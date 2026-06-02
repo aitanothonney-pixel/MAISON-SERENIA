@@ -247,7 +247,19 @@ const ScrollExpandMedia = ({
                     </div>
                   )
                 ) : (
-                  <div className='relative w-full h-full bg-neutral-100 rounded-xl' />
+                  <div className='relative w-full h-full bg-neutral-100 rounded-xl flex items-center justify-center overflow-hidden'>
+                    <motion.span
+                      className='text-4xl md:text-6xl lg:text-7xl font-bold tracking-[0.25em] uppercase text-black select-none'
+                      style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+                      animate={{
+                        opacity: scrollProgress > 0.05 ? Math.min(scrollProgress * 3, 1) : 0,
+                        scale: scrollProgress > 0.05 ? 0.85 + scrollProgress * 0.15 : 0.85,
+                      }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      SERENIA
+                    </motion.span>
+                  </div>
                 )}
 
                 <div className='flex flex-col items-center text-center relative z-10 mt-4 transition-none'>
