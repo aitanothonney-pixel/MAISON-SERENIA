@@ -373,7 +373,7 @@ function PromoBanner() {
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
             </h2>
             <p className="text-white/70 text-sm mb-7 max-w-md">
-              Offre valable jusqu&apos;au 30 juin 2024 — dans la limite des stocks disponibles.
+              Offre valable jusqu&apos;au 30 juin 2026 — dans la limite des stocks disponibles.
             </p>
             <a
               href="#"
@@ -888,7 +888,7 @@ function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
-          <p>© 2024 MAISON SERENIA. Tous droits réservés.</p>
+          <p>© 2026 MAISON SERENIA. Tous droits réservés.</p>
         </div>
       </div>
     </footer>
@@ -929,7 +929,7 @@ export default function Home() {
         mediaSrc="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1280&q=80"
         bgImageSrc="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80"
         title="MAISON SERENIA"
-        date="Collection 2024"
+        date="Collection 2026"
         scrollToExpand="Défiler pour découvrir"
         textBlend={true}
       >
