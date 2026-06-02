@@ -35,43 +35,6 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
 
 // ─── Announcement Bar ─────────────────────────────────────────────────────────
 
-const promoMessages = [
-  '✦  Nouveautés Collection Automne — Découvrez nos dernières pièces  ✦',
-  '✦  Paiement en 3× sans frais disponible  ✦  Service client disponible 6j/7  ✦',
-];
-
-function AnnouncementBar({ onDismiss }: { onDismiss: () => void }) {
-  const [msgIndex, setMsgIndex] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setMsgIndex((i) => (i + 1) % promoMessages.length), 4000);
-    return () => clearInterval(t);
-  }, []);
-
-  return (
-    <div className="bg-black text-white text-xs py-2.5 px-4 flex items-center justify-center relative">
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={msgIndex}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.4 }}
-          className="tracking-widest text-center pr-6"
-        >
-          {promoMessages[msgIndex]}
-        </motion.p>
-      </AnimatePresence>
-      <button
-        onClick={onDismiss}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors"
-        aria-label="Fermer"
-      >
-        <X className="w-3.5 h-3.5" />
-      </button>
-    </div>
-  );
-}
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
@@ -852,7 +815,6 @@ function Footer() {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [showBar, setShowBar] = useState(true);
   const [activeFilter, setActiveFilter] = useState('Tous');
 
   const filteredProducts = activeFilter === 'Tous'
@@ -861,21 +823,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      {/* Announcement bar (fixed top) */}
-      <AnimatePresence>
-        {showBar && (
-          <motion.div
-            initial={{ height: 'auto' }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 right-0 z-50 overflow-hidden"
-          >
-            <AnnouncementBar onDismiss={() => setShowBar(false)} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <Navbar hasBar={showBar} />
+      <Navbar hasBar={false} />
 
       {/* Hero */}
       <ScrollExpandMedia
