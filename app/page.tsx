@@ -155,7 +155,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
                 )}
               </div>
               <div className="flex flex-wrap gap-2 mt-3">
-                {['Canapé', 'Lit', 'Table', 'Fauteuil', 'Lampe'].map((s) => (
+                {['Canapé', 'Lit', 'Table', 'Fauteuil'].map((s) => (
                   <button
                     key={s}
                     onClick={() => setSearchQ(s)}
