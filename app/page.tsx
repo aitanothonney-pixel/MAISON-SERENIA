@@ -669,11 +669,11 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Informations */}
+          {/* Trouvez nous sur */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Informations</h4>
+            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Trouvez nous sur</h4>
             <ul className="space-y-2 text-sm">
-              {['À Propos', 'Nos Showrooms', 'Presse', 'Carrières', 'Blog', 'FAQ'].map((item) => (
+              {['Instagram', 'TikTok', 'Facebook'].map((item) => (
                 <li key={item}>
                   <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
                     <ChevronRight className="w-3 h-3" /> {item}
