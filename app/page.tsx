@@ -308,9 +308,14 @@ function BestsellersSection() {
                     fill
                     className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
                   />
-                  {/* Bestseller badge */}
-                  <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
-                    Best-seller
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                      Best-seller
+                    </div>
+                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                      −30%
+                    </div>
                   </div>
                   <button className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white">
                     <Heart className="w-3.5 h-3.5 text-black" />
@@ -322,7 +327,10 @@ function BestsellersSection() {
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <p className="text-black font-bold text-sm">{product.price.toLocaleString('fr-FR')} €</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
+                  <p className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</p>
+                </div>
               </Link>
             </motion.div>
           ))}
@@ -334,8 +342,9 @@ function BestsellersSection() {
 
 // ─── Product Card (with optional badge) ──────────────────────────────────────
 
-const newProductIds = [2, 5, 7, 13, 17, 21, 25, 29];
-const saleProductIds = [4, 8, 14, 19, 23, 27];
+const newProductIds = [5, 17, 21, 25, 29];
+const saleProductIds = [4, 14, 19, 23, 27];
+const bubbleProductIds = [2, 6, 7, 8, 9, 10, 12, 13, 22];
 
 interface ProductPreview {
   id: number;
@@ -351,6 +360,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
+  const isBubble = bubbleProductIds.includes(product.id);
 
   return (
     <motion.div
@@ -373,15 +383,23 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-            {isNew && (
+            {isBubble ? (
               <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
-                Nouveau
+                −30%
               </span>
-            )}
-            {isSale && (
-              <span className="bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full border border-neutral-200">
-                −20%
-              </span>
+            ) : (
+              <>
+                {isNew && (
+                  <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                    Nouveau
+                  </span>
+                )}
+                {isSale && (
+                  <span className="bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full border border-neutral-200">
+                    −20%
+                  </span>
+                )}
+              </>
             )}
           </div>
 
@@ -404,9 +422,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-black font-bold text-sm">
-                {product.price.toLocaleString('fr-FR')} €
+                {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
               </span>
-              {isSale && (
+              {isBubble && (
+                <span className="text-neutral-400 line-through text-xs">
+                  {product.price.toLocaleString('fr-FR')} €
+                </span>
+              )}
+              {isSale && !isBubble && (
                 <span className="text-neutral-400 line-through text-xs">
                   {Math.round(product.price * 1.25).toLocaleString('fr-FR')} €
                 </span>
