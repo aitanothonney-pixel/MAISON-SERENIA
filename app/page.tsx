@@ -257,12 +257,59 @@ function PromoBanner() {
               Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
             </p>
             <a
-              href="#"
+              href="#bubble-promo"
               className="bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
             >
               Voir les produits en promotion
             </a>
           </div>
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
+// ─── Bubble Promo Carousel ────────────────────────────────────────────────────
+
+const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 7, 9, 12];
+
+function BubblePromoCarousel() {
+  const items = products.filter((p) => bubblePromoProducts.includes(p.id))
+    .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
+
+  return (
+    <FadeInSection>
+      <section id="bubble-promo" className="py-16 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Offre limitée · −30%</p>
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
+        </div>
+        <div className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory">
+          {items.map((product) => (
+            <Link
+              key={product.id}
+              href={`/products/${product.id}`}
+              className="group flex-shrink-0 w-56 md:w-64 snap-start"
+            >
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white p-3 mb-3 shadow-sm border border-neutral-100 group-hover:shadow-md transition-shadow duration-300">
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full">
+                  −30%
+                </div>
+              </div>
+              <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
+              <div className="flex items-center gap-2">
+                <span className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
+                <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </FadeInSection>
@@ -762,6 +809,9 @@ export default function Home() {
 
           {/* Promo full-width banner */}
           <PromoBanner />
+
+          {/* Bubble Promo Carousel */}
+          <BubblePromoCarousel />
 
           {/* Category Quick Nav */}
           <CategoryQuickNav />
