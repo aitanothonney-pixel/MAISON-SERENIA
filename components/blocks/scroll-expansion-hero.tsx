@@ -253,15 +253,18 @@ const ScrollExpandMedia = ({
                 <div className='flex flex-col items-center text-center relative z-10 mt-4 transition-none'>
                   {date && (
                     <p
-                      className='text-2xl text-blue-200'
-                      style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                      className='text-sm tracking-[0.4em] uppercase text-black/60'
+                      style={{
+                        transform: `translateX(-${textTranslateX}vw)`,
+                        fontFamily: 'var(--font-playfair, Georgia, serif)',
+                      }}
                     >
                       {date}
                     </p>
                   )}
                   {scrollToExpand && (
                     <p
-                      className='text-blue-200 font-medium text-center'
+                      className='text-xs tracking-[0.3em] uppercase text-black/40 font-medium text-center mt-1'
                       style={{ transform: `translateX(${textTranslateX}vw)` }}
                     >
                       {scrollToExpand}
@@ -270,20 +273,24 @@ const ScrollExpandMedia = ({
                 </div>
               </div>
 
-              <div
-                className={`flex items-center justify-center text-center gap-4 w-full relative z-10 transition-none flex-col ${
-                  textBlend ? 'mix-blend-difference' : 'mix-blend-normal'
-                }`}
-              >
+              <div className="flex items-center justify-center text-center gap-2 w-full relative z-10 transition-none flex-col mix-blend-normal">
                 <motion.h2
-                  className='text-4xl md:text-5xl lg:text-6xl font-bold text-blue-200 transition-none'
-                  style={{ transform: `translateX(-${textTranslateX}vw)` }}
+                  className='text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase transition-none'
+                  style={{
+                    transform: `translateX(-${textTranslateX}vw)`,
+                    fontFamily: 'var(--font-playfair, Georgia, serif)',
+                    letterSpacing: '0.15em',
+                  }}
                 >
                   {firstWord}
                 </motion.h2>
                 <motion.h2
-                  className='text-4xl md:text-5xl lg:text-6xl font-bold text-center text-blue-200 transition-none'
-                  style={{ transform: `translateX(${textTranslateX}vw)` }}
+                  className='text-5xl md:text-7xl lg:text-8xl font-bold text-center text-black tracking-widest uppercase transition-none'
+                  style={{
+                    transform: `translateX(${textTranslateX}vw)`,
+                    fontFamily: 'var(--font-playfair, Georgia, serif)',
+                    letterSpacing: '0.15em',
+                  }}
                 >
                   {restOfTitle}
                 </motion.h2>
