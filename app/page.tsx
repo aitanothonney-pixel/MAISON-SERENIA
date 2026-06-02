@@ -288,7 +288,7 @@ function PromoBanner() {
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
             </h2>
             <p className="text-white/70 text-sm mb-7 max-w-md">
-              Offre valable jusqu&apos;au 30 juin 2026 — dans la limite des stocks disponibles.
+              Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
             </p>
             <a
               href="#"
