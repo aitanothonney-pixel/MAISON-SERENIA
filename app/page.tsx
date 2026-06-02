@@ -301,12 +301,12 @@ function BestsellersSection() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 mb-3">
+                <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-50 mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain p-4' : 'object-cover'}`}
+                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
                   />
                   {/* Bestseller badge */}
                   <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
@@ -361,13 +361,13 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white rounded-2xl overflow-hidden border border-transparent hover:border-neutral-200 transition-all duration-500 shadow-sm hover:shadow-lg"
     >
       <Link href={`/products/${product.id}`}>
-        <div className="relative overflow-hidden aspect-[4/3]">
+        <div className={`relative overflow-hidden aspect-[4/3] bg-neutral-50 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
             width={600}
             height={450}
-            className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain p-4' : 'object-cover'}`}
+            className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
 
