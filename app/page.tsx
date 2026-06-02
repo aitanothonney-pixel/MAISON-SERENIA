@@ -13,7 +13,6 @@ import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products } from '@/lib/products';
-import { MinimalistHero } from '@/components/ui/minimalist-hero';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
@@ -596,41 +595,6 @@ const testimonials = [
   },
 ];
 
-// ─── Brand Story (MinimalistHero) ─────────────────────────────────────────────
-
-function BrandStorySection() {
-  const navLinks = [
-    { label: 'Collections', href: '#' },
-    { label: 'Nouveautés', href: '#' },
-    { label: 'Inspirations', href: '#' },
-    { label: 'Contact', href: '#' },
-  ];
-
-  const socialLinks = [
-    { icon: Share2, href: '#' },
-    { icon: Heart, href: '#' },
-    { icon: Globe, href: '#' },
-  ];
-
-  return (
-    <FadeInSection>
-      <div className="border-t border-neutral-100">
-        <MinimalistHero
-          logoText="MAISON SERENIA"
-          navLinks={navLinks}
-          mainText="Chaque meuble que nous créons est pensé pour traverser les années sans perdre son élégance. Un savoir-faire artisanal, des matières nobles, une âme intemporelle."
-          readMoreLink="#"
-          imageSrc="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
-          imageAlt="Canapé MAISON SERENIA"
-          overlayText={{ part1: 'l\'art', part2: 'du beau.' }}
-          socialLinks={socialLinks}
-          locationText="Paris, France"
-          className="bg-white"
-        />
-      </div>
-    </FadeInSection>
-  );
-}
 
 // ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
 
@@ -906,7 +870,6 @@ export default function Home() {
       </ScrollExpandMedia>
 
       <InteriorShowcaseSection />
-      <BrandStorySection />
       <InspirationsParallaxSection />
       <TestimonialsSection />
       <NewsletterSection />
