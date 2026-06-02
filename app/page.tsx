@@ -228,48 +228,6 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
   );
 }
 
-// ─── Trust Strip ──────────────────────────────────────────────────────────────
-
-function TrustStrip() {
-  const items = [
-    { icon: <Star className="w-4 h-4" />, text: '4,9/5 — +2 400 avis clients' },
-    { icon: <Star className="w-4 h-4" />, text: 'Paiement en 3× sans frais' },
-    { icon: <Star className="w-4 h-4" />, text: 'Fait avec passion' },
-  ];
-
-  return (
-    <div className="bg-neutral-50 border-y border-neutral-100 py-3 overflow-hidden">
-      <div className="flex items-center justify-center gap-0">
-        {/* Static on lg, scroll animation on sm */}
-        <div className="hidden lg:flex items-center gap-0 w-full max-w-7xl mx-auto px-6 justify-between">
-          {items.map((item, i) => (
-            <div key={i} className="flex items-center gap-2 text-[11px] tracking-wider uppercase text-neutral-500 whitespace-nowrap">
-              {item.icon}
-              <span>{item.text}</span>
-              {i < items.length - 1 && <span className="ml-6 text-neutral-200">|</span>}
-            </div>
-          ))}
-        </div>
-        {/* Mobile marquee */}
-        <div className="lg:hidden relative overflow-hidden w-full">
-          <motion.div
-            animate={{ x: '-50%' }}
-            transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-            className="flex gap-12 whitespace-nowrap w-max"
-          >
-            {[...items, ...items].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-[11px] tracking-wider uppercase text-neutral-500">
-                {item.icon}
-                <span>{item.text}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Category Quick Nav ───────────────────────────────────────────────────────
 
 const categoryNav = [
@@ -942,9 +900,6 @@ export default function Home() {
               </p>
             </div>
           </FadeInSection>
-
-          {/* Trust strip */}
-          <TrustStrip />
 
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection />
