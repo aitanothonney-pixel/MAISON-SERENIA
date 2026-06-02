@@ -9,7 +9,6 @@ import {
   Search, X, Star,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
-import { Gallery4 } from '@/components/blocks/gallery4';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
@@ -33,36 +32,6 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
     </motion.div>
   );
 }
-
-// ─── Collections data ─────────────────────────────────────────────────────────
-
-const collections = [
-  {
-    id: '1', title: 'Salon',
-    description: 'Canapés, fauteuils et tables basses pour un salon raffiné.',
-    href: '#', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-  },
-  {
-    id: '2', title: 'Chambre',
-    description: 'Lits, chevets et armoires pour une chambre apaisante.',
-    href: '#', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80',
-  },
-  {
-    id: '3', title: 'Salle à manger',
-    description: 'Tables et chaises pour des repas en toute élégance.',
-    href: '#', image: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800&q=80',
-  },
-  {
-    id: '4', title: 'Bureau',
-    description: 'Mobilier de bureau alliant confort et esthétique.',
-    href: '#', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80',
-  },
-  {
-    id: '5', title: 'Terrasse',
-    description: "Mobilier d'extérieur pour profiter de vos espaces outdoor.",
-    href: '#', image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&q=80',
-  },
-];
 
 // ─── Announcement Bar ─────────────────────────────────────────────────────────
 
@@ -343,103 +312,6 @@ function CategoryQuickNav() {
               </span>
             </a>
           ))}
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-// ─── Editorial Double Banner ──────────────────────────────────────────────────
-
-function EditorialDoubleBanner() {
-  return (
-    <FadeInSection>
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Banner 1 */}
-          <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group cursor-pointer">
-            <Image
-              src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=900&q=80"
-              alt="Collection Chambre"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <p className="text-white/60 text-xs tracking-[0.25em] uppercase mb-2">Nouveauté</p>
-              <h3 className="text-white text-2xl font-serif font-bold mb-3 leading-snug">
-                Collection<br />Chambre 2024
-              </h3>
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 text-white text-xs tracking-widest uppercase border-b border-white/40 hover:border-white pb-0.5 transition-colors"
-              >
-                Découvrir <ChevronRight className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-
-          {/* Banner 2 */}
-          <div className="relative overflow-hidden rounded-2xl aspect-[4/3] group cursor-pointer">
-            <Image
-              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
-              alt="Collection Salon"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            {/* Promo badge */}
-            <div className="absolute top-5 right-5 bg-white text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">
-              Jusqu&apos;à −30%
-            </div>
-            <div className="absolute bottom-0 left-0 p-8">
-              <p className="text-white/60 text-xs tracking-[0.25em] uppercase mb-2">Offre limitée</p>
-              <h3 className="text-white text-2xl font-serif font-bold mb-3 leading-snug">
-                Salon<br />Collection Sérène
-              </h3>
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 text-white text-xs tracking-widest uppercase border-b border-white/40 hover:border-white pb-0.5 transition-colors"
-              >
-                Profiter de l&apos;offre <ChevronRight className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-// ─── Full-width Promo Banner ──────────────────────────────────────────────────
-
-function PromoBanner() {
-  return (
-    <FadeInSection>
-      <section className="mx-6 lg:mx-10 my-6 rounded-3xl overflow-hidden relative">
-        <div className="relative h-56 md:h-72">
-          <Image
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80"
-            alt="Promo bannière"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6">
-            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-white/60">Édition limitée</p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
-              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
-            </h2>
-            <p className="text-white/70 text-sm mb-7 max-w-md">
-              Offre valable jusqu&apos;au 30 juin 2024 — dans la limite des stocks disponibles.
-            </p>
-            <a
-              href="#"
-              className="bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
-            >
-              Voir les produits en promotion
-            </a>
-          </div>
         </div>
       </section>
     </FadeInSection>
@@ -1008,26 +880,11 @@ export default function Home() {
           {/* Trust strip */}
           <TrustStrip />
 
-          {/* Category Quick Nav */}
-          <CategoryQuickNav />
-
-          {/* Collections carousel */}
-          <FadeInSection delay={0.1}>
-            <Gallery4
-              title="Nos Collections"
-              description=""
-              items={collections}
-            />
-          </FadeInSection>
-
-          {/* Editorial double banner */}
-          <EditorialDoubleBanner />
-
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection />
 
-          {/* Promo full-width banner */}
-          <PromoBanner />
+          {/* Category Quick Nav */}
+          <CategoryQuickNav />
 
           {/* Products Grid with filter */}
           <section className="py-16">
