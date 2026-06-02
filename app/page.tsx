@@ -318,6 +318,76 @@ function CategoryQuickNav() {
   );
 }
 
+// ─── Collection Sérène Banner ─────────────────────────────────────────────────
+
+function CollectionSereneBanner() {
+  return (
+    <FadeInSection>
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
+        <div className="relative overflow-hidden rounded-2xl aspect-[16/6] group cursor-pointer">
+          <Image
+            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+            alt="Collection Salon"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute top-5 right-5 bg-white text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">
+            Jusqu&apos;à −30%
+          </div>
+          <div className="absolute bottom-0 left-0 p-8">
+            <p className="text-white/60 text-xs tracking-[0.25em] uppercase mb-2">Offre limitée</p>
+            <h3 className="text-white text-2xl font-serif font-bold mb-3 leading-snug">
+              Salon<br />Collection Sérène
+            </h3>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 text-white text-xs tracking-widest uppercase border-b border-white/40 hover:border-white pb-0.5 transition-colors"
+            >
+              Profiter de l&apos;offre <ChevronRight className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
+// ─── Full-width Promo Banner ──────────────────────────────────────────────────
+
+function PromoBanner() {
+  return (
+    <FadeInSection>
+      <section className="mx-6 lg:mx-10 my-6 rounded-3xl overflow-hidden relative">
+        <div className="relative h-56 md:h-72">
+          <Image
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80"
+            alt="Promo bannière"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6">
+            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-white/60">Édition limitée</p>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
+              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
+            </h2>
+            <p className="text-white/70 text-sm mb-7 max-w-md">
+              Offre valable jusqu&apos;au 30 juin 2024 — dans la limite des stocks disponibles.
+            </p>
+            <a
+              href="#"
+              className="bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
+            >
+              Voir les produits en promotion
+            </a>
+          </div>
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
 const bestsellerIds = [1, 3, 6, 9];
@@ -882,6 +952,12 @@ export default function Home() {
 
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection />
+
+          {/* Collection Sérène banner */}
+          <CollectionSereneBanner />
+
+          {/* Promo full-width banner */}
+          <PromoBanner />
 
           {/* Category Quick Nav */}
           <CategoryQuickNav />
