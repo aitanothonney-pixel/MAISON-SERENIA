@@ -193,10 +193,9 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 // ─── Category Quick Nav ───────────────────────────────────────────────────────
 
 const categoryNav = [
-  { label: 'Salon', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80' },
-  { label: 'Chambre', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80' },
-  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&q=80' },
-  { label: 'Luminaires', image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&q=80' },
+  { label: 'Salon', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80' },
+  { label: 'Chambre', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80' },
+  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80' },
 ];
 
 function CategoryQuickNav() {
@@ -206,14 +205,14 @@ function CategoryQuickNav() {
         <h2 className="text-xl font-serif font-bold text-black mb-8 tracking-tight">
           Parcourir par univers
         </h2>
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 md:gap-4">
+        <div className="grid grid-cols-3 gap-4 md:gap-6">
           {categoryNav.map((cat) => (
             <a
               key={cat.label}
               href="#"
-              className="group flex flex-col items-center gap-2 cursor-pointer"
+              className="group flex flex-col items-center gap-3 cursor-pointer"
             >
-              <div className="w-full aspect-square rounded-2xl overflow-hidden bg-neutral-100 relative">
+              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 relative">
                 <Image
                   src={cat.image}
                   alt={cat.label}
