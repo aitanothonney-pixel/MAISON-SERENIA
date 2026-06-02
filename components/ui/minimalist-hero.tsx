@@ -54,15 +54,7 @@ export const MinimalistHero = ({
       )}
     >
       {/* Header */}
-      <header className="z-30 flex w-full max-w-7xl items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-xl font-bold tracking-wider"
-        >
-          {logoText}
-        </motion.div>
+      <header className="z-30 flex w-full max-w-7xl items-center justify-end">
         <div className="hidden items-center space-x-8 md:flex">
           {navLinks.map((link) => (
             <NavLink key={link.label} href={link.href}>
