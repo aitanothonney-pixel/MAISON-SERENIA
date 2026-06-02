@@ -233,40 +233,6 @@ function CategoryQuickNav() {
   );
 }
 
-// ─── Collection Sérène Banner ─────────────────────────────────────────────────
-
-function CollectionSereneBanner() {
-  return (
-    <FadeInSection>
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
-        <div className="relative overflow-hidden rounded-2xl aspect-[16/6] group cursor-pointer">
-          <Image
-            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
-            alt="Collection Salon"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          <div className="absolute top-5 right-5 bg-white text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">
-            Jusqu&apos;à −30%
-          </div>
-          <div className="absolute bottom-0 left-0 p-8">
-            <p className="text-white/60 text-xs tracking-[0.25em] uppercase mb-2">Offre limitée</p>
-            <h3 className="text-white text-2xl font-serif font-bold mb-3 leading-snug">
-              Salon<br />Collection Sérène
-            </h3>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-white text-xs tracking-widest uppercase border-b border-white/40 hover:border-white pb-0.5 transition-colors"
-            >
-              Profiter de l&apos;offre <ChevronRight className="w-3 h-3" />
-            </a>
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
 
 // ─── Full-width Promo Banner ──────────────────────────────────────────────────
 
@@ -766,8 +732,6 @@ export default function Home() {
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection />
 
-          {/* Collection Sérène banner */}
-          <CollectionSereneBanner />
 
           {/* Promo full-width banner */}
           <PromoBanner />
