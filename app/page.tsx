@@ -14,6 +14,8 @@ import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products } from '@/lib/products';
+import { MinimalistHero } from '@/components/ui/minimalist-hero';
+import { ZoomParallax } from '@/components/ui/zoom-parallax';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -735,6 +737,73 @@ const testimonials = [
   },
 ];
 
+// ─── Brand Story (MinimalistHero) ─────────────────────────────────────────────
+
+function BrandStorySection() {
+  const navLinks = [
+    { label: 'Collections', href: '#' },
+    { label: 'Nouveautés', href: '#' },
+    { label: 'Inspirations', href: '#' },
+    { label: 'Contact', href: '#' },
+  ];
+
+  const socialLinks = [
+    { icon: Share2, href: '#' },
+    { icon: Heart, href: '#' },
+    { icon: Globe, href: '#' },
+  ];
+
+  return (
+    <FadeInSection>
+      <div className="border-t border-neutral-100">
+        <MinimalistHero
+          logoText="MAISON SERENIA"
+          navLinks={navLinks}
+          mainText="Chaque meuble que nous créons est pensé pour traverser les années sans perdre son élégance. Un savoir-faire artisanal, des matières nobles, une âme intemporelle."
+          readMoreLink="#"
+          imageSrc="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
+          imageAlt="Canapé MAISON SERENIA"
+          overlayText={{ part1: 'l\'art', part2: 'du beau.' }}
+          socialLinks={socialLinks}
+          locationText="Paris, France"
+          className="bg-white"
+        />
+      </div>
+    </FadeInSection>
+  );
+}
+
+// ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
+
+const parallaxImages = [
+  { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', alt: 'Salon contemporain' },
+  { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', alt: 'Canapé élégant' },
+  { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80', alt: 'Chambre raffinée' },
+  { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=1200&q=80', alt: 'Salle à manger' },
+  { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80', alt: 'Bibliothèque' },
+  { src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200&q=80', alt: 'Fauteuil design' },
+  { src: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=1200&q=80', alt: 'Terrasse luxe' },
+];
+
+function InspirationsParallaxSection() {
+  return (
+    <section>
+      <FadeInSection>
+        <div className="text-center py-16 px-6">
+          <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-3">Galerie</p>
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-black leading-tight">
+            Inspirations
+          </h2>
+          <p className="mt-4 text-neutral-400 text-sm max-w-md mx-auto">
+            Laissez-vous porter par nos univers. Faites défiler pour explorer.
+          </p>
+        </div>
+      </FadeInSection>
+      <ZoomParallax images={parallaxImages} />
+    </section>
+  );
+}
+
 const firstColumn = testimonials.slice(0, 3);
 const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
@@ -1005,6 +1074,8 @@ export default function Home() {
       </ScrollExpandMedia>
 
       <InteriorShowcaseSection />
+      <BrandStorySection />
+      <InspirationsParallaxSection />
       <TestimonialsSection />
       <NewsletterSection />
       <Footer />
