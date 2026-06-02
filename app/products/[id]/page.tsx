@@ -44,11 +44,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       ),
     },
     {
-      title: 'Livraison & Retours',
+      title: 'Livraison',
       content: (
         <div className="text-sm text-neutral-600 space-y-2">
           <p>Livraison en blanc à domicile, installation comprise. Délai : 3 à 6 semaines selon disponibilité.</p>
-          <p>Retours acceptés sous 30 jours à compter de la réception, sans frais ni justification.</p>
         </div>
       ),
     },

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
-  Search, X, Star, Truck, RotateCcw, Shield, Phone,
+  Search, X, Star,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { Gallery4 } from '@/components/blocks/gallery4';
@@ -65,7 +65,6 @@ const collections = [
 // ─── Announcement Bar ─────────────────────────────────────────────────────────
 
 const promoMessages = [
-  '✦  Livraison offerte dès 500 €  ✦  Retours gratuits sous 30 jours  ✦  Garantie 5 ans sur tous nos produits',
   '✦  Nouveautés Collection Automne — Découvrez nos dernières pièces  ✦',
   '✦  Paiement en 3× sans frais disponible  ✦  Service client disponible 6j/7  ✦',
 ];
@@ -264,11 +263,9 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 
 function TrustStrip() {
   const items = [
-    { icon: <Truck className="w-4 h-4" />, text: 'Livraison offerte dès 500 €' },
-    { icon: <Shield className="w-4 h-4" />, text: 'Garantie 5 ans' },
-    { icon: <RotateCcw className="w-4 h-4" />, text: 'Retours gratuits 30 jours' },
     { icon: <Star className="w-4 h-4" />, text: '4,9/5 — +2 400 avis clients' },
-    { icon: <Phone className="w-4 h-4" />, text: 'Conseil personnalisé 6j/7' },
+    { icon: <Star className="w-4 h-4" />, text: 'Paiement en 3× sans frais' },
+    { icon: <Star className="w-4 h-4" />, text: 'Fait avec passion' },
   ];
 
   return (
@@ -763,7 +760,7 @@ function TestimonialsSection() {
               Ce que disent nos clients
             </h2>
             <p className="text-center mt-5 text-neutral-500 text-sm">
-              Des milliers de clients satisfaits font confiance à MAISON SERENIA pour sublimer leur intérieur.
+              Des dizaine de clients satisfaits font confiance à MAISON SERENIA pour sublimer leur intérieur.
             </p>
           </motionLib.div>
 
@@ -834,24 +831,6 @@ function Footer() {
   return (
     <footer className="bg-black text-white/60 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Trust row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12 border-b border-white/10 mb-12">
-          {[
-            { icon: <Truck className="w-5 h-5" />, title: 'Livraison offerte', sub: 'dès 500 €' },
-            { icon: <Shield className="w-5 h-5" />, title: 'Garantie 5 ans', sub: 'tous produits' },
-            { icon: <RotateCcw className="w-5 h-5" />, title: 'Retours gratuits', sub: '30 jours' },
-            { icon: <Phone className="w-5 h-5" />, title: 'Conseil client', sub: 'Lun–Sam 9h–19h' },
-          ].map((item, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <div className="text-white/40 mt-0.5">{item.icon}</div>
-              <div>
-                <p className="text-white text-sm font-semibold">{item.title}</p>
-                <p className="text-xs mt-0.5">{item.sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div>
@@ -899,11 +878,6 @@ function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
           <p>© 2024 MAISON SERENIA. Tous droits réservés.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white/60 transition-colors">Mentions légales</a>
-            <a href="#" className="hover:text-white/60 transition-colors">CGV</a>
-            <a href="#" className="hover:text-white/60 transition-colors">Politique de confidentialité</a>
-          </div>
         </div>
       </div>
     </footer>
@@ -957,7 +931,7 @@ export default function Home() {
                 Mobilier d&apos;exception,<br />intérieurs sublimés
               </h2>
               <p className="text-neutral-500 max-w-xl mx-auto leading-relaxed text-sm">
-                Depuis 1985, MAISON SERENIA crée des espaces de vie où le raffinement rencontre le confort. Chaque pièce est pensée pour traverser les générations.
+                MAISON SERENIA crée des espaces de vie où le raffinement rencontre le confort.
               </p>
             </div>
           </FadeInSection>
@@ -972,7 +946,7 @@ export default function Home() {
           <FadeInSection delay={0.1}>
             <Gallery4
               title="Nos Collections"
-              description="Du salon à la terrasse, découvrez des univers conçus pour vous ressembler."
+              description=""
               items={collections}
             />
           </FadeInSection>
