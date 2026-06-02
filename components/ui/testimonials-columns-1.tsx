@@ -35,13 +35,11 @@ export const TestimonialsColumn = (props: {
               >
                 <div className="text-sm leading-relaxed opacity-80">{text}</div>
                 <div className="flex items-center gap-2 mt-5">
-                  <img
-                    width={40}
-                    height={40}
-                    src={image}
-                    alt={name}
-                    className="h-10 w-10 rounded-full object-cover"
-                  />
+                  <div className="h-10 w-10 rounded-full bg-neutral-200 flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-neutral-400" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                    </svg>
+                  </div>
                   <div className="flex flex-col">
                     <div className="font-medium tracking-tight leading-5">{name}</div>
                     <div className="leading-5 opacity-60 tracking-tight text-sm">{role}</div>

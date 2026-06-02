@@ -514,48 +514,48 @@ function InteriorShowcaseSection() {
 
 const testimonials = [
   {
-    text: "Le canapé Élysée est d'une qualité exceptionnelle. Le tissu est doux, les coussins gardent leur forme après des mois d'utilisation. Un achat que je ne regrette absolument pas.",
-    image: 'https://randomuser.me/api/portraits/women/11.jpg',
+    text: "Le Fauteuil Bubble blanc est une vraie sculpture vivante. Il trône au centre de mon salon et tout le monde me demande où je l'ai trouvé. Confort incroyable, qualité irréprochable.",
+    image: '',
     name: 'Sophie Marchand', role: 'Cliente vérifiée',
   },
   {
-    text: 'La table à manger Opéra en chêne massif est tout simplement magnifique. Le bois est chaleureux, les finitions sont parfaites. Ma salle à manger a été transformée.',
-    image: 'https://randomuser.me/api/portraits/men/22.jpg',
+    text: "J'ai craqué pour le Canapé Bubble violet spécial et je ne le regrette pas une seconde. La couleur est encore plus intense en vrai, et on s'y enfonce comme dans un nuage.",
+    image: '',
     name: 'Thomas Lefebvre', role: 'Client vérifié',
   },
   {
-    text: "Livraison rapide, emballage soigné, et le fauteuil Rivoli est encore plus beau en vrai qu'en photo. MAISON SERENIA a un sens du détail remarquable.",
-    image: 'https://randomuser.me/api/portraits/women/33.jpg',
+    text: "Le Fauteuil Bubble bleu est exactement ce qu'il me fallait pour apporter du caractère à mon intérieur. La texture maille 3D est unique, je n'ai jamais vu ça ailleurs.",
+    image: '',
     name: 'Camille Rousseau', role: 'Cliente vérifiée',
   },
   {
-    text: "J'ai commandé l'ensemble chambre — lit Vendôme, chevets et commode. L'harmonie des pièces est parfaite, et la qualité justifie amplement le prix. Je recommande vivement.",
-    image: 'https://randomuser.me/api/portraits/men/44.jpg',
+    text: "Livraison soignée, montage facile, et le Canapé Bubble blanc est tout simplement magnifique. Il a complètement transformé mon salon. Mes amis sont jaloux !",
+    image: '',
     name: 'Antoine Dubois', role: 'Client vérifié',
   },
   {
-    text: "Le service client est au top. J'avais une question sur les dimensions du buffet, ils ont répondu en moins d'une heure avec des photos supplémentaires. Impeccable.",
-    image: 'https://randomuser.me/api/portraits/women/55.jpg',
+    text: "Le Fauteuil Bubble rouge est une déclaration artistique à lui seul. Il donne une âme à toute la pièce. Je suis fan de la collection Bubble, je vais sûrement en commander un deuxième.",
+    image: '',
     name: 'Isabelle Fontaine', role: 'Cliente vérifiée',
   },
   {
-    text: 'Ma bibliothèque Haussmann est arrivée parfaitement assemblée. Les étagères sont robustes et le bois sent bon. Je suis conquise.',
-    image: 'https://randomuser.me/api/portraits/women/66.jpg',
+    text: "J'ai hésité longtemps entre le vert et l'orange, j'ai finalement pris le Fauteuil Bubble vert. La teinte pistache est parfaite avec ma déco naturelle. Un coup de cœur absolu.",
+    image: '',
     name: 'Marie-Claire Petit', role: 'Cliente vérifiée',
   },
   {
-    text: "Le lampadaire Molière en laiton est une vraie pièce de décoration. La lumière qu'il diffuse est douce et chaleureuse. Mes invités le remarquent à chaque visite.",
-    image: 'https://randomuser.me/api/portraits/men/77.jpg',
+    text: "Le Canapé Bubble bleu est monumental. Sa présence dans mon loft est impressionnante. La qualité de fabrication est au rendez-vous, chaque détail est soigné.",
+    image: '',
     name: 'Julien Bernard', role: 'Client vérifié',
   },
   {
-    text: 'Excellent rapport qualité-prix sur la table basse Concorde en marbre. Elle est lourde (signe de qualité !), facile à nettoyer et sublime mon salon.',
-    image: 'https://randomuser.me/api/portraits/women/88.jpg',
+    text: "Le Fauteuil Bubble orange illumine mon bureau à la maison. Je travaille en souriant depuis qu'il est là. MAISON SERENIA crée des pièces vraiment uniques.",
+    image: '',
     name: 'Nathalie Girard', role: 'Cliente vérifiée',
   },
   {
-    text: "Les chaises Palais Royal sont stables, confortables et résistantes. Après un an d'usage quotidien, elles sont comme neuves. Une belle réussite.",
-    image: 'https://randomuser.me/api/portraits/men/99.jpg',
+    text: "Commandé le Canapé Bubble rouge pour ma salle de réception. Nos clients le remarquent immédiatement, c'est devenu la pièce signature de notre espace. Bravo MAISON SERENIA.",
+    image: '',
     name: 'Pierre Morel', role: 'Client vérifié',
   },
 ];
