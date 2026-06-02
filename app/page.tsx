@@ -17,6 +17,7 @@ import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { Gallery4 } from '@/components/blocks/gallery4';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
+import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -233,6 +234,69 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         </div>
       </div>
     </motion.div>
+  );
+}
+
+// ─── Container Scroll Section ─────────────────────────────────────────────────
+
+function InteriorShowcaseSection() {
+  return (
+    <div className="flex flex-col overflow-hidden bg-[#faf9f7]">
+      <ContainerScroll
+        titleComponent={
+          <div className="mb-8">
+            <p className="text-[#c9a96e] text-xs tracking-[0.3em] uppercase mb-4">
+              L&apos;art de vivre
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1a1a1a] font-serif leading-tight">
+              Des intérieurs qui vous <br />
+              <span className="text-[#c9a96e]">ressemblent</span>
+            </h2>
+            <p className="mt-4 text-[#6b6b6b] max-w-xl mx-auto text-base">
+              Chaque pièce est pensée pour s&apos;intégrer harmonieusement dans votre espace de vie, alliant esthétique et fonctionnalité.
+            </p>
+          </div>
+        }
+      >
+        {/* Mosaic of interior images */}
+        <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
+          <div className="col-span-2 row-span-2 relative overflow-hidden rounded-xl">
+            <img
+              src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80"
+              alt="Salon MAISON SERENIA"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute bottom-4 left-4 text-white">
+              <p className="text-xs tracking-widest uppercase opacity-70">Collection</p>
+              <p className="text-lg font-semibold">Salon Contemporain</p>
+            </div>
+          </div>
+          <div className="relative overflow-hidden rounded-xl">
+            <img
+              src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80"
+              alt="Chambre MAISON SERENIA"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute bottom-3 left-3 text-white">
+              <p className="text-sm font-semibold">Chambre</p>
+            </div>
+          </div>
+          <div className="relative overflow-hidden rounded-xl">
+            <img
+              src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
+              alt="Salle à manger MAISON SERENIA"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute bottom-3 left-3 text-white">
+              <p className="text-sm font-semibold">Salle à manger</p>
+            </div>
+          </div>
+        </div>
+      </ContainerScroll>
+    </div>
   );
 }
 
@@ -575,6 +639,9 @@ export default function Home() {
           </section>
         </div>
       </ScrollExpandMedia>
+
+      {/* Interior Showcase */}
+      <InteriorShowcaseSection />
 
       {/* Testimonials */}
       <TestimonialsSection />
