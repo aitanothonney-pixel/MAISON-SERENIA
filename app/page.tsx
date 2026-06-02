@@ -306,7 +306,7 @@ function BestsellersSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-cover transition-transform duration-600 group-hover:scale-105"
+                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain p-4' : 'object-cover'}`}
                   />
                   {/* Bestseller badge */}
                   <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
@@ -367,7 +367,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain p-4' : 'object-cover'}`}
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
 
