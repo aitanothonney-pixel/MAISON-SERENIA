@@ -307,7 +307,7 @@ function PromoBanner() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [1, 3, 6, 9];
+const bestsellerIds = [2, 6, 10, 22];
 
 function BestsellersSection() {
   const bestsellers = products.filter((p) => bestsellerIds.includes(p.id));
