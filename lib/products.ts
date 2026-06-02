@@ -169,7 +169,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: 'Lit Vendôme',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 3200,
     description: 'Tête de lit capitonnée en velours doux, structure en hêtre massif laqué blanc. Une présence architecturale dans votre chambre, alliant douceur et raffinement.',
     images: [
@@ -217,7 +217,7 @@ export const products: Product[] = [
   {
     id: 11,
     name: 'Armoire Versailles',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 2750,
     description: 'Armoire à portes coulissantes avec miroir intégré, intérieur personnalisable en chêne naturel. Élégance fonctionnelle pour votre chambre.',
     images: [
@@ -233,7 +233,7 @@ export const products: Product[] = [
   {
     id: 14,
     name: 'Tête de lit Madeleine',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 890,
     description: 'Tête de lit capitonnée en velours côtelé, surpiquée à la main en motif chevron. Un détail architectural fort pour magnifier votre chambre.',
     images: [
@@ -265,7 +265,7 @@ export const products: Product[] = [
   {
     id: 16,
     name: 'Table de chevet Pigalle',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 490,
     description: 'Chevet asymétrique en noyer et laiton, tiroir coulissant silencieux. Un équilibre parfait entre fonctionnalité et esthétique pour votre chambre.',
     images: [
@@ -329,7 +329,7 @@ export const products: Product[] = [
   {
     id: 20,
     name: 'Miroir Châtelet',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 650,
     description: 'Grand miroir en rotin naturel tressé, format arche. Il apporte chaleur et profondeur à n\'importe quelle pièce, du couloir à la chambre.',
     images: [
@@ -345,7 +345,7 @@ export const products: Product[] = [
   {
     id: 21,
     name: 'Lit Double Étoile',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 2600,
     description: 'Lit double à plateforme basse en noyer massif, lignes très épurées. L\'élégance dans sa forme la plus minimaliste pour une chambre zen.',
     images: [
@@ -425,7 +425,7 @@ export const products: Product[] = [
   {
     id: 27,
     name: 'Coiffeuse Joséphine',
-    category: 'Chambre',
+    category: 'Figurines',
     price: 1100,
     description: 'Coiffeuse avec miroir tri-faces, tiroirs garnis de velours, tablette éclairante LED. Votre espace beauté pensé avec soin et raffinement.',
     images: [

@@ -51,7 +51,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 
   const navItems = [
     { label: 'Salon', href: '#' },
-    { label: 'Chambre', href: '#' },
+    { label: 'Figurines', href: '#' },
     { label: 'Bureau', href: '#' },
     { label: 'Inspirations', href: '#' },
   ];
@@ -194,7 +194,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 
 const categoryNav = [
   { label: 'Salon', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80' },
-  { label: 'Chambre', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80' },
+  { label: 'Figurines', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80' },
   { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80' },
 ];
 
@@ -494,7 +494,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Chambre', 'Bureau'];
+const filterCategories = ['Tous', 'Salon', 'Figurines', 'Bureau'];
 
 function ProductFilterBar({
   active,
@@ -558,11 +558,11 @@ function InteriorShowcaseSection() {
             <div className="relative overflow-hidden rounded-xl">
               <img
                 src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80"
-                alt="Chambre"
+                alt="Figurines"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Chambre</div>
+              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Figurines</div>
             </div>
             <div className="relative overflow-hidden rounded-xl">
               <img
@@ -636,7 +636,7 @@ const testimonials = [
 const parallaxImages = [
   { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', alt: 'Salon contemporain' },
   { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', alt: 'Canapé élégant' },
-  { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80', alt: 'Chambre raffinée' },
+  { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80', alt: 'Figurines' },
   { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=1200&q=80', alt: 'Salle à manger' },
   { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80', alt: 'Bibliothèque' },
   { src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200&q=80', alt: 'Fauteuil design' },
@@ -729,7 +729,7 @@ function Footer() {
           <div>
             <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Collections</h4>
             <ul className="space-y-2 text-sm">
-              {['Salon', 'Chambre', 'Salle à manger', 'Bureau', 'Terrasse', 'Luminaires'].map((item) => (
+              {['Salon', 'Figurines', 'Salle à manger', 'Bureau', 'Terrasse', 'Luminaires'].map((item) => (
                 <li key={item}>
                   <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
                     <ChevronRight className="w-3 h-3" /> {item}
