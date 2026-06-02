@@ -140,14 +140,6 @@ export const MinimalistHero = ({
             <SocialIcon key={index} href={link.href} icon={link.icon} />
           ))}
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.3 }}
-          className="text-sm font-medium text-foreground/80 tracking-widest uppercase"
-        >
-          {locationText}
-        </motion.div>
       </footer>
     </div>
   );
