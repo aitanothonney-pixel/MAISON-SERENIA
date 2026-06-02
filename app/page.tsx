@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { Gallery4 } from '@/components/blocks/gallery4';
+import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
+import { motion as motionLib } from 'motion/react';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -231,6 +233,103 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         </div>
       </div>
     </motion.div>
+  );
+}
+
+// ─── Testimonials ─────────────────────────────────────────────────────────────
+
+const testimonials = [
+  {
+    text: "Le canapé Sérénia est d'une qualité exceptionnelle. Le tissu est doux, les coussins gardent leur forme après des mois d'utilisation. Un achat que je ne regrette absolument pas.",
+    image: "https://randomuser.me/api/portraits/women/11.jpg",
+    name: "Sophie Marchand",
+    role: "Cliente vérifiée",
+  },
+  {
+    text: "La table à manger en chêne massif est tout simplement magnifique. Le bois est chaleureux, les finitions sont parfaites. Ma salle à manger a été transformée.",
+    image: "https://randomuser.me/api/portraits/men/22.jpg",
+    name: "Thomas Lefebvre",
+    role: "Client vérifié",
+  },
+  {
+    text: "Livraison rapide, emballage soigné, et le fauteuil est encore plus beau en vrai qu'en photo. MAISON SERENIA a un sens du détail remarquable.",
+    image: "https://randomuser.me/api/portraits/women/33.jpg",
+    name: "Camille Rousseau",
+    role: "Cliente vérifiée",
+  },
+  {
+    text: "J'ai commandé l'ensemble chambre — lit, chevets et commode. L'harmonie des pièces est parfaite, et la qualité justifie amplement le prix. Je recommande vivement.",
+    image: "https://randomuser.me/api/portraits/men/44.jpg",
+    name: "Antoine Dubois",
+    role: "Client vérifié",
+  },
+  {
+    text: "Le service client est au top. J'avais une question sur les dimensions du buffet, ils ont répondu en moins d'une heure avec des photos supplémentaires. Impeccable.",
+    image: "https://randomuser.me/api/portraits/women/55.jpg",
+    name: "Isabelle Fontaine",
+    role: "Cliente vérifiée",
+  },
+  {
+    text: "Ma bibliothèque sur mesure est arrivée parfaitement assemblée. Les étagères sont robustes et le bois sent bon. Je suis conquise.",
+    image: "https://randomuser.me/api/portraits/women/66.jpg",
+    name: "Marie-Claire Petit",
+    role: "Cliente vérifiée",
+  },
+  {
+    text: "Le lampadaire en laiton est une vraie pièce de décoration. La lumière qu'il diffuse est douce et chaleureuse. Mes invités le remarquent à chaque visite.",
+    image: "https://randomuser.me/api/portraits/men/77.jpg",
+    name: "Julien Bernard",
+    role: "Client vérifié",
+  },
+  {
+    text: "Excellent rapport qualité-prix sur la table basse en marbre. Elle est lourde (signe de qualité !), facile à nettoyer et sublime mon salon.",
+    image: "https://randomuser.me/api/portraits/women/88.jpg",
+    name: "Nathalie Girard",
+    role: "Cliente vérifiée",
+  },
+  {
+    text: "Les chaises de salle à manger sont stables, confortables et résistantes. Après un an d'usage quotidien, elles sont comme neuves. Une belle réussite.",
+    image: "https://randomuser.me/api/portraits/men/99.jpg",
+    name: "Pierre Morel",
+    role: "Client vérifié",
+  },
+];
+
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
+const thirdColumn = testimonials.slice(6, 9);
+
+function TestimonialsSection() {
+  return (
+    <section className="bg-background my-20 relative">
+      <div className="container z-10 mx-auto">
+        <motionLib.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
+        >
+          <div className="flex justify-center">
+            <div className="border border-[#c9a96e] text-[#c9a96e] py-1 px-4 rounded-lg text-xs tracking-[0.2em] uppercase">
+              Témoignages
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mt-5 text-center font-serif">
+            Ce que disent nos clients
+          </h2>
+          <p className="text-center mt-5 opacity-60">
+            Des milliers de clients satisfaits font confiance à MAISON SERENIA pour sublimer leur intérieur.
+          </p>
+        </motionLib.div>
+
+        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
+          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -476,6 +575,9 @@ export default function Home() {
           </section>
         </div>
       </ScrollExpandMedia>
+
+      {/* Testimonials */}
+      <TestimonialsSection />
 
       {/* Features */}
       <FeaturesSection />
