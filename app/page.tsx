@@ -666,55 +666,6 @@ function TestimonialsSection() {
   );
 }
 
-// ─── Newsletter ───────────────────────────────────────────────────────────────
-
-function NewsletterSection() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
-
-  return (
-    <FadeInSection>
-      <section className="py-28 bg-black text-white">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-xs tracking-[0.3em] uppercase mb-4 text-white/40">Newsletter</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            L&apos;art de vivre, chaque semaine
-          </h2>
-          <p className="text-white/50 mb-10 max-w-lg mx-auto text-sm leading-relaxed">
-            Recevez nos nouvelles collections, nos conseils déco exclusifs et nos offres privilèges directement dans votre boîte mail.
-          </p>
-          {submitted ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white font-semibold text-lg">
-              Merci ! Vous êtes désormais inscrit(e) à notre newsletter.
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre adresse email"
-                className="flex-1 bg-white/10 border border-white/20 text-white placeholder:text-white/30 px-5 py-3 rounded-xl text-sm focus:outline-none focus:border-white transition-colors"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-white hover:bg-neutral-100 text-black font-semibold px-6 py-3 rounded-xl text-sm tracking-wider uppercase transition-colors duration-300"
-              >
-                S&apos;inscrire
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
@@ -871,7 +822,6 @@ export default function Home() {
       <InteriorShowcaseSection />
       <InspirationsParallaxSection />
       <TestimonialsSection />
-      <NewsletterSection />
       <Footer />
     </div>
   );
