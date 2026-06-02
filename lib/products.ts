@@ -32,7 +32,7 @@ export const products: Product[] = [
     id: 2,
     name: 'Fauteuil Bubble blanc',
     category: 'Salon',
-    price: 499,
+    price: 713,
     description: 'Le Fauteuil Bubble en version blanc immaculé — une silhouette sculpturale aux formes généreuses et organiques. Confort enveloppant, esthétique contemporaine, présence forte dans tout intérieur.',
     images: [
       'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg',
@@ -47,7 +47,7 @@ export const products: Product[] = [
     id: 10,
     name: 'Canapé Bubble blanc',
     category: 'Salon',
-    price: 1300,
+    price: 1857,
     description: 'Le Canapé Bubble 3 places en blanc crème immaculé — silhouette sculpturale et enveloppante, tissu bouclé doux au toucher. Une pièce maîtresse qui transforme instantanément votre salon.',
     images: [
       'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg',
@@ -62,7 +62,7 @@ export const products: Product[] = [
     id: 6,
     name: 'Fauteuil Bubble bleu',
     category: 'Salon',
-    price: 499,
+    price: 713,
     description: 'Le Fauteuil Bubble dans un bleu Klein intense et vibrant — une déclaration artistique autant qu\'une invitation au confort absolu. Texture unique en maille 3D structurée.',
     images: [
       'https://i.ibb.co/gFctkCc0/IMG-2554.jpg',
@@ -77,7 +77,7 @@ export const products: Product[] = [
     id: 13,
     name: 'Canapé Bubble bleu',
     category: 'Salon',
-    price: 1300,
+    price: 1857,
     description: 'Le Canapé Bubble 3 places en bleu Klein intense — une présence sculpturale et chromatique forte. Texture maille 3D signature, assise généreuse et enveloppante.',
     images: [
       'https://i.ibb.co/R1tJYDf/IMG-2491.jpg',
@@ -92,7 +92,7 @@ export const products: Product[] = [
     id: 8,
     name: 'Fauteuil Bubble rouge',
     category: 'Salon',
-    price: 499,
+    price: 713,
     description: 'Le Fauteuil Bubble dans un rouge vif et audacieux — énergie, caractère et confort sculptural réunis. Une pièce iconique qui s\'impose dès le premier regard dans votre salon.',
     images: [
       'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg',
@@ -107,7 +107,7 @@ export const products: Product[] = [
     id: 22,
     name: 'Canapé Bubble rouge',
     category: 'Salon',
-    price: 1300,
+    price: 1857,
     description: 'Le Canapé Bubble 3 places en rouge vif et ardent — énergie, caractère et confort sculptural. Une pièce iconique qui s\'impose avec force dans votre espace de vie.',
     images: [
       'https://i.ibb.co/zH4qtJVB/IMG-2511.jpg',
@@ -122,7 +122,7 @@ export const products: Product[] = [
     id: 7,
     name: 'Fauteuil Bubble vert',
     category: 'Salon',
-    price: 499,
+    price: 713,
     description: 'Le Fauteuil Bubble dans un vert pistache lumineux — douceur organique et présence végétale. Même confort sculpturale signature, dans une teinte qui renouvelle l\'intérieur.',
     images: [
       'https://i.ibb.co/0pnzSpFV/IMG-2557.jpg',
@@ -138,7 +138,7 @@ export const products: Product[] = [
     id: 9,
     name: 'Fauteuil Bubble orange',
     category: 'Salon',
-    price: 499,
+    price: 713,
     description: 'Le Fauteuil Bubble dans un orange soleil audacieux — même silhouette sculpturale, même confort enveloppant, avec une couleur qui illumine instantanément votre intérieur.',
     images: [
       'https://i.ibb.co/xQ4XWSy/IMG-2530.jpg',
@@ -154,7 +154,7 @@ export const products: Product[] = [
     id: 12,
     name: 'Canapé Bubble violet spécial',
     category: 'Salon',
-    price: 1300,
+    price: 1857,
     description: 'Le Canapé Bubble 3 places dans un violet prune intense et vibrant — une édition spéciale aux proportions généreuses. Texture maille 3D unique, confort sculptural signature.',
     images: [
       'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
