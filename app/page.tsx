@@ -90,9 +90,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
   const navItems = [
     { label: 'Salon', href: '#' },
     { label: 'Chambre', href: '#' },
-    { label: 'Salle à manger', href: '#' },
     { label: 'Bureau', href: '#' },
-    { label: 'Terrasse', href: '#' },
     { label: 'Inspirations', href: '#' },
   ];
 
@@ -277,9 +275,7 @@ function TrustStrip() {
 const categoryNav = [
   { label: 'Salon', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80' },
   { label: 'Chambre', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&q=80' },
-  { label: 'Salle à manger', image: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=400&q=80' },
   { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=400&q=80' },
-  { label: 'Terrasse', image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&q=80' },
   { label: 'Luminaires', image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&q=80' },
 ];
 
@@ -543,7 +539,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Chambre', 'Salle à manger', 'Bureau', 'Terrasse'];
+const filterCategories = ['Tous', 'Salon', 'Chambre', 'Bureau'];
 
 function ProductFilterBar({
   active,
