@@ -673,10 +673,14 @@ function Footer() {
           <div>
             <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Trouvez nous sur</h4>
             <ul className="space-y-2 text-sm">
-              {['Instagram', 'TikTok', 'Facebook'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
-                    <ChevronRight className="w-3 h-3" /> {item}
+              {[
+                { label: 'Instagram — @serenia_officiel', href: 'https://www.instagram.com/serenia_officiel' },
+                { label: 'TikTok — @serenia_officiel', href: 'https://www.tiktok.com/@serenia_officiel' },
+                { label: 'Facebook', href: '#' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
+                    <ChevronRight className="w-3 h-3" /> {item.label}
                   </a>
                 </li>
               ))}
