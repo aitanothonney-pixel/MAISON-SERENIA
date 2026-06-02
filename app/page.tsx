@@ -271,7 +271,7 @@ function PromoBanner() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [2, 6, 10, 22];
+const bestsellerIds = [2, 10, 6, 13];
 
 function BestsellersSection() {
   const bestsellers = products.filter((p) => bestsellerIds.includes(p.id));
@@ -301,7 +301,7 @@ function BestsellersSection() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-neutral-50 mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
@@ -361,7 +361,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white rounded-2xl overflow-hidden border border-transparent hover:border-neutral-200 transition-all duration-500 shadow-sm hover:shadow-lg"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden aspect-[4/3] bg-neutral-50 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+        <div className={`relative overflow-hidden aspect-[4/3] bg-white ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
