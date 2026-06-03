@@ -193,9 +193,9 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 // ─── Category Quick Nav ───────────────────────────────────────────────────────
 
 const categoryNav = [
-  { label: 'Salon', image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80' },
-  { label: 'Figurines', image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80' },
-  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80' },
+  { label: 'Salon', image: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg', href: '#section-salon' },
+  { label: 'Figurines', image: 'https://i.ibb.co/rfHJgML3/IMG-0625.jpg', href: '#section-figurines' },
+  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80', href: '#section-bureau' },
 ];
 
 function CategoryQuickNav() {
@@ -209,16 +209,16 @@ function CategoryQuickNav() {
           {categoryNav.map((cat) => (
             <a
               key={cat.label}
-              href="#"
+              href={cat.href}
               className="group flex flex-col items-center gap-3 cursor-pointer"
             >
-              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-100 relative">
+              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white relative border border-neutral-100">
                 <Image
                   src={cat.image}
                   alt={cat.label}
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  width={400}
+                  height={300}
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${cat.label === 'Figurines' ? 'object-contain p-4' : 'object-cover'}`}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 rounded-2xl" />
               </div>
