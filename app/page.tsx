@@ -276,15 +276,55 @@ const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 7, 9, 12];
 function BubblePromoCarousel() {
   const items = products.filter((p) => bubblePromoProducts.includes(p.id))
     .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  const updateArrows = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 8);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  };
+
+  const scroll = (dir: 'left' | 'right') => {
+    scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
+  };
 
   return (
     <FadeInSection>
       <section id="bubble-promo" className="py-16 scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Offre limitée · −30%</p>
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Offre limitée · −30%</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
+          </div>
+          <div className="flex items-center gap-2">
+            <motion.button
+              onClick={() => scroll('left')}
+              animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
+              transition={{ duration: 0.25 }}
+              className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+              aria-label="Précédent"
+            >
+              <ChevronRight className="w-4 h-4 rotate-180" />
+            </motion.button>
+            <motion.button
+              onClick={() => scroll('right')}
+              animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
+              transition={{ duration: 0.25 }}
+              className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+              aria-label="Suivant"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </motion.button>
+          </div>
         </div>
-        <div className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory">
+        <div
+          ref={scrollRef}
+          onScroll={updateArrows}
+          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory"
+        >
           {items.map((product) => (
             <Link
               key={product.id}
