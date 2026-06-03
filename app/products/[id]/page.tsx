@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use } from 'react';
+import { useState, use, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -37,12 +37,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const related = product.category === 'Figurines'
     ? products.filter((p) => kawsIds.includes(p.id) && p.id !== product.id)
     : isBubble
-      ? bubbleOrder
-          .filter((id) => id !== product.id)
-          .map((id) => products.find((p) => p.id === id)!)
-          .filter(Boolean)
-          .slice(0, 4)
+      ? bubbleOrder.filter((id) => id !== product.id).map((id) => products.find((p) => p.id === id)!).filter(Boolean)
       : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+
+  const relatedScrollRef = useRef<HTMLDivElement>(null);
+  const scrollRelated = (dir: 'left' | 'right') => {
+    relatedScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
+  };
 
   const accordions = [
     {
@@ -273,10 +274,35 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           {/* Related products */}
           {related.length > 0 && (
             <section className="mt-24">
-              <h2 className="text-2xl font-serif font-bold mb-10">Vous aimerez aussi</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="flex items-end justify-between mb-10">
+                <h2 className="text-2xl font-serif font-bold">Vous aimerez aussi</h2>
+                <div className="flex items-center gap-2">
+                  <motion.button
+                    onClick={() => scrollRelated('left')}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+                    aria-label="Précédent"
+                  >
+                    <ChevronRight className="w-4 h-4 rotate-180" />
+                  </motion.button>
+                  <motion.button
+                    onClick={() => scrollRelated('right')}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+                    aria-label="Suivant"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </motion.button>
+                </div>
+              </div>
+              <div
+                ref={relatedScrollRef}
+                className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+              >
                 {related.map((p) => (
-                  <Link key={p.id} href={`/products/${p.id}`} className="group">
+                  <Link key={p.id} href={`/products/${p.id}`} className="group flex-shrink-0 w-56 md:w-64 snap-start">
                     <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-3' : ''}`}>
                       <Image
                         src={p.images[0]}
