@@ -122,6 +122,22 @@ export const products: Product[] = [
     material: 'Tissu maille 3D, base laquée',
     details: ['Forme sculpturale en modules gonflés', 'Tissu maille 3D haute résilience', 'Base laquée rouge mat', 'Livraison en blanc incluse'],
   },
+  // ── Bubble Violet ────────────────────────────────────────────────────────────
+  {
+    id: 12,
+    name: 'Canapé Bubble violet spécial',
+    category: 'Salon',
+    price: 1857,
+    description: 'Le Canapé Bubble 3 places dans un violet prune intense et vibrant — une édition spéciale aux proportions généreuses. Texture maille 3D unique, confort sculptural signature.',
+    images: [
+      'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
+      'https://i.ibb.co/yBk1BSq4/IMG-2659.jpg',
+      'https://i.ibb.co/DfjGtFm8/IMG-2526.jpg',
+    ],
+    dimensions: 'L 230 × P 105 × H 80 cm',
+    material: 'Tissu maille 3D, base laquée',
+    details: ['Édition spéciale coloris prune', 'Tissu maille 3D haute résilience', 'Base laquée violet mat', 'Livraison en blanc incluse'],
+  },
   // ── Bubble Vert ──────────────────────────────────────────────────────────────
   {
     id: 7,
@@ -153,22 +169,6 @@ export const products: Product[] = [
     dimensions: 'L 95 × P 90 × H 82 cm',
     material: 'Tissu structuré, base laquée',
     details: ['Forme sculpturale en modules gonflés', 'Tissu résistant haute qualité', 'Base laquée orange mat', 'Livraison en blanc incluse'],
-  },
-  // ── Bubble Violet ────────────────────────────────────────────────────────────
-  {
-    id: 12,
-    name: 'Canapé Bubble violet spécial',
-    category: 'Salon',
-    price: 1857,
-    description: 'Le Canapé Bubble 3 places dans un violet prune intense et vibrant — une édition spéciale aux proportions généreuses. Texture maille 3D unique, confort sculptural signature.',
-    images: [
-      'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
-      'https://i.ibb.co/yBk1BSq4/IMG-2659.jpg',
-      'https://i.ibb.co/DfjGtFm8/IMG-2526.jpg',
-    ],
-    dimensions: 'L 230 × P 105 × H 80 cm',
-    material: 'Tissu maille 3D, base laquée',
-    details: ['Édition spéciale coloris prune', 'Tissu maille 3D haute résilience', 'Base laquée violet mat', 'Livraison en blanc incluse'],
   },
   // ── Autres produits ──────────────────────────────────────────────────────────
   {

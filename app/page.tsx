@@ -271,7 +271,7 @@ function PromoBanner() {
 
 // ─── Bubble Promo Carousel ────────────────────────────────────────────────────
 
-const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 7, 9, 12];
+const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 12, 7, 9];
 
 function BubblePromoCarousel() {
   const items = products.filter((p) => bubblePromoProducts.includes(p.id))
