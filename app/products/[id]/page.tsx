@@ -24,6 +24,7 @@ function CheckoutDrawer({
   const [step, setStep] = useState<CheckoutStep>('cart');
   const [delivery, setDelivery] = useState({ prenom: '', nom: '', email: '', adresse: '', ville: '', code: '' });
   const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
+  const [payMethod, setPayMethod] = useState<'card' | 'paypal' | 'twint'>('card');
   const [payLoading, setPayLoading] = useState(false);
 
   const promoPrice = product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price;
@@ -54,7 +55,7 @@ function CheckoutDrawer({
   };
 
   const deliveryValid = delivery.prenom && delivery.nom && delivery.email && delivery.adresse && delivery.ville && delivery.code;
-  const paymentValid = payment.carte.replace(/\s/g, '').length === 16 && payment.expiry.length === 5 && payment.cvv.length === 3 && payment.titulaire;
+  const paymentValid = payMethod !== 'card' || (payment.carte.replace(/\s/g, '').length === 16 && payment.expiry.length === 5 && payment.cvv.length === 3 && payment.titulaire);
 
   const formatCard = (val: string) =>
     val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
@@ -242,60 +243,118 @@ function CheckoutDrawer({
                     transition={{ duration: 0.25 }}
                     className="p-6 space-y-4"
                   >
-                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-xl p-3 mb-2">
+                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-xl p-3">
                       <Lock className="w-3.5 h-3.5 shrink-0" />
                       <span>Paiement 100% sécurisé — chiffrement SSL 256 bits</span>
                     </div>
 
-                    <div>
-                      <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Titulaire de la carte</label>
-                      <input
-                        value={payment.titulaire}
-                        onChange={(e) => setPayment({ ...payment, titulaire: e.target.value })}
-                        className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
-                        placeholder="Jean Dupont"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Numéro de carte</label>
-                      <input
-                        value={payment.carte}
-                        onChange={(e) => setPayment({ ...payment, carte: formatCard(e.target.value) })}
-                        className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Expiration</label>
-                        <input
-                          value={payment.expiry}
-                          onChange={(e) => setPayment({ ...payment, expiry: formatExpiry(e.target.value) })}
-                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
-                          placeholder="MM/AA"
-                          maxLength={5}
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">CVV</label>
-                        <input
-                          value={payment.cvv}
-                          onChange={(e) => setPayment({ ...payment, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) })}
-                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
-                          placeholder="123"
-                          maxLength={3}
-                          type="password"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Payment icons */}
-                    <div className="flex gap-2 pt-1">
-                      {['Visa', 'MC', 'Amex', 'PayPal'].map((p) => (
-                        <span key={p} className="text-[9px] font-bold border border-neutral-200 rounded px-1.5 py-0.5 text-neutral-400">{p}</span>
+                    {/* Method tabs */}
+                    <div className="grid grid-cols-3 gap-2">
+                      {([
+                        { key: 'card', label: 'Carte', icon: <CreditCard className="w-4 h-4" /> },
+                        { key: 'paypal', label: 'PayPal', icon: <span className="text-[#003087] font-bold text-xs">PP</span> },
+                        { key: 'twint', label: 'Twint', icon: <span className="font-bold text-xs text-black">TW</span> },
+                      ] as const).map((m) => (
+                        <motion.button
+                          key={m.key}
+                          onClick={() => setPayMethod(m.key)}
+                          whileTap={{ scale: 0.97 }}
+                          className={`flex flex-col items-center justify-center gap-1 py-3 rounded-xl border-2 text-xs font-semibold transition-all duration-200 ${
+                            payMethod === m.key ? 'border-black bg-black text-white' : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400'
+                          }`}
+                        >
+                          <span className={payMethod === m.key ? 'text-white' : ''}>{m.icon}</span>
+                          {m.label}
+                        </motion.button>
                       ))}
                     </div>
+
+                    <AnimatePresence mode="wait">
+                      {/* Card fields */}
+                      {payMethod === 'card' && (
+                        <motion.div key="card" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="space-y-4">
+                          <div>
+                            <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Titulaire de la carte</label>
+                            <input value={payment.titulaire} onChange={(e) => setPayment({ ...payment, titulaire: e.target.value })}
+                              className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors" placeholder="Jean Dupont" />
+                          </div>
+                          <div>
+                            <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Numéro de carte</label>
+                            <input value={payment.carte} onChange={(e) => setPayment({ ...payment, carte: formatCard(e.target.value) })}
+                              className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
+                              placeholder="1234 5678 9012 3456" maxLength={19} />
+                          </div>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div>
+                              <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Expiration</label>
+                              <input value={payment.expiry} onChange={(e) => setPayment({ ...payment, expiry: formatExpiry(e.target.value) })}
+                                className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                                placeholder="MM/AA" maxLength={5} />
+                            </div>
+                            <div>
+                              <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">CVV</label>
+                              <input value={payment.cvv} onChange={(e) => setPayment({ ...payment, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) })}
+                                className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                                placeholder="123" maxLength={3} type="password" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+
+                      {/* PayPal */}
+                      {payMethod === 'paypal' && (
+                        <motion.div key="paypal" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
+                          className="bg-[#FFC439]/10 border border-[#FFC439]/40 rounded-2xl p-5 text-center space-y-3">
+                          <div className="flex justify-center">
+                            <div className="bg-[#003087] text-white font-bold text-lg px-4 py-2 rounded-xl tracking-tight">
+                              Pay<span className="text-[#009cde]">Pal</span>
+                            </div>
+                          </div>
+                          <p className="text-sm text-neutral-600">Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.</p>
+                          <p className="text-xs text-neutral-400">Compte PayPal ou carte bancaire acceptés</p>
+                        </motion.div>
+                      )}
+
+                      {/* Twint */}
+                      {payMethod === 'twint' && (
+                        <motion.div key="twint" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
+                          className="bg-black/5 border border-black/10 rounded-2xl p-5 text-center space-y-3">
+                          <div className="flex justify-center">
+                            <div className="bg-black text-white font-black text-xl px-5 py-2 rounded-xl tracking-widest">
+                              TWINT
+                            </div>
+                          </div>
+                          <p className="text-sm text-neutral-600">Scannez le QR code avec votre app TWINT pour confirmer le paiement.</p>
+                          <div className="mx-auto w-24 h-24 bg-white border border-neutral-200 rounded-xl flex items-center justify-center">
+                            <svg viewBox="0 0 80 80" className="w-16 h-16" fill="none">
+                              <rect x="4" y="4" width="24" height="24" rx="2" fill="black"/>
+                              <rect x="8" y="8" width="16" height="16" rx="1" fill="white"/>
+                              <rect x="11" y="11" width="10" height="10" fill="black"/>
+                              <rect x="52" y="4" width="24" height="24" rx="2" fill="black"/>
+                              <rect x="56" y="8" width="16" height="16" rx="1" fill="white"/>
+                              <rect x="59" y="11" width="10" height="10" fill="black"/>
+                              <rect x="4" y="52" width="24" height="24" rx="2" fill="black"/>
+                              <rect x="8" y="56" width="16" height="16" rx="1" fill="white"/>
+                              <rect x="11" y="59" width="10" height="10" fill="black"/>
+                              <rect x="36" y="4" width="8" height="8" fill="black"/>
+                              <rect x="36" y="16" width="8" height="8" fill="black"/>
+                              <rect x="4" y="36" width="8" height="8" fill="black"/>
+                              <rect x="16" y="36" width="8" height="8" fill="black"/>
+                              <rect x="36" y="36" width="8" height="8" fill="black"/>
+                              <rect x="48" y="36" width="8" height="8" fill="black"/>
+                              <rect x="60" y="36" width="8" height="8" fill="black"/>
+                              <rect x="36" y="48" width="8" height="8" fill="black"/>
+                              <rect x="48" y="52" width="8" height="8" fill="black"/>
+                              <rect x="60" y="52" width="8" height="8" fill="black"/>
+                              <rect x="36" y="60" width="8" height="8" fill="black"/>
+                              <rect x="60" y="68" width="8" height="8" fill="black"/>
+                              <rect x="72" y="60" width="4" height="4" fill="black"/>
+                            </svg>
+                          </div>
+                          <p className="text-xs text-neutral-400">Valable 5 minutes</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     <div className="h-px bg-neutral-100" />
                     <div className="flex justify-between font-bold text-sm">
@@ -397,7 +456,7 @@ function CheckoutDrawer({
                     ) : (
                       <>
                         <Lock className="w-4 h-4" />
-                        Payer {promoPrice.toLocaleString('fr-FR')} €
+                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : `Payer ${promoPrice.toLocaleString('fr-FR')} €`}
                       </>
                     )}
                   </button>
