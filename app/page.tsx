@@ -345,7 +345,7 @@ function BestsellersSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
+              className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
                 <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
