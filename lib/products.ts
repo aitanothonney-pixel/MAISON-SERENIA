@@ -32,22 +32,6 @@ export function getVariantGroup(productId: number): ProductVariant[] | null {
 }
 
 export const products: Product[] = [
-  {
-    id: 1,
-    name: 'Canapé Élysée',
-    category: 'Salon',
-    price: 2890,
-    description: 'Un canapé d\'exception en tissu bouclé crème, à la structure en chêne massif huilé. Lignes épurées, assise généreuse, coussins à plumes. La pièce maîtresse de votre salon.',
-    images: [
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80',
-      'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80',
-      'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=900&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
-    ],
-    dimensions: 'L 240 × P 95 × H 78 cm',
-    material: 'Tissu bouclé, chêne massif',
-    details: ['Pieds en chêne massif huilé', 'Coussins à plumes et duvet', 'Tissu bouclé haute résistance', 'Livraison en blanc incluse'],
-  },
   // ── Bubble Blanc ─────────────────────────────────────────────────────────────
   {
     id: 2,
@@ -187,6 +171,22 @@ export const products: Product[] = [
     details: ['Édition spéciale coloris prune', 'Tissu maille 3D haute résilience', 'Base laquée violet mat', 'Livraison en blanc incluse'],
   },
   // ── Autres produits ──────────────────────────────────────────────────────────
+  {
+    id: 1,
+    name: 'Canapé Élysée',
+    category: 'Salon',
+    price: 2890,
+    description: 'Un canapé d\'exception en tissu bouclé crème, à la structure en chêne massif huilé. Lignes épurées, assise généreuse, coussins à plumes. La pièce maîtresse de votre salon.',
+    images: [
+      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80',
+      'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80',
+      'https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=900&q=80',
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80',
+    ],
+    dimensions: 'L 240 × P 95 × H 78 cm',
+    material: 'Tissu bouclé, chêne massif',
+    details: ['Pieds en chêne massif huilé', 'Coussins à plumes et duvet', 'Tissu bouclé haute résistance', 'Livraison en blanc incluse'],
+  },
   {
     id: 3,
     name: 'Lit Vendôme',
