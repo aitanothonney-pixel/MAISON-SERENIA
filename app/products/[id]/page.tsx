@@ -269,13 +269,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {related.map((p) => (
                   <Link key={p.id} href={`/products/${p.id}`} className="group">
-                    <div className="aspect-square overflow-hidden rounded-xl bg-neutral-50 mb-3">
+                    <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-3' : ''}`}>
                       <Image
                         src={p.images[0]}
                         alt={p.name}
                         width={400}
                         height={400}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`}
                       />
                     </div>
                     <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
