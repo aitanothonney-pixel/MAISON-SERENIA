@@ -494,7 +494,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Figurines', 'Bureau'];
+const filterCategories = ['Tous', 'Salon', 'Bureau'];
 
 function ProductFilterBar({
   active,
@@ -768,11 +768,60 @@ function Footer() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+// ─── Figurines Section ────────────────────────────────────────────────────────
+
+function FigurinesSection() {
+  const figurines = products.filter((p) => p.category === 'Figurines');
+
+  return (
+    <FadeInSection>
+      <section className="py-16 max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="mb-10">
+          <p className="text-xs tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            Figurines
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {figurines.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="group"
+            >
+              <Link href={`/products/${product.id}`}>
+                <div className="relative aspect-square overflow-hidden rounded-2xl bg-white border border-neutral-100 mb-3 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="block w-full text-center bg-black text-white text-[10px] font-bold tracking-widest uppercase py-2.5 rounded-xl">
+                      Voir le produit
+                    </span>
+                  </div>
+                </div>
+                <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
+                <p className="text-black font-bold text-sm">{product.price.toLocaleString('fr-FR')} €</p>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState('Tous');
 
   const filteredProducts = activeFilter === 'Tous'
-    ? products
+    ? products.filter((p) => p.category !== 'Figurines')
     : products.filter((p) => p.category === activeFilter);
 
   return (
@@ -857,6 +906,9 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </section>
+          {/* Figurines Section */}
+          <FigurinesSection />
+
         </div>
       </ScrollExpandMedia>
 
