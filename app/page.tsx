@@ -50,10 +50,10 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
   }, [hasBar]);
 
   const navItems = [
-    { label: 'Salon', href: '#' },
-    { label: 'Figurines', href: '#' },
-    { label: 'Bureau', href: '#' },
-    { label: 'Inspirations', href: '#' },
+    { label: 'Salon', href: '#section-salon' },
+    { label: 'Bureau', href: '#section-bureau' },
+    { label: 'Figurines', href: '#section-figurines' },
+    { label: 'Inspirations', href: '#section-inspirations' },
   ];
 
   return (
@@ -645,7 +645,7 @@ const parallaxImages = [
 
 function InspirationsParallaxSection() {
   return (
-    <section>
+    <section id="section-inspirations" className="scroll-mt-20">
       <FadeInSection>
         <div className="text-center py-16 px-6">
           <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-3">Galerie</p>
@@ -775,7 +775,7 @@ function FigurinesSection() {
 
   return (
     <FadeInSection>
-      <section className="py-16 max-w-7xl mx-auto px-6 lg:px-10">
+      <section id="section-figurines" className="py-16 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
         <div className="mb-10">
           <p className="text-xs tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
@@ -819,6 +819,17 @@ function FigurinesSection() {
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState('Tous');
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#section-salon') setActiveFilter('Salon');
+      else if (hash === '#section-bureau') setActiveFilter('Bureau');
+      else if (hash === '#section-salon' || hash === '') setActiveFilter('Tous');
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
 
   const filteredProducts = activeFilter === 'Tous'
     ? products.filter((p) => p.category !== 'Figurines')
@@ -866,7 +877,8 @@ export default function Home() {
           <CategoryQuickNav />
 
           {/* Products Grid with filter */}
-          <section className="py-16">
+          <section id="section-salon" className="py-16 scroll-mt-20">
+            <div id="section-bureau" />
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
