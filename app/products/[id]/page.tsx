@@ -5,8 +5,449 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
+
+// ─── Checkout Drawer ──────────────────────────────────────────────────────────
+
+type CheckoutStep = 'cart' | 'delivery' | 'payment' | 'confirmation';
+
+function CheckoutDrawer({
+  open,
+  onClose,
+  product,
+}: {
+  open: boolean;
+  onClose: () => void;
+  product: { name: string; price: number; images: string[]; category: string };
+}) {
+  const [step, setStep] = useState<CheckoutStep>('cart');
+  const [delivery, setDelivery] = useState({ prenom: '', nom: '', email: '', adresse: '', ville: '', code: '' });
+  const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
+  const [payLoading, setPayLoading] = useState(false);
+
+  const promoPrice = product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price;
+
+  const steps: { key: CheckoutStep; label: string; icon: React.ReactNode }[] = [
+    { key: 'cart', label: 'Panier', icon: <ShoppingBag className="w-3.5 h-3.5" /> },
+    { key: 'delivery', label: 'Livraison', icon: <Truck className="w-3.5 h-3.5" /> },
+    { key: 'payment', label: 'Paiement', icon: <CreditCard className="w-3.5 h-3.5" /> },
+    { key: 'confirmation', label: 'Confirmation', icon: <Check className="w-3.5 h-3.5" /> },
+  ];
+
+  const stepIndex = steps.findIndex((s) => s.key === step);
+
+  const handlePay = () => {
+    setPayLoading(true);
+    setTimeout(() => {
+      setPayLoading(false);
+      setStep('confirmation');
+    }, 1800);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setTimeout(() => {
+      setStep('cart');
+      setPayLoading(false);
+    }, 400);
+  };
+
+  const deliveryValid = delivery.prenom && delivery.nom && delivery.email && delivery.adresse && delivery.ville && delivery.code;
+  const paymentValid = payment.carte.replace(/\s/g, '').length === 16 && payment.expiry.length === 5 && payment.cvv.length === 3 && payment.titulaire;
+
+  const formatCard = (val: string) =>
+    val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+  const formatExpiry = (val: string) => {
+    const d = val.replace(/\D/g, '').slice(0, 4);
+    return d.length >= 3 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={handleClose}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
+          />
+
+          {/* Drawer */}
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 320, damping: 35 }}
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col shadow-2xl"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+              <h2 className="text-base font-serif font-bold tracking-wide">
+                {step === 'cart' && 'Mon panier'}
+                {step === 'delivery' && 'Livraison'}
+                {step === 'payment' && 'Paiement sécurisé'}
+                {step === 'confirmation' && 'Commande confirmée'}
+              </h2>
+              <button onClick={handleClose} className="p-1.5 rounded-full hover:bg-neutral-100 transition-colors">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Step indicator */}
+            {step !== 'confirmation' && (
+              <div className="px-6 pt-4 pb-2">
+                <div className="flex items-center gap-1">
+                  {steps.slice(0, 3).map((s, i) => (
+                    <div key={s.key} className="flex items-center gap-1 flex-1">
+                      <div className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'}`}>
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${i < stepIndex ? 'bg-black text-white' : i === stepIndex ? 'border-2 border-black text-black' : 'border border-neutral-200 text-neutral-300'}`}>
+                          {i < stepIndex ? <Check className="w-3 h-3" /> : s.icon}
+                        </div>
+                        <span className="hidden sm:block">{s.label}</span>
+                      </div>
+                      {i < 2 && <div className={`flex-1 h-px transition-colors duration-300 ${i < stepIndex ? 'bg-black' : 'bg-neutral-200'}`} />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto">
+              <AnimatePresence mode="wait">
+                {/* ── CART ── */}
+                {step === 'cart' && (
+                  <motion.div
+                    key="cart"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.25 }}
+                    className="p-6"
+                  >
+                    <div className="flex gap-4 p-4 rounded-2xl border border-neutral-100 bg-neutral-50 mb-6">
+                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-white flex-shrink-0 flex items-center justify-center border border-neutral-100">
+                        <Image
+                          src={product.images[0]}
+                          alt={product.name}
+                          width={80}
+                          height={80}
+                          className={product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-sm text-black leading-tight mb-1">{product.name}</p>
+                        <p className="text-xs text-neutral-400 mb-2">{product.category} · Qté 1</p>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
+                          {product.name.includes('Bubble') && (
+                            <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 mb-6 text-sm">
+                      <div className="flex justify-between text-neutral-500">
+                        <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                      </div>
+                      <div className="flex justify-between text-neutral-500">
+                        <span>Livraison</span><span className="text-emerald-600">Offerte</span>
+                      </div>
+                      <div className="h-px bg-neutral-100 my-2" />
+                      <div className="flex justify-between font-bold text-black text-base">
+                        <span>Total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-xs text-neutral-400 mb-6 bg-neutral-50 rounded-xl p-3">
+                      <Truck className="w-4 h-4 shrink-0" />
+                      <span>Livraison à domicile offerte · 3 à 6 semaines</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ── DELIVERY ── */}
+                {step === 'delivery' && (
+                  <motion.div
+                    key="delivery"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.25 }}
+                    className="p-6 space-y-4"
+                  >
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { key: 'prenom', label: 'Prénom', col: 1 },
+                        { key: 'nom', label: 'Nom', col: 1 },
+                      ].map((f) => (
+                        <div key={f.key}>
+                          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                          <input
+                            value={delivery[f.key as keyof typeof delivery]}
+                            onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
+                            className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                            placeholder={f.label}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    {[
+                      { key: 'email', label: 'Email', placeholder: 'votre@email.com', type: 'email' },
+                      { key: 'adresse', label: 'Adresse', placeholder: '12 rue de la Paix' },
+                    ].map((f) => (
+                      <div key={f.key}>
+                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                        <input
+                          type={f.type || 'text'}
+                          value={delivery[f.key as keyof typeof delivery]}
+                          onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
+                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                          placeholder={f.placeholder}
+                        />
+                      </div>
+                    ))}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { key: 'ville', label: 'Ville', placeholder: 'Paris' },
+                        { key: 'code', label: 'Code postal', placeholder: '75001' },
+                      ].map((f) => (
+                        <div key={f.key}>
+                          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                          <input
+                            value={delivery[f.key as keyof typeof delivery]}
+                            onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
+                            className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                            placeholder={f.placeholder}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ── PAYMENT ── */}
+                {step === 'payment' && (
+                  <motion.div
+                    key="payment"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.25 }}
+                    className="p-6 space-y-4"
+                  >
+                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-xl p-3 mb-2">
+                      <Lock className="w-3.5 h-3.5 shrink-0" />
+                      <span>Paiement 100% sécurisé — chiffrement SSL 256 bits</span>
+                    </div>
+
+                    <div>
+                      <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Titulaire de la carte</label>
+                      <input
+                        value={payment.titulaire}
+                        onChange={(e) => setPayment({ ...payment, titulaire: e.target.value })}
+                        className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                        placeholder="Jean Dupont"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Numéro de carte</label>
+                      <input
+                        value={payment.carte}
+                        onChange={(e) => setPayment({ ...payment, carte: formatCard(e.target.value) })}
+                        className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
+                        placeholder="1234 5678 9012 3456"
+                        maxLength={19}
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Expiration</label>
+                        <input
+                          value={payment.expiry}
+                          onChange={(e) => setPayment({ ...payment, expiry: formatExpiry(e.target.value) })}
+                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                          placeholder="MM/AA"
+                          maxLength={5}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">CVV</label>
+                        <input
+                          value={payment.cvv}
+                          onChange={(e) => setPayment({ ...payment, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) })}
+                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                          placeholder="123"
+                          maxLength={3}
+                          type="password"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Payment icons */}
+                    <div className="flex gap-2 pt-1">
+                      {['Visa', 'MC', 'Amex', 'PayPal'].map((p) => (
+                        <span key={p} className="text-[9px] font-bold border border-neutral-200 rounded px-1.5 py-0.5 text-neutral-400">{p}</span>
+                      ))}
+                    </div>
+
+                    <div className="h-px bg-neutral-100" />
+                    <div className="flex justify-between font-bold text-sm">
+                      <span>Total à payer</span>
+                      <span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ── CONFIRMATION ── */}
+                {step === 'confirmation' && (
+                  <motion.div
+                    key="confirmation"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                    className="p-6 flex flex-col items-center text-center pt-12"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
+                      className="w-20 h-20 rounded-full bg-black flex items-center justify-center mb-6"
+                    >
+                      <Check className="w-10 h-10 text-white" />
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <h3 className="text-xl font-serif font-bold mb-2">Merci pour votre commande !</h3>
+                      <p className="text-sm text-neutral-500 mb-6 leading-relaxed">
+                        Votre commande a bien été reçue. Vous recevrez un email de confirmation à <strong>{delivery.email || 'votre adresse'}</strong>.
+                      </p>
+                      <div className="bg-neutral-50 rounded-2xl p-4 text-left w-full mb-6">
+                        <div className="flex gap-3 mb-3">
+                          <div className="w-12 h-12 rounded-lg bg-white border border-neutral-100 flex items-center justify-center overflow-hidden">
+                            <Image src={product.images[0]} alt={product.name} width={48} height={48}
+                              className={product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-sm">{product.name}</p>
+                            <p className="text-xs text-neutral-400">{promoPrice.toLocaleString('fr-FR')} € · Livraison offerte</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs text-neutral-500">
+                          <Package className="w-3.5 h-3.5" />
+                          <span>Expédition estimée : 3 à 6 semaines</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={handleClose}
+                        className="w-full py-3.5 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                      >
+                        Continuer mes achats
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Footer CTA */}
+            {step !== 'confirmation' && (
+              <div className="p-6 border-t border-neutral-100 space-y-3">
+                {step === 'cart' && (
+                  <button
+                    onClick={() => setStep('delivery')}
+                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                  >
+                    Continuer vers la livraison
+                  </button>
+                )}
+                {step === 'delivery' && (
+                  <button
+                    onClick={() => setStep('payment')}
+                    disabled={!deliveryValid}
+                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    Continuer vers le paiement
+                  </button>
+                )}
+                {step === 'payment' && (
+                  <button
+                    onClick={handlePay}
+                    disabled={!paymentValid || payLoading}
+                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {payLoading ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                        />
+                        Traitement en cours…
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="w-4 h-4" />
+                        Payer {promoPrice.toLocaleString('fr-FR')} €
+                      </>
+                    )}
+                  </button>
+                )}
+                {step !== 'cart' && (
+                  <button
+                    onClick={() => setStep(step === 'payment' ? 'delivery' : 'cart')}
+                    className="w-full text-center text-xs text-neutral-400 hover:text-black transition-colors"
+                  >
+                    ← Retour
+                  </button>
+                )}
+              </div>
+            )}
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ─── Cart Toast ───────────────────────────────────────────────────────────────
+
+function CartToast({ show, productName }: { show: boolean; productName: string }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          initial={{ opacity: 0, y: -16, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -16, scale: 0.96 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-medium whitespace-nowrap"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.1, type: 'spring', stiffness: 500 }}
+            className="w-5 h-5 rounded-full bg-white flex items-center justify-center"
+          >
+            <Check className="w-3 h-3 text-black" />
+          </motion.div>
+          <span>{productName} ajouté au panier</span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ─── Product Page ─────────────────────────────────────────────────────────────
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -16,7 +457,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [selectedImage, setSelectedImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [added, setAdded] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const [wished, setWished] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   if (!product) {
     return (
@@ -37,12 +480,20 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const related = product.category === 'Figurines'
     ? products.filter((p) => kawsIds.includes(p.id) && p.id !== product.id)
     : isBubble
-      ? bubbleOrder.filter((id) => id !== product.id).map((id) => products.find((p) => p.id === id)!).filter(Boolean)
+      ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
       : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const relatedScrollRef = useRef<HTMLDivElement>(null);
   const scrollRelated = (dir: 'left' | 'right') => {
     relatedScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
+  };
+
+  const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+
+  const handleAddToCart = () => {
+    setAdded(true);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
   };
 
   const accordions = [
@@ -63,7 +514,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       title: 'Livraison',
       content: (
         <div className="text-sm text-neutral-600 space-y-2">
-          <p>Livraison en blanc à domicile, installation comprise. Délai : 3 à 6 semaines selon disponibilité.</p>
+          <p>Livraison à domicile offerte, installation comprise. Délai : 3 à 6 semaines selon disponibilité.</p>
         </div>
       ),
     },
@@ -80,8 +531,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   return (
     <div className="min-h-screen bg-white">
+      <CartToast show={showToast} productName={product.name} />
+      <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
+
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-100">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
           <Link href="/" className="text-base font-bold tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             MAISON SERENIA
@@ -110,7 +564,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Image Gallery */}
             <div className="space-y-4">
-              {/* Main image */}
               <div className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -125,53 +578,50 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       src={product.images[selectedImage]}
                       alt={product.name}
                       fill
-                      className={product.category === 'Figurines' ? 'object-contain p-6' : 'object-cover'}
+                      className={product.category === 'Figurines' ? 'object-contain p-6' : isBubble ? 'object-contain p-6' : 'object-cover'}
                       priority
                     />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Thumbnails */}
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedImage(i)}
-                    className={`relative aspect-square overflow-hidden rounded-xl transition-all duration-200 ${
-                      selectedImage === i
-                        ? 'ring-2 ring-black ring-offset-2'
-                        : 'opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <Image src={img} alt={`${product.name} vue ${i + 1}`} fill className="object-cover" />
-                  </button>
-                ))}
-              </div>
+              {product.images.length > 1 && (
+                <div className="grid grid-cols-4 gap-3">
+                  {product.images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedImage(i)}
+                      className={`relative aspect-square overflow-hidden rounded-xl transition-all duration-200 ${
+                        selectedImage === i ? 'ring-2 ring-black ring-offset-2' : 'opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill className="object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Product Info */}
             <div className="lg:pt-4">
-              {/* Category */}
               <p className="text-xs tracking-[0.25em] uppercase text-neutral-400 mb-3">{product.category}</p>
+              <h1 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4 leading-tight">{product.name}</h1>
 
-              {/* Name */}
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4 leading-tight">
-                {product.name}
-              </h1>
-
-              {/* Stars */}
               <div className="flex items-center gap-1 mb-5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-black text-black" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
                 <span className="text-xs text-neutral-400 ml-2">(24 avis)</span>
               </div>
 
               {/* Price */}
-              <p className="text-3xl font-bold text-black mb-6">
-                {product.price.toLocaleString('fr-FR')} €
-              </p>
+              <div className="flex items-baseline gap-3 mb-6">
+                <p className="text-3xl font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
+                {isBubble && (
+                  <p className="text-lg text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</p>
+                )}
+                {isBubble && (
+                  <span className="text-xs font-bold bg-black text-white px-2.5 py-1 rounded-full">−30%</span>
+                )}
+              </div>
 
               {/* Color variants */}
               {variants && (
@@ -186,9 +636,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         onClick={() => router.push(`/products/${v.productId}`)}
                         title={v.color}
                         className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
-                          v.productId === product.id
-                            ? 'border-black scale-110 shadow-md'
-                            : 'border-neutral-200 hover:border-neutral-400 hover:scale-105'
+                          v.productId === product.id ? 'border-black scale-110 shadow-md' : 'border-neutral-200 hover:border-neutral-400 hover:scale-105'
                         }`}
                         style={{ backgroundColor: v.colorHex }}
                       />
@@ -197,44 +645,68 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
               )}
 
-              {/* Description */}
-              <p className="text-neutral-600 leading-relaxed mb-8 text-sm">
-                {product.description}
-              </p>
+              <p className="text-neutral-600 leading-relaxed mb-8 text-sm">{product.description}</p>
 
-              {/* Specs */}
               <div className="flex flex-wrap gap-3 mb-8">
-                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">
-                  📐 {product.dimensions}
-                </span>
-                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">
-                  🪵 {product.material}
-                </span>
+                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">📐 {product.dimensions}</span>
+                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">🪵 {product.material}</span>
               </div>
 
               {/* CTA Buttons */}
               <div className="space-y-3 mb-10">
-                <button
-                  onClick={() => setAdded(true)}
-                  className={`w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase transition-all duration-300 ${
-                    added
-                      ? 'bg-neutral-800 text-white'
-                      : 'bg-black text-white hover:bg-neutral-800'
+                {/* Ajouter au panier */}
+                <motion.button
+                  onClick={handleAddToCart}
+                  whileTap={{ scale: 0.98 }}
+                  className={`w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase transition-all duration-300 relative overflow-hidden ${
+                    added ? 'bg-neutral-800 text-white' : 'bg-black text-white hover:bg-neutral-800'
                   }`}
                 >
-                  {added ? '✓ Ajouté au panier' : 'Ajouter au panier'}
-                </button>
-                <button
+                  <AnimatePresence mode="wait">
+                    {added ? (
+                      <motion.span
+                        key="added"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Check className="w-4 h-4" /> Ajouté au panier
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="add"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <ShoppingBag className="w-4 h-4" /> Ajouter au panier
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
+
+                {/* Acheter maintenant */}
+                <motion.button
+                  onClick={() => setCheckoutOpen(true)}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <Lock className="w-4 h-4" /> Acheter maintenant
+                </motion.button>
+
+                {/* Wishlist */}
+                <motion.button
                   onClick={() => setWished(!wished)}
-                  className={`w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
-                    wished
-                      ? 'border-black bg-black text-white'
-                      : 'border-neutral-200 bg-white text-black hover:border-black'
+                  whileTap={{ scale: 0.97 }}
+                  className={`w-full py-3.5 rounded-xl font-semibold text-sm tracking-widest uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
+                    wished ? 'border-black bg-black text-white' : 'border-neutral-200 bg-white text-black hover:border-black'
                   }`}
                 >
                   <Heart className={`w-4 h-4 ${wished ? 'fill-white' : ''}`} />
                   {wished ? 'Dans vos souhaits' : 'Ajouter à la liste de souhaits'}
-                </button>
+                </motion.button>
               </div>
 
               {/* Accordions */}
@@ -246,11 +718,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       onClick={() => setOpenAccordion(openAccordion === i ? null : i)}
                     >
                       {acc.title}
-                      <ChevronDown
-                        className={`w-4 h-4 text-neutral-400 transition-transform duration-300 ${
-                          openAccordion === i ? 'rotate-180' : ''
-                        }`}
-                      />
+                      <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-300 ${openAccordion === i ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openAccordion === i && (
@@ -277,40 +745,22 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="flex items-end justify-between mb-10">
                 <h2 className="text-2xl font-serif font-bold">Vous aimerez aussi</h2>
                 <div className="flex items-center gap-2">
-                  <motion.button
-                    onClick={() => scrollRelated('left')}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
-                    aria-label="Précédent"
-                  >
+                  <motion.button onClick={() => scrollRelated('left')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
                     <ChevronRight className="w-4 h-4 rotate-180" />
                   </motion.button>
-                  <motion.button
-                    onClick={() => scrollRelated('right')}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
-                    aria-label="Suivant"
-                  >
+                  <motion.button onClick={() => scrollRelated('right')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Suivant">
                     <ChevronRight className="w-4 h-4" />
                   </motion.button>
                 </div>
               </div>
-              <div
-                ref={relatedScrollRef}
-                className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
-              >
+              <div ref={relatedScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
                 {related.map((p) => (
                   <Link key={p.id} href={`/products/${p.id}`} className="group flex-shrink-0 w-56 md:w-64 snap-start">
                     <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-3' : ''}`}>
-                      <Image
-                        src={p.images[0]}
-                        alt={p.name}
-                        width={400}
-                        height={400}
-                        className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`}
-                      />
+                      <Image src={p.images[0]} alt={p.name} width={400} height={400}
+                        className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
                     </div>
                     <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                     <p className="text-neutral-500 text-sm mt-0.5">{p.price.toLocaleString('fr-FR')} €</p>
@@ -322,10 +772,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
           {/* Back button */}
           <div className="mt-16">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-black transition-colors"
-            >
+            <Link href="/" className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-black transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Retour à la boutique
             </Link>
