@@ -17,7 +17,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [added, setAdded] = useState(false);
   const [wished, setWished] = useState(false);
-  const variants = getVariantGroup(product.id);
 
   if (!product) {
     return (
@@ -29,6 +28,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       </div>
     );
   }
+
+  const variants = getVariantGroup(product.id);
 
   const related = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
