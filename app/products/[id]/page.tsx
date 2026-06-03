@@ -3,18 +3,21 @@
 import { useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight } from 'lucide-react';
-import { products } from '@/lib/products';
+import { products, getVariantGroup } from '@/lib/products';
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const product = products.find((p) => p.id === Number(id));
 
+  const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [added, setAdded] = useState(false);
   const [wished, setWished] = useState(false);
+  const variants = getVariantGroup(product.id);
 
   if (!product) {
     return (
@@ -109,7 +112,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       src={product.images[selectedImage]}
                       alt={product.name}
                       fill
-                      className="object-cover"
+                      className={product.category === 'Figurines' ? 'object-contain p-6' : 'object-cover'}
                       priority
                     />
                   </motion.div>
@@ -156,6 +159,30 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <p className="text-3xl font-bold text-black mb-6">
                 {product.price.toLocaleString('fr-FR')} €
               </p>
+
+              {/* Color variants */}
+              {variants && (
+                <div className="mb-8">
+                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
+                    Couleur — <span className="text-black font-medium">{variants.find(v => v.productId === product.id)?.color}</span>
+                  </p>
+                  <div className="flex items-center gap-3">
+                    {variants.map((v) => (
+                      <button
+                        key={v.productId}
+                        onClick={() => router.push(`/products/${v.productId}`)}
+                        title={v.color}
+                        className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
+                          v.productId === product.id
+                            ? 'border-black scale-110 shadow-md'
+                            : 'border-neutral-200 hover:border-neutral-400 hover:scale-105'
+                        }`}
+                        style={{ backgroundColor: v.colorHex }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Description */}
               <p className="text-neutral-600 leading-relaxed mb-8 text-sm">

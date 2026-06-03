@@ -10,6 +10,27 @@ export interface Product {
   details: string[];
 }
 
+export interface ProductVariant {
+  productId: number;
+  color: string;
+  colorHex: string;
+}
+
+export const variantGroups: Record<string, ProductVariant[]> = {
+  'figurine-kaws-monde': [
+    { productId: 31, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 32, color: 'Gris', colorHex: '#9e9e9e' },
+    { productId: 33, color: 'Brun', colorHex: '#8B5E3C' },
+  ],
+};
+
+export function getVariantGroup(productId: number): ProductVariant[] | null {
+  for (const group of Object.values(variantGroups)) {
+    if (group.some((v) => v.productId === productId)) return group;
+  }
+  return null;
+}
+
 export const products: Product[] = [
   {
     id: 1,
@@ -485,5 +506,46 @@ export const products: Product[] = [
     dimensions: 'Table Ø 90, canapé 2 pl. L 160, 2 fauteuils',
     material: 'Aluminium, tissu Sunbrella®',
     details: ['Aluminium thermolaqué blanc', 'Coussins Sunbrella® imperméables', 'Table plateau verre trempé', 'Housses de protection incluses'],
+  },
+  // ── Figurines KAWS Monde ─────────────────────────────────────────────────────
+  {
+    id: 31,
+    name: 'Figurine KAWS noir monde',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS édition Monde en coloris noir intense — une pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/r1YNwbR/IMG-0657.jpg',
+      'https://i.ibb.co/s9x78xz3/IMG-0665.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Édition Monde collector', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
+  {
+    id: 32,
+    name: 'Figurine KAWS gris monde',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS édition Monde en coloris gris — subtilité et caractère dans une même pièce. Sculpture en vinyle premium, finition soyeuse, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/dss1k9Yf/IMG-0626.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Édition Monde collector', 'Vinyle premium finition soyeuse', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
+  {
+    id: 33,
+    name: 'Figurine KAWS brun monde',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS édition Monde en coloris brun chaleureux — une teinte rare et raffinée. Sculpture en vinyle premium, finition naturelle, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/WvDJ6BCH/IMG-0658.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Édition Monde collector', 'Vinyle premium finition naturelle', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
 ];
