@@ -516,7 +516,6 @@ export const products: Product[] = [
     description: 'Figurine KAWS édition Monde en coloris noir intense — une pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
     images: [
       'https://i.ibb.co/r1YNwbR/IMG-0657.jpg',
-      'https://i.ibb.co/s9x78xz3/IMG-0665.jpg',
     ],
     dimensions: 'H 28 cm',
     material: 'Vinyle premium',

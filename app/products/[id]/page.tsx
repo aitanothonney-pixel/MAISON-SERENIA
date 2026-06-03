@@ -31,7 +31,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const variants = getVariantGroup(product.id);
 
-  const related = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const kawsIds = [31, 32, 33];
+  const related = product.category === 'Figurines'
+    ? products.filter((p) => kawsIds.includes(p.id) && p.id !== product.id)
+    : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const accordions = [
     {
