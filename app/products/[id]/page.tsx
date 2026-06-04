@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use, useRef } from 'react';
+import { useState, use, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -522,6 +522,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const { isWished, toggle: toggleWish } = useWishlist();
   const { addItem: addToCart } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
   if (!product) {
     return (
