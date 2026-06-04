@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
@@ -1316,8 +1316,18 @@ export default function Home() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
+  const shuffledAll = useMemo(() => {
+    const arr = [...products];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const baseProducts = activeFilter === 'Tous'
-    ? products
+    ? shuffledAll
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
       : products.filter((p) => p.category === activeFilter);
