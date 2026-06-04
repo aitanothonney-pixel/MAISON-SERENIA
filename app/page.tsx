@@ -534,7 +534,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Bureau'];
+const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines'];
 
 function ProductFilterBar({
   active,
@@ -922,8 +922,10 @@ export default function Home() {
   }, []);
 
   const filteredProducts = activeFilter === 'Tous'
-    ? products.filter((p) => p.category !== 'Figurines')
-    : products.filter((p) => p.category === activeFilter);
+    ? products.filter((p) => p.category !== 'Figurines' && p.category !== 'Chambre' && p.category !== 'Décoration' && p.category !== 'Terrasse' && p.category !== 'Salle à manger')
+    : activeFilter === 'Figurines'
+      ? products.filter((p) => p.category === 'Figurines').sort((a, b) => b.id - a.id)
+      : products.filter((p) => p.category === activeFilter);
 
   return (
     <div className="bg-white">
