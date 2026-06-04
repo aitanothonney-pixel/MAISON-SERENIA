@@ -643,7 +643,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       src={product.images[selectedImage]}
                       alt={product.name}
                       fill
-                      className={product.category === 'Figurines' ? 'object-contain p-6' : isBubble ? 'object-contain p-1' : 'object-cover'}
+                      className={product.category === 'Figurines'
+                        ? product.id === 33
+                          ? 'object-cover object-center scale-110'
+                          : 'object-contain p-6'
+                        : isBubble ? 'object-contain p-1' : 'object-cover'}
                       priority
                     />
                   </motion.div>
