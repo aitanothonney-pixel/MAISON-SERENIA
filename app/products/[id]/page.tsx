@@ -26,7 +26,7 @@ function CheckoutDrawer({
   const [step, setStep] = useState<CheckoutStep>('cart');
   const [delivery, setDelivery] = useState({ prenom: '', nom: '', email: '', adresse: '', ville: '', code: '' });
   const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
-  const [payMethod, setPayMethod] = useState<'card' | 'paypal' | 'twint'>('card');
+  const [payMethod, setPayMethod] = useState<'card' | 'paypal' | 'twint' | 'applepay'>('card');
   const [payLoading, setPayLoading] = useState(false);
 
   const promoPrice = product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price;
@@ -251,11 +251,12 @@ function CheckoutDrawer({
                     </div>
 
                     {/* Method tabs */}
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-4 gap-2">
                       {([
                         { key: 'card', label: 'Carte', icon: <CreditCard className="w-4 h-4" /> },
                         { key: 'paypal', label: 'PayPal', icon: <span className="text-[#003087] font-bold text-xs">PP</span> },
                         { key: 'twint', label: 'Twint', icon: <span className="font-bold text-xs text-black">TW</span> },
+                        { key: 'applepay', label: 'Apple Pay', icon: <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.29.07 2.18.74 2.93.8 1.12-.22 2.19-.91 3.39-.84 1.44.07 2.53.61 3.24 1.57-2.96 1.77-2.26 5.69.44 6.82-.52 1.42-1.22 2.83-2 3.51zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> },
                       ] as const).map((m) => (
                         <motion.button
                           key={m.key}
@@ -314,6 +315,19 @@ function CheckoutDrawer({
                           </div>
                           <p className="text-sm text-neutral-600">Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.</p>
                           <p className="text-xs text-neutral-400">Compte PayPal ou carte bancaire acceptés</p>
+                        </motion.div>
+                      )}
+
+                      {/* Apple Pay */}
+                      {payMethod === 'applepay' && (
+                        <motion.div key="applepay" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
+                          className="bg-black/5 border border-black/10 rounded-2xl p-5 text-center space-y-3">
+                          <div className="flex justify-center items-center gap-2">
+                            <svg viewBox="0 0 24 24" className="w-7 h-7" fill="black"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.29.07 2.18.74 2.93.8 1.12-.22 2.19-.91 3.39-.84 1.44.07 2.53.61 3.24 1.57-2.96 1.77-2.26 5.69.44 6.82-.52 1.42-1.22 2.83-2 3.51zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                            <span className="font-bold text-lg tracking-tight">Apple Pay</span>
+                          </div>
+                          <p className="text-sm text-neutral-600">Confirmez le paiement avec Face ID ou Touch ID sur votre appareil Apple.</p>
+                          <p className="text-xs text-neutral-400">Disponible sur iPhone, iPad et Mac</p>
                         </motion.div>
                       )}
 
@@ -458,7 +472,7 @@ function CheckoutDrawer({
                     ) : (
                       <>
                         <Lock className="w-4 h-4" />
-                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : `Payer ${promoPrice.toLocaleString('fr-FR')} €`}
+                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${promoPrice.toLocaleString('fr-FR')} €`}
                       </>
                     )}
                   </button>
