@@ -822,11 +822,6 @@ function Footer() {
             <p className="text-sm leading-relaxed mb-6">
               L&apos;art de vivre à la française. Des pièces intemporelles, conçues pour durer et sublimer votre intérieur.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-white transition-colors"><Share2 className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white transition-colors"><Heart className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
-            </div>
           </div>
 
           {/* Collections */}
