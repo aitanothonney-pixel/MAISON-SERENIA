@@ -778,13 +778,13 @@ const testimonials = [
 // ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
 
 const parallaxImages = [
-  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Dame canapé blanc', position: 'center 40%' },       // 0 — centre: dame, point focal fort
-  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé rouge', position: 'center 60%' },              // 1 — GARDÉ (canapé rouge)
-  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design', position: 'center center' },          // 2 — gauche étroit: texture/détail
-  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé jaune', position: 'center 50%' },              // 3 — droite: canapé jaune en intérieur
-  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Fauteuils Bubble bleu', position: 'center center' },  // 4 — GARDÉ (fauteuils bleu)
-  { src: 'https://i.ibb.co/MksNPSck/IMG-2527.jpg', alt: 'Collection Bubble', position: 'center center' },      // 5 — bas large: atmosphère collection
-  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Salle bleue', position: 'center 55%' },              // 6 — bas petit: accent couleur
+  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Dame canapé blanc', position: 'center 40%', fit: 'cover' as const },
+  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé rouge', position: 'center 50%', fit: 'contain' as const },
+  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design', position: 'center center', fit: 'cover' as const },
+  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé jaune', position: 'center 50%', fit: 'contain' as const },
+  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Fauteuils Bubble bleu', position: 'center center', fit: 'contain' as const },
+  { src: 'https://i.ibb.co/MksNPSck/IMG-2527.jpg', alt: 'Collection Bubble', position: 'center center', fit: 'contain' as const },
+  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Salle bleue', position: 'center 55%', fit: 'cover' as const },
 ];
 
 function InspirationsParallaxSection() {
