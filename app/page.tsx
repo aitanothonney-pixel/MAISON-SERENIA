@@ -859,8 +859,9 @@ function Footer() {
 // ─── Figurines Section ────────────────────────────────────────────────────────
 
 function FigurinesSection() {
-  const kawsIds = [31, 32, 33];
-  const figurines = products.filter((p) => kawsIds.includes(p.id));
+  const figurines = products
+    .filter((p) => p.category === 'Figurines')
+    .sort((a, b) => b.id - a.id);
 
   return (
     <FadeInSection>
