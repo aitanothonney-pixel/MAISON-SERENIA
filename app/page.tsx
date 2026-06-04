@@ -1339,7 +1339,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[70] flex items-center justify-center bg-black pointer-events-none"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-white pointer-events-none"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.7, y: 20 }}
@@ -1348,8 +1348,11 @@ export default function Home() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
-              <p className="text-neutral-500 text-xs tracking-[0.4em] uppercase mb-3">Collection</p>
-              <p className="text-white text-5xl md:text-7xl font-serif font-bold tracking-wide">{flashCat}</p>
+              <p className="text-neutral-300 text-xs tracking-[0.5em] uppercase mb-4">Collection</p>
+              <p
+                className="text-black text-6xl md:text-8xl tracking-tight"
+                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontWeight: 300, fontStyle: 'italic' }}
+              >{flashCat}</p>
             </motion.div>
           </motion.div>
         )}
