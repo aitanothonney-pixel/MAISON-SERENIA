@@ -821,16 +821,34 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
               </div>
               <div ref={relatedScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
-                {related.map((p) => (
-                  <Link key={p.id} href={`/products/${p.id}`} className="group flex-shrink-0 w-64 md:w-80 snap-start">
-                    <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
-                      <Image src={p.images[0]} alt={p.name} width={400} height={400}
-                        className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                {related.map((p) => {
+                  const pIsBubble = bubbleOrder.includes(p.id);
+                  const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
+                  return (
+                    <div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start">
+                      <Link href={`/products/${p.id}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
+                          <Image src={p.images[0]} alt={p.name} width={400} height={400}
+                            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                          {pIsBubble && (
+                            <span className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
+                          )}
+                          <button
+                            onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
+                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                          >
+                            <Heart className={`w-3.5 h-3.5 transition-all ${isWished(p.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                          </button>
+                        </div>
+                      </Link>
+                      <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <p className="font-bold text-sm text-black">{pPromo.toLocaleString('fr-FR')} €</p>
+                        {pIsBubble && <p className="text-neutral-400 line-through text-xs">{p.price.toLocaleString('fr-FR')} €</p>}
+                      </div>
                     </div>
-                    <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
-                    <p className="text-neutral-500 text-sm mt-0.5">{p.price.toLocaleString('fr-FR')} €</p>
-                  </Link>
-                ))}
+                  );
+                })}
               </div>
             </section>
           )}
