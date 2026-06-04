@@ -618,4 +618,18 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Collaboration Bearbrick × Bape', 'Coloris noir édition collector', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
+  // ── Figurine Kaws Câlin ───────────────────────────────────────────────────────
+  {
+    id: 39,
+    name: 'Figurine Kaws câlin',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS câlin — une des poses les plus emblématiques de l\'artiste. Sculpture en vinyle premium, finition impeccable, pièce collector incontournable.',
+    images: [
+      'https://i.ibb.co/Tx10z5Hj/IMG-0627.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Pose câlin emblématique', 'Vinyle premium finition mate', 'Pièce collector', 'Livraison soigneusement emballée'],
+  },
 ];
