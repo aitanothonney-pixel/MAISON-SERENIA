@@ -185,11 +185,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                 const q = searchQ.toLowerCase().trim();
                 const isMatch = (p: typeof products[0]) => {
                   if (!q) return false;
-                  const haystack = (p.name + ' ' + p.category + ' ' + p.description).toLowerCase();
-                  if (haystack.includes(q)) return true;
-                  let i = 0;
-                  for (const ch of q) { const idx = haystack.indexOf(ch, i); if (idx === -1) return false; i = idx + 1; }
-                  return true;
+                  const name = p.name.toLowerCase();
+                  const cat = p.category.toLowerCase();
+                  // Match if query is a substring of the name or category
+                  if (name.includes(q) || cat.includes(q)) return true;
+                  // Also match each word of the query against the name
+                  return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
                 };
                 const hasQuery = q.length >= 1;
                 const sorted = hasQuery
