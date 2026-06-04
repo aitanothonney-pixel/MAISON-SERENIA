@@ -590,4 +590,18 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Collaboration Bearbrick × Bape', 'Coloris rose édition rare', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
+  // ── Figurine Kaws ─────────────────────────────────────────────────────────────
+  {
+    id: 37,
+    name: 'Figurine Kaws (28 cm)',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS collector en vinyle premium — une icône du art toy contemporain. Finition impeccable, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/yM7CjY2/IMG-0664.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Édition collector', 'Vinyle premium', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
 ];
