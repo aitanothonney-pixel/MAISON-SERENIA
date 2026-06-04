@@ -938,6 +938,7 @@ function Footer() {
 // ─── Figurines Section ────────────────────────────────────────────────────────
 
 function FigurinesSection() {
+  const { isWished, toggle } = useWishlist();
   const figurines = products
     .filter((p) => p.category === 'Figurines')
     .sort((a, b) => b.id - a.id);
@@ -970,6 +971,12 @@ function FigurinesSection() {
                     style={[33, 34, 38, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center', ...(product.id === 33 ? { mixBlendMode: 'multiply' as const } : {}) } : undefined}
                     className={`transition-transform duration-500 group-hover:scale-105 object-contain`}
                   />
+                  <button
+                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+                    className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  >
+                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                  </button>
                   <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                     <span className="block w-full text-center bg-black text-white text-[10px] font-bold tracking-widest uppercase py-2.5 rounded-xl">
                       Voir le produit
