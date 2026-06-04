@@ -6,6 +6,7 @@ import { useRef } from 'react';
 interface Image {
   src: string;
   alt?: string;
+  position?: string;
 }
 
 interface ZoomParallaxProps {
@@ -30,7 +31,7 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
   return (
     <div ref={container} className="relative h-[300vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {images.map(({ src, alt }, index) => {
+        {images.map(({ src, alt, position = 'center' }, index) => {
           const scale = scales[index % scales.length];
 
           return (
@@ -43,7 +44,8 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
                 <img
                   src={src || '/placeholder.svg'}
                   alt={alt || `Parallax image ${index + 1}`}
-                  className="h-full w-full object-cover object-center"
+                  style={{ objectPosition: position }}
+                  className="h-full w-full object-cover"
                 />
               </div>
             </motion.div>
