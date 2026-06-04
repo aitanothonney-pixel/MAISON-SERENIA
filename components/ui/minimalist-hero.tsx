@@ -6,7 +6,7 @@ import { Share2, Globe } from 'lucide-react';
 
 export function MinimalistHeroSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-10%' });
+  const inView = useInView(ref, { once: false, margin: '-10%' });
 
   const ease = [0.22, 1, 0.36, 1] as const;
 
