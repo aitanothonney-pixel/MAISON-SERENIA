@@ -1178,7 +1178,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                   <ShoppingBag className="w-12 h-12 text-neutral-200" />
                   <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
                   <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
-                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                  <button onClick={() => { onClose(); setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
                     Découvrir nos produits
                   </button>
                 </div>
