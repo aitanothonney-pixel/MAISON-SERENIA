@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const KEY = 'ms_cart';
+const EVENT = 'ms_cart_change';
 
 export interface CartItem {
   id: number;
@@ -17,22 +18,24 @@ function readStorage(): CartItem[] {
   }
 }
 
+function persist(next: CartItem[]) {
+  localStorage.setItem(KEY, JSON.stringify(next));
+  window.dispatchEvent(new CustomEvent(EVENT));
+}
+
 export function useCart() {
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     setItems(readStorage());
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === KEY) setItems(readStorage());
+    const sync = () => setItems(readStorage());
+    window.addEventListener(EVENT, sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener(EVENT, sync);
+      window.removeEventListener('storage', sync);
     };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
   }, []);
-
-  const save = (next: CartItem[]) => {
-    localStorage.setItem(KEY, JSON.stringify(next));
-    setItems(next);
-  };
 
   const addItem = useCallback((id: number) => {
     setItems((prev) => {
@@ -40,7 +43,7 @@ export function useCart() {
       const next = existing
         ? prev.map((x) => (x.id === id ? { ...x, qty: x.qty + 1 } : x))
         : [...prev, { id, qty: 1 }];
-      localStorage.setItem(KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
   }, []);
@@ -48,7 +51,7 @@ export function useCart() {
   const removeItem = useCallback((id: number) => {
     setItems((prev) => {
       const next = prev.filter((x) => x.id !== id);
-      localStorage.setItem(KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
   }, []);
@@ -57,13 +60,13 @@ export function useCart() {
     if (qty < 1) return;
     setItems((prev) => {
       const next = prev.map((x) => (x.id === id ? { ...x, qty } : x));
-      localStorage.setItem(KEY, JSON.stringify(next));
+      persist(next);
       return next;
     });
   }, []);
 
   const clearCart = useCallback(() => {
-    localStorage.setItem(KEY, '[]');
+    persist([]);
     setItems([]);
   }, []);
 

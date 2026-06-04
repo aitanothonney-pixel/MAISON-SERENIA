@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 const KEY = 'ms_wishlist';
+const EVENT = 'ms_wishlist_change';
 
 function readStorage(): number[] {
   try {
@@ -12,22 +13,29 @@ function readStorage(): number[] {
   }
 }
 
+function save(next: number[]) {
+  localStorage.setItem(KEY, JSON.stringify(next));
+  window.dispatchEvent(new CustomEvent(EVENT));
+}
+
 export function useWishlist() {
   const [ids, setIds] = useState<number[]>([]);
 
   useEffect(() => {
     setIds(readStorage());
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === KEY) setIds(readStorage());
+    const sync = () => setIds(readStorage());
+    window.addEventListener(EVENT, sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener(EVENT, sync);
+      window.removeEventListener('storage', sync);
     };
-    window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
   }, []);
 
   const toggle = useCallback((id: number) => {
     setIds((prev) => {
       const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
-      localStorage.setItem(KEY, JSON.stringify(next));
+      save(next);
       return next;
     });
   }, []);
