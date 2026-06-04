@@ -170,78 +170,56 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                 )}
               </div>
 
-              {/* Live suggestions */}
-              <AnimatePresence mode="wait">
-                {searchQ.trim().length >= 1 ? (
+              {/* Live suggestions — always show all products, highlight matches */}
+              {(() => {
+                const q = searchQ.toLowerCase().trim();
+                const isMatch = (p: typeof products[0]) => {
+                  if (!q) return false;
+                  const haystack = (p.name + ' ' + p.category + ' ' + p.description).toLowerCase();
+                  if (haystack.includes(q)) return true;
+                  let i = 0;
+                  for (const ch of q) { const idx = haystack.indexOf(ch, i); if (idx === -1) return false; i = idx + 1; }
+                  return true;
+                };
+                const hasQuery = q.length >= 1;
+                const sorted = hasQuery
+                  ? [...products].sort((a, b) => (isMatch(b) ? 1 : 0) - (isMatch(a) ? 1 : 0))
+                  : products;
+                return (
                   <motion.div
-                    key="results"
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.15 }}
-                    className="mt-3 space-y-1 max-h-72 overflow-y-auto"
+                    className="mt-3 space-y-1 max-h-80 overflow-y-auto"
                   >
-                    {(() => {
-                      const q = searchQ.toLowerCase().trim();
-                      const matches = products.filter((p) => {
-                        const haystack = (p.name + ' ' + p.category + ' ' + p.description).toLowerCase();
-                        // exact match
-                        if (haystack.includes(q)) return true;
-                        // fuzzy: all chars of query appear in order in the name
-                        let i = 0;
-                        for (const ch of q) { const idx = haystack.indexOf(ch, i); if (idx === -1) return false; i = idx + 1; }
-                        return true;
-                      }).slice(0, 6);
-
-                      if (matches.length === 0) return (
-                        <p className="text-xs text-neutral-400 py-3 text-center">Aucun résultat pour « {searchQ} »</p>
+                    {sorted.map((p) => {
+                      const matched = hasQuery && isMatch(p);
+                      const dimmed = hasQuery && !matched;
+                      const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                      return (
+                        <Link
+                          key={p.id}
+                          href={`/products/${p.id}`}
+                          onClick={() => { setSearchOpen(false); setSearchQ(''); }}
+                          className={`flex items-center gap-3 p-2 rounded-xl transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
+                        >
+                          <div className={`w-12 h-12 rounded-lg overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center transition-all ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
+                            <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
+                            <p className="text-xs text-neutral-400">{p.category}</p>
+                          </div>
+                          <div className="text-right flex-shrink-0">
+                            <p className="text-sm font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
+                            {p.name.includes('Bubble') && <p className="text-xs text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
+                          </div>
+                        </Link>
                       );
-
-                      return matches.map((p) => {
-                        const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
-                        return (
-                          <Link
-                            key={p.id}
-                            href={`/products/${p.id}`}
-                            onClick={() => { setSearchOpen(false); setSearchQ(''); }}
-                            className="flex items-center gap-3 p-2 rounded-xl hover:bg-neutral-50 transition-colors group"
-                          >
-                            <div className={`w-12 h-12 rounded-lg overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
-                              <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
-                              <p className="text-xs text-neutral-400">{p.category}</p>
-                            </div>
-                            <div className="text-right flex-shrink-0">
-                              <p className="text-sm font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
-                              {p.name.includes('Bubble') && <p className="text-xs text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
-                            </div>
-                          </Link>
-                        );
-                      });
-                    })()}
+                    })}
                   </motion.div>
-                ) : (
-                  <motion.div
-                    key="suggestions"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex flex-wrap gap-2 mt-3"
-                  >
-                    {['Canapé', 'Fauteuil', 'Figurine', 'Bubble', 'Bureau'].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => setSearchQ(s)}
-                        className="text-xs border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500"
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                );
+              })()}
             </div>
           </motion.div>
         )}
