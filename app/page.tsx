@@ -859,7 +859,8 @@ function Footer() {
 // ─── Figurines Section ────────────────────────────────────────────────────────
 
 function FigurinesSection() {
-  const figurines = products.filter((p) => p.category === 'Figurines');
+  const kawsIds = [31, 32, 33];
+  const figurines = products.filter((p) => kawsIds.includes(p.id));
 
   return (
     <FadeInSection>
@@ -886,7 +887,7 @@ function FigurinesSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                    className={`transition-transform duration-500 group-hover:scale-105 ${product.id === 33 ? 'object-cover object-center scale-110' : 'object-contain p-4'}`}
                   />
                   <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                     <span className="block w-full text-center bg-black text-white text-[10px] font-bold tracking-widest uppercase py-2.5 rounded-xl">
