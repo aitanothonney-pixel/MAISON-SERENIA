@@ -909,6 +909,7 @@ function FigurinesSection() {
 
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState('Tous');
+  const [sortBy, setSortBy] = useState('recommandes');
 
   useEffect(() => {
     const onHashChange = () => {
@@ -921,11 +922,18 @@ export default function Home() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
-  const filteredProducts = activeFilter === 'Tous'
+  const baseProducts = activeFilter === 'Tous'
     ? products.filter((p) => p.category !== 'Figurines' && p.category !== 'Chambre' && p.category !== 'Décoration' && p.category !== 'Terrasse' && p.category !== 'Salle à manger')
     : activeFilter === 'Figurines'
-      ? products.filter((p) => p.category === 'Figurines').sort((a, b) => b.id - a.id)
+      ? products.filter((p) => p.category === 'Figurines')
       : products.filter((p) => p.category === activeFilter);
+
+  const filteredProducts = [...baseProducts].sort((a, b) => {
+    if (sortBy === 'prix-asc') return a.price - b.price;
+    if (sortBy === 'prix-desc') return b.price - a.price;
+    if (sortBy === 'nouveautes') return b.id - a.id;
+    return 0;
+  });
 
   return (
     <div className="bg-white">
@@ -983,12 +991,15 @@ export default function Home() {
                       {filteredProducts.length} produit{filteredProducts.length > 1 ? 's' : ''}
                     </p>
                   </div>
-                  {/* Sort (decorative) */}
-                  <select className="text-xs border border-neutral-200 rounded-xl px-4 py-2.5 text-neutral-500 outline-none hover:border-neutral-400 transition-colors cursor-pointer self-start md:self-end">
-                    <option>Trier : Recommandés</option>
-                    <option>Prix croissant</option>
-                    <option>Prix décroissant</option>
-                    <option>Nouveautés</option>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="text-xs border border-neutral-200 rounded-xl px-4 py-2.5 text-neutral-500 outline-none hover:border-neutral-400 transition-colors cursor-pointer self-start md:self-end"
+                  >
+                    <option value="recommandes">Trier : Recommandés</option>
+                    <option value="prix-asc">Prix croissant</option>
+                    <option value="prix-desc">Prix décroissant</option>
+                    <option value="nouveautes">Nouveautés</option>
                   </select>
                 </div>
                 <ProductFilterBar active={activeFilter} onChange={setActiveFilter} />
@@ -996,7 +1007,7 @@ export default function Home() {
 
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeFilter}
+                  key={`${activeFilter}-${sortBy}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
