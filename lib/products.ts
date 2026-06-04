@@ -547,4 +547,19 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Édition Monde collector', 'Vinyle premium finition naturelle', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
+  // ── Figurine KAWS Noir (de face + profil) ────────────────────────────────────
+  {
+    id: 34,
+    name: 'Figurine Kaws noir (28 cm)',
+    category: 'Figurines',
+    price: 75,
+    description: 'Figurine KAWS en coloris noir intense — pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/rfHJgML3/IMG-0625.jpg',
+      'https://i.ibb.co/s9x78xz3/IMG-0665.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Édition collector', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
 ];
