@@ -873,10 +873,25 @@ function Footer() {
           <div>
             <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Collections</h4>
             <ul className="space-y-2 text-sm">
-              {['Salon', 'Figurines', 'Salle à manger', 'Bureau', 'Terrasse', 'Luminaires'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-white transition-colors flex items-center gap-1">
-                    <ChevronRight className="w-3 h-3" /> {item}
+              {[
+                { label: 'Salon', filter: 'Salon', section: 'section-salon' },
+                { label: 'Figurines', filter: 'Figurines', section: 'section-figurines' },
+                { label: 'Bureau', filter: 'Bureau', section: 'section-bureau' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={`#${item.section}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (item.filter !== 'Figurines') {
+                        // Need to reach setActiveFilter — use hash to trigger it
+                        window.location.hash = item.section;
+                      }
+                      setTimeout(() => document.getElementById(item.section)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+                    }}
+                    className="hover:text-white transition-colors flex items-center gap-1"
+                  >
+                    <ChevronRight className="w-3 h-3" /> {item.label}
                   </a>
                 </li>
               ))}
