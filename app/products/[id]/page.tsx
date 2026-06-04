@@ -538,11 +538,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const variants = getVariantGroup(product.id);
 
-  const kawsIds = [31, 32, 33];
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
   const related = product.category === 'Figurines'
-    ? products.filter((p) => kawsIds.includes(p.id) && p.id !== product.id)
+    ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
     : isBubble
       ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
       : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
