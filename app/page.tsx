@@ -648,14 +648,7 @@ function ProductFilterBar({
 
 // ─── Interior Showcase ────────────────────────────────────────────────────────
 
-function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: string) => void }) {
-  const navigate = (cat: string, section: string) => {
-    onCategoryClick(cat);
-    setTimeout(() => {
-      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
-  };
-
+function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: string, section: string) => void }) {
   return (
     <FadeInSection>
       <div className="flex flex-col overflow-hidden bg-white">
@@ -675,7 +668,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
         >
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
             {/* Salon */}
-            <button onClick={() => navigate('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
+            <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
               <img
                 src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
                 alt="Salon MAISON SERENIA"
@@ -694,7 +687,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
             </button>
 
             {/* Figurines */}
-            <button onClick={() => navigate('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <button onClick={() => onCategoryClick('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
                 alt="Figurines"
@@ -710,7 +703,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
             </button>
 
             {/* Bureau */}
-            <button onClick={() => navigate('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <button onClick={() => onCategoryClick('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
                 alt="Bureau"
@@ -1480,10 +1473,16 @@ export default function Home() {
         </div>
       </ScrollExpandMedia>
 
-      <InteriorShowcaseSection onCategoryClick={(cat) => {
+      <InteriorShowcaseSection onCategoryClick={(cat, section) => {
         setFlashCat(cat);
-        setTimeout(() => { setActiveFilter(cat); setSortBy('recommandes'); }, 400);
-        setTimeout(() => setFlashCat(null), 1200);
+        setTimeout(() => {
+          if (cat !== 'Figurines') setActiveFilter(cat);
+          setSortBy('recommandes');
+        }, 400);
+        setTimeout(() => {
+          setFlashCat(null);
+          document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 900);
       }} />
       <InspirationsParallaxSection />
       <TestimonialsSection />
