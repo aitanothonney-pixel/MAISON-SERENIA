@@ -677,7 +677,7 @@ const parallaxImages = [
   { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', alt: 'Salon contemporain' },
   { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', alt: 'Canapé élégant' },
   { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80', alt: 'Figurines' },
-  { src: 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=1200&q=80', alt: 'Salle à manger' },
+  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Salle à manger' },
   { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80', alt: 'Bibliothèque' },
   { src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200&q=80', alt: 'Fauteuil design' },
   { src: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=1200&q=80', alt: 'Terrasse luxe' },
