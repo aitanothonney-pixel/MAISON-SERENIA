@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
-  Search, X, Star,
+  Search, X, Star, Minus, Plus, Trash2,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -15,6 +15,7 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products } from '@/lib/products';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { useWishlist } from '@/lib/useWishlist';
+import { useCart } from '@/lib/useCart';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -38,12 +39,13 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
-function Navbar({ hasBar }: { hasBar: boolean }) {
+function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
   const { count: wishCount } = useWishlist();
+  const { count: cartCount } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
@@ -108,7 +110,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
           </button>
 
           {/* Wishlist */}
-          <button className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
+          <button onClick={onWishlistOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
             <Heart className={`w-5 h-5 transition-all ${wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
             {wishCount > 0 && (
               <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
@@ -118,8 +120,13 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
           </button>
 
           {/* Cart */}
-          <button className="relative p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Panier">
+          <button onClick={onCartOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Panier">
             <ShoppingBag className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
+            {cartCount > 0 && (
+              <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+                {cartCount}
+              </span>
+            )}
           </button>
 
           {/* Burger */}
@@ -985,9 +992,291 @@ function FigurinesSection() {
   );
 }
 
+// ─── Wishlist Drawer ──────────────────────────────────────────────────────────
+
+function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { ids, toggle } = useWishlist();
+  const wishedProducts = products.filter((p) => ids.includes(p.id));
+  const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm"
+          />
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+              <div className="flex items-center gap-3">
+                <Heart className="w-5 h-5 fill-red-500 text-red-500" />
+                <span className="font-serif font-semibold text-lg">Favoris</span>
+                {ids.length > 0 && (
+                  <span className="text-xs text-neutral-400 tracking-widest uppercase">{ids.length} article{ids.length > 1 ? 's' : ''}</span>
+                )}
+              </div>
+              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {wishedProducts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                  <Heart className="w-12 h-12 text-neutral-200" />
+                  <p className="font-serif text-lg text-neutral-400">Aucun favori pour l'instant</p>
+                  <p className="text-sm text-neutral-300">Cliquez sur le cœur d'un produit pour l'ajouter ici.</p>
+                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                    Découvrir nos produits
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {wishedProducts.map((product) => {
+                    const price = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
+                    return (
+                      <motion.div
+                        key={product.id}
+                        layout
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100 hover:border-neutral-200 transition-colors"
+                      >
+                        <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
+                          <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
+                        </Link>
+                        <div className="flex-1 min-w-0">
+                          <Link href={`/products/${product.id}`} onClick={onClose}>
+                            <p className="font-serif font-semibold text-sm text-black leading-snug line-clamp-2 hover:underline">{product.name}</p>
+                          </Link>
+                          <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
+                          <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                        </div>
+                        <button
+                          onClick={() => toggle(product.id)}
+                          className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors group"
+                          aria-label="Retirer des favoris"
+                        >
+                          <Heart className="w-4 h-4 fill-red-400 text-red-400 group-hover:fill-red-600 group-hover:text-red-600 transition-colors" />
+                        </button>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// ─── Cart Drawer ──────────────────────────────────────────────────────────────
+
+function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { items, removeItem, updateQty } = useCart();
+  const [selected, setSelected] = useState<number[]>([]);
+  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'checkout'>('cart');
+  const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
+
+  const cartProducts = items.map((item) => {
+    const product = products.find((p) => p.id === item.id);
+    if (!product) return null;
+    const price = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
+    return { ...item, product, price };
+  }).filter(Boolean) as { id: number; qty: number; product: typeof products[0]; price: number }[];
+
+  useEffect(() => {
+    if (open) {
+      setSelected(items.map((x) => x.id));
+      setCheckoutStep('cart');
+    }
+  }, [open, items]);
+
+  const toggleSelect = (id: number) => {
+    setSelected((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+  };
+
+  const selectedItems = cartProducts.filter((x) => selected.includes(x.id));
+  const total = selectedItems.reduce((sum, x) => sum + x.price * x.qty, 0);
+  const totalQty = selectedItems.reduce((sum, x) => sum + x.qty, 0);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm"
+          />
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+              <div className="flex items-center gap-3">
+                <ShoppingBag className="w-5 h-5" />
+                <span className="font-serif font-semibold text-lg">Panier</span>
+                {items.length > 0 && (
+                  <span className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+                    {items.reduce((s, x) => s + x.qty, 0)}
+                  </span>
+                )}
+              </div>
+              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {cartProducts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                  <ShoppingBag className="w-12 h-12 text-neutral-200" />
+                  <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
+                  <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
+                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                    Découvrir nos produits
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {cartProducts.map(({ id, qty, product, price }) => (
+                    <motion.div
+                      key={id}
+                      layout
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className={`flex items-start gap-3 p-3 rounded-2xl border transition-all duration-200 cursor-pointer ${
+                        selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
+                      }`}
+                      onClick={() => toggleSelect(id)}
+                    >
+                      {/* Checkbox */}
+                      <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
+                        selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
+                      }`}>
+                        {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                      </div>
+
+                      {/* Image */}
+                      <div className="shrink-0 w-20 h-20 rounded-xl bg-neutral-100 overflow-hidden flex items-center justify-center">
+                        <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
+                      </div>
+
+                      {/* Info */}
+                      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
+                        <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
+                        <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
+                        <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                        {/* Qty */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            onClick={() => updateQty(id, qty - 1)}
+                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="text-xs font-semibold w-5 text-center">{qty}</span>
+                          <button
+                            onClick={() => updateQty(id, qty + 1)}
+                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Delete */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); removeItem(id); }}
+                        className="shrink-0 mt-1 p-1.5 rounded-full hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            {cartProducts.length > 0 && (
+              <div className="border-t border-neutral-100 px-6 py-5 space-y-4">
+                {/* Select all */}
+                <button
+                  onClick={() => setSelected(selected.length === cartProducts.length ? [] : cartProducts.map(x => x.id))}
+                  className="text-xs text-neutral-400 hover:text-black transition-colors tracking-widest uppercase"
+                >
+                  {selected.length === cartProducts.length ? 'Tout désélectionner' : 'Tout sélectionner'}
+                </button>
+
+                {/* Total */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-neutral-500">Total ({totalQty} article{totalQty > 1 ? 's' : ''})</span>
+                  <span className="font-serif font-bold text-xl">{total.toLocaleString('fr-FR')} €</span>
+                </div>
+                <p className="text-[10px] text-neutral-400 -mt-2">* TVA comprise</p>
+
+                {/* Checkout CTA */}
+                <button
+                  disabled={selectedItems.length === 0}
+                  className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  CONTINUER ({totalQty})
+                </button>
+
+                {/* PayPal + Apple Pay */}
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="flex items-center justify-center gap-2 border border-neutral-200 rounded-xl py-3 hover:border-neutral-400 transition-colors">
+                    <svg viewBox="0 0 80 24" fill="none" className="h-5 w-auto" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M30.6 5.6H24c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.2c.4 0 .7-.3.8-.7l.6-4c.1-.4.4-.7.8-.7H29c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Zm19.9-7.6h-3.3c-.3 0-.6.2-.8.4l-4.8 7-2-6.7c-.1-.4-.5-.7-.9-.7h-3.2c-.3 0-.5.3-.4.6l3.8 11.2-3.6 5c-.2.3 0 .7.3.7h3.3c.3 0 .6-.1.8-.4l11.5-16.6c.2-.2 0-.5-.3-.5h-.4Z" fill="#003087"/>
+                      <path d="M69 5.6h-6.6c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.5c.3 0 .5-.2.6-.5l.7-4.2c.1-.4.4-.7.8-.7h2.1c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2l.5.3Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Z" fill="#009CDE"/>
+                    </svg>
+                  </button>
+                  <button className="flex items-center justify-center gap-2 bg-black rounded-xl py-3 hover:bg-neutral-800 transition-colors">
+                    <svg viewBox="0 0 40 16" fill="none" className="h-4 w-auto" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.4 3.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1ZM8 4.9c-1.1-.1-2 .6-2.5.6S4.2 4.9 3.3 4.9c-1.1 0-2.2.7-2.7 1.7-1.2 2-.3 5 .8 6.6.6.8 1.2 1.7 2.1 1.7.8 0 1.1-.5 2.1-.5 1 0 1.2.5 2.1.5.9 0 1.5-.8 2.1-1.7.6-.9.9-1.8.9-1.8S8.9 10.7 8.9 8.9c0-1.6 1.3-2.3 1.3-2.3S9.5 4.9 8 4.9ZM16.5 2.1h-2.4c-.1 0-.3.1-.3.3v10.8c0 .2.1.3.3.3h1.2c.2 0 .3-.1.3-.3V9.8h1.1c2 0 3.3-1 3.3-3 0-1.9-1.3-2.7-3.5-2.7Zm.2 4.5h-.9V3.4h.9c1.1 0 1.7.5 1.7 1.6 0 1.1-.6 1.6-1.7 1.6ZM22.7 6.9c-.7 0-1.1.3-1.4.8l-.3-1.2v-.1h-.9c-.1 0-.2.1-.2.2v6.3c0 .1.1.2.2.2h1.1c.1 0 .2-.1.2-.2V10.7c.3.4.8.7 1.4.7 1.3 0 2.1-1.1 2.1-2.7-.1-1.5-.9-1.8-2.2-1.8Zm-.3 3.9c-.7 0-1.1-.5-1.1-1.3 0-.8.4-1.3 1.1-1.3.6 0 1 .5 1 1.3 0 .8-.4 1.3-1 1.3ZM29.4 5.8l-3 6.9h-.9l1.1-2.4-1.9-4.5h1l1.4 3.4 1.3-3.4h1Z" fill="white"/>
+                    </svg>
+                    <span className="text-white text-xs font-medium">Pay</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function Home() {
   const [activeFilter, setActiveFilter] = useState('Tous');
   const [sortBy, setSortBy] = useState('recommandes');
+  const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
     const onHashChange = () => {
@@ -1013,7 +1302,9 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      <Navbar hasBar={false} />
+      <Navbar hasBar={false} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
+      <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {/* Hero */}
       <ScrollExpandMedia

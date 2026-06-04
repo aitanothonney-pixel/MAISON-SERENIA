@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
+import { useCart } from '@/lib/useCart';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -519,6 +520,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [added, setAdded] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const { isWished, toggle: toggleWish } = useWishlist();
+  const { addItem: addToCart } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   if (!product) {
@@ -551,6 +553,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
 
   const handleAddToCart = () => {
+    addToCart(product.id);
     setAdded(true);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
