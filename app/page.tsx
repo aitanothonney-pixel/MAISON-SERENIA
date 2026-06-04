@@ -674,13 +674,13 @@ const testimonials = [
 // ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
 
 const parallaxImages = [
-  { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', alt: 'Salon contemporain' },
-  { src: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80', alt: 'Canapé élégant' },
-  { src: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&q=80', alt: 'Figurines' },
-  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Salle à manger' },
-  { src: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80', alt: 'Bibliothèque' },
-  { src: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=1200&q=80', alt: 'Fauteuil design' },
-  { src: 'https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?w=1200&q=80', alt: 'Terrasse luxe' },
+  { src: 'https://i.ibb.co/MksNPSck/IMG-2527.jpg', alt: 'Collection Bubble' },
+  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Ambiance salon' },
+  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design' },
+  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Canapé Bubble' },
+  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Ambiance intérieur' },
+  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Collection mobilier' },
+  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Maison Serenia' },
 ];
 
 function InspirationsParallaxSection() {
