@@ -47,11 +47,6 @@ export function MinimalistHeroSection() {
           >
             Découvrir <span>→</span>
           </a>
-          <div className="flex items-center gap-4 mt-10 justify-center md:justify-start">
-            <a href="#" className="text-neutral-400 hover:text-black transition-colors"><Share2 className="w-4 h-4" /></a>
-            <a href="#" className="text-neutral-400 hover:text-black transition-colors"><Globe className="w-4 h-4" /></a>
-            <span className="text-[10px] tracking-widest uppercase text-neutral-300 ml-2">Paris, France</span>
-          </div>
         </motion.div>
 
         {/* CENTER — image on circle */}
