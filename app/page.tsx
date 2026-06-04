@@ -966,6 +966,7 @@ function FigurinesSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    style={[33, 34, 38, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center', ...(product.id === 33 ? { mixBlendMode: 'multiply' as const } : {}) } : undefined}
                     className={`transition-transform duration-500 group-hover:scale-105 object-contain`}
                   />
                   <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
