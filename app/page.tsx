@@ -924,10 +924,8 @@ export default function Home() {
   }, []);
 
   const baseProducts = activeFilter === 'Tous'
-    ? products.filter((p) => p.category !== 'Figurines' && p.category !== 'Chambre' && p.category !== 'Décoration' && p.category !== 'Terrasse' && p.category !== 'Salle à manger')
-    : activeFilter === 'Figurines'
-      ? products.filter((p) => p.category === 'Figurines')
-      : products.filter((p) => p.category === activeFilter);
+    ? products
+    : products.filter((p) => p.category === activeFilter);
 
   const filteredProducts = [...baseProducts].sort((a, b) => {
     if (sortBy === 'prix-asc') return a.price - b.price;
