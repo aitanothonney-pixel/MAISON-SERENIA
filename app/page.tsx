@@ -643,7 +643,14 @@ function ProductFilterBar({
 
 // ─── Interior Showcase ────────────────────────────────────────────────────────
 
-function InteriorShowcaseSection() {
+function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: string) => void }) {
+  const navigate = (cat: string, section: string) => {
+    onCategoryClick(cat);
+    setTimeout(() => {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
   return (
     <FadeInSection>
       <div className="flex flex-col overflow-hidden bg-white">
@@ -662,36 +669,56 @@ function InteriorShowcaseSection() {
           }
         >
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
-            <div className="col-span-2 row-span-2 relative overflow-hidden rounded-xl">
+            {/* Salon */}
+            <button onClick={() => navigate('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
               <img
                 src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
                 alt="Salon MAISON SERENIA"
-                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-all duration-300 group-hover:from-black/70" />
               <div className="absolute bottom-4 left-4 text-white">
                 <p className="text-xs tracking-widest uppercase opacity-70">Collection</p>
                 <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Salon</p>
               </div>
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-full translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  Voir la collection →
+                </span>
+              </div>
+            </button>
+
+            {/* Figurines */}
+            <button onClick={() => navigate('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
                 alt="Figurines"
-                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Figurines</div>
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                  Voir →
+                </span>
+              </div>
+            </button>
+
+            {/* Bureau */}
+            <button onClick={() => navigate('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
-                alt="Table"
-                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+                alt="Bureau"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Table</div>
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
+              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Bureau</div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                  Voir →
+                </span>
+              </div>
+            </button>
           </div>
         </ContainerScroll>
       </div>
@@ -1271,13 +1298,15 @@ export default function Home() {
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [flashCat, setFlashCat] = useState<string | null>(null);
 
   useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#section-salon') setActiveFilter('Salon');
       else if (hash === '#section-bureau') setActiveFilter('Bureau');
-      else if (hash === '#section-salon' || hash === '') setActiveFilter('Tous');
+      else if (hash === '#section-figurines') setActiveFilter('Figurines');
+      else if (hash === '') setActiveFilter('Tous');
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -1299,6 +1328,31 @@ export default function Home() {
       <Navbar hasBar={false} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+
+      {/* Category flash transition */}
+      <AnimatePresence>
+        {flashCat && (
+          <motion.div
+            key={flashCat}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black pointer-events-none"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.2, y: -20 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center"
+            >
+              <p className="text-neutral-500 text-xs tracking-[0.4em] uppercase mb-3">Collection</p>
+              <p className="text-white text-5xl md:text-7xl font-serif font-bold tracking-wide">{flashCat}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero */}
       <ScrollExpandMedia
@@ -1369,14 +1423,25 @@ export default function Home() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${activeFilter}-${sortBy}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
+                  }}
                   className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
                 >
                   {filteredProducts.map((product, index) => (
-                    <ProductCard key={product.id} product={product} index={index} />
+                    <motion.div
+                      key={product.id}
+                      variants={{
+                        hidden: { opacity: 0, y: 40, scale: 0.92 },
+                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                      }}
+                    >
+                      <ProductCard product={product} index={index} />
+                    </motion.div>
                   ))}
                 </motion.div>
               </AnimatePresence>
@@ -1388,7 +1453,11 @@ export default function Home() {
         </div>
       </ScrollExpandMedia>
 
-      <InteriorShowcaseSection />
+      <InteriorShowcaseSection onCategoryClick={(cat) => {
+        setFlashCat(cat);
+        setTimeout(() => { setActiveFilter(cat); setSortBy('recommandes'); }, 400);
+        setTimeout(() => setFlashCat(null), 1200);
+      }} />
       <InspirationsParallaxSection />
       <TestimonialsSection />
       <Footer />
