@@ -468,8 +468,8 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
 
 // ─── Product Card (with optional badge) ──────────────────────────────────────
 
-const newProductIds = [5, 17, 21, 25, 29];
-const saleProductIds = [4, 14, 19, 23, 27];
+const newProductIds: number[] = [];
+const saleProductIds: number[] = [];
 const bubbleProductIds = [2, 6, 7, 8, 9, 10, 12, 13, 22];
 
 interface ProductPreview {
