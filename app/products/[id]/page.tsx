@@ -833,6 +833,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       <Link href={`/products/${p.id}`}>
                         <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
+                            style={p.id === 12 ? { transform: 'scale(1.35)', transformOrigin: 'center' } : undefined}
                             className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && (
                             <span className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
