@@ -567,7 +567,7 @@ export const products: Product[] = [
     id: 35,
     name: 'Bearbrick x Bape (28 cm)',
     category: 'Figurines',
-    price: 75,
+    price: 150,
     description: 'Bearbrick x A Bathing Ape — collaboration iconique entre deux géants du streetwear et du art toy. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
     images: [
       'https://i.ibb.co/212j4PLX/IMG-0662.jpg',
