@@ -816,8 +816,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
               <div ref={relatedScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
                 {related.map((p) => (
-                  <Link key={p.id} href={`/products/${p.id}`} className="group flex-shrink-0 w-56 md:w-64 snap-start">
-                    <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-3' : ''}`}>
+                  <Link key={p.id} href={`/products/${p.id}`} className="group flex-shrink-0 w-64 md:w-80 snap-start">
+                    <div className={`aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
                       <Image src={p.images[0]} alt={p.name} width={400} height={400}
                         className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
                     </div>
