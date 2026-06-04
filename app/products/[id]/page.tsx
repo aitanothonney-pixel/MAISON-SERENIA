@@ -604,9 +604,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           <Link href="/" className="text-base font-bold tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             MAISON SERENIA
           </Link>
-          <Link href="/" className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
-            <ShoppingBag className="w-5 h-5" />
-          </Link>
+          <div className="flex items-center gap-4">
+            <button onClick={() => window.history.back()} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
+              <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} onClick={(e) => { e.preventDefault(); toggleWish(product.id); }} />
+            </button>
+            <Link href="/" className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
+              <ShoppingBag className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </header>
 
