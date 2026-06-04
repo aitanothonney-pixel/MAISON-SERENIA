@@ -432,7 +432,7 @@ function BubblePromoCarousel() {
 
 const bestsellerIds = [2, 10, 6, 13];
 
-function BestsellersSection() {
+function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const bestsellers = products.filter((p) => bestsellerIds.includes(p.id));
   const { isWished, toggle } = useWishlist();
 
@@ -446,9 +446,9 @@ function BestsellersSection() {
               Coups de cœur
             </h2>
           </div>
-          <a href="#" className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
+          <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
             Tout voir <ChevronRight className="w-3 h-3" />
-          </a>
+          </button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {bestsellers.map((product, index) => (
@@ -614,7 +614,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines'];
+const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines', 'Bubble'];
 
 function ProductFilterBar({
   active,
@@ -1315,7 +1315,9 @@ export default function Home() {
 
   const baseProducts = activeFilter === 'Tous'
     ? products
-    : products.filter((p) => p.category === activeFilter);
+    : activeFilter === 'Bubble'
+      ? products.filter((p) => p.name.includes('Bubble'))
+      : products.filter((p) => p.category === activeFilter);
 
   const filteredProducts = [...baseProducts].sort((a, b) => {
     if (sortBy === 'prix-asc') return a.price - b.price;
@@ -1386,7 +1388,11 @@ export default function Home() {
           </FadeInSection>
 
           {/* Bestsellers / Coups de cœur */}
-          <BestsellersSection />
+          <BestsellersSection onToutVoir={() => {
+            setActiveFilter('Bubble');
+            setSortBy('recommandes');
+            setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+          }} />
 
 
           {/* Promo full-width banner */}
