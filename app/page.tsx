@@ -46,11 +46,13 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   const [searchQ, setSearchQ] = useState('');
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
     window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const t = setTimeout(() => setMounted(true), 800);
+    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
   }, [hasBar]);
 
   const navItems = [
@@ -111,8 +113,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
           {/* Wishlist */}
           <button onClick={onWishlistOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
-            <Heart className={`w-5 h-5 transition-all ${wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
-            {wishCount > 0 && (
+            <Heart className={`w-5 h-5 transition-all ${mounted && wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
+            {mounted && wishCount > 0 && (
               <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
                 {wishCount}
               </span>
@@ -122,7 +124,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
           {/* Cart */}
           <button onClick={onCartOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Panier">
             <ShoppingBag className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
-            {cartCount > 0 && (
+            {mounted && cartCount > 0 && (
               <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
                 {cartCount}
               </span>
