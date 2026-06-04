@@ -604,4 +604,18 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Édition collector', 'Vinyle premium', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
+  // ── Bearbrick x Bape Noir ─────────────────────────────────────────────────────
+  {
+    id: 38,
+    name: 'Bearbrick x Bape noir (28 cm)',
+    category: 'Figurines',
+    price: 150,
+    description: 'Bearbrick x A Bathing Ape coloris noir — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/rKTj3YSh/IMG-0659.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Collaboration Bearbrick × Bape', 'Coloris noir édition collector', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
 ];
