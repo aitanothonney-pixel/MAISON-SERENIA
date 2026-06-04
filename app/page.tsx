@@ -193,9 +193,9 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
 // ─── Category Quick Nav ───────────────────────────────────────────────────────
 
 const categoryNav = [
-  { label: 'Salon', image: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg', href: '#section-salon' },
-  { label: 'Figurines', image: 'https://i.ibb.co/rfHJgML3/IMG-0625.jpg', href: '#section-figurines' },
-  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80', href: '#section-bureau' },
+  { label: 'Salon', image: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', href: '#section-salon', position: 'center 60%' },
+  { label: 'Figurines', image: 'https://i.ibb.co/rfHJgML3/IMG-0625.jpg', href: '#section-figurines', position: 'center center' },
+  { label: 'Bureau', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80', href: '#section-bureau', position: 'center center' },
 ];
 
 function CategoryQuickNav() {
@@ -212,13 +212,14 @@ function CategoryQuickNav() {
               href={cat.href}
               className="group flex flex-col items-center gap-3 cursor-pointer"
             >
-              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white relative border border-neutral-100">
+              <div className={`w-full aspect-[4/3] rounded-2xl overflow-hidden relative border border-neutral-100 ${cat.label === 'Figurines' ? 'bg-neutral-50' : 'bg-white'}`}>
                 <Image
                   src={cat.image}
                   alt={cat.label}
                   width={400}
                   height={300}
-                  className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${cat.label === 'Figurines' ? 'object-contain p-4' : 'object-cover'}`}
+                  style={cat.label !== 'Figurines' ? { objectPosition: cat.position } : undefined}
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${cat.label === 'Figurines' ? 'object-contain p-2 scale-110 group-hover:scale-125' : 'object-cover'}`}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 rounded-2xl" />
               </div>
