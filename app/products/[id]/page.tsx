@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
+import { useWishlist } from '@/lib/useWishlist';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -517,7 +518,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [added, setAdded] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [wished, setWished] = useState(false);
+  const { isWished, toggle: toggleWish } = useWishlist();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   if (!product) {
@@ -757,14 +758,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                 {/* Wishlist */}
                 <motion.button
-                  onClick={() => setWished(!wished)}
+                  onClick={() => toggleWish(product.id)}
                   whileTap={{ scale: 0.97 }}
                   className={`w-full py-3.5 rounded-xl font-semibold text-sm tracking-widest uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
-                    wished ? 'border-black bg-black text-white' : 'border-neutral-200 bg-white text-black hover:border-black'
+                    isWished(product.id) ? 'border-red-500 bg-red-500 text-white' : 'border-neutral-200 bg-white text-black hover:border-black'
                   }`}
                 >
-                  <Heart className={`w-4 h-4 ${wished ? 'fill-white' : ''}`} />
-                  {wished ? 'Dans vos souhaits' : 'Ajouter à la liste de souhaits'}
+                  <Heart className={`w-4 h-4 ${isWished(product.id) ? 'fill-white' : ''}`} />
+                  {isWished(product.id) ? 'Dans vos souhaits' : 'Ajouter à la liste de souhaits'}
                 </motion.button>
               </div>
 

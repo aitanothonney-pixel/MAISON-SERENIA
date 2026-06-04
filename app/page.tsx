@@ -14,6 +14,7 @@ import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products } from '@/lib/products';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
+import { useWishlist } from '@/lib/useWishlist';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -42,6 +43,7 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
+  const { count: wishCount } = useWishlist();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
@@ -106,8 +108,13 @@ function Navbar({ hasBar }: { hasBar: boolean }) {
           </button>
 
           {/* Wishlist */}
-          <button className="p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
-            <Heart className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
+          <button className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
+            <Heart className={`w-5 h-5 transition-all ${wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
+            {wishCount > 0 && (
+              <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+                {wishCount}
+              </span>
+            )}
           </button>
 
           {/* Cart */}
@@ -425,6 +432,7 @@ const bestsellerIds = [2, 10, 6, 13];
 
 function BestsellersSection() {
   const bestsellers = products.filter((p) => bestsellerIds.includes(p.id));
+  const { isWished, toggle } = useWishlist();
 
   return (
     <FadeInSection>
@@ -467,8 +475,11 @@ function BestsellersSection() {
                       −30%
                     </div>
                   </div>
-                  <button className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white">
-                    <Heart className="w-3.5 h-3.5 text-black" />
+                  <button
+                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  >
+                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
                 </div>
                 <div className="flex items-center gap-1 mb-1">
@@ -511,6 +522,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
   const isBubble = bubbleProductIds.includes(product.id);
+  const { isWished, toggle } = useWishlist();
 
   return (
     <motion.div
@@ -554,8 +566,11 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           </div>
 
           {/* Wishlist */}
-          <button className="absolute top-3 right-3 bg-white/70 backdrop-blur-sm rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110">
-            <Heart className="w-3.5 h-3.5 text-black" />
+          <button
+            onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+            className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+          >
+            <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
           </button>
 
           {/* Quick view overlay */}
