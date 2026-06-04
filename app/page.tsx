@@ -220,9 +220,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                             <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
                             <p className="text-xs text-neutral-400">{p.category}</p>
                           </div>
-                          <div className="text-right flex-shrink-0">
+                          <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">
+                            {p.name.includes('Bubble') && (
+                              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
+                            )}
                             <p className="text-sm font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
-                            {p.name.includes('Bubble') && <p className="text-xs text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
+                            {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
                           </div>
                         </Link>
                       );
