@@ -576,4 +576,18 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Collaboration Bearbrick × Bape', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
+  // ── Bearbrick x Bape Rose ─────────────────────────────────────────────────────
+  {
+    id: 36,
+    name: 'Bearbrick x Bape rose (28 cm)',
+    category: 'Figurines',
+    price: 150,
+    description: 'Bearbrick x A Bathing Ape coloris rose — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
+    images: [
+      'https://i.ibb.co/hxfV4W3d/IMG-0663.jpg',
+    ],
+    dimensions: 'H 28 cm',
+    material: 'Vinyle premium',
+    details: ['Collaboration Bearbrick × Bape', 'Coloris rose édition rare', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
+  },
 ];
