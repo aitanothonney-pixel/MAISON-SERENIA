@@ -170,6 +170,15 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                 )}
               </div>
 
+              {/* Quick pills */}
+              {!searchQ && (
+                <div className="flex flex-wrap gap-2 mt-3 mb-1">
+                  {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Bureau'].map((s) => (
+                    <button key={s} onClick={() => setSearchQ(s)} className="text-xs border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500">{s}</button>
+                  ))}
+                </div>
+              )}
+
               {/* Live suggestions — always show all products, highlight matches */}
               {(() => {
                 const q = searchQ.toLowerCase().trim();
