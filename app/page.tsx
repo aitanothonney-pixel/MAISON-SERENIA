@@ -16,6 +16,7 @@ import { products } from '@/lib/products';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { MinimalistHeroSection } from '@/components/ui/minimalist-hero';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -1365,6 +1366,9 @@ export default function Home() {
         textBlend={true}
       >
         <div className="w-full">
+          {/* Minimalist Hero — product showcase */}
+          <MinimalistHeroSection />
+
           {/* Tagline */}
           <FadeInSection>
             <div className="text-center mb-16">

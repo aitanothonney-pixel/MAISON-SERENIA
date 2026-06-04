@@ -1,146 +1,135 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+'use client';
 
-interface MinimalistHeroProps {
-  logoText: string;
-  navLinks: { label: string; href: string }[];
-  mainText: string;
-  readMoreLink: string;
-  imageSrc: string;
-  imageAlt: string;
-  overlayText: {
-    part1: string;
-    part2: string;
-  };
-  socialLinks: { icon: LucideIcon; href: string }[];
-  locationText: string;
-  className?: string;
-}
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Share2, Globe } from 'lucide-react';
 
-const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
-  <a
-    href={href}
-    className="text-sm font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground"
-  >
-    {children}
-  </a>
-);
+export function MinimalistHeroSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-10%' });
 
-const SocialIcon = ({ href, icon: Icon }: { href: string; icon: LucideIcon }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/60 transition-colors hover:text-foreground">
-    <Icon className="h-5 w-5" />
-  </a>
-);
+  const ease = [0.22, 1, 0.36, 1] as const;
 
-export const MinimalistHero = ({
-  logoText,
-  navLinks,
-  mainText,
-  readMoreLink,
-  imageSrc,
-  imageAlt,
-  overlayText,
-  socialLinks,
-  locationText,
-  className,
-}: MinimalistHeroProps) => {
   return (
-    <div
-      className={cn(
-        'relative flex h-screen w-full flex-col items-center justify-between overflow-hidden bg-background p-8 font-sans md:p-12',
-        className
-      )}
+    <section
+      ref={ref}
+      className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden px-6 md:px-16 py-20"
     >
-      {/* Header */}
-      <header className="z-30 flex w-full max-w-7xl items-center justify-end">
-        <div className="hidden items-center space-x-8 md:flex">
-          {navLinks.map((link) => (
-            <NavLink key={link.label} href={link.href}>
-              {link.label}
-            </NavLink>
-          ))}
-        </div>
-        <motion.button
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col space-y-1.5 md:hidden"
-          aria-label="Open menu"
-        >
-          <span className="block h-0.5 w-6 bg-foreground"></span>
-          <span className="block h-0.5 w-6 bg-foreground"></span>
-          <span className="block h-0.5 w-5 bg-foreground"></span>
-        </motion.button>
-      </header>
+      {/* Subtle noise texture */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '128px',
+        }}
+      />
 
-      {/* Main Content Area */}
-      <div className="relative grid w-full max-w-7xl flex-grow grid-cols-1 items-center md:grid-cols-3">
-        {/* Left Text Content */}
+      <div className="relative w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+
+        {/* LEFT — description */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="z-20 order-2 md:order-1 text-center md:text-left"
+          initial={{ opacity: 0, x: -40 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.9, ease, delay: 0.6 }}
+          className="order-2 md:order-1 text-center md:text-left"
         >
-          <p className="mx-auto max-w-xs text-sm leading-relaxed text-foreground/80 md:mx-0">{mainText}</p>
-          <a href={readMoreLink} className="mt-4 inline-block text-sm font-medium text-foreground underline decoration-from-font">
-            En savoir plus
+          <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-5">
+            Collection 2026
+          </p>
+          <p className="text-sm leading-relaxed text-neutral-500 max-w-xs mb-6">
+            Chaque pièce MAISON SERENIA est conçue pour transcender le quotidien — où la forme rencontre le confort absolu.
+          </p>
+          <a
+            href="#section-salon"
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-black border-b border-black pb-0.5 hover:gap-4 transition-all duration-300"
+          >
+            Découvrir <span>→</span>
           </a>
+          <div className="flex items-center gap-4 mt-10 justify-center md:justify-start">
+            <a href="#" className="text-neutral-400 hover:text-black transition-colors"><Share2 className="w-4 h-4" /></a>
+            <a href="#" className="text-neutral-400 hover:text-black transition-colors"><Globe className="w-4 h-4" /></a>
+            <span className="text-[10px] tracking-widest uppercase text-neutral-300 ml-2">Paris, France</span>
+          </div>
         </motion.div>
 
-        {/* Center Image with Circle */}
-        <div className="relative order-1 md:order-2 flex justify-center items-center h-full">
+        {/* CENTER — image on circle */}
+        <div className="order-1 md:order-2 flex justify-center items-center relative">
+          {/* Outer ring */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="absolute z-0 h-[300px] w-[300px] rounded-full bg-neutral-100 md:h-[400px] md:w-[400px] lg:h-[500px] lg:w-[500px]"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={inView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 1, ease, delay: 0.1 }}
+            className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-full border border-neutral-100"
           />
+          {/* Inner circle */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={inView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.9, ease, delay: 0.2 }}
+            className="absolute w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] rounded-full bg-neutral-50"
+          />
+          {/* Rotating text ring */}
+          <motion.div
+            initial={{ opacity: 0, rotate: -30 }}
+            animate={inView ? { opacity: 1, rotate: 0 } : {}}
+            transition={{ duration: 1.2, ease, delay: 0.4 }}
+            className="absolute w-[300px] h-[300px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px]"
+          >
+            <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_18s_linear_infinite] opacity-20">
+              <defs>
+                <path id="circle-path" d="M 100,100 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
+              </defs>
+              <text fontSize="7" letterSpacing="4" fill="currentColor">
+                <textPath href="#circle-path">MAISON SERENIA · COLLECTION 2026 · MOBILIER D'EXCEPTION · </textPath>
+              </text>
+            </svg>
+          </motion.div>
+
+          {/* Product image */}
           <motion.img
-            src={imageSrc}
-            alt={imageAlt}
-            className="relative z-10 h-auto w-56 object-cover md:w-64 scale-150 lg:w-72"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+            src="https://i.ibb.co/mV8MC19X/IMG-2541.jpg"
+            alt="Canapé Bubble MAISON SERENIA"
+            initial={{ opacity: 0, y: 60, scale: 0.85 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 1.1, ease, delay: 0.35 }}
+            className="relative z-10 w-64 md:w-72 lg:w-80 h-auto object-contain drop-shadow-2xl"
             onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = `https://placehold.co/400x600/f5f5f5/000000?text=Image`;
+              const t = e.target as HTMLImageElement;
+              t.onerror = null;
+              t.src = 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80';
             }}
           />
         </div>
 
-        {/* Right Text */}
+        {/* RIGHT — big display text */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="z-20 order-3 flex items-center justify-center text-center md:justify-start"
+          initial={{ opacity: 0, x: 60 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.9, ease, delay: 0.7 }}
+          className="order-3 text-center md:text-right"
         >
-          <h1 className="text-7xl font-extrabold text-foreground md:text-8xl lg:text-9xl leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            {overlayText.part1}
-            <br />
-            <span className="italic">{overlayText.part2}</span>
-          </h1>
+          <h2
+            className="text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] font-black leading-[0.88] tracking-tight text-black select-none"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+          >
+            l&apos;art<br />
+            <span className="text-neutral-200">de</span><br />
+            vivre.
+          </h2>
         </motion.div>
+
       </div>
 
-      {/* Footer Elements */}
-      <footer className="z-30 flex w-full max-w-7xl items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="flex items-center space-x-4"
-        >
-          {socialLinks.map((link, index) => (
-            <SocialIcon key={index} href={link.href} icon={link.icon} />
-          ))}
-        </motion.div>
-      </footer>
-    </div>
+      {/* Bottom divider line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1.2, ease, delay: 1 }}
+        style={{ transformOrigin: 'left' }}
+        className="absolute bottom-10 left-6 right-6 md:left-16 md:right-16 h-px bg-neutral-100"
+      />
+    </section>
   );
-};
+}
