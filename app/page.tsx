@@ -585,21 +585,21 @@ function InteriorShowcaseSection() {
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
             <div className="col-span-2 row-span-2 relative overflow-hidden rounded-xl">
               <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80"
+                src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
                 alt="Salon MAISON SERENIA"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <div className="absolute bottom-4 left-4 text-white">
                 <p className="text-xs tracking-widest uppercase opacity-70">Collection</p>
-                <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Salon Contemporain</p>
+                <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Salon</p>
               </div>
             </div>
             <div className="relative overflow-hidden rounded-xl">
               <img
-                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80"
+                src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
                 alt="Figurines"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Figurines</div>
@@ -607,11 +607,11 @@ function InteriorShowcaseSection() {
             <div className="relative overflow-hidden rounded-xl">
               <img
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
-                alt="Salle à manger"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                alt="Table"
+                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Salle à manger</div>
+              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Table</div>
             </div>
           </div>
         </ContainerScroll>
