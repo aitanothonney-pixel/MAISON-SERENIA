@@ -605,9 +605,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             MAISON SERENIA
           </Link>
           <div className="flex items-center gap-4">
-            <button onClick={() => window.history.back()} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
-              <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} onClick={(e) => { e.preventDefault(); toggleWish(product.id); }} />
-            </button>
+            <Link href="/?wishlist=open" className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
+              <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
+            </Link>
             <Link href="/" className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <ShoppingBag className="w-5 h-5" />
             </Link>

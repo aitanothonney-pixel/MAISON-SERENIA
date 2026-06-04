@@ -1285,6 +1285,14 @@ export default function Home() {
       else if (hash === '') setActiveFilter('Tous');
     };
     window.addEventListener('hashchange', onHashChange);
+
+    // Ouvrir le tiroir wishlist si ?wishlist=open dans l'URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('wishlist') === 'open') {
+      setWishlistOpen(true);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
