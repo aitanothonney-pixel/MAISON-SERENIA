@@ -1391,9 +1391,17 @@ export default function Home() {
       if (hash === '#section-salon') setActiveFilter('Salon');
       else if (hash === '#section-bureau') setActiveFilter('Bureau');
       else if (hash === '#section-figurines') setActiveFilter('Figurines');
-      else if (hash === '') setActiveFilter('Tous');
+      else if (hash === '#tous' || hash === '') setActiveFilter('Tous');
+      if (hash === '#tous') {
+        setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
     };
     window.addEventListener('hashchange', onHashChange);
+    // Handle initial hash on page load
+    if (window.location.hash === '#tous') {
+      setActiveFilter('Tous');
+      setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
 
     // Ouvrir le tiroir wishlist si ?wishlist=open dans l'URL
     const params = new URLSearchParams(window.location.search);

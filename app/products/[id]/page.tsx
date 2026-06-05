@@ -938,7 +938,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
           {/* Back button */}
           <div className="mt-16">
-            <Link href="/" className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-black transition-colors">
+            <Link href="/#tous" className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-black transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Retour à la boutique
             </Link>
