@@ -536,6 +536,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const { isWished, toggle: toggleWish } = useWishlist();
   const { addItem: addToCart } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -619,9 +620,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             MAISON SERENIA
           </Link>
           <div className="flex items-center gap-4">
-            <Link href="/?wishlist=open" className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
+            <button onClick={() => setWishlistOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
-            </Link>
+            </button>
             <Link href="/" className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <ShoppingBag className="w-5 h-5" />
             </Link>
@@ -886,5 +887,60 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         </div>
       </div>
     </div>
+
+    {/* Wishlist Drawer */}
+    <AnimatePresence>
+      {wishlistOpen && (
+        <>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setWishlistOpen(false)}
+            className="fixed inset-0 bg-black/40 z-[60] backdrop-blur-sm" />
+          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
+              <div className="flex items-center gap-3">
+                <Heart className="w-5 h-5 fill-red-500 text-red-500" />
+                <span className="font-serif font-semibold text-lg">Favoris</span>
+              </div>
+              <button onClick={() => setWishlistOpen(false)} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              {products.filter((p) => isWished(p.id)).length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                  <Heart className="w-12 h-12 text-neutral-200" />
+                  <p className="font-serif text-lg text-neutral-400">Aucun favori pour l&apos;instant</p>
+                  <p className="text-sm text-neutral-300">Cliquez sur le cœur d&apos;un produit pour l&apos;ajouter ici.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {products.filter((p) => isWished(p.id)).map((p) => {
+                    const price = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                    return (
+                      <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
+                        <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
+                          <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain p-2' : 'object-cover'}`} />
+                        </Link>
+                        <div className="flex-1 min-w-0">
+                          <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
+                            <p className="font-serif font-semibold text-sm text-black leading-snug hover:underline">{p.name}</p>
+                          </Link>
+                          <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                        </div>
+                        <button onClick={() => toggleWish(p.id)} className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors">
+                          <Heart className="w-4 h-4 fill-red-500 text-red-500" />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
