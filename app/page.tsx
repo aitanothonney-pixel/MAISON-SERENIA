@@ -1057,6 +1057,21 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
   const wishedProducts = products.filter((p) => ids.includes(p.id));
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
 
+  useEffect(() => {
+    if (open) {
+      const sw = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${sw}px`;
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -1160,9 +1175,19 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
 
   useEffect(() => {
     if (open) {
+      const sw = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${sw}px`;
       setSelected(items.map((x) => x.id));
       setCheckoutStep('cart');
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
   }, [open, items]);
 
   const toggleSelect = (id: number) => {
