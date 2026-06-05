@@ -750,48 +750,71 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
 const testimonials = [
   {
     text: "Le Fauteuil Bubble blanc est une vraie sculpture vivante. Il trône au centre de mon salon et tout le monde me demande où je l'ai trouvé. Confort incroyable, qualité irréprochable.",
-    image: '',
-    name: 'Sophie Marchand', role: 'Cliente vérifiée',
+    image: '', name: 'Sophie Marchand', role: 'Cliente vérifiée',
   },
   {
     text: "J'ai craqué pour le Canapé Bubble violet spécial et je ne le regrette pas une seconde. La couleur est encore plus intense en vrai, et on s'y enfonce comme dans un nuage.",
-    image: '',
-    name: 'Thomas Lefebvre', role: 'Client vérifié',
+    image: '', name: 'Thomas Lefebvre', role: 'Client vérifié',
+  },
+  {
+    text: "La Figurine KAWS câlin est absolument magnifique. Le niveau de détail est impressionnant, c'est une vraie pièce d'art. Je l'ai posée sur mon bureau et tout le monde la remarque.",
+    image: '', name: 'Léa Fontaine', role: 'Cliente vérifiée',
   },
   {
     text: "Le Fauteuil Bubble bleu est exactement ce qu'il me fallait pour apporter du caractère à mon intérieur. La texture maille 3D est unique, je n'ai jamais vu ça ailleurs.",
-    image: '',
-    name: 'Camille Rousseau', role: 'Cliente vérifiée',
+    image: '', name: 'Camille Rousseau', role: 'Cliente vérifiée',
+  },
+  {
+    text: "La Figurine KAWS brun monde est simplement splendide. La finition est irréprochable et l'emballage était parfait. Un cadeau idéal pour les amateurs de streetwear.",
+    image: '', name: 'Hugo Blanc', role: 'Client vérifié',
   },
   {
     text: "Livraison soignée, montage facile, et le Canapé Bubble blanc est tout simplement magnifique. Il a complètement transformé mon salon. Mes amis sont jaloux !",
-    image: '',
-    name: 'Antoine Dubois', role: 'Client vérifié',
+    image: '', name: 'Antoine Dubois', role: 'Client vérifié',
+  },
+  {
+    text: "Le Bearbrick x Bape est incroyable. La collaboration est iconique et la qualité de la figurine est au niveau du prix. Je collectionne depuis des années et c'est une des meilleures pièces de ma collection.",
+    image: '', name: 'Romain Vidal', role: 'Client vérifié',
   },
   {
     text: "Le Fauteuil Bubble rouge est une déclaration artistique à lui seul. Il donne une âme à toute la pièce. Je suis fan de la collection Bubble, je vais sûrement en commander un deuxième.",
-    image: '',
-    name: 'Isabelle Fontaine', role: 'Cliente vérifiée',
+    image: '', name: 'Isabelle Fontaine', role: 'Cliente vérifiée',
+  },
+  {
+    text: "La Figurine Kaws noir 28 cm est arrivée parfaitement emballée. La qualité du vinyle est top, les finitions sont nettes. Je recommande MAISON SERENIA les yeux fermés.",
+    image: '', name: 'Clémence Garnier', role: 'Cliente vérifiée',
   },
   {
     text: "J'ai hésité longtemps entre le vert et l'orange, j'ai finalement pris le Fauteuil Bubble vert. La teinte pistache est parfaite avec ma déco naturelle. Un coup de cœur absolu.",
-    image: '',
-    name: 'Marie-Claire Petit', role: 'Cliente vérifiée',
+    image: '', name: 'Marie-Claire Petit', role: 'Cliente vérifiée',
+  },
+  {
+    text: "Le Bearbrick x Bape rose est une rareté. Je cherchais cette colorway depuis longtemps, super content de l'avoir trouvée ici. Livraison rapide et emballage impeccable.",
+    image: '', name: 'Maxime Renard', role: 'Client vérifié',
   },
   {
     text: "Le Canapé Bubble bleu est monumental. Sa présence dans mon loft est impressionnante. La qualité de fabrication est au rendez-vous, chaque détail est soigné.",
-    image: '',
-    name: 'Julien Bernard', role: 'Client vérifié',
+    image: '', name: 'Julien Bernard', role: 'Client vérifié',
+  },
+  {
+    text: "La Figurine KAWS gris monde est une merveille de précision. Les détails du globe terrestre sont parfaitement reproduits. Une pièce collector qui a toute sa place dans mon salon.",
+    image: '', name: 'Aurélie Simon', role: 'Cliente vérifiée',
   },
   {
     text: "Le Fauteuil Bubble orange illumine mon bureau à la maison. Je travaille en souriant depuis qu'il est là. MAISON SERENIA crée des pièces vraiment uniques.",
-    image: '',
-    name: 'Nathalie Girard', role: 'Cliente vérifiée',
+    image: '', name: 'Nathalie Girard', role: 'Cliente vérifiée',
+  },
+  {
+    text: "Le Bearbrick x Bape noir est impressionnant en vrai. La colorway est parfaite et la qualité est irréprochable. Je l'ai mis en vitrine et c'est la première chose que les gens remarquent.",
+    image: '', name: 'Lucas Moreau', role: 'Client vérifié',
   },
   {
     text: "Commandé le Canapé Bubble rouge pour ma salle de réception. Nos clients le remarquent immédiatement, c'est devenu la pièce signature de notre espace. Bravo MAISON SERENIA.",
-    image: '',
-    name: 'Pierre Morel', role: 'Client vérifié',
+    image: '', name: 'Pierre Morel', role: 'Client vérifié',
+  },
+  {
+    text: "La Figurine Kaws 28 cm est tout simplement parfaite. Le noir mat est élégant, la pose est emblématique. Un must-have pour tout fan de KAWS.",
+    image: '', name: 'Sara Dupont', role: 'Cliente vérifiée',
   },
 ];
 
