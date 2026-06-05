@@ -505,8 +505,18 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             width={600}
             height={450}
             style={product.id === 33 ? { mixBlendMode: 'multiply' } : undefined}
-            className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''}`}
           />
+          {product.images[1] && (
+            <Image
+              src={product.images[1]}
+              alt={product.name}
+              width={600}
+              height={450}
+              style={product.id === 33 ? { mixBlendMode: 'multiply' } : undefined}
+              className={`absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''}`}
+            />
+          )}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
 
           {/* Badges */}
@@ -964,8 +974,17 @@ function FigurinesSection() {
                     alt={product.name}
                     fill
                     style={[33, 34, 38, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center', ...(product.id === 33 ? { mixBlendMode: 'multiply' as const } : {}) } : undefined}
-                    className={`transition-transform duration-500 group-hover:scale-105 object-contain`}
+                    className={`transition-all duration-700 group-hover:scale-105 object-contain ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
                   />
+                  {product.images[1] && (
+                    <Image
+                      src={product.images[1]}
+                      alt={product.name}
+                      fill
+                      style={[33, 34, 38, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 object-contain"
+                    />
+                  )}
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
                     className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
