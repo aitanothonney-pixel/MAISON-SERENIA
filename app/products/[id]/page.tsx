@@ -649,7 +649,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-neutral-50">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedImage}
