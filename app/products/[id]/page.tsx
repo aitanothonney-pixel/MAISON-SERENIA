@@ -609,6 +609,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   ];
 
   return (
+    <>
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={product.name} />
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
@@ -942,5 +943,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         </>
       )}
     </AnimatePresence>
+    </>
   );
 }
