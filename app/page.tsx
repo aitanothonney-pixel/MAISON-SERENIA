@@ -267,18 +267,27 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 // ─── Full-width Promo Banner ──────────────────────────────────────────────────
 
 function PromoBanner() {
+  const [lightbox, setLightbox] = useState(false);
+
   return (
     <FadeInSection>
       <section className="mx-6 lg:mx-10 my-6 rounded-3xl overflow-hidden relative">
         <div className="relative h-56 md:h-72">
-          <Image
-            src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
-            alt="Promo bannière"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6">
+          {/* Clickable background image */}
+          <button
+            onClick={() => setLightbox(true)}
+            className="absolute inset-0 w-full h-full cursor-zoom-in"
+            aria-label="Voir la photo en grand"
+          >
+            <Image
+              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+              alt="Promo bannière"
+              fill
+              className="object-cover object-[center_70%]"
+            />
+          </button>
+          <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none">
             <p className="text-xs tracking-[0.35em] uppercase mb-3 text-white/60">Édition limitée</p>
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
@@ -286,15 +295,49 @@ function PromoBanner() {
             <p className="text-white/70 text-sm mb-7 max-w-md">
               Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
             </p>
+          </div>
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none">
             <a
               href="#bubble-promo"
-              className="bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
+              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
             >
               Voir les produits en promotion
             </a>
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+            onClick={() => setLightbox(false)}
+          >
+            <motion.img
+              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+              alt="Promo bannière"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-[95vw] max-h-[95vh] object-contain rounded-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={() => setLightbox(false)}
+              className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
+              aria-label="Fermer"
+            >
+              <X className="w-7 h-7" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </FadeInSection>
   );
 }
