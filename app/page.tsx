@@ -275,7 +275,7 @@ function PromoBanner() {
             src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
             alt="Promo bannière"
             fill
-            className="object-cover object-[center_70%]"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-black/55" />
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6">
