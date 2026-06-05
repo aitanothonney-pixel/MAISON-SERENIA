@@ -272,7 +272,7 @@ function PromoBanner() {
       <section className="mx-6 lg:mx-10 my-6 rounded-3xl overflow-hidden relative">
         <div className="relative h-56 md:h-72">
           <Image
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80"
+            src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
             alt="Promo bannière"
             fill
             className="object-cover"
