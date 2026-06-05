@@ -513,7 +513,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.id === 33 ? 'object-cover object-center scale-[1.6]' : product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''} ${[34, 39].includes(product.id) ? 'scale-[1.55]' : ''}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.id === 33 ? 'object-cover object-center scale-[1.6]' : product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''}`}
           />
           {isBubble && product.images[1] && (
             <Image
@@ -980,7 +980,7 @@ function FigurinesSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    style={[34, 39].includes(product.id) ? { transform: 'scale(1.55)', transformOrigin: 'center' } : product.id === 38 ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
+                    style={[34, 38, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
                     className={`transition-all duration-700 group-hover:scale-105 ${product.id === 33 ? 'object-cover object-center scale-[1.6]' : 'object-contain'}`}
                   />
                   <button
