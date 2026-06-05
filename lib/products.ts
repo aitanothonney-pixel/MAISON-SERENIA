@@ -134,8 +134,8 @@ export const products: Product[] = [
     price: 1857,
     description: 'Le Canapé Bubble 3 places dans un violet prune intense et vibrant — une édition spéciale aux proportions généreuses. Texture maille 3D unique, confort sculptural signature.',
     images: [
-      'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
       'https://i.ibb.co/yBk1BSq4/IMG-2659.jpg',
+      'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
       'https://i.ibb.co/DfjGtFm8/IMG-2526.jpg',
       'https://i.ibb.co/MksNPSck/IMG-2527.jpg',
     ],
