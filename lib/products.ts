@@ -87,8 +87,8 @@ export const products: Product[] = [
     price: 1857,
     description: 'Le Canapé Bubble 3 places en bleu Klein intense — une présence sculpturale et chromatique forte. Texture maille 3D signature, assise généreuse et enveloppante.',
     images: [
-      'https://i.ibb.co/tMbZ7D3Y/IMG-0586.jpg',
       'https://i.ibb.co/R1tJYDf/IMG-2491.jpg',
+      'https://i.ibb.co/tMbZ7D3Y/IMG-0586.jpg',
       'https://i.ibb.co/QjXv6K98/IMG-0930.jpg',
     ],
     dimensions: 'L 225 × P 105 × H 80 cm',
