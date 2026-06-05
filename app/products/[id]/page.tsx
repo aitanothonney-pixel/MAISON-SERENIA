@@ -849,7 +849,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   const pIsBubble = bubbleOrder.includes(p.id);
                   const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
                   return (
-                    <div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start">
+                    <motion.div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start"
+                      whileHover={{ y: -4 }}
+                      whileTap={{ scale: 0.97, opacity: 0.85 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    >
                       <Link href={`/products/${p.id}`}>
                         <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
@@ -876,7 +880,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         <p className="font-bold text-sm text-black">{pPromo.toLocaleString('fr-FR')} €</p>
                         {pIsBubble && <p className="text-neutral-400 line-through text-xs">{p.price.toLocaleString('fr-FR')} €</p>}
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
