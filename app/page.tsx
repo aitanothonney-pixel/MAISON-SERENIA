@@ -755,13 +755,13 @@ const testimonials = [
 // ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
 
 const parallaxImages = [
-  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Dame canapé blanc', position: 'center 45%' },
-  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé Bubble bleu', position: 'center 50%', fit: 'contain' as const },
-  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Canapé rouge', position: 'center 50%' },
-  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé Bubble blanc', position: 'center 50%', fit: 'contain' as const },
-  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Canapé Bubble jaune', position: 'center 50%', fit: 'contain' as const },
+  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Dame canapé blanc', position: 'center 30%' },
+  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé rouge', position: 'center 60%' },
+  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design', position: 'center 50%' },
+  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé jaune', position: 'center 65%' },
+  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Fauteuils Bubble bleu', position: 'center 55%' },
   { src: 'https://i.ibb.co/MksNPSck/IMG-2527.jpg', alt: 'Collection Bubble', position: 'center 50%' },
-  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Fauteuils Bubble bleu', position: 'center 55%' },
+  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Salle bleue', position: 'center 55%' },
 ];
 
 function InspirationsParallaxSection() {
