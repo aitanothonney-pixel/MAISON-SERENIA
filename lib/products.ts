@@ -57,6 +57,7 @@ export const products: Product[] = [
     images: [
       'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg',
       'https://i.ibb.co/mV8MC19X/IMG-2541.jpg',
+      'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg',
     ],
     dimensions: 'L 220 × P 105 × H 80 cm',
     material: 'Tissu bouclé, base laquée',
