@@ -799,7 +799,7 @@ const testimonials = [
 // ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
 
 const parallaxImages = [
-  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Canapé Bubble jaune', position: 'center 58%' },
+  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Canapé Bubble jaune', position: 'center 63%' },
   { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé Bubble bleu', position: 'center 68%' },
   { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design', position: 'center 50%' },
   { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé Bubble blanc', position: 'center 38%' },
