@@ -556,6 +556,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
+            style={product.id === 39 ? { transformOrigin: '40% center' } : product.id === 34 ? { transformOrigin: 'center 65%' } : undefined}
             className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.id === 33 ? 'object-cover object-center scale-[1.6]' : product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${product.id === 12 ? 'scale-125' : ''} ${[34, 39].includes(product.id) ? 'scale-[1.4]' : ''}`}
           />
           {isBubble && product.images[1] && (
