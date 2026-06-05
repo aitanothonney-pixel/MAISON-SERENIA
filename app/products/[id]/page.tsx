@@ -671,7 +671,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         ? product.id === 33
                           ? 'object-cover object-center scale-110'
                           : 'object-contain p-6'
-                        : isBubble ? 'object-cover object-center' : 'object-cover'}
+                        : isBubble ? 'object-contain p-4' : 'object-cover'}
                       priority
                     />
                   </motion.div>
