@@ -117,6 +117,7 @@ export const products: Product[] = [
     images: [
       'https://i.ibb.co/zH4qtJVB/IMG-2511.jpg',
       'https://i.ibb.co/Kx5RnfCy/IMG-2542.jpg',
+      'https://i.ibb.co/99H4L0sP/IMG-2616.jpg',
     ],
     dimensions: 'L 225 × P 105 × H 80 cm',
     material: 'Tissu maille 3D, base laquée',
