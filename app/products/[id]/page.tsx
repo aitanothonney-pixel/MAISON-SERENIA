@@ -537,6 +537,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const { addItem: addToCart } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -649,7 +650,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50">
+              <div
+                className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 cursor-zoom-in"
+                onClick={() => setLightbox(true)}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedImage}
@@ -673,6 +677,51 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   </motion.div>
                 </AnimatePresence>
               </div>
+
+              <AnimatePresence>
+                {lightbox && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center"
+                    onClick={() => setLightbox(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.88, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.88, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="relative max-w-[90vw] max-h-[90vh]"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <img
+                        src={product.images[selectedImage]}
+                        alt={product.name}
+                        className="max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
+                      />
+                    </motion.div>
+                    <button
+                      onClick={() => setLightbox(false)}
+                      className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
+                    >
+                      <X className="w-7 h-7" />
+                    </button>
+                    {product.images.length > 1 && (
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+                        {product.images.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={(e) => { e.stopPropagation(); setSelectedImage(i); }}
+                            className={`w-2 h-2 rounded-full transition-all duration-200 ${i === selectedImage ? 'bg-white scale-125' : 'bg-white/40'}`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {product.images.length > 1 && (
                 <div className="grid grid-cols-4 gap-3">
