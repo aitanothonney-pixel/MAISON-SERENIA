@@ -365,7 +365,7 @@ function BubblePromoCarousel() {
                   alt={product.name}
                   width={400}
                   height={300}
-                  className={`w-full h-full object-contain transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+                  className={`w-full h-full object-contain transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${[22, 12].includes(product.id) ? 'scale-[1.3]' : ''}`}
                 />
                 {product.images[1] && (
                   <Image
