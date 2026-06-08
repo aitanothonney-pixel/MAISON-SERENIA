@@ -370,7 +370,7 @@ function BubblePromoCarousel() {
       <section id="bubble-promo" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Offre limitée · −30%</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: '#C9A96E' }}>Offre limitée · −30%</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
           </div>
           <div className="flex items-center gap-2">
@@ -419,7 +419,7 @@ function BubblePromoCarousel() {
                     className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-3"
                   />
                 )}
-                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full">
+                <div className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
                   −30%
                 </div>
                 <button
@@ -488,7 +488,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
                       Best-seller
                     </div>
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                    <div className="text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
                       −30%
                     </div>
                   </div>
@@ -547,7 +547,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className="group relative bg-white rounded-2xl overflow-hidden border border-transparent hover:border-neutral-200 transition-all duration-500 shadow-sm hover:shadow-lg"
+      className="group relative bg-white rounded-2xl overflow-hidden border border-transparent hover:border-neutral-200 transition-all duration-500 shadow-sm card-premium"
     >
       <Link href={`/products/${product.id}`}>
         <div className={`relative overflow-hidden aspect-[4/3] bg-white ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'p-3' : ''}`}>
@@ -573,7 +573,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
             {isBubble ? (
-              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+              <span className="text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
                 −30%
               </span>
             ) : (
@@ -896,11 +896,13 @@ function TestimonialsSection() {
 function Footer() {
   return (
     <footer className="bg-black text-white/60 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Gold top bar */}
+      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E 20%, #E8D5B0 50%, #C9A96E 80%, transparent)' }} />
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-white text-lg font-bold tracking-[0.2em] uppercase mb-4" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-4 shimmer-gold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
               MAISON SERENIA
             </h3>
             <p className="text-sm leading-relaxed mb-6">
@@ -1026,7 +1028,7 @@ function FigurinesSection() {
     <FadeInSection>
       <section id="section-figurines" className="py-16 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
         <div className="mb-10">
-          <p className="text-xs tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: '#C9A96E' }}>Collection</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             Figurines
           </h2>
@@ -1486,12 +1488,16 @@ export default function Home() {
 
           {/* Tagline */}
           <FadeInSection>
-            <div className="text-center mb-16">
-              <p className="text-xs tracking-[0.4em] uppercase mb-4 text-neutral-400">L&apos;art de vivre à la française</p>
+            <div className="text-center mb-16 px-6">
+              <div className="flex items-center justify-center gap-4 mb-5">
+                <div className="h-px flex-1 max-w-[80px]" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E)' }} />
+                <p className="text-[10px] tracking-[0.45em] uppercase" style={{ color: '#C9A96E' }}>L&apos;art de vivre à la française</p>
+                <div className="h-px flex-1 max-w-[80px]" style={{ background: 'linear-gradient(90deg, #C9A96E, transparent)' }} />
+              </div>
               <h2 className="text-3xl md:text-5xl font-bold text-black mb-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                 Mobilier d&apos;exception,<br />intérieurs sublimés
               </h2>
-              <p className="text-neutral-500 max-w-xl mx-auto leading-relaxed text-sm">
+              <p className="text-neutral-400 max-w-xl mx-auto leading-relaxed text-sm">
                 MAISON SERENIA crée des espaces de vie où le raffinement rencontre le confort.
               </p>
             </div>
@@ -1518,7 +1524,7 @@ export default function Home() {
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <p className="text-xs tracking-[0.4em] uppercase mb-2 text-neutral-400">Sélection</p>
+                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: '#C9A96E' }}>Sélection</p>
                     <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Nos Pièces Signatures
                     </h2>

@@ -761,7 +761,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   <p className="text-lg text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</p>
                 )}
                 {isBubble && (
-                  <span className="text-xs font-bold bg-black text-white px-2.5 py-1 rounded-full">−30%</span>
+                  <span className="text-xs font-bold text-white px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>−30%</span>
                 )}
               </div>
 
@@ -801,8 +801,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   onClick={handleAddToCart}
                   whileTap={{ scale: 0.98 }}
                   className={`w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase transition-all duration-300 relative overflow-hidden ${
-                    added ? 'bg-neutral-800 text-white' : 'bg-black text-white hover:bg-neutral-800'
+                    added ? 'text-white' : 'text-white'
                   }`}
+                  style={added
+                    ? { background: 'linear-gradient(135deg, #A07840, #C9A96E)' }
+                    : { background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)', boxShadow: '0 4px 20px rgba(201,169,110,0.35)' }
+                  }
                 >
                   <AnimatePresence mode="wait">
                     {added ? (
@@ -918,7 +922,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                               className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-2" />
                           )}
                           {pIsBubble && (
-                            <span className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
+                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 6px rgba(201,169,110,0.4)' }}>−30%</span>
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}

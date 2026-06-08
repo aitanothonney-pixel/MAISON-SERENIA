@@ -16,6 +16,9 @@
   --ring: #0a0a0a;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
+  --gold: #C9A96E;
+  --gold-light: #E8D5B0;
+  --gold-dark: #A07840;
 }
 
 @theme inline {
@@ -58,4 +61,95 @@ html {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ── Gold gradient utility ───────────────────────── */
+.text-gold {
+  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #A07840 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gold {
+  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #A07840 100%);
+}
+
+.border-gold {
+  border-color: #C9A96E;
+}
+
+/* ── Premium card hover ──────────────────────────── */
+.card-premium {
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.card-premium:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(201,169,110,0.15), 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ── Shimmer animation ───────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, #C9A96E 0%, #E8D5B0 40%, #C9A96E 60%, #A07840 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Floating orbs ───────────────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+.float-slow { animation: float-slow 8s ease-in-out infinite; }
+.float-medium { animation: float-medium 6s ease-in-out infinite; }
+
+/* ── Luxury divider ──────────────────────────────── */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A96E, transparent);
+}
+
+/* ── Button premium ──────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(201,169,110,0.3);
+}
+.btn-gold:hover {
+  box-shadow: 0 8px 25px rgba(201,169,110,0.5);
+  transform: translateY(-1px);
+}
+
+/* ── Marquee ─────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+/* ── Glow pulse ──────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,169,110,0.2); }
+  50% { box-shadow: 0 0 40px rgba(201,169,110,0.4); }
+}
+.glow-gold {
+  animation: glow-pulse 3s ease-in-out infinite;
 }
