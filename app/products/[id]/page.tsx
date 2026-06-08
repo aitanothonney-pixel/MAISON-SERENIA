@@ -919,14 +919,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-2' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
-                            style={pIsBubble ? { transform: p.id === 12 ? 'scale(1.65)' : [10, 13].includes(p.id) ? 'scale(1.45)' : [7, 8, 9].includes(p.id) ? 'scale(1.45)' : 'scale(1.3)', transformOrigin: 'center center' } : undefined}
                             className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${pIsBubble && p.images[1] ? 'group-hover:opacity-0' : ''} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && p.images[1] && (
                             <Image src={p.images[1]} alt={p.name} width={400} height={400}
-                              style={{ transform: p.id === 12 ? 'scale(1.65)' : [10, 13].includes(p.id) ? 'scale(1.45)' : [7, 8, 9].includes(p.id) ? 'scale(1.45)' : 'scale(1.3)', transformOrigin: 'center center' }}
-                              className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-2" />
+                              className="absolute inset-0 w-full h-full object-contain p-4 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
                           )}
                           {pIsBubble && (
                             <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
