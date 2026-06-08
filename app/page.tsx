@@ -1597,17 +1597,7 @@ export default function Home() {
           </section>
       </div>
 
-      <InteriorShowcaseSection onCategoryClick={(cat, section) => {
-        setFlashCat(cat);
-        setTimeout(() => {
-          if (cat !== 'Figurines') setActiveFilter(cat);
-          setSortBy('recommandes');
-        }, 400);
-        setTimeout(() => {
-          setFlashCat(null);
-          document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 900);
-      }} />
+
       <InspirationsParallaxSection />
       <TestimonialsSection />
       <Footer />
