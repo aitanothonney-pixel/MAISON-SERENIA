@@ -48,6 +48,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
@@ -55,6 +56,18 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
     const t = setTimeout(() => setMounted(true), 800);
     return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
   }, [hasBar]);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+        setSearchQ('');
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [searchOpen]);
 
   const navItems = [
     { label: 'Salon', href: '#section-salon' },
@@ -65,6 +78,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
   return (
     <header
+      ref={searchRef}
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
