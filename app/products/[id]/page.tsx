@@ -746,7 +746,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <h1 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4 leading-tight">{product.name}</h1>
 
               <div className="flex items-center gap-1 mb-5">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
+                {[...Array(4)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
+                <span className="relative w-4 h-4 inline-block">
+                  <Star className="w-4 h-4 text-black" />
+                  <span className="absolute inset-0 overflow-hidden w-[50%]"><Star className="w-4 h-4 fill-black text-black" /></span>
+                </span>
                 <span className="text-xs text-neutral-400 ml-2">(24 avis)</span>
               </div>
 
