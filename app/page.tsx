@@ -568,14 +568,13 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden aspect-[4/3] bg-white ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'p-3' : ''}`}>
+        <div className={`relative overflow-hidden bg-white ${product.category === 'Figurines' ? 'aspect-[3/4] p-4' : 'aspect-[4/3]'} ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
             width={600}
             height={450}
-            style={product.id === 39 ? { transformOrigin: '40% center' } : product.id === 34 ? { transformOrigin: 'center 65%' } : undefined}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.id === 33 ? 'object-cover object-center scale-[2]' : product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain' : 'object-cover'} ${[12, 13, 22].includes(product.id) ? 'scale-125' : ''} ${[34, 39].includes(product.id) ? 'scale-[1.4]' : ''}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'} ${[12, 13, 22].includes(product.id) ? 'scale-125' : ''}`}
           />
           {isBubble && product.images[1] && (
             <Image
@@ -1062,13 +1061,12 @@ function FigurinesSection() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-square overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
+                <div className="relative aspect-[3/4] overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    style={product.id === 38 ? { transform: 'scale(1.55)', transformOrigin: 'center' } : product.id === 34 ? { transform: 'scale(1.7)', transformOrigin: 'center' } : product.id === 39 ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
-                    className={`transition-all duration-700 group-hover:scale-105 ${product.id === 33 ? 'object-cover object-center scale-[2]' : 'object-contain'}`}
+                    className="object-contain p-4 transition-all duration-700 group-hover:scale-105"
                   />
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
