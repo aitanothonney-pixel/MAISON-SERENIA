@@ -71,7 +71,7 @@ export const products: Product[] = [
     price: 713,
     description: 'Le Fauteuil Bubble dans un bleu Klein intense et vibrant — une déclaration artistique autant qu\'une invitation au confort absolu. Texture unique en maille 3D structurée.',
     images: [
-      'https://i.ibb.co/gFctkCc0/IMG-2554.jpg',
+      'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg',
       'https://i.ibb.co/Z1HkzsfN/IMG-2553.jpg',
       'https://i.ibb.co/x8LZvMgv/IMG-2565.jpg',
       'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg',
@@ -87,7 +87,7 @@ export const products: Product[] = [
     price: 1857,
     description: 'Le Canapé Bubble 3 places en bleu Klein intense — une présence sculpturale et chromatique forte. Texture maille 3D signature, assise généreuse et enveloppante.',
     images: [
-      'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg',
+      'https://i.ibb.co/R1tJYDf/IMG-2491.jpg',
       'https://i.ibb.co/tMbZ7D3Y/IMG-0586.jpg',
       'https://i.ibb.co/QjXv6K98/IMG-0930.jpg',
     ],
