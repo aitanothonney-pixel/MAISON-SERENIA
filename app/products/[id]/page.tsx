@@ -745,8 +745,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               {/* Category + name */}
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="h-px w-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #A07840)' }} />
-                  <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: '#C9A96E' }}>{product.category}</p>
+                  <div className="h-px w-6 bg-black" />
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400">{product.category}</p>
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
                 <div className="flex items-center gap-2">
@@ -764,10 +764,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
 
               {/* Divider */}
-              <div className="divider-gold mb-6" />
+              <div className="h-px bg-neutral-100 mb-6" />
 
               {/* Price block */}
-              <div className="rounded-2xl p-4 mb-6" style={{ background: 'linear-gradient(135deg, #faf8f4, #f5f0e8)' }}>
+              <div className="rounded-2xl p-4 mb-6 bg-neutral-50">
                 <div className="flex items-center justify-between">
                   <div className="flex items-baseline gap-3">
                     <p className="text-4xl font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
@@ -777,14 +777,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   </div>
                   {isBubble && (
                     <div className="text-center">
-                      <span className="text-white text-sm font-bold px-3 py-1.5 rounded-full block" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>−30%</span>
+                      <span className="text-white text-sm font-bold px-3 py-1.5 rounded-full block bg-black">−30%</span>
                       <p className="text-[10px] text-neutral-400 mt-1">Offre limitée</p>
                     </div>
                   )}
                 </div>
                 {isBubble && (
                   <p className="text-xs text-neutral-400 mt-2 flex items-center gap-1">
-                    <span style={{ color: '#C9A96E' }}>✓</span> Livraison offerte · Installation comprise
+                    <span>✓</span> Livraison offerte · Installation comprise
                   </p>
                 )}
               </div>
@@ -826,8 +826,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   whileTap={{ scale: 0.98 }}
                   className="w-full py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase text-white relative overflow-hidden flex items-center justify-center gap-2"
                   style={added
-                    ? { background: 'linear-gradient(135deg, #A07840, #C9A96E)' }
-                    : { background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)', boxShadow: '0 6px 24px rgba(201,169,110,0.4)' }
+                    ? { background: '#555' }
+                    : { background: '#000' }
                   }
                 >
                   <AnimatePresence mode="wait">
@@ -932,7 +932,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                               className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-2" />
                           )}
                           {pIsBubble && (
-                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 6px rgba(201,169,110,0.4)' }}>−30%</span>
+                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
