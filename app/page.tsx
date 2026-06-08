@@ -418,16 +418,15 @@ function BubblePromoCarousel() {
           className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory"
         >
           {items.map((product) => (
-            <div key={product.id} className="group flex-shrink-0 w-56 md:w-64 snap-start">
+            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72 snap-start">
               <Link href={`/products/${product.id}`}>
-              <div className="relative aspect-[4/3] overflow-hidden bg-white p-3 mb-3 border border-neutral-100 transition-shadow duration-300">
+              <div className="relative overflow-hidden bg-neutral-50 mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
                 <Image
                   src={product.images[0]}
                   alt={product.name}
                   width={400}
                   height={300}
-                  style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}
-                  className={`w-full h-full object-contain transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+                  className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
                 />
                 {product.images[1] && (
                   <Image
@@ -435,7 +434,7 @@ function BubblePromoCarousel() {
                     alt={product.name}
                     width={400}
                     height={300}
-                    className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-3"
+                    className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                   />
                 )}
                 <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
