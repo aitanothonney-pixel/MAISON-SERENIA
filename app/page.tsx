@@ -1591,9 +1591,6 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </section>
-          {/* Figurines Section */}
-          <FigurinesSection />
-
         </div>
       </ScrollExpandMedia>
 
