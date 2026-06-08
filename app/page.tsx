@@ -1032,7 +1032,7 @@ function FigurinesSection() {
     <FadeInSection>
       <section id="section-figurines" className="py-16 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
         <div className="mb-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: '#C9A96E' }}>Collection</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             Figurines
           </h2>
@@ -1048,7 +1048,7 @@ function FigurinesSection() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-square overflow-hidden rounded-2xl bg-white border border-neutral-100 mb-3 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+                <div className="relative aspect-square overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
@@ -1058,12 +1058,12 @@ function FigurinesSection() {
                   />
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                    className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                   >
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
-                  <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <span className="block w-full text-center bg-black text-white text-[10px] font-bold tracking-widest uppercase py-2.5 rounded-xl">
+                  <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="block w-full text-center bg-black text-white text-[9px] tracking-widest uppercase py-2.5">
                       Voir le produit
                     </span>
                   </div>
@@ -1140,7 +1140,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                   <Heart className="w-12 h-12 text-neutral-200" />
                   <p className="font-serif text-lg text-neutral-400">Aucun favori pour l'instant</p>
                   <p className="text-sm text-neutral-300">Cliquez sur le cœur d'un produit pour l'ajouter ici.</p>
-                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
                     Découvrir nos produits
                   </button>
                 </div>
@@ -1155,9 +1155,9 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100 hover:border-neutral-200 transition-colors"
+                        className="flex items-center gap-4 p-3 border border-neutral-100 hover:border-neutral-200 transition-colors"
                       >
-                        <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
+                        <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 bg-neutral-50 overflow-hidden flex items-center justify-center">
                           <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
@@ -1268,7 +1268,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                   <ShoppingBag className="w-12 h-12 text-neutral-200" />
                   <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
                   <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
-                  <button onClick={() => { onClose(); setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
+                  <button onClick={() => { onClose(); setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
                     Découvrir nos produits
                   </button>
                 </div>
@@ -1281,7 +1281,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className={`flex items-start gap-3 p-3 rounded-2xl border transition-all duration-200 cursor-pointer ${
+                      className={`flex items-start gap-3 p-3 border transition-all duration-200 cursor-pointer ${
                         selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
                       }`}
                       onClick={() => toggleSelect(id)}
@@ -1294,7 +1294,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                       </div>
 
                       {/* Image */}
-                      <div className="shrink-0 w-20 h-20 rounded-xl bg-neutral-100 overflow-hidden flex items-center justify-center">
+                      <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
                         <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
                       </div>
 
@@ -1355,20 +1355,20 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                 {/* Checkout CTA */}
                 <button
                   disabled={selectedItems.length === 0}
-                  className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white py-4 rounded-none font-bold text-sm tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   CONTINUER ({totalQty})
                 </button>
 
                 {/* PayPal + Apple Pay */}
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="flex items-center justify-center gap-2 border border-neutral-200 rounded-xl py-3 hover:border-neutral-400 transition-colors">
+                  <button className="flex items-center justify-center gap-2 border border-neutral-200 py-3 hover:border-neutral-400 transition-colors">
                     <svg viewBox="0 0 80 24" fill="none" className="h-5 w-auto" xmlns="http://www.w3.org/2000/svg">
                       <path d="M30.6 5.6H24c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.2c.4 0 .7-.3.8-.7l.6-4c.1-.4.4-.7.8-.7H29c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Zm19.9-7.6h-3.3c-.3 0-.6.2-.8.4l-4.8 7-2-6.7c-.1-.4-.5-.7-.9-.7h-3.2c-.3 0-.5.3-.4.6l3.8 11.2-3.6 5c-.2.3 0 .7.3.7h3.3c.3 0 .6-.1.8-.4l11.5-16.6c.2-.2 0-.5-.3-.5h-.4Z" fill="#003087"/>
                       <path d="M69 5.6h-6.6c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.5c.3 0 .5-.2.6-.5l.7-4.2c.1-.4.4-.7.8-.7h2.1c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2l.5.3Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Z" fill="#009CDE"/>
                     </svg>
                   </button>
-                  <button className="flex items-center justify-center gap-2 bg-black rounded-xl py-3 hover:bg-neutral-800 transition-colors">
+                  <button className="flex items-center justify-center gap-2 bg-black py-3 hover:bg-neutral-800 transition-colors">
                     <svg viewBox="0 0 40 16" fill="none" className="h-4 w-auto" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.4 3.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1ZM8 4.9c-1.1-.1-2 .6-2.5.6S4.2 4.9 3.3 4.9c-1.1 0-2.2.7-2.7 1.7-1.2 2-.3 5 .8 6.6.6.8 1.2 1.7 2.1 1.7.8 0 1.1-.5 2.1-.5 1 0 1.2.5 2.1.5.9 0 1.5-.8 2.1-1.7.6-.9.9-1.8.9-1.8S8.9 10.7 8.9 8.9c0-1.6 1.3-2.3 1.3-2.3S9.5 4.9 8 4.9ZM16.5 2.1h-2.4c-.1 0-.3.1-.3.3v10.8c0 .2.1.3.3.3h1.2c.2 0 .3-.1.3-.3V9.8h1.1c2 0 3.3-1 3.3-3 0-1.9-1.3-2.7-3.5-2.7Zm.2 4.5h-.9V3.4h.9c1.1 0 1.7.5 1.7 1.6 0 1.1-.6 1.6-1.7 1.6ZM22.7 6.9c-.7 0-1.1.3-1.4.8l-.3-1.2v-.1h-.9c-.1 0-.2.1-.2.2v6.3c0 .1.1.2.2.2h1.1c.1 0 .2-.1.2-.2V10.7c.3.4.8.7 1.4.7 1.3 0 2.1-1.1 2.1-2.7-.1-1.5-.9-1.8-2.2-1.8Zm-.3 3.9c-.7 0-1.1-.5-1.1-1.3 0-.8.4-1.3 1.1-1.3.6 0 1 .5 1 1.3 0 .8-.4 1.3-1 1.3ZM29.4 5.8l-3 6.9h-.9l1.1-2.4-1.9-4.5h1l1.4 3.4 1.3-3.4h1Z" fill="white"/>
                     </svg>
@@ -1494,9 +1494,9 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-16 px-6">
               <div className="flex items-center justify-center gap-4 mb-5">
-                <div className="h-px flex-1 max-w-[80px]" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E)' }} />
-                <p className="text-[10px] tracking-[0.45em] uppercase" style={{ color: '#C9A96E' }}>L&apos;art de vivre à la française</p>
-                <div className="h-px flex-1 max-w-[80px]" style={{ background: 'linear-gradient(90deg, #C9A96E, transparent)' }} />
+                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
+                <p className="text-[10px] tracking-[0.45em] uppercase text-neutral-400">L&apos;art de vivre à la française</p>
+                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-black mb-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                 Mobilier d&apos;exception,<br />intérieurs sublimés
@@ -1528,7 +1528,7 @@ export default function Home() {
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: '#C9A96E' }}>Sélection</p>
+                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-400">Sélection</p>
                     <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Nos Pièces Signatures
                     </h2>
@@ -1539,7 +1539,7 @@ export default function Home() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="text-xs border border-neutral-200 rounded-xl px-4 py-2.5 text-neutral-500 outline-none hover:border-neutral-400 transition-colors cursor-pointer self-start md:self-end"
+                    className="text-xs border border-neutral-200 px-4 py-2.5 text-neutral-500 outline-none hover:border-neutral-400 transition-colors cursor-pointer self-start md:self-end"
                   >
                     <option value="recommandes">Trier : Recommandés</option>
                     <option value="prix-asc">Prix croissant</option>

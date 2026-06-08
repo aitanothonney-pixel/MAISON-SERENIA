@@ -15,22 +15,6 @@ export function MinimalistHeroSection() {
       ref={ref}
       className="relative w-full min-h-screen bg-white flex items-center justify-center overflow-hidden px-6 md:px-16 py-20"
     >
-      {/* Gold ambient orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="float-slow absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full opacity-[0.06]"
-          style={{ background: 'radial-gradient(circle, #C9A96E 0%, transparent 70%)' }}
-        />
-        <div
-          className="float-medium absolute -bottom-20 -right-20 w-[400px] h-[400px] rounded-full opacity-[0.05]"
-          style={{ background: 'radial-gradient(circle, #C9A96E 0%, transparent 70%)' }}
-        />
-        <div
-          className="float-slow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full opacity-[0.03]"
-          style={{ background: 'radial-gradient(circle, #C9A96E 0%, transparent 60%)' }}
-        />
-      </div>
-
       {/* Subtle noise texture */}
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
@@ -52,8 +36,8 @@ export function MinimalistHeroSection() {
           className="order-2 md:order-1 text-center md:text-left"
         >
           <div className="inline-flex items-center gap-2 mb-5">
-            <div className="h-px w-8 bg-gold" style={{ background: 'linear-gradient(90deg, #C9A96E, #A07840)' }} />
-            <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: '#C9A96E' }}>
+            <div className="h-px w-8 bg-neutral-300" />
+            <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400">
               Collection 2026
             </p>
           </div>
@@ -62,8 +46,7 @@ export function MinimalistHeroSection() {
           </p>
           <a
             href="#section-salon"
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase pb-1 hover:gap-4 transition-all duration-300"
-            style={{ color: '#C9A96E', borderBottom: '1px solid #C9A96E' }}
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase pb-1 hover:gap-4 transition-all duration-300 text-black border-b border-black"
           >
             Découvrir <span>→</span>
           </a>
@@ -71,21 +54,12 @@ export function MinimalistHeroSection() {
 
         {/* CENTER — image on circle */}
         <div className="order-1 md:order-2 flex justify-center items-center relative">
-          {/* Gold glow behind circle */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 1.5, ease, delay: 0.05 }}
-            className="glow-gold absolute w-[300px] h-[300px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px] rounded-full"
-            style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%)' }}
-          />
-          {/* Outer ring — gold tint */}
+          {/* Outer ring */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 1, ease, delay: 0.1 }}
-            className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-full"
-            style={{ border: '1px solid rgba(201,169,110,0.25)' }}
+            className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-full border border-neutral-100"
           />
           {/* Inner circle */}
           <motion.div
@@ -102,11 +76,11 @@ export function MinimalistHeroSection() {
             transition={{ duration: 1.2, ease, delay: 0.4 }}
             className="absolute w-[300px] h-[300px] md:w-[360px] md:h-[360px] lg:w-[420px] lg:h-[420px]"
           >
-            <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_18s_linear_infinite]" style={{ opacity: 0.35 }}>
+            <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_18s_linear_infinite]" style={{ opacity: 0.25 }}>
               <defs>
                 <path id="circle-path" d="M 100,100 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
               </defs>
-              <text fontSize="7" letterSpacing="4" fill="#C9A96E">
+              <text fontSize="7" letterSpacing="4" fill="#999">
                 <textPath href="#circle-path">MAISON SERENIA · COLLECTION 2026 · MOBILIER D'EXCEPTION · </textPath>
               </text>
             </svg>
@@ -121,14 +95,13 @@ export function MinimalistHeroSection() {
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 1.1, ease, delay: 0.35 }}
               className="w-64 md:w-72 lg:w-80 h-auto object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-              style={{ filter: 'drop-shadow(0 20px 40px rgba(201,169,110,0.2))' }}
+              style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.12))' }}
             />
             <motion.span
               initial={{ opacity: 0, y: 8 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease, delay: 1.1 }}
-              className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.25em] uppercase whitespace-nowrap transition-colors duration-300"
-              style={{ color: '#C9A96E' }}
+              className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.25em] uppercase whitespace-nowrap transition-colors duration-300 text-neutral-400"
             >
               Voir le produit →
             </motion.span>
@@ -147,20 +120,20 @@ export function MinimalistHeroSection() {
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
           >
             l&apos;art<br />
-            <span className="shimmer-gold">de</span><br />
+            <span className="italic">de</span><br />
             vivre.
           </h2>
         </motion.div>
 
       </div>
 
-      {/* Bottom divider — gold gradient */}
+      {/* Bottom divider */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}
         transition={{ duration: 1.2, ease, delay: 1 }}
         style={{ transformOrigin: 'left' }}
-        className="absolute bottom-10 left-6 right-6 md:left-16 md:right-16 divider-gold"
+        className="absolute bottom-10 left-6 right-6 md:left-16 md:right-16 h-px bg-neutral-100"
       />
     </section>
   );
