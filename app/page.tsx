@@ -574,7 +574,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'} ${[12, 13, 22].includes(product.id) ? 'scale-125' : ''}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'} ${[12, 13, 22].includes(product.id) ? 'scale-125' : ''} ${product.id === 34 ? 'scale-[1.35]' : ''}`}
           />
           {isBubble && product.images[1] && (
             <Image
@@ -1066,7 +1066,7 @@ function FigurinesSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-contain p-4 transition-all duration-700 group-hover:scale-105"
+                    className={`object-contain transition-all duration-700 group-hover:scale-105 ${product.id === 34 ? 'p-1 scale-[1.35]' : 'p-4'}`}
                   />
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
