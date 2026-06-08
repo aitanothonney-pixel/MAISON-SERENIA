@@ -153,3 +153,25 @@ html {
 .glow-gold {
   animation: glow-pulse 3s ease-in-out infinite;
 }
+
+/* LV-style sharp buttons */
+.btn-lv {
+  background: #000;
+  color: white;
+  border: 1px solid #000;
+  transition: all 0.2s ease;
+}
+.btn-lv:hover {
+  background: white;
+  color: black;
+}
+.btn-lv-outline {
+  background: transparent;
+  color: black;
+  border: 1px solid #000;
+  transition: all 0.2s ease;
+}
+.btn-lv-outline:hover {
+  background: black;
+  color: white;
+}

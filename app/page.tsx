@@ -72,19 +72,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       }`}
     >
       {/* Main nav row */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[68px]">
-        {/* Logo */}
-        <a
-          href="#"
-          className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${
-            scrolled ? 'text-black' : 'text-white'
-          }`}
-          style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-        >
-          MAISON SERENIA
-        </a>
-
-        {/* Desktop nav — categories */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-3 items-center h-16 lg:h-[68px]">
+        {/* Left — Desktop nav */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navItems.map((item) => (
             <a
@@ -98,9 +87,34 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
             </a>
           ))}
         </nav>
+        {/* Mobile burger — left on mobile */}
+        <div className="lg:hidden flex items-center">
+          <button
+            className="p-2 flex flex-col gap-1.5"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+          >
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+          </button>
+        </div>
 
-        {/* Icons */}
-        <div className="flex items-center gap-1">
+        {/* Center — Logo */}
+        <div className="flex justify-center">
+          <a
+            href="#"
+            className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${
+              scrolled ? 'text-black' : 'text-white'
+            }`}
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+          >
+            MAISON SERENIA
+          </a>
+        </div>
+
+        {/* Right — Icons */}
+        <div className="flex items-center gap-1 justify-end">
           {/* Search toggle */}
           <button
             className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -132,16 +146,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
             )}
           </button>
 
-          {/* Burger */}
-          <button
-            className="lg:hidden p-2 flex flex-col gap-1.5"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
-          >
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-          </button>
         </div>
       </div>
 
@@ -271,7 +275,7 @@ function PromoBanner() {
 
   return (
     <FadeInSection>
-      <section className="mx-6 lg:mx-10 my-6 rounded-3xl overflow-hidden relative">
+      <section className="w-full overflow-hidden relative">
         <div className="relative h-56 md:h-72">
           {/* Clickable background image */}
           <button
@@ -299,7 +303,7 @@ function PromoBanner() {
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none">
             <a
               href="#bubble-promo"
-              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
+              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-neutral-100 transition-colors"
             >
               Voir les produits en promotion
             </a>
@@ -370,7 +374,7 @@ function BubblePromoCarousel() {
       <section id="bubble-promo" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: '#C9A96E' }}>Offre limitée · −30%</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-400">Offre limitée · −30%</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
           </div>
           <div className="flex items-center gap-2">
@@ -378,7 +382,7 @@ function BubblePromoCarousel() {
               onClick={() => scroll('left')}
               animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
               transition={{ duration: 0.25 }}
-              className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
               aria-label="Précédent"
             >
               <ChevronRight className="w-4 h-4 rotate-180" />
@@ -387,7 +391,7 @@ function BubblePromoCarousel() {
               onClick={() => scroll('right')}
               animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
               transition={{ duration: 0.25 }}
-              className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200"
+              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
               aria-label="Suivant"
             >
               <ChevronRight className="w-4 h-4" />
@@ -402,7 +406,7 @@ function BubblePromoCarousel() {
           {items.map((product) => (
             <div key={product.id} className="group flex-shrink-0 w-56 md:w-64 snap-start">
               <Link href={`/products/${product.id}`}>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white p-3 mb-3 shadow-sm border border-neutral-100 group-hover:shadow-md transition-shadow duration-300">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white p-3 mb-3 border border-neutral-100 transition-shadow duration-300">
                 <Image
                   src={product.images[0]}
                   alt={product.name}
@@ -419,12 +423,12 @@ function BubblePromoCarousel() {
                     className="absolute inset-0 w-full h-full object-contain opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 p-3"
                   />
                 )}
-                <div className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
+                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                   −30%
                 </div>
                 <button
                   onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                  className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                 >
                   <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                 </button>
@@ -476,7 +480,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
@@ -485,16 +489,16 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                   />
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                       Best-seller
                     </div>
-                    <div className="text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
+                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                       −30%
                     </div>
                   </div>
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                   >
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
@@ -547,7 +551,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className="group relative bg-white rounded-2xl overflow-hidden border border-transparent hover:border-neutral-200 transition-all duration-500 shadow-sm card-premium"
+      className="group relative bg-white overflow-hidden transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
         <div className={`relative overflow-hidden aspect-[4/3] bg-white ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'p-3' : ''}`}>
@@ -573,18 +577,18 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
             {isBubble ? (
-              <span className="text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>
+              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                 −30%
               </span>
             ) : (
               <>
                 {isNew && (
-                  <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                  <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                     Nouveau
                   </span>
                 )}
                 {isSale && (
-                  <span className="bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full border border-neutral-200">
+                  <span className="bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 border border-neutral-200">
                     −20%
                   </span>
                 )}
@@ -595,14 +599,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           {/* Wishlist */}
           <button
             onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-            className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+            className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
           >
             <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
           </button>
 
-          {/* Quick view overlay */}
-          <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-            <span className="block w-full text-center bg-white text-black text-[10px] font-bold tracking-widest uppercase py-3 rounded-xl shadow-sm">
+          {/* Quick view overlay — thin bottom bar */}
+          <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+            <span className="block w-full text-center bg-black text-white text-[9px] tracking-widest uppercase py-2.5">
               Voir le produit
             </span>
           </div>
@@ -649,15 +653,15 @@ function ProductFilterBar({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="flex items-center gap-2 flex-wrap mb-10">
+    <div className="flex items-center gap-0 border-b border-neutral-100 mb-12">
       {filterCategories.map((cat) => (
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`text-[11px] tracking-widest uppercase px-4 py-2 rounded-full border transition-all duration-200 font-medium ${
+          className={`text-[11px] tracking-[0.25em] uppercase px-6 py-4 border-b-2 transition-all duration-200 -mb-px ${
             active === cat
-              ? 'bg-black text-white border-black'
-              : 'bg-white text-neutral-500 border-neutral-200 hover:border-neutral-400 hover:text-black'
+              ? 'border-black text-black font-semibold'
+              : 'border-transparent text-neutral-400 hover:text-black hover:border-neutral-300'
           }`}
         >
           {cat}
@@ -896,13 +900,13 @@ function TestimonialsSection() {
 function Footer() {
   return (
     <footer className="bg-black text-white/60 pt-16 pb-8">
-      {/* Gold top bar */}
-      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E 20%, #E8D5B0 50%, #C9A96E 80%, transparent)' }} />
+      {/* Top bar */}
+      <div className="h-px w-full bg-neutral-800" />
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-4 shimmer-gold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-4 text-white" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
               MAISON SERENIA
             </h3>
             <p className="text-sm leading-relaxed mb-6">
