@@ -820,43 +820,40 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
 
               {/* CTA Buttons */}
-              <div className="space-y-3 mb-10">
+              <div className="space-y-2 mb-10">
                 <motion.button
                   onClick={handleAddToCart}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase text-white relative overflow-hidden flex items-center justify-center gap-2"
-                  style={added
-                    ? { background: '#555' }
-                    : { background: '#000' }
-                  }
+                  whileTap={{ scale: 0.99 }}
+                  className="w-full py-4 font-semibold text-sm tracking-[0.2em] uppercase text-white relative overflow-hidden flex items-center justify-center gap-3 border border-black transition-colors duration-300"
+                  style={{ background: added ? '#333' : '#000' }}
                 >
                   <AnimatePresence mode="wait">
                     {added ? (
-                      <motion.span key="added" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-center gap-2">
+                      <motion.span key="added" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
                         <Check className="w-4 h-4" /> Ajouté au panier
                       </motion.span>
                     ) : (
-                      <motion.span key="add" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-center gap-2">
+                      <motion.span key="add" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
                         <ShoppingBag className="w-4 h-4" /> Ajouter au panier
                       </motion.span>
                     )}
                   </AnimatePresence>
                 </motion.button>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2">
                   <motion.button
                     onClick={() => setCheckoutOpen(true)}
-                    whileTap={{ scale: 0.98 }}
-                    className="py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                    whileTap={{ scale: 0.99 }}
+                    className="py-4 font-semibold text-sm tracking-[0.2em] uppercase border border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     <Lock className="w-4 h-4" /> Acheter
                   </motion.button>
 
                   <motion.button
                     onClick={() => toggleWish(product.id)}
-                    whileTap={{ scale: 0.97 }}
-                    className={`py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase border-2 transition-all duration-300 flex items-center justify-center gap-2 ${
-                      isWished(product.id) ? 'border-red-400 bg-red-50 text-red-500' : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400'
+                    whileTap={{ scale: 0.99 }}
+                    className={`py-4 font-semibold text-sm tracking-[0.2em] uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
+                      isWished(product.id) ? 'border-red-400 bg-red-50 text-red-500' : 'border-neutral-300 bg-white text-neutral-500 hover:border-black hover:text-black'
                     }`}
                   >
                     <Heart className={`w-4 h-4 ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
