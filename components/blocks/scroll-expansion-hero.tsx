@@ -41,12 +41,19 @@ const ScrollExpandMedia = ({
   const [isMobileState, setIsMobileState] = useState<boolean>(false);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setScrollProgress(0);
     setShowContent(false);
     setMediaFullyExpanded(false);
   }, [mediaType]);
+
+  useEffect(() => {
+    if (mediaFullyExpanded && contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [mediaFullyExpanded]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
@@ -309,10 +316,11 @@ const ScrollExpandMedia = ({
             </div>
 
             <motion.section
+              ref={contentRef}
               className='flex flex-col w-full px-8 py-10 md:px-16 lg:py-20'
               initial={{ opacity: 0 }}
               animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.5 }}
             >
               {children}
             </motion.section>
