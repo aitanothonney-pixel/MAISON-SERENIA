@@ -568,7 +568,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-white ${product.category === 'Figurines' ? 'aspect-[3/4] p-4' : 'aspect-[4/3]'} ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -1061,7 +1061,7 @@ function FigurinesSection() {
               className="group"
             >
               <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-[3/4] overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
