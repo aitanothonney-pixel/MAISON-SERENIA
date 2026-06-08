@@ -426,7 +426,7 @@ function BubblePromoCarousel() {
                   alt={product.name}
                   width={400}
                   height={300}
-                  style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : undefined}
+                  style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}
                   className={`w-full h-full object-contain transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
                 />
                 {product.images[1] && (
@@ -575,7 +575,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
-            style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : [2, 6, 7, 8, 9].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
+            style={isBubble ? { transform: 'scale(1.15)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
             className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           {isBubble && product.images[1] && (
@@ -584,7 +584,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
               alt={product.name}
               width={600}
               height={450}
-              style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : [2, 6, 7, 8, 9].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : undefined}
+              style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}
               className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105 object-contain"
             />
           )}
