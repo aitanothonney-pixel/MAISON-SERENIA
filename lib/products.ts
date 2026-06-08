@@ -223,8 +223,8 @@ export const products: Product[] = [
     price: 75,
     description: 'Figurine KAWS en coloris noir intense — pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
     images: [
-      'https://i.ibb.co/rfHJgML3/IMG-0625.jpg',
-      'https://i.ibb.co/s9x78xz3/IMG-0665.jpg',
+      'https://i.ibb.co/4Zy6w7XR/E307812-D-5-A20-4-AF5-A8-BC-48-EEA34-EB12-B.jpg',
+      'https://i.ibb.co/4Z9wfJJb/6306-D2-ED-20-EC-42-E8-8266-013-CAE098-AAD.jpg',
     ],
     dimensions: 'H 28 cm',
     material: 'Vinyle premium',
