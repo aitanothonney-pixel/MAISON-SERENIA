@@ -1047,7 +1047,7 @@ function FigurinesSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    style={product.id === 38 ? { transform: 'scale(1.55)', transformOrigin: 'center' } : [34, 39].includes(product.id) ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
+                    style={product.id === 38 ? { transform: 'scale(1.55)', transformOrigin: 'center' } : product.id === 34 ? { transform: 'scale(1.7)', transformOrigin: 'center' } : product.id === 39 ? { transform: 'scale(1.25)', transformOrigin: 'center' } : undefined}
                     className={`transition-all duration-700 group-hover:scale-105 ${product.id === 33 ? 'object-cover object-center scale-[2]' : 'object-contain'}`}
                   />
                   <button
