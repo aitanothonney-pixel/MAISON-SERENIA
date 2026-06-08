@@ -1491,35 +1491,16 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-[100dvh] bg-white overflow-hidden">
-        <motion.div
-          className="flex flex-col items-center justify-center text-center gap-2 w-full"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}
-          >
-            MAISON
-          </h1>
-          <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}
-          >
-            SERENIA
-          </h1>
-          <p className="text-xs tracking-[0.4em] uppercase text-neutral-400 mt-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            Collection 2026
-          </p>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-300 font-medium mt-1">
-            Défiler pour découvrir
-          </p>
-        </motion.div>
-      </section>
-
-      <div className="w-full">
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1280&q=80"
+        bgImageSrc="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80"
+        title="MAISON SERENIA"
+        date="Collection 2026"
+        scrollToExpand="Défiler pour découvrir"
+        textBlend={true}
+      >
+        <div className="w-full">
           {/* Minimalist Hero — product showcase */}
           <MinimalistHeroSection />
 
@@ -1610,7 +1591,8 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </section>
-      </div>
+        </div>
+      </ScrollExpandMedia>
 
       <InteriorShowcaseSection onCategoryClick={(cat, section) => {
         setFlashCat(cat);
