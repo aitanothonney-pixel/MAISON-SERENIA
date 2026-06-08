@@ -742,32 +742,56 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Product Info */}
             <div className="lg:pt-4">
-              <p className="text-xs tracking-[0.25em] uppercase text-neutral-400 mb-3">{product.category}</p>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4 leading-tight">{product.name}</h1>
-
-              <div className="flex items-center gap-1 mb-5">
-                {[...Array(4)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
-                <span className="relative w-4 h-4 inline-block">
-                  <Star className="w-4 h-4 text-black" />
-                  <span className="absolute inset-0 overflow-hidden w-[50%]"><Star className="w-4 h-4 fill-black text-black" /></span>
-                </span>
-                <span className="text-xs text-neutral-400 ml-2">(24 avis)</span>
+              {/* Category + name */}
+              <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="h-px w-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #A07840)' }} />
+                  <p className="text-[10px] tracking-[0.35em] uppercase" style={{ color: '#C9A96E' }}>{product.category}</p>
+                </div>
+                <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-0.5">
+                    {[...Array(4)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
+                    <span className="relative w-4 h-4 inline-block">
+                      <Star className="w-4 h-4 text-neutral-300" />
+                      <span className="absolute inset-0 overflow-hidden w-[50%]"><Star className="w-4 h-4 fill-black text-black" /></span>
+                    </span>
+                  </div>
+                  <span className="text-xs text-neutral-400">4.5</span>
+                  <span className="text-neutral-200">·</span>
+                  <span className="text-xs text-neutral-400 underline underline-offset-2 cursor-pointer">24 avis</span>
+                </div>
               </div>
 
-              {/* Price */}
-              <div className="flex items-baseline gap-3 mb-6">
-                <p className="text-3xl font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
+              {/* Divider */}
+              <div className="divider-gold mb-6" />
+
+              {/* Price block */}
+              <div className="rounded-2xl p-4 mb-6" style={{ background: 'linear-gradient(135deg, #faf8f4, #f5f0e8)' }}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-baseline gap-3">
+                    <p className="text-4xl font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
+                    {isBubble && (
+                      <p className="text-base text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</p>
+                    )}
+                  </div>
+                  {isBubble && (
+                    <div className="text-center">
+                      <span className="text-white text-sm font-bold px-3 py-1.5 rounded-full block" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>−30%</span>
+                      <p className="text-[10px] text-neutral-400 mt-1">Offre limitée</p>
+                    </div>
+                  )}
+                </div>
                 {isBubble && (
-                  <p className="text-lg text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</p>
-                )}
-                {isBubble && (
-                  <span className="text-xs font-bold text-white px-2.5 py-1 rounded-full" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)', boxShadow: '0 2px 8px rgba(201,169,110,0.4)' }}>−30%</span>
+                  <p className="text-xs text-neutral-400 mt-2 flex items-center gap-1">
+                    <span style={{ color: '#C9A96E' }}>✓</span> Livraison offerte · Installation comprise
+                  </p>
                 )}
               </div>
 
               {/* Color variants */}
               {variants && (
-                <div className="mb-8">
+                <div className="mb-6">
                   <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
                     Couleur — <span className="text-black font-medium">{variants.find(v => v.productId === product.id)?.color}</span>
                   </p>
@@ -787,72 +811,58 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
               )}
 
-              <p className="text-neutral-600 leading-relaxed mb-8 text-sm">{product.description}</p>
+              <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
 
-              <div className="flex flex-wrap gap-3 mb-8">
-                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">📐 {product.dimensions}</span>
-                <span className="text-xs border border-neutral-200 rounded-full px-4 py-1.5 text-neutral-500">🪵 {product.material}</span>
+              {/* Specs pills */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">📐 {product.dimensions}</span>
+                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">🪵 {product.material}</span>
               </div>
 
               {/* CTA Buttons */}
               <div className="space-y-3 mb-10">
-                {/* Ajouter au panier */}
                 <motion.button
                   onClick={handleAddToCart}
                   whileTap={{ scale: 0.98 }}
-                  className={`w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase transition-all duration-300 relative overflow-hidden ${
-                    added ? 'text-white' : 'text-white'
-                  }`}
+                  className="w-full py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase text-white relative overflow-hidden flex items-center justify-center gap-2"
                   style={added
                     ? { background: 'linear-gradient(135deg, #A07840, #C9A96E)' }
-                    : { background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)', boxShadow: '0 4px 20px rgba(201,169,110,0.35)' }
+                    : { background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)', boxShadow: '0 6px 24px rgba(201,169,110,0.4)' }
                   }
                 >
                   <AnimatePresence mode="wait">
                     {added ? (
-                      <motion.span
-                        key="added"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        className="flex items-center justify-center gap-2"
-                      >
+                      <motion.span key="added" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-center gap-2">
                         <Check className="w-4 h-4" /> Ajouté au panier
                       </motion.span>
                     ) : (
-                      <motion.span
-                        key="add"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        className="flex items-center justify-center gap-2"
-                      >
+                      <motion.span key="add" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-center gap-2">
                         <ShoppingBag className="w-4 h-4" /> Ajouter au panier
                       </motion.span>
                     )}
                   </AnimatePresence>
                 </motion.button>
 
-                {/* Acheter maintenant */}
-                <motion.button
-                  onClick={() => setCheckoutOpen(true)}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 rounded-xl font-semibold text-sm tracking-widest uppercase border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Lock className="w-4 h-4" /> Acheter maintenant
-                </motion.button>
+                <div className="grid grid-cols-2 gap-3">
+                  <motion.button
+                    onClick={() => setCheckoutOpen(true)}
+                    whileTap={{ scale: 0.98 }}
+                    className="py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase border-2 border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <Lock className="w-4 h-4" /> Acheter
+                  </motion.button>
 
-                {/* Wishlist */}
-                <motion.button
-                  onClick={() => toggleWish(product.id)}
-                  whileTap={{ scale: 0.97 }}
-                  className={`w-full py-3.5 rounded-xl font-semibold text-sm tracking-widest uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isWished(product.id) ? 'border-red-500 bg-red-500 text-white' : 'border-neutral-200 bg-white text-black hover:border-black'
-                  }`}
-                >
-                  <Heart className={`w-4 h-4 ${isWished(product.id) ? 'fill-white' : ''}`} />
-                  {isWished(product.id) ? 'Dans vos souhaits' : 'Ajouter à la liste de souhaits'}
-                </motion.button>
+                  <motion.button
+                    onClick={() => toggleWish(product.id)}
+                    whileTap={{ scale: 0.97 }}
+                    className={`py-4 rounded-2xl font-semibold text-sm tracking-widest uppercase border-2 transition-all duration-300 flex items-center justify-center gap-2 ${
+                      isWished(product.id) ? 'border-red-400 bg-red-50 text-red-500' : 'border-neutral-200 bg-white text-neutral-500 hover:border-neutral-400'
+                    }`}
+                  >
+                    <Heart className={`w-4 h-4 ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                    {isWished(product.id) ? 'Sauvé' : 'Wishlist'}
+                  </motion.button>
+                </div>
               </div>
 
               {/* Accordions */}
