@@ -185,7 +185,6 @@ const ScrollExpandMedia = ({
                   height: `${mediaHeight}px`,
                   maxWidth: '95vw',
                   maxHeight: '85vh',
-                  boxShadow: '0px 0px 50px rgba(0, 0, 0, 0.3)',
                 }}
               >
                 {mediaType === 'video' ? (
@@ -247,7 +246,7 @@ const ScrollExpandMedia = ({
                     </div>
                   )
                 ) : (
-                  <div className='relative w-full h-full bg-neutral-100 rounded-xl flex items-center justify-center overflow-hidden'>
+                  <div className='relative w-full h-full flex items-center justify-center'>
                     <motion.span
                       className='text-4xl md:text-6xl lg:text-7xl font-bold tracking-[0.25em] uppercase text-black select-none'
                       style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
