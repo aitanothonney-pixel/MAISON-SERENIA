@@ -32,6 +32,12 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 54, color: 'Rose', colorHex: '#f4a7b9' },
     { productId: 55, color: 'Bleu nuit', colorHex: '#2d3a6b' },
   ],
+  'canape-bubble': [
+    { productId: 10, color: 'Blanc', colorHex: '#f0ede8' },
+    { productId: 13, color: 'Bleu', colorHex: '#1a2fad' },
+    { productId: 22, color: 'Rouge', colorHex: '#c0392b' },
+    { productId: 12, color: 'Violet', colorHex: '#6b3fa0' },
+  ],
 };
 
 export function getVariantGroup(productId: number): ProductVariant[] | null {
