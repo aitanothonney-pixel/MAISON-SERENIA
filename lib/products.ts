@@ -128,7 +128,7 @@ export const products: Product[] = [
     price: 1857,
     description: 'Le Canapé Bubble 3 places en rouge vif et ardent — énergie, caractère et confort sculptural. Une pièce iconique qui s\'impose avec force dans votre espace de vie.',
     images: [
-      'https://i.ibb.co/zH4qtJVB/IMG-2511.jpg',
+      'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png',
       'https://i.ibb.co/Kx5RnfCy/IMG-2542.jpg',
       'https://i.ibb.co/99H4L0sP/IMG-2616.jpg',
     ],
