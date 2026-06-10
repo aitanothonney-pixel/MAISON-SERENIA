@@ -1486,7 +1486,7 @@ export default function Home() {
   }, []);
 
   const shuffledAll = useMemo(() => {
-    const arr = [...products];
+    const arr = [...products.filter(p => p.category !== 'Été')];
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -1499,7 +1499,7 @@ export default function Home() {
     ? shuffledAll
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
-      : products.filter((p) => p.category === activeFilter);
+      : products.filter((p) => p.category === activeFilter && p.category !== 'Été');
 
   const filteredProducts = [...baseProducts].sort((a, b) => {
     if (sortBy === 'prix-asc') return a.price - b.price;
