@@ -1577,6 +1577,9 @@ export default function Home() {
             </div>
           </FadeInSection>
 
+          {/* Section Été */}
+          <SummerProductsSection />
+
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
             setActiveFilter('Bubble');
@@ -1649,9 +1652,6 @@ export default function Home() {
           </section>
       </div>
 
-
-      {/* Section Été */}
-      <SummerProductsSection />
 
       <InspirationsParallaxSection />
       <TestimonialsSection />
