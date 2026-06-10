@@ -22,10 +22,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 32, color: 'Gris', colorHex: '#9e9e9e' },
     { productId: 33, color: 'Brun', colorHex: '#8B5E3C' },
   ],
-  'bracelet-anti-moustiques': [
-    { productId: 51, color: 'Noir', colorHex: '#1a1a1a' },
-    { productId: 52, color: 'Rose', colorHex: '#f4a7b9' },
-  ],
 };
 
 export function getVariantGroup(productId: number): ProductVariant[] | null {
@@ -320,34 +316,5 @@ export const products: Product[] = [
     dimensions: 'H 18 × Ø 8 cm',
     material: 'ABS, acier inoxydable doré',
     details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Disponible en Blanc, Noir, Rose et Bleu nuit'],
-  },
-  // ── Été : Bracelet Anti-Moustiques Noir ──────────────────────────────────────
-  {
-    id: 51,
-    name: 'Bracelet Anti-Moustiques noir',
-    category: 'Été',
-    price: 28.99,
-    description: 'Bracelet anti-moustiques rechargeable à ultrasons, en silicone souple avec capsule dorée. Protection discrète et élégante pour profiter de l\'été sans contraintes.',
-    images: [
-      'https://i.ibb.co/pjRGLdRW/318937-AA-FD64-4-B9-C-BD1-F-1-AFC14-E53-C00.jpg',
-      'https://i.ibb.co/GfXdSYqS/84-A6-F724-482-E-4741-A4-E0-A78827829-FAA.jpg',
-    ],
-    dimensions: 'Tour de poignet : 14–20 cm',
-    material: 'Silicone, acier inoxydable doré',
-    details: ['Technologie ultrasons', 'Silicone souple hypoallergénique', 'Rechargeable USB-C', 'Coloris Noir'],
-  },
-  // ── Été : Bracelet Anti-Moustiques Rose ──────────────────────────────────────
-  {
-    id: 52,
-    name: 'Bracelet Anti-Moustiques rose',
-    category: 'Été',
-    price: 28.99,
-    description: 'Bracelet anti-moustiques rechargeable à ultrasons, en silicone souple avec capsule dorée. Protection discrète et élégante pour profiter de l\'été sans contraintes.',
-    images: [
-      'https://i.ibb.co/840cLP5P/54-C52836-7029-4-D0-E-8-FA9-56-F70-AD0-DFB2.jpg',
-    ],
-    dimensions: 'Tour de poignet : 14–20 cm',
-    material: 'Silicone, acier inoxydable doré',
-    details: ['Technologie ultrasons', 'Silicone souple hypoallergénique', 'Rechargeable USB-C', 'Coloris Rose'],
   },
 ];
