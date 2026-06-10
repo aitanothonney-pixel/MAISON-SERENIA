@@ -26,6 +26,12 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 51, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 52, color: 'Rose', colorHex: '#f4a7b9' },
   ],
+  'ventilateur-nomade': [
+    { productId: 50, color: 'Blanc', colorHex: '#f5f5f5' },
+    { productId: 53, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 54, color: 'Rose', colorHex: '#f4a7b9' },
+    { productId: 55, color: 'Bleu nuit', colorHex: '#2d3a6b' },
+  ],
 };
 
 export function getVariantGroup(productId: number): ProductVariant[] | null {
@@ -307,19 +313,55 @@ export const products: Product[] = [
   // ── Été : Ventilateur Nomade ──────────────────────────────────────────────────
   {
     id: 50,
-    name: 'Ventilateur Nomade',
+    name: 'Ventilateur Nomade blanc',
     category: 'Été',
     price: 18.99,
-    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été. Disponible en 4 coloris.',
+    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été.',
     images: [
       'https://i.ibb.co/mVsj5XR1/116-AD85-E-F417-45-D8-9577-D23-F33-CE5173.jpg',
+    ],
+    dimensions: 'H 18 × Ø 8 cm',
+    material: 'ABS, acier inoxydable doré',
+    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Coloris Blanc'],
+  },
+  {
+    id: 53,
+    name: 'Ventilateur Nomade noir',
+    category: 'Été',
+    price: 18.99,
+    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été.',
+    images: [
       'https://i.ibb.co/x8SJ741Q/7-EE2-AE36-D232-499-C-9937-7-DA23-FBA42-D7.jpg',
+    ],
+    dimensions: 'H 18 × Ø 8 cm',
+    material: 'ABS, acier inoxydable doré',
+    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Coloris Noir'],
+  },
+  {
+    id: 54,
+    name: 'Ventilateur Nomade rose',
+    category: 'Été',
+    price: 18.99,
+    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été.',
+    images: [
       'https://i.ibb.co/vxMfNkQj/D1-C91-BD8-1-E54-4518-82-EA-311-E3-A712694.jpg',
+    ],
+    dimensions: 'H 18 × Ø 8 cm',
+    material: 'ABS, acier inoxydable doré',
+    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Coloris Rose'],
+  },
+  {
+    id: 55,
+    name: 'Ventilateur Nomade bleu nuit',
+    category: 'Été',
+    price: 18.99,
+    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été.',
+    images: [
       'https://i.ibb.co/sdmTndYQ/7-E7761-CB-D102-4-C74-9-E8-A-634-D4-D7-CB2-CD.jpg',
     ],
     dimensions: 'H 18 × Ø 8 cm',
     material: 'ABS, acier inoxydable doré',
-    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Disponible en Blanc, Noir, Rose et Bleu nuit'],
+    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Coloris Bleu nuit'],
   },
   // ── Été : Bracelet Anti-Moustiques Noir ──────────────────────────────────────
   {
