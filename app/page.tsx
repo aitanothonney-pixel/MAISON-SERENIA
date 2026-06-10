@@ -12,7 +12,7 @@ import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { products } from '@/lib/products';
+import { products, getVariantGroup } from '@/lib/products';
 import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -853,7 +853,16 @@ const parallaxImages = [
 // ── Section Été ───────────────────────────────────────────────────────────────
 
 function SummerProductsSection() {
-  const summerProducts = products.filter(p => p.category === 'Été');
+  const allSummer = products.filter(p => p.category === 'Été');
+  const seenGroups = new Set<number>();
+  const summerProducts = allSummer.filter(p => {
+    const group = getVariantGroup(p.id);
+    if (!group) return true;
+    const firstId = group[0].productId;
+    if (seenGroups.has(firstId)) return false;
+    seenGroups.add(firstId);
+    return p.id === firstId;
+  });
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
