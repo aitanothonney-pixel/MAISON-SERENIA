@@ -38,6 +38,13 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 22, color: 'Rouge', colorHex: '#c0392b' },
     { productId: 12, color: 'Violet', colorHex: '#6b3fa0' },
   ],
+  'fauteuil-bubble': [
+    { productId: 2, color: 'Blanc', colorHex: '#f0ede8' },
+    { productId: 6, color: 'Bleu', colorHex: '#1a2fad' },
+    { productId: 8, color: 'Rouge', colorHex: '#c0392b' },
+    { productId: 7, color: 'Vert', colorHex: '#4a7c59' },
+    { productId: 9, color: 'Orange', colorHex: '#d4622a' },
+  ],
 };
 
 export function getVariantGroup(productId: number): ProductVariant[] | null {
