@@ -863,42 +863,55 @@ function SummerProductsSection() {
     seenGroups.add(firstId);
     return p.id === firstId;
   });
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <FadeInSection>
-          <div className="flex flex-col items-center text-center mb-14">
-            <p className="text-[10px] tracking-[0.45em] uppercase text-neutral-400 mb-3">Collection Saisonnière</p>
-            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-              Nos Produits Été
-            </h2>
-            <div className="h-px w-16 bg-black mt-2" />
-          </div>
-        </FadeInSection>
+  const { isWished, toggle } = useWishlist();
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+  return (
+    <FadeInSection>
+      <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Collection Saisonnière</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Nos Produits Été</h2>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {summerProducts.map((product, index) => (
-            <FadeInSection key={product.id} delay={index * 0.08}>
-              <Link href={`/products/${product.id}`} className="group block">
-                <div className="relative overflow-hidden bg-neutral-50 aspect-[4/3] flex items-center justify-center p-4">
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group overflow-hidden"
+            >
+              <Link href={`/products/${product.id}`}>
+                <div className="relative aspect-[4/3] overflow-hidden bg-white mb-3 p-3">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105"
+                    className="object-contain transition-transform duration-600 group-hover:scale-105"
                   />
+                  <button
+                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  >
+                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                  </button>
                 </div>
-                <div className="pt-3 pb-1">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-1">Été 2026</p>
-                  <h3 className="text-sm font-semibold text-black tracking-wide mb-1">{product.name}</h3>
-                  <p className="text-sm text-black font-medium">{product.price.toFixed(2)} CHF</p>
+                <div className="flex items-center gap-1 mb-1">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
+                  <span className="text-[10px] text-neutral-400 ml-1">(4,9)</span>
                 </div>
+                <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
+                <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
+                <p className="text-black font-bold text-sm">{product.price.toFixed(2)} CHF</p>
               </Link>
-            </FadeInSection>
+            </motion.div>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </FadeInSection>
   );
 }
 
