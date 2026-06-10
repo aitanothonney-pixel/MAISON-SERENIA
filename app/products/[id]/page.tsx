@@ -556,8 +556,23 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
+  const currentGroup = getVariantGroup(product.id);
   const related = product.category === 'Été'
-    ? products.filter((p) => p.category === 'Été' && p.id !== product.id)
+    ? (() => {
+        const seenGroups = new Set<number>();
+        return products.filter(p => {
+          if (p.category !== 'Été') return false;
+          const grp = getVariantGroup(p.id);
+          if (grp) {
+            const firstId = grp[0].productId;
+            if (currentGroup && grp[0].productId === currentGroup[0].productId) return false;
+            if (seenGroups.has(firstId)) return false;
+            seenGroups.add(firstId);
+            return p.id === firstId;
+          }
+          return p.id !== product.id;
+        });
+      })()
     : product.category === 'Figurines'
       ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
       : isBubble
