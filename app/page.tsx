@@ -850,6 +850,49 @@ const parallaxImages = [
   { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Salle bleue', position: 'center 55%' },
 ];
 
+// ── Section Été ───────────────────────────────────────────────────────────────
+
+function SummerProductsSection() {
+  const summerProducts = products.filter(p => p.category === 'Été');
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <FadeInSection>
+          <div className="flex flex-col items-center text-center mb-14">
+            <p className="text-[10px] tracking-[0.45em] uppercase text-neutral-400 mb-3">Collection Saisonnière</p>
+            <h2 className="text-3xl md:text-5xl font-bold text-black mb-4" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+              Nos Produits Été
+            </h2>
+            <div className="h-px w-16 bg-black mt-2" />
+          </div>
+        </FadeInSection>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {summerProducts.map((product, index) => (
+            <FadeInSection key={product.id} delay={index * 0.08}>
+              <Link href={`/products/${product.id}`} className="group block">
+                <div className="relative overflow-hidden bg-neutral-50 aspect-[4/3] flex items-center justify-center p-4">
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="pt-3 pb-1">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-1">Été 2026</p>
+                  <h3 className="text-sm font-semibold text-black tracking-wide mb-1">{product.name}</h3>
+                  <p className="text-sm text-black font-medium">{product.price.toFixed(2)} CHF</p>
+                </div>
+              </Link>
+            </FadeInSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function InspirationsParallaxSection() {
   return (
     <section id="section-inspirations" className="scroll-mt-20">
@@ -1597,6 +1640,9 @@ export default function Home() {
           </section>
       </div>
 
+
+      {/* Section Été */}
+      <SummerProductsSection />
 
       <InspirationsParallaxSection />
       <TestimonialsSection />

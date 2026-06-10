@@ -300,4 +300,35 @@ export const products: Product[] = [
     material: 'Vinyle premium',
     details: ['Pose câlin emblématique', 'Vinyle premium finition mate', 'Pièce collector', 'Livraison soigneusement emballée'],
   },
+  // ── Été : Ventilateur Nomade ──────────────────────────────────────────────────
+  {
+    id: 50,
+    name: 'Ventilateur Nomade',
+    category: 'Été',
+    price: 18.99,
+    description: 'Ventilateur portable rechargeable avec affichage digital LED, moteur silencieux haute performance et finitions dorées. Compact et élégant, il vous accompagne partout cet été. Disponible en 4 coloris.',
+    images: [
+      'https://i.ibb.co/mVsj5XR1/116-AD85-E-F417-45-D8-9577-D23-F33-CE5173.jpg',
+      'https://i.ibb.co/x8SJ741Q/7-EE2-AE36-D232-499-C-9937-7-DA23-FBA42-D7.jpg',
+      'https://i.ibb.co/vxMfNkQj/D1-C91-BD8-1-E54-4518-82-EA-311-E3-A712694.jpg',
+      'https://i.ibb.co/sdmTndYQ/7-E7761-CB-D102-4-C74-9-E8-A-634-D4-D7-CB2-CD.jpg',
+    ],
+    dimensions: 'H 18 × Ø 8 cm',
+    material: 'ABS, acier inoxydable doré',
+    details: ['Affichage LED digital', 'Rechargeable via USB-C', 'Moteur silencieux haute vitesse', 'Disponible en Blanc, Noir, Rose et Bleu nuit'],
+  },
+  // ── Été : Bracelet Anti-Moustiques ────────────────────────────────────────────
+  {
+    id: 51,
+    name: 'Bracelet Anti-Moustiques',
+    category: 'Été',
+    price: 28.99,
+    description: 'Bracelet anti-moustiques rechargeable à ultrasons, en silicone souple avec capsule dorée. Protection discrète et élégante pour profiter de l\'été sans contraintes. Disponible en Noir et Rose.',
+    images: [
+      'https://i.ibb.co/mVsj5XR1/116-AD85-E-F417-45-D8-9577-D23-F33-CE5173.jpg',
+    ],
+    dimensions: 'Tour de poignet : 14–20 cm',
+    material: 'Silicone, acier inoxydable doré',
+    details: ['Technologie ultrasons', 'Silicone souple hypoallergénique', 'Rechargeable USB-C', 'Disponible en Noir et Rose'],
+  },
 ];

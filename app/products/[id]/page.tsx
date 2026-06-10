@@ -556,11 +556,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
-  const related = product.category === 'Figurines'
-    ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
-    : isBubble
-      ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
-      : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const related = product.category === 'Été'
+    ? products.filter((p) => p.category === 'Été' && p.id !== product.id)
+    : product.category === 'Figurines'
+      ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
+      : isBubble
+        ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
+        : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   const relatedScrollRef = useRef<HTMLDivElement>(null);
   const scrollRelated = (dir: 'left' | 'right') => {
