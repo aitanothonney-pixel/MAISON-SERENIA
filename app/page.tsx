@@ -463,10 +463,10 @@ function BubblePromoCarousel() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [2, 10, 6, 13];
+const bestsellerIds = [8, 22, 2, 10];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
-  const bestsellers = products.filter((p) => bestsellerIds.includes(p.id));
+  const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
   const { isWished, toggle } = useWishlist();
 
   return (
