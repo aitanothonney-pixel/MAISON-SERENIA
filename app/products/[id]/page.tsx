@@ -655,7 +655,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           <nav className="flex items-center gap-2 text-xs text-neutral-400">
             <Link href="/" className="hover:text-black transition-colors">Accueil</Link>
             <ChevronRight className="w-3 h-3" />
-            <span>{product.category}</span>
+            <Link
+              href={product.category === 'Été' ? '/#section-ete' : `/#section-salon`}
+              className="hover:text-black transition-colors"
+            >
+              {product.category}
+            </Link>
             <ChevronRight className="w-3 h-3" />
             <span className="text-black">{product.name}</span>
           </nav>

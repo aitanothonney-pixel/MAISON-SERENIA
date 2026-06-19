@@ -867,7 +867,7 @@ function SummerProductsSection() {
 
   return (
     <FadeInSection>
-      <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
+      <section id="section-ete" className="py-14 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
         <div className="flex items-end justify-between mb-10">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Collection Saisonnière</p>
