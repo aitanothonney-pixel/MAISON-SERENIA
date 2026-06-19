@@ -823,7 +823,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         key={v.productId}
                         onClick={() => router.push(`/products/${v.productId}`)}
                         title={v.color}
-                        className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
+                        className={`w-8 h-8 border-2 transition-all duration-200 ${
                           v.productId === product.id ? 'border-black scale-110 shadow-md' : 'border-neutral-200 hover:border-neutral-400 hover:scale-105'
                         }`}
                         style={{ backgroundColor: v.colorHex }}
