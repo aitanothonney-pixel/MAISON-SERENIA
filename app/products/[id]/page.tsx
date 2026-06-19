@@ -921,11 +921,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <h2 className="text-2xl font-serif font-bold">Vous aimerez aussi</h2>
                 <div className="flex items-center gap-2">
                   <motion.button onClick={() => scrollRelated('left')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
+                    className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
                     <ChevronRight className="w-4 h-4 rotate-180" />
                   </motion.button>
                   <motion.button onClick={() => scrollRelated('right')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Suivant">
+                    className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Suivant">
                     <ChevronRight className="w-4 h-4" />
                   </motion.button>
                 </div>
