@@ -568,14 +568,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' ? 'p-4' : ''}`}>
+        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
             width={600}
             height={450}
             style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : [7, 8, 9, 10, 13].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           {isBubble && product.images[1] && (
             <Image
