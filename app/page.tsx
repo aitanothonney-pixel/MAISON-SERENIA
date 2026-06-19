@@ -658,7 +658,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines', 'Bubble'];
+const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines', 'Bubble', 'Été'];
 
 function ProductFilterBar({
   active,
@@ -1512,7 +1512,22 @@ export default function Home() {
     ? shuffledAll
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
-      : products.filter((p) => p.category === activeFilter && p.category !== 'Été');
+      : activeFilter === 'Été'
+        ? (() => {
+            const seenGroups = new Set<number>();
+            return products.filter(p => {
+              if (p.category !== 'Été') return false;
+              const grp = getVariantGroup(p.id);
+              if (grp) {
+                const firstId = grp[0].productId;
+                if (seenGroups.has(firstId)) return false;
+                seenGroups.add(firstId);
+                return p.id === firstId;
+              }
+              return true;
+            });
+          })()
+        : products.filter((p) => p.category === activeFilter && p.category !== 'Été');
 
   const filteredProducts = [...baseProducts].sort((a, b) => {
     if (sortBy === 'prix-asc') return a.price - b.price;
