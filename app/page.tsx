@@ -900,8 +900,9 @@ function SummerProductsSection() {
                   </button>
                 </div>
                 <div className="flex items-center gap-1 mb-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
-                  <span className="text-[10px] text-neutral-400 ml-1">(4,9)</span>
+                  {[...Array(4)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
+                  <Star className="w-2.5 h-2.5 text-neutral-300" />
+                  <span className="text-[10px] text-neutral-400 ml-1">(4,0)</span>
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
