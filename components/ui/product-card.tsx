@@ -17,6 +17,7 @@ interface ProductCardImagesProps {
   activeColor: number
   activeImage: number
   handleMouse: (event: 'enter' | 'leave') => void
+  onClick?: () => void
   className?: string
 }
 
@@ -51,13 +52,17 @@ function ProductCardImages({
   activeColor,
   activeImage,
   handleMouse,
+  onClick,
   className,
 }: ProductCardImagesProps) {
   const handleMouseEnter = () => handleMouse('enter')
   const handleMouseLeave = () => handleMouse('leave')
 
   return (
-    <div className={cn('relative w-full h-full', className)}>
+    <div
+      className={cn('relative w-full h-full cursor-pointer', className)}
+      onClick={onClick}
+    >
       {productImages.map((productImage, index) => (
         <motion.div
           key={productImage.id}
@@ -124,6 +129,7 @@ interface ProductColorsThumbsProps {
   productColors: string[]
   activeColor: number
   setActiveColor: (index: number) => void
+  onColorClick?: (index: number) => void
   className?: string
 }
 
@@ -132,6 +138,7 @@ function ProductColorsThumbs({
   productColors,
   activeColor,
   setActiveColor,
+  onColorClick,
   className,
 }: ProductColorsThumbsProps) {
   return (
@@ -141,11 +148,12 @@ function ProductColorsThumbs({
           key={productColor}
           role="button"
           aria-label="show product color"
-          className={`w-8 h-8 appearance-none border-2 transition-all ${
+          className={`w-8 h-8 appearance-none border-2 transition-all cursor-pointer ${
             index === activeColor ? 'border-black scale-110' : 'border-neutral-200 hover:border-neutral-400'
           }`}
           style={{ backgroundColor: productColor }}
           onMouseEnter={() => setActiveColor(index)}
+          onClick={() => onColorClick?.(index)}
           title={productColor}
         />
       ))}
@@ -159,6 +167,7 @@ interface ProductCardProps {
   colors: string[]
   initialColor?: number
   hideColorThumbs?: boolean
+  onColorSelect?: (colorIndex: number) => void
   className?: string
 }
 
@@ -168,6 +177,7 @@ export function ProductCard({
   colors,
   initialColor = 0,
   hideColorThumbs = false,
+  onColorSelect,
   className,
 }: ProductCardProps) {
   const { activeColor, activeImage, handleColorChange, handleMouse } =
@@ -181,6 +191,7 @@ export function ProductCard({
           activeColor={activeColor}
           activeImage={activeImage}
           handleMouse={handleMouse}
+          onClick={() => onColorSelect?.(activeColor)}
           className="h-full"
         />
       </div>
@@ -191,6 +202,7 @@ export function ProductCard({
           productColors={colors}
           activeColor={activeColor}
           setActiveColor={handleColorChange}
+          onColorClick={onColorSelect}
         />
       )}
     </div>

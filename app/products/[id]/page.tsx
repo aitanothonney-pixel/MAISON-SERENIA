@@ -759,6 +759,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                     <ColorSelectorCard
                       id={`product-${product.id}-colors`}
                       initialColor={initialColorIdx}
+                      onColorSelect={(colorIndex) => {
+                        const selectedVariant = variants[colorIndex];
+                        if (selectedVariant) {
+                          router.push(`/products/${selectedVariant.productId}`);
+                        }
+                      }}
                       images={variants.map((variant) => {
                         const variantProduct = products.find(p => p.id === variant.productId);
                         return {

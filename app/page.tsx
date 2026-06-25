@@ -1642,6 +1642,10 @@ export default function Home() {
           </div>
           <ColorSelectorCard
             id="canape-bubble-showcase"
+            onColorSelect={(colorIndex) => {
+              const productIds = [10, 13, 22, 12];
+              window.location.href = `/products/${productIds[colorIndex]}`;
+            }}
             images={[
               {
                 id: 'canape-blanc',
