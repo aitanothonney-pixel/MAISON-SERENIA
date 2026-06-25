@@ -57,7 +57,7 @@ function ProductCardImages({
   const handleMouseLeave = () => handleMouse('leave')
 
   return (
-    <div className={cn('relative aspect-video', className)}>
+    <div className={cn('relative w-full h-full', className)}>
       {productImages.map((productImage, index) => (
         <motion.div
           key={productImage.id}
@@ -180,13 +180,16 @@ export function ProductCard({
     useSetActiveProduct(initialColor)
 
   return (
-    <div id={id} className={cn('relative px-4 py-6', className)}>
-      <ProductCardImages
-        productImages={images}
-        activeColor={activeColor}
-        activeImage={activeImage}
-        handleMouse={handleMouse}
-      />
+    <div id={id} className={cn('relative px-4 py-6 flex flex-col', className)}>
+      <div className="flex-1 relative min-h-0">
+        <ProductCardImages
+          productImages={images}
+          activeColor={activeColor}
+          activeImage={activeImage}
+          handleMouse={handleMouse}
+          className="h-full"
+        />
+      </div>
 
       {!hideColorThumbs && (
         <ProductColorsThumbs

@@ -835,7 +835,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         };
                       })}
                       colors={variants.map((v) => v.colorHex)}
-                      className="max-w-lg"
+                      className="w-full max-w-2xl mx-auto h-96"
                     />
                   </div>
                 );
