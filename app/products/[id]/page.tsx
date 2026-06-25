@@ -825,6 +825,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                     <ColorSelectorCard
                       id={`product-${product.id}-colors`}
                       initialColor={initialColorIdx}
+                      hideColorThumbs={true}
                       images={variants.map((variant) => {
                         const variantProduct = products.find(p => p.id === variant.productId);
                         return {

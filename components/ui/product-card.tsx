@@ -164,6 +164,7 @@ interface ProductCardProps {
   images: ProductImagesProps[]
   colors: string[]
   initialColor?: number
+  hideColorThumbs?: boolean
   className?: string
 }
 
@@ -172,6 +173,7 @@ export function ProductCard({
   images,
   colors,
   initialColor = 0,
+  hideColorThumbs = false,
   className,
 }: ProductCardProps) {
   const { activeColor, activeImage, handleColorChange, handleMouse } =
@@ -186,12 +188,14 @@ export function ProductCard({
         handleMouse={handleMouse}
       />
 
-      <ProductColorsThumbs
-        productId={id}
-        productColors={colors}
-        activeColor={activeColor}
-        setActiveColor={handleColorChange}
-      />
+      {!hideColorThumbs && (
+        <ProductColorsThumbs
+          productId={id}
+          productColors={colors}
+          activeColor={activeColor}
+          setActiveColor={handleColorChange}
+        />
+      )}
     </div>
   )
 }
