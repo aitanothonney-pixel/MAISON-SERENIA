@@ -532,21 +532,13 @@ interface ProductPreview {
 }
 
 function ProductCard({ product, index }: { product: ProductPreview; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
   const isBubble = bubbleProductIds.includes(product.id);
   const { isWished, toggle } = useWishlist();
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className="group relative bg-white overflow-hidden transition-all duration-500"
-    >
+    <div className="group relative bg-white overflow-hidden transition-all duration-500">
       <Link href={`/products/${product.id}`}>
         <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
@@ -632,7 +624,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
@@ -1062,12 +1054,8 @@ function FigurinesSection() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {figurines.map((product, index) => (
-            <motion.div
+            <div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
               className="group"
             >
               <Link href={`/products/${product.id}`}>
