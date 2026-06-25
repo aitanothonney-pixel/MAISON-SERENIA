@@ -951,7 +951,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                               className="absolute inset-0 w-full h-full object-contain p-4 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
                           )}
                           {pIsBubble && (
-                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 bg-black">−30%</span>
+                            <span className="absolute top-2 left-2 text-white text-xs font-bold tracking-widest uppercase px-2.5 py-1 bg-black">−30%</span>
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
@@ -963,7 +963,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black font-price">{pPromo.toLocaleString('fr-FR')} €</p>
+                        <p className="font-bold text-base font-bold text-black font-price">{pPromo.toLocaleString('fr-FR')} €</p>
                         {pIsBubble && <p className="text-neutral-400 line-through text-xs font-price">{p.price.toLocaleString('fr-FR')} €</p>}
                       </div>
                     </motion.div>

@@ -39,7 +39,7 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-raleway, Arial, Helvetica, sans-serif);
   --font-serif: var(--font-playfair, Georgia, serif);
-  --font-price: var(--font-cormorant, 'Cormorant Garamond', Georgia, serif);
+  --font-price: var(--font-playfair, 'Playfair Display', Georgia, serif);
 }
 
 body {

@@ -3,13 +3,12 @@
 import { useEffect, useState, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
 } from 'lucide-react';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
-import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
@@ -17,19 +16,8 @@ import { useCart } from '@/lib/useCart';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
-function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
-    >
-      {children}
-    </motion.div>
-  );
+function FadeInSection({ children }: { children: React.ReactNode; delay?: number }) {
+  return <div>{children}</div>;
 }
 
 // ─── Announcement Bar ─────────────────────────────────────────────────────────
@@ -237,7 +225,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                           </div>
                           <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">
                             {p.name.includes('Bubble') && (
-                              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">−30%</span>
+                              <span className="bg-black text-white text-xs font-bold tracking-widest uppercase px-2.5 py-1">−30%</span>
                             )}
                             <p className="text-sm font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
                             {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through font-price">{p.price.toLocaleString('fr-FR')} €</p>}
@@ -445,7 +433,7 @@ function BubblePromoCarousel() {
               </div>
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
+                <span className="text-black font-bold text-base font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
                 <span className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</span>
               </div>
             </Link>
@@ -481,12 +469,8 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {bestsellers.map((product, index) => (
-            <motion.div
+            <div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
@@ -520,11 +504,11 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-black font-bold text-sm font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
+                  <p className="text-black font-bold text-base font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
                   <p className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</p>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -628,7 +612,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <p className="text-neutral-400 text-[11px] mb-2.5 line-clamp-1">{product.description}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-black font-bold text-sm font-price">
+              <span className="text-black font-bold text-base font-price">
                 {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
               </span>
               {isBubble && (
@@ -861,12 +845,8 @@ function SummerProductsSection() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {summerProducts.map((product, index) => (
-            <motion.div
+            <div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
@@ -891,9 +871,9 @@ function SummerProductsSection() {
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <p className="text-black font-bold text-sm font-price">{product.price.toFixed(2)} CHF</p>
+                <p className="text-black font-bold text-base font-price">{product.price.toFixed(2)} CHF</p>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -911,13 +891,7 @@ function TestimonialsSection() {
     <FadeInSection>
       <section className="bg-white py-20">
         <div className="container z-10 mx-auto">
-          <motionLib.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
-          >
+          <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto">
             <div className="flex justify-center">
               <div className="border border-black text-black py-1 px-4 rounded-full text-xs tracking-[0.2em] uppercase">
                 Témoignages
@@ -929,7 +903,7 @@ function TestimonialsSection() {
             <p className="text-center mt-5 text-neutral-500 text-sm">
               Des dizaine de clients satisfaits font confiance à MAISON SERENIA pour sublimer leur intérieur.
             </p>
-          </motionLib.div>
+          </div>
 
           <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
             <TestimonialsColumn testimonials={firstColumn} duration={15} />
@@ -1117,9 +1091,9 @@ function FigurinesSection() {
                   </div>
                 </div>
                 <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-                <p className="text-black font-bold text-sm font-price">{product.price.toLocaleString('fr-FR')} €</p>
+                <p className="text-black font-bold text-base font-price">{product.price.toLocaleString('fr-FR')} €</p>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -1539,23 +1513,12 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <div className="w-full">
-          {/* Tagline */}
-          <FadeInSection>
-            <div className="text-center mb-16 px-6">
-              <div className="flex items-center justify-center gap-4 mb-5">
-                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
-                <p className="text-[10px] tracking-[0.45em] uppercase text-neutral-400">L&apos;art de vivre à la française</p>
-                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-black mb-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-                Mobilier d&apos;exception,<br />intérieurs sublimés
-              </h2>
-              <p className="text-neutral-400 max-w-xl mx-auto leading-relaxed text-sm">
-                MAISON SERENIA crée des espaces de vie où le raffinement rencontre le confort.
-              </p>
-            </div>
-          </FadeInSection>
+      <motion.div
+        className="w-full"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      >
 
           {/* Section Été */}
           <SummerProductsSection />
@@ -1630,7 +1593,7 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </section>
-      </div>
+      </motion.div>
 
 
       <TestimonialsSection />
