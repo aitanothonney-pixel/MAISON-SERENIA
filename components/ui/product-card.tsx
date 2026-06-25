@@ -163,6 +163,7 @@ interface ProductCardProps {
   id: string
   images: ProductImagesProps[]
   colors: string[]
+  initialColor?: number
   className?: string
 }
 
@@ -170,10 +171,11 @@ export function ProductCard({
   id,
   images,
   colors,
+  initialColor = 0,
   className,
 }: ProductCardProps) {
   const { activeColor, activeImage, handleColorChange, handleMouse } =
-    useSetActiveProduct()
+    useSetActiveProduct(initialColor)
 
   return (
     <div id={id} className={cn('relative px-4 py-6', className)}>
