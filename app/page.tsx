@@ -14,7 +14,6 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
-import { MinimalistHeroSection } from '@/components/ui/minimalist-hero';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -238,10 +237,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                           </div>
                           <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">
                             {p.name.includes('Bubble') && (
-                              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
+                              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">−30%</span>
                             )}
-                            <p className="text-sm font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
-                            {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
+                            <p className="text-sm font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
+                            {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through font-price">{p.price.toLocaleString('fr-FR')} €</p>}
                           </div>
                         </Link>
                       );
@@ -446,8 +445,8 @@ function BubblePromoCarousel() {
               </div>
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
-                <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+                <span className="text-black font-bold text-sm font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
+                <span className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</span>
               </div>
             </Link>
             </div>
@@ -521,8 +520,8 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
-                  <p className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</p>
+                  <p className="text-black font-bold text-sm font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
+                  <p className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</p>
                 </div>
               </Link>
             </motion.div>
@@ -629,16 +628,16 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <p className="text-neutral-400 text-[11px] mb-2.5 line-clamp-1">{product.description}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-black font-bold text-sm">
+              <span className="text-black font-bold text-sm font-price">
                 {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
               </span>
               {isBubble && (
-                <span className="text-neutral-400 line-through text-xs">
+                <span className="text-neutral-400 line-through text-xs font-price">
                   {product.price.toLocaleString('fr-FR')} €
                 </span>
               )}
               {isSale && !isBubble && (
-                <span className="text-neutral-400 line-through text-xs">
+                <span className="text-neutral-400 line-through text-xs font-price">
                   {Math.round(product.price * 1.25).toLocaleString('fr-FR')} €
                 </span>
               )}
@@ -892,7 +891,7 @@ function SummerProductsSection() {
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <p className="text-black font-bold text-sm">{product.price.toFixed(2)} CHF</p>
+                <p className="text-black font-bold text-sm font-price">{product.price.toFixed(2)} CHF</p>
               </Link>
             </motion.div>
           ))}
@@ -1118,7 +1117,7 @@ function FigurinesSection() {
                   </div>
                 </div>
                 <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-                <p className="text-black font-bold text-sm">{product.price.toLocaleString('fr-FR')} €</p>
+                <p className="text-black font-bold text-sm font-price">{product.price.toLocaleString('fr-FR')} €</p>
               </Link>
             </motion.div>
           ))}
@@ -1214,7 +1213,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                             <p className="font-serif font-semibold text-sm text-black leading-snug line-clamp-2 hover:underline">{product.name}</p>
                           </Link>
                           <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                          <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                          <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
                         </div>
                         <button
                           onClick={() => toggle(product.id)}
@@ -1351,7 +1350,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                       <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
                         <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
                         <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                        <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                        <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
                         {/* Qty */}
                         <div className="flex items-center gap-2 mt-2">
                           <button
@@ -1397,7 +1396,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                 {/* Total */}
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-500">Total ({totalQty} article{totalQty > 1 ? 's' : ''})</span>
-                  <span className="font-serif font-bold text-xl">{total.toLocaleString('fr-FR')} €</span>
+                  <span className="font-price font-bold text-xl">{total.toLocaleString('fr-FR')} €</span>
                 </div>
                 <p className="text-[10px] text-neutral-400 -mt-2">* TVA comprise</p>
 
@@ -1540,24 +1539,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-[100dvh] bg-white">
-        <div className="flex flex-col items-center justify-center text-center gap-2 w-full">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}>
-            MAISON
-          </h1>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}>
-            SERENIA
-          </h1>
-          <p className="text-xs tracking-[0.4em] uppercase text-neutral-400 mt-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Collection 2026</p>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-300 font-medium mt-1">Défiler pour découvrir</p>
-        </div>
-      </section>
-
       <div className="w-full">
-          {/* Minimalist Hero — product showcase */}
-          <MinimalistHeroSection />
-
           {/* Tagline */}
           <FadeInSection>
             <div className="text-center mb-16 px-6">

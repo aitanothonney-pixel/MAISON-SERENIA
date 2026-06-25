@@ -147,9 +147,9 @@ function CheckoutDrawer({
                         <p className="font-semibold text-sm text-black leading-tight mb-1">{product.name}</p>
                         <p className="text-xs text-neutral-400 mb-2">{product.category} · Qté 1</p>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
+                          <span className="font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</span>
                           {product.name.includes('Bubble') && (
-                            <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+                            <span className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</span>
                           )}
                         </div>
                       </div>
@@ -157,14 +157,14 @@ function CheckoutDrawer({
 
                     <div className="space-y-2 mb-6 text-sm">
                       <div className="flex justify-between text-neutral-500">
-                        <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                        <span>Sous-total</span><span className="font-price">{promoPrice.toLocaleString('fr-FR')} €</span>
                       </div>
                       <div className="flex justify-between text-neutral-500">
                         <span>Livraison</span><span className="text-emerald-600">Offerte</span>
                       </div>
                       <div className="h-px bg-neutral-100 my-2" />
                       <div className="flex justify-between font-bold text-black text-base">
-                        <span>Total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                        <span>Total</span><span className="font-price">{promoPrice.toLocaleString('fr-FR')} €</span>
                       </div>
                     </div>
 
@@ -375,7 +375,7 @@ function CheckoutDrawer({
                     <div className="h-px bg-neutral-100" />
                     <div className="flex justify-between font-bold text-sm">
                       <span>Total à payer</span>
-                      <span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                      <span className="font-price">{promoPrice.toLocaleString('fr-FR')} €</span>
                     </div>
                   </motion.div>
                 )}
@@ -792,14 +792,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="rounded-2xl p-4 mb-6 bg-neutral-50">
                 <div className="flex items-center justify-between">
                   <div className="flex items-baseline gap-3">
-                    <p className="text-4xl font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
+                    <p className="text-4xl font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
                     {isBubble && (
-                      <p className="text-base text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</p>
+                      <p className="text-base text-neutral-400 line-through font-price">{product.price.toLocaleString('fr-FR')} €</p>
                     )}
                   </div>
                   {isBubble && (
                     <div className="text-center">
-                      <span className="text-white text-sm font-bold px-3 py-1.5 rounded-full block bg-black">−30%</span>
+                      <span className="text-white text-sm font-bold px-3 py-1.5 block bg-black">−30%</span>
                       <p className="text-[10px] text-neutral-400 mt-1">Offre limitée</p>
                     </div>
                   )}
@@ -951,7 +951,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                               className="absolute inset-0 w-full h-full object-contain p-4 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
                           )}
                           {pIsBubble && (
-                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
+                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 bg-black">−30%</span>
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
@@ -963,8 +963,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black">{pPromo.toLocaleString('fr-FR')} €</p>
-                        {pIsBubble && <p className="text-neutral-400 line-through text-xs">{p.price.toLocaleString('fr-FR')} €</p>}
+                        <p className="font-bold text-sm text-black font-price">{pPromo.toLocaleString('fr-FR')} €</p>
+                        {pIsBubble && <p className="text-neutral-400 line-through text-xs font-price">{p.price.toLocaleString('fr-FR')} €</p>}
                       </div>
                     </motion.div>
                   );
@@ -1023,7 +1023,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
                             <p className="font-serif font-semibold text-sm text-black leading-snug hover:underline">{p.name}</p>
                           </Link>
-                          <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                          <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
                         </div>
                         <button onClick={() => toggleWish(p.id)} className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors">
                           <Heart className="w-4 h-4 fill-red-500 text-red-500" />

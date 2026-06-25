@@ -37,14 +37,15 @@
   --color-ring: var(--ring);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --font-sans: var(--font-dm-sans, Arial, Helvetica, sans-serif);
+  --font-sans: var(--font-raleway, Arial, Helvetica, sans-serif);
   --font-serif: var(--font-playfair, Georgia, serif);
+  --font-price: var(--font-cormorant, 'Cormorant Garamond', Georgia, serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-dm-sans, Arial, Helvetica, sans-serif);
+  font-family: var(--font-raleway, Arial, Helvetica, sans-serif);
 }
 
 h1, h2, h3, h4 {
