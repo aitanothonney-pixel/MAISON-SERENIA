@@ -812,34 +812,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 )}
               </div>
 
-              {/* Color Selector */}
-              {variants && variants.length > 1 && (() => {
-                const currentIdx = variants.findIndex(v => v.productId === product.id);
-                const currentColor = variants[currentIdx]?.color ?? '';
-                const initialColorIdx = currentIdx === 0 ? 1 : 0;
-                return (
-                  <div className="mb-8">
-                    <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-4">
-                      Couleur — <span className="text-black font-medium">{currentColor}</span>
-                    </p>
-                    <ColorSelectorCard
-                      id={`product-${product.id}-colors`}
-                      initialColor={initialColorIdx}
-                      images={variants.map((variant) => {
-                        const variantProduct = products.find(p => p.id === variant.productId);
-                        return {
-                          id: `variant-${variant.productId}`,
-                          color: variant.color,
-                          images: variantProduct?.images?.slice(0, 2) ?? [],
-                        };
-                      })}
-                      colors={variants.map((v) => v.colorHex)}
-                      className="w-full max-w-2xl mx-auto h-96"
-                    />
-                  </div>
-                );
-              })()}
-
               <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
 
               {/* Specs pills */}
@@ -890,6 +862,34 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   </motion.button>
                 </div>
               </div>
+
+              {/* Color Selector */}
+              {variants && variants.length > 1 && (() => {
+                const currentIdx = variants.findIndex(v => v.productId === product.id);
+                const currentColor = variants[currentIdx]?.color ?? '';
+                const initialColorIdx = currentIdx === 0 ? 1 : 0;
+                return (
+                  <div className="mb-12 py-8 border-t border-b border-neutral-100">
+                    <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-4 text-center">
+                      Couleur — <span className="text-black font-medium">{currentColor}</span>
+                    </p>
+                    <ColorSelectorCard
+                      id={`product-${product.id}-colors`}
+                      initialColor={initialColorIdx}
+                      images={variants.map((variant) => {
+                        const variantProduct = products.find(p => p.id === variant.productId);
+                        return {
+                          id: `variant-${variant.productId}`,
+                          color: variant.color,
+                          images: variantProduct?.images?.slice(0, 2) ?? [],
+                        };
+                      })}
+                      colors={variants.map((v) => v.colorHex)}
+                      className="w-full max-w-2xl mx-auto h-96"
+                    />
+                  </div>
+                );
+              })()}
 
               {/* Accordions */}
               <div className="divide-y divide-neutral-100">
