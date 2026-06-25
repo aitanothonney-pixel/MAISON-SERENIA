@@ -9,6 +9,7 @@ import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Chec
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { ProductCard as ColorSelectorCard } from '@/components/ui/product-card';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -830,6 +831,25 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       />
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Color Selector Showcase */}
+              {variants && variants.length > 1 && (
+                <div className="mb-10 py-8 border-y border-neutral-100">
+                  <ColorSelectorCard
+                    id={`product-${product.id}-colors`}
+                    images={variants.map((variant) => {
+                      const variantProduct = products.find(p => p.id === variant.productId);
+                      return {
+                        id: `variant-${variant.productId}`,
+                        color: variant.color,
+                        images: variantProduct?.images || [],
+                      };
+                    })}
+                    colors={variants.map((v) => v.colorHex)}
+                    className="max-w-xl mx-auto"
+                  />
                 </div>
               )}
 
