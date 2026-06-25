@@ -141,7 +141,7 @@ function ProductColorsThumbs({
           key={productColor}
           role="button"
           aria-label="show product color"
-          className={`w-8 h-8 appearance-none rounded border-2 transition-all ${
+          className={`w-8 h-8 appearance-none border-2 transition-all ${
             index === activeColor ? 'border-black scale-110' : 'border-neutral-200 hover:border-neutral-400'
           }`}
           style={{ backgroundColor: productColor }}
