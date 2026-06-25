@@ -141,7 +141,7 @@ function ProductColorsThumbs({
           key={productColor}
           role="button"
           aria-label="show product color"
-          className="relative w-8 h-6 appearance-none rounded border-2 border-neutral-200 transition-all hover:border-neutral-400"
+          className="relative w-6 h-6 appearance-none rounded border-2 border-neutral-200 transition-all hover:border-neutral-400"
           style={{ backgroundColor: productColor }}
           onMouseEnter={() => setActiveColor(index)}
           title={productColor}
@@ -149,7 +149,7 @@ function ProductColorsThumbs({
           {index === activeColor && (
             <motion.div
               layoutId={productId}
-              className="absolute -left-1.5 -top-1.5 w-11 h-8 rounded border-2 border-black"
+              className="absolute -left-1 -top-1 w-8 h-8 rounded border-2 border-black"
               transition={springTransition}
             />
           )}
