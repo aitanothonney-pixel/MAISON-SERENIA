@@ -1637,6 +1637,88 @@ export default function Home() {
           </section>
       </motion.div>
 
+      {/* ── Blog/Gallery Section ─────────────────────────────────────────── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <p className="text-[10px] tracking-[0.5em] uppercase text-neutral-400 mb-4">Inspiration</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-black tracking-wide mb-3" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+              Découvrez notre univers
+            </h2>
+            <div className="divider-gold w-16 mx-auto" />
+          </div>
+
+          {/* Masonry Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
+            {/* Paysage large */}
+            <div className="lg:col-span-2 row-span-1 overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=400&fit=crop"
+                alt="Blog image 1"
+                width={800}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Portrait */}
+            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=600&fit=crop"
+                alt="Blog image 2"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Portrait */}
+            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400&h=600&fit=crop"
+                alt="Blog image 3"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Paysage */}
+            <div className="lg:col-span-2 overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1564157191865-71ceaafce078?w=800&h=400&fit=crop"
+                alt="Blog image 4"
+                width={800}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Carré */}
+            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop"
+                alt="Blog image 5"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Paysage */}
+            <div className="lg:col-span-2 overflow-hidden rounded-2xl bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=400&fit=crop"
+                alt="Blog image 6"
+                width={800}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <TestimonialsSection />
       <Footer />
     </div>
