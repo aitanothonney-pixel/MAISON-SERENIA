@@ -1509,7 +1509,7 @@ export default function Home() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
           {/* Hero Section */}
-          <section className="relative flex flex-col items-center justify-center min-h-[80vh] bg-white">
+          <section className="relative flex flex-col items-center justify-center min-h-screen bg-white">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
