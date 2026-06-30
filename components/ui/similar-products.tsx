@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, Heart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface SimilarProduct {
   id: string | number;
@@ -58,6 +58,69 @@ const defaultProducts: SimilarProduct[] = [
     reviewCount: 67,
     category: 'Salon',
   },
+  {
+    id: 6,
+    name: 'Table Basse Marbre',
+    price: 249.99,
+    image: 'https://images.unsplash.com/photo-1581980694727-d671642e6267?w=400&h=400&fit=crop',
+    rating: 4.8,
+    reviewCount: 98,
+    category: 'Salon',
+  },
+  {
+    id: 7,
+    name: 'Lampadaire Arc Design',
+    price: 189.99,
+    image: 'https://images.unsplash.com/photo-1565182409498-de2e02d4114f?w=400&h=400&fit=crop',
+    rating: 4.7,
+    reviewCount: 76,
+    category: 'Éclairage',
+  },
+  {
+    id: 8,
+    name: 'Coussin Texturé Luxe',
+    price: 79.99,
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop',
+    rating: 4.9,
+    reviewCount: 156,
+    category: 'Accessoires',
+  },
+  {
+    id: 9,
+    name: 'Plaid Coton Premium',
+    price: 119.99,
+    image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop',
+    rating: 4.6,
+    reviewCount: 43,
+    category: 'Accessoires',
+  },
+  {
+    id: 10,
+    name: 'Miroir Doré Moderne',
+    price: 199.99,
+    image: 'https://images.unsplash.com/photo-1572190829246-f45e957022da?w=400&h=400&fit=crop',
+    rating: 4.8,
+    reviewCount: 82,
+    category: 'Décoration',
+  },
+  {
+    id: 11,
+    name: 'Tabouret Velours',
+    price: 159.99,
+    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop',
+    rating: 4.7,
+    reviewCount: 61,
+    category: 'Salon',
+  },
+  {
+    id: 12,
+    name: 'Étagère Murale Design',
+    price: 279.99,
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',
+    rating: 4.9,
+    reviewCount: 105,
+    category: 'Rangement',
+  },
 ];
 
 export function SimilarProducts({
@@ -77,7 +140,11 @@ export function SimilarProducts({
     setWishedIds(newWished);
   };
 
-  const similarProducts = products.filter((p) => p.id !== currentProductId).slice(0, 4);
+  const similarProducts = useMemo(() => {
+    const filtered = products.filter((p) => p.id !== currentProductId);
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, [currentProductId, products]);
 
   return (
     <section className="py-16">
