@@ -1652,7 +1652,7 @@ export default function Home() {
           {/* Masonry Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
             {/* Paysage large */}
-            <div className="lg:col-span-2 row-span-1 overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="lg:col-span-2 row-span-1 overflow-hidden bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=400&fit=crop"
                 alt="Blog image 1"
@@ -1663,7 +1663,7 @@ export default function Home() {
             </div>
 
             {/* Portrait */}
-            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="overflow-hidden bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=600&fit=crop"
                 alt="Blog image 2"
@@ -1673,32 +1673,32 @@ export default function Home() {
               />
             </div>
 
+            {/* Carré */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop"
+                alt="Blog image 3"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
             {/* Portrait */}
-            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="overflow-hidden bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400&h=600&fit=crop"
-                alt="Blog image 3"
+                alt="Blog image 4"
                 width={400}
                 height={600}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Paysage */}
-            <div className="lg:col-span-2 overflow-hidden rounded-2xl bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1564157191865-71ceaafce078?w=800&h=400&fit=crop"
-                alt="Blog image 4"
-                width={800}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
             {/* Carré */}
-            <div className="overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1564157191865-71ceaafce078?w=400&h=400&fit=crop"
                 alt="Blog image 5"
                 width={400}
                 height={400}
@@ -1707,12 +1707,78 @@ export default function Home() {
             </div>
 
             {/* Paysage */}
-            <div className="lg:col-span-2 overflow-hidden rounded-2xl bg-neutral-100">
+            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=400&fit=crop"
                 alt="Blog image 6"
                 width={800}
                 height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Portrait */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=600&fit=crop"
+                alt="Blog image 7"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Paysage large */}
+            <div className="lg:col-span-3 overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1000&h=400&fit=crop"
+                alt="Blog image 8"
+                width={1000}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Carré */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1574394615383-655b15b41beb?w=400&h=400&fit=crop"
+                alt="Blog image 9"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Carré */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1457361552529-c4a2c6b1d0d5?w=400&h=400&fit=crop"
+                alt="Blog image 10"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Paysage */}
+            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=800&h=400&fit=crop"
+                alt="Blog image 11"
+                width={800}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Portrait */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop"
+                alt="Blog image 12"
+                width={400}
+                height={600}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
