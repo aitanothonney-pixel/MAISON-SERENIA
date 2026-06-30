@@ -33,7 +33,7 @@ export default function AboutPage() {
           </section>
 
           {/* Valeurs */}
-          <section className="mb-16 bg-neutral-50 p-8 rounded-lg">
+          <section className="mb-16 bg-neutral-50 p-8 rounded-none">
             <h2 className="text-3xl font-serif font-bold mb-8">Nos valeurs</h2>
             <div className="space-y-6">
               {[
@@ -96,7 +96,7 @@ export default function AboutPage() {
                 { name: 'Responsable Service Client', role: 'SAV & Satisfaction' },
               ].map((member, i) => (
                 <div key={i} className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 bg-neutral-200 rounded-lg" />
+                  <div className="w-24 h-24 mx-auto mb-4 bg-neutral-200 rounded-none" />
                   <h3 className="font-semibold text-black mb-1">{member.name}</h3>
                   <p className="text-xs text-neutral-600">{member.role}</p>
                 </div>
@@ -110,7 +110,7 @@ export default function AboutPage() {
             <p className="text-neutral-600 mb-6">Nous sommes ici pour vous aider.</p>
             <a
               href="/contact"
-              className="inline-block px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors"
+              className="inline-block px-8 py-3 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors"
             >
               Nous contacter
             </a>

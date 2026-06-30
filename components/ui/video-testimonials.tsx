@@ -71,7 +71,7 @@ export function VideoTestimonials() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Video */}
-        <div className="relative bg-black rounded-xl overflow-hidden aspect-video flex items-center justify-center group">
+        <div className="relative bg-black rounded-none overflow-hidden aspect-video flex items-center justify-center group">
           {!isPlaying ? (
             <>
               <Image
@@ -84,7 +84,7 @@ export function VideoTestimonials() {
                 onClick={() => setIsPlaying(true)}
                 className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors"
               >
-                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-white rounded-none flex items-center justify-center">
                   <Play className="w-8 h-8 text-black fill-black ml-1" />
                 </div>
               </button>
@@ -126,7 +126,7 @@ export function VideoTestimonials() {
               alt={testimonial.name}
               width={60}
               height={60}
-              className="w-14 h-14 rounded-full object-cover"
+              className="w-14 h-14 rounded-none object-cover"
             />
             <div>
               <p className="font-bold text-black">{testimonial.name}</p>
@@ -138,7 +138,7 @@ export function VideoTestimonials() {
           <div className="flex items-center gap-3">
             <button
               onClick={prevTestimonial}
-              className="p-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
+              className="p-2 border border-neutral-300 rounded-none hover:bg-neutral-50 transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -151,7 +151,7 @@ export function VideoTestimonials() {
                     setCurrentIndex(idx);
                     setIsPlaying(false);
                   }}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-2 rounded-none transition-all ${
                     idx === currentIndex ? 'w-8 bg-black' : 'w-2 bg-neutral-300'
                   }`}
                 />
@@ -160,7 +160,7 @@ export function VideoTestimonials() {
 
             <button
               onClick={nextTestimonial}
-              className="p-2 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors"
+              className="p-2 border border-neutral-300 rounded-none hover:bg-neutral-50 transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

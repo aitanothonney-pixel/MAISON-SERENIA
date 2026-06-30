@@ -7,7 +7,7 @@ export default function MentionsLegalesPage() {
         <div className="space-y-8 text-neutral-700 leading-relaxed">
           <section>
             <h2 className="text-2xl font-semibold text-black mb-4">1. Éditeur du site</h2>
-            <div className="bg-neutral-50 p-6 rounded-lg space-y-2">
+            <div className="bg-neutral-50 p-6 rounded-none space-y-2">
               <p><strong>Raison sociale :</strong> MAISON SERENIA SARL</p>
               <p><strong>Forme juridique :</strong> SARL</p>
               <p><strong>Adresse :</strong> [Adresse complète]</p>
@@ -26,7 +26,7 @@ export default function MentionsLegalesPage() {
 
           <section>
             <h2 className="text-2xl font-semibold text-black mb-4">3. Hébergeur du site</h2>
-            <div className="bg-neutral-50 p-6 rounded-lg space-y-2">
+            <div className="bg-neutral-50 p-6 rounded-none space-y-2">
               <p><strong>Nom :</strong> Vercel Inc.</p>
               <p><strong>Adresse :</strong> 340 S Lemon Ave, Walnut, CA 91789, États-Unis</p>
               <p><strong>Site web :</strong> www.vercel.com</p>

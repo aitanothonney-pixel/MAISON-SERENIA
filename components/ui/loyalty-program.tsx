@@ -47,7 +47,7 @@ export function LoyaltyProgram({
     : null;
 
   return (
-    <section className="py-12 bg-gradient-to-br from-neutral-900 to-black text-white rounded-2xl p-8">
+    <section className="py-12 bg-gradient-to-br from-neutral-900 to-black text-white rounded-none p-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <div>
           <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">
@@ -85,9 +85,9 @@ export function LoyaltyProgram({
               {(((nextTier?.minPoints || 0) - pointsToNextTier) / (nextTier?.minPoints || 1) * 100).toFixed(0)}%
             </p>
           </div>
-          <div className="w-full bg-neutral-700 rounded-full h-2">
+          <div className="w-full bg-neutral-700 rounded-none h-2">
             <div
-              className="bg-yellow-400 h-2 rounded-full transition-all duration-500"
+              className="bg-yellow-400 h-2 rounded-none transition-all duration-500"
               style={{
                 width: `${(((nextTier?.minPoints || 0) - pointsToNextTier) / (nextTier?.minPoints || 1) * 100)}%`,
               }}
@@ -100,7 +100,7 @@ export function LoyaltyProgram({
         {tiers.map((tier) => (
           <div
             key={tier.name}
-            className={`p-4 rounded-lg border transition-all ${
+            className={`p-4 rounded-none border transition-all ${
               tier.name.toLowerCase() === userTier
                 ? 'bg-white/10 border-yellow-400'
                 : 'bg-white/5 border-neutral-700'

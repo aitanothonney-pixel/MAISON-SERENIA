@@ -92,7 +92,7 @@ export function UserReviewsWithPhotos() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Photos carousel */}
         <div className="lg:col-span-1 order-2 lg:order-1">
-          <div className="relative bg-neutral-100 rounded-xl overflow-hidden aspect-square">
+          <div className="relative bg-neutral-100 rounded-none overflow-hidden aspect-square">
             {review.photos.length > 0 && (
               <>
                 <Image
@@ -106,13 +106,13 @@ export function UserReviewsWithPhotos() {
                   <>
                     <button
                       onClick={prevPhoto}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 backdrop-blur-sm rounded-none hover:bg-white transition-colors"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <button
                       onClick={nextPhoto}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 backdrop-blur-sm rounded-none hover:bg-white transition-colors"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -128,7 +128,7 @@ export function UserReviewsWithPhotos() {
                               [review.id]: idx,
                             }))
                           }
-                          className={`w-2 h-2 rounded-full transition-colors ${
+                          className={`w-2 h-2 rounded-none transition-colors ${
                             idx === photoIndex ? 'bg-white' : 'bg-white/50'
                           }`}
                         />
@@ -155,7 +155,7 @@ export function UserReviewsWithPhotos() {
               alt={review.name}
               width={50}
               height={50}
-              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+              className="w-12 h-12 rounded-none object-cover flex-shrink-0"
             />
             <div className="flex-1">
               <h3 className="font-semibold text-black">{review.name}</h3>
@@ -197,7 +197,7 @@ export function UserReviewsWithPhotos() {
           <button
             key={idx}
             onClick={() => goToReview(idx)}
-            className={`h-2 rounded-full transition-all ${
+            className={`h-2 rounded-none transition-all ${
               idx === currentReviewIndex ? 'w-8 bg-black' : 'w-2 bg-neutral-300'
             }`}
           />
@@ -208,7 +208,7 @@ export function UserReviewsWithPhotos() {
       <div className="mt-6 flex items-center justify-center gap-4">
         <button
           onClick={() => goToReview((currentReviewIndex - 1 + sampleReviews.length) % sampleReviews.length)}
-          className="px-6 py-2 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
+          className="px-6 py-2 border border-neutral-200 rounded-none hover:bg-neutral-50 transition-colors"
         >
           ← Précédent
         </button>
@@ -217,7 +217,7 @@ export function UserReviewsWithPhotos() {
         </span>
         <button
           onClick={() => goToReview((currentReviewIndex + 1) % sampleReviews.length)}
-          className="px-6 py-2 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
+          className="px-6 py-2 border border-neutral-200 rounded-none hover:bg-neutral-50 transition-colors"
         >
           Suivant →
         </button>

@@ -41,7 +41,7 @@ export function ProductFAQ({ productName }: ProductFAQProps) {
           <button
             key={idx}
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-            className="w-full text-left p-4 bg-neutral-50 hover:bg-neutral-100 transition-colors rounded-lg border border-neutral-200"
+            className="w-full text-left p-4 bg-neutral-50 hover:bg-neutral-100 transition-colors rounded-none border border-neutral-200"
           >
             <div className="flex items-start justify-between gap-4">
               <h3 className="text-sm font-semibold text-black pr-4">{faq.question}</h3>

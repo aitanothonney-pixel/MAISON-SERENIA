@@ -35,10 +35,10 @@ export function FOmoToast({ show = true, onDismiss }: FOmoToastProps) {
 
   return (
     <div className="fixed bottom-6 left-6 z-40 animate-in slide-in-from-left">
-      <div className="bg-white rounded-lg shadow-lg border border-neutral-200 p-4 max-w-sm">
+      <div className="bg-white rounded-none shadow-lg border border-neutral-200 p-4 max-w-sm">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3">
-            <div className="p-2 bg-green-100 rounded-lg mt-0.5">
+            <div className="p-2 bg-green-100 rounded-none mt-0.5">
               <ShoppingBag className="w-4 h-4 text-green-600" />
             </div>
             <div className="space-y-1">

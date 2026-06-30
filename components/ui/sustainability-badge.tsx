@@ -28,7 +28,7 @@ export function SustainabilityBadge({
 }: SustainabilityBadgeProps) {
   if (compact) {
     return (
-      <div className="flex items-center gap-3 bg-green-50 border border-green-300 rounded-lg p-3 w-fit">
+      <div className="flex items-center gap-3 bg-green-50 border border-green-300 rounded-none p-3 w-fit">
         <Leaf className="w-5 h-5 text-green-700 flex-shrink-0" />
         <div>
           <p className="text-sm font-bold text-green-900">Produit Durable</p>
@@ -39,7 +39,7 @@ export function SustainabilityBadge({
   }
 
   return (
-    <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-300 rounded-xl p-6">
+    <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-300 rounded-none p-6">
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-lg font-bold text-green-900 flex items-center gap-2">

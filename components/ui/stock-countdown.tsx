@@ -18,7 +18,7 @@ export function StockCountdown({
 
   if (isSoldOut) {
     return (
-      <div className="bg-neutral-100 border border-neutral-300 rounded-lg p-3 flex items-center gap-2">
+      <div className="bg-neutral-100 border border-neutral-300 rounded-none p-3 flex items-center gap-2">
         <AlertCircle className="w-5 h-5 text-neutral-600" />
         <span className="text-sm font-semibold text-neutral-600">Rupture de stock</span>
       </div>
@@ -27,7 +27,7 @@ export function StockCountdown({
 
   return (
     <div
-      className={`border rounded-lg p-3 ${
+      className={`border rounded-none p-3 ${
         showUrgency
           ? 'bg-red-50 border-red-300'
           : 'bg-green-50 border-green-300'

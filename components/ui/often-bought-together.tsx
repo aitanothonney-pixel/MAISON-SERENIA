@@ -40,8 +40,8 @@ export function OftenBoughtTogether({ currentProductId, products = defaultProduc
       <h2 className="text-2xl font-serif font-bold text-black mb-8">Souvent acheté ensemble</h2>
       <div className="space-y-4">
         {products.map((product) => (
-          <div key={product.id} className="flex items-center gap-4 p-4 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors">
-            <div className="w-16 h-16 bg-neutral-100 rounded-lg overflow-hidden flex-shrink-0">
+          <div key={product.id} className="flex items-center gap-4 p-4 border border-neutral-200 rounded-none hover:bg-neutral-50 transition-colors">
+            <div className="w-16 h-16 bg-neutral-100 rounded-none overflow-hidden flex-shrink-0">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -64,7 +64,7 @@ export function OftenBoughtTogether({ currentProductId, products = defaultProduc
               <p className="font-serif font-bold text-black">{product.price.toLocaleString('fr-FR')} €</p>
             </div>
 
-            <button className="p-2 bg-black text-white rounded-lg hover:bg-neutral-900 transition-colors flex-shrink-0">
+            <button className="p-2 bg-black text-white rounded-none hover:bg-neutral-900 transition-colors flex-shrink-0">
               <Plus className="w-4 h-4" />
             </button>
           </div>
@@ -72,7 +72,7 @@ export function OftenBoughtTogether({ currentProductId, products = defaultProduc
       </div>
 
       {/* Bundle offer CTA */}
-      <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+      <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-none">
         <p className="text-sm text-yellow-900 font-semibold">
           💡 Économisez 10% en achetant ces 3 articles ensemble
         </p>

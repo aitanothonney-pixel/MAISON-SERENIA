@@ -70,7 +70,7 @@ export function SizeFitGuide({ productType = 'canapé' }: SizeFitGuideProps) {
   const guideItems = guides[productType] || guides.canapé;
 
   return (
-    <div className="bg-neutral-50 rounded-lg p-6 md:p-8">
+    <div className="bg-neutral-50 rounded-none p-6 md:p-8">
       <h3 className="text-xl font-serif font-bold text-black mb-6">
         Guide des dimensions & tailles
       </h3>
@@ -80,7 +80,7 @@ export function SizeFitGuide({ productType = 'canapé' }: SizeFitGuideProps) {
           <button
             key={idx}
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-            className="w-full text-left p-4 bg-white rounded-lg border border-neutral-200 hover:border-neutral-300 transition-colors"
+            className="w-full text-left p-4 bg-white rounded-none border border-neutral-200 hover:border-neutral-300 transition-colors"
           >
             <div className="flex items-center justify-between">
               <h4 className="font-semibold text-black">{section.title}</h4>
@@ -106,7 +106,7 @@ export function SizeFitGuide({ productType = 'canapé' }: SizeFitGuideProps) {
       </div>
 
       {/* Help section */}
-      <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+      <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-none">
         <p className="text-sm text-blue-900">
           <strong>Besoin d'aide?</strong> Notre équipe SAV peut vous aider à choisir les bonnes dimensions.{' '}
           <a href="/contact" className="underline hover:opacity-60">

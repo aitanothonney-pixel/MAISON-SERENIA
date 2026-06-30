@@ -61,7 +61,7 @@ export function StickyAddToCart({
         <div className="flex items-center gap-3 flex-shrink-0">
           <button
             onClick={onAddToCart}
-            className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-neutral-900 transition-colors flex items-center gap-2 whitespace-nowrap"
+            className="px-6 py-3 bg-black text-white rounded-none font-semibold hover:bg-neutral-900 transition-colors flex items-center gap-2 whitespace-nowrap"
           >
             <ShoppingBag className="w-5 h-5" />
             <span className="hidden sm:inline">Ajouter</span>

@@ -56,13 +56,13 @@ export function ProductQuickView({
             exit={{ scale: 0.9, opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-none max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               {/* Header */}
               <div className="sticky top-0 bg-white flex items-center justify-between p-6 border-b border-neutral-200">
                 <h2 className="text-xl font-serif font-bold">Aperçu rapide</h2>
                 <button
                   onClick={onClose}
-                  className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-neutral-100 rounded-none transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -71,7 +71,7 @@ export function ProductQuickView({
               {/* Content */}
               <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Image */}
-                <div className="bg-neutral-100 rounded-xl overflow-hidden h-80 md:h-96">
+                <div className="bg-neutral-100 rounded-none overflow-hidden h-80 md:h-96">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -127,7 +127,7 @@ export function ProductQuickView({
                         <button
                           key={idx}
                           onClick={() => setSelectedColor(idx)}
-                          className={`w-10 h-10 rounded-lg border-2 transition-all ${
+                          className={`w-10 h-10 rounded-none border-2 transition-all ${
                             selectedColor === idx
                               ? 'border-black scale-110'
                               : 'border-neutral-200'
@@ -147,14 +147,14 @@ export function ProductQuickView({
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="w-10 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-50"
+                        className="w-10 h-10 rounded-none border border-neutral-200 hover:bg-neutral-50"
                       >
                         −
                       </button>
                       <span className="w-8 text-center font-semibold">{quantity}</span>
                       <button
                         onClick={() => setQuantity(quantity + 1)}
-                        className="w-10 h-10 rounded-lg border border-neutral-200 hover:bg-neutral-50"
+                        className="w-10 h-10 rounded-none border border-neutral-200 hover:bg-neutral-50"
                       >
                         +
                       </button>
@@ -165,12 +165,12 @@ export function ProductQuickView({
                   <div className="flex gap-3 pt-4">
                     <button
                       onClick={onAddToCart}
-                      className="flex-1 bg-black text-white py-3 rounded-lg font-semibold hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2"
                     >
                       <ShoppingBag className="w-5 h-5" />
                       Ajouter au panier
                     </button>
-                    <button className="w-12 h-12 rounded-lg border border-neutral-200 hover:bg-neutral-50 transition-colors flex items-center justify-center">
+                    <button className="w-12 h-12 rounded-none border border-neutral-200 hover:bg-neutral-50 transition-colors flex items-center justify-center">
                       <Heart className="w-5 h-5" />
                     </button>
                   </div>

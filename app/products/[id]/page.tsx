@@ -109,7 +109,7 @@ function CheckoutDrawer({
                 {step === 'payment' && 'Paiement sécurisé'}
                 {step === 'confirmation' && 'Commande confirmée'}
               </h2>
-              <button onClick={handleClose} className="p-1.5 rounded-full hover:bg-neutral-100 transition-colors">
+              <button onClick={handleClose} className="p-1.5 rounded-none hover:bg-neutral-100 transition-colors">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -121,7 +121,7 @@ function CheckoutDrawer({
                   {steps.slice(0, 3).map((s, i) => (
                     <div key={s.key} className="flex items-center gap-1 flex-1">
                       <div className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'}`}>
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${i < stepIndex ? 'bg-black text-white' : i === stepIndex ? 'border-2 border-black text-black' : 'border border-neutral-200 text-neutral-300'}`}>
+                        <div className={`w-5 h-5 rounded-none flex items-center justify-center transition-all duration-300 ${i < stepIndex ? 'bg-black text-white' : i === stepIndex ? 'border-2 border-black text-black' : 'border border-neutral-200 text-neutral-300'}`}>
                           {i < stepIndex ? <Check className="w-3 h-3" /> : s.icon}
                         </div>
                         <span className="hidden sm:block">{s.label}</span>
@@ -146,8 +146,8 @@ function CheckoutDrawer({
                     transition={{ duration: 0.25 }}
                     className="p-6"
                   >
-                    <div className="flex gap-4 p-4 rounded-2xl border border-neutral-100 bg-neutral-50 mb-6">
-                      <div className="w-20 h-20 rounded-xl overflow-hidden bg-white flex-shrink-0 flex items-center justify-center border border-neutral-100">
+                    <div className="flex gap-4 p-4 rounded-none border border-neutral-100 bg-neutral-50 mb-6">
+                      <div className="w-20 h-20 rounded-none overflow-hidden bg-white flex-shrink-0 flex items-center justify-center border border-neutral-100">
                         <Image
                           src={product.images[0]}
                           alt={product.name}
@@ -181,7 +181,7 @@ function CheckoutDrawer({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs text-neutral-400 mb-6 bg-neutral-50 rounded-xl p-3">
+                    <div className="flex items-center gap-2 text-xs text-neutral-400 mb-6 bg-neutral-50 rounded-none p-3">
                       <Truck className="w-4 h-4 shrink-0" />
                       <span>Livraison à domicile offerte · 3 à 6 semaines</span>
                     </div>
@@ -208,7 +208,7 @@ function CheckoutDrawer({
                           <input
                             value={delivery[f.key as keyof typeof delivery]}
                             onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
-                            className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                            className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
                             placeholder={f.label}
                           />
                         </div>
@@ -224,7 +224,7 @@ function CheckoutDrawer({
                           type={f.type || 'text'}
                           value={delivery[f.key as keyof typeof delivery]}
                           onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
-                          className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                          className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
                           placeholder={f.placeholder}
                         />
                       </div>
@@ -239,7 +239,7 @@ function CheckoutDrawer({
                           <input
                             value={delivery[f.key as keyof typeof delivery]}
                             onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
-                            className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
+                            className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors"
                             placeholder={f.placeholder}
                           />
                         </div>
@@ -258,7 +258,7 @@ function CheckoutDrawer({
                     transition={{ duration: 0.25 }}
                     className="p-6 space-y-4"
                   >
-                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-xl p-3">
+                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-none p-3">
                       <Lock className="w-3.5 h-3.5 shrink-0" />
                       <span>Paiement 100% sécurisé — chiffrement SSL 256 bits</span>
                     </div>
@@ -275,7 +275,7 @@ function CheckoutDrawer({
                           key={m.key}
                           onClick={() => setPayMethod(m.key)}
                           whileTap={{ scale: 0.97 }}
-                          className={`flex flex-col items-center justify-center gap-1 py-3 rounded-xl border-2 text-xs font-semibold transition-all duration-200 ${
+                          className={`flex flex-col items-center justify-center gap-1 py-3 rounded-none border-2 text-xs font-semibold transition-all duration-200 ${
                             payMethod === m.key ? 'border-black bg-black text-white' : 'border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400'
                           }`}
                         >
@@ -292,25 +292,25 @@ function CheckoutDrawer({
                           <div>
                             <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Titulaire de la carte</label>
                             <input value={payment.titulaire} onChange={(e) => setPayment({ ...payment, titulaire: e.target.value })}
-                              className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors" placeholder="Jean Dupont" />
+                              className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors" placeholder="Jean Dupont" />
                           </div>
                           <div>
                             <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Numéro de carte</label>
                             <input value={payment.carte} onChange={(e) => setPayment({ ...payment, carte: formatCard(e.target.value) })}
-                              className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
+                              className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
                               placeholder="1234 5678 9012 3456" maxLength={19} />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div>
                               <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Expiration</label>
                               <input value={payment.expiry} onChange={(e) => setPayment({ ...payment, expiry: formatExpiry(e.target.value) })}
-                                className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                                className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
                                 placeholder="MM/AA" maxLength={5} />
                             </div>
                             <div>
                               <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">CVV</label>
                               <input value={payment.cvv} onChange={(e) => setPayment({ ...payment, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) })}
-                                className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
+                                className="w-full border border-neutral-200 rounded-none px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
                                 placeholder="123" maxLength={3} type="password" />
                             </div>
                           </div>
@@ -320,9 +320,9 @@ function CheckoutDrawer({
                       {/* PayPal */}
                       {payMethod === 'paypal' && (
                         <motion.div key="paypal" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
-                          className="bg-[#FFC439]/10 border border-[#FFC439]/40 rounded-2xl p-5 text-center space-y-3">
+                          className="bg-[#FFC439]/10 border border-[#FFC439]/40 rounded-none p-5 text-center space-y-3">
                           <div className="flex justify-center">
-                            <div className="bg-[#003087] text-white font-bold text-lg px-4 py-2 rounded-xl tracking-tight">
+                            <div className="bg-[#003087] text-white font-bold text-lg px-4 py-2 rounded-none tracking-tight">
                               Pay<span className="text-[#009cde]">Pal</span>
                             </div>
                           </div>
@@ -334,7 +334,7 @@ function CheckoutDrawer({
                       {/* Apple Pay */}
                       {payMethod === 'applepay' && (
                         <motion.div key="applepay" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
-                          className="bg-black/5 border border-black/10 rounded-2xl p-5 text-center space-y-3">
+                          className="bg-black/5 border border-black/10 rounded-none p-5 text-center space-y-3">
                           <div className="flex justify-center items-center gap-2">
                             <svg viewBox="0 0 24 24" className="w-7 h-7" fill="black"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.29.07 2.18.74 2.93.8 1.12-.22 2.19-.91 3.39-.84 1.44.07 2.53.61 3.24 1.57-2.96 1.77-2.26 5.69.44 6.82-.52 1.42-1.22 2.83-2 3.51zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                             <span className="font-bold text-lg tracking-tight">Apple Pay</span>
@@ -347,14 +347,14 @@ function CheckoutDrawer({
                       {/* Twint */}
                       {payMethod === 'twint' && (
                         <motion.div key="twint" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}
-                          className="bg-black/5 border border-black/10 rounded-2xl p-5 text-center space-y-3">
+                          className="bg-black/5 border border-black/10 rounded-none p-5 text-center space-y-3">
                           <div className="flex justify-center">
-                            <div className="bg-black text-white font-black text-xl px-5 py-2 rounded-xl tracking-widest">
+                            <div className="bg-black text-white font-black text-xl px-5 py-2 rounded-none tracking-widest">
                               TWINT
                             </div>
                           </div>
                           <p className="text-sm text-neutral-600">Scannez le QR code avec votre app TWINT pour confirmer le paiement.</p>
-                          <div className="mx-auto w-24 h-24 bg-white border border-neutral-200 rounded-xl flex items-center justify-center">
+                          <div className="mx-auto w-24 h-24 bg-white border border-neutral-200 rounded-none flex items-center justify-center">
                             <svg viewBox="0 0 80 80" className="w-16 h-16" fill="none">
                               <rect x="4" y="4" width="24" height="24" rx="2" fill="black"/>
                               <rect x="8" y="8" width="16" height="16" rx="1" fill="white"/>
@@ -406,7 +406,7 @@ function CheckoutDrawer({
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.1 }}
-                      className="w-20 h-20 rounded-full bg-black flex items-center justify-center mb-6"
+                      className="w-20 h-20 rounded-none bg-black flex items-center justify-center mb-6"
                     >
                       <Check className="w-10 h-10 text-white" />
                     </motion.div>
@@ -419,9 +419,9 @@ function CheckoutDrawer({
                       <p className="text-sm text-neutral-500 mb-6 leading-relaxed">
                         Votre commande a bien été reçue. Vous recevrez un email de confirmation à <strong>{delivery.email || 'votre adresse'}</strong>.
                       </p>
-                      <div className="bg-neutral-50 rounded-2xl p-4 text-left w-full mb-6">
+                      <div className="bg-neutral-50 rounded-none p-4 text-left w-full mb-6">
                         <div className="flex gap-3 mb-3">
-                          <div className="w-12 h-12 rounded-lg bg-white border border-neutral-100 flex items-center justify-center overflow-hidden">
+                          <div className="w-12 h-12 rounded-none bg-white border border-neutral-100 flex items-center justify-center overflow-hidden">
                             <Image src={product.images[0]} alt={product.name} width={48} height={48}
                               className={product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
                           </div>
@@ -437,7 +437,7 @@ function CheckoutDrawer({
                       </div>
                       <button
                         onClick={handleClose}
-                        className="w-full py-3.5 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                        className="w-full py-3.5 rounded-none bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
                       >
                         Continuer mes achats
                       </button>
@@ -453,7 +453,7 @@ function CheckoutDrawer({
                 {step === 'cart' && (
                   <button
                     onClick={() => setStep('delivery')}
-                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                    className="w-full py-4 rounded-none bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
                   >
                     Continuer vers la livraison
                   </button>
@@ -462,7 +462,7 @@ function CheckoutDrawer({
                   <button
                     onClick={() => setStep('payment')}
                     disabled={!deliveryValid}
-                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-full py-4 rounded-none bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     Continuer vers le paiement
                   </button>
@@ -471,14 +471,14 @@ function CheckoutDrawer({
                   <button
                     onClick={handlePay}
                     disabled={!paymentValid || payLoading}
-                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full py-4 rounded-none bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {payLoading ? (
                       <>
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
-                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-none"
                         />
                         Traitement en cours…
                       </>
@@ -518,13 +518,13 @@ function CartToast({ show, productName }: { show: boolean; productName: string }
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -16, scale: 0.96 }}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-medium whitespace-nowrap"
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-5 py-3 rounded-none shadow-xl flex items-center gap-3 text-sm font-medium whitespace-nowrap"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.1, type: 'spring', stiffness: 500 }}
-            className="w-5 h-5 rounded-full bg-white flex items-center justify-center"
+            className="w-5 h-5 rounded-none bg-white flex items-center justify-center"
           >
             <Check className="w-3 h-3 text-black" />
           </motion.div>
@@ -687,7 +687,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 cursor-zoom-in"
+                className="relative aspect-square overflow-hidden rounded-none bg-neutral-50 cursor-zoom-in"
                 onClick={() => setLightbox(true)}
               >
                 <AnimatePresence mode="wait">
@@ -735,7 +735,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       <img
                         src={product.images[selectedImage]}
                         alt={product.name}
-                        className="max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
+                        className="max-w-[90vw] max-h-[90vh] object-contain rounded-none"
                       />
                     </motion.div>
                     <button
@@ -750,7 +750,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                           <button
                             key={i}
                             onClick={(e) => { e.stopPropagation(); setSelectedImage(i); }}
-                            className={`w-2 h-2 rounded-full transition-all duration-200 ${i === selectedImage ? 'bg-white scale-125' : 'bg-white/40'}`}
+                            className={`w-2 h-2 rounded-none transition-all duration-200 ${i === selectedImage ? 'bg-white scale-125' : 'bg-white/40'}`}
                           />
                         ))}
                       </div>
@@ -822,7 +822,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="h-px bg-neutral-100 mb-6" />
 
               {/* Price block */}
-              <div className="rounded-2xl p-4 mb-6 bg-neutral-50">
+              <div className="rounded-none p-4 mb-6 bg-neutral-50">
                 <div className="flex items-center justify-between">
                   <div className="flex items-baseline gap-3">
                     <p className="text-4xl font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
@@ -873,8 +873,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
               {/* Specs pills */}
               <div className="flex flex-wrap gap-2 mb-8">
-                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">📐 {product.dimensions}</span>
-                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">🪵 {product.material}</span>
+                <span className="text-xs border border-neutral-100 rounded-none px-4 py-1.5 text-neutral-500 bg-neutral-50">📐 {product.dimensions}</span>
+                <span className="text-xs border border-neutral-100 rounded-none px-4 py-1.5 text-neutral-500 bg-neutral-50">🪵 {product.material}</span>
               </div>
 
               {/* CTA Buttons */}
@@ -977,7 +977,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-none bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
                             style={[7, 9, 12].includes(p.id) ? { transform: 'scale(1.3)', transformOrigin: 'center center' } : undefined}
                             className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${pIsBubble && p.images[1] ? 'group-hover:opacity-0' : ''} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
@@ -991,7 +991,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
-                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-none p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                           >
                             <Heart className={`w-3.5 h-3.5 transition-all ${isWished(p.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                           </button>
@@ -1079,7 +1079,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <Heart className="w-5 h-5 fill-red-500 text-red-500" />
                 <span className="font-serif font-semibold text-lg">Favoris</span>
               </div>
-              <button onClick={() => setWishlistOpen(false)} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+              <button onClick={() => setWishlistOpen(false)} className="p-2 rounded-none hover:bg-neutral-100 transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1095,8 +1095,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   {products.filter((p) => isWished(p.id)).map((p) => {
                     const price = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
                     return (
-                      <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
-                        <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
+                      <div key={p.id} className="flex items-center gap-4 p-3 rounded-none border border-neutral-100">
+                        <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-none bg-neutral-50 overflow-hidden flex items-center justify-center">
                           <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
@@ -1105,7 +1105,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                           </Link>
                           <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
                         </div>
-                        <button onClick={() => toggleWish(p.id)} className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors">
+                        <button onClick={() => toggleWish(p.id)} className="shrink-0 p-2 rounded-none hover:bg-red-50 transition-colors">
                           <Heart className="w-4 h-4 fill-red-500 text-red-500" />
                         </button>
                       </div>

@@ -99,7 +99,7 @@ export function ProductBundles() {
           {bundles.map((bundle) => (
             <div
               key={bundle.id}
-              className="bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:shadow-lg transition-shadow"
+              className="bg-white rounded-none border border-neutral-200 overflow-hidden hover:shadow-lg transition-shadow"
             >
               {/* Header */}
               <div className="p-6 border-b border-neutral-100">
@@ -112,7 +112,7 @@ export function ProductBundles() {
                     <p className="text-sm text-neutral-600 mt-1">{bundle.description}</p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <div className="bg-red-100 text-red-700 font-bold px-4 py-2 rounded-lg text-sm">
+                    <div className="bg-red-100 text-red-700 font-bold px-4 py-2 rounded-none text-sm">
                       −{bundle.savingsPercent}%
                     </div>
                   </div>
@@ -123,7 +123,7 @@ export function ProductBundles() {
               <div className="p-6 space-y-4 border-b border-neutral-100">
                 {bundle.products.map((product, idx) => (
                   <div key={product.id} className="flex items-start gap-4">
-                    <div className="relative w-20 h-20 bg-neutral-100 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="relative w-20 h-20 bg-neutral-100 rounded-none overflow-hidden flex-shrink-0">
                       <Image
                         src={product.image}
                         alt={product.name}
@@ -159,7 +159,7 @@ export function ProductBundles() {
                   </p>
                 </div>
 
-                <button className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2 mb-2">
+                <button className="w-full bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2 mb-2">
                   <Zap className="w-5 h-5" />
                   Acheter cet ensemble
                 </button>

@@ -95,7 +95,7 @@ export function InfluencerPicks({ influencers = defaultInfluencers }: Influencer
         {influencers.map((influencer, idx) => (
           <div
             key={idx}
-            className="bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
+            className="bg-white border border-neutral-200 rounded-none overflow-hidden hover:shadow-lg transition-shadow"
           >
             {/* Influencer Header */}
             <div className="p-6 border-b border-neutral-100">
@@ -105,7 +105,7 @@ export function InfluencerPicks({ influencers = defaultInfluencers }: Influencer
                   alt={influencer.name}
                   width={60}
                   height={60}
-                  className="w-12 h-12 rounded-full object-cover"
+                  className="w-12 h-12 rounded-none object-cover"
                 />
                 <div className="flex-1">
                   <p className="font-bold text-black">{influencer.name}</p>
@@ -125,7 +125,7 @@ export function InfluencerPicks({ influencers = defaultInfluencers }: Influencer
                 <div key={pick.productId} className="space-y-3">
                   {/* Product Image */}
                   <Link href={`/products/${pick.productId}`}>
-                    <div className="relative aspect-square bg-neutral-100 rounded-xl overflow-hidden group cursor-pointer">
+                    <div className="relative aspect-square bg-neutral-100 rounded-none overflow-hidden group cursor-pointer">
                       <Image
                         src={pick.productImage}
                         alt={pick.productName}
@@ -137,7 +137,7 @@ export function InfluencerPicks({ influencers = defaultInfluencers }: Influencer
                           e.preventDefault();
                           toggleLike(`${idx}-${pick.productId}`);
                         }}
-                        className="absolute top-3 right-3 p-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-3 right-3 p-2 bg-white rounded-none opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <Heart
                           className={`w-5 h-5 transition-all ${
@@ -168,7 +168,7 @@ export function InfluencerPicks({ influencers = defaultInfluencers }: Influencer
 
             {/* Follow CTA */}
             <div className="px-6 py-4 border-t border-neutral-100">
-              <button className="w-full py-2 text-sm font-semibold border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2">
+              <button className="w-full py-2 text-sm font-semibold border border-neutral-300 rounded-none hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2">
                 <Share2 className="w-4 h-4" />
                 Suivre
               </button>

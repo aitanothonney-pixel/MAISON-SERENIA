@@ -101,7 +101,7 @@ export function NewArrivals({ products = defaultProducts }: NewArrivalsProps) {
               href={`/products/${product.id}`}
               className="group"
             >
-              <div className="relative mb-4 bg-neutral-100 rounded-lg overflow-hidden aspect-square">
+              <div className="relative mb-4 bg-neutral-100 rounded-none overflow-hidden aspect-square">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -112,12 +112,12 @@ export function NewArrivals({ products = defaultProducts }: NewArrivalsProps) {
                 {/* Badges */}
                 <div className="absolute top-3 left-3 flex gap-2">
                   {product.isNew && (
-                    <span className="bg-black text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="bg-black text-white text-xs font-bold px-3 py-1 rounded-none">
                       NOUVEAU
                     </span>
                   )}
                   {product.discount && (
-                    <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-none">
                       −{product.discount}%
                     </span>
                   )}
@@ -129,7 +129,7 @@ export function NewArrivals({ products = defaultProducts }: NewArrivalsProps) {
                     e.preventDefault();
                     toggleWish(product.id);
                   }}
-                  className="absolute top-3 right-3 p-2.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+                  className="absolute top-3 right-3 p-2.5 bg-white rounded-none opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
                 >
                   <Heart
                     className={`w-5 h-5 transition-all ${

@@ -103,7 +103,7 @@ export default function FAQPage() {
                       <button
                         key={globalIndex}
                         onClick={() => setOpenIndex(isOpen ? null : globalIndex)}
-                        className="w-full text-left p-6 bg-neutral-50 hover:bg-neutral-100 transition-colors rounded-lg border border-neutral-200"
+                        className="w-full text-left p-6 bg-neutral-50 hover:bg-neutral-100 transition-colors rounded-none border border-neutral-200"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <h3 className="text-lg font-semibold text-black pr-4">
@@ -128,7 +128,7 @@ export default function FAQPage() {
           ))}
 
           {/* CTA */}
-          <div className="mt-16 bg-neutral-50 p-8 rounded-lg text-center">
+          <div className="mt-16 bg-neutral-50 p-8 rounded-none text-center">
             <h2 className="text-2xl font-serif font-bold text-black mb-4">
               Vous n&apos;avez pas trouvé votre réponse ?
             </h2>
@@ -137,7 +137,7 @@ export default function FAQPage() {
             </p>
             <a
               href="/contact"
-              className="inline-block px-8 py-3 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors"
+              className="inline-block px-8 py-3 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors"
             >
               Nous contacter
             </a>

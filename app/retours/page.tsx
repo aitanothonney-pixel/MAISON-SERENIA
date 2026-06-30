@@ -101,7 +101,7 @@ export default function RetoursPage() {
 
           <section>
             <h2 className="text-2xl font-semibold text-black mb-4">8. Contact pour les retours</h2>
-            <div className="bg-neutral-50 p-6 rounded-lg">
+            <div className="bg-neutral-50 p-6 rounded-none">
               <p className="mb-3"><strong>Email :</strong> <span className="font-mono">returns@maisonserenia.ch</span></p>
               <p className="mb-3"><strong>Téléphone :</strong> +41 xx xxx xx xx (lun-ven 9h-17h CET)</p>
               <p><strong>Formulaire :</strong> Utilisez le formulaire de contact sur notre site</p>

@@ -42,7 +42,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Email */}
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-none mb-4">
                 <Mail className="w-6 h-6 text-black" />
               </div>
               <h3 className="font-semibold text-black mb-2">Email</h3>
@@ -56,7 +56,7 @@ export default function ContactPage() {
 
             {/* Téléphone */}
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-none mb-4">
                 <Phone className="w-6 h-6 text-black" />
               </div>
               <h3 className="font-semibold text-black mb-2">Téléphone</h3>
@@ -70,7 +70,7 @@ export default function ContactPage() {
 
             {/* Adresse */}
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-lg mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-neutral-100 rounded-none mb-4">
                 <MapPin className="w-6 h-6 text-black" />
               </div>
               <h3 className="font-semibold text-black mb-2">Adresse</h3>
@@ -82,7 +82,7 @@ export default function ContactPage() {
           </div>
 
           {/* Horaires */}
-          <div className="bg-neutral-50 p-8 rounded-lg mb-16">
+          <div className="bg-neutral-50 p-8 rounded-none mb-16">
             <h2 className="text-xl font-semibold text-black mb-6 flex items-center gap-3">
               <Clock className="w-5 h-5" />
               Horaires de service client
@@ -122,7 +122,7 @@ export default function ContactPage() {
                     value={formState.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+                    className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
                     placeholder="Votre nom"
                   />
                 </div>
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     value={formState.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+                    className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
                     placeholder="votre@email.ch"
                   />
                 </div>
@@ -150,7 +150,7 @@ export default function ContactPage() {
                   name="subject"
                   value={formState.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+                  className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
                 >
                   <option value="">Sélectionnez un sujet</option>
                   <option value="commande">Question sur une commande</option>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10 resize-none"
+                  className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10 resize-none"
                   placeholder="Décrivez votre message..."
                 />
               </div>
@@ -178,7 +178,7 @@ export default function ContactPage() {
               <div>
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors"
+                  className="w-full px-6 py-3 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors"
                 >
                   {submitted ? '✓ Message envoyé !' : 'Envoyer le message'}
                 </button>

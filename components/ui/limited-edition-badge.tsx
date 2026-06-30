@@ -19,7 +19,7 @@ export function LimitedEditionBadge({
 }: LimitedEditionBadgeProps) {
   if (exclusive) {
     return (
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 w-fit">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-none flex items-center gap-2 w-fit">
         <Sparkles className="w-4 h-4" />
         <span className="text-sm font-bold">Collection Exclusive</span>
       </div>
@@ -28,7 +28,7 @@ export function LimitedEditionBadge({
 
   if (preOrder) {
     return (
-      <div className="bg-amber-100 border border-amber-400 text-amber-900 px-4 py-2 rounded-lg flex items-center gap-2 w-fit">
+      <div className="bg-amber-100 border border-amber-400 text-amber-900 px-4 py-2 rounded-none flex items-center gap-2 w-fit">
         <Sparkles className="w-4 h-4" />
         <div>
           <span className="text-sm font-bold">Précommande</span>
@@ -41,7 +41,7 @@ export function LimitedEditionBadge({
   }
 
   return (
-    <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 rounded-lg p-3">
+    <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 rounded-none p-3">
       <div className="flex items-start gap-2 mb-2">
         <Sparkles className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
         <div>

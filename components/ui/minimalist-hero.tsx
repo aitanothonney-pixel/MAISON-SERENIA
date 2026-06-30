@@ -59,14 +59,14 @@ export function MinimalistHeroSection() {
             initial={{ scale: 0, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 1, ease, delay: 0.1 }}
-            className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-full border border-neutral-100"
+            className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] lg:w-[440px] lg:h-[440px] rounded-none border border-neutral-100"
           />
           {/* Inner circle */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={inView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.9, ease, delay: 0.2 }}
-            className="absolute w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] rounded-full"
+            className="absolute w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] rounded-none"
             style={{ background: 'radial-gradient(circle at 40% 40%, #faf9f7, #f5f3f0)' }}
           />
           {/* Rotating text ring */}

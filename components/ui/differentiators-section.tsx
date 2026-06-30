@@ -34,7 +34,7 @@ export function DifferentiatorsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {differentiators.map(({ icon: Icon, title, description }, i) => (
             <div key={i} className="flex flex-col items-center text-center">
-              <div className="mb-6 p-4 bg-white rounded-xl">
+              <div className="mb-6 p-4 bg-white rounded-none">
                 <Icon className="w-8 h-8 text-black" />
               </div>
               <h3 className="text-lg font-semibold text-black mb-3">{title}</h3>

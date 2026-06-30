@@ -45,7 +45,7 @@ export function ProductReviews({ averageRating = 4.8, totalReviews = 147 }: Prod
       <h2 className="text-2xl font-serif font-bold text-black mb-8">Avis de nos clients</h2>
 
       {/* Rating summary */}
-      <div className="mb-8 p-6 bg-neutral-50 rounded-lg border border-neutral-200">
+      <div className="mb-8 p-6 bg-neutral-50 rounded-none border border-neutral-200">
         <div className="flex items-center gap-6">
           <div>
             <p className="text-4xl font-serif font-bold text-black">{averageRating}</p>
@@ -72,7 +72,7 @@ export function ProductReviews({ averageRating = 4.8, totalReviews = 147 }: Prod
               return (
                 <div key={rating} className="flex items-center gap-3">
                   <span className="text-xs font-semibold text-neutral-600 w-6">{rating}★</span>
-                  <div className="flex-1 h-2 bg-neutral-200 rounded-full overflow-hidden">
+                  <div className="flex-1 h-2 bg-neutral-200 rounded-none overflow-hidden">
                     <div
                       className="h-full bg-yellow-400 transition-all duration-500"
                       style={{ width: `${percentage}%` }}
@@ -89,13 +89,13 @@ export function ProductReviews({ averageRating = 4.8, totalReviews = 147 }: Prod
       {/* Individual reviews */}
       <div className="space-y-4">
         {sampleReviews.map((review, idx) => (
-          <div key={idx} className="p-4 border border-neutral-200 rounded-lg">
+          <div key={idx} className="p-4 border border-neutral-200 rounded-none">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <p className="font-semibold text-black text-sm">{review.name}</p>
                   {review.verified && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-none">
                       Achat vérifié
                     </span>
                   )}

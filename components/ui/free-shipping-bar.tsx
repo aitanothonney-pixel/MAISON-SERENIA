@@ -33,7 +33,7 @@ export function FreeShippingBar({
                 {cartTotal.toLocaleString('fr-FR')} € / {freeShippingThreshold.toLocaleString('fr-FR')} €
               </span>
             </div>
-            <div className="h-2 bg-neutral-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-neutral-200 rounded-none overflow-hidden">
               <div
                 className="h-full bg-green-500 transition-all duration-500"
                 style={{ width: `${percentage}%` }}

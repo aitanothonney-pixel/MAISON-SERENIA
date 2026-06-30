@@ -44,7 +44,7 @@ export function CollectionsShowcase({ onCollectionClick }: CollectionShowcasePro
             <button
               key={collection.id}
               onClick={() => onCollectionClick?.(collection.id)}
-              className="group relative overflow-hidden rounded-lg h-64 md:h-80"
+              className="group relative overflow-hidden rounded-none h-64 md:h-80"
             >
               <Image
                 src={collection.image}

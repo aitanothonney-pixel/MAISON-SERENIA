@@ -68,7 +68,7 @@ export function RecentlyViewed({
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-30 max-w-sm bg-white rounded-xl shadow-lg border border-neutral-200 p-4">
+    <div className="fixed bottom-6 left-6 z-30 max-w-sm bg-white rounded-none shadow-lg border border-neutral-200 p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-bold text-black text-sm">Récemment consultés</h3>
@@ -86,10 +86,10 @@ export function RecentlyViewed({
           <Link
             key={product.id}
             href={`/products/${product.id}`}
-            className="flex gap-3 p-2 rounded-lg hover:bg-neutral-50 transition-colors group"
+            className="flex gap-3 p-2 rounded-none hover:bg-neutral-50 transition-colors group"
           >
             {/* Image */}
-            <div className="relative w-16 h-16 bg-neutral-100 rounded-lg overflow-hidden flex-shrink-0">
+            <div className="relative w-16 h-16 bg-neutral-100 rounded-none overflow-hidden flex-shrink-0">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -129,7 +129,7 @@ export function RecentlyViewed({
       {/* CTA */}
       <Link
         href="/products"
-        className="mt-4 w-full block text-center text-sm font-semibold text-black border border-neutral-300 py-2 rounded-lg hover:bg-neutral-50 transition-colors"
+        className="mt-4 w-full block text-center text-sm font-semibold text-black border border-neutral-300 py-2 rounded-none hover:bg-neutral-50 transition-colors"
       >
         Voir tous les produits
       </Link>

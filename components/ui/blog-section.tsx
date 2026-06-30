@@ -77,7 +77,7 @@ export function BlogSection() {
               className="group flex flex-col h-full"
             >
               {/* Image */}
-              <div className="relative mb-5 bg-neutral-200 rounded-lg overflow-hidden aspect-video h-48 flex-shrink-0">
+              <div className="relative mb-5 bg-neutral-200 rounded-none overflow-hidden aspect-video h-48 flex-shrink-0">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -90,7 +90,7 @@ export function BlogSection() {
               <div className="flex flex-col flex-grow">
                 {/* Category & Meta */}
                 <div className="flex items-center gap-3 mb-3 text-xs text-neutral-500">
-                  <span className="inline-block bg-neutral-200 text-black px-3 py-1 rounded-full font-semibold">
+                  <span className="inline-block bg-neutral-200 text-black px-3 py-1 rounded-none font-semibold">
                     {post.category}
                   </span>
                   <div className="flex items-center gap-1">
@@ -122,7 +122,7 @@ export function BlogSection() {
         </div>
 
         {/* Newsletter CTA */}
-        <div className="mt-16 p-8 bg-white rounded-lg border border-neutral-200 text-center">
+        <div className="mt-16 p-8 bg-white rounded-none border border-neutral-200 text-center">
           <h3 className="text-2xl font-serif font-bold text-black mb-3">
             Ne manquez aucun conseil
           </h3>
@@ -133,9 +133,9 @@ export function BlogSection() {
             <input
               type="email"
               placeholder="Votre email"
-              className="flex-1 px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+              className="flex-1 px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
             />
-            <button className="px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors whitespace-nowrap">
+            <button className="px-6 py-3 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors whitespace-nowrap">
               S&apos;abonner
             </button>
           </div>

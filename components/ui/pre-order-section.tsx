@@ -68,7 +68,7 @@ export function PreOrderSection({ products = defaultProducts }: PreOrderSectionP
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white border border-neutral-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
+            className="bg-white border border-neutral-200 rounded-none overflow-hidden hover:shadow-lg transition-shadow"
           >
             {/* Image container with coming soon overlay */}
             <div className="relative bg-neutral-100 aspect-video overflow-hidden">
@@ -92,7 +92,7 @@ export function PreOrderSection({ products = defaultProducts }: PreOrderSectionP
               <p className="text-sm text-neutral-600 mb-4">{product.description}</p>
 
               {/* Release date */}
-              <div className="flex items-center gap-2 mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex items-center gap-2 mb-4 p-3 bg-amber-50 border border-amber-200 rounded-none">
                 <Calendar className="w-5 h-5 text-amber-700 flex-shrink-0" />
                 <div>
                   <p className="text-xs text-amber-600 uppercase font-semibold">
@@ -125,7 +125,7 @@ export function PreOrderSection({ products = defaultProducts }: PreOrderSectionP
               {/* CTA */}
               <button
                 onClick={() => toggleNotification(product.id)}
-                className={`w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
+                className={`w-full py-3 rounded-none font-semibold transition-all flex items-center justify-center gap-2 ${
                   notifiedIds.has(product.id)
                     ? 'bg-green-100 text-green-700 border border-green-300'
                     : 'bg-black text-white hover:bg-neutral-900'

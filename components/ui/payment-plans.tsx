@@ -47,7 +47,7 @@ export function PaymentPlans({ price, showMinimum = true }: PaymentPlansProps) {
   }
 
   return (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+    <div className="bg-blue-50 border border-blue-200 rounded-none p-4">
       <div className="flex items-center gap-2 mb-4">
         <CreditCard className="w-5 h-5 text-blue-700" />
         <h3 className="font-bold text-blue-900">Paiements Flexibles</h3>
@@ -57,7 +57,7 @@ export function PaymentPlans({ price, showMinimum = true }: PaymentPlansProps) {
         {eligiblePlans.map((plan) => (
           <button
             key={plan.name}
-            className="w-full p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors text-left"
+            className="w-full p-3 bg-white border border-blue-200 rounded-none hover:bg-blue-50 transition-colors text-left"
           >
             <div className="flex items-start justify-between">
               <div>

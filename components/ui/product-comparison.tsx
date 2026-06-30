@@ -29,7 +29,7 @@ export function ProductComparison({ products = [] }: ProductComparisonProps) {
 
   if (selected.length === 0) {
     return (
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-none p-6">
         <h3 className="font-bold text-black mb-2">Comparer les produits</h3>
         <p className="text-sm text-neutral-600 mb-4">
           Sélectionnez jusqu'à 3 produits pour les comparer côte à côte.

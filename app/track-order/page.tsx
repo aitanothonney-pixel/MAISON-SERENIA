@@ -28,7 +28,7 @@ export default function TrackOrderPage() {
           </div>
 
           {/* Search form */}
-          <form onSubmit={handleSearch} className="mb-12 p-8 bg-neutral-50 rounded-lg">
+          <form onSubmit={handleSearch} className="mb-12 p-8 bg-neutral-50 rounded-none">
             <div className="space-y-4 mb-6">
               <div>
                 <label className="block text-sm font-semibold text-black mb-2">
@@ -39,7 +39,7 @@ export default function TrackOrderPage() {
                   value={orderNumber}
                   onChange={(e) => setOrderNumber(e.target.value)}
                   placeholder="Ex: #2406-001234"
-                  className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+                  className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
                 />
               </div>
               <div>
@@ -51,13 +51,13 @@ export default function TrackOrderPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Votre email de commande"
-                  className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-black/10"
+                  className="w-full px-4 py-3 border border-neutral-200 rounded-none focus:outline-none focus:ring-2 focus:ring-black/10"
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2"
             >
               <Search className="w-5 h-5" />
               Suivre ma commande
@@ -68,7 +68,7 @@ export default function TrackOrderPage() {
           {searched && (
             <div className="space-y-8">
               {/* Order info */}
-              <div className="p-6 bg-neutral-50 rounded-lg">
+              <div className="p-6 bg-neutral-50 rounded-none">
                 <h2 className="font-semibold text-black mb-4">Détails de votre commande</h2>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -129,7 +129,7 @@ export default function TrackOrderPage() {
                       <div key={idx} className="flex gap-6">
                         <div className="flex flex-col items-center">
                           <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                            className={`w-10 h-10 rounded-none flex items-center justify-center ${
                               step.completed
                                 ? 'bg-green-100'
                                 : 'bg-neutral-100'
@@ -161,13 +161,13 @@ export default function TrackOrderPage() {
               </div>
 
               {/* CTA */}
-              <div className="p-6 bg-neutral-50 rounded-lg text-center">
+              <div className="p-6 bg-neutral-50 rounded-none text-center">
                 <p className="text-sm text-neutral-600 mb-4">
                   Des questions sur votre livraison ?
                 </p>
                 <a
                   href="/contact"
-                  className="inline-block px-6 py-2 bg-black text-white font-semibold rounded-lg hover:bg-neutral-900 transition-colors text-sm"
+                  className="inline-block px-6 py-2 bg-black text-white font-semibold rounded-none hover:bg-neutral-900 transition-colors text-sm"
                 >
                   Contactez-nous
                 </a>
@@ -176,7 +176,7 @@ export default function TrackOrderPage() {
           )}
 
           {/* Info box */}
-          <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-none">
             <h3 className="font-semibold text-blue-900 mb-2">💡 Conseil</h3>
             <p className="text-sm text-blue-800">
               Vous pouvez aussi suivre votre colis directement auprès du transporteur en cliquant sur le lien

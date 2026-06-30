@@ -29,7 +29,7 @@ export function ReferralProgram({
   const shareUrl = `https://maisonserenia.ch?ref=${referralCode}`;
 
   return (
-    <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-200 p-8">
+    <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50 rounded-none border border-purple-200 p-8">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
           <Share2 className="w-8 h-8 text-purple-700" />
@@ -44,13 +44,13 @@ export function ReferralProgram({
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-lg p-4 text-center border border-purple-200">
+          <div className="bg-white rounded-none p-4 text-center border border-purple-200">
             <p className="text-xs text-purple-600 uppercase font-semibold mb-1">
               Amis invités
             </p>
             <p className="text-3xl font-bold text-black">{referralCount}</p>
           </div>
-          <div className="bg-white rounded-lg p-4 text-center border border-purple-200">
+          <div className="bg-white rounded-none p-4 text-center border border-purple-200">
             <p className="text-xs text-purple-600 uppercase font-semibold mb-1">
               Gains totaux
             </p>
@@ -58,7 +58,7 @@ export function ReferralProgram({
               {totalEarnings.toLocaleString('fr-FR')}€
             </p>
           </div>
-          <div className="bg-white rounded-lg p-4 text-center border border-purple-200">
+          <div className="bg-white rounded-none p-4 text-center border border-purple-200">
             <p className="text-xs text-purple-600 uppercase font-semibold mb-1">
               Prochaine récompense
             </p>
@@ -69,7 +69,7 @@ export function ReferralProgram({
         </div>
 
         {/* How it works */}
-        <div className="bg-white rounded-lg p-6 border border-purple-200 mb-8">
+        <div className="bg-white rounded-none p-6 border border-purple-200 mb-8">
           <h3 className="font-bold text-black mb-4 flex items-center gap-2">
             <Users className="w-5 h-5 text-purple-700" />
             Comment ça marche?
@@ -97,7 +97,7 @@ export function ReferralProgram({
         {/* Copy code */}
         <button
           onClick={handleCopy}
-          className="w-full bg-white border-2 border-purple-700 text-black py-4 rounded-lg font-bold hover:bg-purple-50 transition-colors flex items-center justify-center gap-2 mb-4 group"
+          className="w-full bg-white border-2 border-purple-700 text-black py-4 rounded-none font-bold hover:bg-purple-50 transition-colors flex items-center justify-center gap-2 mb-4 group"
         >
           <div className="bg-purple-100 p-2 rounded group-hover:bg-purple-200 transition-colors">
             {copied ? (
@@ -114,10 +114,10 @@ export function ReferralProgram({
 
         {/* Share buttons */}
         <div className="grid grid-cols-2 gap-3">
-          <button className="bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white py-3 rounded-none font-semibold hover:bg-blue-700 transition-colors">
             Partager sur Facebook
           </button>
-          <button className="bg-black text-white py-3 rounded-lg font-semibold hover:bg-neutral-800 transition-colors">
+          <button className="bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-800 transition-colors">
             Partager sur X
           </button>
         </div>
@@ -136,7 +136,7 @@ export function ReferralProgram({
             ].map((tier) => (
               <div
                 key={tier.threshold}
-                className="p-4 bg-purple-50 border border-purple-200 rounded-lg text-center"
+                className="p-4 bg-purple-50 border border-purple-200 rounded-none text-center"
               >
                 <p className="text-xs text-purple-600 uppercase font-semibold mb-1">
                   {tier.threshold} amis invités

@@ -71,14 +71,14 @@ export function LiveSocialProof({
     <div className="space-y-4">
       {/* Summary stats */}
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center gap-2">
+        <div className="bg-blue-50 border border-blue-200 rounded-none p-3 flex items-center gap-2">
           <Eye className="w-4 h-4 text-blue-700" />
           <div>
             <p className="text-xs text-blue-600 uppercase font-semibold">Actuellement</p>
             <p className="text-lg font-bold text-blue-900">{viewersCount} regardent</p>
           </div>
         </div>
-        <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center gap-2">
+        <div className="bg-green-50 border border-green-200 rounded-none p-3 flex items-center gap-2">
           <ShoppingBag className="w-4 h-4 text-green-700" />
           <div>
             <p className="text-xs text-green-600 uppercase font-semibold">Derniers jours</p>
@@ -93,14 +93,14 @@ export function LiveSocialProof({
         {displayedEvents.map((event, idx) => (
           <div
             key={event.id}
-            className="animate-in fade-in slide-in-from-top-2 duration-300 bg-neutral-50 border border-neutral-200 rounded-lg p-3 flex items-center gap-3"
+            className="animate-in fade-in slide-in-from-top-2 duration-300 bg-neutral-50 border border-neutral-200 rounded-none p-3 flex items-center gap-3"
           >
             {event.type === 'purchase' ? (
-              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-none bg-green-100 flex items-center justify-center flex-shrink-0">
                 <ShoppingBag className="w-4 h-4 text-green-700" />
               </div>
             ) : (
-              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-none bg-blue-100 flex items-center justify-center flex-shrink-0">
                 <Eye className="w-4 h-4 text-blue-700" />
               </div>
             )}

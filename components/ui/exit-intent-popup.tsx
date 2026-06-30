@@ -38,11 +38,11 @@ export function ExitIntentPopup() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 max-w-md w-full mx-6 bg-white rounded-2xl shadow-2xl p-8"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 max-w-md w-full mx-6 bg-white rounded-none shadow-2xl p-8"
           >
             <button
               onClick={() => setShow(false)}
-              className="absolute top-4 right-4 p-2 hover:bg-neutral-100 rounded-full transition-colors"
+              className="absolute top-4 right-4 p-2 hover:bg-neutral-100 rounded-none transition-colors"
             >
               <X className="w-5 h-5 text-neutral-400" />
             </button>
@@ -55,7 +55,7 @@ export function ExitIntentPopup() {
                 Vous partez déjà? Recevez une remise exclusive avant de nous quitter.
               </p>
 
-              <div className="bg-gradient-to-r from-red-100 to-pink-100 rounded-xl p-6 mb-6">
+              <div className="bg-gradient-to-r from-red-100 to-pink-100 rounded-none p-6 mb-6">
                 <p className="text-3xl font-bold text-red-600 mb-1">−15%</p>
                 <p className="text-sm font-semibold text-red-700 mb-2">
                   SUR VOTRE PREMIÈRE COMMANDE
@@ -68,13 +68,13 @@ export function ExitIntentPopup() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setShow(false)}
-                  className="flex-1 py-3 rounded-lg font-semibold text-black border border-neutral-300 hover:bg-neutral-50 transition-colors"
+                  className="flex-1 py-3 rounded-none font-semibold text-black border border-neutral-300 hover:bg-neutral-50 transition-colors"
                 >
                   Non, merci
                 </button>
                 <button
                   onClick={() => setShow(false)}
-                  className="flex-1 py-3 rounded-lg font-semibold text-white bg-black hover:bg-neutral-900 transition-colors"
+                  className="flex-1 py-3 rounded-none font-semibold text-white bg-black hover:bg-neutral-900 transition-colors"
                 >
                   Réclamer l'offre
                 </button>

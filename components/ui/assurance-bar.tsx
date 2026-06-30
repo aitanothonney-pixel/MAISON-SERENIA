@@ -9,7 +9,7 @@ export function AssuranceBar() {
         <div className="grid grid-cols-3 gap-8 md:gap-12">
           {/* Livraison rapide */}
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3 p-3 bg-white rounded-lg">
+            <div className="mb-3 p-3 bg-white rounded-none">
               <Truck className="w-6 h-6 text-black" />
             </div>
             <h3 className="text-sm font-semibold text-black mb-1">Livraison rapide</h3>
@@ -18,7 +18,7 @@ export function AssuranceBar() {
 
           {/* Paiement sécurisé */}
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3 p-3 bg-white rounded-lg">
+            <div className="mb-3 p-3 bg-white rounded-none">
               <Lock className="w-6 h-6 text-black" />
             </div>
             <h3 className="text-sm font-semibold text-black mb-1">Paiement sécurisé</h3>
@@ -27,7 +27,7 @@ export function AssuranceBar() {
 
           {/* Retours faciles */}
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3 p-3 bg-white rounded-lg">
+            <div className="mb-3 p-3 bg-white rounded-none">
               <RotateCcw className="w-6 h-6 text-black" />
             </div>
             <h3 className="text-sm font-semibold text-black mb-1">Retours 30 jours</h3>

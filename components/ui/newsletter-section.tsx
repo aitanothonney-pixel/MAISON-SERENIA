@@ -20,7 +20,7 @@ export function NewsletterSection() {
     <section className="py-20 bg-black text-white">
       <div className="max-w-2xl mx-auto px-6 lg:px-10 text-center">
         <div className="flex justify-center mb-6">
-          <div className="p-3 bg-white/10 rounded-lg">
+          <div className="p-3 bg-white/10 rounded-none">
             <Mail className="w-8 h-8" />
           </div>
         </div>
@@ -39,11 +39,11 @@ export function NewsletterSection() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="flex-1 px-4 py-3 rounded-none bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-white/90 transition-colors whitespace-nowrap"
+            className="px-6 py-3 bg-white text-black font-semibold rounded-none hover:bg-white/90 transition-colors whitespace-nowrap"
           >
             {submitted ? '✓ Merci !' : "J'en profite"}
           </button>

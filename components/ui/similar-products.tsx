@@ -90,7 +90,7 @@ export function SimilarProducts({
             href={`/products/${product.id}`}
             className="group"
           >
-            <div className="relative mb-4 bg-neutral-100 rounded-lg overflow-hidden aspect-square">
+            <div className="relative mb-4 bg-neutral-100 rounded-none overflow-hidden aspect-square">
               <Image
                 src={product.image}
                 alt={product.name}
@@ -104,7 +104,7 @@ export function SimilarProducts({
                   e.preventDefault();
                   toggleWish(product.id);
                 }}
-                className="absolute top-3 right-3 p-2.5 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+                className="absolute top-3 right-3 p-2.5 bg-white rounded-none opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
               >
                 <Heart
                   className={`w-5 h-5 transition-all ${

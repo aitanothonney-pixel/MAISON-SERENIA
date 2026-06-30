@@ -114,7 +114,7 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
             <button
               key={occ.id}
               onClick={() => setOccasion(occ.id)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all ${
+              className={`px-6 py-3 rounded-none font-semibold transition-all ${
                 occasion === occ.id
                   ? 'bg-black text-white'
                   : 'bg-neutral-100 text-black hover:bg-neutral-200'
@@ -131,7 +131,7 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
         {items.map((item) => (
           <div
             key={item.id}
-            className="bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow group"
+            className="bg-white border border-neutral-200 rounded-none overflow-hidden hover:shadow-lg transition-shadow group"
           >
             {/* Image */}
             <Link href={`/products/${item.id}`}>
@@ -147,7 +147,7 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
                     e.preventDefault();
                     toggleLike(item.id);
                   }}
-                  className="absolute top-3 right-3 p-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-3 right-3 p-2 bg-white rounded-none opacity-0 group-hover:opacity-100 transition-opacity"
                 >
                   <Heart
                     className={`w-5 h-5 transition-all ${
@@ -179,7 +179,7 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
 
               <Link
                 href={`/products/${item.id}`}
-                className="w-full block text-center bg-black text-white py-3 rounded-lg font-semibold hover:bg-neutral-900 transition-colors"
+                className="w-full block text-center bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-900 transition-colors"
               >
                 Voir le produit
               </Link>
@@ -189,7 +189,7 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
       </div>
 
       {/* Tips section */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-8">
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-none p-8">
         <h3 className="text-xl font-serif font-bold text-black mb-6">
           💡 Conseils de cadeaux
         </h3>

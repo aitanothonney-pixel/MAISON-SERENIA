@@ -129,7 +129,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
         <div className="flex items-center gap-1 justify-end">
           {/* Search toggle */}
           <button
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            className="p-2 rounded-none hover:bg-white/10 transition-colors"
             onClick={() => setSearchOpen((v) => !v)}
             aria-label="Rechercher"
           >
@@ -139,20 +139,20 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
           </button>
 
           {/* Wishlist */}
-          <button onClick={onWishlistOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
+          <button onClick={onWishlistOpen} className="relative p-2 rounded-none hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
             <Heart className={`w-5 h-5 transition-all ${mounted && wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
             {mounted && wishCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+              <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-none flex items-center justify-center leading-none">
                 {wishCount}
               </span>
             )}
           </button>
 
           {/* Cart */}
-          <button onClick={onCartOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Panier">
+          <button onClick={onCartOpen} className="relative p-2 rounded-none hover:bg-white/10 transition-colors" aria-label="Panier">
             <ShoppingBag className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
             {mounted && cartCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+              <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-none flex items-center justify-center leading-none">
                 {cartCount}
               </span>
             )}
@@ -191,7 +191,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
               {!searchQ && (
                 <div className="flex flex-wrap gap-2 mt-3 mb-1">
                   {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Bureau'].map((s) => (
-                    <button key={s} onClick={() => setSearchQ(s)} className="text-xs border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500">{s}</button>
+                    <button key={s} onClick={() => setSearchQ(s)} className="text-xs border border-neutral-200 rounded-none px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500">{s}</button>
                   ))}
                 </div>
               )}
@@ -228,9 +228,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                           key={p.id}
                           href={`/products/${p.id}`}
                           onClick={() => { setSearchOpen(false); setSearchQ(''); }}
-                          className={`flex items-center gap-3 p-2 rounded-xl transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
+                          className={`flex items-center gap-3 p-2 rounded-none transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
                         >
-                          <div className={`w-12 h-12 rounded-lg overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center transition-all ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
+                          <div className={`w-12 h-12 rounded-none overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center transition-all ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
                             <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -341,7 +341,7 @@ function PromoBanner() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-[95vw] max-h-[95vh] object-contain rounded-2xl"
+              className="max-w-[95vw] max-h-[95vh] object-contain rounded-none"
               onClick={(e) => e.stopPropagation()}
             />
             <button
@@ -694,7 +694,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
         >
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
             {/* Salon */}
-            <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
+            <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-none group cursor-pointer text-left">
               <img
                 src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
                 alt="Salon MAISON SERENIA"
@@ -706,14 +706,14 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
                 <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Salon</p>
               </div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-full translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-none translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   Voir la collection →
                 </span>
               </div>
             </button>
 
             {/* Figurines */}
-            <button onClick={() => onCategoryClick('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <button onClick={() => onCategoryClick('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-none group cursor-pointer">
               <img
                 src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
                 alt="Figurines"
@@ -722,14 +722,14 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Figurines</div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-none translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                   Voir →
                 </span>
               </div>
             </button>
 
             {/* Bureau */}
-            <button onClick={() => onCategoryClick('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            <button onClick={() => onCategoryClick('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-none group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
                 alt="Bureau"
@@ -738,7 +738,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Bureau</div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-none translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                   Voir →
                 </span>
               </div>
@@ -899,7 +899,7 @@ function TestimonialsSection() {
         <div className="container z-10 mx-auto">
           <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto">
             <div className="flex justify-center">
-              <div className="border border-black text-black py-1 px-4 rounded-full text-xs tracking-[0.2em] uppercase">
+              <div className="border border-black text-black py-1 px-4 rounded-none text-xs tracking-[0.2em] uppercase">
                 Témoignages
               </div>
             </div>
@@ -1152,7 +1152,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                   <span className="text-xs text-neutral-400 tracking-widest uppercase">{ids.length} article{ids.length > 1 ? 's' : ''}</span>
                 )}
               </div>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+              <button onClick={onClose} className="p-2 rounded-none hover:bg-neutral-100 transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1193,7 +1193,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         </div>
                         <button
                           onClick={() => toggle(product.id)}
-                          className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors group"
+                          className="shrink-0 p-2 rounded-none hover:bg-red-50 transition-colors group"
                           aria-label="Retirer des favoris"
                         >
                           <Heart className="w-4 h-4 fill-red-400 text-red-400 group-hover:fill-red-600 group-hover:text-red-600 transition-colors" />
@@ -1275,12 +1275,12 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                 <ShoppingBag className="w-5 h-5" />
                 <span className="font-serif font-semibold text-lg">Panier</span>
                 {items.length > 0 && (
-                  <span className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+                  <span className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-none">
                     {items.reduce((s, x) => s + x.qty, 0)}
                   </span>
                 )}
               </div>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
+              <button onClick={onClose} className="p-2 rounded-none hover:bg-neutral-100 transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1331,14 +1331,14 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                         <div className="flex items-center gap-2 mt-2">
                           <button
                             onClick={() => updateQty(id, qty - 1)}
-                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                            className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
                           <span className="text-xs font-semibold w-5 text-center">{qty}</span>
                           <button
                             onClick={() => updateQty(id, qty + 1)}
-                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                            className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -1348,7 +1348,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                       {/* Delete */}
                       <button
                         onClick={(e) => { e.stopPropagation(); removeItem(id); }}
-                        className="shrink-0 mt-1 p-1.5 rounded-full hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
+                        className="shrink-0 mt-1 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
