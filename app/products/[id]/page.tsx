@@ -20,6 +20,8 @@ import { LiveSocialProof } from '@/components/ui/live-social-proof';
 import { SimilarProducts } from '@/components/ui/similar-products';
 import { PriceAlert } from '@/components/ui/price-alert';
 import { SizeFitGuide } from '@/components/ui/size-fit-guide';
+import { RecentlyViewed } from '@/components/ui/recently-viewed';
+import { SizeColorFinder } from '@/components/ui/size-color-finder';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -640,6 +642,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   return (
     <>
     <div className="min-h-screen bg-white">
+      <RecentlyViewed />
       <CartToast show={showToast} productName={product.name} />
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
 
@@ -859,6 +862,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   productId={String(product.id)}
                   targetPrice={Math.round(promoPrice * 0.9)}
                 />
+              </div>
+
+              {/* Size/Color Finder */}
+              <div className="mb-6">
+                <SizeColorFinder productName={product.name} />
               </div>
 
               <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
