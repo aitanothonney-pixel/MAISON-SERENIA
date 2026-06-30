@@ -360,8 +360,11 @@ function PromoBanner() {
 const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 12, 7, 9];
 
 function BubblePromoCarousel() {
-  const items = products.filter((p) => bubblePromoProducts.includes(p.id))
-    .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
+  const filteredItems = products.filter((p) => bubblePromoProducts.includes(p.id));
+  const items = useMemo(() => {
+    const shuffled = [...filteredItems].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
   const { isWished, toggle } = useWishlist();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -458,11 +461,12 @@ function BubblePromoCarousel() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [8, 22, 2, 10];
-
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
-  const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
   const { isWished, toggle } = useWishlist();
+  const bestsellers = useMemo(() => {
+    const shuffled = [...products].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
 
   return (
     <FadeInSection>
@@ -826,16 +830,20 @@ const testimonials = [
 
 function SummerProductsSection() {
   const allSummer = products.filter(p => p.category === 'Été');
-  const seenGroups = new Set<number>();
-  const summerProducts = allSummer.filter(p => {
-    const group = getVariantGroup(p.id);
-    if (!group) return true;
-    const firstId = group[0].productId;
-    if (seenGroups.has(firstId)) return false;
-    seenGroups.add(firstId);
-    return p.id === firstId;
-  });
   const { isWished, toggle } = useWishlist();
+  const summerProducts = useMemo(() => {
+    const seenGroups = new Set<number>();
+    const filtered = allSummer.filter(p => {
+      const group = getVariantGroup(p.id);
+      if (!group) return true;
+      const firstId = group[0].productId;
+      if (seenGroups.has(firstId)) return false;
+      seenGroups.add(firstId);
+      return p.id === firstId;
+    });
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, [allSummer]);
 
   return (
     <FadeInSection>
@@ -1050,9 +1058,12 @@ function Footer() {
 
 function FigurinesSection() {
   const { isWished, toggle } = useWishlist();
-  const figurines = products
-    .filter((p) => p.category === 'Figurines')
-    .sort((a, b) => b.id - a.id);
+  const figurines = useMemo(() => {
+    const filtered = products
+      .filter((p) => p.category === 'Figurines');
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
 
   return (
     <FadeInSection>

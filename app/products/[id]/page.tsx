@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use, useRef, useEffect } from 'react';
+import { useState, use, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -570,27 +570,32 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
   const currentGroup = getVariantGroup(product.id);
-  const related = product.category === 'Été'
-    ? (() => {
-        const seenGroups = new Set<number>();
-        return products.filter(p => {
-          if (p.category !== 'Été') return false;
-          const grp = getVariantGroup(p.id);
-          if (grp) {
-            const firstId = grp[0].productId;
-            if (currentGroup && grp[0].productId === currentGroup[0].productId) return false;
-            if (seenGroups.has(firstId)) return false;
-            seenGroups.add(firstId);
-            return p.id === firstId;
-          }
-          return p.id !== product.id;
-        });
-      })()
-    : product.category === 'Figurines'
-      ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
-      : isBubble
-        ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
-        : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const related = useMemo(() => {
+    let baseRelated = [];
+    if (product.category === 'Été') {
+      const seenGroups = new Set<number>();
+      baseRelated = products.filter(p => {
+        if (p.category !== 'Été') return false;
+        const grp = getVariantGroup(p.id);
+        if (grp) {
+          const firstId = grp[0].productId;
+          if (currentGroup && grp[0].productId === currentGroup[0].productId) return false;
+          if (seenGroups.has(firstId)) return false;
+          seenGroups.add(firstId);
+          return p.id === firstId;
+        }
+        return p.id !== product.id;
+      });
+    } else if (product.category === 'Figurines') {
+      baseRelated = products.filter((p) => p.category === 'Figurines' && p.id !== product.id);
+    } else if (isBubble) {
+      baseRelated = bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean);
+    } else {
+      baseRelated = products.filter((p) => p.category === product.category && p.id !== product.id);
+    }
+    const shuffled = [...baseRelated].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, [product.id, product.category, isBubble, currentGroup]);
 
   const relatedScrollRef = useRef<HTMLDivElement>(null);
   const scrollRelated = (dir: 'left' | 'right') => {
