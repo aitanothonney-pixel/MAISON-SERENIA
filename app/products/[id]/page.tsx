@@ -14,6 +14,12 @@ import { TrustBadges } from '@/components/ui/trust-badges';
 import { ProductFAQ } from '@/components/ui/product-faq';
 import { ProductReviews } from '@/components/ui/product-reviews';
 import { OftenBoughtTogether } from '@/components/ui/often-bought-together';
+import { StockCountdown } from '@/components/ui/stock-countdown';
+import { PaymentPlans } from '@/components/ui/payment-plans';
+import { LiveSocialProof } from '@/components/ui/live-social-proof';
+import { SimilarProducts } from '@/components/ui/similar-products';
+import { PriceAlert } from '@/components/ui/price-alert';
+import { SizeFitGuide } from '@/components/ui/size-fit-guide';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -835,6 +841,26 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 )}
               </div>
 
+              {/* Stock Countdown */}
+              <div className="mb-6">
+                <StockCountdown itemsLeft={3} threshold={5} totalSold={42} />
+              </div>
+
+              {/* Payment Plans */}
+              <div className="mb-6">
+                <PaymentPlans price={promoPrice} showMinimum={true} />
+              </div>
+
+              {/* Price Alert */}
+              <div className="mb-6">
+                <PriceAlert
+                  currentPrice={promoPrice}
+                  productName={product.name}
+                  productId={String(product.id)}
+                  targetPrice={Math.round(promoPrice * 0.9)}
+                />
+              </div>
+
               <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
 
               {/* Specs pills */}
@@ -984,14 +1010,37 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           {/* Divider */}
           <div className="my-16 h-px bg-neutral-200" />
 
+          {/* Live Social Proof */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-serif font-bold text-black mb-6">Vu maintenant</h3>
+            <LiveSocialProof viewersCount={7} recentPurchases={3} showAnimatedNotifications={true} />
+          </div>
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
           {/* Product Reviews */}
           <ProductReviews />
 
           {/* Divider */}
           <div className="my-16 h-px bg-neutral-200" />
 
+          {/* Size & Fit Guide */}
+          <div className="mb-16">
+            <SizeFitGuide productType={product.category === 'Salon' ? 'canapé' : 'meuble'} />
+          </div>
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
           {/* Product FAQ */}
           <ProductFAQ productName={product.name} />
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
+          {/* Similar Products */}
+          <SimilarProducts currentProductId={product.id} category={product.category} />
 
           {/* Divider */}
           <div className="my-16 h-px bg-neutral-200" />

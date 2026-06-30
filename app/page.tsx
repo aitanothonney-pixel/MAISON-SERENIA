@@ -16,6 +16,10 @@ import { CollectionsShowcase } from '@/components/ui/collections-showcase';
 import { DifferentiatorsSection } from '@/components/ui/differentiators-section';
 import { NewsletterSection } from '@/components/ui/newsletter-section';
 import { FooterComponent } from '@/components/ui/footer';
+import { ProductBundles } from '@/components/ui/product-bundles';
+import { PreOrderSection } from '@/components/ui/pre-order-section';
+import { VideoTestimonials } from '@/components/ui/video-testimonials';
+import { ReferralProgram } from '@/components/ui/referral-program';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -1789,8 +1793,28 @@ export default function Home() {
         document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
       }} />
 
+      {/* Product Bundles */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <ProductBundles />
+      </div>
+
+      {/* Pre-order Section */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <PreOrderSection />
+      </div>
+
+      {/* Video Testimonials */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <VideoTestimonials />
+      </div>
+
       {/* Testimonials */}
       <TestimonialsSection />
+
+      {/* Referral Program */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <ReferralProgram />
+      </div>
 
       {/* Differentiators */}
       <DifferentiatorsSection />
