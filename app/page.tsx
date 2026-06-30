@@ -1517,8 +1517,8 @@ export default function Home() {
               backgroundPosition: 'center',
             }}
           >
-            {/* Overlay for text contrast */}
-            <div className="absolute inset-0 bg-white/60" />
+            {/* Subtle overlay for text contrast */}
+            <div className="absolute inset-0 bg-white/20" />
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
