@@ -59,6 +59,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
     { label: 'Salon', href: '#section-salon' },
     { label: 'Bureau', href: '#section-bureau' },
     { label: 'Figurines', href: '#section-figurines' },
+    { label: 'Été', href: '#section-ete' },
   ];
 
   return (
