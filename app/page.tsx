@@ -11,6 +11,11 @@ import {
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { ProductCard as ColorSelectorCard } from '@/components/ui/product-card';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
+import { AssuranceBar } from '@/components/ui/assurance-bar';
+import { CollectionsShowcase } from '@/components/ui/collections-showcase';
+import { DifferentiatorsSection } from '@/components/ui/differentiators-section';
+import { NewsletterSection } from '@/components/ui/newsletter-section';
+import { FooterComponent } from '@/components/ui/footer';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -1577,6 +1582,9 @@ export default function Home() {
           {/* Promo full-width banner */}
           <PromoBanner />
 
+          {/* Assurance Bar — Livraison rapide, Paiement sécurisé, Retours */}
+          <AssuranceBar />
+
           {/* Bubble Promo Carousel */}
           <BubblePromoCarousel />
 
@@ -1776,8 +1784,22 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Collections Showcase */}
+      <CollectionsShowcase onCollectionClick={(id) => {
+        document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
+      }} />
+
+      {/* Testimonials */}
       <TestimonialsSection />
-      <Footer />
+
+      {/* Differentiators */}
+      <DifferentiatorsSection />
+
+      {/* Newsletter */}
+      <NewsletterSection />
+
+      {/* Footer */}
+      <FooterComponent />
     </div>
   );
 }
