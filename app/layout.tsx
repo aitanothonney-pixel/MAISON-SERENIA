@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Raleway, Cormorant_Garamond } from 'next/font/google'
+import { Playfair_Display, Sora, DM_Serif_Display } from 'next/font/google'
 import { Analytics } from '@/components/analytics'
 import './globals.css'
 
@@ -9,16 +9,16 @@ const playfair = Playfair_Display({
   display: 'swap',
 })
 
-const raleway = Raleway({
+const sora = Sora({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-raleway',
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({
+const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400'],
   variable: '--font-cormorant',
   display: 'swap',
 })
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${raleway.variable} ${cormorant.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${sora.variable} ${dmSerif.variable}`}>
       <head>
         <Analytics />
       </head>
