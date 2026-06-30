@@ -10,6 +10,10 @@ import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { ProductCard as ColorSelectorCard } from '@/components/ui/product-card';
+import { TrustBadges } from '@/components/ui/trust-badges';
+import { ProductFAQ } from '@/components/ui/product-faq';
+import { ProductReviews } from '@/components/ui/product-reviews';
+import { OftenBoughtTogether } from '@/components/ui/often-bought-together';
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -970,6 +974,27 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
             </section>
           )}
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
+          {/* Often bought together */}
+          <OftenBoughtTogether currentProductId={String(product.id)} />
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
+          {/* Product Reviews */}
+          <ProductReviews />
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
+
+          {/* Product FAQ */}
+          <ProductFAQ productName={product.name} />
+
+          {/* Divider */}
+          <div className="my-16 h-px bg-neutral-200" />
 
           {/* Back button */}
           <div className="mt-16">
