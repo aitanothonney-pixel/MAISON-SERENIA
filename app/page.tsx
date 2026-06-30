@@ -18,9 +18,6 @@ import { NewsletterSection } from '@/components/ui/newsletter-section';
 import { FooterComponent } from '@/components/ui/footer';
 import { ProductBundles } from '@/components/ui/product-bundles';
 import { PreOrderSection } from '@/components/ui/pre-order-section';
-import { VideoTestimonials } from '@/components/ui/video-testimonials';
-import { ReferralProgram } from '@/components/ui/referral-program';
-import { InfluencerPicks } from '@/components/ui/influencer-picks';
 import { ExitIntentPopup } from '@/components/ui/exit-intent-popup';
 import { GiftGuide } from '@/components/ui/gift-guide';
 import { products, getVariantGroup } from '@/lib/products';
@@ -1806,23 +1803,8 @@ export default function Home() {
         <PreOrderSection />
       </div>
 
-      {/* Video Testimonials */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
-        <VideoTestimonials />
-      </div>
-
       {/* Testimonials */}
       <TestimonialsSection />
-
-      {/* Referral Program */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
-        <ReferralProgram />
-      </div>
-
-      {/* Influencer Picks */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
-        <InfluencerPicks />
-      </div>
 
       {/* Gift Guide */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
