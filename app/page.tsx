@@ -1509,12 +1509,21 @@ export default function Home() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
           {/* Hero Section */}
-          <section className="relative flex flex-col items-center justify-center min-h-screen bg-white">
+          <section
+            className="relative flex flex-col items-center justify-center min-h-screen bg-white bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: 'url(https://i.ibb.co/j9h5SNVC/IMG-2392.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            {/* Dark overlay for text contrast */}
+            <div className="absolute inset-0 bg-white/80" />
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-center"
+              className="text-center relative z-10"
             >
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
