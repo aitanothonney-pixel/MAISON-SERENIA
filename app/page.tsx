@@ -22,6 +22,7 @@ import { VideoTestimonials } from '@/components/ui/video-testimonials';
 import { ReferralProgram } from '@/components/ui/referral-program';
 import { InfluencerPicks } from '@/components/ui/influencer-picks';
 import { ExitIntentPopup } from '@/components/ui/exit-intent-popup';
+import { GiftGuide } from '@/components/ui/gift-guide';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -1821,6 +1822,11 @@ export default function Home() {
       {/* Influencer Picks */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
         <InfluencerPicks />
+      </div>
+
+      {/* Gift Guide */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <GiftGuide />
       </div>
 
       {/* Differentiators */}
