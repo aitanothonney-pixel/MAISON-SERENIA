@@ -1772,16 +1772,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Portrait */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop"
-                alt="Blog image 12"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
           </div>
         </div>
       </section>
