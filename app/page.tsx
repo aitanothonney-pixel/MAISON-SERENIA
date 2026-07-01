@@ -1821,123 +1821,123 @@ export default function Home() {
             <div className="divider-gold w-16 mx-auto" />
           </div>
 
-          {/* Masonry Grid */}
+          {/* Editorial Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
-            {/* Paysage large */}
-            <div className="lg:col-span-2 row-span-1 overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=400&fit=crop"
-                alt="Blog image 1"
-                width={800}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Portrait */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=600&fit=crop"
-                alt="Blog image 2"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Carré */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop"
-                alt="Blog image 3"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Portrait */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400&h=600&fit=crop"
-                alt="Blog image 4"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Carré */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://images.unsplash.com/photo-1564157191865-71ceaafce078?w=400&h=400&fit=crop"
-                alt="Blog image 5"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Paysage */}
+            {/* Canapé Bubble blanc — lifestyle */}
             <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=400&fit=crop"
-                alt="Blog image 6"
+                src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+                alt="Canapé Bubble blanc"
                 width={800}
                 height={400}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Portrait */}
+            {/* Fauteuil Bubble blanc */}
             <div className="overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=600&fit=crop"
-                alt="Blog image 7"
+                src="https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg"
+                alt="Fauteuil Bubble blanc"
                 width={400}
                 height={600}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Paysage large */}
+            {/* Bearbrick Bape */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://i.ibb.co/212j4PLX/IMG-0662.jpg"
+                alt="Bearbrick Bape"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Fauteuil Bubble bleu */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg"
+                alt="Fauteuil Bubble bleu"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Canapé Bubble bleu */}
+            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
+              <Image
+                src="https://i.ibb.co/R1tJYDf/IMG-2491.jpg"
+                alt="Canapé Bubble bleu"
+                width={800}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* KAWS noir monde */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://i.ibb.co/r1YNwbR/IMG-0657.jpg"
+                alt="Figurine KAWS noir monde"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Canapé Bubble rouge — grande largeur */}
             <div className="lg:col-span-3 overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1000&h=400&fit=crop"
-                alt="Blog image 8"
+                src="https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png"
+                alt="Canapé Bubble rouge"
                 width={1000}
                 height={400}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Carré */}
+            {/* Canapé Bubble violet */}
             <div className="overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1574394615383-655b15b41beb?w=400&h=400&fit=crop"
-                alt="Blog image 9"
+                src="https://i.ibb.co/My8fK90B/IMG-2525.jpg"
+                alt="Canapé Bubble violet"
                 width={400}
                 height={400}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Carré */}
+            {/* Fauteuil Bubble rouge */}
             <div className="overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1457361552529-c4a2c6b1d0d5?w=400&h=400&fit=crop"
-                alt="Blog image 10"
+                src="https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg"
+                alt="Fauteuil Bubble rouge"
                 width={400}
                 height={400}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
 
-            {/* Paysage */}
+            {/* Fauteuil Bubble vert */}
+            <div className="overflow-hidden bg-neutral-100">
+              <Image
+                src="https://i.ibb.co/0pnzSpFV/IMG-2557.jpg"
+                alt="Fauteuil Bubble vert"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Canapé Bubble blanc — vue de face */}
             <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
               <Image
-                src="https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=800&h=400&fit=crop"
-                alt="Blog image 11"
+                src="https://i.ibb.co/wZRJYt6F/IMG-5364.jpg"
+                alt="Canapé Bubble blanc"
                 width={800}
                 height={400}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
