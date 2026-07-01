@@ -572,28 +572,16 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
           </button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {bestsellers.map((product, index) => (
-            <div
-              key={product.id}
-              className="group overflow-hidden"
-            >
+          {bestsellers.map((product) => (
+            <div key={product.id} className="group">
               <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+                <div className="relative aspect-[3/4] overflow-hidden bg-white border border-neutral-100 mb-3 p-4">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+                    className="object-contain transition-transform duration-500 group-hover:scale-105"
                   />
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                      Best-seller
-                    </div>
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                      −30%
-                    </div>
-                  </div>
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
                     className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
@@ -601,16 +589,12 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
                 </div>
-                <div className="flex items-center gap-1 mb-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
-                  <span className="text-[10px] text-neutral-400 ml-1">(4,9)</span>
-                </div>
-                <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
-                <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <div className="flex items-center gap-2">
-                  <p className="text-black font-bold text-base font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
-                  <p className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</p>
-                </div>
+                <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400 font-light mb-1">{product.category}</p>
+                <h3 className="text-sm font-light text-black mb-0.5 group-hover:opacity-60 transition-opacity">{product.name}</h3>
+                <p className="text-neutral-400 text-xs mb-2 line-clamp-1 font-light">{product.description}</p>
+                <p className="text-black font-serif font-light text-base" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                  {product.price.toLocaleString('fr-FR')} €
+                </p>
               </Link>
             </div>
           ))}
