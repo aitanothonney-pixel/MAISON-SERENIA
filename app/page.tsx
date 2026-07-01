@@ -84,18 +84,21 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
     >
       {/* Main nav row */}
       <div className="max-w-full px-6 lg:px-10 relative flex items-center h-16 lg:h-[68px]">
-        {/* Left — Hamburger Menu Button */}
+        {/* Left — Hamburger Menu Button with "Menu" text */}
         <div className="flex items-center flex-shrink-0">
           <button
-            className={`flex flex-col gap-1.5 p-2 transition-colors hover:opacity-60 ${
-              scrolled ? 'text-black' : 'text-white'
+            className={`group flex items-center gap-3 px-3 py-2 transition-all duration-200 ${
+              scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'
             }`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <div className="flex flex-col gap-1.5">
+              <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+              <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+              <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            </div>
+            <span className="text-xs font-light tracking-widest uppercase hidden sm:block">Menu</span>
           </button>
         </div>
 
@@ -114,7 +117,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
         {/* Center-Left — Search Bar (hidden on mobile) */}
         <div className={`hidden lg:block flex-1 max-w-md ml-8`}>
-          <div className={`flex items-center gap-2 pb-1`}>
+          <div className={`flex items-center gap-2`}>
             <Search className={`w-4 h-4 ${scrolled ? 'text-black/50' : 'text-white/50'}`} />
             <input
               type="text"
@@ -134,21 +137,21 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
         {/* Right — Contact & Icons */}
         <div className="flex items-center gap-4 lg:gap-6 ml-auto flex-shrink-0">
           {/* Contact text */}
-          <a href="tel:+33" className={`text-xs font-light tracking-widest uppercase hidden lg:block transition-colors ${
-            scrolled ? 'text-black hover:opacity-60' : 'text-white hover:opacity-60'
+          <a href="tel:+33" className={`text-xs font-light tracking-widest uppercase hidden lg:block transition-all duration-200 px-3 py-2 ${
+            scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'
           }`}>
             Contactez-nous
           </a>
 
           {/* Account icon */}
-          <button className={`p-2 transition-colors hover:opacity-60 ${scrolled ? 'text-black' : 'text-white'}`} aria-label="Compte">
+          <button className={`p-2 transition-all duration-200 ${scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'}`} aria-label="Compte">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 110 8 4 4 0 010-8z" />
             </svg>
           </button>
 
           {/* Cart */}
-          <button onClick={onCartOpen} className={`relative p-2 transition-colors hover:opacity-60 ${scrolled ? 'text-black' : 'text-white'}`} aria-label="Panier">
+          <button onClick={onCartOpen} className={`relative p-2 transition-all duration-200 ${scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'}`} aria-label="Panier">
             <ShoppingBag className="w-5 h-5" />
             {mounted && cartCount > 0 && (
               <span className={`absolute top-0.5 right-0.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center leading-none ${
