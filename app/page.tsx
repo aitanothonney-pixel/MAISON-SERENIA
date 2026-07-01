@@ -252,21 +252,90 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
         )}
       </AnimatePresence>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - Louis Vuitton style */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden bg-white border-t border-neutral-100 px-6 py-6 flex flex-col gap-4"
-          >
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href} className="text-sm tracking-widest uppercase text-black hover:opacity-60 flex items-center justify-between">
-                {item.label} <ChevronRight className="w-4 h-4 text-neutral-300" />
-              </a>
-            ))}
-          </motion.div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMenuOpen(false)}
+              className="lg:hidden fixed inset-0 bg-black/40 z-40"
+            />
+
+            {/* Sidebar menu */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="lg:hidden fixed left-0 top-0 h-full w-72 bg-white z-50 overflow-y-auto flex flex-col"
+            >
+              {/* Header with close button */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 sticky top-0 bg-white">
+                <span className="text-xs tracking-widest uppercase text-neutral-400 font-light">Menu</span>
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="p-2 hover:bg-neutral-100 transition-colors"
+                  aria-label="Fermer le menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Menu content */}
+              <div className="flex-1 px-6 py-8 space-y-8">
+                {/* Collections */}
+                <div>
+                  <p className="text-xs tracking-[0.15em] uppercase text-neutral-400 font-light mb-4">Collections</p>
+                  <div className="space-y-3">
+                    <a href="#section-salon" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Salon</a>
+                    <a href="#section-bureau" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Bureau</a>
+                    <a href="#section-figurines" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Figurines</a>
+                    <a href="#section-ete" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Collection Été</a>
+                  </div>
+                </div>
+
+                {/* Packs */}
+                <div>
+                  <p className="text-xs tracking-[0.15em] uppercase text-neutral-400 font-light mb-4">Packs & Ensembles</p>
+                  <div className="space-y-3">
+                    <a href="#packs" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Voir les offres groupées</a>
+                  </div>
+                </div>
+
+                {/* Services */}
+                <div>
+                  <p className="text-xs tracking-[0.15em] uppercase text-neutral-400 font-light mb-4">Services</p>
+                  <div className="space-y-3">
+                    <a href="/about" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">À propos de nous</a>
+                    <a href="/contact" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Contact</a>
+                    <a href="/faq" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Questions fréquentes</a>
+                    <a href="/track-order" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Suivi commande</a>
+                  </div>
+                </div>
+
+                {/* Legal */}
+                <div>
+                  <p className="text-xs tracking-[0.15em] uppercase text-neutral-400 font-light mb-4">Informations</p>
+                  <div className="space-y-3">
+                    <a href="/retours" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Retours & Échanges</a>
+                    <a href="/cgv" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Conditions générales</a>
+                    <a href="/confidentialite" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Confidentialité</a>
+                    <a href="/mentions-legales" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Mentions légales</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-6 py-6 border-t border-neutral-100 space-y-3 text-xs text-neutral-400 font-light">
+                <p className="tracking-[0.1em]">Livraison en Suisse</p>
+                <p className="tracking-[0.1em]">© 2026 Maison Serenia</p>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
