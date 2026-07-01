@@ -1731,58 +1731,17 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-          {/* Hero Section */}
-          <section
-            className="relative flex flex-col items-center justify-center min-h-screen bg-white bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: 'url(https://i.ibb.co/j9h5SNVC/IMG-2392.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          >
-            {/* Subtle overlay for text contrast */}
-            <div className="absolute inset-0 bg-white/20" />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-center relative z-10"
-            >
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase mb-2"
-                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}
-              >
-                MAISON
-              </motion.h1>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase mb-8"
-                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}
-              >
-                SERENIA
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-xs tracking-[0.4em] uppercase text-neutral-400 mb-4"
-              >
-                Collection 2026
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-[10px] tracking-[0.3em] uppercase text-neutral-300 font-medium"
-              >
-                Défiler pour découvrir
-              </motion.p>
-            </motion.div>
+          {/* Hero Section - full clean high-quality image */}
+          <section className="relative min-h-screen w-full overflow-hidden">
+            <Image
+              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+              alt="Maison Serenia"
+              fill
+              priority
+              quality={100}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
           </section>
 
           {/* Section Été */}
