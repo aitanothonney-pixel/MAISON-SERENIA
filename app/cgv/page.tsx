@@ -92,7 +92,7 @@ export default function CGVPage() {
             <h2 className="text-2xl font-semibold text-black mb-4">10. Contact</h2>
             <p>
               Pour toute question concernant les Conditions Générales de Vente, veuillez nous contacter à
-              <strong> contact@maisonserenia.ch</strong> ou via le formulaire de contact sur le site.
+              <strong> maisonserenia@gmail.com</strong> ou via le formulaire de contact sur le site.
             </p>
           </section>
 

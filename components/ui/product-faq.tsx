@@ -14,7 +14,7 @@ const defaultFAQs = [
   },
   {
     question: 'Comment retourner un article ?',
-    answer: 'Vous avez 30 jours pour retourner tout article non utilisé. Contactez-nous à returns@maisonserenia.ch avec votre numéro de commande. Les frais de retour sont gratuits en cas d\'erreur de notre part.',
+    answer: 'Vous avez 30 jours pour retourner tout article non utilisé. Contactez-nous à maisonserenia@gmail.com avec votre numéro de commande. Les frais de retour sont gratuits en cas d\'erreur de notre part.',
   },
   {
     question: 'Le produit est-il conforme aux photos ?',

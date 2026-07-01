@@ -74,7 +74,7 @@ export default function ConfidentialitePage() {
             <p>
               Conformément au RGPD, vous disposez du droit d&apos;accès, de rectification, de suppression,
               de limitation et de portabilité de vos données. Pour exercer ces droits, contactez-nous à
-              <strong> privacy@maisonserenia.ch</strong>.
+              <strong> maisonserenia@gmail.com</strong>.
             </p>
           </section>
 
@@ -98,7 +98,7 @@ export default function ConfidentialitePage() {
             <h2 className="text-2xl font-semibold text-black mb-4">10. Contact</h2>
             <p>
               Pour toute question concernant vos données personnelles, contactez-nous à
-              <strong> privacy@maisonserenia.ch</strong> ou via le formulaire de contact du site.
+              <strong> maisonserenia@gmail.com</strong> ou via le formulaire de contact du site.
             </p>
           </section>
 

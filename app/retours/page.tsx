@@ -32,7 +32,7 @@ export default function RetoursPage() {
               Pour retourner un article :
             </p>
             <ol className="list-decimal list-inside mt-3 space-y-3 ml-2">
-              <li><strong>Contactez-nous</strong> à <span className="font-mono text-sm">returns@maisonserenia.ch</span> avec votre numéro de commande</li>
+              <li><strong>Contactez-nous</strong> à <span className="font-mono text-sm">maisonserenia@gmail.com</span> avec votre numéro de commande</li>
               <li><strong>Attendez la confirmation</strong> avec les instructions d&apos;expédition</li>
               <li><strong>Emballez l&apos;article</strong> soigneusement avec tous les accessoires</li>
               <li><strong>Livrez le colis</strong> à l&apos;adresse indiquée (sans assurance requise)</li>
@@ -102,7 +102,7 @@ export default function RetoursPage() {
           <section>
             <h2 className="text-2xl font-semibold text-black mb-4">8. Contact pour les retours</h2>
             <div className="bg-neutral-50 p-6 rounded-none">
-              <p className="mb-3"><strong>Email :</strong> <span className="font-mono">returns@maisonserenia.ch</span></p>
+              <p className="mb-3"><strong>Email :</strong> <span className="font-mono">maisonserenia@gmail.com</span></p>
               <p className="mb-3"><strong>Téléphone :</strong> +41 xx xxx xx xx (lun-ven 9h-17h CET)</p>
               <p><strong>Formulaire :</strong> Utilisez le formulaire de contact sur notre site</p>
             </div>

@@ -11,7 +11,7 @@ export default function MentionsLegalesPage() {
               <p><strong>Raison sociale :</strong> MAISON SERENIA SARL</p>
               <p><strong>Forme juridique :</strong> SARL</p>
               <p><strong>Adresse :</strong> [Adresse complète]</p>
-              <p><strong>Email :</strong> contact@maisonserenia.ch</p>
+              <p><strong>Email :</strong> maisonserenia@gmail.com</p>
               <p><strong>Numéro TVA :</strong> CHE xxx.xxx.xxx</p>
               <p><strong>Capital social :</strong> [Montant]</p>
             </div>
@@ -110,7 +110,7 @@ export default function MentionsLegalesPage() {
             <h2 className="text-2xl font-semibold text-black mb-4">12. Contact</h2>
             <p>
               Pour toute question, réclamation ou demande concernant ces Mentions Légales, veuillez nous contacter à
-              <strong> contact@maisonserenia.ch</strong>.
+              <strong> maisonserenia@gmail.com</strong>.
             </p>
           </section>
 

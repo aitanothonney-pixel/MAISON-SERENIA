@@ -28,7 +28,7 @@ const faqItems: FAQItem[] = [
   {
     category: 'Retours',
     question: 'Comment retourner un article ?',
-    answer: 'Vous avez 30 jours pour retourner tout article non utilisé. Contactez-nous à returns@maisonserenia.ch avec votre numéro de commande. Nous vous fournirons une étiquette de retour. Une fois reçu, vous êtes remboursé sous 14 jours.'
+    answer: 'Vous avez 30 jours pour retourner tout article non utilisé. Contactez-nous à maisonserenia@gmail.com avec votre numéro de commande. Nous vous fournirons une étiquette de retour. Une fois reçu, vous êtes remboursé sous 14 jours.'
   },
   {
     category: 'Retours',
@@ -38,7 +38,7 @@ const faqItems: FAQItem[] = [
   {
     category: 'Retours',
     question: 'Puis-je échanger un produit ?',
-    answer: 'Bien sûr ! Un échange est possible dans les 30 jours. Une fois votre retour reçu, nous vous envoyons le nouveau produit gratuitement. Contactez returns@maisonserenia.ch pour commencer.'
+    answer: 'Bien sûr ! Un échange est possible dans les 30 jours. Une fois votre retour reçu, nous vous envoyons le nouveau produit gratuitement. Contactez maisonserenia@gmail.com pour commencer.'
   },
   {
     category: 'Paiements',
@@ -63,7 +63,7 @@ const faqItems: FAQItem[] = [
   {
     category: 'Service Client',
     question: 'Comment contacter le service client ?',
-    answer: 'Vous pouvez nous joindre par email à contact@maisonserenia.ch, par téléphone au +41 xx xxx xx xx (lun-ven 9h-17h), ou via le formulaire de contact. Nous répondons dans les 4 heures en semaine.'
+    answer: 'Vous pouvez nous joindre par email à maisonserenia@gmail.com, par téléphone au +41 xx xxx xx xx (lun-ven 9h-17h), ou via le formulaire de contact. Nous répondons dans les 4 heures en semaine.'
   },
   {
     category: 'Service Client',
