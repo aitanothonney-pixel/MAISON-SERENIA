@@ -1351,62 +1351,130 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {cartProducts.map(({ id, qty, product, price }) => (
-                    <motion.div
-                      key={id}
-                      layout
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className={`flex items-start gap-3 p-3 border transition-all duration-200 cursor-pointer ${
-                        selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
-                      }`}
-                      onClick={() => toggleSelect(id)}
-                    >
-                      {/* Checkbox */}
-                      <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
-                        selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
-                      }`}>
-                        {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                      </div>
+                  {cartProducts.map(({ id, qty, product, price, isBundle }) => {
+                    const bundle = isBundle ? bundleDefinitions.find(b => b.bundleId === Math.floor(Math.abs(id) / 1000).toString()) : null;
+                    const bundleProducts = bundle?.products || [];
 
-                      {/* Image */}
-                      <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
-                        <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
-                      </div>
-
-                      {/* Info */}
-                      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
-                        <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                        <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
-                        {/* Qty */}
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            onClick={() => updateQty(id, qty - 1)}
-                            className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="text-xs font-semibold w-5 text-center">{qty}</span>
-                          <button
-                            onClick={() => updateQty(id, qty + 1)}
-                            className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Delete */}
-                      <button
-                        onClick={(e) => { e.stopPropagation(); removeItem(id); }}
-                        className="shrink-0 mt-1 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
+                    return (
+                      <motion.div
+                        key={id}
+                        layout
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`border rounded-none p-3 transition-all duration-200 ${
+                          selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
+                        }`}
                       >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </motion.div>
-                  ))}
+                        {/* Bundle header with checkbox */}
+                        {isBundle && bundle && (
+                          <div className="flex items-start gap-3 pb-3 border-b border-neutral-200 cursor-pointer" onClick={() => toggleSelect(id)}>
+                            <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
+                              selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
+                            }`}>
+                              {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                            </div>
+                            <div className="flex-1">
+                              <p className="font-serif font-semibold text-sm">{bundle.name}</p>
+                              <p className="text-xs text-neutral-400 mt-0.5">Pack ensemble</p>
+                            </div>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); removeItem(id); }}
+                              className="shrink-0 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Products in bundle or single product */}
+                        {isBundle && bundle ? (
+                          <div className="space-y-2 pt-3">
+                            {bundleProducts.map((bundleProduct, idx) => (
+                              <div key={bundleProduct.id} className={idx < bundleProducts.length - 1 ? 'pb-2 border-b border-neutral-100' : ''}>
+                                <div className="flex items-start gap-2">
+                                  <div className="shrink-0 w-16 h-16 bg-neutral-100 overflow-hidden flex items-center justify-center rounded-none">
+                                    <img
+                                      src={products.find(p => p.id === bundleProduct.id)?.images[0] || ''}
+                                      alt={bundleProduct.name}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="font-serif font-semibold text-xs leading-snug line-clamp-2">{bundleProduct.name}</p>
+                                    <p className="text-xs text-neutral-400 mt-0.5">Inclus dans le pack</p>
+                                    <p className="font-bold text-xs text-black mt-1">{bundleProduct.price.toLocaleString('fr-FR')} €</p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="flex items-start gap-3 cursor-pointer" onClick={() => toggleSelect(id)}>
+                            <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
+                              selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
+                            }`}>
+                              {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                            </div>
+
+                            <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
+                              <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
+                            </div>
+
+                            <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
+                              <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
+                              <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
+                              <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
+                              <div className="flex items-center gap-2 mt-2">
+                                <button
+                                  onClick={() => updateQty(id, qty - 1)}
+                                  className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="text-xs font-semibold w-5 text-center">{qty}</span>
+                                <button
+                                  onClick={() => updateQty(id, qty + 1)}
+                                  className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={(e) => { e.stopPropagation(); removeItem(id); }}
+                              className="shrink-0 mt-1 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Bundle pricing */}
+                        {isBundle && bundle && (
+                          <div className="mt-3 pt-3 border-t border-neutral-100 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => updateQty(id, qty - 1)}
+                                className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                              >
+                                <Minus className="w-3 h-3" />
+                              </button>
+                              <span className="text-xs font-semibold w-5 text-center">{qty}</span>
+                              <button
+                                onClick={() => updateQty(id, qty + 1)}
+                                className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                              >
+                                <Plus className="w-3 h-3" />
+                              </button>
+                            </div>
+                            <p className="font-bold text-sm text-black font-price">{price.toLocaleString('fr-FR')} €</p>
+                          </div>
+                        )}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               )}
             </div>
