@@ -15,10 +15,8 @@ import { ProductFAQ } from '@/components/ui/product-faq';
 import { ProductReviews } from '@/components/ui/product-reviews';
 import { OftenBoughtTogether } from '@/components/ui/often-bought-together';
 import { StockCountdown } from '@/components/ui/stock-countdown';
-import { PaymentPlans } from '@/components/ui/payment-plans';
 import { LiveSocialProof } from '@/components/ui/live-social-proof';
 import { SimilarProducts } from '@/components/ui/similar-products';
-import { PriceAlert } from '@/components/ui/price-alert';
 import { SizeFitGuide } from '@/components/ui/size-fit-guide';
 import { RecentlyViewed } from '@/components/ui/recently-viewed';
 import { SizeColorFinder } from '@/components/ui/size-color-finder';
@@ -852,21 +850,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               {/* Stock Countdown */}
               <div className="mb-6">
                 <StockCountdown itemsLeft={3} threshold={5} totalSold={42} />
-              </div>
-
-              {/* Payment Plans */}
-              <div className="mb-6">
-                <PaymentPlans price={promoPrice} showMinimum={true} />
-              </div>
-
-              {/* Price Alert */}
-              <div className="mb-6">
-                <PriceAlert
-                  currentPrice={promoPrice}
-                  productName={product.name}
-                  productId={String(product.id)}
-                  targetPrice={Math.round(promoPrice * 0.9)}
-                />
               </div>
 
               {/* Size/Color Finder */}
