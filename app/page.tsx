@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ShoppingBag, ChevronRight, Share2, Heart, Globe,
+  ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
 } from 'lucide-react';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -146,14 +146,18 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
           {/* Account icon */}
           <button className={`p-2 transition-all duration-200 ${scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'}`} aria-label="Compte">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 110 8 4 4 0 010-8z" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+              <circle cx="12" cy="7.5" r="3.5" />
+              <path d="M4 21c0-4.418 3.582-8 8-8s8 3.582 8 8" />
             </svg>
           </button>
 
           {/* Cart */}
           <button onClick={onCartOpen} className={`relative p-2 transition-all duration-200 ${scrolled ? 'text-black hover:bg-black/5' : 'text-white hover:bg-white/20'}`} aria-label="Panier">
-            <ShoppingBag className="w-5 h-5" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+              <path d="M5 9h14l-1.5 11h-11z" />
+              <path d="M9 9V7a3 3 0 016 0v2" />
+            </svg>
             {mounted && cartCount > 0 && (
               <span className={`absolute top-0.5 right-0.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center leading-none ${
                 scrolled ? 'bg-black text-white' : 'bg-white text-black'
