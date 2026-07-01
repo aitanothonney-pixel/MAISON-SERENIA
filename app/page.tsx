@@ -7,6 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
+  Truck, Shield, RotateCcw, ArrowUp,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -32,6 +33,69 @@ function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; del
     >
       {children}
     </motion.div>
+  );
+}
+
+// ─── Scroll Progress Bar ──────────────────────────────────────────────────────
+
+function ScrollProgressBar() {
+  const [scrollPercent, setScrollPercent] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const scrollTop = window.scrollY;
+      const scrollHeight = el.scrollHeight - el.clientHeight;
+      setScrollPercent(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        height: '2px',
+        backgroundColor: '#C9A96E',
+        width: scrollPercent + '%',
+        zIndex: 9999,
+        transition: 'width 0.1s linear',
+      }}
+    />
+  );
+}
+
+// ─── Back To Top ──────────────────────────────────────────────────────────────
+
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 500);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          key="back-to-top"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed z-50 bottom-20 right-4 md:bottom-8 md:right-8 w-11 h-11 rounded-full bg-black text-white flex items-center justify-center hover:bg-neutral-700 transition-colors shadow-lg"
+          aria-label="Retour en haut"
+        >
+          <ArrowUp size={18} />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -286,6 +350,29 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
 function PromoBanner() {
   const [lightbox, setLightbox] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const endDate = new Date('2026-07-22').getTime();
+    const calc = () => {
+      const diff = endDate - Date.now();
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    calc();
+    const id = setInterval(calc, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const pad = (n: number) => String(n).padStart(2, '0');
 
   return (
     <FadeInSection>
@@ -310,9 +397,23 @@ function PromoBanner() {
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
             </h2>
-            <p className="text-white/70 text-sm mb-7 max-w-md">
+            <p className="text-white/70 text-sm mb-5 max-w-md">
               Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
             </p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Offre se termine dans :</p>
+            <div className="flex gap-3">
+              {[
+                { value: pad(timeLeft.days), label: 'Jours' },
+                { value: pad(timeLeft.hours), label: 'Heures' },
+                { value: pad(timeLeft.minutes), label: 'Min' },
+                { value: pad(timeLeft.seconds), label: 'Sec' },
+              ].map(({ value, label }) => (
+                <div key={label} className="flex flex-col items-center bg-black/80 border border-[#C9A96E] px-3 py-2 min-w-[44px]">
+                  <span className="text-white text-lg font-bold leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{value}</span>
+                  <span className="text-[9px] text-neutral-400 uppercase tracking-wider mt-1">{label}</span>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none">
             <a
@@ -978,73 +1079,255 @@ function TestimonialsSection() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
+// ─── Trust Strip ─────────────────────────────────────────────────────────────
+
+function TrustStrip() {
+  const items = [
+    { Icon: Truck, title: 'Livraison Offerte', subtitle: 'dès 80€' },
+    { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
+    { Icon: RotateCcw, title: 'Retours Gratuits', subtitle: '30 jours' },
+    { Icon: Star, title: '4.9/5', subtitle: '+1 200 clients' },
+  ];
+  return (
+    <FadeInSection>
+      <div className="w-full" style={{ background: '#f9f9f9' }}>
+        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200">
+          {items.map(({ Icon, title, subtitle }) => (
+            <div key={title} className="flex flex-col items-center justify-center gap-2 py-7 px-4 text-center">
+              <Icon size={24} className="text-black" strokeWidth={1.5} />
+              <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
+              <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </FadeInSection>
+  );
+}
+
+// ─── Newsletter Section ───────────────────────────────────────────────────────
+
+function NewsletterSection() {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) setSubmitted(true);
+  };
+
+  return (
+    <section className="w-full bg-black py-20 px-6">
+      <div className="max-w-2xl mx-auto text-center">
+        <FadeInSection>
+          <h2
+            className="text-3xl md:text-4xl text-white mb-4"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontStyle: 'italic', fontWeight: 400 }}
+          >
+            Rejoignez l&apos;art de vivre Serenia
+          </h2>
+          <p className="text-neutral-400 text-sm mb-8 leading-relaxed">
+            Accédez en avant-première à nos collections exclusives, conseils déco et offres réservées aux membres.
+          </p>
+          {submitted ? (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-white text-base font-medium"
+            >
+              Bienvenue&nbsp;! 🎉 Vérifiez votre email.
+            </motion.p>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="votre@email.com"
+                className="flex-1 bg-white/10 text-white placeholder-neutral-500 border border-white/20 rounded px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
+              />
+              <button
+                type="submit"
+                className="bg-white text-black font-medium text-sm px-6 py-3 rounded hover:bg-neutral-200 transition-colors whitespace-nowrap"
+              >
+                S&apos;inscrire
+              </button>
+            </form>
+          )}
+          <p className="text-neutral-600 text-[11px] mt-4 tracking-wide">Pas de spam · Désabonnement en 1 clic</p>
+        </FadeInSection>
+      </div>
+    </section>
+  );
+}
+
+// ─── Cookie Banner ────────────────────────────────────────────────────────────
+
+function CookieBanner() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('cookie-consent');
+    if (!stored) setVisible(true);
+  }, []);
+
+  const handleChoice = (choice: 'accepted' | 'refused') => {
+    localStorage.setItem('cookie-consent', choice);
+    setVisible(false);
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-lg border-t border-neutral-200"
+        >
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4">
+            <p className="text-sm text-neutral-700 text-center sm:text-left">
+              Nous utilisons des cookies pour améliorer votre expérience.
+            </p>
+            <div className="flex gap-3 shrink-0">
+              <button
+                onClick={() => handleChoice('refused')}
+                className="text-sm px-5 py-2 border border-black text-black rounded hover:bg-neutral-100 transition-colors"
+              >
+                Refuser
+              </button>
+              <button
+                onClick={() => handleChoice('accepted')}
+                className="text-sm px-5 py-2 bg-black text-white rounded hover:bg-neutral-800 transition-colors"
+              >
+                Tout accepter
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSent, setNewsletterSent] = useState(false);
+
   return (
     <footer className="bg-black text-white/60 pt-16 pb-8">
       {/* Top bar */}
       <div className="h-px w-full bg-neutral-800" />
       <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-          {/* Brand */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+          {/* Col 1 — Brand */}
           <div>
-            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-4 text-white" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-3 text-white" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
               MAISON SERENIA
             </h3>
-            <p className="text-sm leading-relaxed mb-6">
-              L&apos;art de vivre à la française. Des pièces intemporelles, conçues pour durer et sublimer votre intérieur.
-            </p>
+            <p className="text-sm leading-relaxed mb-2">L&apos;art de vivre à la française.</p>
+            <p className="text-sm mb-5">Paris, France 🇫🇷</p>
+            <div className="flex items-center gap-4">
+              <a href="https://www.instagram.com/serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="https://www.youtube.com/@serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Youtube" className="hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="hover:text-white transition-colors text-sm font-medium tracking-wider">
+                TikTok
+              </a>
+            </div>
           </div>
 
-          {/* Collections */}
+          {/* Col 2 — Nos Collections */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Collections</h4>
+            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Nos Collections</h4>
             <ul className="space-y-2 text-sm">
               {[
-                { label: 'Salon', filter: 'Salon', section: 'section-salon' },
-                { label: 'Figurines', filter: 'Figurines', section: 'section-figurines' },
-                { label: 'Bureau', filter: 'Bureau', section: 'section-bureau' },
+                { label: 'Salon', href: '/#section-salon' },
+                { label: 'Bureau', href: '/#section-bureau' },
+                { label: 'Figurines', href: '/#section-figurines' },
+                { label: 'Été', href: '/#section-ete' },
+                { label: 'Promotions', href: '/#section-salon?filter=Bubble' },
               ].map((item) => (
                 <li key={item.label}>
-                  <a
-                    href={`#${item.section}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (item.filter !== 'Figurines') {
-                        // Need to reach setActiveFilter — use hash to trigger it
-                        window.location.hash = item.section;
-                      }
-                      setTimeout(() => document.getElementById(item.section)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
-                    }}
-                    className="hover:text-white transition-colors flex items-center gap-1"
-                  >
+                  <Link href={item.href} className="hover:text-white transition-colors flex items-center gap-1">
                     <ChevronRight className="w-3 h-3" /> {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Trouvez nous sur */}
+          {/* Col 3 — Service Client */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Trouvez nous sur</h4>
+            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Service Client</h4>
             <ul className="space-y-2 text-sm">
               {[
-                { label: 'Instagram — @serenia_officiel', href: 'https://www.instagram.com/serenia_officiel' },
-                { label: 'TikTok — @serenia_officiel', href: 'https://www.tiktok.com/@serenia_officiel' },
-                { label: 'Facebook', href: '#' },
+                { label: 'Livraison', href: '/livraison' },
+                { label: 'Retours', href: '/retours' },
+                { label: 'FAQ', href: '/faq' },
+                { label: 'Contact', href: '/contact' },
+                { label: 'À propos', href: '/a-propos' },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
+                  <Link href={item.href} className="hover:text-white transition-colors flex items-center gap-1">
                     <ChevronRight className="w-3 h-3" /> {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Col 4 — Newsletter */}
+          <div>
+            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Newsletter</h4>
+            <p className="text-sm leading-relaxed mb-4">Recevez nos nouveautés et offres exclusives.</p>
+            {newsletterSent ? (
+              <p className="text-sm text-white/80">Merci pour votre inscription !</p>
+            ) : (
+              <form
+                onSubmit={(e) => { e.preventDefault(); if (newsletterEmail) setNewsletterSent(true); }}
+                className="flex items-center"
+              >
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="votre@email.com"
+                  required
+                  className="flex-1 min-w-0 bg-white/5 border border-white/20 text-white text-sm px-3 py-2 rounded-l outline-none focus:ring-1 focus:ring-[#C9A96E] placeholder:text-white/30 transition-all"
+                />
+                <button
+                  type="submit"
+                  className="bg-white/10 hover:bg-white/20 border border-white/20 border-l-0 text-white px-3 py-2 rounded-r transition-colors focus:outline-none focus:ring-1 focus:ring-[#C9A96E]"
+                  aria-label="S'inscrire"
+                >
+                  →
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
-          <p>© 2026 MAISON SERENIA. Tous droits réservés.</p>
+          <p>
+            © 2026 Maison Serenia&nbsp;
+            <span className="hidden sm:inline">|</span>
+            <Link href="/cgv" className="hover:text-white transition-colors mx-1">CGV</Link>
+            |
+            <Link href="/confidentialite" className="hover:text-white transition-colors mx-1">Politique confidentialité</Link>
+            |
+            <Link href="/mentions-legales" className="hover:text-white transition-colors mx-1">Mentions légales</Link>
+          </p>
           <div className="flex items-center gap-3 flex-wrap justify-center">
             {/* Visa */}
             <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1539,6 +1822,8 @@ export default function Home() {
 
   return (
     <div className="bg-white">
+      <ScrollProgressBar />
+      <BackToTop />
       <Navbar hasBar={false} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
@@ -1584,6 +1869,8 @@ export default function Home() {
           <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-300 font-medium mt-1">Défiler pour découvrir</p>
         </div>
       </section>
+
+      <TrustStrip />
 
       <div className="w-full">
           {/* Minimalist Hero — product showcase */}
@@ -1684,7 +1971,9 @@ export default function Home() {
 
       <InspirationsParallaxSection />
       <TestimonialsSection />
+      <NewsletterSection />
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

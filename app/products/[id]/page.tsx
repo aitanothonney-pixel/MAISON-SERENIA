@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2 } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -524,6 +524,17 @@ function CartToast({ show, productName }: { show: boolean; productName: string }
 
 // ─── Product Page ─────────────────────────────────────────────────────────────
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const product = products.find(p => p.id === Number(id));
+  if (!product) return { title: 'Produit | Maison Serenia' };
+  return {
+    title: `${product.name} | Maison Serenia`,
+    description: product.description.slice(0, 155),
+    openGraph: { title: product.name, description: product.description.slice(0, 155), images: [{ url: product.images[0] }] },
+  };
+}
+
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const product = products.find((p) => p.id === Number(id));
@@ -538,8 +549,23 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [lightbox, setLightbox] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
+
+  useEffect(() => {
+    if (!product) return;
+    const key = 'ms_recently_viewed';
+    const stored: number[] = JSON.parse(localStorage.getItem(key) ?? '[]');
+    // Build recently viewed list (excluding current) before updating storage
+    const filtered = stored.filter((pid) => pid !== product.id);
+    const viewedProducts = filtered.slice(0, 5).map((pid) => products.find((p) => p.id === pid)).filter((p): p is (typeof products)[number] => Boolean(p));
+    setRecentlyViewed(viewedProducts);
+    // Save updated list with current product at front
+    const updated = [product.id, ...filtered].slice(0, 5);
+    localStorage.setItem(key, JSON.stringify(updated));
+  }, [product]);
 
   if (!product) {
     return (
@@ -783,6 +809,39 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   <span className="text-neutral-200">·</span>
                   <span className="text-xs text-neutral-400 underline underline-offset-2 cursor-pointer">24 avis</span>
                 </div>
+                {/* Social Share */}
+                <div className="flex gap-3 items-center text-neutral-400 text-xs mt-2">
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      setLinkCopied(true);
+                      setTimeout(() => setLinkCopied(false), 2000);
+                    }}
+                    className="flex items-center gap-1 hover:text-black transition-colors"
+                    title="Copier le lien"
+                  >
+                    <Link2 className="w-3.5 h-3.5" />
+                    {linkCopied ? <span className="text-green-600 font-medium">Lien copié !</span> : <span>Partager</span>}
+                  </button>
+                  <a
+                    href={`https://www.instagram.com/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 hover:text-black transition-colors"
+                    title="Instagram"
+                  >
+                    <Link2 className="w-3.5 h-3.5" />
+                  </a>
+                  <a
+                    href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&description=${encodeURIComponent(product.name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 hover:text-black transition-colors"
+                    title="Pinterest"
+                  >
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                  </a>
+                </div>
               </div>
 
               {/* Divider */}
@@ -829,6 +888,20 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                         style={{ backgroundColor: v.colorHex }}
                       />
                     ))}
+                  </div>
+                  {/* Stock Indicator */}
+                  <div className="flex items-center gap-2 text-xs mt-3">
+                    {isBubble ? (
+                      <>
+                        <span className="w-2 h-2 rounded-full bg-orange-400 shrink-0" />
+                        <span className="text-neutral-500">Stock limité · Plus que 3 disponibles</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
+                        <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
@@ -884,6 +957,22 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </div>
               </div>
 
+              {/* Reassurance Badges */}
+              <div className="flex gap-3 flex-wrap mb-8">
+                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
+                  <Shield className="w-3 h-3" /> Garantie 2 ans
+                </span>
+                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
+                  <Package className="w-3 h-3" /> Emballage protecteur
+                </span>
+                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
+                  <RotateCcw className="w-3 h-3" /> Retour 30j
+                </span>
+                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
+                  <CreditCard className="w-3 h-3" /> Paiement sécurisé
+                </span>
+              </div>
+
               {/* Accordions */}
               <div className="divide-y divide-neutral-100">
                 {accordions.map((acc, i) => (
@@ -913,6 +1002,49 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
             </div>
           </div>
+
+          {/* Recently Viewed */}
+          {recentlyViewed.length > 0 && (
+            <section className="mt-24">
+              <div className="flex items-end justify-between mb-10">
+                <h2 className="text-2xl font-serif font-bold">Consultés récemment</h2>
+              </div>
+              <div className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+                {recentlyViewed.map((p) => {
+                  const pIsBubble = [2, 10, 6, 13, 8, 22, 12, 7, 9].includes(p.id);
+                  const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
+                  return (
+                    <motion.div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start"
+                      whileHover={{ y: -4 }}
+                      whileTap={{ scale: 0.97, opacity: 0.85 }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <Link href={`/products/${p.id}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
+                          <Image src={p.images[0]} alt={p.name} width={400} height={400}
+                            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                          {pIsBubble && (
+                            <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
+                          )}
+                          <button
+                            onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
+                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                          >
+                            <Heart className={`w-3.5 h-3.5 transition-all ${isWished(p.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                          </button>
+                        </div>
+                      </Link>
+                      <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <p className="font-bold text-sm text-black">{pPromo.toLocaleString('fr-FR')} €</p>
+                        {pIsBubble && <p className="text-neutral-400 line-through text-xs">{p.price.toLocaleString('fr-FR')} €</p>}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           {/* Related products */}
           {related.length > 0 && (
