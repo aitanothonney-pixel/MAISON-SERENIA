@@ -12,7 +12,7 @@ import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { ProductCard as ColorSelectorCard } from '@/components/ui/product-card';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { AssuranceBar } from '@/components/ui/assurance-bar';
-import { CollectionsShowcase } from '@/components/ui/collections-showcase';
+
 import { DifferentiatorsSection } from '@/components/ui/differentiators-section';
 import { NewsletterSection } from '@/components/ui/newsletter-section';
 import { FooterComponent } from '@/components/ui/footer';
@@ -1965,10 +1965,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Collections Showcase */}
-      <CollectionsShowcase onCollectionClick={(id) => {
-        document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
-      }} />
+
 
       {/* Pre-order Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
