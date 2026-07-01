@@ -1972,13 +1972,13 @@ export default function Home() {
         <PreOrderSection />
       </div>
 
-      {/* Testimonials */}
-      <TestimonialsSection />
-
       {/* Gift Guide */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
         <GiftGuide />
       </div>
+
+      {/* Testimonials */}
+      <TestimonialsSection />
 
       {/* Differentiators */}
       <DifferentiatorsSection />
