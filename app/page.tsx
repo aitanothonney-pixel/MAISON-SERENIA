@@ -83,9 +83,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       }`}
     >
       {/* Main nav row */}
-      <div className="max-w-full px-6 lg:px-10 flex items-center h-16 lg:h-[68px] gap-6 lg:gap-8">
+      <div className="max-w-full px-6 lg:px-10 relative flex items-center h-16 lg:h-[68px]">
         {/* Left — Menu Button */}
-        <div className="flex items-center">
+        <div className="flex items-center flex-shrink-0">
           <button
             className={`border-2 px-4 py-2 flex items-center gap-2 transition-colors ${
               scrolled ? 'border-black text-black' : 'border-white text-white'
@@ -97,8 +97,21 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
           </button>
         </div>
 
-        {/* Center-Left — Search Bar */}
-        <div className={`flex-1 max-w-md hidden lg:block`}>
+        {/* Center — Logo (Absolute centered) */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+          <a
+            href="#"
+            className={`text-lg lg:text-xl font-bold tracking-[0.15em] uppercase transition-colors shrink-0 ${
+              scrolled ? 'text-black' : 'text-white'
+            }`}
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em', fontWeight: 500 }}
+          >
+            MAISON SERENIA
+          </a>
+        </div>
+
+        {/* Center-Left — Search Bar (hidden on mobile) */}
+        <div className={`hidden lg:block flex-1 max-w-md ml-8`}>
           <div className={`flex items-center gap-2 pb-1 border-b transition-colors ${
             scrolled ? 'border-black/20' : 'border-white/20'
           }`}>
@@ -118,21 +131,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
           </div>
         </div>
 
-        {/* Center — Logo */}
-        <div className="flex-1 lg:flex-none flex justify-center lg:mx-auto">
-          <a
-            href="#"
-            className={`text-lg lg:text-xl font-bold tracking-[0.15em] uppercase transition-colors shrink-0 ${
-              scrolled ? 'text-black' : 'text-white'
-            }`}
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em', fontWeight: 500 }}
-          >
-            MAISON SERENIA
-          </a>
-        </div>
-
         {/* Right — Contact & Icons */}
-        <div className="flex items-center gap-4 lg:gap-6 justify-end">
+        <div className="flex items-center gap-4 lg:gap-6 ml-auto flex-shrink-0">
           {/* Contact text */}
           <a href="tel:+33" className={`text-xs font-light tracking-widest uppercase hidden lg:block transition-colors ${
             scrolled ? 'text-black hover:opacity-60' : 'text-white hover:opacity-60'
