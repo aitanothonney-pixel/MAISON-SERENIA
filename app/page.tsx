@@ -277,105 +277,92 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 h-full w-80 bg-white z-50 overflow-y-auto flex flex-col rounded-r-[50px] shadow-2xl"
+              className="fixed left-0 top-0 h-full w-full max-w-sm bg-white z-50 flex flex-col shadow-2xl"
             >
               {/* Header with close button */}
-              <div className="flex items-center justify-between px-8 py-6 border-b border-neutral-100 sticky top-0 bg-white rounded-tr-[50px]">
+              <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
+                <span className="text-xs tracking-[0.25em] uppercase text-black font-serif font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                  Maison Serenia
+                </span>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="text-xs tracking-widest uppercase text-black font-light hover:opacity-60 transition-opacity"
+                  className="flex items-center gap-2 text-xs tracking-widest uppercase text-neutral-500 font-light hover:text-black transition-colors"
                   aria-label="Fermer le menu"
                 >
                   Fermer
-                </button>
-                <button
-                  onClick={() => setMenuOpen(false)}
-                  className="p-2 hover:opacity-60 transition-opacity"
-                  aria-label="Fermer"
-                >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Menu content */}
-              <div className="flex-1 px-6 py-8 space-y-10">
-
-                {/* Catégories principales */}
-                <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 font-light mb-5">Catégories</p>
-                  <div className="space-y-4">
-                    {/* Salon */}
-                    <div>
-                      <a href="#section-salon" onClick={() => setMenuOpen(false)} className="block text-base font-light text-black hover:opacity-60 transition-opacity mb-2">Salon</a>
-                      <div className="space-y-2 ml-2 border-l border-neutral-200 pl-4">
-                        <a href="#section-salon" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Canapés & Fauteuils</a>
-                        <a href="#section-salon" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Tables & Consoles</a>
-                        <a href="#section-salon" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Étagères</a>
-                      </div>
-                    </div>
-
-                    {/* Bureau */}
-                    <div>
-                      <a href="#section-bureau" onClick={() => setMenuOpen(false)} className="block text-base font-light text-black hover:opacity-60 transition-opacity mb-2">Bureau</a>
-                      <div className="space-y-2 ml-2 border-l border-neutral-200 pl-4">
-                        <a href="#section-bureau" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Chaises & Fauteuils</a>
-                        <a href="#section-bureau" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Bureaux</a>
-                        <a href="#section-bureau" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Rangements</a>
-                      </div>
-                    </div>
-
-                    {/* Figurines */}
-                    <div>
-                      <a href="#section-figurines" onClick={() => setMenuOpen(false)} className="block text-base font-light text-black hover:opacity-60 transition-opacity mb-2">Figurines</a>
-                      <div className="space-y-2 ml-2 border-l border-neutral-200 pl-4">
-                        <a href="#section-figurines" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Sculptures</a>
-                        <a href="#section-figurines" onClick={() => setMenuOpen(false)} className="block text-xs text-neutral-600 font-light hover:text-black transition-colors">Objets de décoration</a>
-                      </div>
-                    </div>
-
-                    {/* Été */}
-                    <div>
-                      <a href="#section-ete" onClick={() => setMenuOpen(false)} className="block text-base font-light text-black hover:opacity-60 transition-opacity">Collection Été</a>
-                    </div>
+              <div className="flex-1 overflow-y-auto">
+                {/* Collections avec images */}
+                <div className="px-6 pt-8 pb-6">
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Nos Collections</p>
+                  <div className="space-y-3">
+                    {[
+                      { label: 'Salon', sub: 'Canapés & Fauteuils Bubble', href: '#section-salon', img: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg' },
+                      { label: 'Figurines', sub: 'Sculptures KAWS Collector', href: '#section-figurines', img: 'https://i.ibb.co/r1YNwbR/IMG-0657.jpg' },
+                      { label: 'Collection Été', sub: 'Accessoires nomades', href: '#section-ete', img: 'https://i.ibb.co/mVsj5XR1/116-AD85-E-F417-45-D8-9577-D23-F33-CE5173.jpg' },
+                    ].map((col) => (
+                      <a
+                        key={col.label}
+                        href={col.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="group flex items-center gap-4 hover:bg-neutral-50 transition-colors p-2 -mx-2"
+                      >
+                        <div className="w-16 h-16 bg-neutral-100 overflow-hidden flex-shrink-0">
+                          <img src={col.img} alt={col.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-base font-light text-black group-hover:opacity-60 transition-opacity">{col.label}</p>
+                          <p className="text-xs text-neutral-400 font-light mt-0.5">{col.sub}</p>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors" />
+                      </a>
+                    ))}
                   </div>
                 </div>
 
-                {/* Packs & Ensembles */}
-                <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 font-light mb-5">Offres Spéciales</p>
-                  <div className="space-y-3">
-                    <a href="#packs" onClick={() => setMenuOpen(false)} className="block text-base font-light text-black hover:opacity-60 transition-opacity">Packs & Ensembles</a>
-                    <a href="#packs" onClick={() => setMenuOpen(false)} className="block text-sm text-neutral-600 font-light hover:text-black transition-colors">Économisez jusqu'à 30%</a>
-                  </div>
+                {/* Packs & Ensembles - highlight */}
+                <div className="px-6 py-6 border-t border-neutral-100">
+                  <a href="#packs" onClick={() => setMenuOpen(false)} className="group block bg-black text-white p-5 hover:bg-neutral-800 transition-colors">
+                    <p className="text-[10px] tracking-[0.25em] uppercase text-white/60 font-light mb-1">Offre exclusive</p>
+                    <p className="text-lg font-serif font-bold mb-1" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Packs & Ensembles</p>
+                    <p className="text-xs text-white/70 font-light">Économisez jusqu'à 210€ sur nos duos</p>
+                  </a>
                 </div>
 
                 {/* Services & Aide */}
-                <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 font-light mb-5">Services & Aide</p>
-                  <div className="space-y-3">
-                    <a href="/contact" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Contactez-nous</a>
-                    <a href="/track-order" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Suivi de commande</a>
-                    <a href="/faq" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Questions fréquentes</a>
-                    <a href="/about" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">À propos de nous</a>
+                <div className="px-6 py-6 border-t border-neutral-100">
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-4">Aide & Services</p>
+                  <div className="space-y-3.5">
+                    <Link href="/contact" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Contactez-nous</Link>
+                    <Link href="/track-order" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Suivi de commande</Link>
+                    <Link href="/faq" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Questions fréquentes</Link>
+                    <Link href="/retours" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Retours & Échanges</Link>
+                    <Link href="/about" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">À propos de nous</Link>
                   </div>
                 </div>
 
-                {/* Information légale */}
-                <div>
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 font-light mb-5">Information</p>
-                  <div className="space-y-3">
-                    <a href="/retours" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Retours & Échanges</a>
-                    <a href="/cgv" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Conditions générales</a>
-                    <a href="/confidentialite" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Confidentialité</a>
-                    <a href="/mentions-legales" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-black hover:opacity-60 transition-opacity">Mentions légales</a>
+                {/* Info légale */}
+                <div className="px-6 py-6 border-t border-neutral-100">
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-4">Informations</p>
+                  <div className="space-y-3.5">
+                    <Link href="/cgv" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-neutral-600 hover:text-black transition-colors">Conditions générales</Link>
+                    <Link href="/confidentialite" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-neutral-600 hover:text-black transition-colors">Confidentialité</Link>
+                    <Link href="/mentions-legales" onClick={() => setMenuOpen(false)} className="block text-sm font-light text-neutral-600 hover:text-black transition-colors">Mentions légales</Link>
                   </div>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="px-6 py-6 border-t border-neutral-200 space-y-3 text-xs text-neutral-500 font-light">
-                <p className="tracking-[0.1em]">Livraison gratuite à partir de 60€</p>
-                <p className="tracking-[0.1em]">© 2026 Maison Serenia</p>
+              <div className="px-6 py-5 border-t border-neutral-100 flex-shrink-0 bg-neutral-50">
+                <div className="flex items-center gap-2 text-xs text-neutral-500 font-light mb-1">
+                  <span>🚚</span>
+                  <span className="tracking-[0.05em]">Livraison gratuite dès 60€ · Suisse</span>
+                </div>
+                <p className="text-[10px] text-neutral-400 tracking-[0.1em]">© 2026 Maison Serenia</p>
               </div>
             </motion.div>
           </>
