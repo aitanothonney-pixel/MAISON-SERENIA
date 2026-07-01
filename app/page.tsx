@@ -1822,6 +1822,11 @@ export default function Home() {
           </section>
       </motion.div>
 
+      {/* Product Bundles */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
+        <ProductBundles />
+      </div>
+
       {/* ── Blog/Gallery Section ─────────────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -1964,11 +1969,6 @@ export default function Home() {
       <CollectionsShowcase onCollectionClick={(id) => {
         document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: 'smooth' });
       }} />
-
-      {/* Product Bundles */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
-        <ProductBundles />
-      </div>
 
       {/* Pre-order Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4">
