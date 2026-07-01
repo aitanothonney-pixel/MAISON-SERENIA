@@ -165,95 +165,67 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
         </div>
       </div>
 
-      {/* Search dropdown - Desktop & Mobile */}
+      {/* Search dropdown - appears only when typing, discreet floating card */}
       <AnimatePresence>
-        {searchOpen && (
+        {searchOpen && searchQ.trim() && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden bg-white border-t border-neutral-100 shadow-lg"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18 }}
+            className="absolute left-0 right-0 top-full"
           >
-            <div className="px-6 py-4 lg:py-6 lg:max-w-2xl lg:mx-auto">
-              <div className="flex items-center gap-3 border-b border-black pb-2">
-                <Search className="w-4 h-4 text-neutral-400 shrink-0" />
-                <input
-                  autoFocus
-                  type="text"
-                  placeholder="Rechercher un meuble, une collection…"
-                  value={searchQ}
-                  onChange={(e) => setSearchQ(e.target.value)}
-                  className="flex-1 text-sm outline-none placeholder:text-neutral-300 text-black"
-                />
-                {searchQ && (
-                  <button onClick={() => setSearchQ('')}><X className="w-4 h-4 text-neutral-400" /></button>
-                )}
+            <div className="max-w-7xl mx-auto px-6 lg:px-10">
+              <div className="lg:max-w-md lg:ml-[9.5rem] bg-white shadow-xl border border-neutral-100 overflow-hidden">
+                {(() => {
+                  const q = searchQ.toLowerCase().trim();
+                  const isMatch = (p: typeof products[0]) => {
+                    const name = p.name.toLowerCase();
+                    const cat = p.category.toLowerCase();
+                    if (name.includes(q) || cat.includes(q)) return true;
+                    return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
+                  };
+                  const matches = products.filter(isMatch).slice(0, 6);
+
+                  if (matches.length === 0) {
+                    return (
+                      <div className="px-5 py-8 text-center">
+                        <p className="text-sm text-neutral-400 font-light">Aucun résultat pour « {searchQ} »</p>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div className="max-h-[70vh] overflow-y-auto py-2">
+                      {matches.map((p) => {
+                        const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                        return (
+                          <Link
+                            key={p.id}
+                            href={`/products/${p.id}`}
+                            onClick={() => { setSearchOpen(false); setSearchQ(''); }}
+                            className="flex items-center gap-3 px-4 py-2.5 transition-colors group hover:bg-neutral-50"
+                          >
+                            <div className={`w-11 h-11 overflow-hidden bg-white flex-shrink-0 flex items-center justify-center ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-0.5' : ''}`}>
+                              <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-light text-black truncate group-hover:opacity-60 transition-opacity">{p.name}</p>
+                              <p className="text-xs text-neutral-400 font-light">{p.category}</p>
+                            </div>
+                            <div className="text-right flex-shrink-0 flex items-center gap-2">
+                              {p.name.includes('Bubble') && (
+                                <span className="text-[10px] text-neutral-400 line-through font-price">{p.price.toLocaleString('fr-FR')} €</span>
+                              )}
+                              <p className="text-sm font-light text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
               </div>
-
-              {/* Quick pills */}
-              {!searchQ && (
-                <div className="flex flex-wrap gap-2 mt-3 mb-1">
-                  {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Bureau'].map((s) => (
-                    <button key={s} onClick={() => setSearchQ(s)} className="text-xs border border-neutral-200 rounded-none px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500">{s}</button>
-                  ))}
-                </div>
-              )}
-
-              {/* Live suggestions — always show all products, highlight matches */}
-              {(() => {
-                const q = searchQ.toLowerCase().trim();
-                const isMatch = (p: typeof products[0]) => {
-                  if (!q) return false;
-                  const name = p.name.toLowerCase();
-                  const cat = p.category.toLowerCase();
-                  // Match if query is a substring of the name or category
-                  if (name.includes(q) || cat.includes(q)) return true;
-                  // Also match each word of the query against the name
-                  return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
-                };
-                const hasQuery = q.length >= 1;
-                const sorted = hasQuery
-                  ? [...products].sort((a, b) => (isMatch(b) ? 1 : 0) - (isMatch(a) ? 1 : 0))
-                  : products;
-                return (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="mt-3 space-y-1 max-h-80 overflow-y-auto"
-                  >
-                    {sorted.map((p) => {
-                      const matched = hasQuery && isMatch(p);
-                      const dimmed = hasQuery && !matched;
-                      const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
-                      return (
-                        <Link
-                          key={p.id}
-                          href={`/products/${p.id}`}
-                          onClick={() => { setSearchOpen(false); setSearchQ(''); }}
-                          className={`flex items-center gap-3 p-2 rounded-none transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
-                        >
-                          <div className={`w-12 h-12 rounded-none overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center transition-all ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
-                            <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
-                            <p className="text-xs text-neutral-400">{p.category}</p>
-                          </div>
-                          <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">
-                            {p.name.includes('Bubble') && (
-                              <span className="bg-black text-white text-xs font-bold tracking-widest uppercase px-2.5 py-1">−30%</span>
-                            )}
-                            <p className="text-sm font-bold text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
-                            {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through font-price">{p.price.toLocaleString('fr-FR')} €</p>}
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </motion.div>
-                );
-              })()}
             </div>
           </motion.div>
         )}
