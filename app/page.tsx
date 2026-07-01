@@ -570,12 +570,12 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
           {bestsellers.map((product) => (
             <div key={product.id} className="group">
               <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-[3/4] overflow-hidden bg-white border border-neutral-100 mb-3 p-4">
+                <div className="relative aspect-[3/4] overflow-hidden bg-white border border-neutral-100 mb-3">
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
