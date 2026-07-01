@@ -1147,12 +1147,11 @@ function Footer() {
 
 function FigurinesSection() {
   const { isWished, toggle } = useWishlist();
-  const figurines = useMemo(() => {
-    const filtered = products
-      .filter((p) => p.category === 'Figurines');
-    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
-  }, []);
+  // Ordered as requested: Bape, Bape noir, Kaws noir, Bape rose, Kaws câlin, KAWS gris monde, KAWS brun monde, then remaining
+  const orderedFigurineIds = [35, 38, 34, 36, 39, 32, 33, 31, 37];
+  const figurines = orderedFigurineIds
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean) as typeof products;
 
   return (
     <FadeInSection>
