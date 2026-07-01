@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Gift, Heart } from 'lucide-react';
 import { useState } from 'react';
 
 interface GiftGuideItem {
@@ -12,10 +11,6 @@ interface GiftGuideItem {
   price: number;
   occasion: string;
   reason: string;
-}
-
-interface GiftGuideProps {
-  selectedOccasion?: string;
 }
 
 const giftGuides: Record<string, GiftGuideItem[]> = {
@@ -52,7 +47,7 @@ const giftGuides: Record<string, GiftGuideItem[]> = {
       image: 'https://images.unsplash.com/photo-1565182409498-de2e02d4114f?w=400&h=400&fit=crop',
       price: 189,
       occasion: 'mariage',
-      reason: 'Créer l\'ambiance parfaite dans leur maison',
+      reason: "Créer l'ambiance parfaite dans leur maison",
     },
   ],
   noel: [
@@ -70,57 +65,87 @@ const giftGuides: Record<string, GiftGuideItem[]> = {
       image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop',
       price: 89,
       occasion: 'noel',
-      reason: 'Confort et chaleur pour les soirées d\'hiver',
+      reason: "Confort et chaleur pour les soirées d'hiver",
     },
   ],
 };
 
-export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps) {
+const tabs = [
+  {
+    id: 'anniversaire',
+    label: 'Anniversaire',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="flex-shrink-0">
+        <path d="M12 8 C12 8 8 2 5 4 C2 6 6 8 12 8" />
+        <path d="M12 8 C12 8 16 2 19 4 C22 6 18 8 12 8" />
+        <rect x="4" y="8" width="16" height="13" />
+        <path d="M4 12 H20" />
+        <path d="M12 8 V21" />
+      </svg>
+    ),
+  },
+  {
+    id: 'mariage',
+    label: 'Mariage',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="flex-shrink-0">
+        <circle cx="12" cy="15" r="7" />
+        <path d="M8 8 L10 4 L12 6 L14 4 L16 8 L12 10 Z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'noel',
+    label: 'Noël',
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="flex-shrink-0">
+        <path d="M12 2 L14.5 9 H22 L16 13.5 L18.5 20.5 L12 16 L5.5 20.5 L8 13.5 L2 9 H9.5 Z" />
+      </svg>
+    ),
+  },
+];
+
+export function GiftGuide({ selectedOccasion = 'anniversaire' }: { selectedOccasion?: string }) {
   const [occasion, setOccasion] = useState(selectedOccasion);
-  const [liked, setLiked] = useState<Set<string>>(new Set());
 
   const items = giftGuides[occasion] || giftGuides.anniversaire;
 
-  const toggleLike = (id: string) => {
-    const newLiked = new Set(liked);
-    if (newLiked.has(id)) {
-      newLiked.delete(id);
-    } else {
-      newLiked.add(id);
-    }
-    setLiked(newLiked);
-  };
-
   return (
     <section className="py-16">
+      {/* Header */}
       <div className="mb-12 text-center">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <Gift className="w-8 h-8 text-purple-700" />
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-black">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-neutral-400 font-light mb-4">Sélection</p>
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-black">
+            <path d="M12 8 C12 8 8 2 5 4 C2 6 6 8 12 8" />
+            <path d="M12 8 C12 8 16 2 19 4 C22 6 18 8 12 8" />
+            <rect x="4" y="8" width="16" height="13" />
+            <path d="M4 12 H20" />
+            <path d="M12 8 V21" />
+          </svg>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             Guide des cadeaux
           </h2>
         </div>
-        <p className="text-neutral-600 mb-8">
+        <div className="w-8 h-px bg-neutral-300 mx-auto mb-6" />
+        <p className="text-xs text-neutral-500 font-light tracking-wide">
           Trouvez le cadeau parfait pour chaque occasion
         </p>
 
         {/* Occasion Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {[
-            { id: 'anniversaire', label: '🎂 Anniversaire' },
-            { id: 'mariage', label: '💍 Mariage' },
-            { id: 'noel', label: '🎄 Noël' },
-          ].map((occ) => (
+        <div className="flex flex-wrap justify-center gap-4 mt-10">
+          {tabs.map((tab) => (
             <button
-              key={occ.id}
-              onClick={() => setOccasion(occ.id)}
-              className={`px-6 py-3 rounded-none font-semibold transition-all ${
-                occasion === occ.id
-                  ? 'bg-black text-white'
-                  : 'bg-neutral-100 text-black hover:bg-neutral-200'
+              key={tab.id}
+              onClick={() => setOccasion(tab.id)}
+              className={`flex items-center gap-2 px-6 py-2.5 text-xs font-light tracking-[0.15em] uppercase transition-all duration-200 border ${
+                occasion === tab.id
+                  ? 'bg-black text-white border-black'
+                  : 'bg-white text-black border-neutral-300 hover:border-black'
               }`}
             >
-              {occ.label}
+              {tab.icon}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -131,55 +156,38 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
         {items.map((item) => (
           <div
             key={item.id}
-            className="bg-white border border-neutral-200 rounded-none overflow-hidden hover:shadow-lg transition-shadow group"
+            className="bg-white border border-neutral-200 overflow-hidden hover:border-neutral-400 transition-all duration-300 group"
           >
-            {/* Image */}
             <Link href={`/products/${item.id}`}>
               <div className="relative aspect-square bg-neutral-100 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleLike(item.id);
-                  }}
-                  className="absolute top-3 right-3 p-2 bg-white rounded-none opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <Heart
-                    className={`w-5 h-5 transition-all ${
-                      liked.has(item.id)
-                        ? 'fill-red-500 text-red-500'
-                        : 'text-neutral-400'
-                    }`}
-                  />
-                </button>
               </div>
             </Link>
 
-            {/* Content */}
             <div className="p-6">
-              <p className="text-xs text-purple-600 uppercase font-semibold mb-2">
-                Pourquoi cette pièce?
+              <p className="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-light mb-2">
+                Pourquoi cette pièce
               </p>
-              <p className="text-sm text-neutral-600 mb-4">{item.reason}</p>
+              <p className="text-xs text-neutral-500 font-light mb-5 leading-relaxed">{item.reason}</p>
 
-              <h3 className="font-bold text-black mb-3 group-hover:opacity-60 transition-opacity">
+              <h3 className="text-sm font-light text-black mb-4 group-hover:opacity-60 transition-opacity">
                 {item.name}
               </h3>
 
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-2xl font-bold text-black">
+              <div className="flex items-center justify-between mb-5">
+                <p className="text-2xl font-serif font-light text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                   {item.price.toLocaleString('fr-FR')}€
                 </p>
               </div>
 
               <Link
                 href={`/products/${item.id}`}
-                className="w-full block text-center bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-900 transition-colors"
+                className="w-full block text-center bg-black text-white py-3 text-xs font-light tracking-widest uppercase hover:bg-neutral-800 transition-colors"
               >
                 Voir le produit
               </Link>
@@ -189,27 +197,32 @@ export function GiftGuide({ selectedOccasion = 'anniversaire' }: GiftGuideProps)
       </div>
 
       {/* Tips section */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-none p-8">
-        <h3 className="text-xl font-serif font-bold text-black mb-6">
-          💡 Conseils de cadeaux
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <p className="font-semibold text-black mb-2">Pour un petit budget</p>
-            <p className="text-sm text-neutral-600">
-              Commencez par des accessoires comme les coussins ou les plaids (€49-€89)
+      <div className="border border-neutral-200 p-10">
+        <div className="flex items-center gap-3 mb-8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-black flex-shrink-0">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 7 V13" />
+            <circle cx="12" cy="17" r="0.5" fill="currentColor" />
+          </svg>
+          <h3 className="text-xs tracking-[0.2em] uppercase text-black font-light">Conseils de sélection</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-neutral-200">
+          <div className="md:pr-8">
+            <p className="text-xs tracking-[0.1em] uppercase text-black font-light mb-3">Petit budget</p>
+            <p className="text-xs text-neutral-500 font-light leading-relaxed">
+              Commencez par des accessoires comme les coussins ou les plaids (49€–89€)
             </p>
           </div>
-          <div>
-            <p className="font-semibold text-black mb-2">Pour un budget moyen</p>
-            <p className="text-sm text-neutral-600">
-              Optez pour des pièces fonctionnelles comme les lampes ou tables (€189-€349)
+          <div className="md:px-8 pt-6 md:pt-0">
+            <p className="text-xs tracking-[0.1em] uppercase text-black font-light mb-3">Budget moyen</p>
+            <p className="text-xs text-neutral-500 font-light leading-relaxed">
+              Optez pour des pièces fonctionnelles comme les lampes ou tables (189€–349€)
             </p>
           </div>
-          <div>
-            <p className="font-semibold text-black mb-2">Pour un grand budget</p>
-            <p className="text-sm text-neutral-600">
-              Investissez dans une pièce maîtresse comme un canapé premium (€599+)
+          <div className="md:pl-8 pt-6 md:pt-0">
+            <p className="text-xs tracking-[0.1em] uppercase text-black font-light mb-3">Grand budget</p>
+            <p className="text-xs text-neutral-500 font-light leading-relaxed">
+              Investissez dans une pièce maîtresse comme un canapé premium (599€+)
             </p>
           </div>
         </div>
