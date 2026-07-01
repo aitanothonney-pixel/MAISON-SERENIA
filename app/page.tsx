@@ -1814,46 +1814,6 @@ export default function Home() {
         <ProductBundles />
       </div>
 
-      {/* ── Blog/Gallery Section ─────────────────────────────────────────── */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <p className="text-[10px] tracking-[0.5em] uppercase text-neutral-400 mb-4">Inspiration</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-black tracking-wide mb-3" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-              Découvrez notre univers
-            </h2>
-            <div className="divider-gold w-16 mx-auto" />
-          </div>
-
-          {/* Masonry columns — images affichées en entier */}
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3">
-            {[
-              { src: 'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg', alt: 'Canapé Bubble blanc', w: 900, h: 600 },
-              { src: 'https://i.ibb.co/212j4PLX/IMG-0662.jpg', alt: 'Bearbrick Bape', w: 600, h: 800 },
-              { src: 'https://i.ibb.co/R1tJYDf/IMG-2491.jpg', alt: 'Canapé Bubble bleu', w: 900, h: 600 },
-              { src: 'https://i.ibb.co/r1YNwbR/IMG-0657.jpg', alt: 'Figurine KAWS noir monde', w: 600, h: 800 },
-              { src: 'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg', alt: 'Fauteuil Bubble blanc', w: 700, h: 600 },
-              { src: 'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png', alt: 'Canapé Bubble rouge', w: 900, h: 600 },
-              { src: 'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg', alt: 'Fauteuil Bubble bleu', w: 700, h: 600 },
-              { src: 'https://i.ibb.co/My8fK90B/IMG-2525.jpg', alt: 'Canapé Bubble violet', w: 900, h: 700 },
-              { src: 'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg', alt: 'Fauteuil Bubble rouge', w: 700, h: 600 },
-              { src: 'https://i.ibb.co/0pnzSpFV/IMG-2557.jpg', alt: 'Fauteuil Bubble vert', w: 700, h: 600 },
-              { src: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg', alt: 'Canapé Bubble blanc', w: 900, h: 600 },
-            ].map(({ src, alt, w, h }) => (
-              <div key={src} className="mb-3 overflow-hidden break-inside-avoid bg-neutral-50 group">
-                <Image
-                  src={src}
-                  alt={alt}
-                  width={w}
-                  height={h}
-                  className="w-full h-auto block group-hover:scale-[1.03] transition-transform duration-700"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
 
 
       {/* Pre-order Section */}
