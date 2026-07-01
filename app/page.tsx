@@ -76,10 +76,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   return (
     <header
       ref={searchRef}
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-300 border-b ${hasBar ? 'top-8' : 'top-0'} ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-transparent'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-neutral-100'
+          : 'bg-transparent border-transparent shadow-none'
       }`}
     >
       {/* Main nav row */}
