@@ -469,7 +469,7 @@ function BubblePromoCarousel() {
 
   const { isWished, toggle } = useWishlist();
 
-  const ProductCard = ({ product }: { product: typeof products[0] }) => (
+  const ProductCard = ({ product, promo }: { product: typeof products[0]; promo?: boolean }) => (
     <div className="group">
       <Link href={`/products/${product.id}`}>
         <div className="relative overflow-hidden bg-neutral-50 mb-3 border border-neutral-100 flex items-center justify-center" style={{ height: '200px' }}>
@@ -489,9 +489,11 @@ function BubblePromoCarousel() {
               className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
             />
           )}
-          <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-light tracking-widest uppercase px-2 py-0.5">
-            −30%
-          </div>
+          {promo && (
+            <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-light tracking-widest uppercase px-2 py-0.5">
+              −30%
+            </div>
+          )}
           <button
             onClick={(e) => { e.preventDefault(); toggle(product.id); }}
             className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
@@ -502,9 +504,11 @@ function BubblePromoCarousel() {
         <h3 className="text-sm font-light text-black mb-1 leading-snug group-hover:opacity-60 transition-opacity">{product.name}</h3>
         <div className="flex items-center gap-2">
           <span className="text-black font-serif font-light text-base" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            {Math.round(product.price * 0.7).toLocaleString('fr-FR')} €
+            {promo ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
           </span>
-          <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+          {promo && (
+            <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+          )}
         </div>
       </Link>
     </div>
@@ -527,7 +531,7 @@ function BubblePromoCarousel() {
           <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Canapés</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
             {canapes.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} promo />
             ))}
           </div>
 

@@ -39,12 +39,12 @@ const bundles: Bundle[] = [
       {
         id: '2',
         name: 'Fauteuil Bubble blanc',
-        price: 713,
+        price: 499,
         image: 'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg',
       },
     ],
     bundlePrice: 1590,
-    savingsAmount: 210,
+    savingsAmount: 766,
     icon: '⚪',
   },
   {
@@ -61,12 +61,12 @@ const bundles: Bundle[] = [
       {
         id: '6',
         name: 'Fauteuil Bubble bleu',
-        price: 713,
+        price: 499,
         image: 'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg',
       },
     ],
     bundlePrice: 1590,
-    savingsAmount: 210,
+    savingsAmount: 766,
     icon: '🔵',
   },
   {
@@ -83,12 +83,12 @@ const bundles: Bundle[] = [
       {
         id: '8',
         name: 'Fauteuil Bubble rouge',
-        price: 713,
+        price: 499,
         image: 'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg',
       },
     ],
     bundlePrice: 1590,
-    savingsAmount: 210,
+    savingsAmount: 766,
     icon: '🔴',
   },
 ];
