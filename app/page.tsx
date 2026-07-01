@@ -1590,27 +1590,6 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             {/* Footer - Luxury Louis Vuitton style */}
             {cartProducts.length > 0 && (
               <div className="border-t border-neutral-200 overflow-y-auto flex-1 flex flex-col">
-                {/* Gifts & Packaging Section */}
-                <div className="px-6 py-6 border-b border-neutral-200">
-                  <p className="text-sm font-light text-black mb-4">Cadeaux et packaging</p>
-                  <div className="space-y-3">
-                    <label className="flex items-start gap-3 cursor-pointer">
-                      <input type="checkbox" className="mt-1.5 w-4 h-4" />
-                      <div>
-                        <p className="text-sm font-light text-black">Cette commande est un cadeau</p>
-                        <p className="text-xs text-neutral-500 mt-0.5">Personnalisez gratuitement votre commande.</p>
-                      </div>
-                    </label>
-                    <label className="flex items-start gap-3 cursor-pointer">
-                      <input type="checkbox" className="mt-1.5 w-4 h-4" />
-                      <div>
-                        <p className="text-sm font-light text-black">Sac papier</p>
-                        <p className="text-xs text-neutral-500 mt-0.5">Ajouter un sac papier en papier recyclé Louis Vuitton.</p>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-
                 {/* Summary Section */}
                 <div className="px-6 py-8 space-y-4">
                   <div className="flex items-center justify-between">
