@@ -552,10 +552,10 @@ function BubblePromoCarousel() {
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const { isWished, toggle } = useWishlist();
-  const bestsellers = useMemo(() => {
-    const shuffled = [...products].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
-  }, []);
+  // Order: Bearbrick Bape, Bearbrick Bape noir, Bearbrick Bape rose, Figurine Kaws noir
+  const bestsellers = [35, 38, 36, 34]
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean) as typeof products;
 
   return (
     <FadeInSection>
