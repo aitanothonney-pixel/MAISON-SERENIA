@@ -79,7 +79,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-neutral-700/40 backdrop-blur-sm'
+          : 'bg-transparent'
       }`}
     >
       {/* Main nav row */}
@@ -114,9 +114,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
         {/* Center-Left — Search Bar (hidden on mobile) */}
         <div className={`hidden lg:block flex-1 max-w-md ml-8`}>
-          <div className={`flex items-center gap-2 pb-1 border-b transition-colors ${
-            scrolled ? 'border-black/20' : 'border-white/20'
-          }`}>
+          <div className={`flex items-center gap-2 pb-1`}>
             <Search className={`w-4 h-4 ${scrolled ? 'text-black/50' : 'text-white/50'}`} />
             <input
               type="text"
