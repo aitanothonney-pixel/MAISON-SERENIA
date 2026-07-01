@@ -1723,7 +1723,7 @@ export default function Home() {
           {/* Hero Section - full clean high-quality image */}
           <section className="relative min-h-screen w-full overflow-hidden">
             <Image
-              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+              src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
               alt="Maison Serenia"
               fill
               priority
