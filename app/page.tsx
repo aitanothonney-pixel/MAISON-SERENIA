@@ -1221,6 +1221,39 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 
 // ─── Cart Drawer ──────────────────────────────────────────────────────────────
 
+const bundleDefinitions = [
+  {
+    bundleId: '1',
+    name: 'Duo Minimaliste',
+    price: 1590,
+    products: [
+      { id: 10, name: 'Canapé Bubble blanc', price: 1857 },
+      { id: 2, name: 'Fauteuil Bubble blanc', price: 713 },
+    ],
+    icon: '⚪',
+  },
+  {
+    bundleId: '2',
+    name: 'Harmonie Bleue',
+    price: 1590,
+    products: [
+      { id: 13, name: 'Canapé Bubble bleu', price: 1857 },
+      { id: 6, name: 'Fauteuil Bubble bleu', price: 713 },
+    ],
+    icon: '🔵',
+  },
+  {
+    bundleId: '3',
+    name: 'Passion Écarlate',
+    price: 1590,
+    products: [
+      { id: 22, name: 'Canapé Bubble rouge', price: 1857 },
+      { id: 8, name: 'Fauteuil Bubble rouge', price: 713 },
+    ],
+    icon: '🔴',
+  },
+];
+
 function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, removeItem, updateQty } = useCart();
   const [selected, setSelected] = useState<number[]>([]);
@@ -1228,11 +1261,23 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
 
   const cartProducts = items.map((item) => {
+    const isBundle = item.id < 0;
+    if (isBundle) {
+      const bundleId = Math.floor(Math.abs(item.id) / 1000).toString();
+      const bundle = bundleDefinitions.find((b) => b.bundleId === bundleId);
+      if (!bundle) return null;
+      return {
+        ...item,
+        product: { id: item.id, name: bundle.name, price: bundle.price, images: [bundle.icon] } as typeof products[0],
+        price: bundle.price,
+        isBundle: true,
+      };
+    }
     const product = products.find((p) => p.id === item.id);
     if (!product) return null;
     const price = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
-    return { ...item, product, price };
-  }).filter(Boolean) as { id: number; qty: number; product: typeof products[0]; price: number }[];
+    return { ...item, product, price, isBundle: false };
+  }).filter(Boolean) as { id: number; qty: number; product: typeof products[0]; price: number; isBundle: boolean }[];
 
   useEffect(() => {
     if (open) {

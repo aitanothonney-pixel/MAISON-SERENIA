@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { Plus, Zap } from 'lucide-react';
+import { Plus, Zap, Check } from 'lucide-react';
+import { useState } from 'react';
+import { useCart } from '@/lib/useCart';
 
 interface BundleProduct {
   id: string | number;
@@ -92,6 +94,15 @@ const bundles: Bundle[] = [
 ];
 
 export function ProductBundles() {
+  const { addItem } = useCart();
+  const [addedBundleId, setAddedBundleId] = useState<string | null>(null);
+
+  const handleAddBundle = (bundleId: string, bundleName: string) => {
+    addItem(parseInt(bundleId) * -1000);
+    setAddedBundleId(bundleId);
+    setTimeout(() => setAddedBundleId(null), 2000);
+  };
+
   return (
     <section className="py-16 bg-neutral-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -170,9 +181,24 @@ export function ProductBundles() {
                   </p>
                 </div>
 
-                <button className="w-full bg-black text-white py-3 rounded-none font-semibold hover:bg-neutral-900 transition-colors flex items-center justify-center gap-2 mb-2">
-                  <Zap className="w-5 h-5" />
-                  Acheter cet ensemble
+                <button
+                  onClick={() => handleAddBundle(bundle.id, bundle.name)}
+                  className={`w-full py-3 rounded-none font-semibold transition-colors flex items-center justify-center gap-2 mb-2 ${
+                    addedBundleId === bundle.id
+                      ? 'bg-green-600 text-white hover:bg-green-700'
+                      : 'bg-black text-white hover:bg-neutral-900'
+                  }`}>
+                  {addedBundleId === bundle.id ? (
+                    <>
+                      <Check className="w-5 h-5" />
+                      Ajouté au panier
+                    </>
+                  ) : (
+                    <>
+                      <Zap className="w-5 h-5" />
+                      Acheter cet ensemble
+                    </>
+                  )}
                 </button>
 
                 <p className="text-xs text-center text-neutral-600">
