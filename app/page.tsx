@@ -1388,9 +1388,8 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
     setSelected((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
   };
 
-  const selectedItems = cartProducts.filter((x) => selected.includes(x.id));
-  const total = selectedItems.reduce((sum, x) => sum + x.price * x.qty, 0);
-  const totalQty = selectedItems.reduce((sum, x) => sum + x.qty, 0);
+  const total = cartProducts.reduce((sum, x) => sum + x.price * x.qty, 0);
+  const totalQty = cartProducts.reduce((sum, x) => sum + x.qty, 0);
 
   return (
     <AnimatePresence>
@@ -1410,26 +1409,25 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
-              <div className="flex items-center gap-3">
-                <ShoppingBag className="w-5 h-5" />
-                <span className="font-serif font-semibold text-lg">Panier</span>
+            {/* Header - Louis Vuitton style */}
+            <div className="flex items-center justify-between px-6 py-6 border-b border-neutral-200">
+              <h2 className="text-sm font-light tracking-wide">
+                Mon Panier
                 {items.length > 0 && (
-                  <span className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-none">
-                    {items.reduce((s, x) => s + x.qty, 0)}
+                  <span className="text-neutral-400 ml-2">
+                    ({items.reduce((s, x) => s + x.qty, 0)})
                   </span>
                 )}
-              </div>
-              <button onClick={onClose} className="p-2 rounded-none hover:bg-neutral-100 transition-colors">
+              </h2>
+              <button onClick={onClose} className="p-1 hover:opacity-60 transition-opacity" aria-label="Fermer">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Body */}
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <div className="flex-1 overflow-y-auto px-0 py-0">
               {cartProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
                   <ShoppingBag className="w-12 h-12 text-neutral-200" />
                   <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
                   <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
@@ -1438,7 +1436,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                   </button>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-6 px-6 py-6">
                   {cartProducts.map(({ id, qty, product, price, isBundle }) => {
                     const bundle = isBundle ? bundleDefinitions.find(b => b.bundleId === Math.floor(Math.abs(id) / 1000).toString()) : null;
                     const bundleProducts = bundle?.products || [];
@@ -1450,38 +1448,29 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className={`border rounded-none p-3 transition-all duration-200 ${
-                          selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
-                        }`}
+                        className="border-b border-neutral-200 pb-6 last:border-b-0"
                       >
-                        {/* Bundle header with checkbox */}
-                        {isBundle && bundle && (
-                          <div className="flex items-start gap-3 pb-3 border-b border-neutral-200 cursor-pointer" onClick={() => toggleSelect(id)}>
-                            <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
-                              selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
-                            }`}>
-                              {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                            </div>
-                            <div className="flex-1">
-                              <p className="font-serif font-semibold text-sm">{bundle.name}</p>
-                              <p className="text-xs text-neutral-400 mt-0.5">Pack ensemble</p>
-                            </div>
-                            <button
-                              onClick={(e) => { e.stopPropagation(); removeItem(id); }}
-                              className="shrink-0 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        )}
-
-                        {/* Products in bundle or single product */}
+                        {/* Bundle layout */}
                         {isBundle && bundle ? (
-                          <div className="space-y-2 pt-3">
-                            {bundleProducts.map((bundleProduct, idx) => (
-                              <div key={bundleProduct.id} className={idx < bundleProducts.length - 1 ? 'pb-2 border-b border-neutral-100' : ''}>
-                                <div className="flex items-start gap-2">
-                                  <div className="shrink-0 w-16 h-16 bg-neutral-100 overflow-hidden flex items-center justify-center rounded-none">
+                          <div>
+                            <div className="flex items-start justify-between mb-4">
+                              <div>
+                                <p className="text-sm font-light text-black">{bundle.name}</p>
+                                <p className="text-xs text-neutral-400 mt-0.5">Pack ensemble</p>
+                              </div>
+                              <button
+                                onClick={() => removeItem(id)}
+                                className="p-1 text-neutral-400 hover:text-red-500 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+
+                            {/* Products in bundle */}
+                            <div className="space-y-3 mb-4">
+                              {bundleProducts.map((bundleProduct) => (
+                                <div key={bundleProduct.id} className="flex items-start gap-3">
+                                  <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
                                     <img
                                       src={products.find(p => p.id === bundleProduct.id)?.images[0] || ''}
                                       alt={bundleProduct.name}
@@ -1489,75 +1478,71 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                                     />
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <p className="font-serif font-semibold text-xs leading-snug line-clamp-2">{bundleProduct.name}</p>
-                                    <p className="text-xs text-neutral-400 mt-0.5">Inclus dans le pack</p>
-                                    <p className="font-bold text-xs text-black mt-1">{bundleProduct.price.toLocaleString('fr-FR')} €</p>
+                                    <p className="text-sm font-light text-black">{bundleProduct.name}</p>
+                                    <p className="text-xs text-neutral-400 mt-1">{bundleProduct.price.toLocaleString('fr-FR')} €</p>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className="flex items-start gap-3 cursor-pointer" onClick={() => toggleSelect(id)}>
-                            <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
-                              selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
-                            }`}>
-                              {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                              ))}
                             </div>
 
-                            <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
-                              <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
-                            </div>
-
-                            <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
-                              <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
-                              <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                              <p className="font-bold text-sm text-black mt-1 font-price">{price.toLocaleString('fr-FR')} €</p>
-                              <div className="flex items-center gap-2 mt-2">
+                            {/* Quantity and price */}
+                            <div className="flex items-center justify-between pt-3">
+                              <div className="flex items-center gap-3">
                                 <button
                                   onClick={() => updateQty(id, qty - 1)}
-                                  className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                                  className="w-6 h-6 rounded-none border border-neutral-300 flex items-center justify-center hover:border-black transition-colors text-neutral-600"
                                 >
                                   <Minus className="w-3 h-3" />
                                 </button>
-                                <span className="text-xs font-semibold w-5 text-center">{qty}</span>
+                                <span className="text-sm font-light w-4 text-center">{qty}</span>
                                 <button
                                   onClick={() => updateQty(id, qty + 1)}
-                                  className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                                  className="w-6 h-6 rounded-none border border-neutral-300 flex items-center justify-center hover:border-black transition-colors text-neutral-600"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                              <p className="font-serif font-semibold text-black">{price.toLocaleString('fr-FR')} €</p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-start gap-4">
+                            <div className="shrink-0 w-24 h-24 bg-neutral-100 overflow-hidden flex items-center justify-center">
+                              <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
+                            </div>
+
+                            <div className="flex-1 min-w-0 flex flex-col">
+                              <div className="flex items-start justify-between mb-2">
+                                <div>
+                                  <p className="text-sm font-light text-black">{product.name}</p>
+                                  <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
+                                </div>
+                                <button
+                                  onClick={() => removeItem(id)}
+                                  className="p-1 text-neutral-400 hover:text-red-500 transition-colors"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+
+                              <p className="font-serif font-semibold text-black mb-4">{price.toLocaleString('fr-FR')} €</p>
+
+                              <div className="flex items-center gap-3 mt-auto">
+                                <button
+                                  onClick={() => updateQty(id, qty - 1)}
+                                  className="w-6 h-6 rounded-none border border-neutral-300 flex items-center justify-center hover:border-black transition-colors text-neutral-600"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="text-sm font-light w-4 text-center">{qty}</span>
+                                <button
+                                  onClick={() => updateQty(id, qty + 1)}
+                                  className="w-6 h-6 rounded-none border border-neutral-300 flex items-center justify-center hover:border-black transition-colors text-neutral-600"
                                 >
                                   <Plus className="w-3 h-3" />
                                 </button>
                               </div>
                             </div>
-
-                            <button
-                              onClick={(e) => { e.stopPropagation(); removeItem(id); }}
-                              className="shrink-0 mt-1 p-1.5 rounded-none hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        )}
-
-                        {/* Bundle pricing */}
-                        {isBundle && bundle && (
-                          <div className="mt-3 pt-3 border-t border-neutral-100 flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <button
-                                onClick={() => updateQty(id, qty - 1)}
-                                className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
-                              >
-                                <Minus className="w-3 h-3" />
-                              </button>
-                              <span className="text-xs font-semibold w-5 text-center">{qty}</span>
-                              <button
-                                onClick={() => updateQty(id, qty + 1)}
-                                className="w-6 h-6 rounded-none border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
-                              >
-                                <Plus className="w-3 h-3" />
-                              </button>
-                            </div>
-                            <p className="font-bold text-sm text-black font-price">{price.toLocaleString('fr-FR')} €</p>
                           </div>
                         )}
                       </motion.div>
@@ -1567,30 +1552,20 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
               )}
             </div>
 
-            {/* Footer */}
+            {/* Footer - Louis Vuitton style */}
             {cartProducts.length > 0 && (
-              <div className="border-t border-neutral-100 px-6 py-5 space-y-4">
-                {/* Select all */}
-                <button
-                  onClick={() => setSelected(selected.length === cartProducts.length ? [] : cartProducts.map(x => x.id))}
-                  className="text-xs text-neutral-400 hover:text-black transition-colors tracking-widest uppercase"
-                >
-                  {selected.length === cartProducts.length ? 'Tout désélectionner' : 'Tout sélectionner'}
-                </button>
-
+              <div className="border-t border-neutral-200 px-6 py-8 space-y-6">
                 {/* Total */}
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-neutral-500">Total ({totalQty} article{totalQty > 1 ? 's' : ''})</span>
-                  <span className="font-price font-bold text-xl">{total.toLocaleString('fr-FR')} €</span>
+                <div className="flex items-baseline justify-between">
+                  <span className="text-sm font-light text-black">Total</span>
+                  <span className="font-serif font-bold text-2xl text-black">{total.toLocaleString('fr-FR')} €</span>
                 </div>
-                <p className="text-[10px] text-neutral-400 -mt-2">* TVA comprise</p>
 
-                {/* Checkout CTA */}
+                {/* Checkout CTA - Full width button with rounded corners */}
                 <button
-                  disabled={selectedItems.length === 0}
-                  className="w-full bg-black text-white py-4 rounded-none font-bold text-sm tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white py-4 rounded-full font-light text-sm tracking-wide hover:bg-neutral-900 transition-colors"
                 >
-                  CONTINUER ({totalQty})
+                  Valider mon panier
                 </button>
 
                 {/* PayPal + Apple Pay */}
