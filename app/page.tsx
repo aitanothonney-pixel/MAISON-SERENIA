@@ -84,16 +84,18 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
     >
       {/* Main nav row */}
       <div className="max-w-full px-6 lg:px-10 relative flex items-center h-16 lg:h-[68px]">
-        {/* Left — Menu Button */}
+        {/* Left — Hamburger Menu Button */}
         <div className="flex items-center flex-shrink-0">
           <button
-            className={`border-2 px-4 py-2 flex items-center gap-2 transition-colors ${
-              scrolled ? 'border-black text-black' : 'border-white text-white'
-            } hover:opacity-60`}
+            className={`flex flex-col gap-1.5 p-2 transition-colors hover:opacity-60 ${
+              scrolled ? 'text-black' : 'text-white'
+            }`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className="text-xs font-light tracking-widest uppercase">Menu</span>
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
           </button>
         </div>
 
@@ -274,10 +276,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 h-full w-96 bg-white z-50 overflow-y-auto flex flex-col"
+              className="fixed left-0 top-0 h-full w-80 bg-white z-50 overflow-y-auto flex flex-col rounded-r-[50px] shadow-2xl"
             >
               {/* Header with close button */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-200 sticky top-0 bg-white">
+              <div className="flex items-center justify-between px-8 py-6 border-b border-neutral-100 sticky top-0 bg-white rounded-tr-[50px]">
                 <button
                   onClick={() => setMenuOpen(false)}
                   className="text-xs tracking-widest uppercase text-black font-light hover:opacity-60 transition-opacity"
