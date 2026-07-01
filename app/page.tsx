@@ -1440,8 +1440,20 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
+            className="fixed right-0 top-0 h-full w-full max-w-2xl bg-white z-[61] flex flex-col shadow-2xl overflow-hidden"
           >
+            {/* Help Banner */}
+            <div className="bg-neutral-50 px-6 py-4 border-b border-neutral-200">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-black rounded-none flex items-center justify-center flex-shrink-0">
+                  <span className="text-white text-xs font-bold">MS</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-light text-black">Besoin d&apos;aide? <span className="font-medium">Contactez-nous au +41 76 XXX XX XX</span></p>
+                </div>
+              </div>
+            </div>
+
             {/* Header - Louis Vuitton style */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-neutral-200">
               <h2 className="text-sm font-light tracking-wide">
@@ -1585,36 +1597,68 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
               )}
             </div>
 
-            {/* Footer - Louis Vuitton style */}
+            {/* Footer - Luxury Louis Vuitton style */}
             {cartProducts.length > 0 && (
-              <div className="border-t border-neutral-200 px-6 py-8 space-y-6">
-                {/* Total */}
-                <div className="flex items-baseline justify-between">
-                  <span className="text-sm font-light text-black">Total</span>
-                  <span className="font-serif font-bold text-2xl text-black">{total.toLocaleString('fr-FR')} €</span>
+              <div className="border-t border-neutral-200 overflow-y-auto flex-1 flex flex-col">
+                {/* Gifts & Packaging Section */}
+                <div className="px-6 py-6 border-b border-neutral-200">
+                  <p className="text-sm font-light text-black mb-4">Cadeaux et packaging</p>
+                  <div className="space-y-3">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input type="checkbox" className="mt-1.5 w-4 h-4" />
+                      <div>
+                        <p className="text-sm font-light text-black">Cette commande est un cadeau</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">Personnalisez gratuitement votre commande.</p>
+                      </div>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input type="checkbox" className="mt-1.5 w-4 h-4" />
+                      <div>
+                        <p className="text-sm font-light text-black">Sac papier</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">Ajouter un sac papier en papier recyclé Louis Vuitton.</p>
+                      </div>
+                    </label>
+                  </div>
                 </div>
 
-                {/* Checkout CTA - Full width button with rounded corners */}
-                <button
-                  className="w-full bg-black text-white py-4 rounded-full font-light text-sm tracking-wide hover:bg-neutral-900 transition-colors"
-                >
-                  Valider mon panier
-                </button>
+                {/* Summary Section */}
+                <div className="px-6 py-8 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-light text-neutral-600">Sous-total</span>
+                    <span className="text-sm font-light text-black">{total.toLocaleString('fr-FR')} €</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-light text-neutral-600">Livraison</span>
+                    <span className="text-sm font-light text-black">Gratuite</span>
+                  </div>
+                  <div className="border-t border-neutral-200 pt-4 flex items-baseline justify-between">
+                    <span className="text-sm font-light text-black">Total</span>
+                    <span className="font-serif font-bold text-2xl text-black">{total.toLocaleString('fr-FR')} €</span>
+                  </div>
+                </div>
 
-                {/* PayPal + Apple Pay */}
-                <div className="grid grid-cols-2 gap-3">
-                  <button className="flex items-center justify-center gap-2 border border-neutral-200 py-3 hover:border-neutral-400 transition-colors">
-                    <svg viewBox="0 0 80 24" fill="none" className="h-5 w-auto" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M30.6 5.6H24c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.2c.4 0 .7-.3.8-.7l.6-4c.1-.4.4-.7.8-.7H29c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Zm19.9-7.6h-3.3c-.3 0-.6.2-.8.4l-4.8 7-2-6.7c-.1-.4-.5-.7-.9-.7h-3.2c-.3 0-.5.3-.4.6l3.8 11.2-3.6 5c-.2.3 0 .7.3.7h3.3c.3 0 .6-.1.8-.4l11.5-16.6c.2-.2 0-.5-.3-.5h-.4Z" fill="#003087"/>
-                      <path d="M69 5.6h-6.6c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.5c.3 0 .5-.2.6-.5l.7-4.2c.1-.4.4-.7.8-.7h2.1c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2l.5.3Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Z" fill="#009CDE"/>
-                    </svg>
+                {/* CTA Buttons */}
+                <div className="px-6 pb-6 space-y-3">
+                  <button className="w-full bg-black text-white py-4 rounded-full font-light text-sm tracking-wide hover:bg-neutral-900 transition-colors">
+                    Procéder au paiement
                   </button>
-                  <button className="flex items-center justify-center gap-2 bg-black py-3 hover:bg-neutral-800 transition-colors">
-                    <svg viewBox="0 0 40 16" fill="none" className="h-4 w-auto" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.4 3.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1ZM8 4.9c-1.1-.1-2 .6-2.5.6S4.2 4.9 3.3 4.9c-1.1 0-2.2.7-2.7 1.7-1.2 2-.3 5 .8 6.6.6.8 1.2 1.7 2.1 1.7.8 0 1.1-.5 2.1-.5 1 0 1.2.5 2.1.5.9 0 1.5-.8 2.1-1.7.6-.9.9-1.8.9-1.8S8.9 10.7 8.9 8.9c0-1.6 1.3-2.3 1.3-2.3S9.5 4.9 8 4.9ZM16.5 2.1h-2.4c-.1 0-.3.1-.3.3v10.8c0 .2.1.3.3.3h1.2c.2 0 .3-.1.3-.3V9.8h1.1c2 0 3.3-1 3.3-3 0-1.9-1.3-2.7-3.5-2.7Zm.2 4.5h-.9V3.4h.9c1.1 0 1.7.5 1.7 1.6 0 1.1-.6 1.6-1.7 1.6ZM22.7 6.9c-.7 0-1.1.3-1.4.8l-.3-1.2v-.1h-.9c-.1 0-.2.1-.2.2v6.3c0 .1.1.2.2.2h1.1c.1 0 .2-.1.2-.2V10.7c.3.4.8.7 1.4.7 1.3 0 2.1-1.1 2.1-2.7-.1-1.5-.9-1.8-2.2-1.8Zm-.3 3.9c-.7 0-1.1-.5-1.1-1.3 0-.8.4-1.3 1.1-1.3.6 0 1 .5 1 1.3 0 .8-.4 1.3-1 1.3ZM29.4 5.8l-3 6.9h-.9l1.1-2.4-1.9-4.5h1l1.4 3.4 1.3-3.4h1Z" fill="white"/>
+                  <button className="w-full bg-blue-600 text-white py-4 rounded-full font-light text-sm tracking-wide hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 00-.794.68l-.04.22-.63 4.006-.028.15a.806.806 0 01-.795.68h-1.95a.558.558 0 01-.55-.647l.04-.22.63-4.006.028-.15a.806.806 0 01.794-.68h.5c1.64 0 3.276-.413 3.906-2.096.438-1.15.657-1.904.876-2.746a.92.92 0 00-.12-.708c-.329.22-.712.44-1.168.44h-4.148a2.33 2.33 0 01-2.284-2.49l.22-1.4a2.33 2.33 0 012.283-2.016h4.97c1.15 0 2.085-.73 2.39-1.897.22-.877.22-2.016-.04-3.146" />
                     </svg>
-                    <span className="text-white text-xs font-medium">Pay</span>
+                    Payer avec PayPal
                   </button>
+                </div>
+
+                {/* Security Section */}
+                <div className="px-6 py-6 bg-neutral-50 border-t border-neutral-200 space-y-3">
+                  <p className="text-xs font-light text-black tracking-widest">PAIEMENT SÉCURISÉ</p>
+                  <p className="text-xs font-light text-neutral-600">Maison Serenia accepte les modes de paiement sécurisés. Vos données de paiement sont traitées de façon confidentielle.</p>
+                </div>
+
+                {/* Returns Info */}
+                <div className="px-6 py-4 border-t border-neutral-200 text-xs font-light text-neutral-600">
+                  <p>✓ Échange ou retour sans frais</p>
                 </div>
               </div>
             )}
