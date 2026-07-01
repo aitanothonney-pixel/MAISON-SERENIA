@@ -21,7 +21,8 @@ interface Bundle {
   bundlePrice: number;
   savingsPercent?: number;
   savingsAmount?: number;
-  icon: string;
+  color: string;
+  label: string;
 }
 
 const bundles: Bundle[] = [
@@ -45,7 +46,8 @@ const bundles: Bundle[] = [
     ],
     bundlePrice: 1590,
     savingsAmount: 766,
-    icon: '⚪',
+    color: '#D6D0C8',
+    label: 'Blanc crème',
   },
   {
     id: '2',
@@ -67,7 +69,8 @@ const bundles: Bundle[] = [
     ],
     bundlePrice: 1590,
     savingsAmount: 766,
-    icon: '🔵',
+    color: '#1B3A8C',
+    label: 'Bleu Klein',
   },
   {
     id: '3',
@@ -89,7 +92,8 @@ const bundles: Bundle[] = [
     ],
     bundlePrice: 1590,
     savingsAmount: 766,
-    icon: '🔴',
+    color: '#B91C1C',
+    label: 'Rouge ardent',
   },
 ];
 
@@ -130,7 +134,15 @@ export function ProductBundles() {
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-3xl">{bundle.icon}</span>
+                      <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                        <div
+                          className="w-5 h-5 border border-neutral-200"
+                          style={{ backgroundColor: bundle.color }}
+                        />
+                        <span className="text-[8px] tracking-[0.12em] uppercase text-neutral-400 font-light whitespace-nowrap">
+                          {bundle.label}
+                        </span>
+                      </div>
                       <h3 className="text-xl font-serif font-bold text-black leading-tight">
                         {bundle.name}
                       </h3>
