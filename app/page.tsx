@@ -527,21 +527,12 @@ function BubblePromoCarousel() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          {/* Canapés row — 4 cols */}
-          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Canapés</p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {canapes.map((product) => (
               <ProductCard key={product.id} product={product} promo />
             ))}
           </div>
 
-          {/* Fauteuils row — 5 cols */}
-          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Fauteuils</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
-            {fauteuils.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
         </div>
       </section>
     </FadeInSection>
