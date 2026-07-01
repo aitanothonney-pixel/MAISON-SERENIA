@@ -79,88 +79,89 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-transparent'
+          : 'bg-neutral-700/40 backdrop-blur-sm'
       }`}
     >
       {/* Main nav row */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-3 items-center h-16 lg:h-[68px]">
-        {/* Left — Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`text-[11px] tracking-widest uppercase transition-colors duration-300 hover:opacity-60 whitespace-nowrap ${
-                scrolled ? 'text-black' : 'text-white/90'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        {/* Mobile burger — left on mobile */}
-        <div className="lg:hidden flex items-center">
+      <div className="max-w-full px-6 lg:px-10 flex items-center h-16 lg:h-[68px] gap-6 lg:gap-8">
+        {/* Left — Menu Button */}
+        <div className="flex items-center">
           <button
-            className="p-2 flex flex-col gap-1.5"
+            className={`border-2 px-4 py-2 flex items-center gap-2 transition-colors ${
+              scrolled ? 'border-black text-black' : 'border-white text-white'
+            } hover:opacity-60`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu"
           >
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className="text-xs font-light tracking-widest uppercase">Menu</span>
           </button>
         </div>
 
+        {/* Center-Left — Search Bar */}
+        <div className={`flex-1 max-w-md hidden lg:block`}>
+          <div className={`flex items-center gap-2 pb-1 border-b transition-colors ${
+            scrolled ? 'border-black/20' : 'border-white/20'
+          }`}>
+            <Search className={`w-4 h-4 ${scrolled ? 'text-black/50' : 'text-white/50'}`} />
+            <input
+              type="text"
+              placeholder="Que recherchez vous ?"
+              value={searchQ}
+              onChange={(e) => setSearchQ(e.target.value)}
+              className={`flex-1 text-xs outline-none placeholder:text-opacity-50 bg-transparent transition-colors ${
+                scrolled
+                  ? 'text-black placeholder:text-black/50'
+                  : 'text-white placeholder:text-white/50'
+              }`}
+              style={{ fontFamily: 'var(--font-raleway)' }}
+            />
+          </div>
+        </div>
+
         {/* Center — Logo */}
-        <div className="flex justify-center">
+        <div className="flex-1 lg:flex-none flex justify-center lg:mx-auto">
           <a
             href="#"
-            className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${
+            className={`text-lg lg:text-xl font-bold tracking-[0.15em] uppercase transition-colors shrink-0 ${
               scrolled ? 'text-black' : 'text-white'
             }`}
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em', fontWeight: 500 }}
           >
             MAISON SERENIA
           </a>
         </div>
 
-        {/* Right — Icons */}
-        <div className="flex items-center gap-1 justify-end">
-          {/* Search toggle */}
-          <button
-            className="p-2 rounded-none hover:bg-white/10 transition-colors"
-            onClick={() => setSearchOpen((v) => !v)}
-            aria-label="Rechercher"
-          >
-            {searchOpen
-              ? <X className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
-              : <Search className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />}
-          </button>
+        {/* Right — Contact & Icons */}
+        <div className="flex items-center gap-4 lg:gap-6 justify-end">
+          {/* Contact text */}
+          <a href="tel:+33" className={`text-xs font-light tracking-widest uppercase hidden lg:block transition-colors ${
+            scrolled ? 'text-black hover:opacity-60' : 'text-white hover:opacity-60'
+          }`}>
+            Contactez-nous
+          </a>
 
-          {/* Wishlist */}
-          <button onClick={onWishlistOpen} className="relative p-2 rounded-none hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
-            <Heart className={`w-5 h-5 transition-all ${mounted && wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
-            {mounted && wishCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-none flex items-center justify-center leading-none">
-                {wishCount}
-              </span>
-            )}
+          {/* Account icon */}
+          <button className={`p-2 transition-colors hover:opacity-60 ${scrolled ? 'text-black' : 'text-white'}`} aria-label="Compte">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
           </button>
 
           {/* Cart */}
-          <button onClick={onCartOpen} className="relative p-2 rounded-none hover:bg-white/10 transition-colors" aria-label="Panier">
-            <ShoppingBag className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
+          <button onClick={onCartOpen} className={`relative p-2 transition-colors hover:opacity-60 ${scrolled ? 'text-black' : 'text-white'}`} aria-label="Panier">
+            <ShoppingBag className="w-5 h-5" />
             {mounted && cartCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-none flex items-center justify-center leading-none">
+              <span className={`absolute top-0.5 right-0.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center leading-none ${
+                scrolled ? 'bg-black text-white' : 'bg-white text-black'
+              }`}>
                 {cartCount}
               </span>
             )}
           </button>
-
         </div>
       </div>
 
-      {/* Search bar drop-down */}
+      {/* Mobile Search bar */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -168,15 +169,15 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden bg-white border-t border-neutral-100"
+            className="lg:hidden overflow-hidden bg-white border-t border-neutral-100"
           >
-            <div className="max-w-2xl mx-auto px-6 py-4">
+            <div className="px-6 py-4">
               <div className="flex items-center gap-3 border-b border-black pb-2">
                 <Search className="w-4 h-4 text-neutral-400 shrink-0" />
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Rechercher un meuble, une collection…"
+                  placeholder="Que recherchez vous ?"
                   value={searchQ}
                   onChange={(e) => setSearchQ(e.target.value)}
                   className="flex-1 text-sm outline-none placeholder:text-neutral-300 text-black"
