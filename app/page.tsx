@@ -124,6 +124,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
               placeholder="Que recherchez vous ?"
               value={searchQ}
               onChange={(e) => setSearchQ(e.target.value)}
+              onFocus={() => setSearchOpen(true)}
               className={`flex-1 text-xs outline-none placeholder:text-opacity-50 bg-transparent transition-colors ${
                 scrolled
                   ? 'text-black placeholder:text-black/50'
@@ -164,7 +165,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
         </div>
       </div>
 
-      {/* Mobile Search bar */}
+      {/* Search dropdown - Desktop & Mobile */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -172,15 +173,15 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-white border-t border-neutral-100"
+            className="overflow-hidden bg-white border-t border-neutral-100 shadow-lg"
           >
-            <div className="px-6 py-4">
+            <div className="px-6 py-4 lg:py-6 lg:max-w-2xl lg:mx-auto">
               <div className="flex items-center gap-3 border-b border-black pb-2">
                 <Search className="w-4 h-4 text-neutral-400 shrink-0" />
                 <input
                   autoFocus
                   type="text"
-                  placeholder="Que recherchez vous ?"
+                  placeholder="Rechercher un meuble, une collection…"
                   value={searchQ}
                   onChange={(e) => setSearchQ(e.target.value)}
                   className="flex-1 text-sm outline-none placeholder:text-neutral-300 text-black"
