@@ -104,15 +104,15 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
         {/* Center — Logo (Absolute centered) */}
         <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-          <a
-            href="#"
-            className={`text-lg lg:text-xl font-bold tracking-[0.15em] uppercase transition-colors shrink-0 ${
+          <button
+            onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className={`text-lg lg:text-xl font-bold tracking-[0.15em] uppercase transition-colors shrink-0 cursor-pointer ${
               scrolled ? 'text-black' : 'text-white'
             }`}
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em', fontWeight: 500 }}
           >
             MAISON SERENIA
-          </a>
+          </button>
         </div>
 
         {/* Center-Left — Search Bar (hidden on mobile) */}
@@ -269,8 +269,23 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
               {/* Menu content */}
               <div className="flex-1 overflow-y-auto">
+                {/* Accueil */}
+                <div className="px-6 pt-6 pb-2">
+                  <button
+                    onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="flex items-center gap-3 w-full text-sm font-light text-black hover:opacity-60 transition-opacity py-2"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1" className="flex-shrink-0">
+                      <path d="M1 7 L7 1 L13 7" />
+                      <path d="M2.5 5.5 V13 H5.5 V9 H8.5 V13 H11.5 V5.5" />
+                    </svg>
+                    <span className="tracking-[0.1em] uppercase text-xs">Accueil</span>
+                  </button>
+                </div>
+                <div className="mx-6 h-px bg-neutral-100" />
+
                 {/* Collections avec images */}
-                <div className="px-6 pt-8 pb-6">
+                <div className="px-6 pt-6 pb-6">
                   <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Nos Collections</p>
                   <div className="space-y-3">
                     {[
