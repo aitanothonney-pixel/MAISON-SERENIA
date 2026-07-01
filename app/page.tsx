@@ -202,7 +202,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                   return (
                     <div className="max-h-[70vh] overflow-y-auto py-2">
                       {matches.map((p) => {
-                        const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                        const promoPrice = canapesPromoIds.includes(p.id) ? Math.round(p.price * 0.7) : p.price;
                         return (
                           <Link
                             key={p.id}
@@ -218,7 +218,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
                               <p className="text-xs text-neutral-400 font-light">{p.category}</p>
                             </div>
                             <div className="text-right flex-shrink-0 flex items-center gap-2">
-                              {p.name.includes('Bubble') && (
+                              {canapesPromoIds.includes(p.id) && (
                                 <span className="text-[10px] text-neutral-400 line-through font-price">{p.price.toLocaleString('fr-FR')} €</span>
                               )}
                               <p className="text-sm font-light text-black font-price">{promoPrice.toLocaleString('fr-FR')} €</p>
@@ -604,6 +604,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
 const newProductIds: number[] = [];
 const saleProductIds: number[] = [];
 const bubbleProductIds = [2, 6, 7, 8, 9, 10, 12, 13, 22];
+const canapesPromoIds = [10, 12, 13, 22];
 
 interface ProductPreview {
   id: number;
@@ -618,6 +619,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
   const isBubble = bubbleProductIds.includes(product.id);
+  const isPromo = canapesPromoIds.includes(product.id);
   const { isWished, toggle } = useWishlist();
 
   return (
@@ -646,7 +648,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-            {isBubble ? (
+            {isPromo ? (
               <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                 −30%
               </span>
@@ -688,14 +690,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-black font-bold text-base font-price">
-                {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
+                {isPromo ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
               </span>
-              {isBubble && (
+              {isPromo && (
                 <span className="text-neutral-400 line-through text-xs font-price">
                   {product.price.toLocaleString('fr-FR')} €
                 </span>
               )}
-              {isSale && !isBubble && (
+              {isSale && !isPromo && (
                 <span className="text-neutral-400 line-through text-xs font-price">
                   {Math.round(product.price * 1.25).toLocaleString('fr-FR')} €
                 </span>
