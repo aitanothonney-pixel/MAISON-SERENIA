@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail } from 'lucide-react';
 
 export function NewsletterSection() {
   const [email, setEmail] = useState('');
@@ -19,10 +18,13 @@ export function NewsletterSection() {
   return (
     <section className="py-20 bg-black text-white">
       <div className="max-w-2xl mx-auto px-6 lg:px-10 text-center">
-        <div className="flex justify-center mb-6">
-          <div className="p-3 bg-white/10 rounded-none">
-            <Mail className="w-8 h-8" />
-          </div>
+        <div className="flex justify-center mb-8">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/70">
+            <rect x="2" y="8" width="32" height="22" />
+            <path d="M2 8 L18 22 L34 8" />
+            <path d="M2 30 L13 19" />
+            <path d="M34 30 L23 19" />
+          </svg>
         </div>
 
         <h2 className="text-3xl md:text-4xl font-serif font-bold mb-3">

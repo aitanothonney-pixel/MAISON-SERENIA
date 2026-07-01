@@ -1451,7 +1451,11 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             <div className="flex-1 overflow-y-auto px-0 py-0">
               {cartProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
-                  <ShoppingBag className="w-12 h-12 text-neutral-200" />
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1" className="text-neutral-300">
+                    <path d="M16 20 V14 A8 8 0 0 1 32 14 V20" />
+                    <path d="M8 20 H40 L36 42 H12 Z" />
+                    <path d="M19 28 H29" />
+                  </svg>
                   <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
                   <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
                   <button onClick={() => { onClose(); setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
