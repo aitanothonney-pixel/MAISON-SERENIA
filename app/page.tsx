@@ -1825,129 +1825,31 @@ export default function Home() {
             <div className="divider-gold w-16 mx-auto" />
           </div>
 
-          {/* Editorial Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
-            {/* Canapé Bubble blanc — lifestyle */}
-            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
-                alt="Canapé Bubble blanc"
-                width={800}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Fauteuil Bubble blanc */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg"
-                alt="Fauteuil Bubble blanc"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Bearbrick Bape */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/212j4PLX/IMG-0662.jpg"
-                alt="Bearbrick Bape"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Fauteuil Bubble bleu */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg"
-                alt="Fauteuil Bubble bleu"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Canapé Bubble bleu */}
-            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/R1tJYDf/IMG-2491.jpg"
-                alt="Canapé Bubble bleu"
-                width={800}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* KAWS noir monde */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/r1YNwbR/IMG-0657.jpg"
-                alt="Figurine KAWS noir monde"
-                width={400}
-                height={600}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Canapé Bubble rouge — grande largeur */}
-            <div className="lg:col-span-3 overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png"
-                alt="Canapé Bubble rouge"
-                width={1000}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Canapé Bubble violet */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/My8fK90B/IMG-2525.jpg"
-                alt="Canapé Bubble violet"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Fauteuil Bubble rouge */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg"
-                alt="Fauteuil Bubble rouge"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Fauteuil Bubble vert */}
-            <div className="overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/0pnzSpFV/IMG-2557.jpg"
-                alt="Fauteuil Bubble vert"
-                width={400}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Canapé Bubble blanc — vue de face */}
-            <div className="lg:col-span-2 overflow-hidden bg-neutral-100">
-              <Image
-                src="https://i.ibb.co/wZRJYt6F/IMG-5364.jpg"
-                alt="Canapé Bubble blanc"
-                width={800}
-                height={400}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
+          {/* Masonry columns — images affichées en entier */}
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-3">
+            {[
+              { src: 'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg', alt: 'Canapé Bubble blanc', w: 900, h: 600 },
+              { src: 'https://i.ibb.co/212j4PLX/IMG-0662.jpg', alt: 'Bearbrick Bape', w: 600, h: 800 },
+              { src: 'https://i.ibb.co/R1tJYDf/IMG-2491.jpg', alt: 'Canapé Bubble bleu', w: 900, h: 600 },
+              { src: 'https://i.ibb.co/r1YNwbR/IMG-0657.jpg', alt: 'Figurine KAWS noir monde', w: 600, h: 800 },
+              { src: 'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg', alt: 'Fauteuil Bubble blanc', w: 700, h: 600 },
+              { src: 'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png', alt: 'Canapé Bubble rouge', w: 900, h: 600 },
+              { src: 'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg', alt: 'Fauteuil Bubble bleu', w: 700, h: 600 },
+              { src: 'https://i.ibb.co/My8fK90B/IMG-2525.jpg', alt: 'Canapé Bubble violet', w: 900, h: 700 },
+              { src: 'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg', alt: 'Fauteuil Bubble rouge', w: 700, h: 600 },
+              { src: 'https://i.ibb.co/0pnzSpFV/IMG-2557.jpg', alt: 'Fauteuil Bubble vert', w: 700, h: 600 },
+              { src: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg', alt: 'Canapé Bubble blanc', w: 900, h: 600 },
+            ].map(({ src, alt, w, h }) => (
+              <div key={src} className="mb-3 overflow-hidden break-inside-avoid bg-neutral-50 group">
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={w}
+                  height={h}
+                  className="w-full h-auto block group-hover:scale-[1.03] transition-transform duration-700"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
