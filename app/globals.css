@@ -52,6 +52,13 @@ h1, h2, h3, h4 {
   font-family: var(--font-playfair, Georgia, serif);
 }
 
+.font-bold,
+.font-semibold,
+b,
+strong {
+  font-family: var(--font-playfair, Georgia, serif);
+}
+
 html {
   scroll-behavior: smooth;
 }

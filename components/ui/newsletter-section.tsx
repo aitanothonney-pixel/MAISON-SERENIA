@@ -40,10 +40,12 @@ export function NewsletterSection() {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="flex-1 px-4 py-3 rounded-none bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-white text-black font-semibold rounded-none hover:bg-white/90 transition-colors whitespace-nowrap"
+            className="px-6 py-3 bg-white text-black font-semibold rounded-none hover:bg-white/90 transition-colors whitespace-nowrap tracking-[0.1em]"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
           >
             {submitted ? '✓ Merci !' : "J'en profite"}
           </button>
