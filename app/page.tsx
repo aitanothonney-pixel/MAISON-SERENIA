@@ -20,9 +20,11 @@ import { ProductBundles } from '@/components/ui/product-bundles';
 import { PreOrderSection } from '@/components/ui/pre-order-section';
 import { ExitIntentPopup } from '@/components/ui/exit-intent-popup';
 import { GiftGuide } from '@/components/ui/gift-guide';
+import { AddToCartToast } from '@/components/ui/add-to-cart-toast';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { useAddToCartNotification } from '@/lib/useAddToCartNotification';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -1598,6 +1600,7 @@ export default function Home() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [flashCat, setFlashCat] = useState<string | null>(null);
+  const { showNotification, addedProduct, closeNotification } = useAddToCartNotification();
 
   useEffect(() => {
     const onHashChange = () => {
@@ -1670,6 +1673,12 @@ export default function Home() {
       <Navbar hasBar={false} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <AddToCartToast
+        show={showNotification}
+        product={addedProduct}
+        onClose={closeNotification}
+        onContinueShopping={() => setCartOpen(false)}
+      />
 
       {/* Category flash transition */}
       <AnimatePresence>

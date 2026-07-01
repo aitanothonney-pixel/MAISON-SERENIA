@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 const KEY = 'ms_cart';
 const EVENT = 'ms_cart_change';
+export const ITEM_ADDED_EVENT = 'ms_item_added';
 
 export interface CartItem {
   id: number;
@@ -44,6 +45,7 @@ export function useCart() {
         ? prev.map((x) => (x.id === id ? { ...x, qty: x.qty + 1 } : x))
         : [...prev, { id, qty: 1 }];
       persist(next);
+      window.dispatchEvent(new CustomEvent(ITEM_ADDED_EVENT, { detail: { id } }));
       return next;
     });
   }, []);
