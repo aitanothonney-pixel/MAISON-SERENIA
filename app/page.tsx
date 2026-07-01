@@ -456,102 +456,88 @@ function PromoBanner() {
 
 // ─── Bubble Promo Carousel ────────────────────────────────────────────────────
 
-const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 12, 7, 9];
+// Ordered: canapés first (blanc, bleu, rouge, violet), then fauteuils (blanc, bleu, rouge, vert, orange)
+const bubbleOrderedIds = [10, 13, 22, 12, 2, 6, 8, 7, 9];
 
 function BubblePromoCarousel() {
-  const filteredItems = products.filter((p) => bubblePromoProducts.includes(p.id));
-  const items = useMemo(() => {
-    const shuffled = [...filteredItems].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
-  }, []);
+  const items = bubbleOrderedIds
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean) as typeof products;
+
+  const canapes = items.filter((p) => p.name.includes('Canapé'));
+  const fauteuils = items.filter((p) => p.name.includes('Fauteuil'));
+
   const { isWished, toggle } = useWishlist();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
 
-  const updateArrows = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 8);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
-  };
-
-  const scroll = (dir: 'left' | 'right') => {
-    scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
-  };
+  const ProductCard = ({ product }: { product: typeof products[0] }) => (
+    <div className="group">
+      <Link href={`/products/${product.id}`}>
+        <div className="relative overflow-hidden bg-neutral-50 mb-3 border border-neutral-100 flex items-center justify-center" style={{ height: '200px' }}>
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            width={400}
+            height={300}
+            className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+          />
+          {product.images[1] && (
+            <Image
+              src={product.images[1]}
+              alt={product.name}
+              width={400}
+              height={300}
+              className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+            />
+          )}
+          <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-light tracking-widest uppercase px-2 py-0.5">
+            −30%
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+          >
+            <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+          </button>
+        </div>
+        <h3 className="text-sm font-light text-black mb-1 leading-snug group-hover:opacity-60 transition-opacity">{product.name}</h3>
+        <div className="flex items-center gap-2">
+          <span className="text-black font-serif font-light text-base" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            {Math.round(product.price * 0.7).toLocaleString('fr-FR')} €
+          </span>
+          <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+        </div>
+      </Link>
+    </div>
+  );
 
   return (
     <FadeInSection>
       <section id="bubble-promo" className="py-16 scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-400">Offre limitée · −30%</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
-          </div>
-          <div className="flex items-center gap-2">
-            <motion.button
-              onClick={() => scroll('left')}
-              animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
-              transition={{ duration: 0.25 }}
-              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-              aria-label="Précédent"
-            >
-              <ChevronRight className="w-4 h-4 rotate-180" />
-            </motion.button>
-            <motion.button
-              onClick={() => scroll('right')}
-              animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
-              transition={{ duration: 0.25 }}
-              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-              aria-label="Suivant"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </div>
+        {/* Header centered */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-12 text-center">
+          <p className="text-[10px] tracking-[0.3em] uppercase mb-3 text-neutral-400 font-light">Offre limitée · −30%</p>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-black mb-4" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            Collection Bubble en promotion
+          </h2>
+          <div className="w-8 h-px bg-neutral-300 mx-auto" />
         </div>
-        <div
-          ref={scrollRef}
-          onScroll={updateArrows}
-          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory"
-        >
-          {items.map((product) => (
-            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72 snap-start">
-              <Link href={`/products/${product.id}`}>
-              <div className="relative overflow-hidden bg-neutral-50 mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  width={400}
-                  height={300}
-                  className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
-                />
-                {product.images[1] && (
-                  <Image
-                    src={product.images[1]}
-                    alt={product.name}
-                    width={400}
-                    height={300}
-                    className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                  />
-                )}
-                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                  −30%
-                </div>
-                <button
-                  onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                  className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                >
-                  <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                </button>
-              </div>
-              <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-              <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-base font-price">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
-                <span className="text-neutral-400 line-through text-xs font-price">{product.price.toLocaleString('fr-FR')} €</span>
-              </div>
-            </Link>
-            </div>
-          ))}
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          {/* Canapés row — 4 cols */}
+          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Canapés</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+            {canapes.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          {/* Fauteuils row — 5 cols */}
+          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-light mb-5">Fauteuils</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+            {fauteuils.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </section>
     </FadeInSection>
