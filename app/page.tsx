@@ -284,9 +284,9 @@ function PromoBanner() {
 
   return (
     <FadeInSection>
-      <section className="w-full overflow-hidden relative">
-        <div className="relative h-56 md:h-72">
-          {/* Clickable background image */}
+      <section className="w-full overflow-hidden relative mt-0 pt-0">
+        <div className="relative min-h-screen md:min-h-[70vh] flex items-center justify-center">
+          {/* Full background image */}
           <button
             onClick={() => setLightbox(true)}
             className="absolute inset-0 w-full h-full cursor-zoom-in"
@@ -296,25 +296,44 @@ function PromoBanner() {
               src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
               alt="Promo bannière"
               fill
-              className="object-cover object-[center_70%]"
+              className="object-cover object-center"
+              priority
             />
           </button>
-          <div className="absolute inset-0 bg-black/55 pointer-events-none" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none">
-            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-white/60">Édition limitée</p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
-              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
-            </h2>
-            <p className="text-white/70 text-sm mb-7 max-w-md">
-              Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
+
+          {/* Subtle overlay */}
+          <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+
+          {/* Content overlay - inspired by Louis Vuitton */}
+          <div className="relative z-10 px-6 py-20 max-w-2xl flex flex-col items-center md:items-start text-white md:text-left md:ml-12 lg:ml-20 pointer-events-none">
+            {/* Category label */}
+            <p className="text-xs tracking-[0.25em] uppercase mb-6 text-white/80 font-light">
+              Collection Exclusive
             </p>
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none">
+
+            {/* Main title */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 leading-tight tracking-tight">
+              Jusqu&apos;à<br />−30%
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-sm md:text-base tracking-widest uppercase mb-8 text-white/70 font-light">
+              La Collection Salon
+            </p>
+
+            {/* Description */}
+            <p className="text-xs md:text-sm leading-relaxed text-white/60 mb-10 max-w-sm">
+              Découvrez notre sélection exceptionnelle de mobilier haut de gamme.
+              Édition limitée, offre valable 3 semaines.
+            </p>
+
+            {/* CTA Button */}
             <a
               href="#bubble-promo"
-              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-neutral-100 transition-colors"
+              className="pointer-events-auto inline-flex items-center gap-2 bg-white/95 text-black text-xs font-bold tracking-[0.15em] uppercase px-8 py-3 hover:bg-white transition-all duration-300 backdrop-blur-sm"
             >
-              Voir les produits en promotion
+              Découvrir
+              <ChevronRight className="w-4 h-4" />
             </a>
           </div>
         </div>
