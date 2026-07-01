@@ -17,66 +17,77 @@ interface Bundle {
   description: string;
   products: BundleProduct[];
   bundlePrice: number;
-  savingsPercent: number;
+  savingsPercent?: number;
+  savingsAmount?: number;
   icon: string;
 }
 
 const bundles: Bundle[] = [
   {
     id: '1',
-    name: 'Le Salon Complet',
-    description: 'Tout ce dont vous avez besoin pour un salon parfait',
+    name: 'Duo Minimaliste',
+    description: 'Le Canapé et Fauteuil Bubble blanc — élégance épurée et confort sculptural',
     products: [
       {
-        id: '1',
-        name: 'Canapé Bubble',
-        price: 599,
-        image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&h=300&fit=crop',
+        id: '10',
+        name: 'Canapé Bubble blanc',
+        price: 1857,
+        image: 'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg',
       },
       {
         id: '2',
-        name: 'Table Basse Design',
-        price: 199,
-        image: 'https://images.unsplash.com/photo-1581980694727-d671642e6267?w=300&h=300&fit=crop',
-      },
-      {
-        id: '3',
-        name: 'Fauteuil Lounge',
-        price: 349,
-        image: 'https://images.unsplash.com/photo-1592078615290-033ee584e262?w=300&h=300&fit=crop',
+        name: 'Fauteuil Bubble blanc',
+        price: 713,
+        image: 'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg',
       },
     ],
-    bundlePrice: 999,
-    savingsPercent: 30,
-    icon: '🛋️',
+    bundlePrice: 1590,
+    savingsAmount: 210,
+    icon: '⚪',
   },
   {
     id: '2',
-    name: 'Ambiance Chaleureuse',
-    description: 'Créez une atmosphère cosy chez vous',
+    name: 'Harmonie Bleue',
+    description: 'Le Canapé et Fauteuil Bubble bleu — intensité Klein et présence sculpturale',
     products: [
       {
-        id: '4',
-        name: 'Lampadaire Arc',
-        price: 189,
-        image: 'https://images.unsplash.com/photo-1565182409498-de2e02d4114f?w=300&h=300&fit=crop',
-      },
-      {
-        id: '5',
-        name: 'Coussin Texturé',
-        price: 49,
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop',
+        id: '13',
+        name: 'Canapé Bubble bleu',
+        price: 1857,
+        image: 'https://i.ibb.co/R1tJYDf/IMG-2491.jpg',
       },
       {
         id: '6',
-        name: 'Plaid Coton',
-        price: 89,
-        image: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&h=300&fit=crop',
+        name: 'Fauteuil Bubble bleu',
+        price: 713,
+        image: 'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg',
       },
     ],
-    bundlePrice: 279,
-    savingsPercent: 25,
-    icon: '✨',
+    bundlePrice: 1590,
+    savingsAmount: 210,
+    icon: '🔵',
+  },
+  {
+    id: '3',
+    name: 'Passion Écarlate',
+    description: 'Le Canapé et Fauteuil Bubble rouge — énergie audacieuse et caractère vibrant',
+    products: [
+      {
+        id: '22',
+        name: 'Canapé Bubble rouge',
+        price: 1857,
+        image: 'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png',
+      },
+      {
+        id: '8',
+        name: 'Fauteuil Bubble rouge',
+        price: 713,
+        image: 'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg',
+      },
+    ],
+    bundlePrice: 1590,
+    savingsAmount: 210,
+    icon: '🔴',
   },
 ];
 
@@ -95,7 +106,7 @@ export function ProductBundles() {
         </div>
 
         {/* Bundles grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {bundles.map((bundle) => (
             <div
               key={bundle.id}
@@ -113,7 +124,7 @@ export function ProductBundles() {
                   </div>
                   <div className="text-right flex-shrink-0">
                     <div className="bg-red-100 text-red-700 font-bold px-4 py-2 rounded-none text-sm">
-                      −{bundle.savingsPercent}%
+                      {bundle.savingsAmount ? `Rabais de ${bundle.savingsAmount}.-` : `−${bundle.savingsPercent}%`}
                     </div>
                   </div>
                 </div>
