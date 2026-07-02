@@ -374,7 +374,7 @@ function PromoBanner() {
   return (
     <FadeInSection>
       <section className="w-full overflow-hidden relative">
-        <div className="relative h-56 md:h-72">
+        <div className="relative min-h-[560px] md:min-h-[600px] py-14 md:py-16">
           {/* Clickable background image */}
           <button
             onClick={() => setLightbox(true)}
@@ -388,34 +388,45 @@ function PromoBanner() {
               className="object-cover object-[center_70%]"
             />
           </button>
-          <div className="absolute inset-0 bg-black/55 pointer-events-none" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none">
-            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-white/60">Édition limitée</p>
+          <div className="absolute inset-0 bg-black/65 pointer-events-none" />
+          <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
+            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-[#C9A96E]">Édition limitée</p>
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
             </h2>
-            <p className="text-white/70 text-sm mb-5 max-w-md">
+            <p className="text-white/70 text-sm mb-8 max-w-md">
               Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
             </p>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Offre se termine dans :</p>
-            <div className="flex gap-3">
+
+            {/* Countdown — grande visibilité */}
+            <p className="text-[11px] tracking-[0.4em] uppercase text-[#C9A96E] mb-4">Offre se termine dans</p>
+            <div className="flex gap-3 md:gap-5 mb-10">
               {[
                 { value: pad(timeLeft.days), label: 'Jours' },
                 { value: pad(timeLeft.hours), label: 'Heures' },
                 { value: pad(timeLeft.minutes), label: 'Min' },
                 { value: pad(timeLeft.seconds), label: 'Sec' },
               ].map(({ value, label }) => (
-                <div key={label} className="flex flex-col items-center bg-black/80 border border-[#C9A96E] px-3 py-2 min-w-[44px]">
-                  <span className="text-white text-lg font-bold leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{value}</span>
-                  <span className="text-[9px] text-neutral-400 uppercase tracking-wider mt-1">{label}</span>
+                <div
+                  key={label}
+                  className="flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm border-2 border-[#C9A96E] px-4 md:px-6 py-3 md:py-4 min-w-[70px] md:min-w-[90px] shadow-2xl"
+                >
+                  <span
+                    className="text-white text-3xl md:text-5xl font-bold leading-none tabular-nums"
+                    style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+                  >
+                    {value}
+                  </span>
+                  <span className="text-[9px] md:text-[10px] text-[#C9A96E] uppercase tracking-[0.25em] mt-2 md:mt-3">
+                    {label}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 pointer-events-none">
+
             <a
               href="#bubble-promo"
-              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-neutral-100 transition-colors"
+              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#C9A96E] hover:text-white transition-colors"
             >
               Voir les produits en promotion
             </a>
