@@ -14,7 +14,6 @@ import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
-import { ZoomParallax } from '@/components/ui/zoom-parallax';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { MinimalistHeroSection } from '@/components/ui/minimalist-hero';
@@ -137,7 +136,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
     { label: 'Salon', href: '#section-salon' },
     { label: 'Bureau', href: '#section-bureau' },
     { label: 'Figurines', href: '#section-figurines' },
-    { label: 'Inspirations', href: '#section-inspirations' },
   ];
 
   return (
@@ -939,18 +937,6 @@ const testimonials = [
 ];
 
 
-// ─── Zoom Parallax Inspirations ───────────────────────────────────────────────
-
-const parallaxImages = [
-  { src: 'https://i.ibb.co/Y7bdp0Z7/IMG-0589.jpg', alt: 'Canapé Bubble jaune', position: 'center 63%' },
-  { src: 'https://i.ibb.co/QjXv6K98/IMG-0930.jpg', alt: 'Canapé Bubble bleu', position: 'center 68%' },
-  { src: 'https://i.ibb.co/99H4L0sP/IMG-2616.jpg', alt: 'Détail design', position: 'center 50%' },
-  { src: 'https://i.ibb.co/RkJCsW7S/IMG-0935.jpg', alt: 'Canapé Bubble blanc', position: 'center 54%' },
-  { src: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', alt: 'Fauteuils Bubble bleu', position: 'center 55%' },
-  { src: 'https://i.ibb.co/MksNPSck/IMG-2527.jpg', alt: 'Collection Bubble', position: 'center 50%' },
-  { src: 'https://i.ibb.co/rR0zYMWg/IMG-0932.jpg', alt: 'Salle bleue', position: 'center 55%' },
-];
-
 // ── Section Été ───────────────────────────────────────────────────────────────
 
 function SummerProductsSection() {
@@ -1014,25 +1000,6 @@ function SummerProductsSection() {
         </div>
       </section>
     </FadeInSection>
-  );
-}
-
-function InspirationsParallaxSection() {
-  return (
-    <section id="section-inspirations" className="scroll-mt-20">
-      <FadeInSection>
-        <div className="text-center py-16 px-6">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-3">Galerie</p>
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-black leading-tight">
-            Inspirations
-          </h2>
-          <p className="mt-4 text-neutral-400 text-sm max-w-md mx-auto">
-            Laissez-vous porter par nos univers. Faites défiler pour explorer.
-          </p>
-        </div>
-      </FadeInSection>
-      <ZoomParallax images={parallaxImages} />
-    </section>
   );
 }
 
@@ -1969,7 +1936,6 @@ export default function Home() {
       </div>
 
 
-      <InspirationsParallaxSection />
       <TestimonialsSection />
       <NewsletterSection />
       <Footer />
