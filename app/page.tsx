@@ -16,6 +16,7 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { Logo } from '@/components/ui/logo';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -173,14 +174,7 @@ function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void 
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
-              <Link
-                href="/"
-                onClick={onClose}
-                className="text-sm font-bold tracking-[0.25em] uppercase text-black"
-                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-              >
-                MAISON SERENIA
-              </Link>
+              <Logo color="black" size="sm" onClick={onClose} />
               <button
                 onClick={onClose}
                 className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-500 hover:text-black transition-colors"
@@ -457,13 +451,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
 
         {/* CENTER — Logo */}
         <div className="flex justify-center">
-          <Link
-            href="/"
-            className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${textColor}`}
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-          >
-            MAISON SERENIA
-          </Link>
+          <Logo color={scrolled ? 'black' : 'white'} size="md" />
         </div>
 
         {/* RIGHT — CONTACTEZ-NOUS + user + cart */}
@@ -1497,9 +1485,9 @@ function Footer() {
 
           {/* Col 1 — Brand */}
           <div>
-            <h3 className="text-lg font-bold tracking-[0.2em] uppercase mb-3 text-white" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-              MAISON SERENIA
-            </h3>
+            <div className="mb-4">
+              <Logo color="white" size="lg" />
+            </div>
             <p className="text-sm leading-relaxed mb-2">L&apos;art de vivre à la française.</p>
             <p className="text-sm mb-5">Paris, France 🇫🇷</p>
             <div className="flex items-center gap-4">

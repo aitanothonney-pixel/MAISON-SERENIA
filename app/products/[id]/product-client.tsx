@@ -9,6 +9,7 @@ import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Chec
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { Logo } from '@/components/ui/logo';
 
 // Canapé Bubble ↔ Fauteuil Bubble de même couleur
 const bubbleComplement: Record<number, number> = {
@@ -774,9 +775,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       {/* Navbar */}
       <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-          <Link href="/" className="text-base font-bold tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            MAISON SERENIA
-          </Link>
+          <Logo color="black" size="md" />
           <div className="flex items-center gap-4">
             <button onClick={() => setWishlistOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
