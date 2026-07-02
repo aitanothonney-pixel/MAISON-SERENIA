@@ -2151,23 +2151,6 @@ export default function Home() {
       <TrustStrip />
 
       <div className="w-full">
-          {/* Tagline */}
-          <FadeInSection>
-            <div className="text-center mb-16 px-6">
-              <div className="flex items-center justify-center gap-4 mb-5">
-                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
-                <p className="text-[10px] tracking-[0.45em] uppercase text-neutral-400">L&apos;art de vivre à la française</p>
-                <div className="h-px flex-1 max-w-[80px] bg-neutral-200" />
-              </div>
-              <h2 className="text-3xl md:text-5xl font-bold text-black mb-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-                Mobilier d&apos;exception,<br />intérieurs sublimés
-              </h2>
-              <p className="text-neutral-400 max-w-xl mx-auto leading-relaxed text-sm">
-                MAISON SERENIA crée des espaces de vie où le raffinement rencontre le confort.
-              </p>
-            </div>
-          </FadeInSection>
-
           {/* Section Été */}
           <SummerProductsSection />
 
