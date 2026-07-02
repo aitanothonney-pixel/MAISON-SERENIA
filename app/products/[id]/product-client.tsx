@@ -5,10 +5,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2 } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+
+// Canapé Bubble ↔ Fauteuil Bubble de même couleur
+const bubbleComplement: Record<number, number> = {
+  10: 2, 2: 10,   // blanc
+  13: 6, 6: 13,   // bleu
+  22: 8, 8: 22,   // rouge
+};
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -540,6 +547,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [lightbox, setLightbox] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
+  const [toastMessage, setToastMessage] = useState('');
+  const [addedComplement, setAddedComplement] = useState(false);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -601,9 +610,22 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
 
+  const complementId = bubbleComplement[product.id];
+  const complementProduct = complementId ? products.find((p) => p.id === complementId) : undefined;
+
   const handleAddToCart = () => {
     addToCart(product.id);
     setAdded(true);
+    setToastMessage(product.name);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  };
+
+  const handleAddComplement = () => {
+    if (!complementProduct) return;
+    addToCart(complementProduct.id);
+    setAddedComplement(true);
+    setToastMessage(complementProduct.name);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
   };
@@ -644,7 +666,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   return (
     <>
     <div className="min-h-screen bg-white">
-      <CartToast show={showToast} productName={product.name} />
+      <CartToast show={showToast} productName={toastMessage || product.name} />
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
 
       {/* Navbar */}
@@ -991,6 +1013,44 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               </div>
             </div>
           </div>
+
+          {/* Souvent acheté ensemble */}
+          {complementProduct && (
+            <section className="mt-16">
+              <h2 className="text-2xl font-serif font-bold text-black mb-6">Souvent acheté ensemble</h2>
+              <div className="space-y-3 mb-4">
+                {(() => {
+                  const cp = complementProduct;
+                  const cpPromo = Math.round(cp.price * 0.7);
+                  return (
+                    <div className="flex items-center gap-4 p-4 border border-neutral-200">
+                      <Link href={`/products/${cp.id}`} className="shrink-0 w-16 h-16 bg-neutral-50 flex items-center justify-center overflow-hidden">
+                        <img src={cp.images[0]} alt={cp.name} className="w-full h-full object-contain p-1.5" />
+                      </Link>
+                      <div className="flex-1 min-w-0">
+                        <Link href={`/products/${cp.id}`} className="font-serif font-bold text-sm text-black hover:underline">{cp.name}</Link>
+                        <p className="text-xs text-neutral-400 mt-0.5">{cp.category}</p>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="font-serif font-bold text-black text-sm">{cpPromo.toLocaleString('fr-FR')} €</span>
+                        <button
+                          onClick={handleAddComplement}
+                          className="w-9 h-9 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+                          aria-label={`Ajouter ${cp.name} au panier`}
+                        >
+                          {addedComplement ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+              <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 px-5 py-4">
+                <span className="text-base" aria-hidden>💡</span>
+                <p className="text-sm text-amber-700 font-medium">Économisez 10% en achetant ces 2 articles ensemble</p>
+              </div>
+            </section>
+          )}
 
           {/* Recently Viewed */}
           {recentlyViewed.length > 0 && (
