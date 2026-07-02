@@ -16,7 +16,6 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
-import { MinimalistHeroSection } from '@/components/ui/minimalist-hero';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -1840,9 +1839,6 @@ export default function Home() {
       <TrustStrip />
 
       <div className="w-full">
-          {/* Minimalist Hero — product showcase */}
-          <MinimalistHeroSection />
-
           {/* Tagline */}
           <FadeInSection>
             <div className="text-center mb-16 px-6">
