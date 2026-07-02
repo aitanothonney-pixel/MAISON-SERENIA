@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -16,6 +16,95 @@ const bubbleComplement: Record<number, number> = {
   13: 6, 6: 13,   // bleu
   22: 8, 8: 22,   // rouge
 };
+
+// ─── Deterministic per-product mock data (same product always shows the same numbers) ──
+
+function seedFromId(seed: number) {
+  let s = seed;
+  return function next() {
+    s = (s * 9301 + 49297) % 233280;
+    return s / 233280;
+  };
+}
+
+function dimensionGuideExtra(category: string) {
+  if (category === 'Figurines') {
+    return {
+      title: 'Hauteur & socle',
+      content: "La hauteur indiquée inclut le socle d'origine. Prévoyez une étagère ou vitrine d'une profondeur minimale de 15 cm pour une présentation stable.",
+    };
+  }
+  if (category === 'Été') {
+    return {
+      title: 'Poids & encombrement',
+      content: "Produit compact et léger, pensé pour être transporté facilement. Le poids et l'encombrement plié sont précisés dans la fiche technique ci-dessus.",
+    };
+  }
+  return {
+    title: 'Profondeur d\'assise',
+    content: "La profondeur d'assise détermine le confort d'usage : comptez environ 55 à 60 cm pour une assise droite, et jusqu'à 65 cm pour un confort cocooning type Bubble.",
+  };
+}
+
+const REVIEW_POOL: { name: string; text: string }[] = [
+  { name: 'Marie D.', text: "Absolument magnifique ! Le produit est conforme aux photos. L'emballage était impeccable et la livraison très rapide. Je recommande vivement !" },
+  { name: 'Jean-Pierre L.', text: 'Excellent rapport qualité-prix. Vraiment satisfait de mon achat. C\'est du solide, très bien fini. Merci MAISON SERENIA !' },
+  { name: 'Sophie M.', text: "Très bien. Légèrement différent de ce que j'attendais mais au final c'est super. Le service client a été très réactif." },
+  { name: 'Antoine R.', text: 'Qualité au rendez-vous, exactement ce que je cherchais pour mon intérieur. Livraison soignée et dans les temps.' },
+  { name: 'Camille B.', text: 'Superbe pièce, très agréable au quotidien. Un vrai coup de cœur pour toute la famille.' },
+  { name: 'Nicolas F.', text: 'Produit à la hauteur de mes attentes. Finitions soignées, je suis ravi de mon achat.' },
+  { name: 'Laura P.', text: 'Livraison un peu longue mais le résultat en vaut la peine. Magnifique une fois installé.' },
+  { name: 'Thomas G.', text: "Très satisfait, j'hésitais mais je ne regrette absolument pas. Qualité premium au rendez-vous." },
+];
+
+const REVIEW_DATES = ['28 juin 2026', '25 juin 2026', '22 juin 2026', '18 juin 2026', '14 juin 2026', '9 juin 2026'];
+
+function buildReviewStats(productId: number) {
+  const rng = seedFromId(productId * 7 + 4242);
+  const five = 60 + Math.floor(rng() * 90);
+  const four = 10 + Math.floor(rng() * 30);
+  const three = Math.floor(rng() * 12);
+  const two = Math.floor(rng() * 4);
+  const one = rng() < 0.15 ? 1 : 0;
+  const total = five + four + three + two + one;
+  const avg = Math.round(((five * 5 + four * 4 + three * 3 + two * 2 + one * 1) / total) * 10) / 10;
+  return { five, four, three, two, one, total, avg };
+}
+
+function buildReviews(productId: number) {
+  const rng = seedFromId(productId * 13 + 777);
+  const shuffled = [...REVIEW_POOL].sort(() => rng() - 0.5);
+  return shuffled.slice(0, 3).map((r, i) => ({
+    ...r,
+    rating: rng() < 0.25 ? 4 : 5,
+    date: REVIEW_DATES[(productId + i) % REVIEW_DATES.length],
+  }));
+}
+
+const ACTIVITY_NAMES = ['Claude D.', 'Diane M.', 'Boris D.', 'Emma L.', 'Julien K.', 'Nadia S.', 'Marc T.', 'Alice V.', 'Hugo P.', 'Léa R.'];
+
+function buildLiveActivity(productId: number) {
+  const rng = seedFromId(productId * 17 + 55);
+  const viewers = 3 + Math.floor(rng() * 10);
+  const buyers = 1 + Math.floor(rng() * 7);
+  const names = [...ACTIVITY_NAMES].sort(() => rng() - 0.5).slice(0, 3);
+  const extra = 2 + Math.floor(rng() * 6);
+  const feed = [
+    { name: names[0], action: 'regarde ce produit', type: 'view' as const },
+    { name: names[1], action: 'a acheté cet article', type: 'buy' as const },
+    { name: `+${extra} personnes`, action: 'a acheté cet article', type: 'buy' as const },
+    { name: names[2], action: 'regarde ce produit', type: 'view' as const },
+  ];
+  return { viewers, buyers, feed };
+}
+
+const FAQ_ITEMS = [
+  { q: 'Combien de temps pour la livraison ?', a: 'Les commandes standard sont expédiées sous 24 à 48h. Pour les meubles de la collection Bubble, fabriqués sur demande, comptez 3 à 6 semaines.' },
+  { q: 'Comment retourner un article ?', a: "Vous disposez de 30 jours pour changer d'avis. Contactez notre service client pour lancer un retour : l'enlèvement à domicile est organisé gratuitement." },
+  { q: 'Le produit est-il conforme aux photos ?', a: 'Oui, nos photos sont fidèles au produit livré. De légères variations de teinte peuvent survenir selon les écrans.' },
+  { q: 'Offrez-vous une garantie ?', a: 'Tous nos produits sont garantis 2 ans contre les défauts de fabrication.' },
+  { q: 'Puis-je payer en plusieurs fois ?', a: "Oui, le paiement en 3x ou 4x sans frais est disponible via carte bancaire et PayPal dès 100€ d'achat." },
+];
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────
 
@@ -549,6 +638,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
   const [toastMessage, setToastMessage] = useState('');
   const [addedComplement, setAddedComplement] = useState(false);
+  const [openDim, setOpenDim] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -629,6 +720,17 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2500);
   };
+
+  const dimExtra = dimensionGuideExtra(product.category);
+  const dimensionAccordions = [
+    { title: 'Avant de commencer', content: "Mesurez précisément l'espace disponible dans votre intérieur avant de passer commande, en prévoyant au moins 10 à 15 cm de marge pour la circulation et l'ouverture des portes." },
+    { title: 'Guide des dimensions', content: `Dimensions du produit : ${product.dimensions}. Ces mesures correspondent à l'encombrement total du produit fini, hors emballage.` },
+    { title: dimExtra.title, content: dimExtra.content },
+  ];
+
+  const reviewStats = buildReviewStats(product.id);
+  const reviews = buildReviews(product.id);
+  const liveActivity = buildLiveActivity(product.id);
 
   const accordions = [
     {
@@ -1051,6 +1153,163 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               </div>
             </section>
           )}
+
+          {/* Guide des dimensions & tailles */}
+          <section className="mt-16">
+            <div className="bg-neutral-50 p-6 md:p-10">
+              <h2 className="text-2xl font-serif font-bold text-black mb-6">Guide des dimensions &amp; tailles</h2>
+              <div className="space-y-3">
+                {dimensionAccordions.map((acc, i) => (
+                  <div key={i} className="bg-white border border-neutral-200">
+                    <button
+                      className="w-full flex items-center justify-between px-5 py-4 text-sm font-serif font-bold text-black text-left"
+                      onClick={() => setOpenDim(openDim === i ? null : i)}
+                    >
+                      {acc.title}
+                      <ChevronDown className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform duration-300 ${openDim === i ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {openDim === i && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="px-5 pb-5 text-sm text-neutral-600 leading-relaxed">{acc.content}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 bg-blue-50 border border-blue-100 px-5 py-4 text-sm text-blue-700">
+                Besoin d&apos;aide? Notre équipe SAV peut vous aider à choisir les bonnes dimensions. <Link href="/contact" className="underline font-semibold">Contactez-nous</Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Questions fréquentes */}
+          <section className="mt-16">
+            <h2 className="text-2xl font-serif font-bold text-black mb-6">Questions fréquentes</h2>
+            <div className="space-y-3">
+              {FAQ_ITEMS.map((item, i) => (
+                <div key={i} className="border border-neutral-200">
+                  <button
+                    className="w-full flex items-center justify-between px-5 py-4 text-sm font-serif font-bold text-black text-left bg-neutral-50"
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  >
+                    {item.q}
+                    <ChevronDown className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {openFaq === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden bg-white"
+                      >
+                        <p className="px-5 pb-5 pt-4 text-sm text-neutral-600 leading-relaxed">{item.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Avis de nos clients */}
+          <section className="mt-16">
+            <h2 className="text-2xl font-serif font-bold text-black mb-6">Avis de nos clients</h2>
+            <div className="bg-neutral-50 border border-neutral-200 p-6 mb-6 flex flex-col md:flex-row items-start md:items-center gap-6">
+              <div className="text-center shrink-0 md:pr-6 md:border-r md:border-neutral-200 w-full md:w-auto">
+                <p className="text-4xl font-serif font-bold text-black">{reviewStats.avg}</p>
+                <div className="flex justify-center gap-0.5 my-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-amber-400 text-amber-400' : 'text-neutral-300'}`} />
+                  ))}
+                </div>
+                <p className="text-xs text-neutral-400">{reviewStats.total} avis vérifiés</p>
+              </div>
+              <div className="flex-1 w-full space-y-1.5">
+                {[
+                  { star: 5, count: reviewStats.five },
+                  { star: 4, count: reviewStats.four },
+                  { star: 3, count: reviewStats.three },
+                  { star: 2, count: reviewStats.two },
+                  { star: 1, count: reviewStats.one },
+                ].map(({ star, count }) => {
+                  const pct = reviewStats.total ? (count / reviewStats.total) * 100 : 0;
+                  return (
+                    <div key={star} className="flex items-center gap-3 text-xs">
+                      <span className="w-6 text-neutral-400 shrink-0">{star}★</span>
+                      <div className="flex-1 h-2 bg-neutral-200 overflow-hidden">
+                        <div className="h-full bg-amber-400" style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className="w-8 text-right text-neutral-400 shrink-0">{count}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="space-y-3 mb-6">
+              {reviews.map((r, i) => (
+                <div key={i} className="border border-neutral-200 p-4">
+                  <div className="flex items-center justify-between mb-1.5 gap-2 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <span className="font-serif font-bold text-sm text-black">{r.name}</span>
+                      <span className="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">Achat vérifié</span>
+                    </div>
+                    <span className="text-xs text-neutral-400">{r.date}</span>
+                  </div>
+                  <div className="flex gap-0.5 mb-1.5">
+                    {[...Array(5)].map((_, i2) => (
+                      <Star key={i2} className={`w-3.5 h-3.5 ${i2 < r.rating ? 'fill-amber-400 text-amber-400' : 'text-neutral-200'}`} />
+                    ))}
+                  </div>
+                  <p className="text-sm text-neutral-600 leading-relaxed">{r.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center">
+              <button className="text-sm font-semibold text-black hover:underline">Voir tous les avis →</button>
+            </div>
+          </section>
+
+          {/* Vu maintenant */}
+          <section className="mt-16">
+            <h2 className="text-2xl font-serif font-bold text-black mb-6">Vu maintenant</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div className="bg-blue-50 border border-blue-100 px-5 py-4">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-blue-600 font-semibold mb-1.5">Actuellement</p>
+                <p className="text-sm text-blue-900 font-medium flex items-center gap-2"><Eye className="w-4 h-4" /> {liveActivity.viewers} regardent</p>
+              </div>
+              <div className="bg-green-50 border border-green-100 px-5 py-4">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-green-600 font-semibold mb-1.5">Derniers jours</p>
+                <p className="text-sm text-green-900 font-medium flex items-center gap-2"><ShoppingBag className="w-4 h-4" /> {liveActivity.buyers} achats</p>
+              </div>
+            </div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-3">Activité en direct</p>
+            <div className="space-y-2">
+              {liveActivity.feed.map((item, i) => (
+                <div key={i} className="flex items-center justify-between bg-neutral-50 border border-neutral-100 px-4 py-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${item.type === 'buy' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
+                      {item.type === 'buy' ? <ShoppingBag className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-black truncate">{item.name}</p>
+                      <p className="text-xs text-neutral-400">{item.action}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-neutral-400 shrink-0 ml-3">à l&apos;instant</span>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* Recently Viewed */}
           {recentlyViewed.length > 0 && (
