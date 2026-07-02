@@ -1826,8 +1826,6 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 
 function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, removeItem, updateQty } = useCart();
-  const [selected, setSelected] = useState<number[]>([]);
-  const [checkoutStep, setCheckoutStep] = useState<'cart' | 'checkout'>('cart');
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
 
   const cartProducts = items.map((item) => {
@@ -1842,8 +1840,6 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
       const sw = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = `${sw}px`;
-      setSelected(items.map((x) => x.id));
-      setCheckoutStep('cart');
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -1852,15 +1848,16 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     };
-  }, [open, items]);
+  }, [open]);
 
-  const toggleSelect = (id: number) => {
-    setSelected((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+  const totalQty = cartProducts.reduce((sum, x) => sum + x.qty, 0);
+  const subtotal = cartProducts.reduce((sum, x) => sum + x.price * x.qty, 0);
+  const total = subtotal;
+
+  const goShopping = () => {
+    onClose();
+    setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
   };
-
-  const selectedItems = cartProducts.filter((x) => selected.includes(x.id));
-  const total = selectedItems.reduce((sum, x) => sum + x.price * x.qty, 0);
-  const totalQty = selectedItems.reduce((sum, x) => sum + x.qty, 0);
 
   return (
     <AnimatePresence>
@@ -1880,35 +1877,49 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
           >
+            {/* Top help strip */}
+            <div className="flex items-center gap-3 px-5 py-3 bg-neutral-50 border-b border-neutral-100 flex-shrink-0">
+              <span className="w-8 h-8 bg-black text-white text-[10px] font-bold tracking-wider flex items-center justify-center flex-shrink-0">
+                MS
+              </span>
+              <p className="text-[13px] text-neutral-700 leading-tight">
+                Besoin d&apos;aide? <span className="font-semibold text-black">Contactez-nous au +41 76 XXX XX XX</span>
+              </p>
+            </div>
+
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
-              <div className="flex items-center gap-3">
-                <ShoppingBag className="w-5 h-5" />
-                <span className="font-serif font-semibold text-lg">Panier</span>
-                {items.length > 0 && (
-                  <span className="bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
-                    {items.reduce((s, x) => s + x.qty, 0)}
-                  </span>
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                  Mon Panier
+                </span>
+                {totalQty > 0 && (
+                  <span className="text-neutral-400 text-sm">({totalQty})</span>
                 )}
               </div>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
-                <X className="w-5 h-5" />
+              <button onClick={onClose} className="p-1 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
+                <X className="w-5 h-5 text-black" />
               </button>
             </div>
 
             {/* Body */}
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <div className="flex-1 overflow-y-auto">
               {cartProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-                  <ShoppingBag className="w-12 h-12 text-neutral-200" />
-                  <p className="font-serif text-lg text-neutral-400">Votre panier est vide</p>
-                  <p className="text-sm text-neutral-300">Ajoutez des produits pour commencer.</p>
-                  <button onClick={() => { onClose(); setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
+                <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-6 py-16">
+                  <ShoppingBag className="w-11 h-11 text-neutral-300" strokeWidth={1.4} />
+                  <p className="font-serif text-base text-neutral-500" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    Votre panier est vide
+                  </p>
+                  <p className="text-xs text-neutral-400">Ajoutez des produits pour commencer.</p>
+                  <button
+                    onClick={goShopping}
+                    className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3 hover:bg-neutral-800 transition-colors"
+                  >
                     Découvrir nos produits
                   </button>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="px-6 py-5 space-y-5">
                   {cartProducts.map(({ id, qty, product, price }) => (
                     <motion.div
                       key={id}
@@ -1916,53 +1927,58 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className={`flex items-start gap-3 p-3 border transition-all duration-200 cursor-pointer ${
-                        selected.includes(id) ? 'border-black bg-neutral-50' : 'border-neutral-100 bg-white'
-                      }`}
-                      onClick={() => toggleSelect(id)}
+                      className="flex items-start gap-4"
                     >
-                      {/* Checkbox */}
-                      <div className={`mt-1 shrink-0 w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
-                        selected.includes(id) ? 'border-black bg-black' : 'border-neutral-300'
-                      }`}>
-                        {selected.includes(id) && <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2.5"><path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                      </div>
-
                       {/* Image */}
-                      <div className="shrink-0 w-20 h-20 bg-neutral-100 overflow-hidden flex items-center justify-center">
-                        <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(id) ? 'object-contain p-2' : 'object-cover'}`} />
+                      <div className="shrink-0 w-[92px] h-[92px] bg-neutral-100 overflow-hidden flex items-center justify-center">
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className={`w-full h-full ${isBubble(id) || product.category === 'Figurines' || product.category === 'Été' ? 'object-contain p-2' : 'object-cover'}`}
+                        />
                       </div>
 
                       {/* Info */}
-                      <div className="flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
-                        <p className="font-serif font-semibold text-sm leading-snug line-clamp-2">{product.name}</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                        <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
-                        {/* Qty */}
-                        <div className="flex items-center gap-2 mt-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[15px] text-black leading-snug">{product.name}</p>
+                            <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
+                            <p
+                              className="text-[19px] font-bold text-black mt-2 italic"
+                              style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+                            >
+                              {price.toLocaleString('fr-FR')} €
+                            </p>
+                          </div>
                           <button
-                            onClick={() => updateQty(id, qty - 1)}
-                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                            onClick={() => removeItem(id)}
+                            className="shrink-0 p-1 text-neutral-400 hover:text-black transition-colors"
+                            aria-label="Supprimer"
+                          >
+                            <Trash2 className="w-4 h-4" strokeWidth={1.5} />
+                          </button>
+                        </div>
+
+                        {/* Qty */}
+                        <div className="flex items-center gap-0 mt-3">
+                          <button
+                            onClick={() => updateQty(id, Math.max(1, qty - 1))}
+                            className="w-8 h-8 border border-neutral-200 flex items-center justify-center hover:border-black transition-colors text-neutral-700"
+                            aria-label="Diminuer"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="text-xs font-semibold w-5 text-center">{qty}</span>
+                          <span className="w-10 h-8 flex items-center justify-center text-sm text-black">{qty}</span>
                           <button
                             onClick={() => updateQty(id, qty + 1)}
-                            className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center hover:border-black transition-colors"
+                            className="w-8 h-8 border border-neutral-200 flex items-center justify-center hover:border-black transition-colors text-neutral-700"
+                            aria-label="Augmenter"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
                         </div>
                       </div>
-
-                      {/* Delete */}
-                      <button
-                        onClick={(e) => { e.stopPropagation(); removeItem(id); }}
-                        className="shrink-0 mt-1 p-1.5 rounded-full hover:bg-red-50 transition-colors text-neutral-400 hover:text-red-500"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
                     </motion.div>
                   ))}
                 </div>
@@ -1971,44 +1987,46 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
 
             {/* Footer */}
             {cartProducts.length > 0 && (
-              <div className="border-t border-neutral-100 px-6 py-5 space-y-4">
-                {/* Select all */}
-                <button
-                  onClick={() => setSelected(selected.length === cartProducts.length ? [] : cartProducts.map(x => x.id))}
-                  className="text-xs text-neutral-400 hover:text-black transition-colors tracking-widest uppercase"
-                >
-                  {selected.length === cartProducts.length ? 'Tout désélectionner' : 'Tout sélectionner'}
-                </button>
-
-                {/* Total */}
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-neutral-500">Total ({totalQty} article{totalQty > 1 ? 's' : ''})</span>
-                  <span className="font-serif font-bold text-xl">{total.toLocaleString('fr-FR')} €</span>
+              <div className="border-t border-neutral-100 flex-shrink-0">
+                <div className="px-6 pt-5 pb-4">
+                  <div className="flex items-center justify-between mb-2.5">
+                    <span className="text-sm text-neutral-700">Sous-total</span>
+                    <span className="text-sm text-neutral-700">{subtotal.toLocaleString('fr-FR')} €</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-neutral-700">Livraison</span>
+                    <span className="text-sm text-neutral-700">Gratuite</span>
+                  </div>
                 </div>
-                <p className="text-[10px] text-neutral-400 -mt-2">* TVA comprise</p>
 
-                {/* Checkout CTA */}
-                <button
-                  disabled={selectedItems.length === 0}
-                  className="w-full bg-black text-white py-4 rounded-none font-bold text-sm tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  CONTINUER ({totalQty})
-                </button>
+                <div className="border-t border-neutral-100 px-6 py-5">
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-base text-black">Total</span>
+                    <span
+                      className="text-2xl font-bold text-black italic"
+                      style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+                    >
+                      {total.toLocaleString('fr-FR')} €
+                    </span>
+                  </div>
 
-                {/* PayPal + Apple Pay */}
-                <div className="grid grid-cols-2 gap-3">
-                  <button className="flex items-center justify-center gap-2 border border-neutral-200 py-3 hover:border-neutral-400 transition-colors">
-                    <svg viewBox="0 0 80 24" fill="none" className="h-5 w-auto" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M30.6 5.6H24c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.2c.4 0 .7-.3.8-.7l.6-4c.1-.4.4-.7.8-.7H29c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Zm19.9-7.6h-3.3c-.3 0-.6.2-.8.4l-4.8 7-2-6.7c-.1-.4-.5-.7-.9-.7h-3.2c-.3 0-.5.3-.4.6l3.8 11.2-3.6 5c-.2.3 0 .7.3.7h3.3c.3 0 .6-.1.8-.4l11.5-16.6c.2-.2 0-.5-.3-.5h-.4Z" fill="#003087"/>
-                      <path d="M69 5.6h-6.6c-.4 0-.7.3-.8.7l-2.4 15.2c0 .3.2.5.5.5h3.5c.3 0 .5-.2.6-.5l.7-4.2c.1-.4.4-.7.8-.7h2.1c3.4 0 5.3-1.6 5.8-4.8.2-1.4 0-2.5-.6-3.3-.7-.8-1.9-1.2-3.6-1.2l.5.3Zm.6 4.7c-.3 1.8-1.7 1.8-3 1.8h-.8l.5-3.3h.9c.9 0 1.8 0 2.2.5.3.3.3.7.2 1Zm14.5 0h-3.3c-.3 0-.6.2-.7.5l-.2.9-.3-.4c-.8-1.2-2.7-1.6-4.6-1.6-4.3 0-8 3.3-8.7 7.9-.4 2.3.2 4.5 1.5 6 1.2 1.4 3 2 5 2 3.5 0 5.4-2.2 5.4-2.2l-.2.9c0 .3.2.5.5.5h3c.4 0 .7-.3.8-.7l1.8-11.3c0-.2-.2-.5-.5-.5Zm-4.7 7.6c-.4 2.2-2.1 3.7-4.4 3.7-1.1 0-2-.4-2.6-1-.6-.7-.8-1.6-.6-2.7.3-2.1 2.1-3.7 4.3-3.7 1.1 0 2 .3 2.6 1 .6.7.9 1.6.7 2.7Z" fill="#009CDE"/>
-                    </svg>
+                  <button className="w-full bg-black text-white py-4 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors">
+                    Procéder au paiement
                   </button>
-                  <button className="flex items-center justify-center gap-2 bg-black py-3 hover:bg-neutral-800 transition-colors">
-                    <svg viewBox="0 0 40 16" fill="none" className="h-4 w-auto" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7.4 3.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1ZM8 4.9c-1.1-.1-2 .6-2.5.6S4.2 4.9 3.3 4.9c-1.1 0-2.2.7-2.7 1.7-1.2 2-.3 5 .8 6.6.6.8 1.2 1.7 2.1 1.7.8 0 1.1-.5 2.1-.5 1 0 1.2.5 2.1.5.9 0 1.5-.8 2.1-1.7.6-.9.9-1.8.9-1.8S8.9 10.7 8.9 8.9c0-1.6 1.3-2.3 1.3-2.3S9.5 4.9 8 4.9ZM16.5 2.1h-2.4c-.1 0-.3.1-.3.3v10.8c0 .2.1.3.3.3h1.2c.2 0 .3-.1.3-.3V9.8h1.1c2 0 3.3-1 3.3-3 0-1.9-1.3-2.7-3.5-2.7Zm.2 4.5h-.9V3.4h.9c1.1 0 1.7.5 1.7 1.6 0 1.1-.6 1.6-1.7 1.6ZM22.7 6.9c-.7 0-1.1.3-1.4.8l-.3-1.2v-.1h-.9c-.1 0-.2.1-.2.2v6.3c0 .1.1.2.2.2h1.1c.1 0 .2-.1.2-.2V10.7c.3.4.8.7 1.4.7 1.3 0 2.1-1.1 2.1-2.7-.1-1.5-.9-1.8-2.2-1.8Zm-.3 3.9c-.7 0-1.1-.5-1.1-1.3 0-.8.4-1.3 1.1-1.3.6 0 1 .5 1 1.3 0 .8-.4 1.3-1 1.3ZM29.4 5.8l-3 6.9h-.9l1.1-2.4-1.9-4.5h1l1.4 3.4 1.3-3.4h1Z" fill="white"/>
+
+                  <button className="w-full mt-3 bg-[#0070ba] text-white py-4 rounded-full text-sm font-semibold hover:bg-[#005f9e] transition-colors flex items-center justify-center gap-2">
+                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="white" />
                     </svg>
-                    <span className="text-white text-xs font-medium">Pay</span>
+                    Payer avec PayPal
                   </button>
+                </div>
+
+                <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-4">
+                  <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-black mb-2">Paiement sécurisé</p>
+                  <p className="text-xs text-neutral-500 leading-relaxed">
+                    Maison Serenia accepte les modes de paiement sécurisés. Vos données de paiement sont traitées de façon confidentielle.
+                  </p>
                 </div>
               </div>
             )}
