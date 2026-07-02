@@ -1013,6 +1013,129 @@ function SummerProductsSection() {
   );
 }
 
+// ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
+
+function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
+  const { addItem } = useCart();
+
+  const bundles = [
+    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2 },
+    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6 },
+    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8 },
+  ];
+  const BUNDLE_PRICE = 1590;
+
+  const handleBuy = (canapeId: number, fauteuilId: number) => {
+    addItem(canapeId);
+    addItem(fauteuilId);
+    onCartOpen();
+  };
+
+  return (
+    <FadeInSection>
+      <section className="py-20 bg-neutral-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Économisez plus</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+              Nos ensembles Bubble
+            </h2>
+            <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
+              Le canapé et son fauteuil assortis — pensés ensemble, sublimés en couple.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {bundles.map(({ key, canapeId, fauteuilId }, index) => {
+              const canape = products.find((p) => p.id === canapeId)!;
+              const fauteuil = products.find((p) => p.id === fauteuilId)!;
+              const sum = canape.price + fauteuil.price;
+              const savings = sum - BUNDLE_PRICE;
+              return (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white border border-neutral-200 p-6 lg:p-7 flex flex-col hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="flex-1 flex flex-col">
+                    <div className="relative">
+                      <Link href={`/products/${canapeId}`} className="flex items-center gap-4 group">
+                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                          <Image
+                            src={canape.images[0]}
+                            alt={canape.name}
+                            width={140}
+                            height={140}
+                            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{canape.name}</h3>
+                          <p className="text-neutral-500 text-sm mt-1">{canape.price.toLocaleString('fr-FR')}€</p>
+                        </div>
+                      </Link>
+                      <div className="flex justify-center my-3">
+                        <span className="text-neutral-300 text-2xl leading-none">+</span>
+                      </div>
+                      <Link href={`/products/${fauteuilId}`} className="flex items-center gap-4 group">
+                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                          <Image
+                            src={fauteuil.images[0]}
+                            alt={fauteuil.name}
+                            width={140}
+                            height={140}
+                            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{fauteuil.name}</h3>
+                          <p className="text-neutral-500 text-sm mt-1">{fauteuil.price.toLocaleString('fr-FR')}€</p>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="h-px bg-neutral-200 my-6" />
+
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">Prix du bundle</p>
+                    <p className="text-neutral-400 line-through text-sm">{sum.toLocaleString('fr-FR')}€</p>
+                  </div>
+                  <p
+                    className="text-4xl md:text-5xl font-bold text-black mb-5 leading-none"
+                    style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+                  >
+                    {BUNDLE_PRICE.toLocaleString('fr-FR')}€
+                  </p>
+
+                  <div className="flex justify-center mb-6">
+                    <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
+                      Économies de {savings.toLocaleString('fr-FR')}€
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => handleBuy(canapeId, fauteuilId)}
+                    className="w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors"
+                  >
+                    Acheter cet ensemble
+                  </button>
+                  <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
+                    Livraison gratuite à partir de 60€
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
 const firstColumn = testimonials.slice(0, 3);
 const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
@@ -1943,6 +2066,7 @@ export default function Home() {
       </div>
 
 
+      <BundlesSection onCartOpen={() => setCartOpen(true)} />
       <TestimonialsSection />
       <NewsletterSection />
       <Footer />
