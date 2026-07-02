@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
-  Truck, Shield, RotateCcw, ArrowUp,
+  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -100,17 +100,215 @@ function BackToTop() {
 // ─── Announcement Bar ─────────────────────────────────────────────────────────
 
 
+// ─── Side Menu Drawer ─────────────────────────────────────────────────────────
+
+function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [open, onClose]);
+
+  const collections = [
+    {
+      name: 'Salon',
+      desc: 'Canapés & Fauteuils Bubble',
+      href: '/#section-salon',
+      img: products.find((p) => p.id === 10)?.images[0] ?? '',
+    },
+    {
+      name: 'Figurines',
+      desc: 'Sculptures KAWS Collector',
+      href: '/#section-figurines',
+      img: products.find((p) => p.id === 34)?.images[0] ?? '',
+    },
+    {
+      name: 'Collection Été',
+      desc: 'Accessoires nomades',
+      href: '/#section-ete',
+      img: products.find((p) => p.id === 50)?.images[0] ?? '',
+    },
+  ];
+
+  const services = [
+    { label: 'Contactez-nous', href: '/contact' },
+    { label: 'Suivi de commande', href: '/livraison' },
+    { label: 'Questions fréquentes', href: '/faq' },
+    { label: 'Retours & Échanges', href: '/retours' },
+    { label: 'À propos de nous', href: '/a-propos' },
+  ];
+
+  const informations = [
+    { label: 'Mentions légales', href: '/a-propos' },
+    { label: 'Politique de confidentialité', href: '/a-propos' },
+    { label: 'Conditions générales de vente', href: '/faq' },
+    { label: 'Gestion des cookies', href: '/faq' },
+  ];
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/40 z-[80]"
+          />
+          {/* Drawer */}
+          <motion.aside
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'tween', duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed top-0 left-0 h-full w-[92vw] max-w-md bg-white z-[90] flex flex-col shadow-2xl"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
+              <Link
+                href="/"
+                onClick={onClose}
+                className="text-sm font-bold tracking-[0.25em] uppercase text-black"
+                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+              >
+                MAISON SERENIA
+              </Link>
+              <button
+                onClick={onClose}
+                className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-500 hover:text-black transition-colors"
+              >
+                Fermer <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto">
+              {/* ACCUEIL */}
+              <div className="px-6 py-5 border-b border-neutral-100">
+                <Link
+                  href="/"
+                  onClick={onClose}
+                  className="flex items-center gap-3 group"
+                >
+                  <HomeIcon className="w-5 h-5 text-black" />
+                  <span className="text-sm tracking-[0.2em] uppercase font-semibold text-black group-hover:underline">Accueil</span>
+                </Link>
+              </div>
+
+              {/* NOS COLLECTIONS */}
+              <div className="px-6 py-6 border-b border-neutral-100">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-5">Nos collections</p>
+                <div className="flex flex-col gap-5">
+                  {collections.map((c) => (
+                    <Link
+                      key={c.name}
+                      href={c.href}
+                      onClick={onClose}
+                      className="flex items-center gap-4 group"
+                    >
+                      <div className="w-14 h-14 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        {c.img ? (
+                          <img
+                            src={c.img}
+                            alt={c.name}
+                            className="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : null}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-serif text-base font-semibold text-black group-hover:underline leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
+                        <p className="text-xs text-neutral-400 mt-0.5">{c.desc}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors flex-shrink-0" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* OFFRE EXCLUSIVE — promo card */}
+              <div className="px-6 py-5 border-b border-neutral-100">
+                <Link
+                  href="/#bubble-promo"
+                  onClick={onClose}
+                  className="block bg-black text-white p-5 hover:bg-neutral-900 transition-colors"
+                >
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-white/60 mb-2">Offre exclusive</p>
+                  <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    Packs &amp; Ensembles
+                  </h3>
+                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Économisez jusqu&apos;à 980€ sur nos duos</p>
+                </Link>
+              </div>
+
+              {/* AIDE & SERVICES */}
+              <div className="px-6 py-6 border-b border-neutral-100">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Aide &amp; Services</p>
+                <div className="flex flex-col">
+                  {services.map((s) => (
+                    <Link
+                      key={s.label}
+                      href={s.href}
+                      onClick={onClose}
+                      className="text-sm text-black py-2 hover:opacity-60 transition-opacity"
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* INFORMATIONS */}
+              <div className="px-6 py-6">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Informations</p>
+                <div className="flex flex-col">
+                  {informations.map((s) => (
+                    <Link
+                      key={s.label}
+                      href={s.href}
+                      onClick={onClose}
+                      className="text-sm text-black py-2 hover:opacity-60 transition-opacity"
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-neutral-100 bg-neutral-50 flex-shrink-0">
+              <p className="text-xs text-neutral-600 flex items-center gap-2">
+                <span aria-hidden>🚚</span>
+                <span>Livraison gratuite dès 60€ · Suisse</span>
+              </p>
+              <p className="text-[11px] text-neutral-400 mt-1.5">© 2026 Maison Serenia</p>
+            </div>
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
 function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void }) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
+  const [searchFocused, setSearchFocused] = useState(false);
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
@@ -120,26 +318,23 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   }, [hasBar]);
 
   useEffect(() => {
-    if (!searchOpen) return;
+    if (!searchFocused) return;
     const handleClick = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setSearchOpen(false);
-        setSearchQ('');
+      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target as Node)) {
+        setSearchFocused(false);
       }
     };
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
-  }, [searchOpen]);
+  }, [searchFocused]);
 
-  const navItems = [
-    { label: 'Salon', href: '#section-salon' },
-    { label: 'Bureau', href: '#section-bureau' },
-    { label: 'Figurines', href: '#section-figurines' },
-  ];
+  const hoverBg = scrolled ? 'hover:bg-black/5' : 'hover:bg-white/15';
+  const textColor = scrolled ? 'text-black' : 'text-white';
+  const iconColor = scrolled ? 'text-black' : 'text-white';
 
   return (
+    <>
     <header
-      ref={searchRef}
       className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
@@ -147,63 +342,146 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       }`}
     >
       {/* Main nav row */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-3 items-center h-16 lg:h-[68px]">
-        {/* Left — Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`text-[11px] tracking-widest uppercase transition-colors duration-300 hover:opacity-60 whitespace-nowrap ${
-                scrolled ? 'text-black' : 'text-white/90'
-              }`}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        {/* Mobile burger — left on mobile */}
-        <div className="lg:hidden flex items-center">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-3 items-center h-16 lg:h-[68px]">
+        {/* LEFT — Menu + Search */}
+        <div className="flex items-center gap-2 lg:gap-3">
+          {/* Menu button (all breakpoints) */}
           <button
-            className="p-2 flex flex-col gap-1.5"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setDrawerOpen(true)}
+            className={`flex items-center gap-2 px-2.5 py-2 transition-colors ${hoverBg}`}
             aria-label="Menu"
           >
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? 'opacity-0' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            <span className={`block w-5 h-0.5 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''} ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            <span className="flex flex-col gap-[3px]">
+              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
+              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
+              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
+            </span>
+            <span className={`hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium ${textColor}`}>Menu</span>
           </button>
+
+          {/* Inline search — desktop only */}
+          <div ref={searchWrapRef} className="hidden lg:block relative">
+            <div className={`flex items-center gap-2 px-3 py-2 border transition-colors ${
+              scrolled
+                ? 'border-neutral-200 bg-white hover:border-neutral-300'
+                : 'border-white/25 bg-white/5 hover:bg-white/10'
+            }`}>
+              <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
+              <input
+                type="text"
+                placeholder="Que recherchez-vous ?"
+                value={searchQ}
+                onFocus={() => setSearchFocused(true)}
+                onChange={(e) => { setSearchQ(e.target.value); setSearchFocused(true); }}
+                className={`w-52 xl:w-64 text-xs outline-none bg-transparent ${
+                  scrolled ? 'text-black placeholder:text-neutral-400' : 'text-white placeholder:text-white/60'
+                }`}
+              />
+              {searchQ && (
+                <button onClick={() => setSearchQ('')} aria-label="Effacer">
+                  <X className={`w-3.5 h-3.5 ${scrolled ? 'text-neutral-400' : 'text-white/60'}`} />
+                </button>
+              )}
+            </div>
+
+            {/* Suggestions dropdown */}
+            <AnimatePresence>
+              {searchFocused && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-0 mt-2 w-[420px] max-w-[92vw] bg-white border border-neutral-100 shadow-xl z-50"
+                >
+                  <div className="p-4">
+                    {!searchQ && (
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Été'].map((s) => (
+                          <button
+                            key={s}
+                            onClick={() => setSearchQ(s)}
+                            className="text-[11px] border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500"
+                          >
+                            {s}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    {(() => {
+                      const q = searchQ.toLowerCase().trim();
+                      const isMatch = (p: typeof products[0]) => {
+                        if (!q) return false;
+                        const name = p.name.toLowerCase();
+                        const cat = p.category.toLowerCase();
+                        if (name.includes(q) || cat.includes(q)) return true;
+                        return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
+                      };
+                      const hasQuery = q.length >= 1;
+                      const sorted = hasQuery
+                        ? [...products].sort((a, b) => (isMatch(b) ? 1 : 0) - (isMatch(a) ? 1 : 0))
+                        : products;
+                      return (
+                        <div className="space-y-1 max-h-80 overflow-y-auto">
+                          {sorted.slice(0, 20).map((p) => {
+                            const matched = hasQuery && isMatch(p);
+                            const dimmed = hasQuery && !matched;
+                            const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                            return (
+                              <Link
+                                key={p.id}
+                                href={`/products/${p.id}`}
+                                onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                                className={`flex items-center gap-3 p-2 transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
+                              >
+                                <div className={`w-11 h-11 overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' || p.category === 'Été' ? 'p-1' : ''}`}>
+                                  <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' || p.category === 'Été' ? 'object-contain' : 'object-cover'}`} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
+                                  <p className="text-[11px] text-neutral-400">{p.category}</p>
+                                </div>
+                                <p className="text-sm font-bold text-black flex-shrink-0">{promoPrice.toLocaleString('fr-FR')} €</p>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
-        {/* Center — Logo */}
+        {/* CENTER — Logo */}
         <div className="flex justify-center">
-          <a
-            href="#"
-            className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${
-              scrolled ? 'text-black' : 'text-white'
-            }`}
+          <Link
+            href="/"
+            className={`text-base lg:text-lg font-bold tracking-[0.22em] uppercase transition-colors duration-300 shrink-0 ${textColor}`}
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
           >
             MAISON SERENIA
-          </a>
+          </Link>
         </div>
 
-        {/* Right — Icons */}
+        {/* RIGHT — CONTACTEZ-NOUS + user + cart */}
         <div className="flex items-center gap-1 justify-end">
-          {/* Search toggle */}
-          <button
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
-            onClick={() => setSearchOpen((v) => !v)}
-            aria-label="Rechercher"
+          <Link
+            href="/contact"
+            className={`hidden lg:inline-block text-[11px] tracking-[0.25em] uppercase font-medium px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
           >
-            {searchOpen
-              ? <X className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
-              : <Search className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />}
-          </button>
+            Contactez-nous
+          </Link>
 
-          {/* Wishlist */}
-          <button onClick={onWishlistOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors hidden sm:block" aria-label="Favoris">
-            <Heart className={`w-5 h-5 transition-all ${mounted && wishCount > 0 ? 'fill-red-500 text-red-500' : scrolled ? 'text-black' : 'text-white'}`} />
+          {/* User (opens wishlist) */}
+          <button
+            onClick={onWishlistOpen}
+            className={`relative p-2 transition-colors ${hoverBg} hidden sm:block`}
+            aria-label="Favoris"
+          >
+            <User className={`w-5 h-5 transition-colors ${mounted && wishCount > 0 ? 'text-red-500' : iconColor}`} />
             {mounted && wishCount > 0 && (
               <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
                 {wishCount}
@@ -212,130 +490,24 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
           </button>
 
           {/* Cart */}
-          <button onClick={onCartOpen} className="relative p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Panier">
-            <ShoppingBag className={`w-5 h-5 ${scrolled ? 'text-black' : 'text-white'}`} />
+          <button
+            onClick={onCartOpen}
+            className={`relative p-2 transition-colors ${hoverBg}`}
+            aria-label="Panier"
+          >
+            <ShoppingBag className={`w-5 h-5 ${iconColor}`} />
             {mounted && cartCount > 0 && (
               <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
                 {cartCount}
               </span>
             )}
           </button>
-
         </div>
       </div>
-
-      {/* Search bar drop-down */}
-      <AnimatePresence>
-        {searchOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden bg-white border-t border-neutral-100"
-          >
-            <div className="max-w-2xl mx-auto px-6 py-4">
-              <div className="flex items-center gap-3 border-b border-black pb-2">
-                <Search className="w-4 h-4 text-neutral-400 shrink-0" />
-                <input
-                  autoFocus
-                  type="text"
-                  placeholder="Rechercher un meuble, une collection…"
-                  value={searchQ}
-                  onChange={(e) => setSearchQ(e.target.value)}
-                  className="flex-1 text-sm outline-none placeholder:text-neutral-300 text-black"
-                />
-                {searchQ && (
-                  <button onClick={() => setSearchQ('')}><X className="w-4 h-4 text-neutral-400" /></button>
-                )}
-              </div>
-
-              {/* Quick pills */}
-              {!searchQ && (
-                <div className="flex flex-wrap gap-2 mt-3 mb-1">
-                  {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Bureau'].map((s) => (
-                    <button key={s} onClick={() => setSearchQ(s)} className="text-xs border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500">{s}</button>
-                  ))}
-                </div>
-              )}
-
-              {/* Live suggestions — always show all products, highlight matches */}
-              {(() => {
-                const q = searchQ.toLowerCase().trim();
-                const isMatch = (p: typeof products[0]) => {
-                  if (!q) return false;
-                  const name = p.name.toLowerCase();
-                  const cat = p.category.toLowerCase();
-                  // Match if query is a substring of the name or category
-                  if (name.includes(q) || cat.includes(q)) return true;
-                  // Also match each word of the query against the name
-                  return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
-                };
-                const hasQuery = q.length >= 1;
-                const sorted = hasQuery
-                  ? [...products].sort((a, b) => (isMatch(b) ? 1 : 0) - (isMatch(a) ? 1 : 0))
-                  : products;
-                return (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="mt-3 space-y-1 max-h-80 overflow-y-auto"
-                  >
-                    {sorted.map((p) => {
-                      const matched = hasQuery && isMatch(p);
-                      const dimmed = hasQuery && !matched;
-                      const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
-                      return (
-                        <Link
-                          key={p.id}
-                          href={`/products/${p.id}`}
-                          onClick={() => { setSearchOpen(false); setSearchQ(''); }}
-                          className={`flex items-center gap-3 p-2 rounded-xl transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
-                        >
-                          <div className={`w-12 h-12 rounded-lg overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center transition-all ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-1' : ''}`}>
-                            <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
-                            <p className="text-xs text-neutral-400">{p.category}</p>
-                          </div>
-                          <div className="text-right flex-shrink-0 flex flex-col items-end gap-0.5">
-                            {p.name.includes('Bubble') && (
-                              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full">−30%</span>
-                            )}
-                            <p className="text-sm font-bold text-black">{promoPrice.toLocaleString('fr-FR')} €</p>
-                            {p.name.includes('Bubble') && <p className="text-[10px] text-neutral-400 line-through">{p.price.toLocaleString('fr-FR')} €</p>}
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </motion.div>
-                );
-              })()}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden bg-white border-t border-neutral-100 px-6 py-6 flex flex-col gap-4"
-          >
-            {navItems.map((item) => (
-              <a key={item.label} href={item.href} className="text-sm tracking-widest uppercase text-black hover:opacity-60 flex items-center justify-between">
-                {item.label} <ChevronRight className="w-4 h-4 text-neutral-300" />
-              </a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
+
+    <SideMenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+    </>
   );
 }
 
