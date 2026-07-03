@@ -122,27 +122,33 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
     onSectionNav(section, filter);
   };
 
+  // Métadonnées connues par catégorie — toute nouvelle catégorie ajoutée au
+  // catalogue apparaît automatiquement ici avec des valeurs par défaut.
+  const categoryMeta: Record<string, { name?: string; desc: string; section: string; imgId?: number }> = {
+    'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 10 },
+    'Bureau': { desc: 'Pièces de travail raffinées', section: 'section-bureau' },
+    'Figurines': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
+    'Été': { name: 'Collection Été', desc: 'Accessoires nomades', section: 'section-ete', imgId: 50 },
+  };
+
   const collections = [
+    ...[...new Set(products.map((p) => p.category))].map((cat) => {
+      const meta = categoryMeta[cat];
+      const count = products.filter((p) => p.category === cat).length;
+      return {
+        name: meta?.name ?? cat,
+        desc: `${meta?.desc ?? 'Nouvelle collection'} · ${count} pièce${count > 1 ? 's' : ''}`,
+        section: meta?.section ?? 'section-salon',
+        filter: cat,
+        img: (meta?.imgId ? products.find((p) => p.id === meta.imgId) : products.find((p) => p.category === cat))?.images[0] ?? '',
+      };
+    }),
     {
-      name: 'Salon',
-      desc: 'Canapés & Fauteuils Bubble',
+      name: 'Collection Bubble',
+      desc: 'La collection signature · −30%',
       section: 'section-salon',
-      filter: 'Salon',
-      img: products.find((p) => p.id === 10)?.images[0] ?? '',
-    },
-    {
-      name: 'Figurines',
-      desc: 'Sculptures KAWS Collector',
-      section: 'section-figurines',
-      filter: 'Figurines',
-      img: products.find((p) => p.id === 34)?.images[0] ?? '',
-    },
-    {
-      name: 'Collection Été',
-      desc: 'Accessoires nomades',
-      section: 'section-ete',
-      filter: 'Été',
-      img: products.find((p) => p.id === 50)?.images[0] ?? '',
+      filter: 'Bubble',
+      img: products.find((p) => p.id === 22)?.images[0] ?? '',
     },
   ];
 
