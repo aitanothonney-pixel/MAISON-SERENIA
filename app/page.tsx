@@ -944,12 +944,12 @@ function ProductFilterBar({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="flex items-center gap-0 border-b border-neutral-100 mb-12">
+    <div className="flex items-center gap-0 border-b border-neutral-100 mb-12 overflow-x-auto scrollbar-hide">
       {filterCategories.map((cat) => (
         <button
           key={cat}
           onClick={() => onChange(cat)}
-          className={`text-[11px] tracking-[0.25em] uppercase px-6 py-4 border-b-2 transition-all duration-200 -mb-px ${
+          className={`shrink-0 text-[11px] tracking-[0.25em] uppercase px-4 sm:px-6 py-4 border-b-2 transition-all duration-200 -mb-px whitespace-nowrap ${
             active === cat
               ? 'border-black text-black font-semibold'
               : 'border-transparent text-neutral-400 hover:text-black hover:border-neutral-300'
