@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
-  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, CreditCard,
+  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, CreditCard, Gift,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -1268,13 +1268,14 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <span className="text-neutral-300 text-2xl leading-none">+</span>
                       </div>
                       <Link href={`/products/${figurineId}`} className="flex items-center gap-4 group">
-                        <div className="relative w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                        <div className="relative w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
                           <Image
                             src={figurine.images[0]}
                             alt={figurine.name}
                             width={140}
                             height={140}
-                            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                            style={{ transform: 'scale(1.45)', transformOrigin: 'center center' }}
+                            className="object-contain transition-transform duration-300 group-hover:scale-[1.55]"
                           />
                           <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">
                             Offerte
@@ -1310,10 +1311,15 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-center gap-1.5 mb-6 text-center">
-                    <span aria-hidden>🎁</span>
-                    <p className="text-[11px] text-emerald-700 font-semibold">
-                      {figurine.name} offerte avec cet ensemble
+                  <div className="flex items-center justify-center gap-2 mb-6 text-center">
+                    <span
+                      className="flex items-center justify-center w-5 h-5 rounded-full shrink-0"
+                      style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+                    >
+                      <Gift className="w-3 h-3 text-white" strokeWidth={2} />
+                    </span>
+                    <p className="text-[11px] tracking-wide text-neutral-600">
+                      <span className="font-semibold text-black">{figurine.name}</span> offerte avec cet ensemble
                     </p>
                   </div>
 
