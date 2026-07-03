@@ -1176,7 +1176,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         <p className="text-xs text-neutral-400 mt-0.5">{cp.category}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="font-serif font-bold text-black text-sm">{cpPromo.toLocaleString('fr-FR')} €</span>
+                        <span className="font-bold text-black text-sm">{cpPromo.toLocaleString('fr-FR')} €</span>
                         <button
                           onClick={handleAddComplement}
                           className="w-9 h-9 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"

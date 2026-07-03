@@ -133,10 +133,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                           <div className="flex-1 min-w-0">
                             <p className="text-[15px] text-black leading-snug">{product.name}</p>
                             <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
-                            <p
-                              className="text-[19px] font-bold text-black mt-2 italic"
-                              style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-                            >
+                            <p className="text-[17px] font-bold text-black mt-2">
                               {price.toLocaleString('fr-FR')} €
                             </p>
                           </div>
@@ -195,10 +192,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="px-6 py-5">
                   <div className="flex items-end justify-between mb-6">
                     <span className="text-[11px] tracking-[0.3em] uppercase text-black font-semibold">Total</span>
-                    <span
-                      className="text-3xl font-bold text-black italic leading-none"
-                      style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-                    >
+                    <span className="text-2xl font-bold text-black leading-none">
                       {total.toLocaleString('fr-FR')} €
                     </span>
                   </div>

@@ -1310,10 +1310,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">Prix du bundle</p>
                     <p className="text-neutral-400 line-through text-sm">{sum.toLocaleString('fr-FR')}€</p>
                   </div>
-                  <p
-                    className="text-4xl md:text-5xl font-bold text-black mb-5 leading-none"
-                    style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-                  >
+                  <p className="text-4xl font-bold text-black mb-5 leading-none">
                     {BUNDLE_PRICE.toLocaleString('fr-FR')}€
                   </p>
 
