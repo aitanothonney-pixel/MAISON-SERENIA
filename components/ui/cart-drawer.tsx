@@ -92,7 +92,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <div className="flex-1 overflow-y-auto">
               {cartProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-6 py-16">
-                  <ShoppingBag className="w-11 h-11 text-neutral-300" strokeWidth={1.4} />
+                  <div className="relative w-20 h-20 rounded-full border border-[#C9A96E]/40 flex items-center justify-center">
+                    <div className="absolute inset-1.5 rounded-full border border-neutral-100" />
+                    <ShoppingBag className="w-7 h-7 text-neutral-300 relative" strokeWidth={1.3} />
+                  </div>
                   <p className="font-serif text-base text-neutral-500" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Votre panier est vide
                   </p>

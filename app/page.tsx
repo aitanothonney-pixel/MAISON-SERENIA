@@ -1821,7 +1821,10 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {wishedProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-                  <Heart className="w-12 h-12 text-neutral-200" />
+                  <div className="relative w-20 h-20 rounded-full border border-[#C9A96E]/40 flex items-center justify-center">
+                    <div className="absolute inset-1.5 rounded-full border border-neutral-100" />
+                    <Heart className="w-7 h-7 text-neutral-300 relative" strokeWidth={1.3} />
+                  </div>
                   <p className="font-serif text-lg text-neutral-400">Aucun favori pour l'instant</p>
                   <p className="text-sm text-neutral-300">Cliquez sur le cœur d'un produit pour l'ajouter ici.</p>
                   <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
