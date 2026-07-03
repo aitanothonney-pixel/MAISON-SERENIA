@@ -17,6 +17,7 @@ import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
+import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -305,7 +306,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   const searchWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > (hasBar ? 80 : 40));
+    const onScroll = () => setScrolled(window.scrollY > (hasBar ? 76 : 40));
     window.addEventListener('scroll', onScroll);
     const t = setTimeout(() => setMounted(true), 800);
     return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
@@ -329,7 +330,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
   return (
     <>
     <header
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-8' : 'top-0'} ${
+      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-10' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
           : 'bg-transparent'
@@ -2031,6 +2032,7 @@ export default function Home() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [flashCat, setFlashCat] = useState<string | null>(null);
+  const barVisible = useAnnouncementBarVisible();
 
   useEffect(() => {
     const onHashChange = () => {
@@ -2102,7 +2104,7 @@ export default function Home() {
     <div className="bg-white">
       <ScrollProgressBar />
       <BackToTop />
-      <Navbar hasBar={false} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
+      <Navbar hasBar={barVisible} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 

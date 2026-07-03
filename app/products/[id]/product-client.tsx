@@ -10,6 +10,7 @@ import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
+import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 
 // Canapé Bubble ↔ Fauteuil Bubble de même couleur
 const bubbleComplement: Record<number, number> = {
@@ -641,6 +642,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [addedComplement, setAddedComplement] = useState(false);
   const [openDim, setOpenDim] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const barVisible = useAnnouncementBarVisible();
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -773,7 +775,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
 
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100">
+      <header className={`fixed left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 ${barVisible ? 'top-10' : 'top-0'}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
           <Logo color="black" size="md" />
           <div className="flex items-center gap-4">
@@ -787,7 +789,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
         </div>
       </header>
 
-      <div className="pt-16">
+      <div className={barVisible ? 'pt-[104px]' : 'pt-16'}>
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <nav className="flex items-center gap-2 text-xs text-neutral-400">

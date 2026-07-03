@@ -47,8 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
       <body>
-        <AnnouncementBar />
-        {children}
+        <AnnouncementBar>{children}</AnnouncementBar>
       </body>
     </html>
   )
