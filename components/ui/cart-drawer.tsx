@@ -17,7 +17,7 @@ const BUNDLES = [
   { canape: 13, fauteuil: 6, figurine: 31 },  // bleu
   { canape: 22, fauteuil: 8, figurine: 36 },  // rouge
 ];
-const BUNDLE_PRICE = 1680;
+const BUNDLE_PRICE = 1900;
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, removeItem, updateQty, clearCart } = useCart();

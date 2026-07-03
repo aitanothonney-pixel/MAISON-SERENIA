@@ -246,7 +246,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Packs &amp; Ensembles
                   </h3>
-                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Économisez jusqu&apos;à 1 326€ sur nos ensembles</p>
+                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais de 175€ sur nos ensembles</p>
                 </button>
               </div>
 
@@ -1201,7 +1201,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
     { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6, figurineId: 31 },
     { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8, figurineId: 36 },
   ];
-  const BUNDLE_PRICE = 1680;
+  const BUNDLE_PRICE = 1900;
 
   const handleBuy = (canapeId: number, fauteuilId: number, figurineId: number) => {
     addItem(canapeId);
@@ -1229,8 +1229,9 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
               const canape = products.find((p) => p.id === canapeId)!;
               const fauteuil = products.find((p) => p.id === fauteuilId)!;
               const figurine = products.find((p) => p.id === figurineId)!;
-              const sum = canape.price + fauteuil.price + figurine.price;
-              const savings = sum - BUNDLE_PRICE;
+              const canapePromo = Math.round(canape.price * 0.7);
+              const fauteuilPromo = Math.round(fauteuil.price * 0.7);
+              const sum = canapePromo + fauteuilPromo + figurine.price;
               return (
                 <motion.div
                   key={key}
@@ -1254,7 +1255,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{canape.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{canape.price.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{canapePromo.toLocaleString('fr-FR')}€</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1273,7 +1274,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{fauteuil.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{fauteuil.price.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{fauteuilPromo.toLocaleString('fr-FR')}€</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1316,7 +1317,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
                   <div className="flex justify-center mb-3">
                     <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-                      Économies de {savings.toLocaleString('fr-FR')}€
+                      Rabais de 175€
                     </span>
                   </div>
 
