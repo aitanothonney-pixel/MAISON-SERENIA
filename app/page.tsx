@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
-  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, CreditCard, Gift,
+  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, Gift, Lock,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -2025,53 +2025,59 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             {/* Footer */}
             {cartProducts.length > 0 && (
               <div className="border-t border-neutral-100 flex-shrink-0">
-                <div className="px-6 pt-5 pb-4">
-                  <div className="flex items-center justify-between mb-2.5">
-                    <span className="text-sm text-neutral-700">Sous-total</span>
-                    <span className="text-sm text-neutral-700">{subtotal.toLocaleString('fr-FR')} €</span>
+                <div className="px-6 pt-6 pb-4 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Sous-total</span>
+                    <span className="text-sm text-neutral-600">{subtotal.toLocaleString('fr-FR')} €</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-neutral-700">Livraison</span>
-                    <span className="text-sm text-neutral-700">Gratuite</span>
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Livraison</span>
+                    <span className="text-sm text-neutral-600">Gratuite</span>
                   </div>
                 </div>
 
-                <div className="border-t border-neutral-100 px-6 py-5">
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="text-base text-black">Total</span>
+                <div className="px-6">
+                  <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
+                </div>
+
+                <div className="px-6 py-5">
+                  <div className="flex items-end justify-between mb-6">
+                    <span className="text-[11px] tracking-[0.3em] uppercase text-black font-semibold">Total</span>
                     <span
-                      className="text-2xl font-bold text-black italic"
+                      className="text-3xl font-bold text-black italic leading-none"
                       style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
                     >
                       {total.toLocaleString('fr-FR')} €
                     </span>
                   </div>
 
-                  <button className="w-full bg-black text-white py-4 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
-                    <CreditCard className="w-4 h-4" />
+                  <button
+                    className="w-full text-white py-4 rounded-full text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                    style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
+                  >
+                    <Lock className="w-3.5 h-3.5" />
                     Payer par carte
                   </button>
 
                   <div className="grid grid-cols-3 gap-2 mt-3">
                     <button
-                      className="bg-[#0070ba] text-white py-3 rounded-full hover:bg-[#005f9e] transition-colors flex items-center justify-center"
+                      className="bg-white border border-neutral-200 text-black py-3 rounded-full hover:border-black transition-colors flex items-center justify-center"
                       aria-label="Payer avec PayPal"
                     >
                       <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="white" />
+                        <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="#1A1A1A" />
                       </svg>
                     </button>
                     <button
-                      className="bg-black text-white py-3 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1"
+                      className="bg-white border border-neutral-200 text-black py-3 rounded-full hover:border-black transition-colors flex items-center justify-center gap-1"
                       aria-label="Payer avec Apple Pay"
                     >
                       <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
                         <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.29.07 2.18.74 2.93.8 1.12-.22 2.19-.91 3.39-.84 1.44.07 2.53.61 3.24 1.57-2.96 1.77-2.26 5.69.44 6.82-.52 1.42-1.22 2.83-2 3.51zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                       </svg>
-                      <span className="text-xs font-semibold">Pay</span>
                     </button>
                     <button
-                      className="border-2 border-black text-black py-3 rounded-full hover:bg-black hover:text-white transition-colors flex items-center justify-center font-black tracking-wide text-xs"
+                      className="bg-white border border-neutral-200 text-black py-3 rounded-full hover:border-black transition-colors flex items-center justify-center font-bold tracking-wide text-[11px]"
                       aria-label="Payer avec TWINT"
                     >
                       TWINT
@@ -2079,11 +2085,14 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                   </div>
                 </div>
 
-                <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-4">
-                  <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-black mb-2">Paiement sécurisé</p>
-                  <p className="text-xs text-neutral-500 leading-relaxed">
-                    Maison Serenia accepte les modes de paiement sécurisés. Vos données de paiement sont traitées de façon confidentielle.
-                  </p>
+                <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-4 flex items-start gap-2.5">
+                  <Lock className="w-3.5 h-3.5 text-[#C9A96E] shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-black mb-1">Paiement sécurisé</p>
+                    <p className="text-xs text-neutral-500 leading-relaxed">
+                      Maison Serenia accepte les modes de paiement sécurisés. Vos données sont traitées de façon confidentielle.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
