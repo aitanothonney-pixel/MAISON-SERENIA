@@ -104,7 +104,7 @@ function BackToTop() {
 
 // ─── Side Menu Drawer ─────────────────────────────────────────────────────────
 
-function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClose: () => void; onSectionNav: (section: string, filter?: string) => void }) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -116,23 +116,31 @@ function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void 
     };
   }, [open, onClose]);
 
+  const goToSection = (section: string, filter?: string) => {
+    onClose();
+    onSectionNav(section, filter);
+  };
+
   const collections = [
     {
       name: 'Salon',
       desc: 'Canapés & Fauteuils Bubble',
-      href: '/#section-salon',
+      section: 'section-salon',
+      filter: 'Salon',
       img: products.find((p) => p.id === 10)?.images[0] ?? '',
     },
     {
       name: 'Figurines',
       desc: 'Sculptures KAWS Collector',
-      href: '/#section-figurines',
+      section: 'section-figurines',
+      filter: 'Figurines',
       img: products.find((p) => p.id === 34)?.images[0] ?? '',
     },
     {
       name: 'Collection Été',
       desc: 'Accessoires nomades',
-      href: '/#section-ete',
+      section: 'section-ete',
+      filter: 'Été',
       img: products.find((p) => p.id === 50)?.images[0] ?? '',
     },
   ];
@@ -203,11 +211,10 @@ function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                 <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-5">Nos collections</p>
                 <div className="flex flex-col gap-5">
                   {collections.map((c) => (
-                    <Link
+                    <button
                       key={c.name}
-                      href={c.href}
-                      onClick={onClose}
-                      className="flex items-center gap-4 group"
+                      onClick={() => goToSection(c.section, c.filter)}
+                      className="flex items-center gap-4 group text-left w-full"
                     >
                       <div className="w-14 h-14 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
                         {c.img ? (
@@ -223,24 +230,23 @@ function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         <p className="text-xs text-neutral-400 mt-0.5">{c.desc}</p>
                       </div>
                       <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors flex-shrink-0" />
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
 
               {/* OFFRE EXCLUSIVE — promo card */}
               <div className="px-6 py-5 border-b border-neutral-100">
-                <Link
-                  href="/#bubble-promo"
-                  onClick={onClose}
-                  className="block bg-black text-white p-5 hover:bg-neutral-900 transition-colors"
+                <button
+                  onClick={() => goToSection('bubble-promo')}
+                  className="block w-full text-left bg-black text-white p-5 hover:bg-neutral-900 transition-colors"
                 >
                   <p className="text-[10px] tracking-[0.35em] uppercase text-white/60 mb-2">Offre exclusive</p>
                   <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Packs &amp; Ensembles
                   </h3>
                   <p className="text-sm text-white/70 mt-2 leading-relaxed">Économisez jusqu&apos;à 980€ sur nos duos</p>
-                </Link>
+                </button>
               </div>
 
               {/* AIDE & SERVICES */}
@@ -295,7 +301,7 @@ function SideMenuDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
-function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void }) {
+function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void; onSectionNav: (section: string, filter?: string) => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
@@ -495,7 +501,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen }: { hasBar: boolean; onWis
       </div>
     </header>
 
-    <SideMenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+    <SideMenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} onSectionNav={onSectionNav} />
     </>
   );
 }
@@ -1473,7 +1479,7 @@ function CookieBanner() {
   );
 }
 
-function Footer() {
+function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: string) => void }) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSent, setNewsletterSent] = useState(false);
 
@@ -1513,16 +1519,19 @@ function Footer() {
             <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Nos Collections</h4>
             <ul className="space-y-2 text-sm">
               {[
-                { label: 'Salon', href: '/#section-salon' },
-                { label: 'Bureau', href: '/#section-bureau' },
-                { label: 'Figurines', href: '/#section-figurines' },
-                { label: 'Été', href: '/#section-ete' },
-                { label: 'Promotions', href: '/#section-salon?filter=Bubble' },
+                { label: 'Salon', section: 'section-salon', filter: 'Salon' },
+                { label: 'Bureau', section: 'section-bureau', filter: 'Bureau' },
+                { label: 'Figurines', section: 'section-figurines', filter: 'Figurines' },
+                { label: 'Été', section: 'section-ete', filter: 'Été' },
+                { label: 'Promotions', section: 'section-salon', filter: 'Bubble' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link href={item.href} className="hover:text-white transition-colors flex items-center gap-1">
+                  <button
+                    onClick={() => onSectionNav(item.section, item.filter)}
+                    className="hover:text-white transition-colors flex items-center gap-1"
+                  >
                     <ChevronRight className="w-3 h-3" /> {item.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -2034,6 +2043,13 @@ export default function Home() {
   const [flashCat, setFlashCat] = useState<string | null>(null);
   const barVisible = useAnnouncementBarVisible();
 
+  const handleSectionNav = (section: string, filter?: string) => {
+    if (filter) setActiveFilter(filter);
+    setTimeout(() => {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 350);
+  };
+
   useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash;
@@ -2104,7 +2120,7 @@ export default function Home() {
     <div className="bg-white">
       <ScrollProgressBar />
       <BackToTop />
-      <Navbar hasBar={barVisible} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} />
+      <Navbar hasBar={barVisible} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} onSectionNav={handleSectionNav} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
@@ -2172,7 +2188,8 @@ export default function Home() {
 
           {/* Products Grid with filter */}
           <section id="section-salon" className="py-16 scroll-mt-20">
-            <div id="section-bureau" />
+            <div id="section-bureau" className="scroll-mt-20" />
+            <div id="section-figurines" className="scroll-mt-20" />
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
@@ -2232,7 +2249,7 @@ export default function Home() {
       <BundlesSection onCartOpen={() => setCartOpen(true)} />
       <TestimonialsSection />
       <NewsletterSection />
-      <Footer />
+      <Footer onSectionNav={handleSectionNav} />
       <CookieBanner />
     </div>
   );
