@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, AlertTriangle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -1000,41 +1000,35 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* Divider */}
               <div className="h-px bg-neutral-100 mb-6" />
 
-              {/* Price block */}
-              <div className="rounded-2xl p-4 mb-6 bg-neutral-50">
-                <div className="flex items-center justify-between">
+              {/* Price block — sobre, encadré de filets fins */}
+              <div className="border-y border-neutral-200 py-5 mb-6">
+                <div className="flex items-end justify-between gap-4">
                   <div className="flex items-baseline gap-3">
-                    <p className="text-4xl font-bold text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                    <p className="text-4xl text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
                     {isBubble && (
-                      <p className="text-base text-neutral-400 line-through price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                      <p className="text-sm text-neutral-400 line-through price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
                     )}
                   </div>
                   {isBubble && (
-                    <div className="text-center">
-                      <span className="text-white text-sm font-bold px-3 py-1.5 rounded-full block bg-black">−30%</span>
-                      <p className="text-[10px] text-neutral-400 mt-1">Offre limitée</p>
-                    </div>
+                    <span className="text-[10px] tracking-[0.25em] uppercase text-[#A07840] border border-[#C9A96E]/50 px-3 py-1.5 whitespace-nowrap">
+                      −30% · Offre limitée
+                    </span>
                   )}
                 </div>
                 {isBubble && (
-                  <p className="text-xs text-neutral-400 mt-2 flex items-center gap-1">
-                    <span>✓</span> Livraison offerte · Installation comprise
+                  <p className="text-xs text-neutral-400 mt-3 tracking-wide">
+                    Livraison offerte · Installation comprise
                   </p>
                 )}
               </div>
 
-              {/* Stock urgency — réservé aux pièces Bubble (prix les plus élevés, marge la plus rentable) */}
+              {/* Disponibilité — mention discrète, sans alarmisme */}
               {isBubble && (
-                <div className="border border-red-200 bg-red-50 rounded-xl px-5 py-4 mb-6 space-y-1.5">
-                  <p className="flex items-center gap-2 text-sm font-semibold text-red-600">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    Seulement {stockUrgency.stock} en stock
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="w-1.5 h-1.5 rotate-45 shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)' }} />
+                  <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-500">
+                    Édition limitée — plus que {stockUrgency.stock} exemplaires
                   </p>
-                  <p className="flex items-center gap-2 text-sm text-red-500">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                    {stockUrgency.viewers} personnes regardent cet article
-                  </p>
-                  <p className="text-xs text-neutral-500 pl-[22px]">{stockUrgency.soldThisMonth} vendus ce mois</p>
                 </div>
               )}
 
@@ -1069,10 +1063,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
               <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
 
-              {/* Specs pills */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">📐 {product.dimensions}</span>
-                <span className="text-xs border border-neutral-100 rounded-full px-4 py-1.5 text-neutral-500 bg-neutral-50">🪵 {product.material}</span>
+              {/* Caractéristiques — rangées épurées */}
+              <div className="border-t border-neutral-100 divide-y divide-neutral-100 mb-8">
+                <div className="flex items-center justify-between gap-6 py-3">
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 shrink-0">Dimensions</span>
+                  <span className="text-sm text-neutral-700 text-right">{product.dimensions}</span>
+                </div>
+                <div className="flex items-center justify-between gap-6 py-3">
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 shrink-0">Matière</span>
+                  <span className="text-sm text-neutral-700 text-right">{product.material}</span>
+                </div>
               </div>
 
               {/* CTA Buttons */}
