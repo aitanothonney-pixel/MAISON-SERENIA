@@ -1931,7 +1931,7 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                 MS
               </span>
               <p className="text-[13px] text-neutral-700 leading-tight">
-                Besoin d&apos;aide? <span className="font-semibold text-black">Contactez-nous au +41 76 XXX XX XX</span>
+                Besoin d&apos;aide? <a href="mailto:aitanothonney@gmail.com" className="font-semibold text-black hover:underline">Contactez-nous à aitanothonney@gmail.com</a>
               </p>
             </div>
 
