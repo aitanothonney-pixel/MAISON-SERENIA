@@ -1186,15 +1186,16 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const { addItem } = useCart();
 
   const bundles = [
-    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2 },
-    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6 },
-    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8 },
+    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, figurineId: 39 },
+    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6, figurineId: 31 },
+    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8, figurineId: 36 },
   ];
-  const BUNDLE_PRICE = 1590;
+  const BUNDLE_PRICE = 1680;
 
-  const handleBuy = (canapeId: number, fauteuilId: number) => {
+  const handleBuy = (canapeId: number, fauteuilId: number, figurineId: number) => {
     addItem(canapeId);
     addItem(fauteuilId);
+    addItem(figurineId);
     onCartOpen();
   };
 
@@ -1213,10 +1214,11 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bundles.map(({ key, canapeId, fauteuilId }, index) => {
+            {bundles.map(({ key, canapeId, fauteuilId, figurineId }, index) => {
               const canape = products.find((p) => p.id === canapeId)!;
               const fauteuil = products.find((p) => p.id === fauteuilId)!;
-              const sum = canape.price + fauteuil.price;
+              const figurine = products.find((p) => p.id === figurineId)!;
+              const sum = canape.price + fauteuil.price + figurine.price;
               const savings = sum - BUNDLE_PRICE;
               return (
                 <motion.div
@@ -1262,6 +1264,30 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                           <p className="text-neutral-500 text-sm mt-1">{fauteuil.price.toLocaleString('fr-FR')}€</p>
                         </div>
                       </Link>
+                      <div className="flex justify-center my-3">
+                        <span className="text-neutral-300 text-2xl leading-none">+</span>
+                      </div>
+                      <Link href={`/products/${figurineId}`} className="flex items-center gap-4 group">
+                        <div className="relative w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                          <Image
+                            src={figurine.images[0]}
+                            alt={figurine.name}
+                            width={140}
+                            height={140}
+                            className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">
+                            Offerte
+                          </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{figurine.name}</h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className="text-neutral-400 line-through text-sm">{figurine.price.toLocaleString('fr-FR')}€</p>
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offerte</span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
                   </div>
 
@@ -1278,14 +1304,21 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     {BUNDLE_PRICE.toLocaleString('fr-FR')}€
                   </p>
 
-                  <div className="flex justify-center mb-6">
+                  <div className="flex justify-center mb-3">
                     <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
                       Économies de {savings.toLocaleString('fr-FR')}€
                     </span>
                   </div>
 
+                  <div className="flex items-center justify-center gap-1.5 mb-6 text-center">
+                    <span aria-hidden>🎁</span>
+                    <p className="text-[11px] text-emerald-700 font-semibold">
+                      {figurine.name} offerte avec cet ensemble
+                    </p>
+                  </div>
+
                   <button
-                    onClick={() => handleBuy(canapeId, fauteuilId)}
+                    onClick={() => handleBuy(canapeId, fauteuilId, figurineId)}
                     className="w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors"
                   >
                     Acheter cet ensemble
