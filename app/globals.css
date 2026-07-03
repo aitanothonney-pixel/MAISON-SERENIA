@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F8F4EA;
-  --foreground: #211C15;
-  --primary: #211C15;
-  --primary-foreground: #F8F4EA;
-  --secondary: #EFE7D5;
-  --secondary-foreground: #211C15;
-  --muted: #A8967C;
-  --muted-foreground: #8C7A5E;
-  --accent: #211C15;
-  --accent-foreground: #F8F4EA;
-  --border: #E4D9C0;
-  --input: #E4D9C0;
-  --ring: #211C15;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #888888;
+  --muted-foreground: #888888;
+  --accent: #0a0a0a;
+  --accent-foreground: #ffffff;
+  --border: #e8e8e8;
+  --input: #e8e8e8;
+  --ring: #0a0a0a;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --gold: #C9A96E;
@@ -28,9 +28,9 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: #EFE7D5;
+  --color-muted: #f5f5f5;
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: #EFE7D5;
+  --color-accent: #f5f5f5;
   --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
@@ -39,24 +39,6 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-dm-sans, Arial, Helvetica, sans-serif);
   --font-serif: var(--font-playfair, Georgia, serif);
-}
-
-/* ── "Zen Linen" theme — warm beige replacing the cool grey/white palette ── */
-@theme {
-  --color-white: #FBF8F1;
-  --color-black: #1A1712;
-
-  --color-neutral-50: #F8F4EA;
-  --color-neutral-100: #F1EAD6;
-  --color-neutral-200: #E4D9C0;
-  --color-neutral-300: #D3C3A2;
-  --color-neutral-400: #AC9A7A;
-  --color-neutral-500: #8C7A5E;
-  --color-neutral-600: #6B5D46;
-  --color-neutral-700: #4F4433;
-  --color-neutral-800: #332B20;
-  --color-neutral-900: #211C15;
-  --color-neutral-950: #16130D;
 }
 
 body {
