@@ -149,7 +149,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 MS
               </span>
               <p className="text-[13px] text-neutral-700 leading-tight">
-                Besoin d&apos;aide? <a href="mailto:aitanothonney@gmail.com" className="font-semibold text-black hover:underline">Contactez-nous à aitanothonney@gmail.com</a>
+                Besoin d&apos;aide? <a href="mailto:maisonserenia@gmail.com" className="font-semibold text-black hover:underline">Contactez-nous à maisonserenia@gmail.com</a>
               </p>
             </div>
 

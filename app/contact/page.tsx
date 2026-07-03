@@ -202,10 +202,10 @@ export default function ContactPage() {
                   <div>
                     <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">E-mail</p>
                     <a
-                      href="mailto:contact@maison-serenia.fr"
+                      href="mailto:maisonserenia@gmail.com"
                       className="text-black text-sm hover:underline"
                     >
-                      contact@maison-serenia.fr
+                      maisonserenia@gmail.com
                     </a>
                   </div>
                 </div>
