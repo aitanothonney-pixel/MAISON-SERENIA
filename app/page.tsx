@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, Minus, Plus, Trash2,
-  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon,
+  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, CreditCard,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -2041,16 +2041,36 @@ function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
                     </span>
                   </div>
 
-                  <button className="w-full bg-black text-white py-4 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors">
-                    Procéder au paiement
+                  <button className="w-full bg-black text-white py-4 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+                    <CreditCard className="w-4 h-4" />
+                    Payer par carte
                   </button>
 
-                  <button className="w-full mt-3 bg-[#0070ba] text-white py-4 rounded-full text-sm font-semibold hover:bg-[#005f9e] transition-colors flex items-center justify-center gap-2">
-                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="white" />
-                    </svg>
-                    Payer avec PayPal
-                  </button>
+                  <div className="grid grid-cols-3 gap-2 mt-3">
+                    <button
+                      className="bg-[#0070ba] text-white py-3 rounded-full hover:bg-[#005f9e] transition-colors flex items-center justify-center"
+                      aria-label="Payer avec PayPal"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="white" />
+                      </svg>
+                    </button>
+                    <button
+                      className="bg-black text-white py-3 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1"
+                      aria-label="Payer avec Apple Pay"
+                    >
+                      <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.29.07 2.18.74 2.93.8 1.12-.22 2.19-.91 3.39-.84 1.44.07 2.53.61 3.24 1.57-2.96 1.77-2.26 5.69.44 6.82-.52 1.42-1.22 2.83-2 3.51zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                      </svg>
+                      <span className="text-xs font-semibold">Pay</span>
+                    </button>
+                    <button
+                      className="border-2 border-black text-black py-3 rounded-full hover:bg-black hover:text-white transition-colors flex items-center justify-center font-black tracking-wide text-xs"
+                      aria-label="Payer avec TWINT"
+                    >
+                      TWINT
+                    </button>
+                  </div>
                 </div>
 
                 <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-4">
