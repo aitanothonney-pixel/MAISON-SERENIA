@@ -239,14 +239,14 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
               {/* OFFRE EXCLUSIVE — promo card */}
               <div className="px-6 py-5 border-b border-neutral-100">
                 <button
-                  onClick={() => goToSection('bubble-promo')}
+                  onClick={() => goToSection('section-packs')}
                   className="block w-full text-left bg-black text-white p-5 hover:bg-neutral-900 transition-colors"
                 >
                   <p className="text-[10px] tracking-[0.35em] uppercase text-white/60 mb-2">Offre exclusive</p>
                   <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Packs &amp; Ensembles
                   </h3>
-                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Économisez jusqu&apos;à 980€ sur nos duos</p>
+                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Économisez jusqu&apos;à 1 326€ sur nos ensembles</p>
                 </button>
               </div>
 
@@ -1212,7 +1212,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
   return (
     <FadeInSection>
-      <section className="py-20 bg-neutral-50">
+      <section id="section-packs" className="py-20 bg-neutral-50 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Économisez plus</p>

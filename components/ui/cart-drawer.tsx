@@ -11,6 +11,14 @@ type PayMethod = 'card' | 'paypal' | 'twint' | 'applepay';
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
 
+// Packs canapé + fauteuil + figurine — prix fixe promis sur les cartes bundle
+const BUNDLES = [
+  { canape: 10, fauteuil: 2, figurine: 39 },  // blanc
+  { canape: 13, fauteuil: 6, figurine: 31 },  // bleu
+  { canape: 22, fauteuil: 8, figurine: 36 },  // rouge
+];
+const BUNDLE_PRICE = 1680;
+
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, removeItem, updateQty, clearCart } = useCart();
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
@@ -46,7 +54,18 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   const totalQty = cartProducts.reduce((sum, x) => sum + x.qty, 0);
   const subtotal = cartProducts.reduce((sum, x) => sum + x.price * x.qty, 0);
-  const total = subtotal;
+
+  // Remise pack : chaque trio complet canapé+fauteuil+figurine est facturé au prix bundle
+  const qtyOf = (id: number) => cartProducts.find((x) => x.id === id)?.qty ?? 0;
+  const priceOf = (id: number) => cartProducts.find((x) => x.id === id)?.price ?? 0;
+  const packDiscount = BUNDLES.reduce((sum, b) => {
+    const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil), qtyOf(b.figurine));
+    if (packs === 0) return sum;
+    const trioPrice = priceOf(b.canape) + priceOf(b.fauteuil) + priceOf(b.figurine);
+    return sum + packs * Math.max(0, trioPrice - BUNDLE_PRICE);
+  }, 0);
+
+  const total = subtotal - packDiscount;
 
   const goShopping = () => {
     handleClose();
@@ -483,6 +502,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Sous-total</span>
                     <span className="text-sm text-neutral-600 price-luxe">{subtotal.toLocaleString('fr-FR')} €</span>
                   </div>
+                  {packDiscount > 0 && (
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Remise Pack</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{packDiscount.toLocaleString('fr-FR')} €</span>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Livraison</span>
                     <span className="text-sm text-neutral-600">Gratuite</span>
