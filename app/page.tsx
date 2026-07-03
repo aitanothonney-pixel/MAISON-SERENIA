@@ -443,7 +443,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                                   <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
                                   <p className="text-[11px] text-neutral-400">{p.category}</p>
                                 </div>
-                                <p className="text-sm font-bold text-black flex-shrink-0">{promoPrice.toLocaleString('fr-FR')} €</p>
+                                <p className="text-sm font-bold text-black flex-shrink-0 price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
                               </Link>
                             );
                           })}
@@ -736,8 +736,8 @@ function BubblePromoCarousel() {
               </div>
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
-                <span className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</span>
+                <span className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
+                <span className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</span>
               </div>
             </Link>
             </div>
@@ -811,8 +811,8 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-black font-bold text-sm">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
-                  <p className="text-neutral-400 line-through text-xs">{product.price.toLocaleString('fr-FR')} €</p>
+                  <p className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
+                  <p className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
                 </div>
               </Link>
             </motion.div>
@@ -919,16 +919,16 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <p className="text-neutral-400 text-[11px] mb-2.5 line-clamp-1">{product.description}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-black font-bold text-sm">
+              <span className="text-black font-bold text-sm price-luxe">
                 {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
               </span>
               {isBubble && (
-                <span className="text-neutral-400 line-through text-xs">
+                <span className="text-neutral-400 line-through text-xs price-luxe">
                   {product.price.toLocaleString('fr-FR')} €
                 </span>
               )}
               {isSale && !isBubble && (
-                <span className="text-neutral-400 line-through text-xs">
+                <span className="text-neutral-400 line-through text-xs price-luxe">
                   {Math.round(product.price * 1.25).toLocaleString('fr-FR')} €
                 </span>
               )}
@@ -1181,7 +1181,7 @@ function SummerProductsSection() {
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <p className="text-black font-bold text-sm">{product.price.toFixed(2)} CHF</p>
+                <p className="text-black font-bold text-sm price-luxe">{product.price.toFixed(2)} CHF</p>
               </Link>
             </motion.div>
           ))}
@@ -1254,7 +1254,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{canape.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1">{canape.price.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{canape.price.toLocaleString('fr-FR')}€</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1273,7 +1273,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{fauteuil.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1">{fauteuil.price.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{fauteuil.price.toLocaleString('fr-FR')}€</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1296,7 +1296,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{figurine.name}</h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="text-neutral-400 line-through text-sm">{figurine.price.toLocaleString('fr-FR')}€</p>
+                            <p className="text-neutral-400 line-through text-sm price-luxe">{figurine.price.toLocaleString('fr-FR')}€</p>
                             <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offerte</span>
                           </div>
                         </div>
@@ -1308,9 +1308,9 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">Prix du bundle</p>
-                    <p className="text-neutral-400 line-through text-sm">{sum.toLocaleString('fr-FR')}€</p>
+                    <p className="text-neutral-400 line-through text-sm price-luxe">{sum.toLocaleString('fr-FR')}€</p>
                   </div>
-                  <p className="text-4xl font-bold text-black mb-5 leading-none">
+                  <p className="text-4xl font-bold text-black mb-5 leading-none price-luxe">
                     {BUNDLE_PRICE.toLocaleString('fr-FR')}€
                   </p>
 
@@ -1368,11 +1368,11 @@ function TestimonialsSection() {
             className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
           >
             <div className="flex justify-center">
-              <div className="border border-black text-black py-1 px-4 rounded-full text-xs tracking-[0.2em] uppercase">
+              <div className="border border-black text-black py-1 px-4 text-xs tracking-[0.2em] uppercase">
                 Témoignages
               </div>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mt-5 text-center" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl mt-5 text-center uppercase" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)', letterSpacing: '0.08em' }}>
               Ce que disent nos clients
             </h2>
             <p className="text-center mt-5 text-neutral-500 text-sm">
@@ -1408,8 +1408,11 @@ function TrustStrip() {
       <div className="w-full" style={{ background: '#f9f9f9' }}>
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200">
           {items.map(({ Icon, title, subtitle }) => (
-            <div key={title} className="flex flex-col items-center justify-center gap-2 py-7 px-4 text-center">
-              <Icon size={24} className="text-black" strokeWidth={1.5} />
+            <div key={title} className="flex flex-col items-center justify-center gap-3 py-7 px-4 text-center">
+              <div className="relative w-12 h-12 rounded-full border border-[#C9A96E]/50 flex items-center justify-center">
+                <div className="absolute inset-1 rounded-full border border-neutral-200" />
+                <Icon size={18} className="text-black relative" strokeWidth={1.2} />
+              </div>
               <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
               <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
             </div>
@@ -1750,7 +1753,7 @@ function FigurinesSection() {
                   </div>
                 </div>
                 <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-                <p className="text-black font-bold text-sm">{product.price.toLocaleString('fr-FR')} €</p>
+                <p className="text-black font-bold text-sm price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
               </Link>
             </motion.div>
           ))}
@@ -1849,7 +1852,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                             <p className="font-serif font-semibold text-sm text-black leading-snug line-clamp-2 hover:underline">{product.name}</p>
                           </Link>
                           <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                          <p className="font-bold text-sm text-black mt-1">{price.toLocaleString('fr-FR')} €</p>
+                          <p className="font-bold text-sm text-black mt-1 price-luxe">{price.toLocaleString('fr-FR')} €</p>
                         </div>
                         <button
                           onClick={() => toggle(product.id)}

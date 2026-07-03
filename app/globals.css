@@ -55,6 +55,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Luxury price numerals (Cinzel, same family as the monogram) ── */
+.price-luxe {
+  font-family: var(--font-cinzel, Georgia, serif);
+  letter-spacing: 0.02em;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

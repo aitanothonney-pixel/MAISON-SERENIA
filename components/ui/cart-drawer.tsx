@@ -228,7 +228,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                                 <div className="flex-1 min-w-0">
                                   <p className="text-[15px] text-black leading-snug">{product.name}</p>
                                   <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
-                                  <p className="text-[17px] font-bold text-black mt-2">
+                                  <p className="text-[17px] font-bold text-black mt-2 price-luxe">
                                     {price.toLocaleString('fr-FR')} €
                                   </p>
                                 </div>
@@ -456,7 +456,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <div className="bg-neutral-50 p-4 text-left w-full mb-6 space-y-2">
                         <div className="flex justify-between text-sm">
                           <span className="text-neutral-500">Montant réglé</span>
-                          <span className="font-bold text-black">{orderTotal.toLocaleString('fr-FR')} €</span>
+                          <span className="font-bold text-black price-luxe">{orderTotal.toLocaleString('fr-FR')} €</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500 pt-1">
                           <Package className="w-3.5 h-3.5" />
@@ -481,7 +481,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="px-6 pt-6 pb-4 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Sous-total</span>
-                    <span className="text-sm text-neutral-600">{subtotal.toLocaleString('fr-FR')} €</span>
+                    <span className="text-sm text-neutral-600 price-luxe">{subtotal.toLocaleString('fr-FR')} €</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Livraison</span>
@@ -496,7 +496,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="px-6 py-5">
                   <div className="flex items-end justify-between mb-6">
                     <span className="text-[11px] tracking-[0.3em] uppercase text-black font-semibold">Total</span>
-                    <span className="text-2xl font-bold text-black leading-none">
+                    <span className="text-2xl font-bold text-black leading-none price-luxe">
                       {total.toLocaleString('fr-FR')} €
                     </span>
                   </div>
