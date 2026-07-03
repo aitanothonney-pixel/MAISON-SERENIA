@@ -473,12 +473,17 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* User (opens wishlist) */}
           <button
             onClick={onWishlistOpen}
-            className={`relative p-2 transition-colors ${hoverBg} hidden sm:block`}
+            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 hidden sm:flex ${
+              scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
+            }`}
             aria-label="Favoris"
           >
-            <User className={`w-5 h-5 transition-colors ${mounted && wishCount > 0 ? 'text-red-500' : iconColor}`} />
+            <User className={`w-4 h-4 transition-colors ${mounted && wishCount > 0 ? 'text-red-500' : iconColor}`} strokeWidth={1.5} />
             {mounted && wishCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+              <span
+                className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
+                style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+              >
                 {wishCount}
               </span>
             )}
@@ -487,12 +492,17 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Cart */}
           <button
             onClick={onCartOpen}
-            className={`relative p-2 transition-colors ${hoverBg}`}
+            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
+              scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
+            }`}
             aria-label="Panier"
           >
-            <ShoppingBag className={`w-5 h-5 ${iconColor}`} />
+            <ShoppingBag className={`w-4 h-4 ${iconColor}`} strokeWidth={1.5} />
             {mounted && cartCount > 0 && (
-              <span className="absolute top-0.5 right-0.5 bg-black text-white text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center leading-none">
+              <span
+                className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
+                style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+              >
                 {cartCount}
               </span>
             )}

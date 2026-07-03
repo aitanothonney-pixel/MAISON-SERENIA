@@ -210,17 +210,31 @@ function CheckoutDrawer({
 
             {/* Step indicator */}
             {step !== 'confirmation' && (
-              <div className="px-6 pt-4 pb-2">
+              <div className="px-6 pt-5 pb-3">
                 <div className="flex items-center gap-1">
                   {steps.slice(0, 3).map((s, i) => (
                     <div key={s.key} className="flex items-center gap-1 flex-1">
                       <div className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'}`}>
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${i < stepIndex ? 'bg-black text-white' : i === stepIndex ? 'border-2 border-black text-black' : 'border border-neutral-200 text-neutral-300'}`}>
+                        <div
+                          className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                            i < stepIndex
+                              ? 'text-white shadow-sm'
+                              : i === stepIndex
+                                ? 'border-[1.5px] border-[#C9A96E] text-black bg-white shadow-sm'
+                                : 'border border-neutral-200 text-neutral-300'
+                          }`}
+                          style={i < stepIndex ? { background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' } : undefined}
+                        >
                           {i < stepIndex ? <Check className="w-3 h-3" /> : s.icon}
                         </div>
                         <span className="hidden sm:block">{s.label}</span>
                       </div>
-                      {i < 2 && <div className={`flex-1 h-px transition-colors duration-300 ${i < stepIndex ? 'bg-black' : 'bg-neutral-200'}`} />}
+                      {i < 2 && (
+                        <div
+                          className="flex-1 h-px transition-colors duration-300 bg-neutral-200"
+                          style={i < stepIndex ? { background: 'linear-gradient(90deg, #C9A96E, #A07840)' } : undefined}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
