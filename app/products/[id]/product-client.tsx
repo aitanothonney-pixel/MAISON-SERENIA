@@ -725,6 +725,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     relatedScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
 
+  const recentScrollRef = useRef<HTMLDivElement>(null);
+  const scrollRecent = (dir: 'left' | 'right') => {
+    recentScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
+  };
+
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
 
   const complementId = bubbleComplement[product.id];
@@ -1360,8 +1365,18 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             <section className="mt-24">
               <div className="flex items-end justify-between mb-10">
                 <h2 className="text-2xl font-serif font-bold">Consultés récemment</h2>
+                <div className="flex items-center gap-2">
+                  <motion.button onClick={() => scrollRecent('left')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
+                    <ChevronRight className="w-4 h-4 rotate-180" />
+                  </motion.button>
+                  <motion.button onClick={() => scrollRecent('right')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Suivant">
+                    <ChevronRight className="w-4 h-4" />
+                  </motion.button>
+                </div>
               </div>
-              <div className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+              <div ref={recentScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
                 {recentlyViewed.map((p) => {
                   const pIsBubble = [2, 10, 6, 13, 8, 22, 12, 7, 9].includes(p.id);
                   const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
