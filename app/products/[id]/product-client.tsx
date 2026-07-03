@@ -871,9 +871,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       alt={product.name}
                       fill
                       className={product.category === 'Figurines'
-                        ? product.id === 33
-                          ? 'object-cover object-center scale-110'
-                          : 'object-contain p-6'
+                        ? 'object-contain p-6'
                         : isBubble ? 'object-contain p-4' : 'object-cover'}
                       priority
                     />

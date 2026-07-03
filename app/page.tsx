@@ -1071,7 +1071,7 @@ const testimonials = [
     image: '', name: 'Camille Rousseau', role: 'Cliente vérifiée',
   },
   {
-    text: "La Figurine KAWS brun monde est simplement splendide. La finition est irréprochable et l'emballage était parfait. Un cadeau idéal pour les amateurs de streetwear.",
+    text: "La Figurine KAWS gris monde est simplement splendide. La finition est irréprochable et l'emballage était parfait. Un cadeau idéal pour les amateurs de streetwear.",
     image: '', name: 'Hugo Blanc', role: 'Client vérifié',
   },
   {

@@ -20,7 +20,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
   'figurine-kaws-monde': [
     { productId: 31, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 32, color: 'Gris', colorHex: '#9e9e9e' },
-    { productId: 33, color: 'Brun', colorHex: '#8B5E3C' },
   ],
   'bracelet-anti-moustiques': [
     { productId: 51, color: 'Noir', colorHex: '#1a1a1a' },
@@ -224,19 +223,6 @@ export const products: Product[] = [
     dimensions: 'H 28 cm',
     material: 'Vinyle premium',
     details: ['Édition Monde collector', 'Vinyle premium finition soyeuse', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  {
-    id: 33,
-    name: 'Figurine KAWS brun monde',
-    category: 'Figurines',
-    price: 75,
-    description: 'Figurine KAWS édition Monde en coloris brun chaleureux — une teinte rare et raffinée. Sculpture en vinyle premium, finition naturelle, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/WvDJ6BCH/IMG-0658.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Édition Monde collector', 'Vinyle premium finition naturelle', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
   },
   // ── Figurine KAWS Noir ────────────────────────────────────────────────────────
   {
