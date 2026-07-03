@@ -246,7 +246,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Packs &amp; Ensembles
                   </h3>
-                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais de 175€ sur nos ensembles</p>
+                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais jusqu&apos;à 200€ sur nos ensembles</p>
                 </button>
               </div>
 
@@ -1197,9 +1197,9 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const { addItem } = useCart();
 
   const bundles = [
-    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, figurineId: 39 },
-    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6, figurineId: 31 },
-    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8, figurineId: 36 },
+    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, figurineId: 39, rabais: 175 },
+    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6, figurineId: 31, rabais: 175 },
+    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8, figurineId: 36, rabais: 200 },
   ];
   const BUNDLE_PRICE = 1900;
 
@@ -1225,7 +1225,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bundles.map(({ key, canapeId, fauteuilId, figurineId }, index) => {
+            {bundles.map(({ key, canapeId, fauteuilId, figurineId, rabais }, index) => {
               const canape = products.find((p) => p.id === canapeId)!;
               const fauteuil = products.find((p) => p.id === fauteuilId)!;
               const figurine = products.find((p) => p.id === figurineId)!;
@@ -1317,7 +1317,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
                   <div className="flex justify-center mb-3">
                     <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-                      Rabais de 175€
+                      Rabais de {rabais}€
                     </span>
                   </div>
 
