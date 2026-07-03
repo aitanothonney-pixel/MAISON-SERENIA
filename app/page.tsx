@@ -1544,7 +1544,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
           {/* Col 1 — Brand */}
           <div>
             <div className="mb-4">
-              <Logo color="white" size="lg" />
+              <Logo color="white" size="md" />
             </div>
             <p className="text-sm leading-relaxed mb-2">L&apos;art de vivre à la française.</p>
             <p className="text-sm mb-5">Paris, France 🇫🇷</p>
