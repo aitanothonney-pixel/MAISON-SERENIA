@@ -803,15 +803,23 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       <header className={`fixed left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 ${barVisible ? 'top-10' : 'top-0'}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
           <Logo color="black" size="md" />
-          <div className="flex items-center gap-4">
-            <button onClick={() => setWishlistOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
-              <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setWishlistOpen(true)}
+              className="relative w-9 h-9 flex items-center justify-center border border-black/15 hover:border-black text-neutral-600 hover:text-black transition-all duration-300"
+              aria-label="Favoris"
+            >
+              <Heart className={`w-4 h-4 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} strokeWidth={1.5} />
             </button>
-            <button onClick={() => setCartOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
-              <ShoppingBag className="w-5 h-5" />
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative w-9 h-9 flex items-center justify-center border border-black/15 hover:border-black text-neutral-600 hover:text-black transition-all duration-300"
+              aria-label="Panier"
+            >
+              <ShoppingBag className="w-4 h-4" strokeWidth={1.5} />
               {cartCount > 0 && (
                 <span
-                  className="absolute -top-2 -right-2 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
+                  className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
                   style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
                 >
                   {cartCount}
