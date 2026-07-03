@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Italiana, Cinzel } from 'next/font/google'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 
@@ -12,6 +12,19 @@ const playfair = Playfair_Display({
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+const italiana = Italiana({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-italiana',
+  display: 'swap',
+})
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  variable: '--font-cinzel',
   display: 'swap',
 })
 
@@ -32,7 +45,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
       <body>
         <AnnouncementBar />
         {children}

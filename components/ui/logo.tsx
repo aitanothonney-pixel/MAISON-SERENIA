@@ -11,9 +11,9 @@ interface LogoProps {
 }
 
 const SIZES = {
-  sm: { box: 'w-6 h-6', mono: 'text-[9px]', word: 'text-[11px]', tracking: '0.2em' },
-  md: { box: 'w-8 h-8', mono: 'text-[10px]', word: 'text-sm lg:text-[15px]', tracking: '0.24em' },
-  lg: { box: 'w-9 h-9', mono: 'text-[11px]', word: 'text-lg', tracking: '0.26em' },
+  sm: { box: 'w-7 h-7', mono: 'text-[10px]', word: 'text-[12px]', tracking: '0.32em' },
+  md: { box: 'w-9 h-9', mono: 'text-[11px]', word: 'text-sm lg:text-base', tracking: '0.36em' },
+  lg: { box: 'w-10 h-10', mono: 'text-xs', word: 'text-xl', tracking: '0.4em' },
 } as const;
 
 export function Logo({ color = 'black', size = 'md', href = '/', onClick, className = '' }: LogoProps) {
@@ -21,17 +21,17 @@ export function Logo({ color = 'black', size = 'md', href = '/', onClick, classN
   const isWhite = color === 'white';
 
   return (
-    <Link href={href} onClick={onClick} className={`inline-flex items-center gap-2.5 ${className}`}>
-      {/* Monogram */}
+    <Link href={href} onClick={onClick} className={`inline-flex items-center gap-3 ${className}`}>
+      {/* Monogram — diamond crest */}
       <span
-        className={`relative flex items-center justify-center shrink-0 ${s.box} border transition-colors duration-300 ${
-          isWhite ? 'border-white/60' : 'border-black/80'
+        className={`relative flex items-center justify-center shrink-0 ${s.box} rotate-45 border transition-colors duration-300 ${
+          isWhite ? 'border-white/70' : 'border-black'
         }`}
       >
-        <span className={`absolute inset-[2.5px] border ${isWhite ? 'border-white/25' : 'border-black/20'}`} />
+        <span className={`absolute inset-[3px] border ${isWhite ? 'border-white/30' : 'border-black/25'}`} />
         <span
-          className={`relative italic font-bold ${s.mono} ${isWhite ? 'text-white' : 'text-black'}`}
-          style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+          className={`relative -rotate-45 font-semibold ${s.mono} ${isWhite ? 'text-white' : 'text-black'}`}
+          style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)', letterSpacing: '0.05em' }}
         >
           MS
         </span>
@@ -39,12 +39,10 @@ export function Logo({ color = 'black', size = 'md', href = '/', onClick, classN
 
       {/* Wordmark */}
       <span
-        className={`font-bold uppercase whitespace-nowrap transition-colors duration-300 ${s.word} ${
-          isWhite ? 'text-white' : 'text-black'
-        }`}
-        style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: s.tracking }}
+        className={`whitespace-nowrap transition-colors duration-300 ${s.word} ${isWhite ? 'text-white' : 'text-black'}`}
+        style={{ fontFamily: 'var(--font-italiana, Georgia, serif)', letterSpacing: s.tracking }}
       >
-        Maison Serenia
+        MAISON SERENIA
       </span>
     </Link>
   );
