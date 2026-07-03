@@ -1260,12 +1260,13 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <span className="text-neutral-300 text-2xl leading-none">+</span>
                       </div>
                       <Link href={`/products/${fauteuilId}`} className="flex items-center gap-4 group">
-                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
                           <Image
                             src={fauteuil.images[0]}
                             alt={fauteuil.name}
                             width={140}
                             height={140}
+                            style={fauteuilId === 2 ? { transform: 'scale(1.25)', transformOrigin: 'center center' } : undefined}
                             className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
@@ -1284,8 +1285,8 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                             alt={figurine.name}
                             width={140}
                             height={140}
-                            style={{ transform: 'scale(1.45)', transformOrigin: 'center center' }}
-                            className="object-contain transition-transform duration-300 group-hover:scale-[1.55]"
+                            style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}
+                            className="object-contain transition-transform duration-300 group-hover:scale-[1.22]"
                           />
                           <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">
                             Offerte
