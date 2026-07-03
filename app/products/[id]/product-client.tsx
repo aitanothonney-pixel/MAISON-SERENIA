@@ -10,6 +10,7 @@ import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
+import { CartDrawer } from '@/components/ui/cart-drawer';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 
 // Canapé Bubble ↔ Fauteuil Bubble de même couleur
@@ -653,9 +654,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [added, setAdded] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const { isWished, toggle: toggleWish } = useWishlist();
-  const { addItem: addToCart } = useCart();
+  const { addItem: addToCart, count: cartCount } = useCart();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [lightbox, setLightbox] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
@@ -795,6 +797,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={toastMessage || product.name} />
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {/* Navbar */}
       <header className={`fixed left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 ${barVisible ? 'top-10' : 'top-0'}`}>
@@ -804,9 +807,17 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             <button onClick={() => setWishlistOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <Heart className={`w-5 h-5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
             </button>
-            <Link href="/" className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
+            <button onClick={() => setCartOpen(true)} className="relative flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <ShoppingBag className="w-5 h-5" />
-            </Link>
+              {cartCount > 0 && (
+                <span
+                  className="absolute -top-2 -right-2 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
+                  style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </header>
