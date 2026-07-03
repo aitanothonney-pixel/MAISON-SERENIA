@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, AlertTriangle, AlertCircle } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -98,6 +98,15 @@ function buildLiveActivity(productId: number) {
     { name: names[2], action: 'regarde ce produit', type: 'view' as const },
   ];
   return { viewers, buyers, feed };
+}
+
+// Prix élevé + forte marge (collection Bubble) => vaut la peine de pousser l'urgence d'achat
+function buildStockUrgency(productId: number) {
+  const rng = seedFromId(productId * 31 + 911);
+  const stock = 1 + Math.floor(rng() * 5);
+  const viewers = 2 + Math.floor(rng() * 9);
+  const soldThisMonth = 15 + Math.floor(rng() * 60);
+  return { stock, viewers, soldThisMonth };
 }
 
 const FAQ_ITEMS = [
@@ -734,6 +743,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const reviewStats = buildReviewStats(product.id);
   const reviews = buildReviews(product.id);
   const liveActivity = buildLiveActivity(product.id);
+  const stockUrgency = buildStockUrgency(product.id);
 
   const accordions = [
     {
@@ -984,6 +994,21 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 )}
               </div>
 
+              {/* Stock urgency — réservé aux pièces Bubble (prix les plus élevés, marge la plus rentable) */}
+              {isBubble && (
+                <div className="border border-red-200 bg-red-50 rounded-xl px-5 py-4 mb-6 space-y-1.5">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-red-600">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    Seulement {stockUrgency.stock} en stock
+                  </p>
+                  <p className="flex items-center gap-2 text-sm text-red-500">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                    {stockUrgency.viewers} personnes regardent cet article
+                  </p>
+                  <p className="text-xs text-neutral-500 pl-[22px]">{stockUrgency.soldThisMonth} vendus ce mois</p>
+                </div>
+              )}
+
               {/* Color variants */}
               {variants && (
                 <div className="mb-6">
@@ -1003,20 +1028,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       />
                     ))}
                   </div>
-                  {/* Stock Indicator */}
-                  <div className="flex items-center gap-2 text-xs mt-3">
-                    {isBubble ? (
-                      <>
-                        <span className="w-2 h-2 rounded-full bg-orange-400 shrink-0" />
-                        <span className="text-neutral-500">Stock limité · Plus que 3 disponibles</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                        <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
-                      </>
-                    )}
-                  </div>
+                  {/* Stock Indicator — les Bubble ont déjà l'encart d'urgence ci-dessus */}
+                  {!isBubble && (
+                    <div className="flex items-center gap-2 text-xs mt-3">
+                      <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
+                      <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
+                    </div>
+                  )}
                 </div>
               )}
 
