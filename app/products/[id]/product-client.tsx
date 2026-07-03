@@ -113,8 +113,6 @@ const FAQ_ITEMS = [
   { q: 'Combien de temps pour la livraison ?', a: 'Les commandes standard sont expédiées sous 24 à 48h. Pour les meubles de la collection Bubble, fabriqués sur demande, comptez 3 à 6 semaines.' },
   { q: 'Comment retourner un article ?', a: "Vous disposez de 30 jours pour changer d'avis. Contactez notre service client pour lancer un retour : l'enlèvement à domicile est organisé gratuitement." },
   { q: 'Le produit est-il conforme aux photos ?', a: 'Oui, nos photos sont fidèles au produit livré. De légères variations de teinte peuvent survenir selon les écrans.' },
-  { q: 'Offrez-vous une garantie ?', a: 'Tous nos produits sont garantis 2 ans contre les défauts de fabrication.' },
-  { q: 'Puis-je payer en plusieurs fois ?', a: "Oui, le paiement en 3x ou 4x sans frais est disponible via carte bancaire et PayPal dès 100€ d'achat." },
 ];
 
 // ─── Checkout Drawer ──────────────────────────────────────────────────────────

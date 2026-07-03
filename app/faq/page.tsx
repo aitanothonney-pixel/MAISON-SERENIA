@@ -34,10 +34,6 @@ const FAQ_DATA: FaqGroup[] = [
     theme: 'Produits',
     items: [
       {
-        q: 'Les produits sont-ils fabriqués en France ?',
-        a: "Nous travaillons avec une sélection d'artisans et manufactures français et européens. L'origine de chaque produit est précisée sur sa fiche.",
-      },
-      {
         q: "Les couleurs à l'écran sont-elles fidèles ?",
         a: 'Nous faisons tout notre possible pour que les photographies reflètent fidèlement les produits. Il peut toutefois exister de légères variations selon la calibration de votre écran.',
       },
@@ -82,10 +78,6 @@ const FAQ_DATA: FaqGroup[] = [
       {
         q: 'Quand serai-je remboursé ?',
         a: "Le remboursement est effectué dans les 5 jours ouvrés suivant la réception et la vérification du colis retourné, sur votre moyen de paiement d'origine.",
-      },
-      {
-        q: 'Puis-je échanger un article ?',
-        a: 'Oui, un échange est possible sous réserve de disponibilité. Initiez un retour via notre formulaire en précisant que vous souhaitez un échange.',
       },
     ],
   },
