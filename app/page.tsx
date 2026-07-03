@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star,
-  Truck, Shield, RotateCcw, ArrowUp, User, Home as HomeIcon, Gift,
+  Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -477,7 +477,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             Contactez-nous
           </Link>
 
-          {/* User (opens wishlist) */}
+          {/* Favoris (opens wishlist) */}
           <button
             onClick={onWishlistOpen}
             className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 hidden sm:flex ${
@@ -485,7 +485,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             }`}
             aria-label="Favoris"
           >
-            <User className={`w-4 h-4 transition-colors ${mounted && wishCount > 0 ? 'text-red-500' : iconColor}`} strokeWidth={1.5} />
+            <Heart className={`w-4 h-4 transition-colors ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : iconColor}`} strokeWidth={1.3} />
             {mounted && wishCount > 0 && (
               <span
                 className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
@@ -1379,7 +1379,7 @@ function TestimonialsSection() {
                 Témoignages
               </div>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl mt-5 text-center uppercase" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)', letterSpacing: '0.08em' }}>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl mt-5 text-center uppercase" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)', letterSpacing: '0.12em', fontWeight: 500 }}>
               Ce que disent nos clients
             </h2>
             <p className="text-center mt-5 text-neutral-500 text-sm">

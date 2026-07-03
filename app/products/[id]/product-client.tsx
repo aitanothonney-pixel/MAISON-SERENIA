@@ -1195,10 +1195,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   );
                 })()}
               </div>
-              <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 px-5 py-4">
-                <span className="text-base" aria-hidden>💡</span>
-                <p className="text-sm text-amber-700 font-medium">Économisez 10% en achetant ces 2 articles ensemble</p>
-              </div>
             </section>
           )}
 
