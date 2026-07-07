@@ -64,11 +64,11 @@ const REVIEW_DATES = ['28 juin 2026', '25 juin 2026', '22 juin 2026', '18 juin 2
 
 function buildReviewStats(productId: number) {
   const rng = seedFromId(productId * 7 + 4242);
-  const five = 60 + Math.floor(rng() * 90);
-  const four = 10 + Math.floor(rng() * 30);
-  const three = Math.floor(rng() * 12);
-  const two = Math.floor(rng() * 4);
-  const one = rng() < 0.15 ? 1 : 0;
+  const five = 45 + Math.floor(rng() * 55);
+  const four = 15 + Math.floor(rng() * 30);
+  const three = 6 + Math.floor(rng() * 12);
+  const two = 2 + Math.floor(rng() * 6);
+  const one = 1 + Math.floor(rng() * 4);
   const total = five + four + three + two + one;
   const avg = Math.round(((five * 5 + four * 4 + three * 3 + two * 2 + one * 1) / total) * 10) / 10;
   return { five, four, three, two, one, total, avg };
@@ -79,7 +79,7 @@ function buildReviews(productId: number) {
   const shuffled = [...REVIEW_POOL].sort(() => rng() - 0.5);
   return shuffled.slice(0, 3).map((r, i) => ({
     ...r,
-    rating: rng() < 0.25 ? 4 : 5,
+    rating: rng() < 0.15 ? 3 : rng() < 0.45 ? 4 : 5,
     date: REVIEW_DATES[(productId + i) % REVIEW_DATES.length],
   }));
 }
