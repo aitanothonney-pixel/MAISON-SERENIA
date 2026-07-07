@@ -90,14 +90,36 @@ function buildLiveActivity(productId: number) {
   const rng = seedFromId(productId * 17 + 55);
   const viewers = 3 + Math.floor(rng() * 10);
   const buyers = 1 + Math.floor(rng() * 7);
-  const names = [...ACTIVITY_NAMES].sort(() => rng() - 0.5).slice(0, 3);
-  const extra = 2 + Math.floor(rng() * 6);
-  const feed = [
-    { name: names[0], action: 'regarde ce produit', type: 'view' as const },
-    { name: names[1], action: 'a acheté cet article', type: 'buy' as const },
-    { name: `+${extra} personnes`, action: 'a acheté cet article', type: 'buy' as const },
-    { name: names[2], action: 'regarde ce produit', type: 'view' as const },
-  ];
+  const names = [...ACTIVITY_NAMES].sort(() => rng() - 0.5);
+
+  // Nombre de lignes aléatoire (4 à 6)
+  const count = 4 + Math.floor(rng() * 3);
+  const feed: { name: string; action: string; type: 'view' | 'buy'; time: string }[] = [];
+  let elapsed = Math.floor(rng() * 3); // minutes depuis maintenant
+  let nameIdx = 0;
+
+  for (let i = 0; i < count; i++) {
+    const isBuy = rng() < 0.45;
+    // De temps en temps, une ligne groupée "+N personnes"
+    const grouped = isBuy && rng() < 0.3;
+    const name = grouped
+      ? `+${2 + Math.floor(rng() * 7)} personnes`
+      : names[nameIdx++ % names.length];
+    const time =
+      elapsed === 0 ? "à l'instant"
+      : elapsed === 1 ? 'il y a 1 min'
+      : elapsed < 60 ? `il y a ${elapsed} min`
+      : `il y a ${Math.floor(elapsed / 60)} h`;
+    feed.push({
+      name,
+      action: isBuy
+        ? (grouped ? 'ont acheté cet article' : 'a acheté cet article')
+        : 'regarde ce produit',
+      type: isBuy ? 'buy' : 'view',
+      time,
+    });
+    elapsed += 1 + Math.floor(rng() * 18); // écart aléatoire entre chaque ligne
+  }
   return { viewers, buyers, feed };
 }
 
@@ -1354,7 +1376,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       <p className="text-xs text-neutral-400">{item.action}</p>
                     </div>
                   </div>
-                  <span className="text-xs text-neutral-400 shrink-0 ml-3">à l&apos;instant</span>
+                  <span className="text-xs text-neutral-400 shrink-0 ml-3">{item.time}</span>
                 </div>
               ))}
             </div>
