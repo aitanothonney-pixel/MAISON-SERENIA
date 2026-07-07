@@ -93,11 +93,6 @@ export default function LivraisonPage() {
               <div className="grid sm:grid-cols-2 gap-5">
                 {[
                   {
-                    icon: <Phone className="w-4 h-4" />,
-                    title: 'Rendez-vous téléphonique',
-                    desc: "Nos équipes vous contactent sous 48h après la commande pour convenir d'un créneau de livraison qui vous convient.",
-                  },
-                  {
                     icon: <Truck className="w-4 h-4" />,
                     title: 'Livraison en pièce',
                     desc: "Le transporteur monte les articles jusqu'à la pièce de votre choix et procède à l'installation si vous le souhaitez.",
