@@ -161,10 +161,10 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
   ];
 
   const informations = [
-    { label: 'Mentions légales', href: '/a-propos' },
-    { label: 'Politique de confidentialité', href: '/a-propos' },
-    { label: 'Conditions générales de vente', href: '/faq' },
-    { label: 'Gestion des cookies', href: '/faq' },
+    { label: 'Mentions légales', href: '/mentions-legales' },
+    { label: 'Politique de confidentialité', href: '/confidentialite' },
+    { label: 'Conditions générales de vente', href: '/cgv' },
+    { label: 'Gestion des cookies', href: '/confidentialite' },
   ];
 
   return (
