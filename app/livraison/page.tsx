@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Truck, Clock, Package, Phone, MapPin } from 'lucide-react';
+import { Truck, Package, Phone, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Livraison & Délais | MAISON SERENIA',
@@ -41,94 +41,8 @@ export default function LivraisonPage() {
 
       <div className="max-w-4xl mx-auto px-6 py-16 space-y-20">
 
-        {/* Delivery table */}
-        <section>
-          <h2
-            className="text-3xl font-bold text-black mb-8"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Nos modes de livraison
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              <thead>
-                <tr className="border-b-2 border-black">
-                  <th className="text-left py-4 pr-8 text-sm uppercase tracking-widest font-semibold">Mode</th>
-                  <th className="text-left py-4 pr-8 text-sm uppercase tracking-widest font-semibold">Délai</th>
-                  <th className="text-left py-4 text-sm uppercase tracking-widest font-semibold">Tarif</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-100">
-                <tr className="group hover:bg-neutral-50 transition-colors">
-                  <td className="py-5 pr-8">
-                    <div className="flex items-center gap-3">
-                      <Truck className="w-4 h-4 text-neutral-400 group-hover:text-black transition-colors" />
-                      <div>
-                        <p className="font-semibold text-black">Colissimo Standard</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">La Poste — France métropolitaine</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-5 pr-8">
-                    <span className="inline-flex items-center gap-1.5 text-neutral-700">
-                      <Clock className="w-3.5 h-3.5" />
-                      3 – 5 jours ouvrés
-                    </span>
-                  </td>
-                  <td className="py-5">
-                    <div>
-                      <p className="font-semibold text-black">4,90 €</p>
-                      <p className="text-xs text-emerald-700 font-medium mt-0.5">Gratuit dès 80 €</p>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="group hover:bg-neutral-50 transition-colors">
-                  <td className="py-5 pr-8">
-                    <div className="flex items-center gap-3">
-                      <Package className="w-4 h-4 text-neutral-400 group-hover:text-black transition-colors" />
-                      <div>
-                        <p className="font-semibold text-black">Express 24h</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">Chronopost — commande avant 14h</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-5 pr-8">
-                    <span className="inline-flex items-center gap-1.5 text-neutral-700">
-                      <Clock className="w-3.5 h-3.5" />
-                      24 heures
-                    </span>
-                  </td>
-                  <td className="py-5">
-                    <p className="font-semibold text-black">9,90 €</p>
-                  </td>
-                </tr>
-                <tr className="group hover:bg-neutral-50 transition-colors">
-                  <td className="py-5 pr-8">
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 text-neutral-400 group-hover:text-black transition-colors" />
-                      <div>
-                        <p className="font-semibold text-black">Europe</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">UE — hors France métropolitaine</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-5 pr-8">
-                    <span className="inline-flex items-center gap-1.5 text-neutral-700">
-                      <Clock className="w-3.5 h-3.5" />
-                      7 – 14 jours ouvrés
-                    </span>
-                  </td>
-                  <td className="py-5">
-                    <p className="font-semibold text-black">12,90 €</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
         {/* Suivi */}
-        <section className="border-t border-neutral-100 pt-16">
+        <section>
           <div className="flex items-start gap-5">
             <div className="w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
               <Package className="w-4 h-4 text-black" />
