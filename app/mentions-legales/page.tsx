@@ -40,17 +40,6 @@ export default function MentionsLegalesPage() {
         className="max-w-4xl mx-auto px-6 py-16 space-y-12 text-neutral-700 leading-relaxed"
         style={{ fontFamily: 'var(--font-dm-sans)' }}
       >
-        <Section title="Éditeur du site">
-          <p>Le site <strong>maison-serenia.com</strong> est édité par :</p>
-          <ul className="mt-3 space-y-1">
-            <li>Responsable de la publication : <strong>[À COMPLÉTER — nom et prénom]</strong></li>
-            <li>Statut : <strong>[À COMPLÉTER — ex. entreprise individuelle / auto-entrepreneur]</strong></li>
-            <li>Adresse : <strong>[À COMPLÉTER — adresse complète]</strong></li>
-            <li>Numéro d&apos;immatriculation : <strong>[À COMPLÉTER — SIRET / IDE / numéro d&apos;entreprise]</strong></li>
-            <li>E-mail : <strong>[À COMPLÉTER — email de contact]</strong></li>
-          </ul>
-        </Section>
-
         <Section title="Hébergement">
           <p>Le site est hébergé par :</p>
           <ul className="mt-3 space-y-1">
