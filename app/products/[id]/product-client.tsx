@@ -979,15 +979,19 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-0.5">
-                    {[...Array(4)].map((_, i) => <Star key={i} className="w-4 h-4 fill-black text-black" />)}
-                    <span className="relative w-4 h-4 inline-block">
-                      <Star className="w-4 h-4 text-neutral-300" />
-                      <span className="absolute inset-0 overflow-hidden w-[50%]"><Star className="w-4 h-4 fill-black text-black" /></span>
-                    </span>
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-300'}`}
+                        strokeWidth={i < Math.round(reviewStats.avg) ? 0 : 1.5}
+                      />
+                    ))}
                   </div>
-                  <span className="text-xs text-neutral-400">4.5</span>
+                  <span className="text-xs text-neutral-500 font-medium">{reviewStats.avg}</span>
                   <span className="text-neutral-200">·</span>
-                  <span className="text-xs text-neutral-400 underline underline-offset-2 cursor-pointer">24 avis</span>
+                  <Link href={`/products/${product.id}/avis`} className="text-xs text-neutral-400 underline underline-offset-2 hover:text-black transition-colors">
+                    {reviewStats.total} avis
+                  </Link>
                 </div>
                 {/* Social Share */}
                 <div className="flex gap-3 items-center text-neutral-400 text-xs mt-2">
@@ -1349,7 +1353,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               ))}
             </div>
             <div className="text-center">
-              <button className="text-sm font-semibold text-black hover:underline">Voir tous les avis →</button>
+              <Link href={`/products/${product.id}/avis`} className="text-sm font-semibold text-black hover:underline">Voir tous les avis →</Link>
             </div>
           </section>
 
