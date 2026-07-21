@@ -577,10 +577,10 @@ function PromoBanner() {
             aria-label="Voir la photo en grand"
           >
             <Image
-              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
-              alt="Promo bannière"
+              src="https://i.ibb.co/QjXv6K98/IMG-0930.jpg"
+              alt="Collection Salon Bubble en promotion"
               fill
-              className="object-cover object-[center_70%]"
+              className="object-cover object-[center_60%]"
             />
           </button>
           <div className="absolute inset-0 bg-black/65 pointer-events-none" />
@@ -619,12 +619,12 @@ function PromoBanner() {
               ))}
             </div>
 
-            <a
-              href="#bubble-promo"
+            <Link
+              href="/promotions"
               className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#C9A96E] hover:text-white transition-colors"
             >
               Voir les produits en promotion
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -641,8 +641,8 @@ function PromoBanner() {
             onClick={() => setLightbox(false)}
           >
             <motion.img
-              src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
-              alt="Promo bannière"
+              src="https://i.ibb.co/QjXv6K98/IMG-0930.jpg"
+              alt="Collection Salon Bubble en promotion"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
