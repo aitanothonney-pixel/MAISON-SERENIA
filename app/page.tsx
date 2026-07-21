@@ -1996,25 +1996,81 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-[100dvh] bg-white">
-        <div className="flex flex-col items-center justify-center text-center gap-2 w-full">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}>
-            MAISON
+      <section className="relative flex flex-col items-center justify-center min-h-[100dvh] overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+            alt="Salon d'exception signé Maison Serenia"
+            fill
+            priority
+            className="object-cover object-[center_60%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+        </div>
+
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
+        >
+          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#E8D5B0] mb-6">
+            Collection 2026 · Mobilier d&apos;exception
+          </p>
+          <h1
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white uppercase leading-[0.95]"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.12em' }}
+          >
+            Maison Serenia
           </h1>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black tracking-widest uppercase" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.15em' }}>
-            SERENIA
-          </h1>
-          <p className="text-xs tracking-[0.4em] uppercase text-neutral-400 mt-6" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Collection 2026</p>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-300 font-medium mt-1">Défiler pour découvrir</p>
+          <p
+            className="text-lg md:text-2xl text-white/85 mt-6 italic"
+            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+          >
+            L&apos;art de vivre à la française
+          </p>
+          <p className="text-white/70 text-sm md:text-base mt-4 max-w-xl leading-relaxed">
+            Canapés et fauteuils sculpturaux, pièces de collection et intérieurs sublimés.
+            Un mobilier pensé pour durer, livré avec le plus grand soin.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
+            <button
+              onClick={() => {
+                setActiveFilter('Salon');
+                setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+              }}
+              className="bg-white text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#C9A96E] hover:text-white transition-colors duration-300"
+            >
+              Découvrir la collection Salon
+            </button>
+            <a
+              href="#bubble-promo"
+              className="border border-white/60 text-white text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors duration-300"
+            >
+              Voir les promotions
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-white/60">Défiler pour découvrir</p>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ChevronRight className="w-4 h-4 text-white/60 rotate-90" />
+          </motion.div>
         </div>
       </section>
 
       <TrustStrip />
 
       <div className="w-full">
-          {/* Section Été */}
-          <SummerProductsSection />
-
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
             setActiveFilter('Bubble');
@@ -2086,6 +2142,9 @@ export default function Home() {
               </AnimatePresence>
             </div>
           </section>
+
+          {/* Section Été — accessoires saisonniers (secondaire) */}
+          <SummerProductsSection />
       </div>
 
 
