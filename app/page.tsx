@@ -539,9 +539,15 @@ function PromoBanner() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const endDate = new Date('2026-07-22').getTime();
+    // Durée de l'offre : 2 jours et 34 minutes à partir de la première visite du client.
+    const DURATION = (2 * 24 * 60 + 34) * 60 * 1000; // ms
+    let deadline = Number(localStorage.getItem('promo-deadline'));
+    if (!deadline || Number.isNaN(deadline)) {
+      deadline = Date.now() + DURATION;
+      localStorage.setItem('promo-deadline', String(deadline));
+    }
     const calc = () => {
-      const diff = endDate - Date.now();
+      const diff = deadline - Date.now();
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
@@ -584,7 +590,7 @@ function PromoBanner() {
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
-              Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
+              Offre à durée limitée — dans la limite des stocks disponibles.
             </p>
 
             {/* Countdown — grande visibilité */}
