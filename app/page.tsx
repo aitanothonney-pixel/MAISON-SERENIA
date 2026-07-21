@@ -210,10 +210,18 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 <Link
                   href="/"
                   onClick={onClose}
-                  className="flex items-center gap-3 group"
+                  className="flex items-center gap-4 group"
                 >
-                  <HomeIcon className="w-5 h-5 text-black" />
-                  <span className="text-sm tracking-[0.2em] uppercase font-semibold text-black group-hover:underline">Accueil</span>
+                  <span className="relative w-11 h-11 rounded-full border border-[#C9A96E]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#C9A96E]">
+                    <HomeIcon className="w-4 h-4 text-black" strokeWidth={1.4} />
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                      Accueil
+                    </p>
+                    <p className="text-xs text-neutral-400 mt-0.5">Retour à la page principale</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
                 </Link>
               </div>
 
