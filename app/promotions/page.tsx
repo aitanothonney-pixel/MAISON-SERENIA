@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Gift } from 'lucide-react';
 import { products } from '@/lib/products';
+import { BUNDLES, getBundleDetail } from '@/lib/bundles';
 
 export const metadata = {
   title: 'Promotions | Maison Serenia',
@@ -63,6 +65,56 @@ export default function PromotionsPage() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      {/* Ensembles */}
+      <section className="bg-neutral-50 border-t border-neutral-100 py-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-12">
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Économisez plus</p>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
+              Nos ensembles Bubble
+            </h2>
+            <span className="block w-10 h-px mt-3 mx-auto" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+            <p className="text-neutral-500 text-sm mt-4 max-w-md mx-auto">
+              Le canapé et son fauteuil assortis, avec une figurine offerte — le meilleur prix.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {BUNDLES.map((b) => {
+              const detail = getBundleDetail(b.slug);
+              if (!detail) return null;
+              const { canape, fauteuil, figurine, sum, price } = detail;
+              return (
+                <div key={b.slug} className="bg-white border border-neutral-200 p-6 flex flex-col">
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-4">Ensemble {b.color}</p>
+                  <div className="flex items-center gap-3 mb-5">
+                    {[canape, fauteuil, figurine].map((p) => (
+                      <div key={p.id} className="relative w-16 h-16 bg-neutral-50 shrink-0">
+                        <Image src={p.images[0]} alt={p.name} fill className="object-contain p-1" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>{price.toLocaleString('fr-FR')} €</span>
+                    <span className="text-sm text-neutral-400 line-through">{sum.toLocaleString('fr-FR')} €</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
+                    <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />
+                    <span><span className="font-semibold text-black">{figurine.name}</span> offerte · −{b.rabais}€</span>
+                  </div>
+                  <Link
+                    href={`/packs/${b.slug}`}
+                    className="mt-auto block w-full text-center bg-black text-white text-xs font-bold tracking-widest uppercase py-3.5 hover:bg-neutral-800 transition-colors"
+                  >
+                    Voir le pack
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
     </main>
