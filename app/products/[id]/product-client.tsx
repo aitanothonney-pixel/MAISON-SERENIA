@@ -1228,7 +1228,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {/* Guide des dimensions & tailles */}
           <section className="mt-16">
             <div className="bg-neutral-50 p-6 md:p-10">
-              <h2 className="text-2xl font-serif font-bold text-black mb-6">Guide des dimensions &amp; tailles</h2>
+              <h2 className="text-2xl font-serif font-bold text-black mb-1">Guide des dimensions &amp; tailles</h2>
+              <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
               <div className="space-y-3">
                 {dimensionAccordions.map((acc, i) => (
                   <div key={i} className="bg-white border border-neutral-200">
@@ -1255,15 +1256,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </div>
                 ))}
               </div>
-              <div className="mt-4 bg-blue-50 border border-blue-100 px-5 py-4 text-sm text-blue-700">
-                Besoin d&apos;aide? Notre équipe SAV peut vous aider à choisir les bonnes dimensions. <Link href="/contact" className="underline font-semibold">Contactez-nous</Link>
+              <div className="mt-4 bg-neutral-50 border-l-2 border-[#C9A96E] px-5 py-4 text-sm text-neutral-600">
+                Besoin d&apos;aide ? Notre équipe vous accompagne pour choisir les bonnes dimensions. <Link href="/contact" className="text-black underline font-semibold hover:no-underline">Contactez-nous</Link>
               </div>
             </div>
           </section>
 
           {/* Questions fréquentes */}
           <section className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-black mb-6">Questions fréquentes</h2>
+            <h2 className="text-2xl font-serif font-bold text-black mb-1">Questions fréquentes</h2>
+            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
             <div className="space-y-3">
               {FAQ_ITEMS.map((item, i) => (
                 <div key={i} className="border border-neutral-200">
@@ -1294,13 +1296,14 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
           {/* Avis de nos clients */}
           <section className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-black mb-6">Avis de nos clients</h2>
+            <h2 className="text-2xl font-serif font-bold text-black mb-1">Avis de nos clients</h2>
+            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
             <div className="bg-neutral-50 border border-neutral-200 p-6 mb-6 flex flex-col md:flex-row items-start md:items-center gap-6">
               <div className="text-center shrink-0 md:pr-6 md:border-r md:border-neutral-200 w-full md:w-auto">
                 <p className="text-4xl font-serif font-bold text-black">{reviewStats.avg}</p>
                 <div className="flex justify-center gap-0.5 my-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-amber-400 text-amber-400' : 'text-neutral-300'}`} />
+                    <Star key={i} className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-300'}`} />
                   ))}
                 </div>
                 <p className="text-xs text-neutral-400">{reviewStats.total} avis vérifiés</p>
@@ -1318,7 +1321,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <div key={star} className="flex items-center gap-3 text-xs">
                       <span className="w-6 text-neutral-400 shrink-0">{star}★</span>
                       <div className="flex-1 h-2 bg-neutral-200 overflow-hidden">
-                        <div className="h-full bg-amber-400" style={{ width: `${pct}%` }} />
+                        <div className="h-full bg-[#C9A96E]" style={{ width: `${pct}%` }} />
                       </div>
                       <span className="w-8 text-right text-neutral-400 shrink-0">{count}</span>
                     </div>
@@ -1338,7 +1341,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </div>
                   <div className="flex gap-0.5 mb-1.5">
                     {[...Array(5)].map((_, i2) => (
-                      <Star key={i2} className={`w-3.5 h-3.5 ${i2 < r.rating ? 'fill-amber-400 text-amber-400' : 'text-neutral-200'}`} />
+                      <Star key={i2} className={`w-3.5 h-3.5 ${i2 < r.rating ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-200'}`} />
                     ))}
                   </div>
                   <p className="text-sm text-neutral-600 leading-relaxed">{r.text}</p>
@@ -1352,23 +1355,25 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
           {/* Vu maintenant */}
           <section className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-black mb-6">Vu maintenant</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-              <div className="bg-blue-50 border border-blue-100 px-5 py-4">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-blue-600 font-semibold mb-1.5">Actuellement</p>
-                <p className="text-sm text-blue-900 font-medium flex items-center gap-2"><Eye className="w-4 h-4" /> {liveActivity.viewers} regardent</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">En temps réel</p>
+            <h2 className="text-2xl font-serif font-bold text-black mb-1">Vu maintenant</h2>
+            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="border border-neutral-200 px-5 py-4">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-1.5">Actuellement</p>
+                <p className="text-sm text-black font-medium flex items-center gap-2"><Eye className="w-4 h-4 text-[#C9A96E]" /> {liveActivity.viewers} personnes regardent</p>
               </div>
-              <div className="bg-green-50 border border-green-100 px-5 py-4">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-green-600 font-semibold mb-1.5">Derniers jours</p>
-                <p className="text-sm text-green-900 font-medium flex items-center gap-2"><ShoppingBag className="w-4 h-4" /> {liveActivity.buyers} achats</p>
+              <div className="border border-neutral-200 px-5 py-4">
+                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-1.5">Derniers jours</p>
+                <p className="text-sm text-black font-medium flex items-center gap-2"><ShoppingBag className="w-4 h-4 text-[#C9A96E]" /> {liveActivity.buyers} achats récents</p>
               </div>
             </div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-3">Activité en direct</p>
             <div className="space-y-2">
               {liveActivity.feed.map((item, i) => (
-                <div key={i} className="flex items-center justify-between bg-neutral-50 border border-neutral-100 px-4 py-3">
+                <div key={i} className="flex items-center justify-between border border-neutral-100 px-4 py-3 hover:border-neutral-200 transition-colors">
                   <div className="flex items-center gap-3 min-w-0">
-                    <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${item.type === 'buy' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
+                    <span className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-neutral-100 text-black">
                       {item.type === 'buy' ? <ShoppingBag className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     </span>
                     <div className="min-w-0">
