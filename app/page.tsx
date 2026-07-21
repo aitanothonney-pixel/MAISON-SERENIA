@@ -585,10 +585,10 @@ function PromoBanner() {
             aria-label="Voir la photo en grand"
           >
             <Image
-              src="https://i.ibb.co/QjXv6K98/IMG-0930.jpg"
+              src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
               alt="Collection Salon Bubble en promotion"
               fill
-              className="object-cover object-[center_60%]"
+              className="object-cover object-center"
             />
           </button>
           <div className="absolute inset-0 bg-black/65 pointer-events-none" />
@@ -649,7 +649,7 @@ function PromoBanner() {
             onClick={() => setLightbox(false)}
           >
             <motion.img
-              src="https://i.ibb.co/QjXv6K98/IMG-0930.jpg"
+              src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
               alt="Collection Salon Bubble en promotion"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
