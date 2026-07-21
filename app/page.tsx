@@ -14,6 +14,7 @@ import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
+import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
@@ -140,6 +141,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
         desc: `${meta?.desc ?? 'Nouvelle collection'} · ${count} pièce${count > 1 ? 's' : ''}`,
         section: meta?.section ?? 'section-salon',
         filter: cat,
+        slug: categoryToSlug(cat),
         img: (meta?.imgId ? products.find((p) => p.id === meta.imgId) : products.find((p) => p.category === cat))?.images[0] ?? '',
       };
     }),
@@ -148,6 +150,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
       desc: 'La collection signature · −30%',
       section: 'section-salon',
       filter: 'Bubble',
+      slug: 'bubble',
       img: products.find((p) => p.id === 22)?.images[0] ?? '',
     },
   ];
@@ -218,9 +221,10 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-5">Nos collections</p>
                 <div className="flex flex-col gap-5">
                   {collections.map((c) => (
-                    <button
+                    <Link
                       key={c.name}
-                      onClick={() => goToSection(c.section, c.filter)}
+                      href={`/collections/${c.slug}`}
+                      onClick={onClose}
                       className="flex items-center gap-4 group text-left w-full"
                     >
                       <div className="w-14 h-14 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
@@ -237,7 +241,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                         <p className="text-xs text-neutral-400 mt-0.5">{c.desc}</p>
                       </div>
                       <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors flex-shrink-0" />
-                    </button>
+                    </Link>
                   ))}
                 </div>
               </div>
