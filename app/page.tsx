@@ -767,10 +767,11 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
       <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Top ventes</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-2">Top ventes</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">
               Coups de cœur
             </h2>
+            <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
           </div>
           <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
             Tout voir <ChevronRight className="w-3 h-3" />
@@ -1415,13 +1416,22 @@ function TrustStrip() {
       <div className="w-full" style={{ background: '#f9f9f9' }}>
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200">
           {items.map(({ Icon, title, subtitle }) => (
-            <div key={title} className="flex flex-col items-center justify-center gap-3 py-7 px-4 text-center">
-              <div className="relative w-12 h-12 rounded-full border border-[#C9A96E]/50 flex items-center justify-center">
+            <div key={title} className="flex flex-col items-center justify-center gap-3 py-8 px-4 text-center group">
+              <div className="relative w-12 h-12 rounded-full border border-[#C9A96E]/50 flex items-center justify-center transition-colors duration-300 group-hover:border-[#C9A96E]">
                 <div className="absolute inset-1 rounded-full border border-neutral-200" />
                 <Icon size={18} className="text-black relative" strokeWidth={1.2} />
               </div>
               <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
-              <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
+              {title === '4.9/5' ? (
+                <div className="flex items-center gap-0.5">
+                  {[0, 1, 2, 3, 4].map((s) => (
+                    <Star key={s} size={11} className="text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
+                  ))}
+                  <span className="text-[10px] text-neutral-500 tracking-wide ml-1.5">{subtitle}</span>
+                </div>
+              ) : (
+                <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
+              )}
             </div>
           ))}
         </div>
@@ -2093,11 +2103,12 @@ export default function Home() {
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-400">Sélection</p>
+                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#A07840]">Sélection</p>
                     <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Nos Pièces Signatures
                     </h2>
-                    <p className="text-neutral-500 mt-2 max-w-lg text-sm">
+                    <span className="block w-10 h-px mt-3 mb-2" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+                    <p className="text-neutral-500 max-w-lg text-sm">
                       {filteredProducts.length} produit{filteredProducts.length > 1 ? 's' : ''}
                     </p>
                   </div>
