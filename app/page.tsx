@@ -1520,22 +1520,22 @@ function CookieBanner() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-lg border-t border-neutral-200"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-black shadow-lg border-t border-neutral-800"
         >
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4">
-            <p className="text-sm text-neutral-700 text-center sm:text-left">
+            <p className="text-sm text-neutral-300 text-center sm:text-left">
               Nous utilisons des cookies pour améliorer votre expérience.
             </p>
             <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => handleChoice('refused')}
-                className="text-sm px-5 py-2 border border-black text-black rounded hover:bg-neutral-100 transition-colors"
+                className="text-sm px-5 py-2 border border-white text-white rounded hover:bg-white/10 transition-colors"
               >
                 Refuser
               </button>
               <button
                 onClick={() => handleChoice('accepted')}
-                className="text-sm px-5 py-2 bg-black text-white rounded hover:bg-neutral-800 transition-colors"
+                className="text-sm px-5 py-2 bg-white text-black rounded hover:bg-neutral-200 transition-colors"
               >
                 Tout accepter
               </button>
