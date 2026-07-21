@@ -15,6 +15,7 @@ import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
+import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
@@ -1207,12 +1208,7 @@ function SummerProductsSection() {
 function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const { addItem } = useCart();
 
-  const bundles = [
-    { key: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, figurineId: 39, rabais: 175 },
-    { key: 'bleu',  color: 'Bleu',  canapeId: 13, fauteuilId: 6, figurineId: 31, rabais: 175 },
-    { key: 'rouge', color: 'Rouge', canapeId: 22, fauteuilId: 8, figurineId: 36, rabais: 200 },
-  ];
-  const BUNDLE_PRICE = 1900;
+  const bundles = BUNDLES;
 
   const handleBuy = (canapeId: number, fauteuilId: number, figurineId: number) => {
     addItem(canapeId);
@@ -1236,7 +1232,8 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bundles.map(({ key, canapeId, fauteuilId, figurineId, rabais }, index) => {
+            {bundles.map(({ slug, canapeId, fauteuilId, figurineId, rabais }, index) => {
+              const key = slug;
               const canape = products.find((p) => p.id === canapeId)!;
               const fauteuil = products.find((p) => p.id === fauteuilId)!;
               const figurine = products.find((p) => p.id === figurineId)!;
@@ -1350,6 +1347,12 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                   >
                     Acheter cet ensemble
                   </button>
+                  <Link
+                    href={`/packs/${slug}`}
+                    className="block w-full text-center border border-black text-black text-xs font-bold tracking-widest uppercase py-3.5 mt-2.5 hover:bg-black hover:text-white transition-colors"
+                  >
+                    Voir le pack
+                  </Link>
                   <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
                     Livraison gratuite à partir de 60€
                   </p>
