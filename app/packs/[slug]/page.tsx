@@ -38,10 +38,10 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
       <section className="border-b border-neutral-100 bg-neutral-50 py-16">
         <div className="max-w-5xl mx-auto px-6">
           <Link
-            href="/"
+            href="/#section-packs"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
           >
-            ← Retour à l&apos;accueil
+            ← Retour aux ensembles
           </Link>
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais {bundle.rabais}€</p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
