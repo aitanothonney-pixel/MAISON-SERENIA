@@ -2055,15 +2055,12 @@ export default function Home() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
-            <button
-              onClick={() => {
-                setActiveFilter('Salon');
-                setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
-              }}
+            <Link
+              href="/collections/salon"
               className="bg-white text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#C9A96E] hover:text-white transition-colors duration-300"
             >
               Découvrir la collection Salon
-            </button>
+            </Link>
             <a
               href="#bubble-promo"
               className="border border-white/60 text-white text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors duration-300"
