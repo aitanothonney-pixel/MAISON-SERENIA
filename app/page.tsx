@@ -2005,6 +2005,13 @@ export default function Home() {
     return 0;
   });
 
+  // Onglet "Tous" : on limite l'aperçu à 16 produits (le reste via "Voir plus")
+  const ALL_PREVIEW_LIMIT = 16;
+  const showViewMore = activeFilter === 'Tous' && filteredProducts.length > ALL_PREVIEW_LIMIT;
+  const displayedProducts = activeFilter === 'Tous'
+    ? filteredProducts.slice(0, ALL_PREVIEW_LIMIT)
+    : filteredProducts;
+
   return (
     <div className="bg-white">
       <ScrollProgressBar />
@@ -2171,7 +2178,7 @@ export default function Home() {
                   }}
                   className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
                 >
-                  {filteredProducts.map((product, index) => (
+                  {displayedProducts.map((product, index) => (
                     <motion.div
                       key={product.id}
                       variants={{
@@ -2184,6 +2191,18 @@ export default function Home() {
                   ))}
                 </motion.div>
               </AnimatePresence>
+
+              {showViewMore && (
+                <div className="flex justify-center mt-12">
+                  <Link
+                    href="/produits"
+                    className="inline-flex items-center gap-2 border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-black hover:text-white transition-colors duration-300"
+                  >
+                    Voir plus de produits
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              )}
             </div>
           </section>
 
