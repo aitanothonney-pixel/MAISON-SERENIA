@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
-import { products } from '@/lib/products';
+import { products, getVariantGroup } from '@/lib/products';
 
 export const metadata = {
   title: 'Tous nos produits | Maison Serenia',
@@ -11,9 +11,24 @@ export const metadata = {
 const bubbleName = (name: string) => name.includes('Bubble');
 
 export default function ProduitsPage() {
-  // Catalogue complet, classé par catégorie
+  // Catalogue complet, classé par catégorie.
+  // Les accessoires Été à variantes (bracelet, ventilateur) sont regroupés en un seul produit.
+  const seenGroups = new Set<number>();
+  const deduped = products.filter((p) => {
+    if (p.category === 'Été') {
+      const grp = getVariantGroup(p.id);
+      if (grp) {
+        const first = grp[0].productId;
+        if (seenGroups.has(first)) return false;
+        seenGroups.add(first);
+        return p.id === first;
+      }
+    }
+    return true;
+  });
+
   const order: Record<string, number> = { Salon: 0, Bureau: 1, Figurines: 2, 'Été': 3 };
-  const items = [...products].sort((a, b) => {
+  const items = deduped.sort((a, b) => {
     const ra = order[a.category] ?? 9;
     const rb = order[b.category] ?? 9;
     if (ra !== rb) return ra - rb;
