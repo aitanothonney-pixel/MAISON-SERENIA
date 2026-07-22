@@ -1959,18 +1959,26 @@ export default function Home() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
-  const shuffledAll = useMemo(() => {
-    const arr = [...products.filter(p => p.category !== 'Été')];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const curatedAll = useMemo(() => {
+    // Classement curé : best-sellers d'abord, puis Salon, Bureau, Figurines.
+    const categoryRank: Record<string, number> = { Salon: 0, Bureau: 1, Figurines: 2 };
+    return [...products.filter(p => p.category !== 'Été')].sort((a, b) => {
+      const aBest = bestsellerIds.indexOf(a.id);
+      const bBest = bestsellerIds.indexOf(b.id);
+      if (aBest !== -1 || bBest !== -1) {
+        if (aBest === -1) return 1;
+        if (bBest === -1) return -1;
+        return aBest - bBest;
+      }
+      const ra = categoryRank[a.category] ?? 9;
+      const rb = categoryRank[b.category] ?? 9;
+      if (ra !== rb) return ra - rb;
+      return a.id - b.id;
+    });
   }, []);
 
   const baseProducts = activeFilter === 'Tous'
-    ? shuffledAll
+    ? curatedAll
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
       : activeFilter === 'Été'
