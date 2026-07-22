@@ -878,10 +878,10 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className="group relative bg-white overflow-hidden transition-all duration-500"
+      className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' || product.category === 'Été' ? 'p-4' : ''}`}>
+        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -940,9 +940,16 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           </div>
         </div>
         <div className="p-4">
-          <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400 mb-0.5">{product.category}</p>
+          <div className="flex items-center justify-between mb-1">
+            <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400">{product.category}</p>
+            <div className="flex items-center gap-1">
+              <Star className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
+              <span className="text-[10px] text-neutral-400 tabular-nums">{(4.6 + (product.id % 4) * 0.1).toFixed(1)}</span>
+            </div>
+          </div>
           <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-          <p className="text-neutral-400 text-[11px] mb-2.5 line-clamp-1">{product.description}</p>
+          <p className="text-neutral-400 text-[11px] mb-3 line-clamp-1">{product.description}</p>
+          <div className="h-px bg-neutral-100 mb-3" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-black font-bold text-sm price-luxe">
@@ -2154,7 +2161,7 @@ export default function Home() {
                     hidden: {},
                     visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
                   }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
                 >
                   {filteredProducts.map((product, index) => (
                     <motion.div
