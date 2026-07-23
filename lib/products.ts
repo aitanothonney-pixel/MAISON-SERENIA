@@ -548,7 +548,9 @@ export const products: Product[] = [
     price: 49,
     description: 'Table basse mobile multifonction en noir : support à thé, étagère de rangement et surface de jeu (échecs, cartes, Mahjong). Double plateau et roulettes pour la déplacer facilement dans tout le salon.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/Z6xfjVMN/Capture-d-e-cran-2026-07-23-a-21-31-37.png',
+      'https://i.ibb.co/ym393YzM/Capture-d-e-cran-2026-07-23-a-21-32-06.png',
+      'https://i.ibb.co/XxGH6wkC/Capture-d-e-cran-2026-07-23-a-21-31-54.png',
     ],
     dimensions: 'Table basse à roulettes, double plateau',
     material: 'Métal et plateau laqué noir',
