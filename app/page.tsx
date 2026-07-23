@@ -1996,7 +1996,19 @@ export default function Home() {
               return true;
             });
           })()
-        : products.filter((p) => p.category === activeFilter && p.category !== 'Été');
+        : (() => {
+            const list = products.filter((p) => p.category === activeFilter && p.category !== 'Été');
+            // Dans le Salon, on affiche les produits Bubble en dernier
+            if (activeFilter === 'Salon') {
+              return list.sort((a, b) => {
+                const aB = a.name.includes('Bubble') ? 1 : 0;
+                const bB = b.name.includes('Bubble') ? 1 : 0;
+                if (aB !== bB) return aB - bB;
+                return a.id - b.id;
+              });
+            }
+            return list;
+          })();
 
   const filteredProducts = [...baseProducts].sort((a, b) => {
     if (sortBy === 'prix-asc') return a.price - b.price;
