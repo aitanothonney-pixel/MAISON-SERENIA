@@ -54,8 +54,8 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 65, color: 'Vert', colorHex: '#8aa876' },
   ],
   'sculpture-resine': [
-    { productId: 69, color: 'Bleu', colorHex: '#4a6b8a' },
     { productId: 70, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 69, color: 'Bleu', colorHex: '#4a6b8a' },
   ],
 };
 
@@ -582,7 +582,9 @@ export const products: Product[] = [
     price: 250,
     description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris noir profond, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/nN8Nr9JH/Capture-d-e-cran-2026-07-23-a-21-44-36.png',
+      'https://i.ibb.co/274kX9Bw/Capture-d-e-cran-2026-07-23-a-21-43-24.png',
+      'https://i.ibb.co/pBZSfvx3/Capture-d-e-cran-2026-07-23-a-21-44-13.png',
     ],
     dimensions: 'Sculpture verticale sur socle',
     material: 'Résine artistique, sphère cristal, socle laqué',
