@@ -417,7 +417,10 @@ export const products: Product[] = [
     price: 150,
     description: 'Meuble TV au design extensible (146 à 180 cm), en rotin avec 2 tiroirs, compartiments ouverts et rangement à 2 portes. Finition noir chêne élégante, parfait pour structurer un salon contemporain.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/PzVTnCtx/Capture-d-e-cran-2026-07-23-a-12-31-48.png',
+      'https://i.ibb.co/CKtMcfGs/Capture-d-e-cran-2026-07-23-a-12-31-56.png',
+      'https://i.ibb.co/NdNsLBF2/Capture-d-e-cran-2026-07-23-a-12-32-21.png',
+      'https://i.ibb.co/0WwS9zn/Capture-d-e-cran-2026-07-23-a-12-32-09.png',
     ],
     dimensions: 'L 146–180 × P 30 × H 44 cm',
     material: 'Aggloméré et MDF, façades rotin, coloris noir/chêne',
