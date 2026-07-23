@@ -640,4 +640,18 @@ export const products: Product[] = [
     material: 'Céramique finition mate',
     details: ['Design moderne minimaliste', 'Forme sculpturale arrondie', 'Idéal fleurs séchées ou déco', 'Coloris Noir'],
   },
+  // ── Meubles : Commode 6 tiroirs ──────────────────────────────────────────────
+  {
+    id: 74,
+    name: 'Commode 6 tiroirs bois & noir',
+    category: 'Meubles',
+    price: 170,
+    description: 'Commode moderne à 6 tiroirs, unité de rangement idéale pour la chambre ou l\'entrée. Structure noire et façades bois chocolat, en MDF durable. Grande capacité pour vêtements et essentiels, style contemporain.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'L 100 × P 30 × H 70 cm',
+    material: 'MDF durable, structure noire, façades bois chocolat',
+    details: ['6 grands tiroirs de rangement', 'Structure noire, façades bois', 'MDF durable', 'Idéale chambre ou entrée'],
+  },
 ];
