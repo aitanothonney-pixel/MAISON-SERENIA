@@ -49,9 +49,9 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 62, color: 'Light Brown', colorHex: '#c19a6b' },
   ],
   'table-appoint-double': [
-    { productId: 65, color: 'Vert', colorHex: '#8aa876' },
     { productId: 66, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 67, color: 'Blanc', colorHex: '#ece7de' },
+    { productId: 65, color: 'Vert', colorHex: '#8aa876' },
   ],
 };
 
