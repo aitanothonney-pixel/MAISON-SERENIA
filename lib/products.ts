@@ -589,4 +589,18 @@ export const products: Product[] = [
     material: 'Résine artistique, sphère cristal, socle laqué',
     details: ['Design abstrait new classical', 'Coloris noir profond', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
   },
+  // ── Décorations : Vase céramique coquille ────────────────────────────────────
+  {
+    id: 71,
+    name: 'Vase céramique coquille',
+    category: 'Décorations',
+    price: 68,
+    description: 'Vase d\'angle décoratif en céramique de style nordique, aux motifs inspirés du jardin et à la forme sculpturale de coquille. Fait main, blanc mat, il apporte une touche artistique et organique à votre intérieur.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Vase d\'angle décoratif',
+    material: 'Céramique blanche mate, fait main',
+    details: ['Style nordique, forme coquille', 'Fait main, finition blanc mat', 'Motifs inspirés du jardin', 'Pièce décorative sculpturale'],
+  },
 ];
