@@ -53,15 +53,12 @@ export const variantGroups: Record<string, ProductVariant[]> = {
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
 // carte dans les listes. Les produits Bubble restent affichés par couleur.
 export function collapseVariantDuplicates(list: Product[]): Product[] {
-  const seen = new Set<number>();
   return list.filter((p) => {
     if (p.name.includes('Bubble')) return true;
     const grp = getVariantGroup(p.id);
     if (grp) {
-      const first = grp[0].productId;
-      if (seen.has(first)) return false;
-      seen.add(first);
-      return p.id === first;
+      // On ne garde que le représentant du groupe (le premier)
+      return p.id === grp[0].productId;
     }
     return true;
   });
