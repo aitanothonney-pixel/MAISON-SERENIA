@@ -914,9 +914,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         setSelectedImage((selectedImage - 1 + product.images.length) % product.images.length);
                       }}
                       aria-label="Image précédente"
-                      className="group/arrow absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 backdrop-blur-md ring-1 ring-black/10 flex items-center justify-center text-black/70 opacity-0 group-hover:opacity-100 hover:bg-black hover:text-white hover:ring-black transition-all duration-300 z-10"
+                      className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
                     >
-                      <ChevronRight className="w-4 h-4 rotate-180 transition-transform duration-300 group-hover/arrow:-translate-x-0.5" strokeWidth={1.25} />
+                      <ChevronRight className="w-5 h-5 rotate-180" strokeWidth={1} />
                     </button>
                     <button
                       onClick={(e) => {
@@ -924,9 +924,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         setSelectedImage((selectedImage + 1) % product.images.length);
                       }}
                       aria-label="Image suivante"
-                      className="group/arrow absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 backdrop-blur-md ring-1 ring-black/10 flex items-center justify-center text-black/70 opacity-0 group-hover:opacity-100 hover:bg-black hover:text-white hover:ring-black transition-all duration-300 z-10"
+                      className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
                     >
-                      <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover/arrow:translate-x-0.5" strokeWidth={1.25} />
+                      <ChevronRight className="w-5 h-5" strokeWidth={1} />
                     </button>
 
                     {/* Points indicateurs */}
