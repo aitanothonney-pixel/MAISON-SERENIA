@@ -506,7 +506,7 @@ export const products: Product[] = [
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Vert.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/HLQrYmp5/Capture-d-e-cran-2026-07-23-a-21-14-51.png',
     ],
     dimensions: 'Ø 40 × H 40 cm',
     material: 'Plateau plastique résistant, cadre bois',
@@ -520,7 +520,7 @@ export const products: Product[] = [
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Noir.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/mCm4Hqgs/Capture-d-e-cran-2026-07-23-a-21-14-34.png',
     ],
     dimensions: 'Ø 40 × H 40 cm',
     material: 'Plateau plastique résistant, cadre bois',
@@ -534,7 +534,7 @@ export const products: Product[] = [
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Blanc.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/SwSfG0B8/Capture-d-e-cran-2026-07-23-a-21-14-43.png',
     ],
     dimensions: 'Ø 40 × H 40 cm',
     material: 'Plateau plastique résistant, cadre bois',
