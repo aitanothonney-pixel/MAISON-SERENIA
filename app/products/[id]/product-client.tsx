@@ -904,6 +904,32 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     />
                   </motion.div>
                 </AnimatePresence>
+
+                {/* Flèches de navigation */}
+                {product.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage((selectedImage - 1 + product.images.length) % product.images.length);
+                      }}
+                      aria-label="Image précédente"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow-md hover:bg-white transition-colors z-10"
+                    >
+                      <ChevronRight className="w-5 h-5 rotate-180" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage((selectedImage + 1) % product.images.length);
+                      }}
+                      aria-label="Image suivante"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow-md hover:bg-white transition-colors z-10"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
               </div>
 
               <AnimatePresence>
