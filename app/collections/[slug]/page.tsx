@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { COLLECTIONS, getCollectionMeta, getCollectionProducts } from '@/lib/collections';
+import { CollectionCard } from './collection-card';
 
 export function generateStaticParams() {
   return COLLECTIONS.map((c) => ({ slug: c.slug }));
@@ -51,38 +51,9 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
           <p className="text-neutral-500 text-center py-20">Aucun produit dans cette collection pour le moment.</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-            {items.map((product) => {
-              const isBubble = product.name.includes('Bubble');
-              const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
-              const contain = isBubble || product.category === 'Figurines' || product.category === 'Été';
-              return (
-                <Link key={product.id} href={`/products/${product.id}`} className="group block">
-                  <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${contain ? 'p-4' : ''}`}>
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      className={`transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
-                    />
-                    {isBubble && (
-                      <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                        −30%
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 mb-1">{product.category}</p>
-                  <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
-                    {product.name}
-                  </h2>
-                  <div className="flex items-baseline gap-2 mt-1.5">
-                    <span className="text-sm font-semibold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
-                    {isBubble && (
-                      <span className="text-xs text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</span>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
+            {items.map((product) => (
+              <CollectionCard key={product.id} product={product} />
+            ))}
           </div>
         )}
       </section>

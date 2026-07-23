@@ -881,7 +881,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 cursor-zoom-in"
+                className="group relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 cursor-zoom-in"
                 onClick={() => setLightbox(true)}
               >
                 <AnimatePresence mode="wait">
@@ -914,9 +914,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         setSelectedImage((selectedImage - 1 + product.images.length) % product.images.length);
                       }}
                       aria-label="Image précédente"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow-md hover:bg-white transition-colors z-10"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm border border-black/5 shadow-lg flex items-center justify-center text-black opacity-0 group-hover:opacity-100 hover:bg-white hover:scale-105 transition-all duration-300 z-10"
                     >
-                      <ChevronRight className="w-5 h-5 rotate-180" />
+                      <ChevronRight className="w-4 h-4 rotate-180" strokeWidth={1.5} />
                     </button>
                     <button
                       onClick={(e) => {
@@ -924,10 +924,17 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         setSelectedImage((selectedImage + 1) % product.images.length);
                       }}
                       aria-label="Image suivante"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow-md hover:bg-white transition-colors z-10"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm border border-black/5 shadow-lg flex items-center justify-center text-black opacity-0 group-hover:opacity-100 hover:bg-white hover:scale-105 transition-all duration-300 z-10"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4" strokeWidth={1.5} />
                     </button>
+
+                    {/* Points indicateurs */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                      {product.images.map((_, i) => (
+                        <span key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === selectedImage ? 'w-5 bg-black' : 'w-1.5 bg-black/25'}`} />
+                      ))}
+                    </div>
                   </>
                 )}
               </div>
