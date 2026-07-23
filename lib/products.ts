@@ -545,7 +545,7 @@ export const products: Product[] = [
     id: 68,
     name: 'Table basse mobile noire',
     category: 'Salon',
-    price: 39,
+    price: 49,
     description: 'Table basse mobile multifonction en noir : support à thé, étagère de rangement et surface de jeu (échecs, cartes, Mahjong). Double plateau et roulettes pour la déplacer facilement dans tout le salon.',
     images: [
       'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
