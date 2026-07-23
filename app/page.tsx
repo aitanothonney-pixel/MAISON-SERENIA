@@ -2015,6 +2015,16 @@ export default function Home() {
                 return a.id - b.id;
               });
             }
+            // Dans les Décorations, on affiche les figurines (KAWS, Bearbrick) en dernier
+            if (activeFilter === 'Décorations') {
+              const isFig = (n: string) => n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine');
+              return list.sort((a, b) => {
+                const aF = isFig(a.name) ? 1 : 0;
+                const bF = isFig(b.name) ? 1 : 0;
+                if (aF !== bF) return aF - bF;
+                return a.id - b.id;
+              });
+            }
             return list;
           })();
 
