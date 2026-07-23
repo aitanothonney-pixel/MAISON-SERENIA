@@ -648,7 +648,11 @@ export const products: Product[] = [
     price: 170,
     description: 'Commode moderne à 6 tiroirs, unité de rangement idéale pour la chambre ou l\'entrée. Structure noire et façades bois chocolat, en MDF durable. Grande capacité pour vêtements et essentiels, style contemporain.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/cSH9XcdH/Capture-d-e-cran-2026-07-23-a-22-23-19.png',
+      'https://i.ibb.co/kWbJVR5/Capture-d-e-cran-2026-07-23-a-22-21-45.png',
+      'https://i.ibb.co/bg1YMfM9/Capture-d-e-cran-2026-07-23-a-22-23-11.png',
+      'https://i.ibb.co/Mxf3wGjT/Capture-d-e-cran-2026-07-23-a-22-23-03.png',
+      'https://i.ibb.co/DHp15LLC/Capture-d-e-cran-2026-07-23-a-22-22-03.png',
     ],
     dimensions: 'L 100 × P 30 × H 70 cm',
     material: 'MDF durable, structure noire, façades bois chocolat',
