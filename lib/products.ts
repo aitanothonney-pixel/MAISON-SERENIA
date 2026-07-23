@@ -48,6 +48,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 63, color: 'Dark Brown', colorHex: '#5a3a24' },
     { productId: 62, color: 'Light Brown', colorHex: '#c19a6b' },
   ],
+  'table-appoint-double': [
+    { productId: 65, color: 'Vert', colorHex: '#8aa876' },
+    { productId: 66, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 67, color: 'Blanc', colorHex: '#ece7de' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -492,5 +497,47 @@ export const products: Product[] = [
     dimensions: 'L 110 cm',
     material: 'Bois aspect brun rustique, structure métal noir',
     details: ['Compatible TV jusqu\'à 55 pouces', 'Compartiments ouverts', 'Étagère centrale réglable', 'Structure métal industriel'],
+  },
+  // ── Salon : Table d'appoint double couche — Vert ─────────────────────────────
+  {
+    id: 65,
+    name: 'Table d\'appoint double couche',
+    category: 'Salon',
+    price: 49,
+    description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Vert.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Ø 40 × H 40 cm',
+    material: 'Plateau plastique résistant, cadre bois',
+    details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Vert'],
+  },
+  // ── Salon : Table d'appoint double couche — Noir ─────────────────────────────
+  {
+    id: 66,
+    name: 'Table d\'appoint double couche',
+    category: 'Salon',
+    price: 49,
+    description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Noir.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Ø 40 × H 40 cm',
+    material: 'Plateau plastique résistant, cadre bois',
+    details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Noir'],
+  },
+  // ── Salon : Table d'appoint double couche — Blanc ────────────────────────────
+  {
+    id: 67,
+    name: 'Table d\'appoint double couche',
+    category: 'Salon',
+    price: 49,
+    description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Blanc.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Ø 40 × H 40 cm',
+    material: 'Plateau plastique résistant, cadre bois',
+    details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Blanc'],
   },
 ];
