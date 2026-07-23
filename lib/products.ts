@@ -426,4 +426,24 @@ export const products: Product[] = [
     material: 'Aggloméré et MDF, façades rotin, coloris noir/chêne',
     details: ['Design extensible 146 à 180 cm', '2 tiroirs + rangement 2 portes', 'Compartiments ouverts', 'Façades en rotin tressé'],
   },
+  // ── Salon : Table à manger ovale bois massif ─────────────────────────────────
+  {
+    id: 62,
+    name: 'Table à manger ovale en bois massif',
+    category: 'Salon',
+    price: 215,
+    description: 'Table à manger moderne au design épuré, plateau ovale en bois massif et piètement cannelé. Chaleureuse et élégante, elle accueille jusqu\'à 6 personnes. Disponible en Dark Brown et Light Brown.',
+    images: [
+      'https://i.ibb.co/Q7mcpzGW/Capture-d-e-cran-2026-07-23-a-14-35-51.png',
+      'https://i.ibb.co/4gYLRVP0/Capture-d-e-cran-2026-07-23-a-14-35-48.png',
+      'https://i.ibb.co/B2VB3r8B/Capture-d-e-cran-2026-07-23-a-14-35-40.png',
+      'https://i.ibb.co/qMTxqsDx/Capture-d-e-cran-2026-07-23-a-14-36-33.png',
+      'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png',
+      'https://i.ibb.co/XZ3vYFnR/Capture-d-e-cran-2026-07-23-a-14-36-08.png',
+      'https://i.ibb.co/1Js6RdH8/Capture-d-e-cran-2026-07-23-a-14-36-00.png',
+    ],
+    dimensions: 'L 180 × l 90 cm',
+    material: 'Bois massif, plateau ovale, piètement cannelé',
+    details: ['Plateau ovale en bois massif', 'Jusqu\'à 6 personnes', 'Design contemporain épuré', 'Coloris Dark Brown ou Light Brown'],
+  },
 ];
