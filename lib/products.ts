@@ -540,4 +540,18 @@ export const products: Product[] = [
     material: 'Plateau plastique résistant, cadre bois',
     details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Blanc'],
   },
+  // ── Salon : Table basse Mahjong mobile ───────────────────────────────────────
+  {
+    id: 68,
+    name: 'Table basse mobile noire',
+    category: 'Salon',
+    price: 39,
+    description: 'Table basse mobile multifonction en noir : support à thé, étagère de rangement et surface de jeu (échecs, cartes, Mahjong). Double plateau et roulettes pour la déplacer facilement dans tout le salon.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Table basse à roulettes, double plateau',
+    material: 'Métal et plateau laqué noir',
+    details: ['Double plateau de rangement', 'Roulettes pour un déplacement facile', 'Multifonction : thé, jeux, appoint', 'Finition noire élégante'],
+  },
 ];
