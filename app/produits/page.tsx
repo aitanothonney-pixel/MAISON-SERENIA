@@ -15,7 +15,7 @@ export default function ProduitsPage() {
   // Les accessoires Été à variantes (bracelet, ventilateur) sont regroupés en un seul produit.
   const deduped = collapseVariantDuplicates(products);
 
-  const order: Record<string, number> = { Salon: 0, Bureau: 1, Décorations: 2, 'Été': 3 };
+  const order: Record<string, number> = { Salon: 0, Meubles: 1, Décorations: 2, 'Été': 3 };
   const items = deduped.sort((a, b) => {
     const ra = order[a.category] ?? 9;
     const rb = order[b.category] ?? 9;

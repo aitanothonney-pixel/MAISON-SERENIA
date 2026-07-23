@@ -128,7 +128,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
   // catalogue apparaît automatiquement ici avec des valeurs par défaut.
   const categoryMeta: Record<string, { name?: string; desc: string; section: string; imgId?: number }> = {
     'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 10 },
-    'Bureau': { desc: 'Pièces de travail raffinées', section: 'section-bureau' },
+    'Meubles': { desc: 'Meubles & pièces d\'intérieur', section: 'section-bureau' },
     'Décorations': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
     'Été': { name: 'Collection Été', desc: 'Accessoires nomades', section: 'section-ete', imgId: 50 },
   };
@@ -978,7 +978,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Bureau', 'Décorations', 'Bubble', 'Été'];
+const filterCategories = ['Tous', 'Salon', 'Meubles', 'Décorations', 'Bubble', 'Été'];
 
 function ProductFilterBar({
   active,
@@ -1062,15 +1062,15 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
               </div>
             </button>
 
-            {/* Bureau */}
-            <button onClick={() => onCategoryClick('Bureau', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            {/* Meubles */}
+            <button onClick={() => onCategoryClick('Meubles', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
-                alt="Bureau"
+                alt="Meubles"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Bureau</div>
+              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Meubles</div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                   Voir →
@@ -1611,7 +1611,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
             <ul className="space-y-2 text-sm">
               {[
                 { label: 'Salon', section: 'section-salon', filter: 'Salon' },
-                { label: 'Bureau', section: 'section-bureau', filter: 'Bureau' },
+                { label: 'Meubles', section: 'section-bureau', filter: 'Meubles' },
                 { label: 'Décorations', section: 'section-figurines', filter: 'Décorations' },
                 { label: 'Été', section: 'section-ete', filter: 'Été' },
                 { label: 'Promotions', section: 'section-salon', filter: 'Bubble' },
@@ -1935,7 +1935,7 @@ export default function Home() {
     const onHashChange = () => {
       const hash = window.location.hash;
       if (hash === '#section-salon') setActiveFilter('Salon');
-      else if (hash === '#section-bureau') setActiveFilter('Bureau');
+      else if (hash === '#section-bureau') setActiveFilter('Meubles');
       else if (hash === '#section-figurines') setActiveFilter('Décorations');
       else if (hash === '#tous' || hash === '') setActiveFilter('Tous');
       if (hash === '#tous') {
@@ -1960,8 +1960,8 @@ export default function Home() {
   }, []);
 
   const curatedAll = useMemo(() => {
-    // Classement curé : best-sellers d'abord, puis Salon, Bureau, Décorations.
-    const categoryRank: Record<string, number> = { Salon: 0, Bureau: 1, Décorations: 2 };
+    // Classement curé : best-sellers d'abord, puis Salon, Meubles, Décorations.
+    const categoryRank: Record<string, number> = { Salon: 0, Meubles: 1, Décorations: 2 };
     return collapseVariantDuplicates(products.filter(p => p.category !== 'Été')).sort((a, b) => {
       const aBest = bestsellerIds.indexOf(a.id);
       const bBest = bestsellerIds.indexOf(b.id);

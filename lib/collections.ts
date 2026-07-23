@@ -18,7 +18,7 @@ const SLUG_TO_CATEGORY: Record<string, string> = {
   salon: 'Salon',
   figurines: 'Décorations',
   ete: 'Été',
-  bureau: 'Bureau',
+  bureau: 'Meubles',
 };
 
 // Slug URL-safe à partir d'une catégorie (pour le menu)
