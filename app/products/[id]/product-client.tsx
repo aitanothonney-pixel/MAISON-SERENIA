@@ -881,8 +881,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative aspect-square overflow-hidden rounded-2xl bg-neutral-50 cursor-zoom-in"
-                onClick={() => setLightbox(true)}
+                className="group relative aspect-square overflow-hidden rounded-2xl bg-neutral-50"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
