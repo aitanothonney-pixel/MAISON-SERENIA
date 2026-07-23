@@ -775,7 +775,7 @@ function BubblePromoCarousel() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [8, 22, 2, 10];
+const bestsellerIds = [61, 63, 71, 35];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
@@ -807,21 +807,23 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') ? 'p-3' : ''}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'p-3' : ''}`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
                   />
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                     <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
                       Best-seller
                     </div>
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                      −30%
-                    </div>
+                    {product.name.includes('Bubble') && (
+                      <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                        −30%
+                      </div>
+                    )}
                   </div>
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
@@ -837,8 +839,14 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
-                  <p className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
-                  <p className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                  {product.name.includes('Bubble') ? (
+                    <>
+                      <p className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
+                      <p className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                    </>
+                  ) : (
+                    <p className="text-black font-bold text-sm price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                  )}
                 </div>
               </Link>
             </motion.div>
