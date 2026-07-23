@@ -409,18 +409,4 @@ export const products: Product[] = [
     material: 'Bois, façades cannelées, piètement métal noir',
     details: ['2 tiroirs de rangement', 'Niche ouverte centrale', 'Compatible TV jusqu\'à 60 pouces', 'Piètement métal noir incliné'],
   },
-  // ── Salon : Canapé d'angle modulable ─────────────────────────────────────────
-  {
-    id: 61,
-    name: 'Canapé d\'angle modulable chenille',
-    category: 'Salon',
-    price: 262,
-    description: 'Canapé d\'angle modulable en tissu chenille doux, style contemporain. Assise moelleuse et enveloppante, configuration modulable pour s\'adapter à votre salon. Un ensemble confortable et élégant.',
-    images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
-    ],
-    dimensions: 'L 259 × P 73 × H 87 cm',
-    material: 'Tissu chenille doux, structure modulable',
-    details: ['Canapé d\'angle modulable', 'Tissu chenille doux et résistant', 'Assise moelleuse et enveloppante', 'Configuration adaptable au salon'],
-  },
 ];
