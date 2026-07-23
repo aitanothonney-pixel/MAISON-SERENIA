@@ -53,6 +53,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 67, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 65, color: 'Vert', colorHex: '#8aa876' },
   ],
+  'sculpture-resine': [
+    { productId: 69, color: 'Bleu', colorHex: '#4a6b8a' },
+    { productId: 70, color: 'Noir', colorHex: '#1a1a1a' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -569,5 +573,19 @@ export const products: Product[] = [
     dimensions: 'Sculpture verticale sur socle',
     material: 'Résine artistique, sphère cristal, socle laqué',
     details: ['Design abstrait new classical', 'Coloris gris bleuté', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
+  },
+  // ── Figurines : Sculpture artistique en résine — Noir ────────────────────────
+  {
+    id: 70,
+    name: 'Sculpture artistique en résine bleue',
+    category: 'Figurines',
+    price: 250,
+    description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris noir profond, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Sculpture verticale sur socle',
+    material: 'Résine artistique, sphère cristal, socle laqué',
+    details: ['Design abstrait new classical', 'Coloris noir profond', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
   },
 ];
