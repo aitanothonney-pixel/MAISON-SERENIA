@@ -618,7 +618,8 @@ export const products: Product[] = [
     price: 49,
     description: 'Vase en céramique au design moderne et minimaliste, forme sculpturale arrondie. Parfait pour un arrangement floral ou en pièce décorative seule dans le salon. Artisanat soigné, finition mate. Coloris Blanc.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/JwSGCFym/Capture-d-e-cran-2026-07-23-a-22-04-47.png',
+      'https://i.ibb.co/S4qCf5tR/Capture-d-e-cran-2026-07-23-a-22-04-15.png',
     ],
     dimensions: 'Vase décoratif moderne',
     material: 'Céramique finition mate',
@@ -632,7 +633,8 @@ export const products: Product[] = [
     price: 49,
     description: 'Vase en céramique au design moderne et minimaliste, forme sculpturale arrondie. Parfait pour un arrangement floral ou en pièce décorative seule dans le salon. Artisanat soigné, finition mate. Coloris Noir.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/cKJj0NkY/Capture-d-e-cran-2026-07-23-a-22-05-14.png',
+      'https://i.ibb.co/fV7ZZcWf/Capture-d-e-cran-2026-07-23-a-22-05-04.png',
     ],
     dimensions: 'Vase décoratif moderne',
     material: 'Céramique finition mate',
