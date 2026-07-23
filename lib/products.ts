@@ -224,11 +224,11 @@ export const products: Product[] = [
     material: 'Tissu structuré, base laquée',
     details: ['Forme sculpturale en modules gonflés', 'Tissu résistant haute qualité', 'Base laquée orange mat', 'Livraison en blanc incluse'],
   },
-  // ── Figurines KAWS Monde ─────────────────────────────────────────────────────
+  // ── Décorations KAWS Monde ─────────────────────────────────────────────────────
   {
     id: 31,
     name: 'Figurine KAWS noir monde',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 75,
     description: 'Figurine KAWS édition Monde en coloris noir intense — une pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
     images: [
@@ -241,7 +241,7 @@ export const products: Product[] = [
   {
     id: 32,
     name: 'Figurine KAWS gris monde',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 75,
     description: 'Figurine KAWS édition Monde en coloris gris — subtilité et caractère dans une même pièce. Sculpture en vinyle premium, finition soyeuse, 28 cm de hauteur.',
     images: [
@@ -255,7 +255,7 @@ export const products: Product[] = [
   {
     id: 34,
     name: 'Figurine Kaws noir (28 cm)',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 75,
     description: 'Figurine KAWS en coloris noir intense — pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
     images: [
@@ -270,7 +270,7 @@ export const products: Product[] = [
   {
     id: 35,
     name: 'Bearbrick x Bape (28 cm)',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 150,
     description: 'Bearbrick x A Bathing Ape — collaboration iconique entre deux géants du streetwear et du art toy. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
     images: [
@@ -284,7 +284,7 @@ export const products: Product[] = [
   {
     id: 36,
     name: 'Bearbrick x Bape rose (28 cm)',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 150,
     description: 'Bearbrick x A Bathing Ape coloris rose — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
     images: [
@@ -298,7 +298,7 @@ export const products: Product[] = [
   {
     id: 37,
     name: 'Figurine Kaws (28 cm)',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 75,
     description: 'Figurine KAWS collector en vinyle premium — une icône du art toy contemporain. Finition impeccable, 28 cm de hauteur.',
     images: [
@@ -312,7 +312,7 @@ export const products: Product[] = [
   {
     id: 38,
     name: 'Bearbrick x Bape noir (28 cm)',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 150,
     description: 'Bearbrick x A Bathing Ape coloris noir — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
     images: [
@@ -326,7 +326,7 @@ export const products: Product[] = [
   {
     id: 39,
     name: 'Figurine Kaws câlin',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 75,
     description: 'Figurine KAWS câlin — une des poses les plus emblématiques de l\'artiste. Sculpture en vinyle premium, finition impeccable, pièce collector incontournable.',
     images: [
@@ -560,11 +560,11 @@ export const products: Product[] = [
     material: 'Métal et plateau laqué noir',
     details: ['Double plateau de rangement', 'Roulettes pour un déplacement facile', 'Multifonction : thé, jeux, appoint', 'Finition noire élégante'],
   },
-  // ── Figurines : Sculpture artistique en résine ───────────────────────────────
+  // ── Décorations : Sculpture artistique en résine ───────────────────────────────
   {
     id: 69,
     name: 'Sculpture artistique en résine bleue',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 250,
     description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris gris bleuté, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
     images: [
@@ -575,11 +575,11 @@ export const products: Product[] = [
     material: 'Résine artistique, sphère cristal, socle laqué',
     details: ['Design abstrait new classical', 'Coloris gris bleuté', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
   },
-  // ── Figurines : Sculpture artistique en résine — Noir ────────────────────────
+  // ── Décorations : Sculpture artistique en résine — Noir ────────────────────────
   {
     id: 70,
     name: 'Sculpture artistique en résine bleue',
-    category: 'Figurines',
+    category: 'Décorations',
     price: 250,
     description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris noir profond, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
     images: [

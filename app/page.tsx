@@ -129,7 +129,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
   const categoryMeta: Record<string, { name?: string; desc: string; section: string; imgId?: number }> = {
     'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 10 },
     'Bureau': { desc: 'Pièces de travail raffinées', section: 'section-bureau' },
-    'Figurines': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
+    'Décorations': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
     'Été': { name: 'Collection Été', desc: 'Accessoires nomades', section: 'section-ete', imgId: 50 },
   };
 
@@ -455,8 +455,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
                                 className={`flex items-center gap-3 p-2 transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
                               >
-                                <div className={`w-11 h-11 overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Figurines' || p.category === 'Été' ? 'p-1' : ''}`}>
-                                  <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' || p.category === 'Été' ? 'object-contain' : 'object-cover'}`} />
+                                <div className={`w-11 h-11 overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été' ? 'p-1' : ''}`}>
+                                  <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain' : 'object-cover'}`} />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
@@ -881,14 +881,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Figurines' || product.category === 'Été' ? 'p-4' : ''}`}>
+        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
             width={600}
             height={450}
             style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : [7, 8, 9, 10, 13].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Figurines' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           {isBubble && product.images[1] && (
             <Image
@@ -978,7 +978,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Tous', 'Salon', 'Bureau', 'Figurines', 'Bubble', 'Été'];
+const filterCategories = ['Tous', 'Salon', 'Bureau', 'Décorations', 'Bubble', 'Été'];
 
 function ProductFilterBar({
   active,
@@ -1046,15 +1046,15 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
               </div>
             </button>
 
-            {/* Figurines */}
-            <button onClick={() => onCategoryClick('Figurines', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
+            {/* Décorations */}
+            <button onClick={() => onCategoryClick('Décorations', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <img
                 src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
-                alt="Figurines"
+                alt="Décorations"
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Figurines</div>
+              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Décorations</div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                   Voir →
@@ -1612,7 +1612,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
               {[
                 { label: 'Salon', section: 'section-salon', filter: 'Salon' },
                 { label: 'Bureau', section: 'section-bureau', filter: 'Bureau' },
-                { label: 'Figurines', section: 'section-figurines', filter: 'Figurines' },
+                { label: 'Décorations', section: 'section-figurines', filter: 'Décorations' },
                 { label: 'Été', section: 'section-ete', filter: 'Été' },
                 { label: 'Promotions', section: 'section-salon', filter: 'Bubble' },
               ].map((item) => (
@@ -1745,12 +1745,12 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-// ─── Figurines Section ────────────────────────────────────────────────────────
+// ─── Décorations Section ────────────────────────────────────────────────────────
 
-function FigurinesSection() {
+function DécorationsSection() {
   const { isWished, toggle } = useWishlist();
   const figurines = products
-    .filter((p) => p.category === 'Figurines')
+    .filter((p) => p.category === 'Décorations')
     .sort((a, b) => b.id - a.id);
 
   return (
@@ -1759,7 +1759,7 @@ function FigurinesSection() {
         <div className="mb-10">
           <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            Figurines
+            Décorations
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -1936,7 +1936,7 @@ export default function Home() {
       const hash = window.location.hash;
       if (hash === '#section-salon') setActiveFilter('Salon');
       else if (hash === '#section-bureau') setActiveFilter('Bureau');
-      else if (hash === '#section-figurines') setActiveFilter('Figurines');
+      else if (hash === '#section-figurines') setActiveFilter('Décorations');
       else if (hash === '#tous' || hash === '') setActiveFilter('Tous');
       if (hash === '#tous') {
         setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
@@ -1960,8 +1960,8 @@ export default function Home() {
   }, []);
 
   const curatedAll = useMemo(() => {
-    // Classement curé : best-sellers d'abord, puis Salon, Bureau, Figurines.
-    const categoryRank: Record<string, number> = { Salon: 0, Bureau: 1, Figurines: 2 };
+    // Classement curé : best-sellers d'abord, puis Salon, Bureau, Décorations.
+    const categoryRank: Record<string, number> = { Salon: 0, Bureau: 1, Décorations: 2 };
     return collapseVariantDuplicates(products.filter(p => p.category !== 'Été')).sort((a, b) => {
       const aBest = bestsellerIds.indexOf(a.id);
       const bBest = bestsellerIds.indexOf(b.id);

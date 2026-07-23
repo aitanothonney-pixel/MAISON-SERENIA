@@ -10,7 +10,7 @@ export function CollectionCard({ product }: { product: Product }) {
   const [idx, setIdx] = useState(0);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
-  const contain = isBubble || product.category === 'Figurines' || product.category === 'Été';
+  const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
   const hasMultiple = product.images.length > 1;
 
   const go = (e: React.MouseEvent, dir: number) => {

@@ -31,7 +31,7 @@ function seedFromId(seed: number) {
 }
 
 function dimensionGuideExtra(category: string) {
-  if (category === 'Figurines') {
+  if (category === 'Décorations') {
     return {
       title: 'Hauteur & socle',
       content: "La hauteur indiquée inclut le socle d'origine. Prévoyez une étagère ou vitrine d'une profondeur minimale de 15 cm pour une présentation stable.",
@@ -282,7 +282,7 @@ function CheckoutDrawer({
                           alt={product.name}
                           width={80}
                           height={80}
-                          className={product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'}
+                          className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'}
                         />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -552,7 +552,7 @@ function CheckoutDrawer({
                         <div className="flex gap-3 mb-3">
                           <div className="w-12 h-12 rounded-lg bg-white border border-neutral-100 flex items-center justify-center overflow-hidden">
                             <Image src={product.images[0]} alt={product.name} width={48} height={48}
-                              className={product.name.includes('Bubble') || product.category === 'Figurines' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
+                              className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
                           </div>
                           <div>
                             <p className="font-semibold text-sm">{product.name}</p>
@@ -736,8 +736,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           return p.id !== product.id;
         });
       })()
-    : product.category === 'Figurines'
-      ? products.filter((p) => p.category === 'Figurines' && p.id !== product.id)
+    : product.category === 'Décorations'
+      ? products.filter((p) => p.category === 'Décorations' && p.id !== product.id)
       : isBubble
         ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
         : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
@@ -896,7 +896,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       src={product.images[selectedImage]}
                       alt={product.name}
                       fill
-                      className={product.category === 'Figurines'
+                      className={product.category === 'Décorations'
                         ? 'object-contain p-6'
                         : isBubble ? 'object-contain p-4' : 'object-cover'}
                       priority
@@ -1432,9 +1432,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
-                            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && (
                             <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
                           )}
@@ -1485,10 +1485,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'p-4' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
                             style={[7, 9, 12].includes(p.id) ? { transform: 'scale(1.3)', transformOrigin: 'center center' } : undefined}
-                            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${pIsBubble && p.images[1] ? 'group-hover:opacity-0' : ''} ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain' : 'object-cover'}`} />
+                            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${pIsBubble && p.images[1] ? 'group-hover:opacity-0' : ''} ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && p.images[1] && (
                             <Image src={p.images[1]} alt={p.name} width={400} height={400}
                               style={[7, 9, 12].includes(p.id) ? { transform: 'scale(1.3)', transformOrigin: 'center center' } : undefined}
@@ -1561,7 +1561,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     return (
                       <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
                         <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
-                          <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Figurines' ? 'object-contain p-2' : 'object-cover'}`} />
+                          <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
