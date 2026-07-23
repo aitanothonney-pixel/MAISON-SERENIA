@@ -426,7 +426,7 @@ export const products: Product[] = [
   {
     id: 60,
     name: 'Meuble TV bois 150 cm',
-    category: 'Salon',
+    category: 'Meubles',
     price: 215,
     description: 'Meuble TV contemporain en bois avec 2 tiroirs et niche ouverte. Façades cannelées, piètement métal noir incliné — un banc bas élégant qui structure votre salon, compatible TV jusqu\'à 60 pouces.',
     images: [
@@ -444,7 +444,7 @@ export const products: Product[] = [
   {
     id: 61,
     name: 'Meuble TV extensible noir',
-    category: 'Salon',
+    category: 'Meubles',
     price: 150,
     description: 'Meuble TV au design extensible (146 à 180 cm), en rotin avec 2 tiroirs, compartiments ouverts et rangement à 2 portes. Finition noir chêne élégante, parfait pour structurer un salon contemporain.',
     images: [
@@ -461,7 +461,7 @@ export const products: Product[] = [
   {
     id: 62,
     name: 'Table à manger ovale en bois massif',
-    category: 'Salon',
+    category: 'Meubles',
     price: 215,
     description: 'Table à manger moderne au design épuré, plateau ovale en bois massif et piètement cannelé. Chaleureuse et élégante, elle accueille jusqu\'à 6 personnes. Disponible en Dark Brown et Light Brown.',
     images: [
@@ -477,7 +477,7 @@ export const products: Product[] = [
   {
     id: 63,
     name: 'Table à manger ovale en bois massif',
-    category: 'Salon',
+    category: 'Meubles',
     price: 215,
     description: 'Table à manger moderne au design épuré, plateau ovale en bois massif et piètement cannelé. Chaleureuse et élégante, elle accueille jusqu\'à 6 personnes. Coloris Dark Brown, teinte chaude et profonde.',
     images: [
@@ -494,7 +494,7 @@ export const products: Product[] = [
   {
     id: 64,
     name: 'Meuble TV industriel brun rustique',
-    category: 'Salon',
+    category: 'Meubles',
     price: 98,
     description: 'Banc TV de style industriel en brun rustique, pour téléviseur jusqu\'à 55 pouces. Compartiments ouverts, étagère réglable et structure métal noir robuste. Idéal pour salon ou chambre.',
     images: [
@@ -510,7 +510,7 @@ export const products: Product[] = [
   {
     id: 65,
     name: 'Table d\'appoint double couche',
-    category: 'Salon',
+    category: 'Meubles',
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Vert.',
     images: [
@@ -524,7 +524,7 @@ export const products: Product[] = [
   {
     id: 66,
     name: 'Table d\'appoint double couche',
-    category: 'Salon',
+    category: 'Meubles',
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Noir.',
     images: [
@@ -538,7 +538,7 @@ export const products: Product[] = [
   {
     id: 67,
     name: 'Table d\'appoint double couche',
-    category: 'Salon',
+    category: 'Meubles',
     price: 49,
     description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Blanc.',
     images: [
@@ -552,7 +552,7 @@ export const products: Product[] = [
   {
     id: 68,
     name: 'Table basse mobile noire',
-    category: 'Salon',
+    category: 'Meubles',
     price: 49,
     description: 'Table basse mobile multifonction en noir : support à thé, étagère de rangement et surface de jeu (échecs, cartes, Mahjong). Double plateau et roulettes pour la déplacer facilement dans tout le salon.',
     images: [
