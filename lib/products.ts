@@ -556,4 +556,18 @@ export const products: Product[] = [
     material: 'Métal et plateau laqué noir',
     details: ['Double plateau de rangement', 'Roulettes pour un déplacement facile', 'Multifonction : thé, jeux, appoint', 'Finition noire élégante'],
   },
+  // ── Figurines : Sculpture artistique en résine ───────────────────────────────
+  {
+    id: 69,
+    name: 'Sculpture artistique en résine bleue',
+    category: 'Figurines',
+    price: 250,
+    description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris gris bleuté, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Sculpture verticale sur socle',
+    material: 'Résine artistique, sphère cristal, socle laqué',
+    details: ['Design abstrait new classical', 'Coloris gris bleuté', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
+  },
 ];
