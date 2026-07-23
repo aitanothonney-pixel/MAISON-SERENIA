@@ -391,4 +391,22 @@ export const products: Product[] = [
     material: 'Silicone, acier inoxydable doré',
     details: ['Technologie ultrasons', 'Silicone souple hypoallergénique', 'Rechargeable USB-C', 'Coloris Rose'],
   },
+  // ── Salon : Meuble TV bois ───────────────────────────────────────────────────
+  {
+    id: 60,
+    name: 'Meuble TV bois 150 cm',
+    category: 'Salon',
+    price: 215,
+    description: 'Meuble TV contemporain en bois avec 2 tiroirs et niche ouverte. Façades cannelées, piètement métal noir incliné — un banc bas élégant qui structure votre salon, compatible TV jusqu\'à 60 pouces.',
+    images: [
+      'https://ae-pic-a1.aliexpress-media.com/kf/Sd599cd437f8049628dd6fe64a4c3b86d6.jpg_220x220q75.jpg_.avif',
+      'https://ae-pic-a1.aliexpress-media.com/kf/Sd686a2656ae1484cb652b29787fbb425T.jpg_220x220q75.jpg_.avif',
+      'https://ae-pic-a1.aliexpress-media.com/kf/S6fc07147d04e4dd6995ba7df812c3c79p.jpg_220x220q75.jpg_.avif',
+      'https://ae-pic-a1.aliexpress-media.com/kf/S18aecca070df4ba8bd75a8a2de03f1abr.jpg_220x220q75.jpg_.avif',
+      'https://ae-pic-a1.aliexpress-media.com/kf/Sd0c9d0a40e694ff98b7d48c3b136455cz.jpg_220x220q75.jpg_.avif',
+    ],
+    dimensions: 'L 150 × P 38 × H 44 cm',
+    material: 'Bois, façades cannelées, piètement métal noir',
+    details: ['2 tiroirs de rangement', 'Niche ouverte centrale', 'Compatible TV jusqu\'à 60 pouces', 'Piètement métal noir incliné'],
+  },
 ];
