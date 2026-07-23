@@ -1,4 +1,4 @@
-import { products, getVariantGroup, type Product } from './products';
+import { products, getVariantGroup, collapseVariantDuplicates, type Product } from './products';
 
 export interface CollectionMeta {
   slug: string;
@@ -51,5 +51,5 @@ export function getCollectionProducts(slug: string): Product[] {
   }
   const cat = SLUG_TO_CATEGORY[slug];
   if (!cat) return [];
-  return products.filter((p) => p.category === cat && p.category !== 'Été');
+  return collapseVariantDuplicates(products.filter((p) => p.category === cat && p.category !== 'Été'));
 }

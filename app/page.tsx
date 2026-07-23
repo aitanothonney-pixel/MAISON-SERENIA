@@ -13,7 +13,7 @@ import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { products, getVariantGroup } from '@/lib/products';
+import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1962,7 +1962,7 @@ export default function Home() {
   const curatedAll = useMemo(() => {
     // Classement curé : best-sellers d'abord, puis Salon, Bureau, Figurines.
     const categoryRank: Record<string, number> = { Salon: 0, Bureau: 1, Figurines: 2 };
-    return [...products.filter(p => p.category !== 'Été')].sort((a, b) => {
+    return collapseVariantDuplicates(products.filter(p => p.category !== 'Été')).sort((a, b) => {
       const aBest = bestsellerIds.indexOf(a.id);
       const bBest = bestsellerIds.indexOf(b.id);
       if (aBest !== -1 || bBest !== -1) {
@@ -1997,7 +1997,7 @@ export default function Home() {
             });
           })()
         : (() => {
-            const list = products.filter((p) => p.category === activeFilter && p.category !== 'Été');
+            const list = collapseVariantDuplicates(products.filter((p) => p.category === activeFilter && p.category !== 'Été'));
             // Dans le Salon, on affiche les produits Bubble en dernier
             if (activeFilter === 'Salon') {
               return list.sort((a, b) => {

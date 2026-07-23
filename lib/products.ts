@@ -44,7 +44,28 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 7, color: 'Vert', colorHex: '#4a7c59' },
     { productId: 9, color: 'Orange', colorHex: '#d4622a' },
   ],
+  'table-manger-ovale': [
+    { productId: 62, color: 'Light Brown', colorHex: '#c19a6b' },
+    { productId: 63, color: 'Dark Brown', colorHex: '#5a3a24' },
+  ],
 };
+
+// Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
+// carte dans les listes. Les produits Bubble restent affichés par couleur.
+export function collapseVariantDuplicates(list: Product[]): Product[] {
+  const seen = new Set<number>();
+  return list.filter((p) => {
+    if (p.name.includes('Bubble')) return true;
+    const grp = getVariantGroup(p.id);
+    if (grp) {
+      const first = grp[0].productId;
+      if (seen.has(first)) return false;
+      seen.add(first);
+      return p.id === first;
+    }
+    return true;
+  });
+}
 
 export function getVariantGroup(productId: number): ProductVariant[] | null {
   for (const group of Object.values(variantGroups)) {
@@ -444,6 +465,26 @@ export const products: Product[] = [
     ],
     dimensions: 'L 180 × l 90 cm',
     material: 'Bois massif, plateau ovale, piètement cannelé',
-    details: ['Plateau ovale en bois massif', 'Jusqu\'à 6 personnes', 'Design contemporain épuré', 'Coloris Dark Brown ou Light Brown'],
+    details: ['Plateau ovale en bois massif', 'Jusqu\'à 6 personnes', 'Design contemporain épuré', 'Coloris Light Brown'],
+  },
+  // ── Salon : Table à manger ovale — Dark Brown ────────────────────────────────
+  {
+    id: 63,
+    name: 'Table à manger ovale en bois massif',
+    category: 'Salon',
+    price: 215,
+    description: 'Table à manger moderne au design épuré, plateau ovale en bois massif et piètement cannelé. Chaleureuse et élégante, elle accueille jusqu\'à 6 personnes. Coloris Dark Brown, teinte chaude et profonde.',
+    images: [
+      'https://i.ibb.co/B2VB3r8B/Capture-d-e-cran-2026-07-23-a-14-35-40.png',
+      'https://i.ibb.co/Q7mcpzGW/Capture-d-e-cran-2026-07-23-a-14-35-51.png',
+      'https://i.ibb.co/4gYLRVP0/Capture-d-e-cran-2026-07-23-a-14-35-48.png',
+      'https://i.ibb.co/qMTxqsDx/Capture-d-e-cran-2026-07-23-a-14-36-33.png',
+      'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png',
+      'https://i.ibb.co/XZ3vYFnR/Capture-d-e-cran-2026-07-23-a-14-36-08.png',
+      'https://i.ibb.co/1Js6RdH8/Capture-d-e-cran-2026-07-23-a-14-36-00.png',
+    ],
+    dimensions: 'L 180 × l 90 cm',
+    material: 'Bois massif, plateau ovale, piètement cannelé',
+    details: ['Plateau ovale en bois massif', 'Jusqu\'à 6 personnes', 'Design contemporain épuré', 'Coloris Dark Brown'],
   },
 ];
