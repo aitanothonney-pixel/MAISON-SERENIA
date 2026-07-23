@@ -409,4 +409,18 @@ export const products: Product[] = [
     material: 'Bois, façades cannelées, piètement métal noir',
     details: ['2 tiroirs de rangement', 'Niche ouverte centrale', 'Compatible TV jusqu\'à 60 pouces', 'Piètement métal noir incliné'],
   },
+  // ── Salon : Meuble TV Rosahqnda noir ─────────────────────────────────────────
+  {
+    id: 61,
+    name: 'Meuble TV extensible noir',
+    category: 'Salon',
+    price: 150,
+    description: 'Meuble TV au design extensible (146 à 180 cm), en rotin avec 2 tiroirs, compartiments ouverts et rangement à 2 portes. Finition noir chêne élégante, parfait pour structurer un salon contemporain.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'L 146–180 × P 30 × H 44 cm',
+    material: 'Aggloméré et MDF, façades rotin, coloris noir/chêne',
+    details: ['Design extensible 146 à 180 cm', '2 tiroirs + rangement 2 portes', 'Compartiments ouverts', 'Façades en rotin tressé'],
+  },
 ];
