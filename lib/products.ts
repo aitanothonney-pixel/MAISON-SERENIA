@@ -434,9 +434,9 @@ export const products: Product[] = [
     price: 215,
     description: 'Table à manger moderne au design épuré, plateau ovale en bois massif et piètement cannelé. Chaleureuse et élégante, elle accueille jusqu\'à 6 personnes. Disponible en Dark Brown et Light Brown.',
     images: [
+      'https://i.ibb.co/B2VB3r8B/Capture-d-e-cran-2026-07-23-a-14-35-40.png',
       'https://i.ibb.co/Q7mcpzGW/Capture-d-e-cran-2026-07-23-a-14-35-51.png',
       'https://i.ibb.co/4gYLRVP0/Capture-d-e-cran-2026-07-23-a-14-35-48.png',
-      'https://i.ibb.co/B2VB3r8B/Capture-d-e-cran-2026-07-23-a-14-35-40.png',
       'https://i.ibb.co/qMTxqsDx/Capture-d-e-cran-2026-07-23-a-14-36-33.png',
       'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png',
       'https://i.ibb.co/XZ3vYFnR/Capture-d-e-cran-2026-07-23-a-14-36-08.png',
