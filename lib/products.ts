@@ -57,6 +57,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 70, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 69, color: 'Bleu', colorHex: '#4a6b8a' },
   ],
+  'vase-ceramique-duo': [
+    { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
+    { productId: 73, color: 'Noir', colorHex: '#1a1a1a' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -605,5 +609,33 @@ export const products: Product[] = [
     dimensions: 'Vase d\'angle décoratif',
     material: 'Céramique blanche mate, fait main',
     details: ['Style nordique, forme coquille', 'Fait main, finition blanc mat', 'Motifs inspirés du jardin', 'Pièce décorative sculpturale'],
+  },
+  // ── Décorations : Vase céramique minimaliste — Blanc ─────────────────────────
+  {
+    id: 72,
+    name: 'Vase céramique minimaliste',
+    category: 'Décorations',
+    price: 49,
+    description: 'Vase en céramique au design moderne et minimaliste, forme sculpturale arrondie. Parfait pour un arrangement floral ou en pièce décorative seule dans le salon. Artisanat soigné, finition mate. Coloris Blanc.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Vase décoratif moderne',
+    material: 'Céramique finition mate',
+    details: ['Design moderne minimaliste', 'Forme sculpturale arrondie', 'Idéal fleurs séchées ou déco', 'Coloris Blanc'],
+  },
+  // ── Décorations : Vase céramique minimaliste — Noir ──────────────────────────
+  {
+    id: 73,
+    name: 'Vase céramique minimaliste',
+    category: 'Décorations',
+    price: 49,
+    description: 'Vase en céramique au design moderne et minimaliste, forme sculpturale arrondie. Parfait pour un arrangement floral ou en pièce décorative seule dans le salon. Artisanat soigné, finition mate. Coloris Noir.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Vase décoratif moderne',
+    material: 'Céramique finition mate',
+    details: ['Design moderne minimaliste', 'Forme sculpturale arrondie', 'Idéal fleurs séchées ou déco', 'Coloris Noir'],
   },
 ];
