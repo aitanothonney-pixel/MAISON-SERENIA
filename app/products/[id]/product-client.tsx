@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
+import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
@@ -864,7 +865,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             <Link href="/" className="hover:text-black transition-colors">Accueil</Link>
             <ChevronRight className="w-3 h-3" />
             <Link
-              href={product.category === 'Été' ? '/#section-ete' : `/#section-salon`}
+              href={`/collections/${categoryToSlug(product.category)}`}
               className="hover:text-black transition-colors"
             >
               {product.category}
