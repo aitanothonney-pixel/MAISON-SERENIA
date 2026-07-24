@@ -51,10 +51,6 @@ const FAQ_DATA: FaqGroup[] = [
         a: 'Nous acceptons les cartes Visa, Mastercard, American Express, ainsi que le paiement via PayPal. Tous les paiements sont sécurisés par chiffrement SSL.',
       },
       {
-        q: 'Puis-je payer en plusieurs fois ?',
-        a: 'Oui, nous proposons le paiement en 3 ou 4 fois sans frais via Alma pour les commandes à partir de 150 €, disponible au moment du paiement.',
-      },
-      {
         q: 'Mes données bancaires sont-elles sécurisées ?',
         a: 'Absolument. Nous ne stockons aucune donnée bancaire. Toutes les transactions passent par des prestataires de paiement certifiés PCI-DSS.',
       },
