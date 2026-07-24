@@ -65,7 +65,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     return sum + packs * Math.max(0, trioPrice - BUNDLE_PRICE);
   }, 0);
 
-  const total = subtotal - packDiscount;
+  const merchandise = subtotal - packDiscount;
+  // Livraison offerte dès 60.–, sinon frais de port fixes
+  const FREE_SHIPPING_THRESHOLD = 60;
+  const SHIPPING_FEE = 8.50;
+  const shipping = merchandise > 0 && merchandise < FREE_SHIPPING_THRESHOLD ? SHIPPING_FEE : 0;
+  const total = merchandise + shipping;
 
   const goShopping = () => {
     handleClose();
@@ -479,7 +484,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500 pt-1">
                           <Package className="w-3.5 h-3.5" />
-                          <span>Expédition estimée : 3 à 6 semaines · Livraison offerte</span>
+                          <span>Expédition estimée : 3 à 6 semaines</span>
                         </div>
                       </div>
                       <button
@@ -510,8 +515,17 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   )}
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Livraison</span>
-                    <span className="text-sm text-neutral-600">Gratuite</span>
+                    {shipping === 0 ? (
+                      <span className="text-sm text-emerald-600 font-medium">Offerte</span>
+                    ) : (
+                      <span className="text-sm text-neutral-600 price-luxe">{shipping.toLocaleString('fr-FR')} €</span>
+                    )}
                   </div>
+                  {shipping > 0 && (
+                    <p className="text-[10px] text-neutral-400 -mt-1">
+                      Plus que {(FREE_SHIPPING_THRESHOLD - merchandise).toLocaleString('fr-FR')} € pour la livraison offerte
+                    </p>
+                  )}
                 </div>
 
                 <div className="px-6">

@@ -38,10 +38,6 @@ const FAQ_DATA: FaqGroup[] = [
         a: 'Nous faisons tout notre possible pour que les photographies reflètent fidèlement les produits. Il peut toutefois exister de légères variations selon la calibration de votre écran.',
       },
       {
-        q: 'Proposez-vous des pièces sur-mesure ?',
-        a: 'Pour certaines collections de mobilier, une personnalisation de dimensions ou de finitions est possible. Contactez notre service client pour obtenir un devis.',
-      },
-      {
         q: 'Comment entretenir mes articles ?',
         a: "Chaque produit est livré avec une notice d'entretien adaptée. Des conseils généraux sont également disponibles sur notre blog.",
       },
