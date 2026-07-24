@@ -179,7 +179,13 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="flex items-center gap-1">
                   {indicatorSteps.map((s, i) => (
                     <div key={s.label} className="flex items-center gap-1 flex-1 last:flex-none">
-                      <div className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'}`}>
+                      <button
+                        type="button"
+                        onClick={() => { if (i < stepIndex) setStep((['delivery', 'payment'] as Step[])[i]); }}
+                        disabled={i >= stepIndex}
+                        className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'} ${i < stepIndex ? 'cursor-pointer hover:opacity-70' : 'cursor-default'}`}
+                        aria-label={i < stepIndex ? `Revenir à l'étape ${s.label}` : s.label}
+                      >
                         <div
                           className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                             i < stepIndex
@@ -193,7 +199,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                           {i < stepIndex ? <Check className="w-3 h-3" /> : s.icon}
                         </div>
                         <span>{s.label}</span>
-                      </div>
+                      </button>
                       {i < indicatorSteps.length - 1 && (
                         <div
                           className="flex-1 h-px transition-colors duration-300 bg-neutral-200"

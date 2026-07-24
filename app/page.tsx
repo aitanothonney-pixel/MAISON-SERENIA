@@ -1712,52 +1712,43 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
             |
             <Link href="/mentions-legales" className="hover:text-white transition-colors mx-1">Mentions légales</Link>
           </p>
-          <div className="flex items-center gap-3 flex-wrap justify-center">
+          <div className="flex items-center gap-2.5 flex-wrap justify-center">
             {/* Visa */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#1A1F71"/>
-              <path d="M19.5 22H16.6L18.4 10H21.3L19.5 22Z" fill="white"/>
-              <path d="M29.7 10.3C29.1 10.1 28.1 9.9 26.9 9.9C24 9.9 21.9 11.4 21.9 13.6C21.9 15.2 23.4 16.1 24.5 16.6C25.6 17.1 26 17.5 26 18C26 18.8 25 19.1 24.1 19.1C22.8 19.1 22.1 18.9 21 18.4L20.6 18.2L20.1 21C20.8 21.3 22.1 21.6 23.4 21.6C26.5 21.6 28.5 20.1 28.5 17.7C28.5 16.4 27.7 15.4 25.9 14.6C24.9 14.1 24.3 13.8 24.3 13.2C24.3 12.7 24.9 12.2 26.1 12.2C27.1 12.2 27.8 12.4 28.4 12.6L28.7 12.7L29.7 10.3Z" fill="white"/>
-              <path d="M33.4 17.7L34.5 14.7C34.5 14.7 34.8 13.9 35 13.4L35.2 14.6L35.9 17.7H33.4ZM38 10H35.7C35 10 34.4 10.2 34.1 10.9L29.7 22H32.8L33.4 20.3H37.1L37.5 22H40.2L38 10Z" fill="white"/>
-              <path d="M14.4 10L11.5 18.2L11.2 16.7C10.6 14.8 8.8 12.7 6.8 11.7L9.5 22H12.6L17.5 10H14.4Z" fill="white"/>
-              <path d="M8.5 10H3.8L3.7 10.3C7.3 11.2 9.8 13.3 10.8 16L9.8 11C9.6 10.3 9.1 10 8.5 10Z" fill="#F9A51A"/>
-            </svg>
+            <div className="h-7 w-11 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-[#1A1F71] text-[13px] font-bold italic tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>VISA</span>
+            </div>
             {/* Mastercard */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#252525"/>
-              <circle cx="18" cy="16" r="8" fill="#EB001B"/>
-              <circle cx="30" cy="16" r="8" fill="#F79E1B"/>
-              <path d="M24 9.8A8 8 0 0 1 27.5 16 8 8 0 0 1 24 22.2 8 8 0 0 1 20.5 16 8 8 0 0 1 24 9.8Z" fill="#FF5F00"/>
-            </svg>
+            <div className="h-7 w-11 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+              <span className="relative inline-block w-6 h-4">
+                <span className="absolute left-0 top-0 w-4 h-4 rounded-full bg-[#EB001B]" />
+                <span className="absolute right-0 top-0 w-4 h-4 rounded-full bg-[#F79E1B] mix-blend-multiply" />
+              </span>
+            </div>
             {/* PayPal */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#F7F7F7"/>
-              <path d="M32.3 11.2c.1-.7 0-1.2-.4-1.7-.5-.5-1.3-.8-2.4-.8h-4.1c-.3 0-.5.2-.6.5l-1.7 10.8c0 .2.1.4.3.4h2.4l.6-3.8v.1c.1-.3.3-.5.6-.5h1.3c2.5 0 4.5-1 5-4 .2-.8.1-1.5-.1-2Z" fill="#009EE3"/>
-              <path d="M19.3 11.2c.1-.7 0-1.2-.4-1.7C18.4 9 17.6 8.7 16.5 8.7h-4.1c-.3 0-.5.2-.6.5L10.1 20c0 .2.1.4.3.4H13l.7-4.4.6-3.8c.1-.3.3-.5.6-.5H16c2.1 0 3.7-.9 4.2-3.2.3-1 .1-1.7 0-2.1.3.2.8.5 1 .8Z" fill="#113984"/>
-              <path d="M20.3 13.3c-.1.4-.3.8-.5 1.1-.7 1.7-2.3 2.3-4.5 2.3h-1.1c-.3 0-.5.2-.6.5l-.7 4.4-.2 1.2c0 .2.1.3.3.3h2.4c.3 0 .5-.2.5-.4v-.1l.4-2.7v-.1c0-.3.2-.4.5-.4h.3c2.1 0 3.8-.9 4.2-3.4.2-1 .1-1.9-.5-2.5-.2-.1-.3-.2-.5-.2Z" fill="#009EE3"/>
-            </svg>
+            <div className="h-7 px-2.5 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-[12px] font-bold italic" style={{ fontFamily: 'Arial, sans-serif' }}>
+                <span className="text-[#003087]">Pay</span><span className="text-[#009CDE]">Pal</span>
+              </span>
+            </div>
             {/* Apple Pay */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#000"/>
-              <path d="M17.3 12.1c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1.1-.4.5-.8 1.3-.7 2.1.8.1 1.5-.4 2-1ZM18 13.2c-1.1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6c-1.1 0-2.2.7-2.7 1.7-1.2 2-.3 5 .8 6.6.6.8 1.2 1.7 2.1 1.7.8 0 1.1-.5 2.1-.5 1 0 1.2.5 2.1.5.9 0 1.5-.8 2.1-1.7.6-.9.9-1.8.9-1.8s-1.7-.7-1.7-2.5c0-1.6 1.3-2.3 1.3-2.3s-.7-1.7-2.3-1.7ZM26.8 10.4h-2.4c-.1 0-.3.1-.3.3v10.8c0 .2.1.3.3.3h1.2c.2 0 .3-.1.3-.3v-3.4h1.1c2 0 3.3-1 3.3-3 0-1.9-1.3-2.7-3.5-2.7Zm.2 4.5h-.9v-3.2h.9c1.1 0 1.7.5 1.7 1.6 0 1.1-.6 1.6-1.7 1.6ZM33 16.2c-.7 0-1.1.3-1.4.8l-.3-1.2v-.1h-.9c-.1 0-.2.1-.2.2v6.3c0 .1.1.2.2.2h1.1c.1 0 .2-.1.2-.2V20c.3.4.8.7 1.4.7 1.3 0 2.1-1.1 2.1-2.7-.1-1.5-.9-1.8-2.2-1.8Zm-.3 3.9c-.7 0-1.1-.5-1.1-1.3 0-.8.4-1.3 1.1-1.3.6 0 1 .5 1 1.3 0 .8-.4 1.3-1 1.3Z" fill="white"/>
-            </svg>
+            <div className="h-7 px-2.5 rounded bg-black flex items-center justify-center gap-0.5 opacity-90 hover:opacity-100 transition-opacity">
+              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="white"><path d="M17 13.5c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.7-1 2.4-2c.7-1.1 1-2.2 1-2.3-.1 0-2.3-.9-2.3-3.2Zm-2-6c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.2 1.1-.5.6-.9 1.4-.8 2.3.9.1 1.7-.4 2.2-1Z"/></svg>
+              <span className="text-white text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
+            </div>
             {/* Google Pay */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#F7F7F7"/>
-              <path d="M23.5 16.7v2.9h-.9v-7.2h2.5c.6 0 1.2.2 1.6.6.4.4.7.9.7 1.5s-.2 1.1-.7 1.5c-.4.4-1 .6-1.6.6l-1.6.1Zm0-3.5v2.7h1.6c.4 0 .7-.1.9-.4.3-.2.4-.5.4-.9s-.1-.7-.4-.9c-.3-.2-.6-.4-.9-.4l-1.6-.1ZM29 15c.7 0 1.2.2 1.6.5.4.3.6.8.6 1.4v2.9H30v-.7h-.1c-.4.5-.9.8-1.5.8-.5 0-1-.2-1.4-.5-.4-.3-.5-.7-.5-1.2 0-.5.2-.9.5-1.2.4-.3.9-.4 1.5-.4.5 0 1 .1 1.3.3v-.2c0-.3-.1-.6-.4-.8-.3-.2-.6-.3-.9-.3-.5 0-.9.2-1.2.6l-.8-.5c.5-.7 1.2-1 2-.7Zm-1.2 3.5c0 .2.1.4.3.5.2.1.4.2.6.2.3 0 .7-.1.9-.4.3-.3.4-.6.4-.9-.3-.2-.6-.3-1.1-.3-.3 0-.6.1-.8.3-.2.1-.3.4-.3.6ZM35.7 15.1l-3 6.9h-.9l1.1-2.4-1.9-4.5h1l1.4 3.4 1.3-3.4h1Z" fill="#3C4043"/>
-              <path d="M20.1 16.3c0-.3 0-.5-.1-.8h-3.7v1.5h2.1c-.1.5-.4.9-.8 1.2v1h1.3c.7-.7 1.2-1.7 1.2-2.9Z" fill="#4285F4"/>
-              <path d="M16.3 20.2c1.1 0 2-.4 2.7-1l-1.3-1c-.4.3-.9.4-1.4.4-1 0-1.9-.7-2.2-1.7h-1.3v1c.7 1.4 2.1 2.3 3.5 2.3Z" fill="#34A853"/>
-              <path d="M14.1 16.9c-.2-.5-.2-1 0-1.5v-1h-1.3c-.6 1.2-.6 2.6 0 3.8l1.3-1.3Z" fill="#FBBC04"/>
-              <path d="M16.3 13.7c.6 0 1.1.2 1.5.6l1.1-1.1c-.7-.7-1.6-1-2.6-1-1.4 0-2.8.9-3.5 2.3l1.3 1c.3-1 1.2-1.8 2.2-1.8Z" fill="#EA4335"/>
-            </svg>
+            <div className="h-7 px-2.5 rounded bg-white flex items-center justify-center gap-1 opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>
+                <span className="text-[#4285F4]">G</span><span className="text-[#EA4335]">o</span><span className="text-[#FBBC04]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#34A853]">l</span><span className="text-[#EA4335]">e</span>
+              </span>
+              <span className="text-[#5F6368] text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
+            </div>
             {/* Amex */}
-            <svg viewBox="0 0 48 32" className="h-7 w-auto opacity-60 hover:opacity-100 transition-opacity" xmlns="http://www.w3.org/2000/svg">
-              <rect width="48" height="32" rx="4" fill="#2557D6"/>
-              <path d="M8 14l-1.5 4h3L8 14ZM9.5 20H6.5l-.5 1.5H4l3-8h2l3 8h-2l-.5-1.5ZM14.5 12.5l1.5 4 1.5-4H20v8h-2v-5.5l-1.5 4h-1l-1.5-4V20.5h-2v-8h2.5ZM24 12.5v8h-2v-8h2ZM27.5 12.5l3 5v-5h2v8h-2l-3-5v5h-2v-8h2ZM37 17.5v1.5h4v1.5h-4v.5h4v1.5h-6v-8h6v1.5h-4v1.5h4v.5h-4Z" fill="white"/>
-            </svg>
+            <div className="h-7 w-11 rounded bg-[#2E77BC] flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-white text-[10px] font-bold tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>AMEX</span>
+            </div>
             {/* Klarna */}
-            <div className="h-7 px-3 rounded flex items-center justify-center bg-[#FFB3C7] opacity-60 hover:opacity-100 transition-opacity">
-              <span className="text-black text-[11px] font-bold tracking-tight">Klarna</span>
+            <div className="h-7 px-3 rounded flex items-center justify-center bg-[#FFB3C7] opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-black text-[11px] font-bold tracking-tight">Klarna.</span>
             </div>
           </div>
         </div>
