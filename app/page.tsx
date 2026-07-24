@@ -418,7 +418,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   <div className="p-4">
                     {!searchQ && (
                       <div className="flex flex-wrap gap-2 mb-3">
-                        {['Canapé', 'Fauteuil', 'Bubble', 'Figurine', 'Été'].map((s) => (
+                        {['Canapé', 'Meuble', 'Table', 'Bubble', 'Vase', 'Été'].map((s) => (
                           <button
                             key={s}
                             onClick={() => setSearchQ(s)}
