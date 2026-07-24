@@ -52,5 +52,16 @@ export function getCollectionProducts(slug: string): Product[] {
   }
   const cat = SLUG_TO_CATEGORY[slug];
   if (!cat) return [];
-  return collapseVariantDuplicates(products.filter((p) => p.category === cat && p.category !== 'Été'));
+  const list = collapseVariantDuplicates(products.filter((p) => p.category === cat && p.category !== 'Été'));
+  // Dans les Décorations, on affiche les figurines (KAWS, Bearbrick) en dernier
+  if (cat === 'Décorations') {
+    const isFig = (n: string) => n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine');
+    return [...list].sort((a, b) => {
+      const aF = isFig(a.name) ? 1 : 0;
+      const bF = isFig(b.name) ? 1 : 0;
+      if (aF !== bF) return aF - bF;
+      return a.id - b.id;
+    });
+  }
+  return list;
 }
