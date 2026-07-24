@@ -330,6 +330,29 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
   const searchWrapRef = useRef<HTMLDivElement>(null);
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem('recent-searches') || '[]');
+      if (Array.isArray(stored)) setRecentSearches(stored);
+    } catch { /* ignore */ }
+  }, []);
+
+  const saveSearch = (term: string) => {
+    const t = term.trim();
+    if (t.length < 2) return;
+    setRecentSearches((prev) => {
+      const next = [t, ...prev.filter((s) => s.toLowerCase() !== t.toLowerCase())].slice(0, 6);
+      try { localStorage.setItem('recent-searches', JSON.stringify(next)); } catch { /* ignore */ }
+      return next;
+    });
+  };
+
+  const clearRecentSearches = () => {
+    setRecentSearches([]);
+    try { localStorage.removeItem('recent-searches'); } catch { /* ignore */ }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > (hasBar ? 76 : 40));
@@ -394,6 +417,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 value={searchQ}
                 onFocus={() => setSearchFocused(true)}
                 onChange={(e) => { setSearchQ(e.target.value); setSearchFocused(true); }}
+                onKeyDown={(e) => { if (e.key === 'Enter') saveSearch(searchQ); }}
                 className={`w-52 xl:w-64 text-xs outline-none bg-transparent ${
                   scrolled ? 'text-black placeholder:text-neutral-400' : 'text-white placeholder:text-white/60'
                 }`}
@@ -416,6 +440,26 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   className="absolute top-full left-0 mt-2 w-[420px] max-w-[92vw] bg-white border border-neutral-100 shadow-xl z-50"
                 >
                   <div className="p-4">
+                    {!searchQ && recentSearches.length > 0 && (
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">Recherches récentes</p>
+                          <button onClick={clearRecentSearches} className="text-[10px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {recentSearches.map((s) => (
+                            <button
+                              key={s}
+                              onClick={() => { setSearchQ(s); saveSearch(s); }}
+                              className="flex items-center gap-1.5 text-[11px] bg-neutral-100 rounded-full px-3 py-1 hover:bg-neutral-200 transition-colors text-neutral-700"
+                            >
+                              <Search className="w-3 h-3 text-neutral-400" />
+                              {s}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     {!searchQ && (
                       <div className="flex flex-wrap gap-2 mb-3">
                         {['Canapé', 'Meuble', 'Table', 'Bubble', 'Vase', 'Été'].map((s) => (
@@ -452,7 +496,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                               <Link
                                 key={p.id}
                                 href={`/products/${p.id}`}
-                                onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                                onClick={() => { saveSearch(searchQ); setSearchFocused(false); setSearchQ(''); }}
                                 className={`flex items-center gap-3 p-2 transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
                               >
                                 <div className={`w-11 h-11 overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été' ? 'p-1' : ''}`}>
