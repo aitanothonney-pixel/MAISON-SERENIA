@@ -1236,6 +1236,7 @@ function SummerProductsSection() {
 
 function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const { addItem } = useCart();
+  const [addedKey, setAddedKey] = useState<string | null>(null);
 
   const bundles = BUNDLES;
 
@@ -1244,6 +1245,14 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
     addItem(fauteuilId);
     addItem(figurineId);
     onCartOpen();
+  };
+
+  const handleAdd = (slug: string, canapeId: number, fauteuilId: number, figurineId: number) => {
+    addItem(canapeId);
+    addItem(fauteuilId);
+    addItem(figurineId);
+    setAddedKey(slug);
+    setTimeout(() => setAddedKey((k) => (k === slug ? null : k)), 2000);
   };
 
   return (
@@ -1375,6 +1384,12 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     className="w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors"
                   >
                     Acheter cet ensemble
+                  </button>
+                  <button
+                    onClick={() => handleAdd(slug, canapeId, fauteuilId, figurineId)}
+                    className={`w-full text-xs font-bold tracking-widest uppercase py-3.5 mt-2.5 border transition-colors ${addedKey === slug ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-black text-black hover:bg-black hover:text-white'}`}
+                  >
+                    {addedKey === slug ? 'Ajouté au panier ✓' : 'Ajouter au panier'}
                   </button>
                   <Link
                     href={`/packs/${slug}`}
