@@ -104,7 +104,7 @@ export default function ConfidentialitePage() {
         <Section title="7. Contact">
           <p>
             Pour toute question relative à vos données personnelles, écrivez-nous à{' '}
-            <strong>[À COMPLÉTER — email de contact]</strong> ou via notre{' '}
+            <strong>maisonserenia@gmail.com</strong> ou via notre{' '}
             <Link href="/contact" className="text-black underline hover:no-underline">
               page contact
             </Link>
@@ -113,7 +113,7 @@ export default function ConfidentialitePage() {
         </Section>
 
         <p className="text-xs text-neutral-400 pt-8 border-t border-neutral-100">
-          Dernière mise à jour : [À COMPLÉTER — date]
+          Dernière mise à jour : 24 juillet 2026
         </p>
       </div>
     </main>

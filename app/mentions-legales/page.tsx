@@ -47,7 +47,7 @@ export default function MentionsLegalesPage() {
             <li>Statut : <strong>[À COMPLÉTER — ex. entreprise individuelle / auto-entrepreneur]</strong></li>
             <li>Adresse : <strong>[À COMPLÉTER — adresse complète]</strong></li>
             <li>Numéro d&apos;immatriculation : <strong>[À COMPLÉTER — SIRET / IDE / numéro d&apos;entreprise]</strong></li>
-            <li>E-mail : <strong>[À COMPLÉTER — email de contact]</strong></li>
+            <li>E-mail : <strong>maisonserenia@gmail.com</strong></li>
           </ul>
         </Section>
 
@@ -99,7 +99,7 @@ export default function MentionsLegalesPage() {
         </Section>
 
         <p className="text-xs text-neutral-400 pt-8 border-t border-neutral-100">
-          Dernière mise à jour : [À COMPLÉTER — date]
+          Dernière mise à jour : 24 juillet 2026
         </p>
       </div>
     </main>
