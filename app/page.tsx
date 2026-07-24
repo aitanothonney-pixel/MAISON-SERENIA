@@ -986,7 +986,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Salon', 'Meubles', 'Décorations', 'Bubble', 'Été'];
+const filterCategories = ['Meubles', 'Salon', 'Décorations', 'Bubble', 'Été'];
 
 function ProductFilterBar({
   active,
@@ -1925,7 +1925,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 // ─── Cart Drawer ──────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [activeFilter, setActiveFilter] = useState('Salon');
+  const [activeFilter, setActiveFilter] = useState('Meubles');
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
