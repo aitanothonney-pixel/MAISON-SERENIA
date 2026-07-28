@@ -658,4 +658,18 @@ export const products: Product[] = [
     material: 'MDF durable, structure noire, façades bois chocolat',
     details: ['6 grands tiroirs de rangement', 'Structure noire, façades bois', 'MDF durable', 'Idéale chambre ou entrée'],
   },
+  // ── Meubles : Commode meuble TV long à tiroirs ───────────────────────────────
+  {
+    id: 75,
+    name: 'Commode meuble TV long à tiroirs',
+    category: 'Meubles',
+    price: 89,
+    description: 'Commode multifonction et meuble TV long, avec étagère de rangement ouverte et tiroirs en tissu. Sur roulettes pour un déplacement facile. Unité de rangement polyvalente pour la chambre comme pour le salon.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'Meuble TV long avec étagère',
+    material: 'Panneaux bois, tiroirs en tissu, roulettes',
+    details: ['5 tiroirs en tissu', 'Étagère de rangement ouverte', '4 roulettes pour déplacer facilement', 'Polyvalent chambre & salon'],
+  },
 ];
