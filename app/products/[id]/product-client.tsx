@@ -882,7 +882,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative aspect-square overflow-hidden rounded-2xl bg-neutral-50"
+                className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-50"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -985,16 +985,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               </AnimatePresence>
 
               {product.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
+                <div className="flex gap-2 flex-wrap">
                   {product.images.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setSelectedImage(i)}
-                      className={`relative aspect-square overflow-hidden rounded-xl transition-all duration-200 ${
-                        selectedImage === i ? 'ring-2 ring-black ring-offset-2' : 'opacity-60 hover:opacity-100'
+                      className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-neutral-50 transition-all duration-200 ${
+                        selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
                       }`}
                     >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill className="object-cover" />
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill className="object-contain p-1" />
                     </button>
                   ))}
                 </div>
