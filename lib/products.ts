@@ -663,7 +663,7 @@ export const products: Product[] = [
     id: 75,
     name: 'Commode meuble TV long à tiroirs',
     category: 'Meubles',
-    price: 89,
+    price: 200,
     description: 'Commode multifonction et meuble TV long, avec étagère de rangement ouverte et tiroirs en tissu. Sur roulettes pour un déplacement facile. Unité de rangement polyvalente pour la chambre comme pour le salon.',
     images: [
       'https://i.ibb.co/dwT4Jdkt/Capture-d-e-cran-2026-07-28-a-17-06-39.png',
