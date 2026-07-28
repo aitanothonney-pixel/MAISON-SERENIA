@@ -666,7 +666,11 @@ export const products: Product[] = [
     price: 89,
     description: 'Commode multifonction et meuble TV long, avec étagère de rangement ouverte et tiroirs en tissu. Sur roulettes pour un déplacement facile. Unité de rangement polyvalente pour la chambre comme pour le salon.',
     images: [
-      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+      'https://i.ibb.co/dwT4Jdkt/Capture-d-e-cran-2026-07-28-a-17-06-39.png',
+      'https://i.ibb.co/QF9bT2B6/Capture-d-e-cran-2026-07-28-a-17-06-56.png',
+      'https://i.ibb.co/dwQYzJc7/Capture-d-e-cran-2026-07-28-a-17-06-48.png',
+      'https://i.ibb.co/ZpbfLsNS/Capture-d-e-cran-2026-07-28-a-17-07-42.png',
+      'https://i.ibb.co/DHTCpCs4/Capture-d-e-cran-2026-07-28-a-17-07-30.png',
     ],
     dimensions: 'Meuble TV long avec étagère',
     material: 'Panneaux bois, tiroirs en tissu, roulettes',
