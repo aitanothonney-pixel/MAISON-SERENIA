@@ -21,6 +21,7 @@ import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { CartDrawer } from '@/components/ui/cart-drawer';
+import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -1730,13 +1731,23 @@ function NewsletterSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) setSubmitted(true);
+    if (!email.trim()) return;
+    try {
+      localStorage.setItem('welcome-email', email);
+      localStorage.setItem('welcome-discount', WELCOME_CODE);
+      localStorage.setItem('welcome-popup-seen', '1');
+      window.dispatchEvent(new Event('welcome-discount-updated'));
+    } catch { /* ignore */ }
+    setSubmitted(true);
   };
 
   return (
     <section className="w-full bg-black py-20 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <FadeInSection>
+          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#C9A96E]" style={{ border: '1px solid rgba(201,169,110,0.4)' }}>
+            <Gift className="w-3 h-3" /> −10% offerts à l&apos;inscription
+          </div>
           <h2
             className="text-3xl md:text-4xl text-white mb-4"
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontStyle: 'italic', fontWeight: 400 }}
@@ -1744,16 +1755,21 @@ function NewsletterSection() {
             Rejoignez l&apos;art de vivre Serenia
           </h2>
           <p className="text-neutral-400 text-sm mb-8 leading-relaxed">
-            Accédez en avant-première à nos collections exclusives, conseils déco et offres réservées aux membres.
+            Inscrivez-vous et recevez <span className="text-white font-medium">−10% sur votre première commande</span>, ainsi qu&apos;un accès en avant-première à nos collections exclusives et offres réservées aux membres.
           </p>
           {submitted ? (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-white text-base font-medium"
+              className="max-w-md mx-auto"
             >
-              Bienvenue&nbsp;! 🎉 Vérifiez votre email.
-            </motion.p>
+              <p className="text-white text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
+              <div className="flex items-center justify-center gap-3 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/10 px-4 py-3">
+                <span className="text-lg font-bold tracking-[0.15em] text-[#C9A96E]">{WELCOME_CODE}</span>
+                <span className="text-[11px] uppercase tracking-widest text-neutral-400">−10%</span>
+              </div>
+              <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
+            </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
@@ -1768,7 +1784,7 @@ function NewsletterSection() {
                 type="submit"
                 className="bg-white text-black font-medium text-sm px-6 py-3 rounded hover:bg-neutral-200 transition-colors whitespace-nowrap"
               >
-                S&apos;inscrire
+                Obtenir mes −10%
               </button>
             </form>
           )}
