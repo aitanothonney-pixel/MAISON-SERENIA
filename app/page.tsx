@@ -124,6 +124,17 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
     onSectionNav(section, filter);
   };
 
+  const [menuQ, setMenuQ] = useState('');
+  const menuMatches = (() => {
+    const q = menuQ.toLowerCase().trim();
+    if (q.length < 1) return [];
+    return products.filter((p) => {
+      const name = p.name.toLowerCase();
+      const cat = p.category.toLowerCase();
+      return name.includes(q) || cat.includes(q) || q.split(' ').every((w) => name.includes(w) || cat.includes(w));
+    }).slice(0, 8);
+  })();
+
   // Métadonnées connues par catégorie — toute nouvelle catégorie ajoutée au
   // catalogue apparaît automatiquement ici avec des valeurs par défaut.
   const categoryMeta: Record<string, { name?: string; desc: string; section: string; imgId?: number }> = {
@@ -205,6 +216,51 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
             {/* Scrollable content */}
             <div className="flex-1 overflow-y-auto">
+              {/* RECHERCHE */}
+              <div className="px-6 py-5 border-b border-neutral-100">
+                <div className="flex items-center gap-2 border border-neutral-200 px-3 py-2.5">
+                  <Search className="w-4 h-4 text-neutral-400 shrink-0" />
+                  <input
+                    type="text"
+                    value={menuQ}
+                    onChange={(e) => setMenuQ(e.target.value)}
+                    placeholder="Rechercher un produit…"
+                    className="w-full text-sm outline-none bg-transparent text-black placeholder:text-neutral-400"
+                  />
+                  {menuQ && (
+                    <button onClick={() => setMenuQ('')} aria-label="Effacer">
+                      <X className="w-3.5 h-3.5 text-neutral-400" />
+                    </button>
+                  )}
+                </div>
+                {menuMatches.length > 0 && (
+                  <div className="mt-3 space-y-1">
+                    {menuMatches.map((p) => {
+                      const promo = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                      return (
+                        <Link
+                          key={p.id}
+                          href={`/products/${p.id}`}
+                          onClick={onClose}
+                          className="flex items-center gap-3 p-2 hover:bg-neutral-50 transition-colors"
+                        >
+                          <div className="w-10 h-10 bg-neutral-50 border border-neutral-100 shrink-0 flex items-center justify-center overflow-hidden">
+                            <img src={p.images[0]} alt={p.name} className="w-full h-full object-contain p-0.5" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-black truncate">{p.name}</p>
+                            <p className="text-[10px] text-neutral-400">{p.category}</p>
+                          </div>
+                          <p className="text-sm font-bold text-black shrink-0">{promo.toLocaleString('fr-FR')} €</p>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+                {menuQ.trim().length >= 1 && menuMatches.length === 0 && (
+                  <p className="text-xs text-neutral-400 mt-3">Aucun produit trouvé.</p>
+                )}
+              </div>
               {/* ACCUEIL */}
               <div className="px-6 py-5 border-b border-neutral-100">
                 <Link
@@ -537,7 +593,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Favoris (opens wishlist) */}
           <button
             onClick={onWishlistOpen}
-            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 hidden sm:flex ${
+            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
               scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
             }`}
             aria-label="Favoris"
