@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans, Italiana, Cinzel } from 'next/font/google'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
+import { WelcomePopup } from '@/components/ui/welcome-popup'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
       <body>
         <AnnouncementBar>{children}</AnnouncementBar>
+        <WelcomePopup />
       </body>
     </html>
   )

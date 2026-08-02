@@ -1,0 +1,169 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Check, Copy, Sparkles } from 'lucide-react';
+
+const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
+export const WELCOME_CODE = 'BIENVENUE10';
+
+export function WelcomePopup() {
+  const [visible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [done, setDone] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    // Ne s'affiche pas si déjà vu ou déjà inscrit
+    try {
+      const seen = localStorage.getItem('welcome-popup-seen');
+      const already = localStorage.getItem('welcome-discount');
+      if (seen || already) return;
+    } catch { /* ignore */ }
+    const t = setTimeout(() => setVisible(true), 1800);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
+
+  const close = () => {
+    try { localStorage.setItem('welcome-popup-seen', '1'); } catch { /* ignore */ }
+    setVisible(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    try {
+      localStorage.setItem('welcome-email', email);
+      localStorage.setItem('welcome-discount', WELCOME_CODE);
+      localStorage.setItem('welcome-popup-seen', '1');
+      // Prévenir le panier (même onglet) que la remise est active
+      window.dispatchEvent(new Event('welcome-discount-updated'));
+    } catch { /* ignore */ }
+    setDone(true);
+  };
+
+  const copyCode = () => {
+    try { navigator.clipboard?.writeText(WELCOME_CODE); } catch { /* ignore */ }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={close}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 20 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md bg-white shadow-2xl overflow-hidden"
+          >
+            {/* Fine bordure dorée en haut */}
+            <div className="h-1 w-full" style={{ background: GOLD_GRADIENT }} />
+
+            <button
+              onClick={close}
+              className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors z-10"
+              aria-label="Fermer"
+            >
+              <X className="w-5 h-5" strokeWidth={1.5} />
+            </button>
+
+            {!done ? (
+              <div className="px-8 py-10 text-center">
+                <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6" style={{ color: '#A07840', border: '1px solid rgba(201,169,110,0.4)' }}>
+                  <Sparkles className="w-3 h-3" /> Offre de bienvenue
+                </div>
+
+                <h2 className="text-3xl font-serif text-black leading-tight mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  −10% sur votre<br />première commande
+                </h2>
+                <p className="text-sm text-neutral-500 leading-relaxed mb-7 max-w-xs mx-auto">
+                  Inscrivez-vous à la newsletter Maison Serenia et recevez immédiatement votre code de réduction de 10%.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <input
+                    type="email"
+                    required
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="votre@email.com"
+                    className="w-full border border-neutral-300 px-4 py-3.5 text-sm text-center outline-none focus:border-[#C9A96E] transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-transform hover:scale-[1.01]"
+                    style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
+                  >
+                    Je profite des −10%
+                  </button>
+                </form>
+
+                <button onClick={close} className="mt-4 text-[11px] text-neutral-400 hover:text-black transition-colors underline underline-offset-2">
+                  Non merci, je paie plein tarif
+                </button>
+              </div>
+            ) : (
+              <div className="px-8 py-10 text-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                  style={{ background: GOLD_GRADIENT }}
+                >
+                  <Check className="w-8 h-8 text-white" />
+                </motion.div>
+                <h2 className="text-2xl font-serif text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  Bienvenue chez Maison Serenia
+                </h2>
+                <p className="text-sm text-neutral-500 mb-6">
+                  Votre réduction est activée. Elle s&apos;appliquera automatiquement dans votre panier.
+                </p>
+
+                <button
+                  onClick={copyCode}
+                  className="w-full flex items-center justify-between gap-2 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/5 px-4 py-3.5 mb-6 group"
+                >
+                  <span className="text-lg font-bold tracking-[0.15em] text-[#A07840]">{WELCOME_CODE}</span>
+                  <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-neutral-500 group-hover:text-black transition-colors">
+                    {copied ? <><Check className="w-3.5 h-3.5" /> Copié</> : <><Copy className="w-3.5 h-3.5" /> Copier</>}
+                  </span>
+                </button>
+
+                <button
+                  onClick={close}
+                  className="w-full py-3.5 bg-black text-white text-[11px] font-semibold tracking-[0.25em] uppercase hover:bg-neutral-800 transition-colors"
+                >
+                  Découvrir la boutique
+                </button>
+              </div>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}

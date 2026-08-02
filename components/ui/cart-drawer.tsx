@@ -29,6 +29,20 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
   const [payLoading, setPayLoading] = useState(false);
   const [orderTotal, setOrderTotal] = useState(0);
+  const [welcomeActive, setWelcomeActive] = useState(false);
+
+  useEffect(() => {
+    const read = () => {
+      try { setWelcomeActive(!!localStorage.getItem('welcome-discount')); } catch { /* ignore */ }
+    };
+    read();
+    window.addEventListener('welcome-discount-updated', read);
+    window.addEventListener('storage', read);
+    return () => {
+      window.removeEventListener('welcome-discount-updated', read);
+      window.removeEventListener('storage', read);
+    };
+  }, []);
 
   const cartProducts = items.map((item) => {
     const product = products.find((p) => p.id === item.id);
@@ -65,7 +79,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     return sum + packs * Math.max(0, trioPrice - BUNDLE_PRICE);
   }, 0);
 
-  const merchandise = subtotal - packDiscount;
+  const afterPack = subtotal - packDiscount;
+  // Remise de bienvenue -10% (inscription newsletter)
+  const welcomeDiscount = welcomeActive && afterPack > 0 ? Math.round(afterPack * 0.10 * 100) / 100 : 0;
+  const merchandise = afterPack - welcomeDiscount;
   // Livraison offerte dès 60.–, sinon frais de port fixes
   const FREE_SHIPPING_THRESHOLD = 60;
   const SHIPPING_FEE = 8.50;
@@ -517,6 +534,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
                       <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Remise Pack</span>
                       <span className="text-lg font-bold text-[#A07840] price-luxe">−{packDiscount.toLocaleString('fr-FR')} €</span>
+                    </div>
+                  )}
+                  {welcomeDiscount > 0 && (
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Bienvenue −10%</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between">
