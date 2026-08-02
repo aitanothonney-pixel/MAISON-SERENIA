@@ -95,6 +95,9 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   const totalQty = cartProducts.reduce((sum, x) => sum + x.qty, 0);
   const subtotal = cartProducts.reduce((sum, x) => sum + x.price * x.qty, 0);
+  // Prix d'origine (avant la promo -30% des pièces Bubble) et économie correspondante
+  const originalSubtotal = cartProducts.reduce((sum, x) => sum + x.product.price * x.qty, 0);
+  const bubbleSavings = Math.round((originalSubtotal - subtotal) * 100) / 100;
 
   // Remise pack : chaque trio complet canapé+fauteuil+figurine est facturé au prix bundle
   const qtyOf = (id: number) => cartProducts.find((x) => x.id === id)?.qty ?? 0;
@@ -529,19 +532,37 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       </div>
                     )}
 
+                    {(bubbleSavings > 0 && welcomeDiscount > 0) && (
+                      <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
+                        <span className="text-[12px] text-[#A07840] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
+                      </div>
+                    )}
+
                     <div className="h-px bg-neutral-100" />
                     <div className="space-y-1.5">
+                      {(bubbleSavings > 0 || welcomeDiscount > 0) && (
+                        <div className="flex justify-between text-sm text-neutral-500">
+                          <span>Prix d’origine</span>
+                          <span>{originalSubtotal.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
+                      {bubbleSavings > 0 && (
+                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                          <span>Promotion −30%</span>
+                          <span>−{bubbleSavings.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
+                      {packDiscount > 0 && (
+                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                          <span>Remise Pack</span>
+                          <span>−{packDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
                       {welcomeDiscount > 0 && (
-                        <>
-                          <div className="flex justify-between text-sm text-neutral-500">
-                            <span>Sous-total</span>
-                            <span>{afterPack.toLocaleString('fr-FR')} €</span>
-                          </div>
-                          <div className="flex justify-between text-sm text-[#A07840] font-semibold">
-                            <span>Réduction −10%</span>
-                            <span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
-                          </div>
-                        </>
+                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                          <span>Code membre −10%</span>
+                          <span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
                       )}
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
@@ -633,9 +654,15 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
                 <div className="px-6 pt-4 pb-4 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Sous-total</span>
-                    <span className="text-sm text-neutral-600 price-luxe">{subtotal.toLocaleString('fr-FR')} €</span>
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">{bubbleSavings > 0 ? 'Prix d’origine' : 'Sous-total'}</span>
+                    <span className="text-sm text-neutral-600 price-luxe">{(bubbleSavings > 0 ? originalSubtotal : subtotal).toLocaleString('fr-FR')} €</span>
                   </div>
+                  {bubbleSavings > 0 && (
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Promotion −30%</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{bubbleSavings.toLocaleString('fr-FR')} €</span>
+                    </div>
+                  )}
                   {packDiscount > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
                       <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Remise Pack</span>

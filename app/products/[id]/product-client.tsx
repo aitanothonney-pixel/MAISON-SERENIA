@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, Gift } from 'lucide-react';
 import { products, getVariantGroup } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -164,7 +164,9 @@ function CheckoutDrawer({
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState(false);
 
-  const promoPrice = product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price;
+  const isBubble = product.name.includes('Bubble');
+  const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+  const bubbleDiscount = isBubble ? product.price - promoPrice : 0; // remise -30%
   const welcomeDiscount = welcomeActive ? Math.round(promoPrice * 0.10 * 100) / 100 : 0;
   const finalTotal = promoPrice - welcomeDiscount;
 
@@ -383,13 +385,25 @@ function CheckoutDrawer({
 
                     <div className="mb-4">{PromoField()}</div>
 
+                    {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
+                      <div className="flex items-center gap-2 mb-4 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
+                        <Gift className="w-4 h-4 text-[#A07840] shrink-0" />
+                        <span className="text-[12px] text-[#A07840] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                      </div>
+                    )}
+
                     <div className="space-y-2 mb-6 text-sm">
                       <div className="flex justify-between text-neutral-500">
-                        <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                        <span>Prix d&apos;origine</span><span>{product.price.toLocaleString('fr-FR')} €</span>
                       </div>
+                      {bubbleDiscount > 0 && (
+                        <div className="flex justify-between text-[#A07840] font-semibold">
+                          <span>Promotion −30%</span><span>−{bubbleDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-[#A07840] font-semibold">
-                          <span>Réduction −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>Code membre −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
                         </div>
                       )}
                       <div className="flex justify-between text-neutral-500">
@@ -607,17 +621,29 @@ function CheckoutDrawer({
 
                     {PromoField()}
 
+                    {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
+                      <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
+                        <Gift className="w-4 h-4 text-[#A07840] shrink-0" />
+                        <span className="text-[12px] text-[#A07840] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                      </div>
+                    )}
+
                     <div className="h-px bg-neutral-100" />
                     <div className="space-y-1.5">
+                      {(bubbleDiscount > 0 || welcomeDiscount > 0) && (
+                        <div className="flex justify-between text-sm text-neutral-500">
+                          <span>Prix d&apos;origine</span><span>{product.price.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
+                      {bubbleDiscount > 0 && (
+                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                          <span>Promotion −30%</span><span>−{bubbleDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
                       {welcomeDiscount > 0 && (
-                        <>
-                          <div className="flex justify-between text-sm text-neutral-500">
-                            <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
-                          </div>
-                          <div className="flex justify-between text-sm text-[#A07840] font-semibold">
-                            <span>Réduction −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
-                          </div>
-                        </>
+                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                          <span>Code membre −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
                       )}
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
