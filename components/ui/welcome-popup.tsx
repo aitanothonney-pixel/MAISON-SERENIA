@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Copy, Sparkles } from 'lucide-react';
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
-export const WELCOME_CODE = 'BIENVENUE10';
+export const WELCOME_CODE = 'MAISON SERENIA';
 
 export function WelcomePopup() {
   const [visible, setVisible] = useState(false);
