@@ -20,8 +20,21 @@ export function WelcomePopup() {
       const already = localStorage.getItem('welcome-discount');
       if (seen || already) return;
     } catch { /* ignore */ }
-    const t = setTimeout(() => setVisible(true), 1800);
-    return () => clearTimeout(t);
+
+    let shown = false;
+    const trigger = () => {
+      if (shown) return;
+      // Apparait dès que l'utilisateur commence à défiler pour découvrir le site
+      if (window.scrollY > 350) {
+        shown = true;
+        setVisible(true);
+        window.removeEventListener('scroll', trigger);
+      }
+    };
+    window.addEventListener('scroll', trigger, { passive: true });
+    // Filet de sécurité : si le visiteur ne défile pas, on affiche après 12 s
+    const fallback = setTimeout(() => { if (!shown) { shown = true; setVisible(true); window.removeEventListener('scroll', trigger); } }, 12000);
+    return () => { window.removeEventListener('scroll', trigger); clearTimeout(fallback); };
   }, []);
 
   useEffect(() => {
