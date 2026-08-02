@@ -236,7 +236,13 @@ function CheckoutDrawer({
                 <div className="flex items-center gap-1">
                   {steps.slice(0, 3).map((s, i) => (
                     <div key={s.key} className="flex items-center gap-1 flex-1">
-                      <div className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'}`}>
+                      <button
+                        type="button"
+                        onClick={() => { if (i < stepIndex) setStep(s.key); }}
+                        disabled={i >= stepIndex}
+                        aria-label={i < stepIndex ? `Revenir à l'étape ${s.label}` : s.label}
+                        className={`flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors duration-300 ${i <= stepIndex ? 'text-black' : 'text-neutral-300'} ${i < stepIndex ? 'cursor-pointer hover:opacity-70' : 'cursor-default'}`}
+                      >
                         <div
                           className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
                             i < stepIndex
@@ -250,7 +256,7 @@ function CheckoutDrawer({
                           {i < stepIndex ? <Check className="w-3 h-3" /> : s.icon}
                         </div>
                         <span className="hidden sm:block">{s.label}</span>
-                      </div>
+                      </button>
                       {i < 2 && (
                         <div
                           className="flex-1 h-px transition-colors duration-300 bg-neutral-200"
