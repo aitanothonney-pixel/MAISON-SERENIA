@@ -1,63 +1,61 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star, ChevronRight } from 'lucide-react';
+import { Star } from 'lucide-react';
 import type { Product } from '@/lib/products';
 
 export function CollectionCard({ product }: { product: Product }) {
   const [idx, setIdx] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
   const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
   const hasMultiple = product.images.length > 1;
 
-  const go = (e: React.MouseEvent, dir: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIdx((idx + dir + product.images.length) % product.images.length);
+  const onScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const i = Math.round(el.scrollLeft / el.clientWidth);
+    if (i !== idx) setIdx(i);
   };
 
   return (
     <Link href={`/products/${product.id}`} className="group block border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500">
-      <div className={`relative aspect-[4/3] overflow-hidden bg-neutral-50 ${contain ? 'p-4' : ''}`}>
-        <Image
-          key={idx}
-          src={product.images[idx]}
-          alt={product.name}
-          fill
-          className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
-        />
+      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-50">
+        {/* Carrousel défilable horizontalement */}
+        <div
+          ref={scrollRef}
+          onScroll={onScroll}
+          className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {product.images.map((img, i) => (
+            <div key={i} className={`relative w-full h-full flex-shrink-0 snap-center ${contain ? 'p-4' : ''}`}>
+              <Image
+                src={img}
+                alt={`${product.name} ${i + 1}`}
+                fill
+                className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
+              />
+            </div>
+          ))}
+        </div>
+
         {isBubble && (
-          <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 z-10">
+          <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 z-10 pointer-events-none">
             −30%
           </div>
         )}
 
+        {/* Points indicateurs */}
         {hasMultiple && (
-          <>
-            <button
-              onClick={(e) => go(e, -1)}
-              aria-label="Image précédente"
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow opacity-0 group-hover:opacity-100 hover:bg-white transition-all z-10"
-            >
-              <ChevronRight className="w-4 h-4 rotate-180" />
-            </button>
-            <button
-              onClick={(e) => go(e, 1)}
-              aria-label="Image suivante"
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-black shadow opacity-0 group-hover:opacity-100 hover:bg-white transition-all z-10"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-            {/* Points indicateurs */}
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-              {product.images.map((_, i) => (
-                <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-black' : 'bg-black/25'}`} />
-              ))}
-            </div>
-          </>
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 pointer-events-none">
+            {product.images.map((_, i) => (
+              <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-black' : 'bg-black/25'}`} />
+            ))}
+          </div>
         )}
       </div>
       <div className="p-4">
