@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
-  Search, X, Star,
+  Search, X, Star, ArrowLeft, ArrowRight, Clock, TrendingUp,
   Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
@@ -538,75 +538,165 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           transition={{ duration: 0.25 }}
           className="fixed inset-0 z-[100] bg-white overflow-y-auto"
         >
-          <div className="max-w-3xl mx-auto px-6 pt-8 pb-16">
-            {/* Header row */}
-            <div className="flex items-center justify-between mb-10">
-              <Logo color="black" size="md" />
+          {/* Sticky top bar — easy back */}
+          <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-neutral-100">
+            <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
               <button
                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                className="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-black transition-colors"
+                className="group flex items-center gap-2 text-neutral-500 hover:text-black transition-colors -ml-1 pr-2 py-2"
+                aria-label="Retour à la boutique"
+              >
+                <span className="w-9 h-9 flex items-center justify-center border border-neutral-200 rounded-full group-hover:border-black transition-colors">
+                  <ArrowLeft className="w-4 h-4" strokeWidth={1.6} />
+                </span>
+                <span className="hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium">Retour</span>
+              </button>
+              <Logo color="black" size="sm" />
+              <button
+                onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors"
                 aria-label="Fermer la recherche"
               >
-                <X className="w-6 h-6" strokeWidth={1.5} />
+                <X className="w-5 h-5" strokeWidth={1.5} />
               </button>
             </div>
+          </div>
 
+          <div className="max-w-4xl mx-auto px-5 md:px-8 pt-10 md:pt-16 pb-20">
             {/* Big search input */}
-            <div className="relative border-b-2 border-black mb-10">
+            <div className="relative border-b-2 border-neutral-900 mb-3 transition-colors focus-within:border-[#C9A96E]">
               <input
                 type="text"
                 autoFocus
-                placeholder="Que recherchez-vous ?"
+                placeholder="Rechercher un meuble, une pièce…"
                 value={searchQ}
                 onChange={(e) => setSearchQ(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') saveSearch(searchQ); }}
-                className="w-full text-2xl md:text-3xl font-light py-4 pr-12 outline-none bg-transparent text-black placeholder:text-neutral-300"
+                className="w-full text-3xl md:text-5xl font-light py-4 pr-14 outline-none bg-transparent text-black placeholder:text-neutral-300"
                 style={{ fontFamily: 'var(--font-playfair)' }}
               />
-              <Search className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 text-neutral-400 pointer-events-none" strokeWidth={1.5} />
+              {searchQ ? (
+                <button
+                  onClick={() => setSearchQ('')}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-black transition-colors"
+                  aria-label="Effacer"
+                >
+                  <X className="w-6 h-6" strokeWidth={1.5} />
+                </button>
+              ) : (
+                <Search className="absolute right-0 top-1/2 -translate-y-1/2 w-7 h-7 text-neutral-300 pointer-events-none" strokeWidth={1.5} />
+              )}
             </div>
+            <p className="text-[11px] text-neutral-400 mb-12">Appuyez sur <span className="font-medium text-neutral-500">Échap</span> ou « Retour » pour revenir à la boutique.</p>
 
-            {/* Recent searches */}
-            {!searchQ && recentSearches.length > 0 && (
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400">Recherches récentes</p>
-                  <button onClick={clearRecentSearches} className="text-[11px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
-                </div>
-                <div className="flex flex-wrap gap-2.5">
-                  {recentSearches.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setSearchQ(s)}
-                      className="flex items-center gap-2 text-sm bg-neutral-100 rounded-full px-4 py-2 hover:bg-neutral-200 transition-colors text-neutral-700"
-                    >
-                      <Search className="w-3.5 h-3.5 text-neutral-400" />
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Popular searches */}
+            {/* ── Idle state (no query) ── */}
             {!searchQ && (
-              <div className="mb-4">
-                <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-3">Recherches populaires</p>
-                <div className="flex flex-wrap gap-2.5">
-                  {['Canapé', 'Meuble', 'Table', 'Bubble', 'Vase', 'Été'].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setSearchQ(s)}
-                      className="text-sm border border-neutral-200 rounded-full px-4 py-2 hover:border-black hover:text-black transition-colors text-neutral-600"
-                    >
-                      {s}
-                    </button>
-                  ))}
+              <div className="space-y-12">
+                {/* Recent searches */}
+                {recentSearches.length > 0 && (
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-400">
+                        <Clock className="w-3.5 h-3.5" /> Recherches récentes
+                      </p>
+                      <button onClick={clearRecentSearches} className="text-[11px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
+                    </div>
+                    <div className="flex flex-wrap gap-2.5">
+                      {recentSearches.map((s) => (
+                        <button
+                          key={s}
+                          onClick={() => setSearchQ(s)}
+                          className="flex items-center gap-2 text-sm bg-neutral-100 rounded-full px-4 py-2 hover:bg-neutral-200 transition-colors text-neutral-700"
+                        >
+                          <Search className="w-3.5 h-3.5 text-neutral-400" />
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Popular searches */}
+                <div>
+                  <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">
+                    <TrendingUp className="w-3.5 h-3.5" /> Recherches populaires
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
+                    {['Canapé', 'Meuble TV', 'Table', 'Commode', 'Bubble', 'Vase', 'Été'].map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => setSearchQ(s)}
+                        className="text-sm border border-neutral-200 rounded-full px-4 py-2 hover:border-[#C9A96E] hover:text-black transition-colors text-neutral-600"
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Collections shortcuts */}
+                <div>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Explorer les collections</p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {[
+                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles' },
+                      { slug: 'salon', label: 'Salon', cat: 'Salon' },
+                      { slug: 'figurines', label: 'Décorations', cat: 'Décorations' },
+                      { slug: 'bubble', label: 'Bubble', cat: null },
+                    ].map((c) => {
+                      const rep = c.cat
+                        ? products.find((p) => p.category === c.cat)
+                        : products.find((p) => p.name.includes('Bubble'));
+                      return (
+                        <Link
+                          key={c.slug}
+                          href={`/collections/${c.slug}`}
+                          onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                          className="group relative aspect-[4/5] overflow-hidden bg-neutral-100"
+                        >
+                          {rep && (
+                            <img src={rep.images[0]} alt={c.label} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                          <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center justify-between">
+                            <span className="text-white text-xs tracking-[0.15em] uppercase font-medium">{c.label}</span>
+                            <ArrowRight className="w-4 h-4 text-white opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Suggestions */}
+                <div>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Nos suggestions</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
+                    {[61, 63, 74, 71, 35, 68].map((id) => products.find((p) => p.id === id)).filter(Boolean).slice(0, 6).map((p) => {
+                      const prod = p!;
+                      const promoPrice = prod.name.includes('Bubble') ? Math.round(prod.price * 0.7) : prod.price;
+                      const contain = prod.name.includes('Bubble') || prod.category === 'Décorations' || prod.category === 'Été';
+                      return (
+                        <Link
+                          key={prod.id}
+                          href={`/products/${prod.id}`}
+                          onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                          className="group"
+                        >
+                          <div className={`relative aspect-square overflow-hidden bg-neutral-50 mb-2 ${contain ? 'p-3' : ''}`}>
+                            <img src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
+                          </div>
+                          <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
+                          <p className="text-xs text-neutral-500 price-luxe mt-0.5">{promoPrice.toLocaleString('fr-FR')} €</p>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Results */}
+            {/* ── Results ── */}
             {(() => {
               const q = searchQ.toLowerCase().trim();
               if (q.length < 1) return null;
@@ -618,12 +708,17 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               };
               const results = products.filter(isMatch);
               if (results.length === 0) {
-                return <p className="text-sm text-neutral-400 mt-4">Aucun résultat pour « {searchQ} ».</p>;
+                return (
+                  <div className="text-center py-16">
+                    <p className="font-serif text-2xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Aucun résultat</p>
+                    <p className="text-sm text-neutral-400">Rien ne correspond à « {searchQ} ». Essayez un autre mot-clé.</p>
+                  </div>
+                );
               }
               return (
                 <div>
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-3">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
-                  <div className="space-y-1">
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-5">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                     {results.slice(0, 30).map((p) => {
                       const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
                       const contain = p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été';
@@ -632,16 +727,19 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           key={p.id}
                           href={`/products/${p.id}`}
                           onClick={() => { saveSearch(searchQ); setSearchFocused(false); setSearchQ(''); }}
-                          className="flex items-center gap-4 p-2 hover:bg-neutral-50 transition-colors group"
+                          className="flex items-center gap-4 p-2 -mx-2 rounded hover:bg-neutral-50 transition-colors group"
                         >
-                          <div className={`w-14 h-14 overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${contain ? 'p-1' : ''}`}>
+                          <div className={`w-16 h-16 overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${contain ? 'p-1.5' : ''}`}>
                             <img src={p.images[0]} alt={p.name} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
-                            <p className="text-[11px] text-neutral-400">{p.category}</p>
+                            <p className="text-[11px] tracking-wide uppercase text-neutral-400 mt-0.5">{p.category}</p>
                           </div>
-                          <p className="text-sm font-bold text-black flex-shrink-0 price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <p className="text-sm font-bold text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                            <ArrowRight className="w-4 h-4 text-neutral-300 group-hover:text-[#C9A96E] transition-colors" />
+                          </div>
                         </Link>
                       );
                     })}
