@@ -84,7 +84,7 @@ export function getVariantGroup(productId: number): ProductVariant[] | null {
   return null;
 }
 
-export const products: Product[] = [
+const rawProducts: Product[] = [
   // ── Bubble Blanc ─────────────────────────────────────────────────────────────
   {
     id: 2,
@@ -694,3 +694,13 @@ export const products: Product[] = [
     details: ['6 grands tiroirs de rangement', 'Design moderne épuré', 'Finition blanche mate', 'Idéale chambre, salon ou couloir'],
   },
 ];
+
+// Hausse de +10% sur tous les prix, arrondie au chiffre finissant par 9 le plus proche
+// (ex. 215 → 236,50 → 239 ; 499 → 548,90 → 549 ; 136 → 149,60 → 149).
+function bumpPrice(price: number): number {
+  const raised = price * 1.1;
+  const rounded = Math.round((raised - 9) / 10) * 10 + 9;
+  return Math.max(9, rounded);
+}
+
+export const products: Product[] = rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) }));
