@@ -663,7 +663,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                             <img
                               src={rep.images[0]}
                               alt={c.label}
-                              className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain p-3' : 'object-cover'}`}
+                              className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain scale-125' : 'object-cover'}`}
                               style={{ objectPosition: c.position }}
                             />
                           )}
