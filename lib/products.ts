@@ -676,4 +676,18 @@ export const products: Product[] = [
     material: 'Panneaux bois, tiroirs en tissu, roulettes',
     details: ['5 tiroirs en tissu', 'Étagère de rangement ouverte', '4 roulettes pour déplacer facilement', 'Polyvalent chambre & salon'],
   },
+  // ── Meubles : Commode blanche 6 tiroirs ──────────────────────────────────────
+  {
+    id: 76,
+    name: 'Commode blanche 6 tiroirs',
+    category: 'Meubles',
+    price: 150,
+    description: 'Commode de rangement moderne à 6 tiroirs, en blanc épuré. Grande capacité pour la chambre, le salon ou un couloir. Lignes minimalistes et finition soignée qui s\'accordent à tous les intérieurs.',
+    images: [
+      'https://placehold.co/600x450?text=Photos+bient%C3%B4t',
+    ],
+    dimensions: 'L 100 × P 36 × H 69 cm',
+    material: 'Panneaux finition blanche mate',
+    details: ['6 grands tiroirs de rangement', 'Design moderne épuré', 'Finition blanche mate', 'Idéale chambre, salon ou couloir'],
+  },
 ];
