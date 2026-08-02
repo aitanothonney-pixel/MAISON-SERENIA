@@ -12,7 +12,10 @@ import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
+import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
+
+const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
 // Canapé Bubble ↔ Fauteuil Bubble de même couleur
 const bubbleComplement: Record<number, number> = {
@@ -157,8 +160,82 @@ function CheckoutDrawer({
   const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
   const [payMethod, setPayMethod] = useState<'card' | 'paypal' | 'twint' | 'applepay'>('card');
   const [payLoading, setPayLoading] = useState(false);
+  const [welcomeActive, setWelcomeActive] = useState(false);
+  const [promoInput, setPromoInput] = useState('');
+  const [promoError, setPromoError] = useState(false);
 
   const promoPrice = product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price;
+  const welcomeDiscount = welcomeActive ? Math.round(promoPrice * 0.10 * 100) / 100 : 0;
+  const finalTotal = promoPrice - welcomeDiscount;
+
+  useEffect(() => {
+    const read = () => {
+      try { setWelcomeActive(!!localStorage.getItem('welcome-discount')); } catch { /* ignore */ }
+    };
+    read();
+    window.addEventListener('welcome-discount-updated', read);
+    window.addEventListener('storage', read);
+    return () => {
+      window.removeEventListener('welcome-discount-updated', read);
+      window.removeEventListener('storage', read);
+    };
+  }, []);
+
+  const applyPromo = (raw: string) => {
+    if (normalizeCode(raw) === normalizeCode(WELCOME_CODE)) {
+      setWelcomeActive(true);
+      setPromoError(false);
+      setPromoInput('');
+      try {
+        localStorage.setItem('welcome-discount', WELCOME_CODE);
+        window.dispatchEvent(new Event('welcome-discount-updated'));
+      } catch { /* ignore */ }
+    } else {
+      setPromoError(true);
+    }
+  };
+
+  const removePromo = () => {
+    setWelcomeActive(false);
+    try {
+      localStorage.removeItem('welcome-discount');
+      window.dispatchEvent(new Event('welcome-discount-updated'));
+    } catch { /* ignore */ }
+  };
+
+  const PromoField = () => (
+    welcomeActive ? (
+      <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
+        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
+          <Check className="w-3.5 h-3.5" /> Code « {WELCOME_CODE} » — −10%
+        </span>
+        <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
+      </div>
+    ) : (
+      <div>
+        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Code promo</label>
+        <div className="flex gap-2">
+          <input
+            value={promoInput}
+            onChange={(e) => { setPromoInput(e.target.value); setPromoError(false); }}
+            onPaste={(e) => { const t = e.clipboardData.getData('text'); setTimeout(() => applyPromo(t), 0); }}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); applyPromo(promoInput); } }}
+            placeholder="MAISON SERENIA"
+            className={`flex-1 border rounded-xl px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none transition-colors ${promoError ? 'border-red-400' : 'border-neutral-200 focus:border-black'}`}
+          />
+          <button
+            type="button"
+            onClick={() => applyPromo(promoInput)}
+            disabled={!promoInput.trim()}
+            className="px-4 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase rounded-xl hover:bg-neutral-800 transition-colors disabled:opacity-40"
+          >
+            Appliquer
+          </button>
+        </div>
+        {promoError && <p className="text-[11px] text-red-500 mt-1.5">Ce code n&apos;est pas valide.</p>}
+      </div>
+    )
+  );
 
   const steps: { key: CheckoutStep; label: string; icon: React.ReactNode }[] = [
     { key: 'cart', label: 'Panier', icon: <ShoppingBag className="w-3.5 h-3.5" /> },
@@ -304,16 +381,23 @@ function CheckoutDrawer({
                       </div>
                     </div>
 
+                    <div className="mb-4">{PromoField()}</div>
+
                     <div className="space-y-2 mb-6 text-sm">
                       <div className="flex justify-between text-neutral-500">
                         <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
                       </div>
+                      {welcomeDiscount > 0 && (
+                        <div className="flex justify-between text-[#A07840] font-semibold">
+                          <span>Réduction −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                        </div>
+                      )}
                       <div className="flex justify-between text-neutral-500">
                         <span>Livraison</span><span className="text-emerald-600">Offerte</span>
                       </div>
                       <div className="h-px bg-neutral-100 my-2" />
                       <div className="flex justify-between font-bold text-black text-base">
-                        <span>Total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                        <span>Total</span><span>{finalTotal.toLocaleString('fr-FR')} €</span>
                       </div>
                     </div>
 
@@ -521,10 +605,24 @@ function CheckoutDrawer({
                       )}
                     </AnimatePresence>
 
+                    {PromoField()}
+
                     <div className="h-px bg-neutral-100" />
-                    <div className="flex justify-between font-bold text-sm">
-                      <span>Total à payer</span>
-                      <span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                    <div className="space-y-1.5">
+                      {welcomeDiscount > 0 && (
+                        <>
+                          <div className="flex justify-between text-sm text-neutral-500">
+                            <span>Sous-total</span><span>{promoPrice.toLocaleString('fr-FR')} €</span>
+                          </div>
+                          <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                            <span>Réduction −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          </div>
+                        </>
+                      )}
+                      <div className="flex justify-between font-bold text-sm">
+                        <span>Total à payer</span>
+                        <span>{finalTotal.toLocaleString('fr-FR')} €</span>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -563,7 +661,7 @@ function CheckoutDrawer({
                           </div>
                           <div>
                             <p className="font-semibold text-sm">{product.name}</p>
-                            <p className="text-xs text-neutral-400">{promoPrice.toLocaleString('fr-FR')} € · Livraison offerte</p>
+                            <p className="text-xs text-neutral-400">{finalTotal.toLocaleString('fr-FR')} € · Livraison offerte</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -621,7 +719,7 @@ function CheckoutDrawer({
                     ) : (
                       <>
                         <Lock className="w-4 h-4" />
-                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${promoPrice.toLocaleString('fr-FR')} €`}
+                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${finalTotal.toLocaleString('fr-FR')} €`}
                       </>
                     )}
                   </button>
