@@ -385,7 +385,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
-  const searchWrapRef = useRef<HTMLDivElement>(null);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   useEffect(() => {
@@ -419,13 +418,13 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
   useEffect(() => {
     if (!searchFocused) return;
-    const handleClick = (e: MouseEvent) => {
-      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target as Node)) {
-        setSearchFocused(false);
-      }
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSearchFocused(false); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
     };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
   }, [searchFocused]);
 
   const hoverBg = scrolled ? 'hover:bg-black/5' : 'hover:bg-white/15';
@@ -459,121 +458,19 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             <span className={`hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium ${textColor}`}>Menu</span>
           </button>
 
-          {/* Inline search — desktop only */}
-          <div ref={searchWrapRef} className="hidden lg:block relative">
-            <div className={`flex items-center gap-2 px-3 py-2 border transition-colors ${
+          {/* Search trigger — opens full-screen search overlay */}
+          <button
+            onClick={() => setSearchFocused(true)}
+            className={`hidden lg:flex items-center gap-2 px-3 py-2 border transition-colors ${
               scrolled
-                ? 'border-neutral-200 bg-white hover:border-neutral-300'
-                : 'border-white/25 bg-white/5 hover:bg-white/10'
-            }`}>
-              <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
-              <input
-                type="text"
-                placeholder="Que recherchez-vous ?"
-                value={searchQ}
-                onFocus={() => setSearchFocused(true)}
-                onChange={(e) => { setSearchQ(e.target.value); setSearchFocused(true); }}
-                onKeyDown={(e) => { if (e.key === 'Enter') saveSearch(searchQ); }}
-                className={`w-52 xl:w-64 text-xs outline-none bg-transparent ${
-                  scrolled ? 'text-black placeholder:text-neutral-400' : 'text-white placeholder:text-white/60'
-                }`}
-              />
-              {searchQ && (
-                <button onClick={() => setSearchQ('')} aria-label="Effacer">
-                  <X className={`w-3.5 h-3.5 ${scrolled ? 'text-neutral-400' : 'text-white/60'}`} />
-                </button>
-              )}
-            </div>
-
-            {/* Suggestions dropdown */}
-            <AnimatePresence>
-              {searchFocused && (
-                <motion.div
-                  initial={{ opacity: 0, y: -4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 mt-2 w-[420px] max-w-[92vw] bg-white border border-neutral-100 shadow-xl z-50"
-                >
-                  <div className="p-4">
-                    {!searchQ && recentSearches.length > 0 && (
-                      <div className="mb-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">Recherches récentes</p>
-                          <button onClick={clearRecentSearches} className="text-[10px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {recentSearches.map((s) => (
-                            <button
-                              key={s}
-                              onClick={() => { setSearchQ(s); saveSearch(s); }}
-                              className="flex items-center gap-1.5 text-[11px] bg-neutral-100 rounded-full px-3 py-1 hover:bg-neutral-200 transition-colors text-neutral-700"
-                            >
-                              <Search className="w-3 h-3 text-neutral-400" />
-                              {s}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    {!searchQ && (
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {['Canapé', 'Meuble', 'Table', 'Bubble', 'Vase', 'Été'].map((s) => (
-                          <button
-                            key={s}
-                            onClick={() => setSearchQ(s)}
-                            className="text-[11px] border border-neutral-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors text-neutral-500"
-                          >
-                            {s}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                    {(() => {
-                      const q = searchQ.toLowerCase().trim();
-                      const isMatch = (p: typeof products[0]) => {
-                        if (!q) return false;
-                        const name = p.name.toLowerCase();
-                        const cat = p.category.toLowerCase();
-                        if (name.includes(q) || cat.includes(q)) return true;
-                        return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
-                      };
-                      const hasQuery = q.length >= 1;
-                      const sorted = hasQuery
-                        ? [...products].sort((a, b) => (isMatch(b) ? 1 : 0) - (isMatch(a) ? 1 : 0))
-                        : products;
-                      return (
-                        <div className="space-y-1 max-h-80 overflow-y-auto">
-                          {sorted.slice(0, 20).map((p) => {
-                            const matched = hasQuery && isMatch(p);
-                            const dimmed = hasQuery && !matched;
-                            const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
-                            return (
-                              <Link
-                                key={p.id}
-                                href={`/products/${p.id}`}
-                                onClick={() => { saveSearch(searchQ); setSearchFocused(false); setSearchQ(''); }}
-                                className={`flex items-center gap-3 p-2 transition-all duration-200 group ${matched ? 'bg-neutral-50 ring-1 ring-black/10' : 'hover:bg-neutral-50'} ${dimmed ? 'opacity-30' : 'opacity-100'}`}
-                              >
-                                <div className={`w-11 h-11 overflow-hidden bg-white border flex-shrink-0 flex items-center justify-center ${matched ? 'border-neutral-300' : 'border-neutral-100'} ${p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été' ? 'p-1' : ''}`}>
-                                  <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain' : 'object-cover'}`} />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className={`text-sm truncate group-hover:underline ${matched ? 'font-bold text-black' : 'font-semibold text-black'}`}>{p.name}</p>
-                                  <p className="text-[11px] text-neutral-400">{p.category}</p>
-                                </div>
-                                <p className="text-sm font-bold text-black flex-shrink-0 price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                      );
-                    })()}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                ? 'border-neutral-200 bg-white hover:border-neutral-300 text-neutral-400'
+                : 'border-white/25 bg-white/5 hover:bg-white/10 text-white/60'
+            }`}
+            aria-label="Rechercher"
+          >
+            <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
+            <span className="w-52 xl:w-64 text-xs text-left">Que recherchez-vous ?</span>
+          </button>
         </div>
 
         {/* CENTER — Logo */}
@@ -630,6 +527,132 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         </div>
       </div>
     </header>
+
+    {/* Full-screen search overlay */}
+    <AnimatePresence>
+      {searchFocused && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed inset-0 z-[100] bg-white overflow-y-auto"
+        >
+          <div className="max-w-3xl mx-auto px-6 pt-8 pb-16">
+            {/* Header row */}
+            <div className="flex items-center justify-between mb-10">
+              <Logo color="black" size="md" />
+              <button
+                onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                className="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-black transition-colors"
+                aria-label="Fermer la recherche"
+              >
+                <X className="w-6 h-6" strokeWidth={1.5} />
+              </button>
+            </div>
+
+            {/* Big search input */}
+            <div className="relative border-b-2 border-black mb-10">
+              <input
+                type="text"
+                autoFocus
+                placeholder="Que recherchez-vous ?"
+                value={searchQ}
+                onChange={(e) => setSearchQ(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') saveSearch(searchQ); }}
+                className="w-full text-2xl md:text-3xl font-light py-4 pr-12 outline-none bg-transparent text-black placeholder:text-neutral-300"
+                style={{ fontFamily: 'var(--font-playfair)' }}
+              />
+              <Search className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 text-neutral-400 pointer-events-none" strokeWidth={1.5} />
+            </div>
+
+            {/* Recent searches */}
+            {!searchQ && recentSearches.length > 0 && (
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400">Recherches récentes</p>
+                  <button onClick={clearRecentSearches} className="text-[11px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
+                </div>
+                <div className="flex flex-wrap gap-2.5">
+                  {recentSearches.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setSearchQ(s)}
+                      className="flex items-center gap-2 text-sm bg-neutral-100 rounded-full px-4 py-2 hover:bg-neutral-200 transition-colors text-neutral-700"
+                    >
+                      <Search className="w-3.5 h-3.5 text-neutral-400" />
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Popular searches */}
+            {!searchQ && (
+              <div className="mb-4">
+                <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-3">Recherches populaires</p>
+                <div className="flex flex-wrap gap-2.5">
+                  {['Canapé', 'Meuble', 'Table', 'Bubble', 'Vase', 'Été'].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => setSearchQ(s)}
+                      className="text-sm border border-neutral-200 rounded-full px-4 py-2 hover:border-black hover:text-black transition-colors text-neutral-600"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Results */}
+            {(() => {
+              const q = searchQ.toLowerCase().trim();
+              if (q.length < 1) return null;
+              const isMatch = (p: typeof products[0]) => {
+                const name = p.name.toLowerCase();
+                const cat = p.category.toLowerCase();
+                if (name.includes(q) || cat.includes(q)) return true;
+                return q.split(' ').every((word) => name.includes(word) || cat.includes(word));
+              };
+              const results = products.filter(isMatch);
+              if (results.length === 0) {
+                return <p className="text-sm text-neutral-400 mt-4">Aucun résultat pour « {searchQ} ».</p>;
+              }
+              return (
+                <div>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-3">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
+                  <div className="space-y-1">
+                    {results.slice(0, 30).map((p) => {
+                      const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                      const contain = p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été';
+                      return (
+                        <Link
+                          key={p.id}
+                          href={`/products/${p.id}`}
+                          onClick={() => { saveSearch(searchQ); setSearchFocused(false); setSearchQ(''); }}
+                          className="flex items-center gap-4 p-2 hover:bg-neutral-50 transition-colors group"
+                        >
+                          <div className={`w-14 h-14 overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${contain ? 'p-1' : ''}`}>
+                            <img src={p.images[0]} alt={p.name} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
+                            <p className="text-[11px] text-neutral-400">{p.category}</p>
+                          </div>
+                          <p className="text-sm font-bold text-black flex-shrink-0 price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
 
     <SideMenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} onSectionNav={onSectionNav} />
     </>
