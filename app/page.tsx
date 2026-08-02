@@ -541,10 +541,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         >
           {/* Sticky top bar — easy back */}
           <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-neutral-100">
-            <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+            <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 grid grid-cols-3 items-center">
               <button
                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                className="group flex items-center gap-2.5 py-2 -ml-1 pr-1"
+                className="group flex items-center gap-2.5 py-2 -ml-1 pr-1 justify-self-start"
                 aria-label="Retour à la boutique"
               >
                 <span className="relative w-9 h-9 flex items-center justify-center rounded-full border border-neutral-200 overflow-hidden transition-colors duration-300 group-hover:border-black">
@@ -553,10 +553,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 </span>
                 <span className="hidden sm:inline text-[10px] tracking-[0.3em] uppercase font-semibold text-neutral-500 group-hover:text-black transition-colors duration-300">Retour</span>
               </button>
-              <Logo color="black" size="sm" />
+              <div className="justify-self-center">
+                <Logo color="black" size="sm" />
+              </div>
               <button
                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors"
+                className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors justify-self-end"
                 aria-label="Fermer la recherche"
               >
                 <X className="w-5 h-5" strokeWidth={1.5} />
