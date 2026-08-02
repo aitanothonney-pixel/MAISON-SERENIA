@@ -496,10 +496,57 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       )}
                     </AnimatePresence>
 
+                    {/* Code promo */}
+                    {welcomeActive ? (
+                      <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
+                        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
+                          <Check className="w-3.5 h-3.5" /> Code « {WELCOME_CODE} » — −10%
+                        </span>
+                        <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <label className={labelClass}>Code promo</label>
+                        <div className="flex gap-2">
+                          <input
+                            value={promoInput}
+                            onChange={(e) => { setPromoInput(e.target.value); setPromoError(false); }}
+                            onPaste={(e) => { const t = e.clipboardData.getData('text'); setTimeout(() => applyPromo(t), 0); }}
+                            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); applyPromo(promoInput); } }}
+                            placeholder="MAISON SERENIA"
+                            className={`flex-1 border px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none transition-colors ${promoError ? 'border-red-400' : 'border-neutral-200 focus:border-black'}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => applyPromo(promoInput)}
+                            disabled={!promoInput.trim()}
+                            className="px-4 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-neutral-800 transition-colors disabled:opacity-40"
+                          >
+                            Appliquer
+                          </button>
+                        </div>
+                        {promoError && <p className="text-[11px] text-red-500 mt-1.5">Ce code n&apos;est pas valide.</p>}
+                      </div>
+                    )}
+
                     <div className="h-px bg-neutral-100" />
-                    <div className="flex justify-between font-bold text-sm">
-                      <span>Total à payer</span>
-                      <span>{total.toLocaleString('fr-FR')} €</span>
+                    <div className="space-y-1.5">
+                      {welcomeDiscount > 0 && (
+                        <>
+                          <div className="flex justify-between text-sm text-neutral-500">
+                            <span>Sous-total</span>
+                            <span>{afterPack.toLocaleString('fr-FR')} €</span>
+                          </div>
+                          <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                            <span>Réduction −10%</span>
+                            <span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          </div>
+                        </>
+                      )}
+                      <div className="flex justify-between font-bold text-sm">
+                        <span>Total à payer</span>
+                        <span>{total.toLocaleString('fr-FR')} €</span>
+                      </div>
                     </div>
                   </motion.div>
                 )}
