@@ -544,13 +544,14 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
               <button
                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                className="group flex items-center gap-2 text-neutral-500 hover:text-black transition-colors -ml-1 pr-2 py-2"
+                className="group flex items-center gap-2.5 py-2 -ml-1 pr-1"
                 aria-label="Retour à la boutique"
               >
-                <span className="w-9 h-9 flex items-center justify-center border border-neutral-200 rounded-full group-hover:border-black transition-colors">
-                  <ArrowLeft className="w-4 h-4" strokeWidth={1.6} />
+                <span className="relative w-9 h-9 flex items-center justify-center rounded-full border border-neutral-200 overflow-hidden transition-colors duration-300 group-hover:border-black">
+                  <span className="absolute inset-0 bg-black scale-0 group-hover:scale-100 rounded-full transition-transform duration-300 ease-out" />
+                  <ArrowLeft className="relative w-4 h-4 text-black group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5" strokeWidth={1.5} />
                 </span>
-                <span className="hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium">Retour</span>
+                <span className="hidden sm:inline text-[10px] tracking-[0.3em] uppercase font-semibold text-neutral-500 group-hover:text-black transition-colors duration-300">Retour</span>
               </button>
               <Logo color="black" size="sm" />
               <button
