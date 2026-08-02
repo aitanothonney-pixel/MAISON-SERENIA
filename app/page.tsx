@@ -572,8 +572,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 value={searchQ}
                 onChange={(e) => setSearchQ(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') saveSearch(searchQ); }}
-                className="w-full text-3xl md:text-5xl font-light py-4 pr-14 outline-none bg-transparent text-black placeholder:text-neutral-300"
-                style={{ fontFamily: 'var(--font-playfair)' }}
+                className="w-full text-xl md:text-3xl font-light tracking-tight py-4 pr-14 outline-none bg-transparent text-black placeholder:text-neutral-300 placeholder:font-light"
+                style={{ fontFamily: 'var(--font-dm-sans)' }}
               />
               {searchQ ? (
                 <button
@@ -626,7 +626,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       <button
                         key={s}
                         onClick={() => setSearchQ(s)}
-                        className="text-sm border border-neutral-200 rounded-full px-4 py-2 hover:border-[#C9A96E] hover:text-black transition-colors text-neutral-600"
+                        className="text-[11px] tracking-[0.18em] uppercase font-medium border border-neutral-200 px-4 py-2.5 text-neutral-600 hover:border-[#C9A96E] hover:text-[#8a6d38] hover:bg-[#C9A96E]/5 transition-all duration-200"
                       >
                         {s}
                       </button>
