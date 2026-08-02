@@ -639,27 +639,37 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Explorer les collections</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
-                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles' },
-                      { slug: 'salon', label: 'Salon', cat: 'Salon' },
-                      { slug: 'figurines', label: 'Décorations', cat: 'Décorations' },
-                      { slug: 'bubble', label: 'Bubble', cat: null },
+                      // Meubles : scène d'intérieur — plein cadre
+                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, fit: 'cover', position: 'center' },
+                      // Salon : fauteuil Bubble blanc — recadré pour ne rien couper
+                      { slug: 'salon', label: 'Salon', cat: null, id: 2, fit: 'cover', position: 'center 42%' },
+                      // Décorations : Bearbrick x Bape noir mis en avant (figurine haute → contain)
+                      { slug: 'figurines', label: 'Décorations', cat: null, id: 38, fit: 'contain', position: 'center' },
+                      // Bubble : fauteuil Bubble rouge mis en avant
+                      { slug: 'bubble', label: 'Bubble', cat: null, id: 8, fit: 'cover', position: 'center 45%' },
                     ].map((c) => {
-                      const rep = c.cat
-                        ? products.find((p) => p.category === c.cat)
-                        : products.find((p) => p.name.includes('Bubble'));
+                      const rep = c.id != null
+                        ? products.find((p) => p.id === c.id)
+                        : products.find((p) => p.category === c.cat);
+                      const isContain = c.fit === 'contain';
                       return (
                         <Link
                           key={c.slug}
                           href={`/collections/${c.slug}`}
                           onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                          className="group relative aspect-[4/5] overflow-hidden bg-neutral-100"
+                          className={`group relative aspect-[4/5] overflow-hidden ${isContain ? 'bg-neutral-50' : 'bg-neutral-100'}`}
                         >
                           {rep && (
-                            <img src={rep.images[0]} alt={c.label} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <img
+                              src={rep.images[0]}
+                              alt={c.label}
+                              className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain p-3' : 'object-cover'}`}
+                              style={{ objectPosition: c.position }}
+                            />
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                           <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center justify-between">
-                            <span className="text-white text-xs tracking-[0.15em] uppercase font-medium">{c.label}</span>
+                            <span className="text-white text-xs tracking-[0.15em] uppercase font-medium drop-shadow">{c.label}</span>
                             <ArrowRight className="w-4 h-4 text-white opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                           </div>
                         </Link>
