@@ -722,6 +722,23 @@ const exactPriceProducts: Product[] = [
     material: 'Bois d\'ingénierie, finition Rustic Brown',
     details: ['Style farmhouse chaleureux', 'Bois d\'ingénierie résistant', 'Base sculpturale robuste', 'Plateau spacieux pour le salon'],
   },
+  // ── Meubles : Table basse industrielle 2 niveaux ─────────────────────────────
+  {
+    id: 78,
+    name: 'Table basse industrielle 2 niveaux',
+    category: 'Meubles',
+    price: 98,
+    description: 'Table basse rectangulaire au style industriel, alliant bois vintage marron rustique et cadre en métal robuste. Étagère inférieure en maille pour un rangement pratique. Un design chaleureux et solide, parfait pour un salon au caractère affirmé.',
+    images: [
+      'https://i.ibb.co/Kj17z6q7/Capture-d-e-cran-2026-08-06-a-01-00-22.png',
+      'https://i.ibb.co/rR5Yq6tj/Capture-d-e-cran-2026-08-06-a-01-00-28.png',
+      'https://i.ibb.co/4nrFJF61/Capture-d-e-cran-2026-08-06-a-01-00-34.png',
+      'https://i.ibb.co/5WtBFMz5/Capture-d-e-cran-2026-08-06-a-01-00-50.png',
+    ],
+    dimensions: 'L 106 × P 60 × H 45 cm',
+    material: 'Bois vintage & cadre métal, étagère en maille',
+    details: ['Style industriel bois & métal', 'Étagère inférieure en maille', 'Cadre en métal robuste', 'Montage facile'],
+  },
 ];
 
 export const products: Product[] = [
