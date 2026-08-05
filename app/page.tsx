@@ -2364,8 +2364,15 @@ export default function Home() {
           >
             Maison Serenia
           </h1>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 h-px w-28 origin-center"
+            style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }}
+          />
           <p
-            className="text-lg md:text-2xl text-white/85 mt-6 italic"
+            className="text-lg md:text-2xl text-white/85 mt-5 italic"
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
           >
             L&apos;art de vivre à la française
@@ -2390,6 +2397,30 @@ export default function Home() {
               Voir les promotions
             </a>
           </div>
+
+          {/* Micro-réassurance */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/80"
+          >
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide">
+              <span className="flex items-center gap-0.5">
+                {[0, 1, 2, 3, 4].map((s) => (
+                  <Star key={s} className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
+                ))}
+              </span>
+              <span className="font-medium">4,9/5</span>
+              <span className="text-white/50">· +1 200 clients</span>
+            </span>
+            <span className="hidden sm:block w-px h-3 bg-white/25" />
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès 60&nbsp;€</span>
+            <span className="hidden sm:block w-px h-3 bg-white/25" />
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
+            <span className="hidden md:block w-px h-3 bg-white/25" />
+            <span className="hidden md:flex items-center gap-1.5 text-[11px] tracking-wide"><RotateCcw className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Retours 30 jours</span>
+          </motion.div>
         </motion.div>
 
         {/* Scroll hint */}
