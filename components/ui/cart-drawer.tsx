@@ -120,15 +120,20 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - merchandise);
   const freeShippingProgress = Math.min(100, Math.round((merchandise / FREE_SHIPPING_THRESHOLD) * 100));
   const total = merchandise + shipping;
-  // Produit peu coûteux à ajouter pour franchir le seuil de livraison gratuite
+  // Produits à ajouter pour franchir le seuil de livraison gratuite
   const cartIds = cartProducts.map((x) => x.id);
-  const shippingBooster = shipping > 0
-    ? products
-        .filter((p) => !cartIds.includes(p.id))
-        .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }))
-        .filter((x) => x.price >= remainingForFreeShipping && x.price <= remainingForFreeShipping + 40)
-        .sort((a, b) => a.price - b.price)[0]
-    : undefined;
+  const shippingBoosters = shipping > 0
+    ? (() => {
+        const seenNames = new Set<string>();
+        return products
+          .filter((p) => !cartIds.includes(p.id))
+          .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }))
+          .filter((x) => x.price >= remainingForFreeShipping && x.price <= remainingForFreeShipping + 60)
+          .sort((a, b) => a.price - b.price)
+          .filter((x) => { if (seenNames.has(x.p.name)) return false; seenNames.add(x.p.name); return true; })
+          .slice(0, 4);
+      })()
+    : [];
 
   const goShopping = () => {
     handleClose();
@@ -170,6 +175,41 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const formatExpiry = (val: string) => {
     const d = val.replace(/\D/g, '').slice(0, 4);
     return d.length >= 3 ? d.slice(0, 2) + '/' + d.slice(2) : d;
+  };
+
+  const renderShippingBoosters = () => {
+    if (shippingBoosters.length === 0) return null;
+    return (
+      <div className="border border-[#C9A96E]/40 bg-[#C9A96E]/5 rounded-lg p-3 mt-1">
+        <p className="text-[10px] tracking-widest uppercase text-[#A07840] font-bold mb-2.5 flex items-center gap-1.5">
+          <Truck className="w-3.5 h-3.5" /> Ajoutez un article & livraison offerte
+        </p>
+        <div className="space-y-2.5">
+          {shippingBoosters.map(({ p, price }) => (
+            <div key={p.id} className="flex items-center gap-3">
+              <div className="w-11 h-11 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <img
+                  src={p.images[0]}
+                  alt={p.name}
+                  className={`w-full h-full ${isBubble(p.id) || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[12px] text-black truncate leading-tight">{p.name}</p>
+                <p className="text-[12px] font-bold text-black price-luxe">{price.toLocaleString('fr-FR')} €</p>
+              </div>
+              <button
+                onClick={() => addItem(p.id)}
+                className="shrink-0 w-8 h-8 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+                aria-label={`Ajouter ${p.name} au panier`}
+              >
+                <Plus className="w-4 h-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   const stepTitle: Record<Step, string> = {
@@ -595,6 +635,9 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <span>{total.toLocaleString('fr-FR')} €</span>
                       </div>
                     </div>
+
+                    {/* Suggestions pour atteindre la livraison offerte */}
+                    {renderShippingBoosters()}
                   </motion.div>
                 )}
 
@@ -731,30 +774,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     </div>
                   )}
 
-                  {/* Suggestion pour atteindre la livraison offerte */}
-                  {shippingBooster && (
-                    <div className="flex items-center gap-3 border border-[#C9A96E]/40 bg-[#C9A96E]/5 rounded-lg p-2.5 mt-1">
-                      <div className="w-11 h-11 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
-                        <img
-                          src={shippingBooster.p.images[0]}
-                          alt={shippingBooster.p.name}
-                          className={`w-full h-full ${isBubble(shippingBooster.p.id) || shippingBooster.p.category === 'Décorations' || shippingBooster.p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[10px] tracking-widest uppercase text-[#A07840] font-bold mb-0.5">Ajoutez & livraison offerte</p>
-                        <p className="text-[12px] text-black truncate leading-tight">{shippingBooster.p.name}</p>
-                        <p className="text-[12px] font-bold text-black price-luxe">{shippingBooster.price.toLocaleString('fr-FR')} €</p>
-                      </div>
-                      <button
-                        onClick={() => addItem(shippingBooster.p.id)}
-                        className="shrink-0 w-8 h-8 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
-                        aria-label="Ajouter au panier"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </button>
-                    </div>
-                  )}
+                  {/* Suggestions pour atteindre la livraison offerte */}
+                  {renderShippingBoosters()}
                 </div>
 
                 <div className="px-6">
