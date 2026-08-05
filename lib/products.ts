@@ -808,6 +808,24 @@ const exactPriceProducts: Product[] = [
     material: 'Plateau cannelé finition noyer, structure métal noir',
     details: ['Format compact 2 niveaux', 'Surface ondulée cannelée', 'Structure métal noir', 'Bout de canapé, chevet ou coin café'],
   },
+  // ── Meubles : Table basse bicolore à niveaux décalés ─────────────────────────
+  {
+    id: 83,
+    name: 'Table basse bicolore à niveaux décalés',
+    category: 'Meubles',
+    price: 98,
+    description: 'Table basse moderne au design bicolore, associant bois naturel et noir mat. Niveaux décalés et étagère de rangement intégrée pour un rendu graphique et fonctionnel. Une pièce contemporaine qui structure élégamment le salon.',
+    images: [
+      'https://i.ibb.co/S7BMVnNQ/Capture-d-e-cran-2026-08-06-a-01-18-11.png',
+      'https://i.ibb.co/zhNQM9GZ/Capture-d-e-cran-2026-08-06-a-01-18-38.png',
+      'https://i.ibb.co/wNCXwxpb/Capture-d-e-cran-2026-08-06-a-01-18-47.png',
+      'https://i.ibb.co/wNrWyr2c/Capture-d-e-cran-2026-08-06-a-01-18-30.png',
+      'https://i.ibb.co/YFgmqk26/Capture-d-e-cran-2026-08-06-a-01-18-54.png',
+    ],
+    dimensions: 'L 95 × P 55 × H 50 cm',
+    material: 'Bois naturel & noir mat',
+    details: ['Design bicolore bois & noir', 'Niveaux décalés graphiques', 'Étagère de rangement intégrée', 'Style moderne contemporain'],
+  },
 ];
 
 export const products: Product[] = [
