@@ -61,6 +61,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 73, color: 'Noir', colorHex: '#1a1a1a' },
   ],
+  'table-ovale-vintage': [
+    { productId: 79, color: 'Brun', colorHex: '#6b4a30' },
+    { productId: 80, color: 'Gris', colorHex: '#9e9e9e' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -738,6 +742,36 @@ const exactPriceProducts: Product[] = [
     dimensions: 'L 106 × P 60 × H 45 cm',
     material: 'Bois vintage & cadre métal, étagère en maille',
     details: ['Style industriel bois & métal', 'Étagère inférieure en maille', 'Cadre en métal robuste', 'Montage facile'],
+  },
+  // ── Meubles : Table basse ovale vintage 2 niveaux — Brun ─────────────────────
+  {
+    id: 79,
+    name: 'Table basse ovale vintage 2 niveaux',
+    category: 'Meubles',
+    price: 128,
+    description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois brun chaleureuse — une pièce de caractère pour le salon.',
+    images: [
+      'https://i.ibb.co/gMh9nwq7/Capture-d-e-cran-2026-08-06-a-01-04-31.png',
+      'https://i.ibb.co/PBzHLg1/Capture-d-e-cran-2026-08-06-a-01-04-39.png',
+      'https://i.ibb.co/fzg8Sgdd/Capture-d-e-cran-2026-08-06-a-01-05-15.png',
+    ],
+    dimensions: 'L 120 × P 54 × H 44 cm',
+    material: 'Bois finition brun vintage, pieds tournés',
+    details: ['Forme ovale profil bas', 'Style Mid-Century vintage', '2 niveaux de rangement', 'Pieds tournés élégants'],
+  },
+  // ── Meubles : Table basse ovale vintage 2 niveaux — Gris ─────────────────────
+  {
+    id: 80,
+    name: 'Table basse ovale vintage 2 niveaux',
+    category: 'Meubles',
+    price: 128,
+    description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois gris raffinée — une pièce de caractère pour le salon.',
+    images: [
+      'https://i.ibb.co/Kj2CF2k0/Capture-d-e-cran-2026-08-06-a-01-05-26.png',
+    ],
+    dimensions: 'L 120 × P 54 × H 44 cm',
+    material: 'Bois finition gris, pieds tournés',
+    details: ['Forme ovale profil bas', 'Style Mid-Century vintage', '2 niveaux de rangement', 'Pieds tournés élégants'],
   },
 ];
 
