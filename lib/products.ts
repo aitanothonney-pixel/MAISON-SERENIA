@@ -65,6 +65,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 79, color: 'Brun', colorHex: '#6b4a30' },
     { productId: 80, color: 'Gris', colorHex: '#9e9e9e' },
   ],
+  'table-gigognes-lot2': [
+    { productId: 84, color: 'Blanc', colorHex: '#ece7de' },
+    { productId: 85, color: 'Brun', colorHex: '#6b4a30' },
+    { productId: 86, color: 'Blanc doré', colorHex: '#d9c9a3' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -825,6 +830,62 @@ const exactPriceProducts: Product[] = [
     dimensions: 'L 95 × P 55 × H 50 cm',
     material: 'Bois naturel & noir mat',
     details: ['Design bicolore bois & noir', 'Niveaux décalés graphiques', 'Étagère de rangement intégrée', 'Style moderne contemporain'],
+  },
+  // ── Meubles : Lot de 2 tables gigognes — Blanc ───────────────────────────────
+  {
+    id: 84,
+    name: 'Lot de 2 tables gigognes',
+    category: 'Meubles',
+    price: 128,
+    description: 'Lot de 2 tables gigognes au design moderne, plateau blanc et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café, dans le salon comme la chambre.',
+    images: [
+      'https://i.ibb.co/fVbkCLdC/Capture-d-e-cran-2026-08-06-a-01-33-06.png',
+      'https://i.ibb.co/hF5HJ53s/Capture-d-e-cran-2026-08-06-a-01-33-00.png',
+      'https://i.ibb.co/ccSyXtVZ/Capture-d-e-cran-2026-08-06-a-01-32-54.png',
+      'https://i.ibb.co/3yqwcrvy/Capture-d-e-cran-2026-08-06-a-01-32-48.png',
+      'https://i.ibb.co/hJ5BnXZC/Capture-d-e-cran-2026-08-06-a-01-33-14.png',
+      'https://i.ibb.co/TD8c0tKK/Capture-d-e-cran-2026-08-06-a-01-32-38.png',
+    ],
+    dimensions: 'Grande L 90 × Petite L 50 cm',
+    material: 'Plateau blanc, cadre métal',
+    details: ['Lot de 2 tables gigognes', 'Modulables & gain de place', 'Cadre métal fin', 'Plateau blanc moderne'],
+  },
+  // ── Meubles : Lot de 2 tables gigognes — Brun ────────────────────────────────
+  {
+    id: 85,
+    name: 'Lot de 2 tables gigognes',
+    category: 'Meubles',
+    price: 128,
+    description: 'Lot de 2 tables gigognes au design moderne, plateau bois brun chaleureux et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café.',
+    images: [
+      'https://i.ibb.co/VcZ8jxKk/Capture-d-e-cran-2026-08-06-a-01-33-23.png',
+      'https://i.ibb.co/Hkjw6mS/Capture-d-e-cran-2026-08-06-a-01-33-52.png',
+      'https://i.ibb.co/B2PjMSKD/Capture-d-e-cran-2026-08-06-a-01-33-43.png',
+      'https://i.ibb.co/DHYp06mn/Capture-d-e-cran-2026-08-06-a-01-33-35.png',
+      'https://i.ibb.co/fYYXG84b/Capture-d-e-cran-2026-08-06-a-01-34-09.png',
+    ],
+    dimensions: 'Grande L 90 × Petite L 50 cm',
+    material: 'Plateau bois brun, cadre métal',
+    details: ['Lot de 2 tables gigognes', 'Modulables & gain de place', 'Cadre métal fin', 'Plateau bois brun chaleureux'],
+  },
+  // ── Meubles : Lot de 2 tables gigognes — Blanc doré ──────────────────────────
+  {
+    id: 86,
+    name: 'Lot de 2 tables gigognes',
+    category: 'Meubles',
+    price: 128,
+    description: 'Lot de 2 tables gigognes au design chic, plateau blanc et cadre métal doré. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Une touche précieuse et élégante pour le salon ou la chambre.',
+    images: [
+      'https://i.ibb.co/N6CMBgfk/Capture-d-e-cran-2026-08-06-a-01-34-19.png',
+      'https://i.ibb.co/p62p74HL/Capture-d-e-cran-2026-08-06-a-01-39-16.png',
+      'https://i.ibb.co/200DjQYM/Capture-d-e-cran-2026-08-06-a-01-39-09.png',
+      'https://i.ibb.co/zWfZ7RQ0/Capture-d-e-cran-2026-08-06-a-01-39-24.png',
+      'https://i.ibb.co/7xH9dj6t/Capture-d-e-cran-2026-08-06-a-01-39-48.png',
+      'https://i.ibb.co/60gQqrRB/Capture-d-e-cran-2026-08-06-a-01-34-28.png',
+    ],
+    dimensions: 'Grande L 90 × Petite L 50 cm',
+    material: 'Plateau blanc, cadre métal doré',
+    details: ['Lot de 2 tables gigognes', 'Modulables & gain de place', 'Cadre métal doré chic', 'Plateau blanc élégant'],
   },
 ];
 
