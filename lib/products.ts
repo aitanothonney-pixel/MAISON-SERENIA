@@ -703,4 +703,28 @@ function bumpPrice(price: number): number {
   return Math.max(9, rounded);
 }
 
-export const products: Product[] = rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) }));
+// Produits à prix fixe défini par la boutique (non concernés par la hausse +10%)
+const exactPriceProducts: Product[] = [
+  // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
+  {
+    id: 77,
+    name: 'Table basse Farmhouse en bois',
+    category: 'Meubles',
+    price: 218,
+    description: 'Table basse rectangulaire au style farmhouse chaleureux, en bois d\'ingénierie finition Rustic Brown. Plateau généreux et base sculpturale robuste pour un salon à la fois convivial et raffiné. Une pièce centrale qui structure l\'espace.',
+    images: [
+      'https://i.ibb.co/SDHV1Yz6/Capture-d-e-cran-2026-08-06-a-00-47-21.png',
+      'https://i.ibb.co/Z6CK14Xr/Capture-d-e-cran-2026-08-06-a-00-47-31.png',
+      'https://i.ibb.co/Kc0mw8tF/Capture-d-e-cran-2026-08-06-a-00-47-38.png',
+      'https://i.ibb.co/MwjW91n/Capture-d-e-cran-2026-08-06-a-00-49-43.png',
+    ],
+    dimensions: 'L 120 × P 60 × H 45 cm',
+    material: 'Bois d\'ingénierie, finition Rustic Brown',
+    details: ['Style farmhouse chaleureux', 'Bois d\'ingénierie résistant', 'Base sculpturale robuste', 'Plateau spacieux pour le salon'],
+  },
+];
+
+export const products: Product[] = [
+  ...rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) })),
+  ...exactPriceProducts,
+];
