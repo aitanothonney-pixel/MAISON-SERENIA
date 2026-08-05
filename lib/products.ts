@@ -791,6 +791,23 @@ const exactPriceProducts: Product[] = [
     material: 'Plateau effet marbre noir, structure métal',
     details: ['Design moderne épuré', 'Plateau effet marbre noir', 'Double étagère de rangement', 'Structure métal robuste'],
   },
+  // ── Meubles : Table d'appoint 2 niveaux noyer ────────────────────────────────
+  {
+    id: 82,
+    name: 'Table d\'appoint 2 niveaux noyer',
+    category: 'Meubles',
+    price: 98,
+    description: 'Table d\'appoint compacte à 2 niveaux, plateau à surface ondulée cannelée finition noyer et structure métal noir. Idéale en bout de canapé, table de chevet ou coin café. Un design chaleureux et pratique qui se glisse partout.',
+    images: [
+      'https://i.ibb.co/qMPSJqd4/Capture-d-e-cran-2026-08-06-a-01-12-08.png',
+      'https://i.ibb.co/VWrfcJz8/Capture-d-e-cran-2026-08-06-a-01-12-17.png',
+      'https://i.ibb.co/4nJ3qC8n/Capture-d-e-cran-2026-08-06-a-01-12-27.png',
+      'https://i.ibb.co/Q3hcf3FW/Capture-d-e-cran-2026-08-06-a-01-12-41.png',
+    ],
+    dimensions: 'L 45 × P 45 × H 50 cm',
+    material: 'Plateau cannelé finition noyer, structure métal noir',
+    details: ['Format compact 2 niveaux', 'Surface ondulée cannelée', 'Structure métal noir', 'Bout de canapé, chevet ou coin café'],
+  },
 ];
 
 export const products: Product[] = [
