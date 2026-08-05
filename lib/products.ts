@@ -773,6 +773,24 @@ const exactPriceProducts: Product[] = [
     material: 'Bois finition gris, pieds tournés',
     details: ['Forme ovale profil bas', 'Style Mid-Century vintage', '2 niveaux de rangement', 'Pieds tournés élégants'],
   },
+  // ── Meubles : Table basse moderne noire 2 étagères ───────────────────────────
+  {
+    id: 81,
+    name: 'Table basse moderne noire 2 étagères',
+    category: 'Meubles',
+    price: 148,
+    description: 'Table basse rectangulaire au design moderne et épuré, plateau effet marbre noir et structure en métal. Double étagère pour un rangement élégant et pratique. Une pièce contemporaine qui apporte une touche chic et graphique au salon.',
+    images: [
+      'https://i.ibb.co/SD1GmP8Z/Capture-d-e-cran-2026-08-06-a-01-08-32.png',
+      'https://i.ibb.co/9kVvX3K1/Capture-d-e-cran-2026-08-06-a-01-08-51.png',
+      'https://i.ibb.co/VcMJsnw2/Capture-d-e-cran-2026-08-06-a-01-09-00.png',
+      'https://i.ibb.co/zWghJRJ4/Capture-d-e-cran-2026-08-06-a-01-09-08.png',
+      'https://i.ibb.co/Fq6q5p0c/Capture-d-e-cran-2026-08-06-a-01-09-22.png',
+    ],
+    dimensions: 'L 106 × P 50 × H 47 cm',
+    material: 'Plateau effet marbre noir, structure métal',
+    details: ['Design moderne épuré', 'Plateau effet marbre noir', 'Double étagère de rangement', 'Structure métal robuste'],
+  },
 ];
 
 export const products: Product[] = [
