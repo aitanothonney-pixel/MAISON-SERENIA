@@ -887,6 +887,24 @@ const exactPriceProducts: Product[] = [
     material: 'Plateau blanc, cadre métal doré',
     details: ['Lot de 2 tables gigognes', 'Modulables & gain de place', 'Cadre métal doré chic', 'Plateau blanc élégant'],
   },
+  // ── Salon : Canapé d'angle 3 places crème ────────────────────────────────────
+  {
+    id: 87,
+    name: 'Canapé d\'angle 3 places crème',
+    category: 'Salon',
+    price: 798,
+    description: 'Canapé d\'angle modulable 3 places en tissu aspect lin crème, avec pouf de rangement intégré. Assise large et enveloppante pour un confort optimal, méridienne réversible pour s\'adapter à votre pièce. Élégance douce et fonctionnalité réunies.',
+    images: [
+      'https://i.ibb.co/MxPD6Ykm/Capture-d-e-cran-2026-08-06-a-01-52-14.png',
+      'https://i.ibb.co/tMFHN8wt/Capture-d-e-cran-2026-08-06-a-01-52-35.png',
+      'https://i.ibb.co/BKvzDWGY/Capture-d-e-cran-2026-08-06-a-01-52-20.png',
+      'https://i.ibb.co/rfKtRwXk/Capture-d-e-cran-2026-08-06-a-01-52-27.png',
+      'https://i.ibb.co/k6XQCgLK/Capture-d-e-cran-2026-08-06-a-01-52-44.png',
+    ],
+    dimensions: 'L 210 cm · angle modulable',
+    material: 'Tissu aspect lin crème, pouf de rangement',
+    details: ['3 places + pouf de rangement', 'Angle modulable réversible', 'Assise large et confortable', 'Tissu aspect lin crème'],
+  },
 ];
 
 export const products: Product[] = [
