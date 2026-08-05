@@ -168,7 +168,10 @@ function CheckoutDrawer({
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
   const bubbleDiscount = isBubble ? product.price - promoPrice : 0; // remise -30%
   const welcomeDiscount = welcomeActive ? Math.round(promoPrice * 0.10 * 100) / 100 : 0;
-  const finalTotal = promoPrice - welcomeDiscount;
+  const merchandiseTotal = promoPrice - welcomeDiscount;
+  // Livraison offerte dès 40.–, sinon 4,90
+  const shippingFee = merchandiseTotal > 0 && merchandiseTotal < 40 ? 4.90 : 0;
+  const finalTotal = merchandiseTotal + shippingFee;
 
   useEffect(() => {
     const read = () => {
@@ -407,8 +410,19 @@ function CheckoutDrawer({
                         </div>
                       )}
                       <div className="flex justify-between text-neutral-500">
-                        <span>Livraison</span><span className="text-emerald-600">Offerte</span>
+                        <span>Livraison</span>
+                        {shippingFee === 0 ? (
+                          <span className="text-emerald-600">Offerte</span>
+                        ) : (
+                          <span>{shippingFee.toLocaleString('fr-FR')} €</span>
+                        )}
                       </div>
+                      {shippingFee > 0 && (
+                        <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
+                          <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                          <span>Frais de <span className="font-semibold text-black">4,90 €</span> car la commande est inférieure à 40 €. Ajoutez {(40 - merchandiseTotal).toLocaleString('fr-FR')} € pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                        </div>
+                      )}
                       <div className="h-px bg-neutral-100 my-2" />
                       <div className="flex justify-between font-bold text-black text-base">
                         <span>Total</span><span>{finalTotal.toLocaleString('fr-FR')} €</span>
@@ -645,6 +659,21 @@ function CheckoutDrawer({
                           <span>Code membre −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
                         </div>
                       )}
+                      <div className="flex justify-between text-sm text-neutral-500">
+                        <span>Livraison</span>
+                        {shippingFee === 0 ? (
+                          <span className="text-emerald-600 font-medium">Offerte</span>
+                        ) : (
+                          <span>{shippingFee.toLocaleString('fr-FR')} €</span>
+                        )}
+                      </div>
+                      {shippingFee > 0 && (
+                        <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
+                          <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                          <span>Frais de livraison de <span className="font-semibold text-black">4,90 €</span> appliqués car la commande est inférieure à 40 €.</span>
+                        </div>
+                      )}
+                      <div className="h-px bg-neutral-100 my-1" />
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
                         <span>{finalTotal.toLocaleString('fr-FR')} €</span>

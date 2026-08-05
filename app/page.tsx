@@ -365,7 +365,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
             <div className="px-6 py-4 border-t border-neutral-100 bg-neutral-50 flex-shrink-0">
               <p className="text-xs text-neutral-600 flex items-center gap-2">
                 <span aria-hidden>🚚</span>
-                <span>Livraison gratuite dès 60€ · Suisse</span>
+                <span>Livraison offerte dès 40€ · Suisse</span>
               </p>
               <p className="text-[11px] text-neutral-400 mt-1.5">© 2026 Maison Serenia</p>
             </div>
@@ -1692,7 +1692,7 @@ function TestimonialsSection() {
 
 function TrustStrip() {
   const items = [
-    { Icon: Truck, title: 'Livraison Offerte', subtitle: 'dès 80€' },
+    { Icon: Truck, title: 'Livraison Offerte', subtitle: 'dès 40€' },
     { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
     { Icon: RotateCcw, title: 'Retours Gratuits', subtitle: '30 jours' },
     { Icon: Star, title: '4.9/5', subtitle: '+1 200 clients' },
@@ -2415,7 +2415,7 @@ export default function Home() {
               <span className="text-white/50">· +1 200 clients</span>
             </span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
-            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès 60&nbsp;€</span>
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès 40&nbsp;€</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
             <span className="hidden md:block w-px h-3 bg-white/25" />

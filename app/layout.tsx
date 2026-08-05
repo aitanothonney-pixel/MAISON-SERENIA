@@ -31,11 +31,11 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-  description: 'Découvrez MAISON SERENIA : fauteuils et canapés Bubble, figurines KAWS collectibles, accessoires design. Livraison offerte dès 80€.',
+  description: 'Découvrez MAISON SERENIA : fauteuils et canapés Bubble, figurines KAWS collectibles, accessoires design. Livraison offerte dès 40€.',
   keywords: ['mobilier luxe', 'fauteuil design', 'canapé Bubble', 'figurines KAWS', 'décoration intérieure', 'Maison Serenia'],
   openGraph: {
     title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-    description: 'Fauteuils et canapés Bubble, figurines collectibles, accessoires design. Livraison offerte dès 80€.',
+    description: 'Fauteuils et canapés Bubble, figurines collectibles, accessoires design. Livraison offerte dès 40€.',
     type: 'website',
     locale: 'fr_FR',
     images: [{ url: 'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png', width: 1200, height: 630 }],

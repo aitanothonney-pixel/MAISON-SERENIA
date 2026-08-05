@@ -23,7 +23,7 @@ const BUNDLES = [
 const BUNDLE_PRICE = 1900;
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { items, removeItem, updateQty, clearCart } = useCart();
+  const { items, addItem, removeItem, updateQty, clearCart } = useCart();
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
 
   const [step, setStep] = useState<Step>('cart');
@@ -113,11 +113,22 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   // Remise de bienvenue -10% (inscription newsletter)
   const welcomeDiscount = welcomeActive && afterPack > 0 ? Math.round(afterPack * 0.10 * 100) / 100 : 0;
   const merchandise = afterPack - welcomeDiscount;
-  // Livraison offerte dès 60.–, sinon frais de port fixes
-  const FREE_SHIPPING_THRESHOLD = 60;
-  const SHIPPING_FEE = 8.50;
+  // Livraison offerte dès 40.–, sinon frais de port fixes de 4,90
+  const FREE_SHIPPING_THRESHOLD = 40;
+  const SHIPPING_FEE = 4.90;
   const shipping = merchandise > 0 && merchandise < FREE_SHIPPING_THRESHOLD ? SHIPPING_FEE : 0;
+  const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - merchandise);
+  const freeShippingProgress = Math.min(100, Math.round((merchandise / FREE_SHIPPING_THRESHOLD) * 100));
   const total = merchandise + shipping;
+  // Produit peu coûteux à ajouter pour franchir le seuil de livraison gratuite
+  const cartIds = cartProducts.map((x) => x.id);
+  const shippingBooster = shipping > 0
+    ? products
+        .filter((p) => !cartIds.includes(p.id))
+        .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }))
+        .filter((x) => x.price >= remainingForFreeShipping && x.price <= remainingForFreeShipping + 40)
+        .sort((a, b) => a.price - b.price)[0]
+    : undefined;
 
   const goShopping = () => {
     handleClose();
@@ -564,6 +575,21 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                           <span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
                         </div>
                       )}
+                      <div className="flex justify-between text-sm text-neutral-500">
+                        <span>Livraison</span>
+                        {shipping === 0 ? (
+                          <span className="text-emerald-600 font-medium">Offerte</span>
+                        ) : (
+                          <span>{shipping.toLocaleString('fr-FR')} €</span>
+                        )}
+                      </div>
+                      {shipping > 0 && (
+                        <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 p-2.5 rounded-lg">
+                          <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                          <span>Frais de livraison de <span className="font-semibold text-black">4,90 €</span> appliqués car votre commande est inférieure à 40 €. Ajoutez {remainingForFreeShipping.toLocaleString('fr-FR')} € d&apos;articles pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                        </div>
+                      )}
+                      <div className="h-px bg-neutral-100 my-1" />
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
                         <span>{total.toLocaleString('fr-FR')} €</span>
@@ -683,10 +709,51 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <span className="text-sm text-neutral-600 price-luxe">{shipping.toLocaleString('fr-FR')} €</span>
                     )}
                   </div>
-                  {shipping > 0 && (
-                    <p className="text-[10px] text-neutral-400 -mt-1">
-                      Plus que {(FREE_SHIPPING_THRESHOLD - merchandise).toLocaleString('fr-FR')} € pour la livraison offerte
-                    </p>
+
+                  {/* Barre de progression vers la livraison offerte */}
+                  {merchandise > 0 && (
+                    <div className="pt-1">
+                      {shipping > 0 ? (
+                        <p className="text-[11px] text-neutral-500 mb-1.5">
+                          Plus que <span className="font-bold text-[#A07840]">{remainingForFreeShipping.toLocaleString('fr-FR')} €</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
+                        </p>
+                      ) : (
+                        <p className="text-[11px] text-emerald-600 font-medium mb-1.5 flex items-center gap-1">
+                          <Check className="w-3.5 h-3.5" /> Bravo, vous bénéficiez de la livraison offerte !
+                        </p>
+                      )}
+                      <div className="h-1.5 w-full bg-neutral-100 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{ width: `${freeShippingProgress}%`, background: shipping > 0 ? GOLD_GRADIENT : 'linear-gradient(90deg,#10b981,#059669)' }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Suggestion pour atteindre la livraison offerte */}
+                  {shippingBooster && (
+                    <div className="flex items-center gap-3 border border-[#C9A96E]/40 bg-[#C9A96E]/5 rounded-lg p-2.5 mt-1">
+                      <div className="w-11 h-11 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={shippingBooster.p.images[0]}
+                          alt={shippingBooster.p.name}
+                          className={`w-full h-full ${isBubble(shippingBooster.p.id) || shippingBooster.p.category === 'Décorations' || shippingBooster.p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[10px] tracking-widest uppercase text-[#A07840] font-bold mb-0.5">Ajoutez & livraison offerte</p>
+                        <p className="text-[12px] text-black truncate leading-tight">{shippingBooster.p.name}</p>
+                        <p className="text-[12px] font-bold text-black price-luxe">{shippingBooster.price.toLocaleString('fr-FR')} €</p>
+                      </div>
+                      <button
+                        onClick={() => addItem(shippingBooster.p.id)}
+                        className="shrink-0 w-8 h-8 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+                        aria-label="Ajouter au panier"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
                   )}
                 </div>
 

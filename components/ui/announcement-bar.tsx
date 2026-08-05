@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from '
 import { AnimatePresence, motion } from 'framer-motion'
 
 const MESSAGES = [
-  'Livraison offerte dès 80€ d\'achat',
+  'Livraison offerte dès 40€ d\'achat',
   'Collection Bubble 2026 — Jusqu\'à −30%',
   'Paiement 100% sécurisé · SSL 256-bit',
   'Expédition sous 24-48h · Suivi inclus',
