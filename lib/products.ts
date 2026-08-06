@@ -507,8 +507,8 @@ const rawProducts: Product[] = [
     price: 98,
     description: 'Banc TV de style industriel en brun rustique, pour téléviseur jusqu\'à 55 pouces. Compartiments ouverts, étagère réglable et structure métal noir robuste. Idéal pour salon ou chambre.',
     images: [
-      'https://i.ibb.co/wrQbTCNM/Capture-d-e-cran-2026-07-23-a-20-55-45.png',
       'https://i.ibb.co/Pv2QZk4f/Capture-d-e-cran-2026-07-23-a-20-55-56.png',
+      'https://i.ibb.co/wrQbTCNM/Capture-d-e-cran-2026-07-23-a-20-55-45.png',
       'https://i.ibb.co/p6rYtCdV/Capture-d-e-cran-2026-07-23-a-20-56-12.png',
     ],
     dimensions: 'L 110 cm',
