@@ -1069,7 +1069,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 </div>
                 <div className="flex items-center gap-1 mb-1">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
-                  <span className="text-[10px] text-neutral-400 ml-1">(4,9)</span>
+                  <span className="text-[10px] text-neutral-400 ml-1">(4,3)</span>
                 </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
@@ -1695,7 +1695,7 @@ function TrustStrip() {
     { Icon: Truck, title: 'Livraison Offerte', subtitle: 'dès 40€' },
     { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
     { Icon: RotateCcw, title: 'Retours Gratuits', subtitle: '30 jours' },
-    { Icon: Star, title: '4.9/5', subtitle: '+1 200 clients' },
+    { Icon: Star, title: '4.3/5', subtitle: '+1 200 clients' },
   ];
   return (
     <FadeInSection>
@@ -1708,7 +1708,7 @@ function TrustStrip() {
                 <Icon size={18} className="text-black relative" strokeWidth={1.2} />
               </div>
               <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
-              {title === '4.9/5' ? (
+              {title === '4.3/5' ? (
                 <div className="flex items-center gap-0.5">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <Star key={s} size={11} className="text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
@@ -2411,7 +2411,7 @@ export default function Home() {
                   <Star key={s} className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
                 ))}
               </span>
-              <span className="font-medium">4,9/5</span>
+              <span className="font-medium">4,3/5</span>
               <span className="text-white/50">· +1 200 clients</span>
             </span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
