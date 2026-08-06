@@ -645,12 +645,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                     {[
                       // Meubles : scène d'intérieur — plein cadre
                       { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, fit: 'cover', position: 'center' },
-                      // Salon : fauteuil Bubble blanc — recadré pour ne rien couper
-                      { slug: 'salon', label: 'Salon', cat: null, id: 2, fit: 'cover', position: 'center 42%' },
-                      // Décorations : Bearbrick x Bape noir mis en avant (figurine haute → contain)
+                      // Salon : Canapé d'angle 3 places crème
+                      { slug: 'salon', label: 'Salon', cat: null, id: 87, fit: 'cover', position: 'center' },
+                      // Bubble : Canapé Bubble blanc mis en avant
+                      { slug: 'bubble', label: 'Bubble', cat: null, id: 10, fit: 'cover', position: 'center' },
+                      // Décorations : Bearbrick x Bape noir (figurine haute → contain)
                       { slug: 'figurines', label: 'Décorations', cat: null, id: 38, fit: 'contain', position: 'center' },
-                      // Bubble : fauteuil Bubble rouge mis en avant
-                      { slug: 'bubble', label: 'Bubble', cat: null, id: 8, fit: 'cover', position: 'center 45%' },
                     ].map((c) => {
                       const rep = c.id != null
                         ? products.find((p) => p.id === c.id)
@@ -1221,7 +1221,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Meubles', 'Salon', 'Décorations', 'Bubble', 'Été'];
+const filterCategories = ['Meubles', 'Salon', 'Bubble', 'Décorations', 'Été'];
 
 function ProductFilterBar({
   active,
