@@ -923,7 +923,15 @@ const exactPriceProducts: Product[] = [
   },
 ];
 
-export const products: Product[] = [
+// Produits à afficher en dernier dans leur section (Meubles)
+const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table basse mobile noire
+
+const allProducts: Product[] = [
   ...rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) })),
   ...exactPriceProducts,
+];
+
+export const products: Product[] = [
+  ...allProducts.filter((p) => !SHOW_LAST_IDS.includes(p.id)),
+  ...allProducts.filter((p) => SHOW_LAST_IDS.includes(p.id)),
 ];
