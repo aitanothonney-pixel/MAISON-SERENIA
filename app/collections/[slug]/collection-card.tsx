@@ -11,7 +11,7 @@ export function CollectionCard({ product }: { product: Product }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
-  const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
+  const contain = isBubble || product.category === 'Décorations' || product.category === 'Été' || product.category === 'Meubles';
   const hasMultiple = product.images.length > 1;
 
   const onScroll = () => {
