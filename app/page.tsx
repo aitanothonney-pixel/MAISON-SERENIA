@@ -1010,7 +1010,7 @@ function BubblePromoCarousel() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [61, 63, 71, 35];
+const bestsellerIds = [81, 83, 77, 38];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
