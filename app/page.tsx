@@ -435,10 +435,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   return (
     <>
     <header
-      className={`fixed left-0 right-0 z-50 transition-all duration-500 ${hasBar ? 'top-10' : 'top-0'} ${
+      className={`fixed left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${
         scrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-transparent'
+          : 'bg-transparent border-b border-transparent'
       }`}
     >
       {/* Main nav row */}
