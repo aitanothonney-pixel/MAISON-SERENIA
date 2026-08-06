@@ -1041,27 +1041,19 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-neutral-50"
+                className="group relative overflow-hidden rounded-xl bg-neutral-50"
               >
                 <AnimatePresence mode="wait">
-                  <motion.div
+                  <motion.img
                     key={selectedImage}
+                    src={product.images[selectedImage]}
+                    alt={product.name}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.35 }}
-                    className="w-full h-full"
-                  >
-                    <Image
-                      src={product.images[selectedImage]}
-                      alt={product.name}
-                      fill
-                      className={product.category === 'Décorations'
-                        ? 'object-contain p-6'
-                        : isBubble ? 'object-contain p-4' : 'object-cover'}
-                      priority
-                    />
-                  </motion.div>
+                    className="w-full h-auto block"
+                  />
                 </AnimatePresence>
 
                 {/* Flèches de navigation */}
