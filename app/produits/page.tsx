@@ -52,7 +52,7 @@ export default function ProduitsPage() {
           {items.map((product) => {
             const isBubble = bubbleName(product.name);
             const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
-            const contain = isBubble || product.category === 'Décorations' || product.category === 'Été' || product.category === 'Meubles';
+            const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
             return (
               <Link key={product.id} href={`/products/${product.id}`} className="group block border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500">
                 <div className={`relative aspect-[4/3] overflow-hidden bg-neutral-50 ${contain ? 'p-4' : ''}`}>

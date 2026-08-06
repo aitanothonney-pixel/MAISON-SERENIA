@@ -1058,7 +1058,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       fill
                       className={product.category === 'Décorations'
                         ? 'object-contain p-6'
-                        : isBubble ? 'object-contain p-4' : product.category === 'Meubles' ? 'object-contain p-2' : 'object-cover'}
+                        : isBubble ? 'object-contain p-4' : 'object-cover'}
                       priority
                     />
                   </motion.div>

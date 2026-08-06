@@ -1042,12 +1042,12 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Meubles' ? 'p-3' : ''}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'p-3' : ''}`}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Meubles' ? 'object-contain' : 'object-cover'}`}
+                    className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
                   />
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5">
@@ -1124,14 +1124,14 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : product.category === 'Meubles' ? 'p-2' : ''}`}>
+        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
             width={600}
             height={450}
             style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : [7, 8, 9, 10, 13].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' || product.category === 'Meubles' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${isBubble && product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           {isBubble && product.images[1] && (
             <Image
