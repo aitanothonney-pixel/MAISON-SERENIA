@@ -905,6 +905,22 @@ const exactPriceProducts: Product[] = [
     material: 'Tissu aspect lin crème, pouf de rangement',
     details: ['3 places + pouf de rangement', 'Angle modulable réversible', 'Assise large et confortable', 'Tissu aspect lin crème'],
   },
+  // ── Salon : Canapé d'angle en L chenille bleu ────────────────────────────────
+  {
+    id: 88,
+    name: 'Canapé d\'angle en L chenille bleu',
+    category: 'Salon',
+    price: 798,
+    description: 'Canapé d\'angle en L au style italien minimaliste, en tissu chenille bleu doux et enveloppant. Assise capitonnée profonde, coussins moelleux et lignes modulables épurées. Une pièce généreuse et raffinée pour un salon contemporain et cosy.',
+    images: [
+      'https://i.ibb.co/k2sPz4nZ/Capture-d-e-cran-2026-08-06-a-01-57-03.png',
+      'https://i.ibb.co/84ns2HPM/Capture-d-e-cran-2026-08-06-a-01-58-13.png',
+      'https://i.ibb.co/6R9n25Mg/Capture-d-e-cran-2026-08-06-a-01-58-34.png',
+    ],
+    dimensions: 'Canapé d\'angle en L modulable',
+    material: 'Tissu chenille bleu, assise capitonnée',
+    details: ['Forme en L modulable', 'Tissu chenille doux', 'Assise capitonnée profonde', 'Style italien minimaliste'],
+  },
 ];
 
 export const products: Product[] = [
