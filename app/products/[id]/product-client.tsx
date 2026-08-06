@@ -1051,7 +1051,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.35 }}
+                    transition={{ duration: 0.15 }}
                     className="w-full h-auto block"
                   />
                 </AnimatePresence>
