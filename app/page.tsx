@@ -834,7 +834,7 @@ function PromoBanner() {
           <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
             <p className="text-xs tracking-[0.35em] uppercase mb-3 text-[#C9A96E]">Édition limitée</p>
             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
-              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Salon
+              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Bubble
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
               Offre à durée limitée — dans la limite des stocks disponibles.
