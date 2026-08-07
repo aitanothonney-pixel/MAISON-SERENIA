@@ -69,9 +69,13 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Panier vide' }, { status: 400 });
   }
 
+  let stage = 'init';
   try {
   // Client fetch : évite les erreurs de connexion à Stripe en environnement serverless
   const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient(), timeout: 30000, maxNetworkRetries: 2 });
+
+  stage = 'ping';
+  await stripe.balance.retrieve();
 
   // Recalcul sécurisé côté serveur
   const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
@@ -104,6 +108,7 @@ export async function POST(req: Request) {
   // Remises (pack + code membre) via un coupon ponctuel
   const discounts: Stripe.Checkout.SessionCreateParams.Discount[] = [];
   if (totalDiscount > 0) {
+    stage = 'coupon';
     const coupon = await stripe.coupons.create({
       amount_off: chf(totalDiscount),
       currency: 'chf',
@@ -118,6 +123,7 @@ export async function POST(req: Request) {
     process.env.NEXT_PUBLIC_SITE_URL ||
     'https://maison-serenia.com';
 
+  stage = 'session';
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     line_items,
@@ -144,6 +150,6 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error('Stripe checkout error:', err);
     const message = err instanceof Error ? err.message : String(err);
-    return Response.json({ error: 'checkout_failed', message }, { status: 500 });
+    return Response.json({ error: 'checkout_failed', stage, message }, { status: 500 });
   }
 }

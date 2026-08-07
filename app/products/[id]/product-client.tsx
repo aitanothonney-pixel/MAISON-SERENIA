@@ -270,7 +270,7 @@ function CheckoutDrawer({
       // Stripe configuré mais erreur → pas de fausse confirmation
       if (data?.enabled !== false) {
         setPayLoading(false);
-        alert('Paiement indisponible.\n\n' + (data?.message || 'Réessayez dans un instant.'));
+        alert('Paiement indisponible.\n\nEtape: ' + (data?.stage || '?') + '\n' + (data?.message || 'Réessayez.'));
         return;
       }
       // Stripe non configuré → confirmation de démonstration
