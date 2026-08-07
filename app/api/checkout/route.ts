@@ -27,7 +27,7 @@ export async function GET() {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) return Response.json({ stripeConfigured: false });
   try {
-    const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient() });
+    const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient(), timeout: 30000, maxNetworkRetries: 2 });
     const bal = await stripe.balance.retrieve();
     return Response.json({ stripeConfigured: true, ping: 'ok', livemode: bal.livemode });
   } catch (e) {
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
 
   try {
   // Client fetch : évite les erreurs de connexion à Stripe en environnement serverless
-  const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient() });
+  const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient(), timeout: 30000, maxNetworkRetries: 2 });
 
   // Recalcul sécurisé côté serveur
   const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
