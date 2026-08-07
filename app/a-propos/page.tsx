@@ -4,7 +4,7 @@ import { Star, Heart, Leaf, Award } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Notre Histoire | MAISON SERENIA',
-  description: "Découvrez l'histoire de MAISON SERENIA, née d'une passion pour le design français et l'art de vivre.",
+  description: "Découvrez MAISON SERENIA, boutique de sélection design basée à Genève : mobilier sculptural, pièces de collection et décoration contemporaine.",
 };
 
 export default function AProposPage() {
@@ -42,7 +42,7 @@ export default function AProposPage() {
             className="text-neutral-400 text-lg max-w-xl leading-relaxed"
             style={{ fontFamily: 'var(--font-dm-sans)' }}
           >
-            MAISON SERENIA est née d'une conviction simple : chaque intérieur mérite des pièces pensées avec soin, façonnées dans la tradition du savoir-faire français.
+            MAISON SERENIA est née d'une conviction simple : chaque intérieur mérite des pièces au design fort, choisies avec soin et rendues accessibles.
           </p>
         </div>
       </section>
@@ -56,13 +56,13 @@ export default function AProposPage() {
               className="text-3xl font-bold text-black mb-5"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Une passion pour le design français
+              Une passion pour le design
             </h2>
             <p className="text-neutral-600 leading-relaxed mb-4">
-              Fondée en 2024 par une équipe d'amoureux du design, MAISON SERENIA s'est donné pour mission de rendre l'intérieur d'exception accessible. Chaque pièce de notre collection est sélectionnée avec la même exigence : des matières nobles, des lignes intemporelles, une finition irréprochable.
+              Fondée en 2024 à Genève, MAISON SERENIA s'est donné pour mission de rendre le design d'exception accessible. Nous parcourons les tendances déco pour vous proposer une sélection resserrée de pièces sculpturales, de collection et de décoration contemporaine.
             </p>
             <p className="text-neutral-600 leading-relaxed mb-4">
-              Nous collaborons exclusivement avec des artisans et manufactures qui partagent notre vision — celle d'un mobilier et d'une décoration qui traversent les années sans jamais paraître démodés.
+              Notre approche est simple : sélectionner des pièces au caractère affirmé, aux lignes qui traversent les saisons, et les livrer chez vous avec le plus grand soin.
             </p>
             <p className="text-neutral-600 leading-relaxed">
               Notre nom, SERENIA, évoque la sérénité que peut procurer un intérieur soigné. C'est cette émotion que nous cherchons à créer pour chacun de nos clients.
@@ -77,7 +77,7 @@ export default function AProposPage() {
             </div>
             <div className="w-12 h-px bg-white mb-6" />
             <p className="text-neutral-400 text-sm leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              Année de fondation. Depuis, nous avons accompagné des centaines de foyers dans la création d'intérieurs qui leur ressemblent.
+              Année de fondation, à Genève. Depuis, nous sélectionnons avec soin des pièces design pour aider chacun à composer un intérieur qui lui ressemble.
             </p>
           </div>
         </section>
@@ -99,8 +99,8 @@ export default function AProposPage() {
               },
               {
                 icon: <Star className="w-6 h-6" />,
-                title: 'Design Authentique',
-                desc: "Nos collections s'inspirent du patrimoine décoratif français tout en épousant les tendances contemporaines. Des pièces vraies, jamais éphémères.",
+                title: 'Design Affirmé',
+                desc: "Nos collections épousent les tendances contemporaines tout en misant sur des formes qui durent. Des pièces au caractère fort, choisies pour leur style.",
               },
               {
                 icon: <Heart className="w-6 h-6" />,
@@ -141,13 +141,13 @@ export default function AProposPage() {
               {[
                 {
                   icon: <Leaf className="w-4 h-4" />,
-                  title: 'Éco-responsabilité',
-                  desc: 'Emballages recyclés, partenaires locaux privilégiés, réduction de notre empreinte carbone à chaque étape.',
+                  title: 'Sélection responsable',
+                  desc: 'Nous privilégions des pièces pensées pour durer, à contre-courant du mobilier jetable, pour éviter le gaspillage.',
                 },
                 {
                   icon: <Star className="w-4 h-4" />,
-                  title: 'Transparence totale',
-                  desc: "Origine des matières, conditions de fabrication, tarifs clairs — nous n'avons rien à cacher.",
+                  title: 'Transparence',
+                  desc: "Tarifs clairs, informations produit détaillées, conditions de retour explicites — aucune mauvaise surprise.",
                 },
                 {
                   icon: <Heart className="w-4 h-4" />,
@@ -156,8 +156,8 @@ export default function AProposPage() {
                 },
                 {
                   icon: <Award className="w-4 h-4" />,
-                  title: 'Pièces durables',
-                  desc: 'Nous ne vendons pas du "fast furniture". Nos collections sont conçues pour durer et évoluer avec vous.',
+                  title: 'Pièces qui durent',
+                  desc: 'Nous privilégions des designs intemporels plutôt que des tendances éphémères, pour un intérieur qui évolue avec vous.',
                 },
               ].map((eng, i) => (
                 <div
