@@ -21,10 +21,22 @@ const SHIPPING_FEE = 4.9;
 
 const chf = (amount: number) => Math.round(amount * 100); // centimes
 
-// Diagnostic : ouvre /api/checkout dans le navigateur pour vérifier
-// si la clé Stripe est bien détectée sur ce déploiement.
+// Diagnostic : ouvre /api/checkout dans le navigateur.
+// Teste la présence de la clé ET la connexion réelle à Stripe.
 export async function GET() {
-  return Response.json({ stripeConfigured: !!process.env.STRIPE_SECRET_KEY });
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) return Response.json({ stripeConfigured: false });
+  try {
+    const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient() });
+    const bal = await stripe.balance.retrieve();
+    return Response.json({ stripeConfigured: true, ping: 'ok', livemode: bal.livemode });
+  } catch (e) {
+    return Response.json({
+      stripeConfigured: true,
+      ping: 'error',
+      message: e instanceof Error ? e.message : String(e),
+    });
+  }
 }
 
 export async function POST(req: Request) {
