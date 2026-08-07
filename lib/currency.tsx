@@ -2,11 +2,12 @@
 
 import { createContext, useContext } from 'react';
 
-// Devise: prix stockés en EUR (base). Conversion vers CHF pour les visiteurs suisses.
+// Devise: prix stockés en CHF (base, ce sont les prix que tu saisis).
+// Un visiteur suisse voit le montant tel quel en CHF ; ailleurs, il est converti en EUR.
 export type Currency = 'EUR' | 'CHF';
 
-// Taux fixe EUR -> CHF (à ajuster de temps en temps).
-export const EUR_TO_CHF = 0.96;
+// Taux fixe CHF -> EUR (à ajuster de temps en temps). 1 CHF ≈ 1.05 €.
+export const CHF_TO_EUR = 1.05;
 
 export const CurrencyContext = createContext<Currency>('EUR');
 
@@ -14,15 +15,15 @@ export function useCurrency(): Currency {
   return useContext(CurrencyContext);
 }
 
-// Convertit un montant EUR vers la devise cible.
-export function convertPrice(amountEur: number, cur: Currency): number {
-  const v = cur === 'CHF' ? amountEur * EUR_TO_CHF : amountEur;
+// Convertit un montant CHF (base) vers la devise cible.
+export function convertPrice(amountChf: number, cur: Currency): number {
+  const v = cur === 'EUR' ? amountChf * CHF_TO_EUR : amountChf;
   return Math.round(v * 100) / 100;
 }
 
-// Formate un montant (stocké en EUR) dans la devise du visiteur.
-export function formatPrice(amountEur: number, cur: Currency): string {
-  const v = convertPrice(amountEur, cur);
+// Formate un montant (stocké en CHF) dans la devise du visiteur.
+export function formatPrice(amountChf: number, cur: Currency): string {
+  const v = convertPrice(amountChf, cur);
   const num = v.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
   return cur === 'CHF' ? `${num} CHF` : `${num} €`;
 }

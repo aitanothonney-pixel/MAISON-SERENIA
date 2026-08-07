@@ -44,7 +44,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         offers: {
           '@type': 'Offer',
           url: `${BASE}/products/${product.id}`,
-          priceCurrency: 'EUR',
+          priceCurrency: 'CHF',
           price: (product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price).toString(),
           availability: 'https://schema.org/InStock',
           seller: { '@type': 'Organization', name: 'Maison Serenia' },
