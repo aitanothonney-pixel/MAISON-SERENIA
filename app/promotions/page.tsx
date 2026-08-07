@@ -105,7 +105,7 @@ export default function PromotionsPage() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
                     <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />
-                    <span><span className="font-semibold text-black">{figurine.name}</span> offerte · −{b.rabais}€</span>
+                    <span><span className="font-semibold text-black">{figurine.name}</span> offerte · −<Price value={b.rabais} /></span>
                   </div>
                   <Link
                     href={`/packs/${b.slug}`}

@@ -2,13 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-
-const MESSAGES = [
-  'Livraison offerte dès 40€ d\'achat',
-  'Collection Bubble 2026 — Jusqu\'à −30%',
-  'Paiement 100% sécurisé · SSL 256-bit',
-  'Expédition sous 24-48h · Suivi inclus',
-]
+import { useCurrency, formatPrice } from '@/lib/currency'
 
 const SESSION_KEY = 'announcement-bar-closed'
 const INTERVAL_MS = 4500
@@ -21,6 +15,13 @@ export function useAnnouncementBarVisible() {
 }
 
 export function AnnouncementBar({ children }: { children?: ReactNode }) {
+  const cur = useCurrency()
+  const MESSAGES = [
+    `Livraison offerte dès ${formatPrice(40, cur)} d'achat`,
+    'Collection Bubble 2026 — Jusqu\'à −30%',
+    'Paiement 100% sécurisé · SSL 256-bit',
+    'Expédition sous 24-48h · Suivi inclus',
+  ]
   const [visible, setVisible] = useState(false)
   const [index, setIndex] = useState(0)
 

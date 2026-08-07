@@ -422,7 +422,7 @@ function CheckoutDrawer({
                       {shippingFee > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de <span className="font-semibold text-black">4,90 €</span> car la commande est inférieure à 40 €. Ajoutez {formatPrice((40 - merchandiseTotal), cur)} pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                          <span>Frais de <span className="font-semibold text-black">{formatPrice(shippingFee, cur)}</span> car la commande est inférieure à {formatPrice(40, cur)}. Ajoutez {formatPrice((40 - merchandiseTotal), cur)} pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-2" />
@@ -672,7 +672,7 @@ function CheckoutDrawer({
                       {shippingFee > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de livraison de <span className="font-semibold text-black">4,90 €</span> appliqués car la commande est inférieure à 40 €.</span>
+                          <span>Frais de livraison de <span className="font-semibold text-black">{formatPrice(shippingFee, cur)}</span> appliqués car la commande est inférieure à {formatPrice(40, cur)}.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-1" />

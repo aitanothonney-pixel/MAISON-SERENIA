@@ -44,7 +44,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           >
             ← Retour aux ensembles
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais {bundle.rabais}€</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais <Price value={bundle.rabais} /></p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Ensemble Bubble {bundle.color}
           </h1>
@@ -110,7 +110,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           </div>
           <div className="flex mb-5 mt-3">
             <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-              Vous économisez {bundle.rabais}€
+              Vous économisez <Price value={bundle.rabais} />
             </span>
           </div>
 
@@ -126,7 +126,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           <AddBundleButton ids={[canape.id, fauteuil.id, figurine.id]} />
 
           <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
-            Livraison gratuite à partir de 60€
+            Livraison gratuite à partir de <Price value={40} />
           </p>
         </aside>
       </div>

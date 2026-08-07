@@ -324,7 +324,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Packs &amp; Ensembles
                   </h3>
-                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais jusqu&apos;à 200€ sur nos ensembles</p>
+                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais jusqu&apos;à {formatPrice(200, cur)} sur nos ensembles</p>
                 </button>
               </div>
 
@@ -367,7 +367,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
             <div className="px-6 py-4 border-t border-neutral-100 bg-neutral-50 flex-shrink-0">
               <p className="text-xs text-neutral-600 flex items-center gap-2">
                 <span aria-hidden>🚚</span>
-                <span>Livraison offerte dès 40€ · Suisse</span>
+                <span>Livraison offerte dès {formatPrice(40, cur)} · Suisse</span>
               </p>
               <p className="text-[11px] text-neutral-400 mt-1.5">© 2026 Maison Serenia</p>
             </div>
@@ -1608,7 +1608,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
                   <div className="flex justify-center mb-3">
                     <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-                      Rabais de {rabais}€
+                      Rabais de {formatPrice(rabais, cur)}
                     </span>
                   </div>
 
@@ -1643,7 +1643,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     Voir le pack
                   </Link>
                   <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
-                    Livraison gratuite à partir de 60€
+                    Livraison gratuite à partir de {formatPrice(40, cur)}
                   </p>
                 </motion.div>
               );
@@ -1701,8 +1701,9 @@ function TestimonialsSection() {
 // ─── Trust Strip ─────────────────────────────────────────────────────────────
 
 function TrustStrip() {
+  const cur = useCurrency();
   const items = [
-    { Icon: Truck, title: 'Livraison Offerte', subtitle: 'dès 40€' },
+    { Icon: Truck, title: 'Livraison Offerte', subtitle: `dès ${formatPrice(40, cur)}` },
     { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
     { Icon: RotateCcw, title: 'Retours Gratuits', subtitle: '30 jours' },
     { Icon: Star, title: '4.3/5', subtitle: '+1 200 clients' },
@@ -2194,6 +2195,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 // ─── Cart Drawer ──────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const cur = useCurrency();
   const [activeFilter, setActiveFilter] = useState('Meubles');
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
@@ -2429,7 +2431,7 @@ export default function Home() {
               <span className="text-white/50">· +1 200 clients</span>
             </span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
-            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès 40&nbsp;€</span>
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
             <span className="hidden md:block w-px h-3 bg-white/25" />

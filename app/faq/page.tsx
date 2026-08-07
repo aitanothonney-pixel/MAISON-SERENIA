@@ -18,7 +18,7 @@ const FAQ_DATA: FaqGroup[] = [
       },
       {
         q: 'La livraison est-elle gratuite ?',
-        a: "Oui, la livraison Colissimo Standard est offerte pour toute commande d'un montant supérieur à 80 €. En dessous, le tarif est de 4,90 €.",
+        a: "Oui, la livraison Colissimo Standard est offerte pour toute commande d'un montant supérieur à 40 €. En dessous, le tarif est de 4,90 €.",
       },
       {
         q: 'Comment suivre ma commande ?',
