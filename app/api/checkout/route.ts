@@ -38,10 +38,25 @@ async function stripeRequest(path: string, key: string, params?: Record<string, 
   return data;
 }
 
+// Vérifie que la clé est exploitable (pas de caractères non-ASCII issus d'un copier-coller tronqué).
+function validateKey(raw: string | undefined): { key?: string; error?: string } {
+  if (!raw) return { error: 'Clé Stripe absente.' };
+  const key = raw.trim();
+  // Une clé Stripe ne contient que des lettres, chiffres et « _ ». Tout autre caractère
+  // (ex. « … » d'une clé copiée tronquée) est invalide.
+  if (!/^[A-Za-z0-9_]+$/.test(key)) {
+    return { error: 'La clé secrète Stripe contient des caractères invalides (elle a probablement été copiée tronquée avec « … »). Recopiez la clé complète depuis Stripe.' };
+  }
+  if (key.length < 100) {
+    return { error: 'La clé secrète Stripe semble incomplète. Recopiez la clé complète depuis Stripe.' };
+  }
+  return { key };
+}
+
 // Diagnostic : teste la présence de la clé ET la connexion réelle à Stripe.
 export async function GET() {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) return Response.json({ stripeConfigured: false });
+  const { key, error } = validateKey(process.env.STRIPE_SECRET_KEY);
+  if (!key) return Response.json({ stripeConfigured: false, keyError: error });
   try {
     const bal = await stripeRequest('/balance', key);
     return Response.json({ stripeConfigured: true, ping: 'ok', livemode: bal.livemode });
@@ -51,8 +66,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) return Response.json({ enabled: false }, { status: 200 });
+  const { key, error: keyError } = validateKey(process.env.STRIPE_SECRET_KEY);
+  if (!key) return Response.json({ error: 'config', message: keyError }, { status: 500 });
 
   let body: { items?: { id: number; qty: number }[]; promo?: boolean };
   try {
