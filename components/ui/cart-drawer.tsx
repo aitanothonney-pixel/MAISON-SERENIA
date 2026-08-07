@@ -317,9 +317,9 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               <AnimatePresence mode="wait">
                 {/* ── CART ── */}
                 {step === 'cart' && (
-                  <motion.div key="cart" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }} className="h-full">
+                  <motion.div key="cart" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }}>
                     {cartProducts.length === 0 ? (
-                      <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-6 py-16">
+                      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center px-6 py-16">
                         <div className="relative w-20 h-20 rounded-full border border-[#C9A96E]/40 flex items-center justify-center">
                           <div className="absolute inset-1.5 rounded-full border border-neutral-100" />
                           <ShoppingBag className="w-7 h-7 text-neutral-300 relative" strokeWidth={1.3} />
