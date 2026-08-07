@@ -18,6 +18,12 @@ const SHIPPING_FEE = 4.9;
 
 const chf = (amount: number) => Math.round(amount * 100); // centimes
 
+// Diagnostic : ouvre /api/checkout dans le navigateur pour vérifier
+// si la clé Stripe est bien détectée sur ce déploiement.
+export async function GET() {
+  return Response.json({ stripeConfigured: !!process.env.STRIPE_SECRET_KEY });
+}
+
 export async function POST(req: Request) {
   const key = process.env.STRIPE_SECRET_KEY;
   // Tant que la clé secrète n'est pas configurée, on signale que Stripe est inactif
