@@ -686,11 +686,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
 
-            {/* Footer — CART step */}
+            {/* Récapitulatif panier — défile avec les articles */}
             {step === 'cart' && cartProducts.length > 0 && (
-              <div className="border-t border-neutral-100 flex-shrink-0">
+              <div className="border-t border-neutral-100">
                 {/* Code promo */}
                 <div className="px-6 pt-5">
                   {welcomeActive ? (
@@ -843,6 +842,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
               </div>
             )}
+            </div>
 
             {/* Footer — DELIVERY / PAYMENT steps */}
             {(step === 'delivery' || step === 'payment') && (
