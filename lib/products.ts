@@ -70,6 +70,12 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 85, color: 'Brun', colorHex: '#6b4a30' },
     { productId: 86, color: 'Blanc doré', colorHex: '#d9c9a3' },
   ],
+  'canape-lit-modulaire': [
+    { productId: 89, color: 'Vert', colorHex: '#4a5d4a' },
+    { productId: 90, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 91, color: 'Beige', colorHex: '#d8c8a8' },
+    { productId: 92, color: 'Bleu', colorHex: '#2d3a6b' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -920,6 +926,69 @@ const exactPriceProducts: Product[] = [
     dimensions: 'Canapé d\'angle en L modulable',
     material: 'Tissu chenille bleu, assise capitonnée',
     details: ['Forme en L modulable', 'Tissu chenille doux', 'Assise capitonnée profonde', 'Style italien minimaliste'],
+  },
+  // ── Salon : Canapé-lit modulaire chenille — Vert ─────────────────────────────
+  {
+    id: 89,
+    name: 'Canapé-lit modulaire chenille',
+    category: 'Salon',
+    price: 750,
+    description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Vert.',
+    images: [
+      'https://i.ibb.co/wZN1xXXW/Capture-d-e-cran-2026-08-07-a-17-30-58.png',
+      'https://i.ibb.co/rG0Xc7J9/Capture-d-e-cran-2026-08-07-a-17-31-08.png',
+      'https://i.ibb.co/mVmFqtRH/Capture-d-e-cran-2026-08-07-a-17-31-21.png',
+      'https://i.ibb.co/wZSBkJWC/Capture-d-e-cran-2026-08-07-a-17-31-33.png',
+      'https://i.ibb.co/MxbKdfXk/Capture-d-e-cran-2026-08-07-a-17-31-43.png',
+      'https://i.ibb.co/CpB9STSb/Capture-d-e-cran-2026-08-07-a-17-31-53.png',
+      'https://i.ibb.co/d0YmvKMk/Capture-d-e-cran-2026-08-07-a-17-32-01.png',
+      'https://i.ibb.co/dwyRGfqF/Capture-d-e-cran-2026-08-07-a-17-32-10.png',
+    ],
+    dimensions: 'Canapé-lit sectionnel 2 places',
+    material: 'Tissu chenille, livré compressé sous vide',
+    details: ['Convertible canapé-lit', 'Modulable & combinable', 'Adapté aux animaux', 'Sans assemblage (compressé sous vide)'],
+  },
+  // ── Salon : Canapé-lit modulaire chenille — Noir ─────────────────────────────
+  {
+    id: 90,
+    name: 'Canapé-lit modulaire chenille',
+    category: 'Salon',
+    price: 750,
+    description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Noir.',
+    images: [
+      'https://i.ibb.co/WTPptv1/Capture-d-e-cran-2026-08-07-a-17-32-33.png',
+    ],
+    dimensions: 'Canapé-lit sectionnel 2 places',
+    material: 'Tissu chenille, livré compressé sous vide',
+    details: ['Convertible canapé-lit', 'Modulable & combinable', 'Adapté aux animaux', 'Sans assemblage (compressé sous vide)'],
+  },
+  // ── Salon : Canapé-lit modulaire chenille — Beige ────────────────────────────
+  {
+    id: 91,
+    name: 'Canapé-lit modulaire chenille',
+    category: 'Salon',
+    price: 750,
+    description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Beige.',
+    images: [
+      'https://i.ibb.co/p6CnFZ6v/Capture-d-e-cran-2026-08-07-a-17-32-18.png',
+    ],
+    dimensions: 'Canapé-lit sectionnel 2 places',
+    material: 'Tissu chenille, livré compressé sous vide',
+    details: ['Convertible canapé-lit', 'Modulable & combinable', 'Adapté aux animaux', 'Sans assemblage (compressé sous vide)'],
+  },
+  // ── Salon : Canapé-lit modulaire chenille — Bleu ─────────────────────────────
+  {
+    id: 92,
+    name: 'Canapé-lit modulaire chenille',
+    category: 'Salon',
+    price: 750,
+    description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Bleu.',
+    images: [
+      'https://i.ibb.co/MkhGH94b/Capture-d-e-cran-2026-08-07-a-17-32-26.png',
+    ],
+    dimensions: 'Canapé-lit sectionnel 2 places',
+    material: 'Tissu chenille, livré compressé sous vide',
+    details: ['Convertible canapé-lit', 'Modulable & combinable', 'Adapté aux animaux', 'Sans assemblage (compressé sous vide)'],
   },
 ];
 
