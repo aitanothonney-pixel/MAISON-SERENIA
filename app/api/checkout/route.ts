@@ -1,6 +1,9 @@
 import Stripe from 'stripe';
 import { products } from '@/lib/products';
 
+// Force l'exécution sur le runtime Node.js (pas Edge)
+export const runtime = 'nodejs';
+
 // Pièces Bubble en promo -30%
 const BUBBLE_IDS = [2, 6, 7, 8, 9, 10, 12, 13, 22];
 const isBubble = (id: number) => BUBBLE_IDS.includes(id);
@@ -55,7 +58,8 @@ export async function POST(req: Request) {
   }
 
   try {
-  const stripe = new Stripe(key);
+  // Client fetch : évite les erreurs de connexion à Stripe en environnement serverless
+  const stripe = new Stripe(key, { httpClient: Stripe.createFetchHttpClient() });
 
   // Recalcul sécurisé côté serveur
   const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
