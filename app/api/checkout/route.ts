@@ -54,6 +54,7 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Panier vide' }, { status: 400 });
   }
 
+  try {
   const stripe = new Stripe(key);
 
   // Recalcul sécurisé côté serveur
@@ -124,4 +125,8 @@ export async function POST(req: Request) {
   });
 
   return Response.json({ url: session.url });
+  } catch (err) {
+    console.error('Stripe checkout error:', err);
+    return Response.json({ error: 'Erreur lors de la création du paiement.' }, { status: 500 });
+  }
 }
