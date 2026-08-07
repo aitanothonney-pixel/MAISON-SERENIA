@@ -32,6 +32,7 @@ const cinzel = Cinzel({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://maison-serenia.com'),
   title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
   description: 'Découvrez MAISON SERENIA : fauteuils et canapés Bubble, figurines KAWS collectibles, accessoires design. Livraison offerte dès 40€.',
   keywords: ['mobilier luxe', 'fauteuil design', 'canapé Bubble', 'figurines KAWS', 'décoration intérieure', 'Maison Serenia'],
@@ -52,6 +53,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Maison Serenia',
+              url: 'https://maison-serenia.com',
+              email: 'maisonserenia@gmail.com',
+              description: 'Mobilier de luxe et design contemporain : canapés et fauteuils Bubble, tables, pièces de collection et décoration.',
+            }),
+          }}
+        />
         <CurrencyProvider value={currency}>
           <AnnouncementBar>{children}</AnnouncementBar>
           <WelcomePopup />
