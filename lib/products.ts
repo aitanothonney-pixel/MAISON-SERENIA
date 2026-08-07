@@ -990,6 +990,22 @@ const exactPriceProducts: Product[] = [
     material: 'Tissu chenille, livré compressé sous vide',
     details: ['Convertible canapé-lit', 'Modulable & combinable', 'Adapté aux animaux', 'Sans assemblage (compressé sous vide)'],
   },
+  // ── Salon : Canapé-lit modulaire flanelle 150 cm ─────────────────────────────
+  {
+    id: 93,
+    name: 'Canapé-lit modulaire flanelle',
+    category: 'Salon',
+    price: 999,
+    description: 'Canapé modulaire déformable en tissu flanelle côtelé, au design moderne et enveloppant (150 cm). Assise moelleuse à compression d\'air, convertible en couchage d\'appoint. Lignes douces et généreuses pour un salon cosy et contemporain.',
+    images: [
+      'https://i.ibb.co/XfbpfYJh/Capture-d-e-cran-2026-08-07-a-17-49-18.png',
+      'https://i.ibb.co/nMQ2tDQk/Capture-d-e-cran-2026-08-07-a-17-49-22.png',
+      'https://i.ibb.co/JWKDDRcW/Capture-d-e-cran-2026-08-07-a-17-49-28.png',
+    ],
+    dimensions: 'L 150 cm · canapé-lit modulable',
+    material: 'Tissu flanelle côtelé, assise à compression d\'air',
+    details: ['Design modulable déformable', 'Tissu flanelle côtelé doux', 'Convertible canapé-lit', 'Assise moelleuse enveloppante'],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
