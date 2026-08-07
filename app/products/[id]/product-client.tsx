@@ -154,7 +154,7 @@ function CheckoutDrawer({
 }: {
   open: boolean;
   onClose: () => void;
-  product: { name: string; price: number; images: string[]; category: string };
+  product: { id: number; name: string; price: number; images: string[]; category: string };
 }) {
   const cur = useCurrency();
   const [step, setStep] = useState<CheckoutStep>('cart');
@@ -253,8 +253,28 @@ function CheckoutDrawer({
 
   const stepIndex = steps.findIndex((s) => s.key === step);
 
-  const handlePay = () => {
+  const handlePay = async () => {
     setPayLoading(true);
+    // Paiement réel via Stripe si configuré, sinon confirmation de démonstration.
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [{ id: product.id, qty: 1 }], promo: welcomeActive }),
+      });
+      const data = await res.json();
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+      // Stripe configuré mais erreur → pas de fausse confirmation
+      if (data?.enabled !== false) {
+        setPayLoading(false);
+        alert('Le paiement est momentanément indisponible. Merci de réessayer dans un instant.');
+        return;
+      }
+      // Stripe non configuré → confirmation de démonstration
+    } catch { /* erreur réseau → démonstration */ }
     setTimeout(() => {
       setPayLoading(false);
       setStep('confirmation');

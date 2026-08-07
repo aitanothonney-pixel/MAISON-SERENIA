@@ -159,6 +159,37 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     setStep('delivery');
   };
 
+  // Paiement réel via Stripe si configuré, sinon repli sur le tunnel de démonstration.
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const handleCheckout = async (method: PayMethod) => {
+    if (checkoutLoading) return;
+    setCheckoutLoading(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: items.map((i) => ({ id: i.id, qty: i.qty })), promo: welcomeActive }),
+      });
+      const data = await res.json();
+      if (data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+      // Repli sur le tunnel de démonstration UNIQUEMENT si Stripe n'est pas configuré
+      if (data?.enabled === false) {
+        startCheckout(method);
+        return;
+      }
+      // Stripe configuré mais erreur → surtout pas de fausse confirmation
+      alert('Le paiement est momentanément indisponible. Merci de réessayer dans un instant.');
+    } catch {
+      // Erreur réseau : on tente le tunnel de démonstration (aucun débit)
+      startCheckout(method);
+    } finally {
+      setCheckoutLoading(false);
+    }
+  };
+
   const handlePay = () => {
     setPayLoading(true);
     setOrderTotal(total);
@@ -792,7 +823,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   </div>
 
                   <button
-                    onClick={() => startCheckout('card')}
+                    onClick={() => handleCheckout('card')}
                     className="w-full text-white py-4 text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                     style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
                   >
@@ -802,7 +833,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
                   <div className="grid grid-cols-3 gap-2 mt-3">
                     <button
-                      onClick={() => startCheckout('paypal')}
+                      onClick={() => handleCheckout('paypal')}
                       className="bg-white border border-neutral-200 text-black py-3 hover:border-black transition-colors flex items-center justify-center gap-1.5"
                       aria-label="Payer avec PayPal"
                     >
@@ -812,7 +843,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <span className="text-[11px] font-semibold tracking-wide">PayPal</span>
                     </button>
                     <button
-                      onClick={() => startCheckout('applepay')}
+                      onClick={() => handleCheckout('applepay')}
                       className="bg-white border border-neutral-200 text-black py-3 hover:border-black transition-colors flex items-center justify-center gap-1"
                       aria-label="Payer avec Apple Pay"
                     >
@@ -822,7 +853,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <span className="text-[11px] font-semibold tracking-wide">Pay</span>
                     </button>
                     <button
-                      onClick={() => startCheckout('twint')}
+                      onClick={() => handleCheckout('twint')}
                       className="bg-white border border-neutral-200 text-black py-3 hover:border-black transition-colors flex items-center justify-center font-bold tracking-wide text-[11px]"
                       aria-label="Payer avec TWINT"
                     >
