@@ -5,8 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import type { Product } from '@/lib/products';
+import { formatPrice, useCurrency } from '@/lib/currency';
 
 export function CollectionCard({ product }: { product: Product }) {
+  const cur = useCurrency();
   const [idx, setIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
@@ -71,9 +73,9 @@ export function CollectionCard({ product }: { product: Product }) {
           {product.name}
         </h2>
         <div className="flex items-baseline gap-2 mt-1.5">
-          <span className="text-sm font-semibold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
+          <span className="text-sm font-semibold text-black">{formatPrice(promoPrice, cur)}</span>
           {isBubble && (
-            <span className="text-xs text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</span>
+            <span className="text-xs text-neutral-400 line-through">{formatPrice(product.price, cur)}</span>
           )}
         </div>
       </div>

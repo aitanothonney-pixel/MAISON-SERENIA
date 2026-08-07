@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Price } from '@/lib/currency';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { products } from '@/lib/products';

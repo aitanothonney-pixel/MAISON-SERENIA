@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Price } from '@/lib/currency';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { products, collapseVariantDuplicates } from '@/lib/products';
@@ -82,9 +83,9 @@ export default function ProduitsPage() {
                   </h2>
                   <div className="h-px bg-neutral-100 my-3" />
                   <div className="flex items-baseline gap-2">
-                    <span className="text-sm font-semibold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
+                    <span className="text-sm font-semibold text-black"><Price value={promoPrice} /></span>
                     {isBubble && (
-                      <span className="text-xs text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</span>
+                      <span className="text-xs text-neutral-400 line-through"><Price value={product.price} /></span>
                     )}
                   </div>
                 </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Price } from '@/lib/currency';
 import Image from 'next/image';
 import { Gift } from 'lucide-react';
 import { products } from '@/lib/products';
@@ -60,8 +61,8 @@ export default function PromotionsPage() {
                   {product.name}
                 </h2>
                 <div className="flex items-baseline gap-2 mt-1.5">
-                  <span className="text-sm font-semibold text-black">{promoPrice.toLocaleString('fr-FR')} €</span>
-                  <span className="text-xs text-neutral-400 line-through">{product.price.toLocaleString('fr-FR')} €</span>
+                  <span className="text-sm font-semibold text-black"><Price value={promoPrice} /></span>
+                  <span className="text-xs text-neutral-400 line-through"><Price value={product.price} /></span>
                 </div>
               </Link>
             );
@@ -99,8 +100,8 @@ export default function PromotionsPage() {
                     ))}
                   </div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>{price.toLocaleString('fr-FR')} €</span>
-                    <span className="text-sm text-neutral-400 line-through">{sum.toLocaleString('fr-FR')} €</span>
+                    <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}><Price value={price} /></span>
+                    <span className="text-sm text-neutral-400 line-through"><Price value={sum} /></span>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
                     <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />

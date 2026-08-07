@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans, Italiana, Cinzel } from 'next/font/google'
+import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
+import { CurrencyProvider, type Currency } from '@/lib/currency'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -44,12 +46,16 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const currency: Currency = cookieStore.get('mss-currency')?.value === 'CHF' ? 'CHF' : 'EUR';
   return (
     <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
       <body>
-        <AnnouncementBar>{children}</AnnouncementBar>
-        <WelcomePopup />
+        <CurrencyProvider value={currency}>
+          <AnnouncementBar>{children}</AnnouncementBar>
+          <WelcomePopup />
+        </CurrencyProvider>
       </body>
     </html>
   )

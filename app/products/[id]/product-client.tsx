@@ -12,6 +12,7 @@ import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
+import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 
@@ -155,6 +156,7 @@ function CheckoutDrawer({
   onClose: () => void;
   product: { name: string; price: number; images: string[]; category: string };
 }) {
+  const cur = useCurrency();
   const [step, setStep] = useState<CheckoutStep>('cart');
   const [delivery, setDelivery] = useState({ prenom: '', nom: '', email: '', adresse: '', ville: '', code: '' });
   const [payment, setPayment] = useState({ carte: '', expiry: '', cvv: '', titulaire: '' });
@@ -378,9 +380,9 @@ function CheckoutDrawer({
                         <p className="font-semibold text-sm text-black leading-tight mb-1">{product.name}</p>
                         <p className="text-xs text-neutral-400 mb-2">{product.category} · Qté 1</p>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</span>
+                          <span className="font-bold text-black price-luxe">{formatPrice(promoPrice, cur)}</span>
                           {product.name.includes('Bubble') && (
-                            <span className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</span>
+                            <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
                           )}
                         </div>
                       </div>
@@ -397,16 +399,16 @@ function CheckoutDrawer({
 
                     <div className="space-y-2 mb-6 text-sm">
                       <div className="flex justify-between text-neutral-500">
-                        <span>Prix d&apos;origine</span><span>{product.price.toLocaleString('fr-FR')} €</span>
+                        <span>Prix d&apos;origine</span><span>{formatPrice(product.price, cur)}</span>
                       </div>
                       {bubbleDiscount > 0 && (
                         <div className="flex justify-between text-[#A07840] font-semibold">
-                          <span>Promotion −30%</span><span>−{bubbleDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-[#A07840] font-semibold">
-                          <span>Code membre −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-neutral-500">
@@ -414,18 +416,18 @@ function CheckoutDrawer({
                         {shippingFee === 0 ? (
                           <span className="text-emerald-600">Offerte</span>
                         ) : (
-                          <span>{shippingFee.toLocaleString('fr-FR')} €</span>
+                          <span>{formatPrice(shippingFee, cur)}</span>
                         )}
                       </div>
                       {shippingFee > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de <span className="font-semibold text-black">4,90 €</span> car la commande est inférieure à 40 €. Ajoutez {(40 - merchandiseTotal).toLocaleString('fr-FR')} € pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                          <span>Frais de <span className="font-semibold text-black">4,90 €</span> car la commande est inférieure à 40 €. Ajoutez {formatPrice((40 - merchandiseTotal), cur)} pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-2" />
                       <div className="flex justify-between font-bold text-black text-base">
-                        <span>Total</span><span>{finalTotal.toLocaleString('fr-FR')} €</span>
+                        <span>Total</span><span>{formatPrice(finalTotal, cur)}</span>
                       </div>
                     </div>
 
@@ -646,17 +648,17 @@ function CheckoutDrawer({
                     <div className="space-y-1.5">
                       {(bubbleDiscount > 0 || welcomeDiscount > 0) && (
                         <div className="flex justify-between text-sm text-neutral-500">
-                          <span>Prix d&apos;origine</span><span>{product.price.toLocaleString('fr-FR')} €</span>
+                          <span>Prix d&apos;origine</span><span>{formatPrice(product.price, cur)}</span>
                         </div>
                       )}
                       {bubbleDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#A07840] font-semibold">
-                          <span>Promotion −30%</span><span>−{bubbleDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#A07840] font-semibold">
-                          <span>Code membre −10%</span><span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm text-neutral-500">
@@ -664,7 +666,7 @@ function CheckoutDrawer({
                         {shippingFee === 0 ? (
                           <span className="text-emerald-600 font-medium">Offerte</span>
                         ) : (
-                          <span>{shippingFee.toLocaleString('fr-FR')} €</span>
+                          <span>{formatPrice(shippingFee, cur)}</span>
                         )}
                       </div>
                       {shippingFee > 0 && (
@@ -676,7 +678,7 @@ function CheckoutDrawer({
                       <div className="h-px bg-neutral-100 my-1" />
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
-                        <span>{finalTotal.toLocaleString('fr-FR')} €</span>
+                        <span>{formatPrice(finalTotal, cur)}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -716,7 +718,7 @@ function CheckoutDrawer({
                           </div>
                           <div>
                             <p className="font-semibold text-sm">{product.name}</p>
-                            <p className="text-xs text-neutral-400">{finalTotal.toLocaleString('fr-FR')} € · Livraison offerte</p>
+                            <p className="text-xs text-neutral-400">{formatPrice(finalTotal, cur)} · Livraison offerte</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -774,7 +776,7 @@ function CheckoutDrawer({
                     ) : (
                       <>
                         <Lock className="w-4 h-4" />
-                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${finalTotal.toLocaleString('fr-FR')} €`}
+                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${formatPrice(finalTotal, cur)}`}
                       </>
                     )}
                   </button>
@@ -830,6 +832,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const { id } = use(params);
   const product = products.find((p) => p.id === Number(id));
 
+  const cur = useCurrency();
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
@@ -1201,9 +1204,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="border-y border-neutral-200 py-5 mb-6">
                 <div className="flex items-end justify-between gap-4">
                   <div className="flex items-baseline gap-3">
-                    <p className="text-4xl text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                    <p className="text-4xl text-black price-luxe">{formatPrice(promoPrice, cur)}</p>
                     {isBubble && (
-                      <p className="text-sm text-neutral-400 line-through price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                      <p className="text-sm text-neutral-400 line-through price-luxe">{formatPrice(product.price, cur)}</p>
                     )}
                   </div>
                   {isBubble && (
@@ -1379,7 +1382,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         <p className="text-xs text-neutral-400 mt-0.5">{cp.category}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="font-bold text-black text-sm price-luxe">{cpPromo.toLocaleString('fr-FR')} €</span>
+                        <span className="font-bold text-black text-sm price-luxe">{formatPrice(cpPromo, cur)}</span>
                         <button
                           onClick={handleAddComplement}
                           className="w-9 h-9 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
@@ -1600,8 +1603,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black price-luxe">{pPromo.toLocaleString('fr-FR')} €</p>
-                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{p.price.toLocaleString('fr-FR')} €</p>}
+                        <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
+                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
@@ -1659,8 +1662,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black price-luxe">{pPromo.toLocaleString('fr-FR')} €</p>
-                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{p.price.toLocaleString('fr-FR')} €</p>}
+                        <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
+                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
@@ -1719,7 +1722,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
                             <p className="font-serif font-semibold text-sm text-black leading-snug hover:underline">{p.name}</p>
                           </Link>
-                          <p className="font-bold text-sm text-black mt-1 price-luxe">{price.toLocaleString('fr-FR')} €</p>
+                          <p className="font-bold text-sm text-black mt-1 price-luxe">{formatPrice(price, cur)}</p>
                         </div>
                         <button onClick={() => toggleWish(p.id)} className="shrink-0 p-2 rounded-full hover:bg-red-50 transition-colors">
                           <Heart className="w-4 h-4 fill-red-500 text-red-500" />

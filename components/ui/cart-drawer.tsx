@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, X, Minus, Plus, Trash2, Lock, Check, Truck, CreditCard, Package } from 'lucide-react';
 import { products } from '@/lib/products';
 import { useCart } from '@/lib/useCart';
+import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
@@ -24,6 +25,7 @@ const BUNDLE_PRICE = 1900;
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, addItem, removeItem, updateQty, clearCart } = useCart();
+  const cur = useCurrency();
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
 
   const [step, setStep] = useState<Step>('cart');
@@ -196,7 +198,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[12px] text-black truncate leading-tight">{p.name}</p>
-                <p className="text-[12px] font-bold text-black price-luxe">{price.toLocaleString('fr-FR')} €</p>
+                <p className="text-[12px] font-bold text-black price-luxe">{formatPrice(price, cur)}</p>
               </div>
               <button
                 onClick={() => addItem(p.id)}
@@ -357,7 +359,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                                   <p className="text-[15px] text-black leading-snug">{product.name}</p>
                                   <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
                                   <p className="text-[17px] font-bold text-black mt-2 price-luxe">
-                                    {price.toLocaleString('fr-FR')} €
+                                    {formatPrice(price, cur)}
                                   </p>
                                 </div>
                                 <button
@@ -594,25 +596,25 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       {(bubbleSavings > 0 || welcomeDiscount > 0) && (
                         <div className="flex justify-between text-sm text-neutral-500">
                           <span>Prix d’origine</span>
-                          <span>{originalSubtotal.toLocaleString('fr-FR')} €</span>
+                          <span>{formatPrice(originalSubtotal, cur)}</span>
                         </div>
                       )}
                       {bubbleSavings > 0 && (
                         <div className="flex justify-between text-sm text-[#A07840] font-semibold">
                           <span>Promotion −30%</span>
-                          <span>−{bubbleSavings.toLocaleString('fr-FR')} €</span>
+                          <span>−{formatPrice(bubbleSavings, cur)}</span>
                         </div>
                       )}
                       {packDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#A07840] font-semibold">
                           <span>Remise Pack</span>
-                          <span>−{packDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>−{formatPrice(packDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#A07840] font-semibold">
                           <span>Code membre −10%</span>
-                          <span>−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                          <span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm text-neutral-500">
@@ -620,19 +622,19 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         {shipping === 0 ? (
                           <span className="text-emerald-600 font-medium">Offerte</span>
                         ) : (
-                          <span>{shipping.toLocaleString('fr-FR')} €</span>
+                          <span>{formatPrice(shipping, cur)}</span>
                         )}
                       </div>
                       {shipping > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 p-2.5 rounded-lg">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de livraison de <span className="font-semibold text-black">4,90 €</span> appliqués car votre commande est inférieure à 40 €. Ajoutez {remainingForFreeShipping.toLocaleString('fr-FR')} € d&apos;articles pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                          <span>Frais de livraison de <span className="font-semibold text-black">4,90 €</span> appliqués car votre commande est inférieure à 40 €. Ajoutez {formatPrice(remainingForFreeShipping, cur)} d&apos;articles pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-1" />
                       <div className="flex justify-between font-bold text-sm">
                         <span>Total à payer</span>
-                        <span>{total.toLocaleString('fr-FR')} €</span>
+                        <span>{formatPrice(total, cur)}</span>
                       </div>
                     </div>
 
@@ -667,7 +669,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <div className="bg-neutral-50 p-4 text-left w-full mb-6 space-y-2">
                         <div className="flex justify-between text-sm">
                           <span className="text-neutral-500">Montant réglé</span>
-                          <span className="font-bold text-black price-luxe">{orderTotal.toLocaleString('fr-FR')} €</span>
+                          <span className="font-bold text-black price-luxe">{formatPrice(orderTotal, cur)}</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500 pt-1">
                           <Package className="w-3.5 h-3.5" />
@@ -724,24 +726,24 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="px-6 pt-4 pb-4 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">{bubbleSavings > 0 ? 'Prix d’origine' : 'Sous-total'}</span>
-                    <span className="text-sm text-neutral-600 price-luxe">{(bubbleSavings > 0 ? originalSubtotal : subtotal).toLocaleString('fr-FR')} €</span>
+                    <span className="text-sm text-neutral-600 price-luxe">{formatPrice((bubbleSavings > 0 ? originalSubtotal : subtotal), cur)}</span>
                   </div>
                   {bubbleSavings > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
                       <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Promotion −30%</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{bubbleSavings.toLocaleString('fr-FR')} €</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(bubbleSavings, cur)}</span>
                     </div>
                   )}
                   {packDiscount > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
                       <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Remise Pack</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{packDiscount.toLocaleString('fr-FR')} €</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(packDiscount, cur)}</span>
                     </div>
                   )}
                   {welcomeDiscount > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
                       <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Bienvenue −10%</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{welcomeDiscount.toLocaleString('fr-FR')} €</span>
+                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(welcomeDiscount, cur)}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between">
@@ -749,7 +751,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     {shipping === 0 ? (
                       <span className="text-sm text-emerald-600 font-medium">Offerte</span>
                     ) : (
-                      <span className="text-sm text-neutral-600 price-luxe">{shipping.toLocaleString('fr-FR')} €</span>
+                      <span className="text-sm text-neutral-600 price-luxe">{formatPrice(shipping, cur)}</span>
                     )}
                   </div>
 
@@ -758,7 +760,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <div className="pt-1">
                       {shipping > 0 ? (
                         <p className="text-[11px] text-neutral-500 mb-1.5">
-                          Plus que <span className="font-bold text-[#A07840]">{remainingForFreeShipping.toLocaleString('fr-FR')} €</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
+                          Plus que <span className="font-bold text-[#A07840]">{formatPrice(remainingForFreeShipping, cur)}</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
                         </p>
                       ) : (
                         <p className="text-[11px] text-emerald-600 font-medium mb-1.5 flex items-center gap-1">
@@ -786,7 +788,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   <div className="flex items-end justify-between mb-6">
                     <span className="text-[11px] tracking-[0.3em] uppercase text-black font-semibold">Total</span>
                     <span className="text-2xl font-bold text-black leading-none price-luxe">
-                      {total.toLocaleString('fr-FR')} €
+                      {formatPrice(total, cur)}
                     </span>
                   </div>
 
@@ -872,7 +874,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     ) : (
                       <>
                         <Lock className="w-4 h-4" />
-                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${total.toLocaleString('fr-FR')} €`}
+                        {payMethod === 'paypal' ? 'Continuer vers PayPal' : payMethod === 'twint' ? 'Confirmer avec TWINT' : payMethod === 'applepay' ? 'Payer avec Apple Pay' : `Payer ${formatPrice(total, cur)}`}
                       </>
                     )}
                   </button>

@@ -21,6 +21,7 @@ import { useCart } from '@/lib/useCart';
 import { Logo } from '@/components/ui/logo';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { CartDrawer } from '@/components/ui/cart-drawer';
+import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
@@ -109,6 +110,7 @@ function BackToTop() {
 // ─── Side Menu Drawer ─────────────────────────────────────────────────────────
 
 function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClose: () => void; onSectionNav: (section: string, filter?: string) => void }) {
+  const cur = useCurrency();
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -252,7 +254,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                             <p className="text-sm font-semibold text-black truncate">{p.name}</p>
                             <p className="text-[10px] text-neutral-400">{p.category}</p>
                           </div>
-                          <p className="text-sm font-bold text-black shrink-0">{promo.toLocaleString('fr-FR')} €</p>
+                          <p className="text-sm font-bold text-black shrink-0">{formatPrice(promo, cur)}</p>
                         </Link>
                       );
                     })}
@@ -379,6 +381,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
 function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void; onSectionNav: (section: string, filter?: string) => void }) {
+  const cur = useCurrency();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
@@ -701,7 +704,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                             <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
-                          <p className="text-xs text-neutral-500 price-luxe mt-0.5">{promoPrice.toLocaleString('fr-FR')} €</p>
+                          <p className="text-xs text-neutral-500 price-luxe mt-0.5">{formatPrice(promoPrice, cur)}</p>
                         </Link>
                       );
                     })}
@@ -751,7 +754,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                             <p className="text-[11px] tracking-wide uppercase text-neutral-400 mt-0.5">{p.category}</p>
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
-                            <p className="text-sm font-bold text-black price-luxe">{promoPrice.toLocaleString('fr-FR')} €</p>
+                            <p className="text-sm font-bold text-black price-luxe">{formatPrice(promoPrice, cur)}</p>
                             <ArrowRight className="w-4 h-4 text-neutral-300 group-hover:text-[#C9A96E] transition-colors" />
                           </div>
                         </Link>
@@ -913,6 +916,7 @@ function PromoBanner() {
 const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 12, 7, 9];
 
 function BubblePromoCarousel() {
+  const cur = useCurrency();
   const items = products.filter((p) => bubblePromoProducts.includes(p.id))
     .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
   const { isWished, toggle } = useWishlist();
@@ -997,8 +1001,8 @@ function BubblePromoCarousel() {
               </div>
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</span>
-                <span className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</span>
+                <span className="text-black font-bold text-sm price-luxe">{formatPrice(Math.round(product.price * 0.7), cur)}</span>
+                <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
               </div>
             </Link>
             </div>
@@ -1014,6 +1018,7 @@ function BubblePromoCarousel() {
 const bestsellerIds = [81, 83, 77, 38];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
+  const cur = useCurrency();
   const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
   const { isWished, toggle } = useWishlist();
 
@@ -1078,11 +1083,11 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <div className="flex items-center gap-2">
                   {product.name.includes('Bubble') ? (
                     <>
-                      <p className="text-black font-bold text-sm price-luxe">{Math.round(product.price * 0.7).toLocaleString('fr-FR')} €</p>
-                      <p className="text-neutral-400 line-through text-xs price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                      <p className="text-black font-bold text-sm price-luxe">{formatPrice(Math.round(product.price * 0.7), cur)}</p>
+                      <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
                     </>
                   ) : (
-                    <p className="text-black font-bold text-sm price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                    <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
                   )}
                 </div>
               </Link>
@@ -1110,6 +1115,7 @@ interface ProductPreview {
 }
 
 function ProductCard({ product, index }: { product: ProductPreview; index: number }) {
+  const cur = useCurrency();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const isNew = newProductIds.includes(product.id);
@@ -1198,16 +1204,16 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-black font-bold text-sm price-luxe">
-                {isBubble ? Math.round(product.price * 0.7).toLocaleString('fr-FR') : product.price.toLocaleString('fr-FR')} €
+                {formatPrice(isBubble ? Math.round(product.price * 0.7) : product.price, cur)}
               </span>
               {isBubble && (
                 <span className="text-neutral-400 line-through text-xs price-luxe">
-                  {product.price.toLocaleString('fr-FR')} €
+                  {formatPrice(product.price, cur)}
                 </span>
               )}
               {isSale && !isBubble && (
                 <span className="text-neutral-400 line-through text-xs price-luxe">
-                  {Math.round(product.price * 1.25).toLocaleString('fr-FR')} €
+                  {formatPrice(Math.round(product.price * 1.25), cur)}
                 </span>
               )}
             </div>
@@ -1473,6 +1479,7 @@ function SummerProductsSection() {
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
 
 function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
+  const cur = useCurrency();
   const { addItem } = useCart();
   const [addedKey, setAddedKey] = useState<string | null>(null);
 
@@ -1539,7 +1546,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{canape.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{canapePromo.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(canapePromo, cur)}</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1558,7 +1565,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{fauteuil.name}</h3>
-                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{fauteuilPromo.toLocaleString('fr-FR')}€</p>
+                          <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(fauteuilPromo, cur)}</p>
                         </div>
                       </Link>
                       <div className="flex justify-center my-3">
@@ -1581,7 +1588,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <div className="flex-1 min-w-0">
                           <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{figurine.name}</h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="text-neutral-400 line-through text-sm price-luxe">{figurine.price.toLocaleString('fr-FR')}€</p>
+                            <p className="text-neutral-400 line-through text-sm price-luxe">{formatPrice(figurine.price, cur)}</p>
                             <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offerte</span>
                           </div>
                         </div>
@@ -1593,10 +1600,10 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
                   <div className="flex items-center justify-between mb-3">
                     <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">Prix du bundle</p>
-                    <p className="text-neutral-400 line-through text-sm price-luxe">{sum.toLocaleString('fr-FR')}€</p>
+                    <p className="text-neutral-400 line-through text-sm price-luxe">{formatPrice(sum, cur)}</p>
                   </div>
                   <p className="text-4xl font-bold text-black mb-5 leading-none price-luxe">
-                    {BUNDLE_PRICE.toLocaleString('fr-FR')}€
+                    {formatPrice(BUNDLE_PRICE, cur)}
                   </p>
 
                   <div className="flex justify-center mb-3">
@@ -2015,6 +2022,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
 // ─── Décorations Section ────────────────────────────────────────────────────────
 
 function DécorationsSection() {
+  const cur = useCurrency();
   const { isWished, toggle } = useWishlist();
   const figurines = products
     .filter((p) => p.category === 'Décorations')
@@ -2061,7 +2069,7 @@ function DécorationsSection() {
                   </div>
                 </div>
                 <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-                <p className="text-black font-bold text-sm price-luxe">{product.price.toLocaleString('fr-FR')} €</p>
+                <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
               </Link>
             </motion.div>
           ))}
@@ -2074,6 +2082,7 @@ function DécorationsSection() {
 // ─── Wishlist Drawer ──────────────────────────────────────────────────────────
 
 function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const cur = useCurrency();
   const { ids, toggle } = useWishlist();
   const wishedProducts = products.filter((p) => ids.includes(p.id));
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
@@ -2160,7 +2169,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                             <p className="font-serif font-semibold text-sm text-black leading-snug line-clamp-2 hover:underline">{product.name}</p>
                           </Link>
                           <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
-                          <p className="font-bold text-sm text-black mt-1 price-luxe">{price.toLocaleString('fr-FR')} €</p>
+                          <p className="font-bold text-sm text-black mt-1 price-luxe">{formatPrice(price, cur)}</p>
                         </div>
                         <button
                           onClick={() => toggle(product.id)}
