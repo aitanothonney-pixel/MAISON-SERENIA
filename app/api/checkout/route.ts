@@ -127,6 +127,7 @@ export async function POST(req: Request) {
   return Response.json({ url: session.url });
   } catch (err) {
     console.error('Stripe checkout error:', err);
-    return Response.json({ error: 'Erreur lors de la création du paiement.' }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    return Response.json({ error: 'checkout_failed', message }, { status: 500 });
   }
 }

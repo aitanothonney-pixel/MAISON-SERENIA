@@ -270,7 +270,7 @@ function CheckoutDrawer({
       // Stripe configuré mais erreur → pas de fausse confirmation
       if (data?.enabled !== false) {
         setPayLoading(false);
-        alert('Le paiement est momentanément indisponible. Merci de réessayer dans un instant.');
+        alert('Paiement indisponible.\n\n' + (data?.message || 'Réessayez dans un instant.'));
         return;
       }
       // Stripe non configuré → confirmation de démonstration

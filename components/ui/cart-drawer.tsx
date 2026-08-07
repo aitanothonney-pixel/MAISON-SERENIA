@@ -181,7 +181,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         return;
       }
       // Stripe configuré mais erreur → surtout pas de fausse confirmation
-      alert('Le paiement est momentanément indisponible. Merci de réessayer dans un instant.');
+      alert('Paiement indisponible.\n\n' + (data?.message || 'Réessayez dans un instant.'));
     } catch {
       // Erreur réseau : on tente le tunnel de démonstration (aucun débit)
       startCheckout(method);
