@@ -44,7 +44,7 @@ export default function MentionsLegalesPage() {
           <p>Le site <strong>maison-serenia.com</strong> est édité par :</p>
           <ul className="mt-3 space-y-1">
             <li>Responsable de la publication : <strong>Louis Loffet</strong></li>
-            <li>Statut : <strong>Raison individuelle – Sàrl</strong></li>
+            <li>Statut : <strong>Particulier</strong></li>
             <li>Adresse : <strong>Rue de la Synagogue 35, 1204 Genève, Suisse</strong></li>
             <li>Numéro d&apos;immatriculation : <strong>—</strong></li>
             <li>E-mail : <strong>maisonserenia@gmail.com</strong></li>
