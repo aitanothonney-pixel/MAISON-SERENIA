@@ -130,7 +130,7 @@ export default function CGVPage() {
         </Section>
 
         <p className="text-xs text-neutral-400 pt-8 border-t border-neutral-100">
-          Dernière mise à jour : [À COMPLÉTER — date]
+          Dernière mise à jour : 7 août 2026
         </p>
       </div>
     </main>

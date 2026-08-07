@@ -43,10 +43,10 @@ export default function MentionsLegalesPage() {
         <Section title="Éditeur du site">
           <p>Le site <strong>maison-serenia.com</strong> est édité par :</p>
           <ul className="mt-3 space-y-1">
-            <li>Responsable de la publication : <strong>[À COMPLÉTER — nom et prénom]</strong></li>
-            <li>Statut : <strong>[À COMPLÉTER — ex. entreprise individuelle / auto-entrepreneur]</strong></li>
-            <li>Adresse : <strong>[À COMPLÉTER — adresse complète]</strong></li>
-            <li>Numéro d&apos;immatriculation : <strong>[À COMPLÉTER — SIRET / IDE / numéro d&apos;entreprise]</strong></li>
+            <li>Responsable de la publication : <strong>Louis Loffet</strong></li>
+            <li>Statut : <strong>Raison individuelle – Sàrl</strong></li>
+            <li>Adresse : <strong>Rue de la Synagogue 35, 1204 Genève, Suisse</strong></li>
+            <li>Numéro d&apos;immatriculation : <strong>—</strong></li>
             <li>E-mail : <strong>maisonserenia@gmail.com</strong></li>
           </ul>
         </Section>
