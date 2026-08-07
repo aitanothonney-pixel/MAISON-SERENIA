@@ -48,6 +48,7 @@ export default function PromotionsPage() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
@@ -93,7 +94,7 @@ export default function PromotionsPage() {
                   <div className="flex items-center gap-3 mb-5">
                     {[canape, fauteuil, figurine].map((p) => (
                       <div key={p.id} className="relative w-16 h-16 bg-neutral-50 shrink-0">
-                        <Image src={p.images[0]} alt={p.name} fill className="object-contain p-1" />
+                        <Image src={p.images[0]} alt={p.name} fill sizes="120px" className="object-contain p-1" />
                       </div>
                     ))}
                   </div>

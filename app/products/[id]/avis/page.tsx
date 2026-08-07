@@ -71,7 +71,7 @@ export default async function AvisPage({ params }: { params: Promise<{ id: strin
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div className="relative w-24 h-24 bg-white border border-neutral-100 shrink-0">
-              <Image src={product.images[0]} alt={product.name} fill className="object-contain p-2" />
+              <Image src={product.images[0]} alt={product.name} fill sizes="120px" className="object-contain p-2" />
             </div>
             <div>
               <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Avis vérifiés</p>

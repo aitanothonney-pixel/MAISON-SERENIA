@@ -60,6 +60,7 @@ export default function ProduitsPage() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className={`transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
                   />
                   {isBubble && (

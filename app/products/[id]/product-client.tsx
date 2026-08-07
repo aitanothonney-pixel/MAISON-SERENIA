@@ -1145,7 +1145,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
                       }`}
                     >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill className="object-contain p-1" />
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="120px" className="object-contain p-1" />
                     </button>
                   ))}
                 </div>
@@ -1372,7 +1372,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   return (
                     <div className="flex items-center gap-4 p-4 border border-neutral-200">
                       <Link href={`/products/${cp.id}`} className="shrink-0 w-16 h-16 bg-neutral-50 flex items-center justify-center overflow-hidden">
-                        <img src={cp.images[0]} alt={cp.name} className="w-full h-full object-contain p-1.5" />
+                        <img loading="lazy" decoding="async" src={cp.images[0]} alt={cp.name} className="w-full h-full object-contain p-1.5" />
                       </Link>
                       <div className="flex-1 min-w-0">
                         <Link href={`/products/${cp.id}`} className="font-serif font-bold text-sm text-black hover:underline">{cp.name}</Link>
@@ -1713,7 +1713,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     return (
                       <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
                         <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
-                          <img src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
+                          <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>

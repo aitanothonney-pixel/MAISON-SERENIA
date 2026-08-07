@@ -246,7 +246,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                           className="flex items-center gap-3 p-2 hover:bg-neutral-50 transition-colors"
                         >
                           <div className="w-10 h-10 bg-neutral-50 border border-neutral-100 shrink-0 flex items-center justify-center overflow-hidden">
-                            <img src={p.images[0]} alt={p.name} className="w-full h-full object-contain p-0.5" />
+                            <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className="w-full h-full object-contain p-0.5" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate">{p.name}</p>
@@ -698,7 +698,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           className="group"
                         >
                           <div className={`relative aspect-square overflow-hidden bg-neutral-50 mb-2 ${contain ? 'p-3' : ''}`}>
-                            <img src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
+                            <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
                           <p className="text-xs text-neutral-500 price-luxe mt-0.5">{promoPrice.toLocaleString('fr-FR')} €</p>
@@ -744,7 +744,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           className="flex items-center gap-4 p-2 -mx-2 rounded hover:bg-neutral-50 transition-colors group"
                         >
                           <div className={`w-16 h-16 overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${contain ? 'p-1.5' : ''}`}>
-                            <img src={p.images[0]} alt={p.name} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
+                            <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
@@ -823,6 +823,7 @@ function PromoBanner() {
               src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
               alt="Collection Salon Bubble en promotion"
               fill
+              sizes="100vw"
               className="object-cover object-center"
             />
           </button>
@@ -1047,6 +1048,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className={`transition-transform duration-600 group-hover:scale-105 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
                   />
                   {/* Badges */}
@@ -1441,6 +1443,7 @@ function SummerProductsSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className="object-contain transition-transform duration-600 group-hover:scale-105"
                   />
                   <button
@@ -2042,6 +2045,7 @@ function DécorationsSection() {
                     src={product.images[0]}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     className={`object-contain transition-all duration-700 group-hover:scale-105 ${product.id === 34 ? 'p-1 scale-[1.35]' : 'p-4'}`}
                   />
                   <button
@@ -2149,7 +2153,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         className="flex items-center gap-4 p-3 border border-neutral-100 hover:border-neutral-200 transition-colors"
                       >
                         <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 bg-neutral-50 overflow-hidden flex items-center justify-center">
-                          <img src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
+                          <img loading="lazy" decoding="async" src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${product.id}`} onClick={onClose}>
@@ -2342,6 +2346,7 @@ export default function Home() {
             src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
             alt="Salon d'exception signé Maison Serenia"
             fill
+            sizes="100vw"
             priority
             className="object-cover object-[center_60%]"
           />
