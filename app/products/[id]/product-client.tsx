@@ -763,10 +763,25 @@ function CheckoutDrawer({
               <div className="p-6 border-t border-neutral-100 space-y-3">
                 {step === 'cart' && (
                   <button
-                    onClick={() => setStep('delivery')}
-                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors"
+                    onClick={handlePay}
+                    disabled={payLoading}
+                    className="w-full py-4 rounded-xl bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-neutral-800 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
                   >
-                    Continuer vers la livraison
+                    {payLoading ? (
+                      <>
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                          className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                        />
+                        Redirection vers le paiement…
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="w-4 h-4" />
+                        Payer {formatPrice(finalTotal, cur)}
+                      </>
+                    )}
                   </button>
                 )}
                 {step === 'delivery' && (
