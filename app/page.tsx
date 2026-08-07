@@ -1996,20 +1996,9 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
               <svg viewBox="0 0 24 24" className="w-3 h-3" fill="white"><path d="M17 13.5c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.7-1 2.4-2c.7-1.1 1-2.2 1-2.3-.1 0-2.3-.9-2.3-3.2Zm-2-6c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.2 1.1-.5.6-.9 1.4-.8 2.3.9.1 1.7-.4 2.2-1Z"/></svg>
               <span className="text-white text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
             </div>
-            {/* Google Pay */}
-            <div className="h-7 px-2.5 rounded bg-white flex items-center justify-center gap-1 opacity-90 hover:opacity-100 transition-opacity">
-              <span className="text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>
-                <span className="text-[#4285F4]">G</span><span className="text-[#EA4335]">o</span><span className="text-[#FBBC04]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#34A853]">l</span><span className="text-[#EA4335]">e</span>
-              </span>
-              <span className="text-[#5F6368] text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
-            </div>
             {/* Amex */}
             <div className="h-7 w-11 rounded bg-[#2E77BC] flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
               <span className="text-white text-[10px] font-bold tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>AMEX</span>
-            </div>
-            {/* Klarna */}
-            <div className="h-7 px-3 rounded flex items-center justify-center bg-[#FFB3C7] opacity-90 hover:opacity-100 transition-opacity">
-              <span className="text-black text-[11px] font-bold tracking-tight">Klarna.</span>
             </div>
           </div>
         </div>
