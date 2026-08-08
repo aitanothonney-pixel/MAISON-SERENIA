@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     images: [{ url: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Fauteuils Bubble, figurines KAWS et accessoires design livrés en France.' },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Fauteuils Bubble, figurines KAWS et accessoires design livrés en France.', images: ['https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg'] },
   robots: { index: true, follow: true },
 };
 
@@ -61,6 +61,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               '@type': 'Organization',
               name: 'Maison Serenia',
               url: 'https://maison-serenia.com',
+              logo: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg',
+              image: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg',
               email: 'maisonserenia@gmail.com',
               description: 'Mobilier de luxe et design contemporain : canapés et fauteuils Bubble, tables, pièces de collection et décoration.',
             }),
