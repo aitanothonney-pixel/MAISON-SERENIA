@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/gestion/', '/api/'],
     },
     sitemap: 'https://maison-serenia.com/sitemap.xml',
     host: 'https://maison-serenia.com',
