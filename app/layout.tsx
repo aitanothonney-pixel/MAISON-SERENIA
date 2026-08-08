@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     description: 'Fauteuils et canapés Bubble, figurines collectibles, accessoires design. Livraison offerte dès 40€.',
     type: 'website',
     locale: 'fr_FR',
-    images: [{ url: 'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png', width: 1200, height: 630 }],
+    images: [{ url: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg', width: 1200, height: 630 }],
   },
   twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Fauteuils Bubble, figurines KAWS et accessoires design livrés en France.' },
   robots: { index: true, follow: true },
