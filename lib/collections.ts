@@ -11,7 +11,6 @@ export const COLLECTIONS: CollectionMeta[] = [
   { slug: 'salon', label: 'Salon', kicker: 'Collection', description: 'Canapés et fauteuils sculpturaux de la collection Bubble, pensés pour sublimer votre intérieur.' },
   { slug: 'figurines', label: 'Décorations', kicker: 'Collection', description: 'Sculptures et pièces de collection — KAWS, Bearbrick et éditions rares.' },
   { slug: 'meubles', label: 'Meubles', kicker: 'Collection', description: 'Meubles TV, tables et rangements pour aménager tout votre intérieur.' },
-  { slug: 'ete', label: 'Collection Été', kicker: 'Saisonnier', description: 'Accessoires nomades pensés pour la belle saison.' },
   { slug: 'bubble', label: 'Collection Bubble', kicker: 'Signature · −30%', description: "La collection signature aux formes gonflées iconiques, en édition limitée." },
 ];
 
