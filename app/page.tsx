@@ -2117,31 +2117,31 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
             className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100">
-              <div className="flex items-center gap-3">
-                <Heart className="w-5 h-5 fill-red-500 text-red-500" />
-                <span className="font-serif font-semibold text-lg">Favoris</span>
-                {ids.length > 0 && (
-                  <span className="text-xs text-neutral-400 tracking-widest uppercase">{ids.length} article{ids.length > 1 ? 's' : ''}</span>
-                )}
+            <div className="px-6 py-5 border-b border-neutral-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-1">Ma sélection</p>
+                  <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    Favoris {ids.length > 0 && <span className="text-neutral-400 text-base">({ids.length})</span>}
+                  </h2>
+                </div>
+                <button onClick={onClose} className="p-2 -mr-2 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <button onClick={onClose} className="p-2 rounded-full hover:bg-neutral-100 transition-colors">
-                <X className="w-5 h-5" />
-              </button>
             </div>
 
             {/* Body */}
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {wishedProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-                  <div className="relative w-20 h-20 rounded-full border border-[#C9A96E]/40 flex items-center justify-center">
-                    <div className="absolute inset-1.5 rounded-full border border-neutral-100" />
-                    <Heart className="w-7 h-7 text-neutral-300 relative" strokeWidth={1.3} />
+                <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center px-4">
+                  <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F5F1EA 0%, #EDE4D3 100%)' }}>
+                    <Heart className="w-7 h-7 text-[#C9A96E]" strokeWidth={1.4} />
                   </div>
-                  <p className="font-serif text-lg text-neutral-400">Aucun favori pour l'instant</p>
-                  <p className="text-sm text-neutral-300">Cliquez sur le cœur d'un produit pour l'ajouter ici.</p>
-                  <button onClick={onClose} className="mt-4 text-xs tracking-widest uppercase border border-black px-6 py-3 rounded-none hover:bg-black hover:text-white transition-all duration-300">
-                    Découvrir nos produits
+                  <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Votre liste de favoris est vide</p>
+                  <p className="text-sm text-neutral-400 max-w-[240px]">Ajoutez vos coups de cœur en cliquant sur le cœur d&apos;un produit.</p>
+                  <button onClick={onClose} className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-neutral-800 transition-colors">
+                    Parcourir la boutique
                   </button>
                 </div>
               ) : (

@@ -279,27 +279,24 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
           >
-            {/* Top help strip */}
-            <div className="flex items-center gap-3 px-5 py-3 bg-neutral-50 border-b border-neutral-100 flex-shrink-0">
-              <span className="w-8 h-8 bg-black text-white text-[10px] font-bold tracking-wider flex items-center justify-center flex-shrink-0">
-                MS
-              </span>
-              <p className="text-[13px] text-neutral-700 leading-tight">
-                Besoin d&apos;aide? <a href="mailto:maisonserenia@gmail.com" className="font-semibold text-black hover:underline">Contactez-nous à maisonserenia@gmail.com</a>
-              </p>
+            {/* Bandeau réassurance */}
+            <div className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#F5F1EA] border-b border-[#E7DFD1] flex-shrink-0 text-[11px] tracking-wide text-[#8a7658]">
+              <Truck className="w-3.5 h-3.5 shrink-0" />
+              <span>Livraison offerte dès {formatPrice(40, cur)} · Retours sous 30 jours</span>
             </div>
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+              <div>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-1">
+                  {step === 'cart' ? 'Votre commande' : step === 'delivery' ? 'Étape 1 / 2' : step === 'payment' ? 'Étape 2 / 2' : 'Merci'}
+                </p>
+                <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                   {stepTitle[step]}
-                </span>
-                {step === 'cart' && totalQty > 0 && (
-                  <span className="text-neutral-400 text-sm">({totalQty})</span>
-                )}
+                  {step === 'cart' && totalQty > 0 && <span className="text-neutral-400 text-base"> ({totalQty})</span>}
+                </h2>
               </div>
-              <button onClick={handleClose} className="p-1 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
+              <button onClick={handleClose} className="p-2 -mr-2 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
                 <X className="w-5 h-5 text-black" />
               </button>
             </div>
@@ -351,19 +348,18 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   <motion.div key="cart" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }}>
                     {cartProducts.length === 0 ? (
                       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center px-6 py-16">
-                        <div className="relative w-20 h-20 rounded-full border border-[#C9A96E]/40 flex items-center justify-center">
-                          <div className="absolute inset-1.5 rounded-full border border-neutral-100" />
-                          <ShoppingBag className="w-7 h-7 text-neutral-300 relative" strokeWidth={1.3} />
+                        <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F5F1EA 0%, #EDE4D3 100%)' }}>
+                          <ShoppingBag className="w-7 h-7 text-[#C9A96E]" strokeWidth={1.4} />
                         </div>
-                        <p className="font-serif text-base text-neutral-500" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                        <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                           Votre panier est vide
                         </p>
-                        <p className="text-xs text-neutral-400">Ajoutez des produits pour commencer.</p>
+                        <p className="text-sm text-neutral-400 max-w-[240px]">Découvrez nos pièces et commencez votre sélection.</p>
                         <button
                           onClick={goShopping}
-                          className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3 hover:bg-neutral-800 transition-colors"
+                          className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-neutral-800 transition-colors"
                         >
-                          Découvrir nos produits
+                          Parcourir la boutique
                         </button>
                       </div>
                     ) : (
