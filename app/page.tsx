@@ -1372,7 +1372,7 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
       section: 'section-bureau',
       label: 'Meubles',
       desc: 'Tables, TV, rangements',
-      img: catImage('Meubles', 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800&q=80'),
+      img: 'https://i.ibb.co/SD1GmP8Z/Capture-d-e-cran-2026-08-06-a-01-08-32.png',
       big: false,
     },
     {
@@ -1380,7 +1380,7 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
       section: 'section-figurines',
       label: 'Décorations',
       desc: 'Pièces & objets déco',
-      img: 'https://i.ibb.co/hxfV4W3d/IMG-0663.jpg',
+      img: 'https://i.ibb.co/JwSGCFym/Capture-d-e-cran-2026-07-23-a-22-04-47.png',
       big: false,
     },
   ];
