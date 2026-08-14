@@ -1809,21 +1809,23 @@ function NewsletterSection() {
               <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="votre@email.com"
-                className="flex-1 bg-white text-black placeholder-neutral-400 border border-neutral-300 px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
-              />
-              <button
-                type="submit"
-                className="bg-black text-white font-medium text-sm px-6 py-3 hover:bg-neutral-800 transition-colors whitespace-nowrap"
-              >
-                Obtenir mes −10%
-              </button>
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+              <div className="flex items-stretch border border-neutral-300 bg-white focus-within:border-black transition-colors">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Votre adresse e-mail"
+                  className="flex-1 min-w-0 bg-transparent text-black placeholder-neutral-400 px-4 py-3.5 text-sm outline-none"
+                />
+                <button
+                  type="submit"
+                  className="shrink-0 bg-black text-white text-[11px] font-semibold tracking-[0.18em] uppercase px-5 sm:px-7 hover:bg-neutral-800 transition-colors whitespace-nowrap"
+                >
+                  Obtenir −10%
+                </button>
+              </div>
             </form>
           )}
           <p className="text-neutral-500 text-[11px] mt-4 tracking-wide">Pas de spam · Désabonnement en 1 clic</p>
