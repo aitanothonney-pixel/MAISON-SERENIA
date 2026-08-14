@@ -326,7 +326,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
               <div className="px-6 py-5 border-b border-neutral-100">
                 <button
                   onClick={() => goToSection('section-packs')}
-                  className="relative block w-full text-left p-5 rounded-2xl overflow-hidden text-white transition-transform hover:scale-[1.01]"
+                  className="relative block w-full text-left p-5 overflow-hidden text-white transition-transform hover:scale-[1.01]"
                   style={{ background: 'linear-gradient(135deg, #2a2521 0%, #17130f 100%)' }}
                 >
                   <span className="absolute -right-6 -top-6 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.35), transparent 70%)' }} />
@@ -476,21 +476,21 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
             </span>
-            <span className={`hidden sm:inline text-[13px] tracking-[0.32em] uppercase ${textColor}`} style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>Menu</span>
+            <span className={`hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium ${textColor}`}>Menu</span>
           </button>
 
           {/* Search trigger — opens full-screen search overlay */}
           <button
             onClick={() => setSearchFocused(true)}
-            className={`hidden lg:flex items-center gap-2.5 px-4 py-2.5 rounded-full border transition-colors ${
+            className={`hidden lg:flex items-center gap-2 px-3 py-2 border transition-colors ${
               scrolled
-                ? 'border-neutral-200 bg-neutral-50/80 hover:border-neutral-300 text-neutral-400'
+                ? 'border-neutral-200 bg-white hover:border-neutral-300 text-neutral-400'
                 : 'border-white/25 bg-white/5 hover:bg-white/10 text-white/60'
             }`}
             aria-label="Rechercher"
           >
             <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
-            <span className="w-48 xl:w-56 text-[13px] text-left tracking-wide">Rechercher une pièce…</span>
+            <span className="w-52 xl:w-64 text-xs text-left">Que recherchez-vous ?</span>
           </button>
         </div>
 
@@ -503,8 +503,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         <div className="flex items-center gap-1 justify-end">
           <Link
             href="/contact"
-            className={`hidden lg:inline-block text-[13px] tracking-[0.32em] uppercase px-3.5 py-2 transition-colors ${textColor} hover:text-[#A07840]`}
-            style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}
+            className={`hidden lg:inline-block text-[11px] tracking-[0.25em] uppercase font-medium px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
           >
             Contactez-nous
           </Link>
@@ -512,7 +511,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Favoris (opens wishlist) */}
           <button
             onClick={onWishlistOpen}
-            className={`relative w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300 ${
+            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
               scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
             }`}
             aria-label="Favoris"
@@ -531,7 +530,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Cart */}
           <button
             onClick={onCartOpen}
-            className={`relative w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300 ${
+            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
               scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
             }`}
             aria-label="Panier"
@@ -1397,7 +1396,7 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
           <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[280px]">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[232px]">
           {tiles.map((t) => (
             <button
               key={t.cat}
@@ -1781,7 +1780,7 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="w-full bg-[#F5F1EA] py-20 px-6 border-y border-[#E7DFD1]">
+    <section className="w-full bg-white py-20 px-6 border-y border-neutral-100">
       <div className="max-w-2xl mx-auto text-center">
         <FadeInSection>
           <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#A07840] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
@@ -1853,41 +1852,30 @@ function CookieBanner() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ y: 24, opacity: 0 }}
+          initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 24, opacity: 0 }}
+          exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto z-50 sm:max-w-sm bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-neutral-200 p-5"
-          role="dialog"
-          aria-label="Consentement aux cookies"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-black shadow-lg border-t border-neutral-800"
         >
-          <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-full bg-[#F5F1EA] flex items-center justify-center shrink-0">
-              <span className="text-lg leading-none">🍪</span>
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4">
+            <p className="text-sm text-neutral-300 text-center sm:text-left">
+              Nous utilisons des cookies pour améliorer votre expérience.
+            </p>
+            <div className="flex gap-3 shrink-0">
+              <button
+                onClick={() => handleChoice('refused')}
+                className="text-sm px-5 py-2 border border-white text-white rounded hover:bg-white/10 transition-colors"
+              >
+                Refuser
+              </button>
+              <button
+                onClick={() => handleChoice('accepted')}
+                className="text-sm px-5 py-2 bg-white text-black rounded hover:bg-neutral-200 transition-colors"
+              >
+                Tout accepter
+              </button>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-black mb-1">Votre confidentialité</p>
-              <p className="text-[13px] text-neutral-500 leading-relaxed">
-                Nous utilisons des cookies pour améliorer votre navigation et analyser le trafic.{' '}
-                <Link href="/confidentialite" className="text-black underline underline-offset-2 hover:text-[#A07840] transition-colors">
-                  En savoir plus
-                </Link>
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-2.5 mt-4">
-            <button
-              onClick={() => handleChoice('refused')}
-              className="flex-1 text-[13px] font-medium px-4 py-2.5 border border-neutral-300 text-neutral-700 rounded-lg hover:border-black hover:text-black transition-colors"
-            >
-              Refuser
-            </button>
-            <button
-              onClick={() => handleChoice('accepted')}
-              className="flex-1 text-[13px] font-semibold px-4 py-2.5 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors"
-            >
-              Tout accepter
-            </button>
           </div>
         </motion.div>
       )}
