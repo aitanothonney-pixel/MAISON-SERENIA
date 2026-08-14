@@ -1771,20 +1771,20 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="w-full bg-black py-20 px-6">
+    <section className="w-full bg-[#F5F1EA] py-20 px-6 border-y border-[#E7DFD1]">
       <div className="max-w-2xl mx-auto text-center">
         <FadeInSection>
-          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#C9A96E]" style={{ border: '1px solid rgba(201,169,110,0.4)' }}>
+          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#A07840] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
             <Gift className="w-3 h-3" /> −10% offerts à l&apos;inscription
           </div>
           <h2
-            className="text-3xl md:text-4xl text-white mb-4"
+            className="text-3xl md:text-4xl text-black mb-4"
             style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontStyle: 'italic', fontWeight: 400 }}
           >
-            Rejoignez l&apos;art de vivre Serenia
+            Restez informé de nos nouveautés
           </h2>
-          <p className="text-neutral-400 text-sm mb-8 leading-relaxed">
-            Inscrivez-vous et recevez <span className="text-white font-medium">−10% sur votre première commande</span>, ainsi qu&apos;un accès en avant-première à nos collections exclusives et offres réservées aux membres.
+          <p className="text-neutral-600 text-sm mb-8 leading-relaxed">
+            Inscrivez-vous et recevez <span className="text-black font-medium">−10% sur votre première commande</span>, ainsi qu&apos;un accès en avant-première à nos nouvelles pièces et offres réservées aux membres.
           </p>
           {submitted ? (
             <motion.div
@@ -1792,10 +1792,10 @@ function NewsletterSection() {
               animate={{ opacity: 1, y: 0 }}
               className="max-w-md mx-auto"
             >
-              <p className="text-white text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
+              <p className="text-black text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
               <div className="flex items-center justify-center gap-3 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/10 px-4 py-3">
-                <span className="text-lg font-bold tracking-[0.15em] text-[#C9A96E]">{WELCOME_CODE}</span>
-                <span className="text-[11px] uppercase tracking-widest text-neutral-400">−10%</span>
+                <span className="text-lg font-bold tracking-[0.15em] text-[#A07840]">{WELCOME_CODE}</span>
+                <span className="text-[11px] uppercase tracking-widest text-neutral-500">−10%</span>
               </div>
               <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
             </motion.div>
@@ -1807,17 +1807,17 @@ function NewsletterSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="votre@email.com"
-                className="flex-1 bg-white/10 text-white placeholder-neutral-500 border border-white/20 rounded px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
+                className="flex-1 bg-white text-black placeholder-neutral-400 border border-neutral-300 rounded px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
               />
               <button
                 type="submit"
-                className="bg-white text-black font-medium text-sm px-6 py-3 rounded hover:bg-neutral-200 transition-colors whitespace-nowrap"
+                className="bg-black text-white font-medium text-sm px-6 py-3 rounded hover:bg-neutral-800 transition-colors whitespace-nowrap"
               >
                 Obtenir mes −10%
               </button>
             </form>
           )}
-          <p className="text-neutral-600 text-[11px] mt-4 tracking-wide">Pas de spam · Désabonnement en 1 clic</p>
+          <p className="text-neutral-500 text-[11px] mt-4 tracking-wide">Pas de spam · Désabonnement en 1 clic</p>
         </FadeInSection>
       </div>
     </section>
@@ -1875,30 +1875,25 @@ function CookieBanner() {
 }
 
 function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: string) => void }) {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSent, setNewsletterSent] = useState(false);
-
   return (
-    <footer className="bg-black text-white/60 pt-16 pb-8">
-      {/* Top bar */}
-      <div className="h-px w-full bg-neutral-800" />
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <footer className="bg-white text-neutral-500 border-t border-neutral-200 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
 
           {/* Col 1 — Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <div className="mb-4">
-              <Logo color="white" size="md" />
+              <Logo color="black" size="md" />
             </div>
-            <p className="text-sm leading-relaxed mb-2">Mobilier & pièces d&apos;exception.</p>
-            <p className="text-sm mb-5">Genève, Suisse 🇨🇭</p>
+            <p className="text-sm leading-relaxed mb-1 text-neutral-600">Mobilier & pièces d&apos;exception.</p>
+            <p className="text-sm mb-5 text-neutral-500">Genève, Suisse 🇨🇭</p>
             <div className="flex items-center gap-4">
-              <a href="https://www.instagram.com/serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
+              <a href="https://www.instagram.com/serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-neutral-500 hover:text-black transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="hover:text-white transition-colors text-sm font-medium tracking-wider">
+              <a href="https://www.tiktok.com/@serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-neutral-500 hover:text-black transition-colors text-sm font-medium tracking-wider">
                 TikTok
               </a>
             </div>
@@ -1906,8 +1901,8 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
 
           {/* Col 2 — Nos Collections */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Nos Collections</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Nos Collections</h4>
+            <ul className="space-y-2.5 text-sm">
               {[
                 { label: 'Salon', section: 'section-salon', filter: 'Salon' },
                 { label: 'Meubles', section: 'section-bureau', filter: 'Meubles' },
@@ -1917,9 +1912,9 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
                 <li key={item.label}>
                   <button
                     onClick={() => onSectionNav(item.section, item.filter)}
-                    className="hover:text-white transition-colors flex items-center gap-1"
+                    className="text-neutral-500 hover:text-black transition-colors"
                   >
-                    <ChevronRight className="w-3 h-3" /> {item.label}
+                    {item.label}
                   </button>
                 </li>
               ))}
@@ -1928,90 +1923,76 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
 
           {/* Col 3 — Service Client */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Service Client</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Service Client</h4>
+            <ul className="space-y-2.5 text-sm">
               {[
                 { label: 'Livraison', href: '/livraison' },
-                { label: 'Retours', href: '/retours' },
-                { label: 'FAQ', href: '/faq' },
-                { label: 'Contact', href: '/contact' },
+                { label: 'Retours & échanges', href: '/retours' },
+                { label: 'Questions fréquentes', href: '/faq' },
+                { label: 'Nous contacter', href: '/contact' },
                 { label: 'À propos', href: '/a-propos' },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link href={item.href} className="hover:text-white transition-colors flex items-center gap-1">
-                    <ChevronRight className="w-3 h-3" /> {item.label}
+                  <Link href={item.href} className="text-neutral-500 hover:text-black transition-colors">
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 4 — Newsletter */}
+          {/* Col 4 — Informations */}
           <div>
-            <h4 className="text-white text-sm font-semibold tracking-widest uppercase mb-4">Newsletter</h4>
-            <p className="text-sm leading-relaxed mb-4">Recevez nos nouveautés et offres exclusives.</p>
-            {newsletterSent ? (
-              <p className="text-sm text-white/80">Merci pour votre inscription !</p>
-            ) : (
-              <form
-                onSubmit={(e) => { e.preventDefault(); if (newsletterEmail) setNewsletterSent(true); }}
-                className="flex items-center"
-              >
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="votre@email.com"
-                  required
-                  className="flex-1 min-w-0 bg-white/5 border border-white/20 text-white text-sm px-3 py-2 rounded-l outline-none focus:ring-1 focus:ring-[#C9A96E] placeholder:text-white/30 transition-all"
-                />
-                <button
-                  type="submit"
-                  className="bg-white/10 hover:bg-white/20 border border-white/20 border-l-0 text-white px-3 py-2 rounded-r transition-colors focus:outline-none focus:ring-1 focus:ring-[#C9A96E]"
-                  aria-label="S'inscrire"
-                >
-                  →
-                </button>
-              </form>
-            )}
+            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Informations</h4>
+            <ul className="space-y-2.5 text-sm">
+              {[
+                { label: 'Mentions légales', href: '/mentions-legales' },
+                { label: 'Conditions générales', href: '/cgv' },
+                { label: 'Confidentialité', href: '/confidentialite' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-neutral-500 hover:text-black transition-colors">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 flex items-center gap-2 text-xs text-neutral-500">
+              <Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} />
+              Livraison offerte dès 40 CHF
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
+        <div className="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <p>
-            © 2026 Maison Serenia&nbsp;
-            <span className="hidden sm:inline">|</span>
-            <Link href="/cgv" className="hover:text-white transition-colors mx-1">CGV</Link>
-            |
-            <Link href="/confidentialite" className="hover:text-white transition-colors mx-1">Politique confidentialité</Link>
-            |
-            <Link href="/mentions-legales" className="hover:text-white transition-colors mx-1">Mentions légales</Link>
+            © 2026 Maison Serenia · Genève, Suisse
           </p>
           <div className="flex items-center gap-2.5 flex-wrap justify-center">
             {/* Visa */}
-            <div className="h-7 w-11 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="h-7 w-11 rounded border border-neutral-200 bg-white flex items-center justify-center">
               <span className="text-[#1A1F71] text-[13px] font-bold italic tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>VISA</span>
             </div>
             {/* Mastercard */}
-            <div className="h-7 w-11 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="h-7 w-11 rounded border border-neutral-200 bg-white flex items-center justify-center">
               <span className="relative inline-block w-6 h-4">
                 <span className="absolute left-0 top-0 w-4 h-4 rounded-full bg-[#EB001B]" />
                 <span className="absolute right-0 top-0 w-4 h-4 rounded-full bg-[#F79E1B] mix-blend-multiply" />
               </span>
             </div>
             {/* PayPal */}
-            <div className="h-7 px-2.5 rounded bg-white flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="h-7 px-2.5 rounded border border-neutral-200 bg-white flex items-center justify-center">
               <span className="text-[12px] font-bold italic" style={{ fontFamily: 'Arial, sans-serif' }}>
                 <span className="text-[#003087]">Pay</span><span className="text-[#009CDE]">Pal</span>
               </span>
             </div>
             {/* Apple Pay */}
-            <div className="h-7 px-2.5 rounded bg-black flex items-center justify-center gap-0.5 opacity-90 hover:opacity-100 transition-opacity">
+            <div className="h-7 px-2.5 rounded bg-black flex items-center justify-center gap-0.5">
               <svg viewBox="0 0 24 24" className="w-3 h-3" fill="white"><path d="M17 13.5c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.7-1 2.4-2c.7-1.1 1-2.2 1-2.3-.1 0-2.3-.9-2.3-3.2Zm-2-6c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.2 1.1-.5.6-.9 1.4-.8 2.3.9.1 1.7-.4 2.2-1Z"/></svg>
               <span className="text-white text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
             </div>
             {/* Amex */}
-            <div className="h-7 w-11 rounded bg-[#2E77BC] flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="h-7 w-11 rounded bg-[#2E77BC] flex items-center justify-center">
               <span className="text-white text-[10px] font-bold tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>AMEX</span>
             </div>
           </div>
