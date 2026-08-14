@@ -229,7 +229,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
             <div className="flex-1 overflow-y-auto">
               {/* RECHERCHE */}
               <div className="px-6 py-5 border-b border-neutral-100">
-                <div className="flex items-center gap-2 border border-neutral-200 px-3 py-2.5">
+                <div className="flex items-center gap-2 border border-neutral-200 rounded-lg px-3 py-3 focus-within:border-[#C9A96E] transition-colors">
                   <Search className="w-4 h-4 text-neutral-400 shrink-0" />
                   <input
                     type="text"
@@ -294,29 +294,29 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
               {/* NOS COLLECTIONS */}
               <div className="px-6 py-6 border-b border-neutral-100">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-5">Nos collections</p>
-                <div className="flex flex-col gap-5">
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Nos collections</p>
+                <div className="flex flex-col gap-1">
                   {collections.map((c) => (
                     <Link
                       key={c.name}
                       href={`/collections/${c.slug}`}
                       onClick={onClose}
-                      className="flex items-center gap-4 group text-left w-full"
+                      className="flex items-center gap-4 group text-left w-full rounded-xl px-2 -mx-2 py-2 hover:bg-[#FAF7F1] transition-colors"
                     >
-                      <div className="w-14 h-14 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                      <div className="w-16 h-16 rounded-lg bg-neutral-50 border border-neutral-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
                         {c.img ? (
                           <img
                             src={c.img}
                             alt={c.name}
-                            className="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover:scale-105"
+                            className="w-full h-full object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : null}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-serif text-base font-semibold text-black group-hover:underline leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
+                        <p className="font-serif text-base font-semibold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
                         <p className="text-xs text-neutral-400 mt-0.5">{c.desc}</p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors flex-shrink-0" />
+                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#A07840] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -326,13 +326,22 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
               <div className="px-6 py-5 border-b border-neutral-100">
                 <button
                   onClick={() => goToSection('section-packs')}
-                  className="block w-full text-left bg-black text-white p-5 hover:bg-neutral-900 transition-colors"
+                  className="relative block w-full text-left p-5 rounded-2xl overflow-hidden text-white transition-transform hover:scale-[1.01]"
+                  style={{ background: 'linear-gradient(135deg, #2a2521 0%, #17130f 100%)' }}
                 >
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-white/60 mb-2">Offre exclusive</p>
-                  <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-                    Packs &amp; Ensembles
-                  </h3>
-                  <p className="text-sm text-white/70 mt-2 leading-relaxed">Rabais jusqu&apos;à {formatPrice(200, cur)} sur nos ensembles</p>
+                  <span className="absolute -right-6 -top-6 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.35), transparent 70%)' }} />
+                  <div className="relative flex items-start gap-3">
+                    <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)' }}>
+                      <Gift className="w-4 h-4 text-white" />
+                    </span>
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-[#E8D5B0] mb-1">Offre exclusive</p>
+                      <h3 className="text-xl font-bold leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                        Packs &amp; Ensembles
+                      </h3>
+                      <p className="text-sm text-white/70 mt-1.5 leading-relaxed">Jusqu&apos;à {formatPrice(200, cur)} d&apos;économies sur nos ensembles</p>
+                    </div>
+                  </div>
                 </button>
               </div>
 
