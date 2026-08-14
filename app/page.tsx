@@ -2368,16 +2368,6 @@ export default function Home() {
             className="mt-6 h-px w-28 origin-center"
             style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }}
           />
-          <p
-            className="text-lg md:text-2xl text-white/85 mt-5 italic"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-          >
-            L&apos;art de vivre à la française
-          </p>
-          <p className="text-white/70 text-sm md:text-base mt-4 max-w-xl leading-relaxed">
-            Canapés et fauteuils sculpturaux, pièces de collection et intérieurs sublimés.
-            Un mobilier pensé pour durer, livré avec le plus grand soin.
-          </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
