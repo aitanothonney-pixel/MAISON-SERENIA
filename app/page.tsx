@@ -476,21 +476,21 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
             </span>
-            <span className={`hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium ${textColor}`}>Menu</span>
+            <span className={`hidden sm:inline text-[13px] tracking-[0.32em] uppercase ${textColor}`} style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>Menu</span>
           </button>
 
           {/* Search trigger — opens full-screen search overlay */}
           <button
             onClick={() => setSearchFocused(true)}
-            className={`hidden lg:flex items-center gap-2 px-3 py-2 border transition-colors ${
+            className={`hidden lg:flex items-center gap-2.5 px-4 py-2.5 rounded-full border transition-colors ${
               scrolled
-                ? 'border-neutral-200 bg-white hover:border-neutral-300 text-neutral-400'
+                ? 'border-neutral-200 bg-neutral-50/80 hover:border-neutral-300 text-neutral-400'
                 : 'border-white/25 bg-white/5 hover:bg-white/10 text-white/60'
             }`}
             aria-label="Rechercher"
           >
             <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
-            <span className="w-52 xl:w-64 text-xs text-left">Que recherchez-vous ?</span>
+            <span className="w-48 xl:w-56 text-[13px] text-left tracking-wide">Rechercher une pièce…</span>
           </button>
         </div>
 
@@ -503,7 +503,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         <div className="flex items-center gap-1 justify-end">
           <Link
             href="/contact"
-            className={`hidden lg:inline-block text-[11px] tracking-[0.25em] uppercase font-medium px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
+            className={`hidden lg:inline-block text-[13px] tracking-[0.32em] uppercase px-3.5 py-2 transition-colors ${textColor} hover:text-[#A07840]`}
+            style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}
           >
             Contactez-nous
           </Link>
@@ -511,7 +512,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Favoris (opens wishlist) */}
           <button
             onClick={onWishlistOpen}
-            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
+            className={`relative w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300 ${
               scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
             }`}
             aria-label="Favoris"
@@ -530,7 +531,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           {/* Cart */}
           <button
             onClick={onCartOpen}
-            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
+            className={`relative w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300 ${
               scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
             }`}
             aria-label="Panier"
