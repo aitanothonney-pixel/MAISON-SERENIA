@@ -25,7 +25,7 @@ export function CollectionCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/products/${product.id}`} className="group block border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500">
-      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-50">
+      <div className="relative aspect-[4/3] overflow-hidden bg-white">
         {/* Carrousel défilable horizontalement */}
         <div
           ref={scrollRef}

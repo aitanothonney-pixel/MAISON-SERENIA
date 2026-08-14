@@ -27,7 +27,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
       {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-16">
+      <section className="border-b border-neutral-100 bg-white py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <Link
             href="/"
