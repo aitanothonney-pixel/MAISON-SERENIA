@@ -48,7 +48,7 @@ export default async function AvisPage({ params }: { params: Promise<{ id: strin
   }
 
   const stats = buildReviewStats(productId);
-  const reviews = buildAllReviews(productId);
+  const reviews = buildAllReviews(productId, product.category, product.name);
 
   const breakdown = [
     { star: 5, count: stats.five },

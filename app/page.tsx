@@ -144,7 +144,6 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
     'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 10 },
     'Meubles': { desc: 'Meubles & pièces d\'intérieur', section: 'section-bureau' },
     'Décorations': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
-    'Été': { name: 'Collection Été', desc: 'Accessoires nomades', section: 'section-ete', imgId: 50 },
   };
 
   const collections = [
@@ -629,7 +628,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                     <TrendingUp className="w-3.5 h-3.5" /> Recherches populaires
                   </p>
                   <div className="flex flex-wrap gap-2.5">
-                    {['Canapé', 'Meuble TV', 'Table', 'Commode', 'Bubble', 'Vase', 'Été'].map((s) => (
+                    {['Canapé', 'Meuble TV', 'Table', 'Commode', 'Bubble', 'Vase', 'Buffet'].map((s) => (
                       <button
                         key={s}
                         onClick={() => setSearchQ(s)}
@@ -1229,7 +1228,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Meubles', 'Salon', 'Bubble', 'Décorations', 'Été'];
+const filterCategories = ['Meubles', 'Salon', 'Bubble', 'Décorations'];
 
 function ProductFilterBar({
   active,
@@ -1408,73 +1407,6 @@ const testimonials = [
   },
 ];
 
-
-// ── Section Été ───────────────────────────────────────────────────────────────
-
-function SummerProductsSection() {
-  const allSummer = products.filter(p => p.category === 'Été');
-  const seenGroups = new Set<number>();
-  const summerProducts = allSummer.filter(p => {
-    const group = getVariantGroup(p.id);
-    if (!group) return true;
-    const firstId = group[0].productId;
-    if (seenGroups.has(firstId)) return false;
-    seenGroups.add(firstId);
-    return p.id === firstId;
-  });
-  const { isWished, toggle } = useWishlist();
-
-  return (
-    <FadeInSection>
-      <section id="section-ete" className="py-14 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Collection Saisonnière</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Nos Produits Été</h2>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {summerProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group overflow-hidden"
-            >
-              <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-[4/3] overflow-hidden bg-white mb-3 p-3">
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className="object-contain transition-transform duration-600 group-hover:scale-105"
-                  />
-                  <button
-                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  >
-                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                  </button>
-                </div>
-                <div className="flex items-center gap-1 mb-1">
-                  {[...Array(4)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
-                  <Star className="w-2.5 h-2.5 text-neutral-300" />
-                  <span className="text-[10px] text-neutral-400 ml-1">(4,0)</span>
-                </div>
-                <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
-                <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <p className="text-black font-bold text-sm price-luxe">{product.price.toFixed(2)} CHF</p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
 
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
 
@@ -1897,7 +1829,6 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
                 { label: 'Salon', section: 'section-salon', filter: 'Salon' },
                 { label: 'Meubles', section: 'section-bureau', filter: 'Meubles' },
                 { label: 'Décorations', section: 'section-figurines', filter: 'Décorations' },
-                { label: 'Été', section: 'section-ete', filter: 'Été' },
                 { label: 'Promotions', section: 'section-salon', filter: 'Bubble' },
               ].map((item) => (
                 <li key={item.label}>
@@ -2249,23 +2180,8 @@ export default function Home() {
     ? curatedAll
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
-      : activeFilter === 'Été'
-        ? (() => {
-            const seenGroups = new Set<number>();
-            return products.filter(p => {
-              if (p.category !== 'Été') return false;
-              const grp = getVariantGroup(p.id);
-              if (grp) {
-                const firstId = grp[0].productId;
-                if (seenGroups.has(firstId)) return false;
-                seenGroups.add(firstId);
-                return p.id === firstId;
-              }
-              return true;
-            });
-          })()
-        : (() => {
-            const list = collapseVariantDuplicates(products.filter((p) => p.category === activeFilter && p.category !== 'Été'));
+      : (() => {
+            const list = collapseVariantDuplicates(products.filter((p) => p.category === activeFilter));
             // Dans le Salon, on affiche les produits Bubble en dernier
             if (activeFilter === 'Salon') {
               return list.sort((a, b) => {
@@ -2528,8 +2444,6 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Section Été — accessoires saisonniers (secondaire) */}
-          <SummerProductsSection />
       </div>
 
 

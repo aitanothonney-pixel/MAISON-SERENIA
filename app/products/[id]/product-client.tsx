@@ -15,6 +15,7 @@ import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
+import { buildReviewStats, buildAllReviews } from '@/lib/reviews';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
@@ -52,41 +53,6 @@ function dimensionGuideExtra(category: string) {
     title: 'Profondeur d\'assise',
     content: "La profondeur d'assise détermine le confort d'usage : comptez environ 55 à 60 cm pour une assise droite, et jusqu'à 65 cm pour un confort cocooning type Bubble.",
   };
-}
-
-const REVIEW_POOL: { name: string; text: string }[] = [
-  { name: 'Marie D.', text: "Absolument magnifique ! Le produit est conforme aux photos. L'emballage était impeccable et la livraison très rapide. Je recommande vivement !" },
-  { name: 'Jean-Pierre L.', text: 'Excellent rapport qualité-prix. Vraiment satisfait de mon achat. C\'est du solide, très bien fini. Merci MAISON SERENIA !' },
-  { name: 'Sophie M.', text: "Très bien. Légèrement différent de ce que j'attendais mais au final c'est super. Le service client a été très réactif." },
-  { name: 'Antoine R.', text: 'Qualité au rendez-vous, exactement ce que je cherchais pour mon intérieur. Livraison soignée et dans les temps.' },
-  { name: 'Camille B.', text: 'Superbe pièce, très agréable au quotidien. Un vrai coup de cœur pour toute la famille.' },
-  { name: 'Nicolas F.', text: 'Produit à la hauteur de mes attentes. Finitions soignées, je suis ravi de mon achat.' },
-  { name: 'Laura P.', text: 'Livraison un peu longue mais le résultat en vaut la peine. Magnifique une fois installé.' },
-  { name: 'Thomas G.', text: "Très satisfait, j'hésitais mais je ne regrette absolument pas. Qualité premium au rendez-vous." },
-];
-
-const REVIEW_DATES = ['28 juin 2026', '25 juin 2026', '22 juin 2026', '18 juin 2026', '14 juin 2026', '9 juin 2026'];
-
-function buildReviewStats(productId: number) {
-  const rng = seedFromId(productId * 7 + 4242);
-  const five = 45 + Math.floor(rng() * 55);
-  const four = 15 + Math.floor(rng() * 30);
-  const three = 6 + Math.floor(rng() * 12);
-  const two = 2 + Math.floor(rng() * 6);
-  const one = 1 + Math.floor(rng() * 4);
-  const total = five + four + three + two + one;
-  const avg = Math.round(((five * 5 + four * 4 + three * 3 + two * 2 + one * 1) / total) * 10) / 10;
-  return { five, four, three, two, one, total, avg };
-}
-
-function buildReviews(productId: number) {
-  const rng = seedFromId(productId * 13 + 777);
-  const shuffled = [...REVIEW_POOL].sort(() => rng() - 0.5);
-  return shuffled.slice(0, 3).map((r, i) => ({
-    ...r,
-    rating: rng() < 0.15 ? 3 : rng() < 0.45 ? 4 : 5,
-    date: REVIEW_DATES[(productId + i) % REVIEW_DATES.length],
-  }));
 }
 
 const ACTIVITY_NAMES = ['Claude D.', 'Diane M.', 'Boris D.', 'Emma L.', 'Julien K.', 'Nadia S.', 'Marc T.', 'Alice V.', 'Hugo P.', 'Léa R.'];
@@ -946,7 +912,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   ];
 
   const reviewStats = buildReviewStats(product.id);
-  const reviews = buildReviews(product.id);
+  const reviews = buildAllReviews(product.id, product.category, product.name).slice(0, 3);
   const liveActivity = buildLiveActivity(product.id);
   const stockUrgency = buildStockUrgency(product.id);
 
