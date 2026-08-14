@@ -1334,6 +1334,80 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
   );
 }
 
+// ─── Shop by Category (bloc catégories bien visible, style meublier) ──────────
+
+function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, section: string) => void }) {
+  const catImage = (cat: string, fallback: string) =>
+    products.find((p) => p.category === cat)?.images[0] ?? fallback;
+
+  const tiles = [
+    {
+      cat: 'Salon',
+      section: 'section-salon',
+      label: 'Salon',
+      desc: 'Canapés & fauteuils',
+      img: 'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg',
+      big: true,
+    },
+    {
+      cat: 'Meubles',
+      section: 'section-bureau',
+      label: 'Meubles',
+      desc: 'Tables, TV, rangements',
+      img: catImage('Meubles', 'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=800&q=80'),
+      big: false,
+    },
+    {
+      cat: 'Décorations',
+      section: 'section-figurines',
+      label: 'Décorations',
+      desc: 'Pièces & objets déco',
+      img: 'https://i.ibb.co/hxfV4W3d/IMG-0663.jpg',
+      big: false,
+    },
+  ];
+
+  return (
+    <FadeInSection>
+      <section className="py-14 md:py-20 max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="text-center mb-10">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Notre univers</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            Acheter par catégorie
+          </h2>
+          <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[280px]">
+          {tiles.map((t) => (
+            <button
+              key={t.cat}
+              onClick={() => onCategoryClick(t.cat, t.section)}
+              className={`relative overflow-hidden rounded-2xl group text-left ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
+            >
+              <img
+                src={t.img}
+                alt={t.label}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-300 group-hover:from-black/80" />
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <p className={`font-semibold ${t.big ? 'text-2xl md:text-3xl' : 'text-lg'}`} style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                  {t.label}
+                </p>
+                <p className="text-white/75 text-xs md:text-sm mt-0.5">{t.desc}</p>
+                <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-widest uppercase text-white/90 group-hover:text-[#E8D5B0] transition-colors">
+                  Découvrir <ChevronRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+    </FadeInSection>
+  );
+}
+
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
 const testimonials = [
@@ -2358,20 +2432,22 @@ export default function Home() {
 
       <TrustStrip />
 
+      {/* Acheter par catégorie — bien visible, style meublier */}
+      <ShopByCategory onCategoryClick={handleSectionNav} />
+
       <div className="w-full">
+          {/* Promotions mises en avant */}
+          <PromoBanner />
+
+          {/* Bubble Promo Carousel */}
+          <BubblePromoCarousel />
+
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
             setActiveFilter('Bubble');
             setSortBy('recommandes');
             setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
           }} />
-
-
-          {/* Promo full-width banner */}
-          <PromoBanner />
-
-          {/* Bubble Promo Carousel */}
-          <BubblePromoCarousel />
 
           {/* Products Grid with filter */}
           <section id="section-salon" className="py-16 scroll-mt-20">
