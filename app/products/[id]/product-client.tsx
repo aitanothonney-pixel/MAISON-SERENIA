@@ -913,7 +913,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
   const reviewStats = buildReviewStats(product.id);
   const reviews = buildAllReviews(product.id, product.category, product.name).slice(0, 3);
-  const liveActivity = buildLiveActivity(product.id);
   const stockUrgency = buildStockUrgency(product.id);
 
   const accordions = [
@@ -1490,40 +1489,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             </div>
             <div className="text-center">
               <Link href={`/products/${product.id}/avis`} className="text-sm font-semibold text-black hover:underline">Voir tous les avis →</Link>
-            </div>
-          </section>
-
-          {/* Vu maintenant */}
-          <section className="mt-16">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">En temps réel</p>
-            <h2 className="text-2xl font-serif font-bold text-black mb-1">Vu maintenant</h2>
-            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <div className="border border-neutral-200 px-5 py-4">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-1.5">Actuellement</p>
-                <p className="text-sm text-black font-medium flex items-center gap-2"><Eye className="w-4 h-4 text-[#C9A96E]" /> {liveActivity.viewers} personnes regardent</p>
-              </div>
-              <div className="border border-neutral-200 px-5 py-4">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-1.5">Derniers jours</p>
-                <p className="text-sm text-black font-medium flex items-center gap-2"><ShoppingBag className="w-4 h-4 text-[#C9A96E]" /> {liveActivity.buyers} achats récents</p>
-              </div>
-            </div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-3">Activité en direct</p>
-            <div className="space-y-2">
-              {liveActivity.feed.map((item, i) => (
-                <div key={i} className="flex items-center justify-between border border-neutral-100 px-4 py-3 hover:border-neutral-200 transition-colors">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-neutral-100 text-black">
-                      {item.type === 'buy' ? <ShoppingBag className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-black truncate">{item.name}</p>
-                      <p className="text-xs text-neutral-400">{item.action}</p>
-                    </div>
-                  </div>
-                  <span className="text-xs text-neutral-400 shrink-0 ml-3">{item.time}</span>
-                </div>
-              ))}
             </div>
           </section>
 
