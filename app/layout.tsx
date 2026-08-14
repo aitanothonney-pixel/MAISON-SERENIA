@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans, Italiana, Cinzel } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Italiana, Cinzel, Jost } from 'next/font/google'
 import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
@@ -31,6 +31,13 @@ const cinzel = Cinzel({
   display: 'swap',
 })
 
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-jost',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://maison-serenia.com'),
   title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
@@ -51,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = await cookies();
   const currency: Currency = cookieStore.get('mss-currency')?.value === 'CHF' ? 'CHF' : 'EUR';
   return (
-    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable} ${jost.variable}`}>
       <body>
         <script
           type="application/ld+json"

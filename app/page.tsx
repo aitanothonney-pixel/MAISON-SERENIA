@@ -476,7 +476,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
               <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
             </span>
-            <span className={`hidden sm:inline text-[11px] tracking-[0.25em] uppercase font-medium ${textColor}`}>Menu</span>
+            <span className={`hidden sm:inline text-[11px] tracking-[0.3em] uppercase ${textColor}`} style={{ fontFamily: 'var(--font-jost, sans-serif)', fontWeight: 400 }}>Menu</span>
           </button>
 
           {/* Search trigger — opens full-screen search overlay */}
@@ -490,7 +490,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             aria-label="Rechercher"
           >
             <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
-            <span className="w-52 xl:w-64 text-xs text-left">Que recherchez-vous ?</span>
+            <span className="w-52 xl:w-64 text-xs text-left tracking-wide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
           </button>
         </div>
 
@@ -503,7 +503,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         <div className="flex items-center gap-1 justify-end">
           <Link
             href="/contact"
-            className={`hidden lg:inline-block text-[11px] tracking-[0.25em] uppercase font-medium px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
+            className={`hidden lg:inline-block text-[11px] tracking-[0.3em] uppercase px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
+            style={{ fontFamily: 'var(--font-jost, sans-serif)', fontWeight: 400 }}
           >
             Contactez-nous
           </Link>
