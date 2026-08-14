@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans, Italiana, Cinzel } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans, Italiana, Cinzel } from 'next/font/google'
 import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
 
-const playfair = Playfair_Display({
+const playfair = Cormorant_Garamond({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-playfair',
   display: 'swap',
 })
