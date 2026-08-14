@@ -989,7 +989,7 @@ function BubblePromoCarousel() {
           {items.map((product) => (
             <div key={product.id} className="group flex-shrink-0 w-64 md:w-72 snap-start">
               <Link href={`/products/${product.id}`}>
-              <div className="relative overflow-hidden bg-neutral-50 mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
+              <div className="relative overflow-hidden bg-white mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
                 <Image
                   src={product.images[0]}
                   alt={product.name}
@@ -1526,7 +1526,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
 
   return (
     <FadeInSection>
-      <section id="section-packs" className="py-20 bg-neutral-50 scroll-mt-20">
+      <section id="section-packs" className="py-20 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Économisez plus</p>
@@ -1559,7 +1559,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                   <div className="flex-1 flex flex-col">
                     <div className="relative">
                       <Link href={`/products/${canapeId}`} className="flex items-center gap-4 group">
-                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0">
+                        <div className="w-28 h-28 bg-white flex items-center justify-center flex-shrink-0">
                           <Image
                             src={canape.images[0]}
                             alt={canape.name}
@@ -1577,7 +1577,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <span className="text-neutral-300 text-2xl leading-none">+</span>
                       </div>
                       <Link href={`/products/${fauteuilId}`} className="flex items-center gap-4 group">
-                        <div className="w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <div className="w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden">
                           <Image
                             src={fauteuil.images[0]}
                             alt={fauteuil.name}
@@ -1596,7 +1596,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                         <span className="text-neutral-300 text-2xl leading-none">+</span>
                       </div>
                       <Link href={`/products/${figurineId}`} className="flex items-center gap-4 group">
-                        <div className="relative w-28 h-28 bg-neutral-50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <div className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden">
                           <Image
                             src={figurine.images[0]}
                             alt={figurine.name}
