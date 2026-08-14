@@ -1,6 +1,9 @@
-// Génération déterministe des avis clients — partagée entre la page produit
-// et la page « tous les avis » pour que les statistiques restent cohérentes.
-// Les textes sont adaptés à la catégorie du produit (mobilier).
+// Génération déterministe des avis clients — partagée entre la fiche produit
+// et la page « tous les avis ». Les avis sont construits à partir des données
+// réelles du produit (type + matière) et combinés (ouverture + détail + clôture)
+// pour être spécifiques au produit et éviter les répétitions d'un produit à l'autre.
+
+import { products } from './products';
 
 export function seedFromId(seed: number) {
   let s = seed;
@@ -10,14 +13,14 @@ export function seedFromId(seed: number) {
   };
 }
 
-// Volumes réalistes et modérés (une douzaine à une trentaine d'avis par produit).
+// Volumes volontairement modestes (quelques avis crédibles par produit).
 export function buildReviewStats(productId: number) {
   const rng = seedFromId(productId * 7 + 4242);
-  const five = 9 + Math.floor(rng() * 13);   // 9–21
-  const four = 3 + Math.floor(rng() * 5);     // 3–7
-  const three = 1 + Math.floor(rng() * 3);    // 1–3
-  const two = Math.floor(rng() * 2);          // 0–1
-  const one = Math.floor(rng() * 2);          // 0–1
+  const five = 5 + Math.floor(rng() * 5);   // 5–9
+  const four = 2 + Math.floor(rng() * 3);    // 2–4
+  const three = Math.floor(rng() * 2);       // 0–1
+  const two = rng() < 0.15 ? 1 : 0;          // rare
+  const one = rng() < 0.08 ? 1 : 0;          // très rare
   const total = five + four + three + two + one;
   const avg = Math.round(((five * 5 + four * 4 + three * 3 + two * 2 + one * 1) / total) * 10) / 10;
   return { five, four, three, two, one, total, avg };
@@ -28,11 +31,10 @@ const FIRST_NAMES = [
   'Émilie', 'Alexandre', 'Chloé', 'Maxime', 'Léa', 'Hugo', 'Sarah', 'Lucas',
   'Manon', 'Romain', 'Clara', 'Pierre', 'Inès', 'Baptiste', 'Juliette', 'Mathieu',
   'Anaïs', 'Guillaume', 'Océane', 'Vincent', 'Pauline', 'Florian', 'Céline', 'Damien',
+  'Nadia', 'Boris', 'Diane', 'Marc', 'Alice', 'Hélène', 'Fabien', 'Sabrina',
 ];
-const LAST_INITIALS = ['M.', 'R.', 'P.', 'G.', 'L.', 'B.', 'D.', 'F.', 'T.', 'C.', 'V.', 'S.'];
+const LAST_INITIALS = ['M.', 'R.', 'P.', 'G.', 'L.', 'B.', 'D.', 'F.', 'T.', 'C.', 'V.', 'S.', 'K.', 'N.'];
 
-// ── Textes d'avis par famille de produit ────────────────────────────────────
-// On regroupe par « type » de meuble pour que l'avis colle vraiment au produit.
 type Family = 'seating' | 'furniture' | 'deco';
 
 function familyOf(category: string, name: string): Family {
@@ -41,79 +43,142 @@ function familyOf(category: string, name: string): Family {
   return 'furniture';
 }
 
-const TEXTS: Record<Family, Record<number, string[]>> = {
-  // Canapés & fauteuils
+// Détermine le nom commun du produit pour l'intégrer naturellement à l'avis.
+function nounOf(name: string, category: string): string {
+  const n = name.toLowerCase();
+  if (n.includes('canapé-lit')) return 'canapé-lit';
+  if (n.includes('canapé')) return 'canapé';
+  if (n.includes('fauteuil')) return 'fauteuil';
+  if (n.includes('table basse')) return 'table basse';
+  if (n.includes('table')) return 'table';
+  if (n.includes('meuble tv') || n.includes('meuble télé')) return 'meuble TV';
+  if (n.includes('commode')) return 'commode';
+  if (n.includes('buffet')) return 'buffet';
+  if (n.includes('étagère') || n.includes('etagere')) return 'étagère';
+  if (n.includes('vase')) return 'vase';
+  if (n.includes('bearbrick') || n.includes('kaws') || n.includes('figurine')) return 'figurine';
+  if (category === 'Décorations') return 'pièce';
+  if (category === 'Salon') return 'canapé';
+  return 'meuble';
+}
+
+// Genre grammatical du nom commun (pour accorder Ce/Cette, Le/La).
+function isFeminine(noun: string): boolean {
+  return ['table basse', 'table', 'commode', 'étagère', 'figurine', 'pièce'].includes(noun);
+}
+
+// Traduit la matière du produit en une petite proposition (en minuscule, milieu de phrase).
+function matPhraseOf(material: string, family: Family): string {
+  const m = material.toLowerCase();
+  if (m.includes('velours')) return 'le velours est doux et bien dense';
+  if (m.includes('chenille')) return 'le tissu chenille est doux et enveloppant';
+  if (m.includes('maille')) return 'la maille 3D est unique et agréable';
+  if (m.includes('bouclé') || m.includes('boucle')) return 'le tissu bouclé est moelleux';
+  if (m.includes('flanelle') || m.includes('côtelé') || m.includes('cotele')) return 'le tissu côtelé est très agréable';
+  if (m.includes('lin')) return "l'aspect lin est chaleureux";
+  if (m.includes('tissu')) return 'le tissu est agréable et bien tendu';
+  if (m.includes('vinyle')) return 'le vinyle est parfaitement fini';
+  if (m.includes('résine') || m.includes('resine')) return 'la résine est nette et bien détaillée';
+  if (m.includes('céramique') || m.includes('ceramique')) return 'la céramique est délicate et soignée';
+  if (m.includes('marbre')) return "le plateau effet marbre est superbe";
+  if (m.includes('verre')) return 'le plateau en verre est élégant';
+  if (m.includes('rotin') || m.includes('cannage') || m.includes('cannelé')) return 'les détails sont finement réalisés';
+  if (m.includes('noyer') || m.includes('chêne') || m.includes('chene') || m.includes('bois')) return 'le bois est de belle qualité';
+  if (m.includes('métal') || m.includes('metal') || m.includes('acier')) return 'la structure métallique est robuste';
+  if (m.includes('mdf') || m.includes('panneaux') || m.includes('aggloméré') || m.includes('agglomere')) return 'les finitions sont propres et nettes';
+  if (family === 'seating') return "l'assise est confortable et bien rembourrée";
+  if (family === 'deco') return 'la finition est soignée';
+  return 'les finitions sont soignées';
+}
+
+// ── Pools de phrases (combinées pour maximiser la variété) ───────────────────
+// Placeholders : {noun} = type de produit, {mat} = matière, {Dem} = Ce/Cette,
+// {art} = Le/La (début de phrase), {artl} = le/la (milieu de phrase).
+const OPEN: Record<number, string[]> = {
+  5: [
+    'Un vrai coup de cœur.', 'Ravie de mon achat.', "Exactement ce que j'espérais.",
+    '{Dem} {noun} est superbe.', 'Je recommande les yeux fermés.', 'Parfait du début à la fin.',
+    '{Dem} {noun} rend encore mieux en vrai.', 'Sans hésiter, un excellent choix.',
+  ],
+  4: [
+    'Très satisfait de mon achat.', '{Dem} {noun} correspond bien à la description.',
+    'Content dans l’ensemble.', '{Dem} {noun} est de belle facture.', 'Achat que je referais.',
+  ],
+  3: [
+    '{Dem} {noun} est convenable dans l’ensemble.', 'Correct, sans plus.', 'Mon avis est partagé.',
+  ],
+  2: [
+    'Un peu déçu(e) par {artl} {noun}.', 'Expérience mitigée.',
+  ],
+  1: [
+    'Déçu(e) de cet achat.', 'Pas à la hauteur de mes attentes.',
+  ],
+};
+
+const DETAIL: Record<Family, Record<number, string[]>> = {
   seating: {
     5: [
-      "Assise incroyablement moelleuse, on ne veut plus se lever ! Le tissu est doux et la couleur est fidèle aux photos.",
-      "Ce canapé transforme complètement le salon. Confort exceptionnel et finitions haut de gamme, un vrai coup de cœur.",
-      "Encore plus beau en vrai. Très confortable, bien rembourré, et la mousse garde parfaitement sa forme.",
-      "Livré bien emballé, aucune trace. L'assise est ferme mais enveloppante, exactement le confort que je cherchais.",
-      "Pièce maîtresse de mon salon. Le rendu est luxueux et tout le monde me demande où je l'ai acheté.",
+      "L'assise est incroyablement confortable et {mat}.", 'On s’y sent tout de suite bien, et {mat}.',
+      'Le maintien est parfait et {mat}.', 'Il transforme le salon, {mat}.', 'La couleur est fidèle aux photos et {mat}.',
     ],
     4: [
-      "Très confortable et joli. Le montage des pieds demande deux minutes mais rien de compliqué.",
-      "Beau canapé, tissu agréable. La teinte est très légèrement plus foncée qu'à l'écran, mais superbe quand même.",
-      "Confort au rendez-vous. Livraison un peu longue mais la qualité de l'assise vaut l'attente.",
+      'Confortable au quotidien, {mat}.', 'Bonne assise, {mat}.', 'Agréable à l’usage, {mat}.',
     ],
     3: [
-      "Assise confortable mais l'emballage aurait pu être plus protecteur. Le produit en lui-même reste très bien.",
-      "Conforme dans l'ensemble. La couleur est un peu différente de ce que j'imaginais mais le confort est là.",
+      'L’assise reste correcte et {mat}, malgré un emballage perfectible.',
+      'Le confort est là, {mat}, mais la teinte diffère un peu de l’écran.',
     ],
-    2: [
-      "Livraison retardée et suivi à améliorer. Le canapé est confortable une fois installé, heureusement.",
-    ],
-    1: [
-      "Délai d'attente trop long à mon goût. Le canapé est beau mais l'expérience a été gâchée par la logistique.",
-    ],
+    2: ['Le confort est correct une fois installé, mais la livraison a traîné.'],
+    1: ['{art} {noun} plaît beaucoup, mais l’attente a vraiment gâché l’expérience.'],
   },
-  // Meubles (tables, meubles TV, commodes, buffets…)
   furniture: {
     5: [
-      "Meuble très solide, le bois est de belle qualité et le montage a été simple avec la notice fournie.",
-      "Exactement les bonnes dimensions pour mon intérieur. Finitions nettes, aucune rayure, je recommande.",
-      "Superbe pièce, stable et robuste. Le rendu est élégant et bien plus qualitatif que le prix ne le laisse penser.",
-      "Montage rapide et résultat impeccable. Le plateau est bien fini et la structure ne bouge pas d'un pouce.",
-      "Très satisfaite : le meuble structure la pièce, matériaux agréables au toucher et coloris fidèle.",
+      'Très solide et stable, {mat}.', 'Le montage a été simple et {mat}.',
+      'Les dimensions sont exactes et {mat}.', 'Structure robuste, {mat}.', 'Aucune rayure à l’arrivée et {mat}.',
     ],
     4: [
-      "Bon meuble, bien fini. Le montage prend un peu de temps mais tout s'emboîte correctement.",
-      "Conforme à la description, solide. Une petite marque à la livraison mais le SAV a été réactif.",
-      "Rapport qualité-prix correct. Les dimensions sont exactes, parfait pour l'espace prévu.",
+      'Bien fini, {mat}.', 'Montage un peu long mais tout s’emboîte, {mat}.', 'Solide pour le prix, {mat}.',
     ],
     3: [
-      "Meuble correct mais la livraison a été plus longue que prévu. La qualité reste au rendez-vous.",
-      "Quelques détails de finition perfectibles, mais l'ensemble est stable et fait son effet.",
+      'L’ensemble reste stable et {mat}, mais la livraison a été longue.',
+      'Quelques finitions perfectibles, même si {mat}.',
     ],
-    2: [
-      "Emballage à améliorer, un angle légèrement marqué à l'arrivée. Le meuble reste utilisable et correct.",
-    ],
-    1: [
-      "Délai de livraison bien trop long. Le meuble est joli une fois monté mais l'attente a gâché l'achat.",
-    ],
+    2: ['Un angle légèrement marqué à l’arrivée, mais {artl} {noun} reste utilisable.'],
+    1: ['{art} {noun} tient ses promesses, mais l’attente a été bien trop longue.'],
   },
-  // Décorations (sculptures, vases, objets déco)
   deco: {
     5: [
-      "Pièce déco magnifique, elle attire tous les regards sur mon étagère. Finition impeccable et taille parfaite.",
-      "Exactement le rendu que j'espérais. Objet de belle facture, bien emballé, un vrai petit bijou déco.",
-      "Superbe ! Les détails sont soignés et la présentation est très haut de gamme. Je recommande.",
-      "Très belle pièce, elle habille parfaitement mon salon. Conforme aux photos et livraison soignée.",
+      'La finition est superbe et {mat}.', 'Très photogénique, {mat}.',
+      'Très bel effet sur l’étagère, {mat}.', 'Les détails sont soignés et {mat}.',
     ],
     4: [
-      "Joli objet, bien fini. Un peu plus petit que je pensais mais l'effet déco est réussi.",
-      "Très content de mon achat. La teinte est légèrement différente de l'écran mais reste superbe.",
+      'Joli rendu, {mat}.', 'La taille est un peu différente de l’écran, mais {mat}.', 'Bel objet, {mat}.',
     ],
     3: [
-      "Bien mais sans plus. La taille est un peu différente de ce que j'imaginais.",
+      'Correct dans l’ensemble et {mat}, mais la taille surprend un peu.',
     ],
-    2: [
-      "Emballage à améliorer, mais l'objet est arrivé intact et fait son petit effet.",
-    ],
-    1: [
-      "Livraison bien trop longue. L'objet est beau mais l'attente a gâché l'expérience.",
-    ],
+    2: ['L’emballage était juste, mais la pièce est arrivée intacte.'],
+    1: ['La pièce est belle mais la livraison a été bien trop longue.'],
   },
+};
+
+const CLOSE: Record<number, string[]> = {
+  5: [
+    'Livraison soignée, rien à redire.', 'Emballage impeccable.', 'Le rendu est vraiment haut de gamme.',
+    'Je recommande cette boutique.', 'Un achat que je ne regrette pas.', 'Merci Maison Serenia !',
+  ],
+  4: [
+    'Bon rapport qualité-prix.', 'Service client réactif.', 'Livraison correcte dans les temps.',
+  ],
+  3: [
+    'Le SAV a tout de même été à l’écoute.', 'Reste correct pour le prix.',
+  ],
+  2: [
+    'Le service a fini par arranger les choses.', 'Communication à améliorer.',
+  ],
+  1: [
+    'Suivi de commande décevant.', 'J’espère que le service s’améliorera.',
+  ],
 };
 
 const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
@@ -132,14 +197,26 @@ export interface Review {
   date: string;
 }
 
-// Génère la liste complète des avis, répartis selon les statistiques du produit.
+const pick = <T,>(pool: T[], rng: () => number): T => pool[Math.floor(rng() * pool.length)];
+
+// Génère les avis d'un produit : spécifiques (type + matière), variés, sans doublon interne.
 export function buildAllReviews(productId: number, category = 'Meubles', name = '', cap = 999): Review[] {
+  const product = products.find((p) => p.id === productId);
+  const cat = product?.category ?? category;
+  const nm = product?.name ?? name;
+  const mat = product?.material ?? '';
+
   const stats = buildReviewStats(productId);
   const rng = seedFromId(productId * 101 + 31);
-  const family = familyOf(category, name);
-  const pool = TEXTS[family];
+  const family = familyOf(cat, nm);
+  const noun = nounOf(nm, cat);
+  const matPhrase = matPhraseOf(mat, family);
+  const fem = isFeminine(noun);
+  const dem = fem ? 'Cette' : 'Ce';
+  const artCap = fem ? 'La' : 'Le';
+  const artLow = fem ? 'la' : 'le';
 
-  const buckets: { rating: number; count: number }[] = [
+  const buckets = [
     { rating: 5, count: stats.five },
     { rating: 4, count: stats.four },
     { rating: 3, count: stats.three },
@@ -147,16 +224,40 @@ export function buildAllReviews(productId: number, category = 'Meubles', name = 
     { rating: 1, count: stats.one },
   ];
 
+  const fill = (s: string) =>
+    s
+      .replace(/\{Dem\}/g, dem)
+      .replace(/\{art\}/g, artCap)
+      .replace(/\{artl\}/g, artLow)
+      .replace(/\{noun\}/g, noun)
+      .replace(/\{mat\}/g, matPhrase);
+
   const reviews: Review[] = [];
+  const seenTexts = new Set<string>();
+  const seenNames = new Set<string>();
+
   for (const { rating, count } of buckets) {
     for (let i = 0; i < count; i++) {
-      const texts = pool[rating];
-      reviews.push({
-        name: `${FIRST_NAMES[Math.floor(rng() * FIRST_NAMES.length)]} ${LAST_INITIALS[Math.floor(rng() * LAST_INITIALS.length)]}`,
-        rating,
-        text: texts[Math.floor(rng() * texts.length)],
-        date: makeDate(rng),
-      });
+      // Compose un texte unique au sein du produit
+      let text = '';
+      for (let attempt = 0; attempt < 10; attempt++) {
+        const detailPool = DETAIL[family][rating];
+        const candidate = `${fill(pick(OPEN[rating], rng))} ${fill(pick(detailPool, rng))} ${fill(pick(CLOSE[rating], rng))}`;
+        text = candidate;
+        if (!seenTexts.has(candidate)) break;
+      }
+      seenTexts.add(text);
+
+      // Nom unique au sein du produit
+      let name = '';
+      for (let attempt = 0; attempt < 12; attempt++) {
+        const candidate = `${pick(FIRST_NAMES, rng)} ${pick(LAST_INITIALS, rng)}`;
+        name = candidate;
+        if (!seenNames.has(candidate)) break;
+      }
+      seenNames.add(name);
+
+      reviews.push({ name, rating, text, date: makeDate(rng) });
     }
   }
 
