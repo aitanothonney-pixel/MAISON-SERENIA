@@ -146,8 +146,17 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
     'Décorations': { desc: 'Sculptures KAWS Collector', section: 'section-figurines', imgId: 34 },
   };
 
+  const categoryOrder = ['Salon', 'Meubles', 'Décorations'];
+  const orderedCategories = [...new Set(products.map((p) => p.category))].sort(
+    (a, b) => {
+      const ia = categoryOrder.indexOf(a);
+      const ib = categoryOrder.indexOf(b);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    },
+  );
+
   const collections = [
-    ...[...new Set(products.map((p) => p.category))].map((cat) => {
+    ...orderedCategories.map((cat) => {
       const meta = categoryMeta[cat];
       const count = products.filter((p) => p.category === cat).length;
       return {
@@ -1881,8 +1890,8 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
             <div className="mb-4">
               <Logo color="white" size="md" />
             </div>
-            <p className="text-sm leading-relaxed mb-2">L&apos;art de vivre à la française.</p>
-            <p className="text-sm mb-5">Paris, France 🇫🇷</p>
+            <p className="text-sm leading-relaxed mb-2">Mobilier & pièces d&apos;exception.</p>
+            <p className="text-sm mb-5">Genève, Suisse 🇨🇭</p>
             <div className="flex items-center gap-4">
               <a href="https://www.instagram.com/serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
