@@ -27,6 +27,7 @@ const italiana = Italiana({
 
 const cinzel = Cinzel({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
   variable: '--font-cinzel',
   display: 'swap',
 })
