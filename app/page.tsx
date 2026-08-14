@@ -2440,14 +2440,15 @@ export default function Home() {
         </div>
       </section>
 
-      <TrustStrip />
-
       {/* Acheter par catégorie — bien visible, style meublier */}
       <ShopByCategory onCategoryClick={handleSectionNav} />
 
       <div className="w-full">
           {/* Promotions mises en avant */}
           <PromoBanner />
+
+          {/* Bande de réassurance — sous la bannière promo */}
+          <TrustStrip />
 
           {/* Bubble Promo Carousel */}
           <BubblePromoCarousel />
