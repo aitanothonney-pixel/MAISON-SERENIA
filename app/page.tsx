@@ -851,7 +851,7 @@ function PromoBanner() {
           <div className="absolute inset-0 bg-black/65 pointer-events-none" />
           <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
             <p className="text-xs tracking-[0.35em] uppercase mb-3 text-[#C9A96E]">Édition limitée</p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
               Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Bubble
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
@@ -959,7 +959,7 @@ function BubblePromoCarousel() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-400">Offre limitée · −30%</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">Collection Bubble en promotion</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Collection Bubble en promotion</h2>
           </div>
           <div className="flex items-center gap-2">
             <motion.button
@@ -1046,7 +1046,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
         <div className="flex items-end justify-between mb-10">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-2">Top ventes</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">
+            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
               Coups de cœur
             </h2>
             <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
@@ -1391,7 +1391,7 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
       <section className="py-14 md:py-20 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Notre univers</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+          <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
             Acheter par catégorie
           </h2>
           <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
@@ -1531,7 +1531,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
             <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Économisez plus</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
               Nos ensembles Bubble
             </h2>
             <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
@@ -2451,7 +2451,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
                     <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#A07840]">Sélection</p>
-                    <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
                       Nos Pièces Signatures
                     </h2>
                     <span className="block w-10 h-px mt-3 mb-2" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
