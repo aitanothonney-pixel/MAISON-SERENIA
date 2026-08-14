@@ -2524,7 +2524,6 @@ export default function Home() {
 
 
       <BundlesSection onCartOpen={() => setCartOpen(true)} />
-      <TestimonialsSection />
       <NewsletterSection />
       <Footer onSectionNav={handleSectionNav} />
       <CookieBanner />
