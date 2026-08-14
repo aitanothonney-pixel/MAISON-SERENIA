@@ -1843,30 +1843,41 @@ function CookieBanner() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
+          exit={{ y: 24, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-black shadow-lg border-t border-neutral-800"
+          className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto z-50 sm:max-w-sm bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-neutral-200 p-5"
+          role="dialog"
+          aria-label="Consentement aux cookies"
         >
-          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4">
-            <p className="text-sm text-neutral-300 text-center sm:text-left">
-              Nous utilisons des cookies pour améliorer votre expérience.
-            </p>
-            <div className="flex gap-3 shrink-0">
-              <button
-                onClick={() => handleChoice('refused')}
-                className="text-sm px-5 py-2 border border-white text-white rounded hover:bg-white/10 transition-colors"
-              >
-                Refuser
-              </button>
-              <button
-                onClick={() => handleChoice('accepted')}
-                className="text-sm px-5 py-2 bg-white text-black rounded hover:bg-neutral-200 transition-colors"
-              >
-                Tout accepter
-              </button>
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-full bg-[#F5F1EA] flex items-center justify-center shrink-0">
+              <span className="text-lg leading-none">🍪</span>
             </div>
+            <div>
+              <p className="text-sm font-semibold text-black mb-1">Votre confidentialité</p>
+              <p className="text-[13px] text-neutral-500 leading-relaxed">
+                Nous utilisons des cookies pour améliorer votre navigation et analyser le trafic.{' '}
+                <Link href="/confidentialite" className="text-black underline underline-offset-2 hover:text-[#A07840] transition-colors">
+                  En savoir plus
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-2.5 mt-4">
+            <button
+              onClick={() => handleChoice('refused')}
+              className="flex-1 text-[13px] font-medium px-4 py-2.5 border border-neutral-300 text-neutral-700 rounded-lg hover:border-black hover:text-black transition-colors"
+            >
+              Refuser
+            </button>
+            <button
+              onClick={() => handleChoice('accepted')}
+              className="flex-1 text-[13px] font-semibold px-4 py-2.5 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors"
+            >
+              Tout accepter
+            </button>
           </div>
         </motion.div>
       )}
