@@ -1816,11 +1816,11 @@ function NewsletterSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="votre@email.com"
-                className="flex-1 bg-white text-black placeholder-neutral-400 border border-neutral-300 rounded px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
+                className="flex-1 bg-white text-black placeholder-neutral-400 border border-neutral-300 px-4 py-3 text-sm outline-none transition-all duration-200 focus:ring-2 focus:ring-[#C9A96E] focus:border-transparent"
               />
               <button
                 type="submit"
-                className="bg-black text-white font-medium text-sm px-6 py-3 rounded hover:bg-neutral-800 transition-colors whitespace-nowrap"
+                className="bg-black text-white font-medium text-sm px-6 py-3 hover:bg-neutral-800 transition-colors whitespace-nowrap"
               >
                 Obtenir mes −10%
               </button>
