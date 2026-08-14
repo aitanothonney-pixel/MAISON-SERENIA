@@ -682,7 +682,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           key={c.slug}
                           href={`/collections/${c.slug}`}
                           onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                          className={`group relative aspect-[4/5] overflow-hidden ${isContain ? 'bg-neutral-50' : 'bg-neutral-100'}`}
+                          className="group relative aspect-[4/5] overflow-hidden bg-white"
                         >
                           {rep && (
                             <img
@@ -718,7 +718,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           onClick={() => { setSearchFocused(false); setSearchQ(''); }}
                           className="group"
                         >
-                          <div className={`relative aspect-square overflow-hidden bg-neutral-50 mb-2 ${contain ? 'p-3' : ''}`}>
+                          <div className={`relative aspect-square overflow-hidden bg-white mb-2 ${contain ? 'p-3' : ''}`}>
                             <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
@@ -1150,7 +1150,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
       className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
-        <div className={`relative overflow-hidden bg-neutral-50 aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
+        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -2158,7 +2158,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         exit={{ opacity: 0, x: 20 }}
                         className="flex items-center gap-4 p-3 border border-neutral-100 hover:border-neutral-200 transition-colors"
                       >
-                        <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 bg-neutral-50 overflow-hidden flex items-center justify-center">
+                        <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 bg-white border border-neutral-100 overflow-hidden flex items-center justify-center">
                           <img loading="lazy" decoding="async" src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">

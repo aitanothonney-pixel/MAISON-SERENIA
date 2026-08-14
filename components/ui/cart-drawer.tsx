@@ -373,7 +373,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             exit={{ opacity: 0, y: -10 }}
                             className="flex items-start gap-4"
                           >
-                            <div className="shrink-0 w-[92px] h-[92px] bg-neutral-100 overflow-hidden flex items-center justify-center">
+                            <div className="shrink-0 w-[92px] h-[92px] bg-white border border-neutral-100 overflow-hidden flex items-center justify-center">
                               <img
                                 src={product.images[0]}
                                 alt={product.name}
