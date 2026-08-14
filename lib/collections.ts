@@ -63,5 +63,14 @@ export function getCollectionProducts(slug: string): Product[] {
       return a.id - b.id;
     });
   }
+  // Dans le Salon, on affiche les produits Bubble en dernier
+  if (cat === 'Salon') {
+    return [...list].sort((a, b) => {
+      const aB = a.name.includes('Bubble') ? 1 : 0;
+      const bB = b.name.includes('Bubble') ? 1 : 0;
+      if (aB !== bB) return aB - bB;
+      return a.id - b.id;
+    });
+  }
   return list;
 }
