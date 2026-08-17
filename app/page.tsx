@@ -1364,30 +1364,24 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
 
 // ─── Shop by Category (bloc catégories bien visible, style meublier) ──────────
 
-function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, section: string) => void }) {
-  const catImage = (cat: string, fallback: string) =>
-    products.find((p) => p.category === cat)?.images[0] ?? fallback;
-
+function ShopByCategory() {
   const tiles = [
     {
-      cat: 'Salon',
-      section: 'section-salon',
+      slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
       img: 'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg',
       big: true,
     },
     {
-      cat: 'Meubles',
-      section: 'section-bureau',
+      slug: 'meubles',
       label: 'Meubles',
       desc: 'Tables, TV, rangements',
       img: 'https://i.ibb.co/SD1GmP8Z/Capture-d-e-cran-2026-08-06-a-01-08-32.png',
       big: false,
     },
     {
-      cat: 'Décorations',
-      section: 'section-figurines',
+      slug: 'figurines',
       label: 'Décorations',
       desc: 'Pièces & objets déco',
       img: 'https://i.ibb.co/JwSGCFym/Capture-d-e-cran-2026-07-23-a-22-04-47.png',
@@ -1408,10 +1402,10 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[232px]">
           {tiles.map((t) => (
-            <button
-              key={t.cat}
-              onClick={() => onCategoryClick(t.cat, t.section)}
-              className={`relative overflow-hidden rounded-2xl group text-left ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
+            <Link
+              key={t.slug}
+              href={`/collections/${t.slug}`}
+              className={`relative overflow-hidden rounded-2xl group text-left block ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
             >
               <img
                 src={t.img}
@@ -1428,7 +1422,7 @@ function ShopByCategory({ onCategoryClick }: { onCategoryClick: (cat: string, se
                   Découvrir <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </section>
@@ -2432,7 +2426,7 @@ export default function Home() {
       </section>
 
       {/* Acheter par catégorie — bien visible, style meublier */}
-      <ShopByCategory onCategoryClick={handleSectionNav} />
+      <ShopByCategory />
 
       <div className="w-full">
           {/* Promotions mises en avant */}

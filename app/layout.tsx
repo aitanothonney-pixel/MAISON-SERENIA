@@ -73,6 +73,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               image: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg',
               email: 'maisonserenia@gmail.com',
               description: 'Mobilier de luxe et design contemporain : canapés et fauteuils Bubble, tables, pièces de collection et décoration.',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Genève',
+                addressCountry: 'CH',
+              },
+              sameAs: [
+                'https://www.instagram.com/serenia_officiel',
+                'https://www.tiktok.com/@serenia_officiel',
+              ],
             }),
           }}
         />

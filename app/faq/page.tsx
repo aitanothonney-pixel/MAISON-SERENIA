@@ -146,8 +146,19 @@ export default function FaqPage() {
     }));
   }
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_DATA.flatMap((g) => g.items).map((it) => ({
+      '@type': 'Question',
+      name: it.q,
+      acceptedAnswer: { '@type': 'Answer', text: it.a },
+    })),
+  };
+
   return (
     <main className="bg-white min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       {/* Hero */}
       <section className="border-b border-neutral-100 bg-neutral-50 py-20">
         <div className="max-w-4xl mx-auto px-6">
