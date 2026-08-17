@@ -1,4 +1,6 @@
 import { products } from '@/lib/products';
+import { buildReviewStats } from '@/lib/reviews';
+import { categoryToSlug } from '@/lib/collections';
 import ProductClient from './product-client';
 
 const BASE = 'https://maison-serenia.com';
@@ -32,7 +34,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const product = products.find(p => p.id === Number(id));
 
-  const jsonLd = product
+  const stats = product ? buildReviewStats(product.id) : null;
+  // Date de validité du prix (1 an), requise par Google pour les offres.
+  const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
+
+  const jsonLd = product && stats
     ? {
         '@context': 'https://schema.org',
         '@type': 'Product',
@@ -40,15 +46,37 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         image: product.images,
         description: product.description,
         category: product.category,
+        material: product.material,
         brand: { '@type': 'Brand', name: 'Maison Serenia' },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: stats.avg,
+          reviewCount: stats.total,
+          bestRating: 5,
+          worstRating: 1,
+        },
         offers: {
           '@type': 'Offer',
           url: `${BASE}/products/${product.id}`,
           priceCurrency: 'CHF',
           price: (product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price).toString(),
+          priceValidUntil,
           availability: 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
           seller: { '@type': 'Organization', name: 'Maison Serenia' },
         },
+      }
+    : null;
+
+  const breadcrumbLd = product
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Accueil', item: BASE },
+          { '@type': 'ListItem', position: 2, name: product.category, item: `${BASE}/collections/${categoryToSlug(product.category)}` },
+          { '@type': 'ListItem', position: 3, name: product.name, item: `${BASE}/products/${product.id}` },
+        ],
       }
     : null;
 
@@ -58,6 +86,12 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      {breadcrumbLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
       )}
       <ProductClient params={params} />

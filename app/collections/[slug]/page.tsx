@@ -11,9 +11,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const meta = getCollectionMeta(slug);
   if (!meta) return { title: 'Collection | Maison Serenia' };
+  const url = `https://maison-serenia.com/collections/${meta.slug}`;
   return {
     title: `${meta.label} | Maison Serenia`,
     description: meta.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${meta.label} | Maison Serenia`,
+      description: meta.description,
+      type: 'website',
+      url,
+    },
   };
 }
 
