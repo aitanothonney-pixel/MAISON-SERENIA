@@ -37,8 +37,8 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
-      if (data?.success) {
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
         setSubmitted(true);
       } else {
         setError(data?.message || "L'envoi a échoué. Réessayez ou écrivez-nous directement à maisonserenia@gmail.com.");
