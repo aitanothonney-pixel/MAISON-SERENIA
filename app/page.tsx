@@ -2343,7 +2343,7 @@ export default function Home() {
             fill
             sizes="100vw"
             priority
-            className="object-cover object-[center_60%]"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
         </div>
