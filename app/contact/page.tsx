@@ -22,11 +22,32 @@ const FAQ_ITEMS = [
 export default function ContactPage() {
   const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    setError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data?.success) {
+        setSubmitted(true);
+      } else {
+        setError(data?.message || "L'envoi a échoué. Réessayez ou écrivez-nous directement à maisonserenia@gmail.com.");
+      }
+    } catch {
+      setError("Erreur de connexion. Réessayez ou écrivez-nous à maisonserenia@gmail.com.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -144,11 +165,15 @@ export default function ContactPage() {
                     className="w-full border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors resize-none"
                   />
                 </div>
+                {error && (
+                  <p className="text-sm text-red-500">{error}</p>
+                )}
                 <button
                   type="submit"
-                  className="bg-black text-white text-xs uppercase tracking-widest px-8 py-4 hover:bg-neutral-800 transition-colors"
+                  disabled={sending}
+                  className="bg-black text-white text-xs uppercase tracking-widest px-8 py-4 hover:bg-neutral-800 transition-colors disabled:opacity-60"
                 >
-                  Envoyer le message
+                  {sending ? 'Envoi en cours…' : 'Envoyer le message'}
                 </button>
               </form>
             )}
