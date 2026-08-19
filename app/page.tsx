@@ -1370,7 +1370,7 @@ function ShopByCategory() {
       slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
-      img: 'https://i.ibb.co/j9h5SNVC/IMG-2392.jpg',
+      img: 'https://i.ibb.co/MxPD6Ykm/Capture-d-e-cran-2026-08-06-a-01-52-14.png',
       big: true,
     },
     {
