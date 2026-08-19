@@ -1384,7 +1384,7 @@ function ShopByCategory() {
       slug: 'figurines',
       label: 'Décorations',
       desc: 'Pièces & objets déco',
-      img: 'https://i.ibb.co/JwSGCFym/Capture-d-e-cran-2026-07-23-a-22-04-47.png',
+      img: 'https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png',
       big: false,
     },
   ];
