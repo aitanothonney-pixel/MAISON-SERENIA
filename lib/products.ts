@@ -349,7 +349,7 @@ const rawProducts: Product[] = [
   {
     id: 60,
     name: 'Meuble TV bois 150 cm',
-    category: 'Meubles',
+    category: 'Salon',
     price: 215,
     description: 'Meuble TV contemporain en bois avec 2 tiroirs et niche ouverte. Façades cannelées, piètement métal noir incliné — un banc bas élégant qui structure votre salon, compatible TV jusqu\'à 60 pouces.',
     images: [
@@ -367,7 +367,7 @@ const rawProducts: Product[] = [
   {
     id: 61,
     name: 'Meuble TV extensible noir',
-    category: 'Meubles',
+    category: 'Salon',
     price: 150,
     description: 'Meuble TV au design extensible (146 à 180 cm), en rotin avec 2 tiroirs, compartiments ouverts et rangement à 2 portes. Finition noir chêne élégante, parfait pour structurer un salon contemporain.',
     images: [
@@ -417,7 +417,7 @@ const rawProducts: Product[] = [
   {
     id: 64,
     name: 'Meuble TV industriel brun rustique',
-    category: 'Meubles',
+    category: 'Salon',
     price: 98,
     description: 'Banc TV de style industriel en brun rustique, pour téléviseur jusqu\'à 55 pouces. Compartiments ouverts, étagère réglable et structure métal noir robuste. Idéal pour salon ou chambre.',
     images: [
@@ -632,7 +632,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 77,
     name: 'Table basse Farmhouse en bois',
-    category: 'Meubles',
+    category: 'Salon',
     price: 218,
     description: 'Table basse rectangulaire au style farmhouse chaleureux, en bois d\'ingénierie finition Rustic Brown. Plateau généreux et base sculpturale robuste pour un salon à la fois convivial et raffiné. Une pièce centrale qui structure l\'espace.',
     images: [
@@ -649,7 +649,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 78,
     name: 'Table basse industrielle 2 niveaux',
-    category: 'Meubles',
+    category: 'Salon',
     price: 98,
     description: 'Table basse rectangulaire au style industriel, alliant bois vintage marron rustique et cadre en métal robuste. Étagère inférieure en maille pour un rangement pratique. Un design chaleureux et solide, parfait pour un salon au caractère affirmé.',
     images: [
@@ -666,7 +666,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 79,
     name: 'Table basse ovale vintage 2 niveaux',
-    category: 'Meubles',
+    category: 'Salon',
     price: 128,
     description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois brun chaleureuse — une pièce de caractère pour le salon.',
     images: [
@@ -682,7 +682,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 80,
     name: 'Table basse ovale vintage 2 niveaux',
-    category: 'Meubles',
+    category: 'Salon',
     price: 128,
     description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois gris raffinée — une pièce de caractère pour le salon.',
     images: [
@@ -696,7 +696,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 81,
     name: 'Table basse moderne noire 2 étagères',
-    category: 'Meubles',
+    category: 'Salon',
     price: 148,
     description: 'Table basse rectangulaire au design moderne et épuré, plateau effet marbre noir et structure en métal. Double étagère pour un rangement élégant et pratique. Une pièce contemporaine qui apporte une touche chic et graphique au salon.',
     images: [
@@ -731,7 +731,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 83,
     name: 'Table basse bicolore à niveaux décalés',
-    category: 'Meubles',
+    category: 'Salon',
     price: 98,
     description: 'Table basse moderne au design bicolore, associant bois naturel et noir mat. Niveaux décalés et étagère de rangement intégrée pour un rendu graphique et fonctionnel. Une pièce contemporaine qui structure élégamment le salon.',
     images: [
@@ -749,7 +749,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 84,
     name: 'Lot de 2 tables gigognes',
-    category: 'Meubles',
+    category: 'Salon',
     price: 128,
     description: 'Lot de 2 tables gigognes au design moderne, plateau blanc et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café, dans le salon comme la chambre.',
     images: [
@@ -768,7 +768,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 85,
     name: 'Lot de 2 tables gigognes',
-    category: 'Meubles',
+    category: 'Salon',
     price: 128,
     description: 'Lot de 2 tables gigognes au design moderne, plateau bois brun chaleureux et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café.',
     images: [
@@ -786,7 +786,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 86,
     name: 'Lot de 2 tables gigognes',
-    category: 'Meubles',
+    category: 'Salon',
     price: 128,
     description: 'Lot de 2 tables gigognes au design chic, plateau blanc et cadre métal doré. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Une touche précieuse et élégante pour le salon ou la chambre.',
     images: [
