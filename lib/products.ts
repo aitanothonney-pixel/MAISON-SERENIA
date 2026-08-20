@@ -74,6 +74,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 98, color: 'Brun', colorHex: '#6b4a30' },
     { productId: 99, color: 'Vert', colorHex: '#4a5d4a' },
   ],
+  'canape-l-nuage': [
+    { productId: 100, color: 'Gris anthracite', colorHex: '#3a3f44' },
+    { productId: 101, color: 'Beige', colorHex: '#d8c8a8' },
+    { productId: 102, color: 'Blanc chaud', colorHex: '#efe9dd' },
+  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
@@ -988,6 +993,40 @@ const exactPriceProducts: Product[] = [
     dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
     material: 'Tissu chenille, structure bois',
     details: ['Forme en U avec double méridienne', 'Tissu chenille doux et résistant', 'Modulable et combinable', 'Assise généreuse 4-5 places'],
+  },
+  // ── Salon : Canapé modulable en L « style nuage » (velours côtelé) — 3 coloris ─
+  {
+    id: 100,
+    name: 'Canapé modulable en L style nuage gris anthracite',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé d\'angle modulable en forme de L (style nuage), revêtu de velours côtelé doux et moelleux. Assise profonde et enveloppante, pouf mobile et coussins inclus. Modulable selon votre espace pour un salon cosy et contemporain. Coloris gris anthracite.',
+    images: ['https://placehold.co/600x450/3a3f44/ffffff?text=Canape+L+Nuage+-+Gris+anthracite'],
+    dimensions: 'L 365 × P 185 × H 80 cm (canapé en L)',
+    material: 'Velours côtelé, assise moelleuse',
+    details: ['Forme en L modulable', 'Velours côtelé doux « style nuage »', 'Pouf mobile & coussins inclus', 'Assise profonde et enveloppante'],
+  },
+  {
+    id: 101,
+    name: 'Canapé modulable en L style nuage beige',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé d\'angle modulable en forme de L (style nuage), revêtu de velours côtelé doux et moelleux. Assise profonde et enveloppante, pouf mobile et coussins inclus. Modulable selon votre espace pour un salon cosy et contemporain. Coloris beige chaleureux.',
+    images: ['https://placehold.co/600x450/d8c8a8/333333?text=Canape+L+Nuage+-+Beige'],
+    dimensions: 'L 365 × P 185 × H 80 cm (canapé en L)',
+    material: 'Velours côtelé, assise moelleuse',
+    details: ['Forme en L modulable', 'Velours côtelé doux « style nuage »', 'Pouf mobile & coussins inclus', 'Assise profonde et enveloppante'],
+  },
+  {
+    id: 102,
+    name: 'Canapé modulable en L style nuage blanc chaud',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé d\'angle modulable en forme de L (style nuage), revêtu de velours côtelé doux et moelleux. Assise profonde et enveloppante, pouf mobile et coussins inclus. Modulable selon votre espace pour un salon cosy et contemporain. Coloris blanc chaud, lumineux et élégant.',
+    images: ['https://placehold.co/600x450/efe9dd/333333?text=Canape+L+Nuage+-+Blanc+chaud'],
+    dimensions: 'L 365 × P 185 × H 80 cm (canapé en L)',
+    material: 'Velours côtelé, assise moelleuse',
+    details: ['Forme en L modulable', 'Velours côtelé doux « style nuage »', 'Pouf mobile & coussins inclus', 'Assise profonde et enveloppante'],
   },
 ];
 
