@@ -848,7 +848,7 @@ function PromoBanner() {
             aria-label="Voir la photo en grand"
           >
             <Image
-              src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
+              src="https://i.ibb.co/99H4L0sP/IMG-2616.jpg"
               alt="Collection Salon Bubble en promotion"
               fill
               sizes="100vw"
@@ -913,7 +913,7 @@ function PromoBanner() {
             onClick={() => setLightbox(false)}
           >
             <motion.img
-              src="https://i.ibb.co/RkJCsW7S/IMG-0935.jpg"
+              src="https://i.ibb.co/99H4L0sP/IMG-2616.jpg"
               alt="Collection Salon Bubble en promotion"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
