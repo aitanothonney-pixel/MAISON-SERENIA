@@ -68,7 +68,7 @@ export function getCollectionProducts(slug: string): Product[] {
   }
   // Le Salon exclut les Bubble ; ordre prioritaire, puis les autres canapés, puis les meubles
   if (cat === 'Salon') {
-    const PRIORITY = [100, 102, 87, 88, 94, 89];
+    const PRIORITY = [100, 102, 101, 87, 88, 94, 89];
     const rank = (p: Product) => {
       const i = PRIORITY.indexOf(p.id);
       if (i !== -1) return i;                     // 0..5 : ordre prioritaire
