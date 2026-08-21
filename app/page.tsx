@@ -647,13 +647,20 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                     <TrendingUp className="w-3.5 h-3.5" /> Recherches populaires
                   </p>
                   <div className="flex flex-wrap gap-2.5">
-                    {['Canapé', 'Meuble TV', 'Table', 'Commode', 'Bubble', 'Vase', 'Buffet'].map((s) => (
+                    {[
+                      { label: 'Canapé', q: 'Canapé' },
+                      { label: 'Meuble TV', q: 'Meuble TV' },
+                      { label: 'Table', q: 'Table' },
+                      { label: 'Commode', q: 'Commode' },
+                      { label: 'Bubble', q: 'Bubble' },
+                      { label: 'Tableaux', q: 'Tableau' },
+                    ].map((s) => (
                       <button
-                        key={s}
-                        onClick={() => setSearchQ(s)}
+                        key={s.label}
+                        onClick={() => setSearchQ(s.q)}
                         className="text-[11px] tracking-[0.18em] uppercase font-medium border border-neutral-200 px-4 py-2.5 text-neutral-600 hover:border-[#C9A96E] hover:text-[#8a6d38] hover:bg-[#C9A96E]/5 transition-all duration-200"
                       >
-                        {s}
+                        {s.label}
                       </button>
                     ))}
                   </div>
