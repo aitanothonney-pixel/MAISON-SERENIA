@@ -441,7 +441,6 @@ const rawProducts: Product[] = [
     price: 68,
     description: 'Vase d\'angle décoratif en céramique de style nordique, aux motifs inspirés du jardin et à la forme sculpturale de coquille. Fait main, blanc mat, il apporte une touche artistique et organique à votre intérieur.',
     images: [
-      'https://i.ibb.co/F4fc8mqW/Capture-d-e-cran-2026-07-23-a-21-56-13.png',
       'https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png',
       'https://i.ibb.co/QjxsrSKs/Capture-d-e-cran-2026-07-23-a-21-56-06.png',
       'https://i.ibb.co/DHsm1RcJ/Capture-d-e-cran-2026-07-23-a-21-56-21.png',
