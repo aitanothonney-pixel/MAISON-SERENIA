@@ -2033,7 +2033,12 @@ function DécorationsSection() {
   const { isWished, toggle } = useWishlist();
   const figurines = products
     .filter((p) => p.category === 'Décorations')
-    .sort((a, b) => b.id - a.id);
+    .sort((a, b) => {
+      const rank = (n: string) => (n.includes('Tableau') ? 0 : n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine') ? 2 : 1);
+      const ra = rank(a.name), rb = rank(b.name);
+      if (ra !== rb) return ra - rb;
+      return b.id - a.id;
+    });
 
   return (
     <FadeInSection>
@@ -2277,13 +2282,16 @@ export default function Home() {
                 return a.id - b.id;
               });
             }
-            // Dans les Décorations, on affiche les figurines (KAWS, Bearbrick) en dernier
+            // Dans les Décorations : tableaux en premier, figurines en dernier
             if (activeFilter === 'Décorations') {
-              const isFig = (n: string) => n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine');
+              const rank = (n: string) => {
+                if (n.includes('Tableau')) return 0;
+                if (n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine')) return 2;
+                return 1;
+              };
               return list.sort((a, b) => {
-                const aF = isFig(a.name) ? 1 : 0;
-                const bF = isFig(b.name) ? 1 : 0;
-                if (aF !== bF) return aF - bF;
+                const ra = rank(a.name), rb = rank(b.name);
+                if (ra !== rb) return ra - rb;
                 return a.id - b.id;
               });
             }
