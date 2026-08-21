@@ -652,7 +652,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 77,
     name: 'Table basse Farmhouse en bois',
-    category: 'Salon',
+    category: 'Meubles',
     price: 218,
     description: 'Table basse rectangulaire au style farmhouse chaleureux, en bois d\'ingénierie finition Rustic Brown. Plateau généreux et base sculpturale robuste pour un salon à la fois convivial et raffiné. Une pièce centrale qui structure l\'espace.',
     images: [
@@ -669,7 +669,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 78,
     name: 'Table basse industrielle 2 niveaux',
-    category: 'Salon',
+    category: 'Meubles',
     price: 98,
     description: 'Table basse rectangulaire au style industriel, alliant bois vintage marron rustique et cadre en métal robuste. Étagère inférieure en maille pour un rangement pratique. Un design chaleureux et solide, parfait pour un salon au caractère affirmé.',
     images: [
@@ -686,7 +686,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 79,
     name: 'Table basse ovale vintage 2 niveaux',
-    category: 'Salon',
+    category: 'Meubles',
     price: 128,
     description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois brun chaleureuse — une pièce de caractère pour le salon.',
     images: [
@@ -702,7 +702,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 80,
     name: 'Table basse ovale vintage 2 niveaux',
-    category: 'Salon',
+    category: 'Meubles',
     price: 128,
     description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois gris raffinée — une pièce de caractère pour le salon.',
     images: [
@@ -716,7 +716,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 81,
     name: 'Table basse moderne noire 2 étagères',
-    category: 'Salon',
+    category: 'Meubles',
     price: 148,
     description: 'Table basse rectangulaire au design moderne et épuré, plateau effet marbre noir et structure en métal. Double étagère pour un rangement élégant et pratique. Une pièce contemporaine qui apporte une touche chic et graphique au salon.',
     images: [
@@ -751,7 +751,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 83,
     name: 'Table basse bicolore à niveaux décalés',
-    category: 'Salon',
+    category: 'Meubles',
     price: 98,
     description: 'Table basse moderne au design bicolore, associant bois naturel et noir mat. Niveaux décalés et étagère de rangement intégrée pour un rendu graphique et fonctionnel. Une pièce contemporaine qui structure élégamment le salon.',
     images: [
@@ -769,7 +769,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 84,
     name: 'Lot de 2 tables gigognes',
-    category: 'Salon',
+    category: 'Meubles',
     price: 128,
     description: 'Lot de 2 tables gigognes au design moderne, plateau blanc et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café, dans le salon comme la chambre.',
     images: [
@@ -788,7 +788,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 85,
     name: 'Lot de 2 tables gigognes',
-    category: 'Salon',
+    category: 'Meubles',
     price: 128,
     description: 'Lot de 2 tables gigognes au design moderne, plateau bois brun chaleureux et cadre métal fin. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Parfaites en table basse, table d\'appoint ou coin café.',
     images: [
@@ -806,7 +806,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 86,
     name: 'Lot de 2 tables gigognes',
-    category: 'Salon',
+    category: 'Meubles',
     price: 128,
     description: 'Lot de 2 tables gigognes au design chic, plateau blanc et cadre métal doré. Modulables et gain de place, elles se glissent l\'une sous l\'autre. Une touche précieuse et élégante pour le salon ou la chambre.',
     images: [
