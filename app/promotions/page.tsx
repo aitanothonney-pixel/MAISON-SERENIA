@@ -94,7 +94,7 @@ export default function PromotionsPage() {
                   <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-4">Ensemble {b.color}</p>
                   <div className="flex items-center gap-3 mb-5">
                     {[canape, fauteuil, gift].map((p) => (
-                      <div key={p.id} className="relative w-16 h-16 bg-neutral-50 shrink-0">
+                      <div key={p.id} className="relative w-16 h-16 bg-white shrink-0">
                         <Image src={p.images[0]} alt={p.name} fill sizes="120px" className="object-contain p-1" />
                       </div>
                     ))}

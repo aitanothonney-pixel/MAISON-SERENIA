@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { Price } from '@/lib/currency';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { Gift } from 'lucide-react';
 import { BUNDLES, getBundleDetail } from '@/lib/bundles';
-import { AddBundleButton } from './add-bundle-button';
+import { products } from '@/lib/products';
+import { PackCheckout } from './pack-checkout';
 
 export function generateStaticParams() {
   return BUNDLES.map((b) => ({ slug: b.slug }));
@@ -30,8 +30,12 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
   const elements = [
     { product: canape, price: canapePromo, offert: false, id: canape.id },
     { product: fauteuil, price: fauteuilPromo, offert: false, id: fauteuil.id },
-    { product: gift, price: 60, offert: true, id: gift.id },
   ];
+
+  // Tableaux disponibles pour le cadeau offert (au choix du client)
+  const tableaux = products
+    .filter((p) => p.name.includes('Tableau'))
+    .map((p) => ({ id: p.id, name: p.name, image: p.images[0] }));
 
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
@@ -69,7 +73,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                 href={`/products/${id}`}
                 className="flex items-center gap-5 border border-neutral-100 p-4 hover:border-neutral-300 transition-colors group"
               >
-                <div className="relative w-28 h-28 bg-neutral-50 shrink-0">
+                <div className="relative w-28 h-28 bg-white shrink-0">
                   <Image src={product.images[0]} alt={product.name} fill className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
                   {offert && (
                     <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">
@@ -114,16 +118,13 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
             </span>
           </div>
 
-          <div className="flex items-center gap-2 mb-6">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>
-              <Gift className="w-3 h-3 text-white" strokeWidth={2} />
-            </span>
-            <p className="text-[11px] tracking-wide text-neutral-600">
-              <span className="font-semibold text-black">{gift.name}</span> (50×70 cm) offert
-            </p>
-          </div>
-
-          <AddBundleButton ids={[canape.id, fauteuil.id]} gift={{ id: gift.id, size: '50×70 cm' }} />
+          <PackCheckout
+            ids={[canape.id, fauteuil.id]}
+            tableaux={tableaux}
+            defaultGiftId={gift.id}
+            giftSize="50×70 cm"
+            giftPrice={60}
+          />
 
           <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
             Livraison gratuite à partir de <Price value={40} />
