@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, Star, ArrowLeft, ArrowRight, Clock, TrendingUp,
-  Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift,
+  Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift, Eye,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -1565,10 +1565,21 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
         <div className="flex justify-center my-3"><span className="text-neutral-300 text-2xl leading-none">+</span></div>
         <div className={`transition-opacity duration-200 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
           <div className="flex items-center gap-4">
-            <div className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-neutral-100">
-              <Image src={gift.images[0]} alt={gift.name} width={140} height={140} className="object-cover w-full h-full" />
+            <Link
+              href={`/products/${selectedTableau}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Voir le tableau en grand"
+              className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-neutral-100 group/gift"
+            >
+              <Image src={gift.images[0]} alt={gift.name} width={140} height={140} className="object-cover w-full h-full transition-transform duration-300 group-hover/gift:scale-105" />
               <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">Offert</span>
-            </div>
+              <span className="absolute inset-0 bg-black/0 group-hover/gift:bg-black/25 transition-colors flex items-center justify-center">
+                <span className="opacity-0 group-hover/gift:opacity-100 transition-opacity text-white text-[9px] font-bold tracking-widest uppercase flex items-center gap-1">
+                  <Eye className="w-3 h-3" /> Voir
+                </span>
+              </span>
+            </Link>
             <div className="flex-1 min-w-0">
               <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07840] mb-1">Tableau offert · 50×70 cm</p>
               <select
