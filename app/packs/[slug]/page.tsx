@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!detail) return { title: 'Pack | Maison Serenia' };
   return {
     title: `Ensemble Bubble ${detail.bundle.color} | Maison Serenia`,
-    description: `Canapé et fauteuil Bubble ${detail.bundle.color.toLowerCase()} assortis, avec figurine offerte. Économisez ${detail.bundle.rabais}€.`,
+    description: `Canapé et fauteuil Bubble ${detail.bundle.color.toLowerCase()} assortis, avec un tableau (50×70 cm) offert. Économisez ${detail.bundle.rabais} CHF.`,
   };
 }
 
@@ -25,12 +25,12 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
   const detail = getBundleDetail(slug);
   if (!detail) notFound();
 
-  const { bundle, canape, fauteuil, figurine, canapePromo, fauteuilPromo, sum, price } = detail;
+  const { bundle, canape, fauteuil, gift, canapePromo, fauteuilPromo, sum, price } = detail;
 
   const elements = [
     { product: canape, price: canapePromo, offert: false, id: canape.id },
     { product: fauteuil, price: fauteuilPromo, offert: false, id: fauteuil.id },
-    { product: figurine, price: figurine.price, offert: true, id: figurine.id },
+    { product: gift, price: 60, offert: true, id: gift.id },
   ];
 
   return (
@@ -51,7 +51,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
           <p className="text-neutral-500 max-w-xl leading-relaxed">
             Le canapé et son fauteuil Bubble {bundle.color.toLowerCase()} assortis, pensés ensemble.
-            La figurine de collection est offerte avec cet ensemble.
+            Un tableau (50×70 cm) au choix est offert avec cet ensemble.
           </p>
         </div>
       </section>
@@ -119,11 +119,11 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
               <Gift className="w-3 h-3 text-white" strokeWidth={2} />
             </span>
             <p className="text-[11px] tracking-wide text-neutral-600">
-              <span className="font-semibold text-black">{figurine.name}</span> offerte
+              <span className="font-semibold text-black">{gift.name}</span> (50×70 cm) offert
             </p>
           </div>
 
-          <AddBundleButton ids={[canape.id, fauteuil.id, figurine.id]} />
+          <AddBundleButton ids={[canape.id, fauteuil.id]} gift={{ id: gift.id, size: '50×70 cm' }} />
 
           <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
             Livraison gratuite à partir de <Price value={40} />

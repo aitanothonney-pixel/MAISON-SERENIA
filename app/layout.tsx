@@ -42,16 +42,16 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL('https://maison-serenia.com'),
   title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-  description: 'Découvrez MAISON SERENIA : fauteuils et canapés Bubble, figurines KAWS collectibles, accessoires design. Livraison offerte dès 40€.',
-  keywords: ['mobilier luxe', 'fauteuil design', 'canapé Bubble', 'figurines KAWS', 'décoration intérieure', 'Maison Serenia'],
+  description: 'Découvrez MAISON SERENIA : canapés & fauteuils Bubble, tableaux d\'art, mobilier et décoration design. Livraison offerte dès 40 CHF.',
+  keywords: ['mobilier luxe', 'fauteuil design', 'canapé Bubble', 'tableau abstrait', 'décoration intérieure', 'Maison Serenia'],
   openGraph: {
     title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-    description: 'Fauteuils et canapés Bubble, figurines collectibles, accessoires design. Livraison offerte dès 40€.',
+    description: 'Canapés & fauteuils Bubble, tableaux d\'art, mobilier et décoration design. Livraison offerte dès 40 CHF.',
     type: 'website',
     locale: 'fr_FR',
     images: [{ url: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Fauteuils Bubble, figurines KAWS et accessoires design livrés en France.', images: ['https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg'] },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés & fauteuils Bubble, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg'] },
   robots: { index: true, follow: true },
 };
 

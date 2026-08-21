@@ -9,7 +9,7 @@ export interface CollectionMeta {
 
 export const COLLECTIONS: CollectionMeta[] = [
   { slug: 'salon', label: 'Salon', kicker: 'Collection', description: 'Canapés, fauteuils et tables pour sublimer votre salon.' },
-  { slug: 'figurines', label: 'Décorations', kicker: 'Collection', description: 'Sculptures et pièces de collection — KAWS, Bearbrick et éditions rares.' },
+  { slug: 'figurines', label: 'Décorations', kicker: 'Collection', description: "Tableaux d'art, vases et pièces déco pour sublimer votre intérieur." },
   { slug: 'meubles', label: 'Meubles', kicker: 'Collection', description: 'Meubles TV, tables et rangements pour aménager tout votre intérieur.' },
   { slug: 'bubble', label: 'Collection Bubble', kicker: 'Signature · −30%', description: "La collection signature aux formes gonflées iconiques, en édition limitée." },
 ];

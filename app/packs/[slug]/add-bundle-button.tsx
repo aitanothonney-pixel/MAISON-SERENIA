@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { useCart } from '@/lib/useCart';
 
-export function AddBundleButton({ ids }: { ids: number[] }) {
+export function AddBundleButton({ ids, gift }: { ids: number[]; gift?: { id: number; size: string } }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
     ids.forEach((id) => addItem(id));
+    if (gift) addItem(gift.id, gift.size);
     setAdded(true);
   };
 

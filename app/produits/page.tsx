@@ -6,7 +6,7 @@ import { products, collapseVariantDuplicates } from '@/lib/products';
 
 export const metadata = {
   title: 'Tous nos produits | Maison Serenia',
-  description: "Découvrez l'intégralité du catalogue Maison Serenia : mobilier Bubble, figurines de collection et accessoires.",
+  description: "Découvrez l'intégralité du catalogue Maison Serenia : mobilier Bubble, tableaux d'art et décoration.",
 };
 
 const bubbleName = (name: string) => name.includes('Bubble');

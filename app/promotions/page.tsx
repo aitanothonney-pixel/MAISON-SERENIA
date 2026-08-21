@@ -80,7 +80,7 @@ export default function PromotionsPage() {
             </h2>
             <span className="block w-10 h-px mt-3 mx-auto" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
             <p className="text-neutral-500 text-sm mt-4 max-w-md mx-auto">
-              Le canapé et son fauteuil assortis, avec une figurine offerte — le meilleur prix.
+              Le canapé et son fauteuil assortis, avec un tableau (50×70 cm) offert — le meilleur prix.
             </p>
           </div>
 
@@ -88,12 +88,12 @@ export default function PromotionsPage() {
             {BUNDLES.map((b) => {
               const detail = getBundleDetail(b.slug);
               if (!detail) return null;
-              const { canape, fauteuil, figurine, sum, price } = detail;
+              const { canape, fauteuil, gift, sum, price } = detail;
               return (
                 <div key={b.slug} className="bg-white border border-neutral-200 p-6 flex flex-col">
                   <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-4">Ensemble {b.color}</p>
                   <div className="flex items-center gap-3 mb-5">
-                    {[canape, fauteuil, figurine].map((p) => (
+                    {[canape, fauteuil, gift].map((p) => (
                       <div key={p.id} className="relative w-16 h-16 bg-neutral-50 shrink-0">
                         <Image src={p.images[0]} alt={p.name} fill sizes="120px" className="object-contain p-1" />
                       </div>
@@ -105,7 +105,7 @@ export default function PromotionsPage() {
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
                     <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />
-                    <span><span className="font-semibold text-black">{figurine.name}</span> offerte · −<Price value={b.rabais} /></span>
+                    <span><span className="font-semibold text-black">{gift.name}</span> (50×70) offert · −<Price value={b.rabais} /></span>
                   </div>
                   <Link
                     href={`/packs/${b.slug}`}

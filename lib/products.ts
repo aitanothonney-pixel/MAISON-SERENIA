@@ -24,10 +24,6 @@ export interface ProductVariant {
 }
 
 export const variantGroups: Record<string, ProductVariant[]> = {
-  'figurine-kaws-monde': [
-    { productId: 31, color: 'Noir', colorHex: '#1a1a1a' },
-    { productId: 32, color: 'Gris', colorHex: '#9e9e9e' },
-  ],
   'canape-bubble': [
     { productId: 10, color: 'Blanc', colorHex: '#f0ede8' },
     { productId: 13, color: 'Bleu', colorHex: '#1a2fad' },
@@ -252,118 +248,6 @@ const rawProducts: Product[] = [
     dimensions: 'L 95 × P 90 × H 82 cm',
     material: 'Tissu structuré, base laquée',
     details: ['Forme sculpturale en modules gonflés', 'Tissu résistant haute qualité', 'Base laquée orange mat', 'Livraison en blanc incluse'],
-  },
-  // ── Décorations KAWS Monde ─────────────────────────────────────────────────────
-  {
-    id: 31,
-    name: 'Figurine KAWS noir monde',
-    category: 'Décorations',
-    price: 75,
-    description: 'Figurine KAWS édition Monde en coloris noir intense — une pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/r1YNwbR/IMG-0657.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Édition Monde collector', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  {
-    id: 32,
-    name: 'Figurine KAWS gris monde',
-    category: 'Décorations',
-    price: 75,
-    description: 'Figurine KAWS édition Monde en coloris gris — subtilité et caractère dans une même pièce. Sculpture en vinyle premium, finition soyeuse, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/dss1k9Yf/IMG-0626.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Édition Monde collector', 'Vinyle premium finition soyeuse', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Figurine KAWS Noir ────────────────────────────────────────────────────────
-  {
-    id: 34,
-    name: 'Figurine Kaws noir (28 cm)',
-    category: 'Décorations',
-    price: 75,
-    description: 'Figurine KAWS en coloris noir intense — pièce collector incontournable. Sculpture en vinyle premium, finition mate impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/4Zy6w7XR/E307812-D-5-A20-4-AF5-A8-BC-48-EEA34-EB12-B.jpg',
-      'https://i.ibb.co/4Z9wfJJb/6306-D2-ED-20-EC-42-E8-8266-013-CAE098-AAD.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Édition collector', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Bearbrick x Bape ─────────────────────────────────────────────────────────
-  {
-    id: 35,
-    name: 'Bearbrick x Bape (28 cm)',
-    category: 'Décorations',
-    price: 150,
-    description: 'Bearbrick x A Bathing Ape — collaboration iconique entre deux géants du streetwear et du art toy. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/212j4PLX/IMG-0662.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Collaboration Bearbrick × Bape', 'Vinyle premium finition mate', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Bearbrick x Bape Rose ─────────────────────────────────────────────────────
-  {
-    id: 36,
-    name: 'Bearbrick x Bape rose (28 cm)',
-    category: 'Décorations',
-    price: 150,
-    description: 'Bearbrick x A Bathing Ape coloris rose — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/hxfV4W3d/IMG-0663.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Collaboration Bearbrick × Bape', 'Coloris rose édition rare', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Figurine Kaws ─────────────────────────────────────────────────────────────
-  {
-    id: 37,
-    name: 'Figurine Kaws (28 cm)',
-    category: 'Décorations',
-    price: 75,
-    description: 'Figurine KAWS collector en vinyle premium — une icône du art toy contemporain. Finition impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/yM7CjY2/IMG-0664.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Édition collector', 'Vinyle premium', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Bearbrick x Bape Noir ─────────────────────────────────────────────────────
-  {
-    id: 38,
-    name: 'Bearbrick x Bape noir (28 cm)',
-    category: 'Décorations',
-    price: 150,
-    description: 'Bearbrick x A Bathing Ape coloris noir — édition rare et très recherchée. Pièce collector en vinyle premium, finition impeccable, 28 cm de hauteur.',
-    images: [
-      'https://i.ibb.co/rKTj3YSh/IMG-0659.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Collaboration Bearbrick × Bape', 'Coloris noir édition collector', 'Hauteur 28 cm', 'Livraison soigneusement emballée'],
-  },
-  // ── Figurine Kaws Câlin ───────────────────────────────────────────────────────
-  {
-    id: 39,
-    name: 'Figurine Kaws câlin',
-    category: 'Décorations',
-    price: 75,
-    description: 'Figurine KAWS câlin — une des poses les plus emblématiques de l\'artiste. Sculpture en vinyle premium, finition impeccable, pièce collector incontournable.',
-    images: [
-      'https://i.ibb.co/Tx10z5Hj/IMG-0627.jpg',
-    ],
-    dimensions: 'H 28 cm',
-    material: 'Vinyle premium',
-    details: ['Pose câlin emblématique', 'Vinyle premium finition mate', 'Pièce collector', 'Livraison soigneusement emballée'],
   },
   // ── Salon : Meuble TV bois ───────────────────────────────────────────────────
   {

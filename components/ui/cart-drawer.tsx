@@ -15,13 +15,14 @@ type PayMethod = 'card' | 'paypal' | 'twint' | 'applepay';
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
 
-// Packs canapé + fauteuil + figurine — prix fixe promis sur les cartes bundle
+// Ensembles canapé + fauteuil — prix fixe, avec tableau 50×70 offert (au choix)
 const BUNDLES = [
-  { canape: 10, fauteuil: 2, figurine: 39 },  // blanc
-  { canape: 13, fauteuil: 6, figurine: 31 },  // bleu
-  { canape: 22, fauteuil: 8, figurine: 36 },  // rouge
+  { canape: 10, fauteuil: 2 },  // blanc
+  { canape: 13, fauteuil: 6 },  // bleu
+  { canape: 22, fauteuil: 8 },  // rouge
 ];
 const BUNDLE_PRICE = 1900;
+const GIFT_TABLEAU_PRICE = 60; // tableau 50×70 offert avec un ensemble
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, addItem, removeItem, updateQty, clearCart } = useCart();
@@ -104,15 +105,23 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const originalSubtotal = cartProducts.reduce((sum, x) => sum + x.orig * x.qty, 0);
   const bubbleSavings = Math.round((originalSubtotal - subtotal) * 100) / 100;
 
-  // Remise pack : chaque trio complet canapé+fauteuil+figurine est facturé au prix bundle
+  // Remise ensemble : chaque paire canapé+fauteuil est facturée au prix bundle,
+  // et un tableau 50×70 par paire est offert.
   const qtyOf = (id: number) => cartProducts.find((x) => x.id === id)?.qty ?? 0;
   const priceOf = (id: number) => cartProducts.find((x) => x.id === id)?.price ?? 0;
-  const packDiscount = BUNDLES.reduce((sum, b) => {
-    const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil), qtyOf(b.figurine));
+  let totalPacks = 0;
+  const pairDiscount = BUNDLES.reduce((sum, b) => {
+    const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil));
+    totalPacks += packs;
     if (packs === 0) return sum;
-    const trioPrice = priceOf(b.canape) + priceOf(b.fauteuil) + priceOf(b.figurine);
-    return sum + packs * Math.max(0, trioPrice - BUNDLE_PRICE);
+    const pairPrice = priceOf(b.canape) + priceOf(b.fauteuil);
+    return sum + packs * Math.max(0, pairPrice - BUNDLE_PRICE);
   }, 0);
+  const giftQty = cartProducts
+    .filter((x) => x.product.name.includes('Tableau') && x.size === '50×70 cm')
+    .reduce((s, x) => s + x.qty, 0);
+  const giftDiscount = Math.min(totalPacks, giftQty) * GIFT_TABLEAU_PRICE;
+  const packDiscount = pairDiscount + giftDiscount;
 
   const afterPack = subtotal - packDiscount;
   // Remise de bienvenue -10% (inscription newsletter)

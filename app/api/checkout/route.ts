@@ -11,11 +11,12 @@ const BUBBLE_IDS = [2, 6, 7, 8, 9, 10, 12, 13, 22];
 const isBubble = (id: number) => BUBBLE_IDS.includes(id);
 
 const BUNDLES = [
-  { canape: 10, fauteuil: 2, figurine: 39 },
-  { canape: 13, fauteuil: 6, figurine: 31 },
-  { canape: 22, fauteuil: 8, figurine: 36 },
+  { canape: 10, fauteuil: 2 },
+  { canape: 13, fauteuil: 6 },
+  { canape: 22, fauteuil: 8 },
 ];
 const BUNDLE_PRICE = 1900;
+const GIFT_TABLEAU_PRICE = 60; // tableau 50×70 offert avec un ensemble
 
 const FREE_SHIPPING_THRESHOLD = 40;
 const SHIPPING_FEE = 4.9;
@@ -97,12 +98,23 @@ export async function POST(req: Request) {
     const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
     const qtyOf = (id: number) => cart.find((x) => x.product.id === id)?.qty ?? 0;
     const unitOf = (id: number) => cart.find((x) => x.product.id === id)?.unit ?? 0;
-    const packDiscount = BUNDLES.reduce((s, b) => {
-      const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil), qtyOf(b.figurine));
+    let totalPacks = 0;
+    const pairDiscount = BUNDLES.reduce((s, b) => {
+      const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil));
+      totalPacks += packs;
       if (packs === 0) return s;
-      const trio = unitOf(b.canape) + unitOf(b.fauteuil) + unitOf(b.figurine);
-      return s + packs * Math.max(0, trio - BUNDLE_PRICE);
+      const pair = unitOf(b.canape) + unitOf(b.fauteuil);
+      return s + packs * Math.max(0, pair - BUNDLE_PRICE);
     }, 0);
+    // Tableau 50×70 offert : un par ensemble présent
+    const giftQty = rawItems
+      .filter((it) => {
+        const p = products.find((pp) => pp.id === Number(it.id));
+        return p?.name.includes('Tableau') && it.size === '50×70 cm';
+      })
+      .reduce((sum, it) => sum + Math.max(1, Math.min(20, Math.floor(Number(it.qty) || 1))), 0);
+    const giftDiscount = Math.min(totalPacks, giftQty) * GIFT_TABLEAU_PRICE;
+    const packDiscount = pairDiscount + giftDiscount;
     const afterPack = subtotal - packDiscount;
     const welcomeDiscount = body.promo && afterPack > 0 ? afterPack * 0.1 : 0;
     const merchandise = afterPack - welcomeDiscount;
