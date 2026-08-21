@@ -2276,6 +2276,15 @@ export default function Home() {
             const list = collapseVariantDuplicates(
               products.filter((p) => p.category === activeFilter && (activeFilter !== 'Salon' || !p.name.includes('Bubble'))),
             );
+            // Dans le Salon : canapés & fauteuils en premier, puis les meubles (tables, TV…)
+            if (activeFilter === 'Salon') {
+              const isSeat = (n: string) => n.includes('Canapé') || n.includes('Fauteuil');
+              return list.sort((a, b) => {
+                const ra = isSeat(a.name) ? 0 : 1, rb = isSeat(b.name) ? 0 : 1;
+                if (ra !== rb) return ra - rb;
+                return a.id - b.id;
+              });
+            }
             // Dans les Décorations : tableaux en premier, figurines en dernier
             if (activeFilter === 'Décorations') {
               const rank = (n: string) => {

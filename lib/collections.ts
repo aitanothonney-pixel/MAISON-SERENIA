@@ -66,9 +66,17 @@ export function getCollectionProducts(slug: string): Product[] {
       return a.id - b.id;
     });
   }
-  // Le Salon exclut les produits Bubble (uniquement présents dans la collection Bubble)
+  // Le Salon exclut les Bubble ; canapés & fauteuils en premier, puis les meubles
   if (cat === 'Salon') {
-    return list.filter((p) => !p.name.includes('Bubble'));
+    const isSeat = (n: string) => n.includes('Canapé') || n.includes('Fauteuil');
+    return list
+      .filter((p) => !p.name.includes('Bubble'))
+      .sort((a, b) => {
+        const ra = isSeat(a.name) ? 0 : 1;
+        const rb = isSeat(b.name) ? 0 : 1;
+        if (ra !== rb) return ra - rb;
+        return a.id - b.id;
+      });
   }
   return list;
 }
