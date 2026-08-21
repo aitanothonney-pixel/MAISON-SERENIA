@@ -960,6 +960,35 @@ function BubblePromoCarousel() {
     scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
 
+  // Défilement automatique doux, en boucle infinie, en pause au survol
+  const pausedRef = useRef(false);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const reduce = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return; // respecte la préférence « réduire les animations »
+    let raf = 0;
+    const step = () => {
+      if (el && !pausedRef.current) {
+        const half = el.scrollWidth / 2; // la liste est dupliquée une fois
+        if (half > 0) {
+          el.scrollLeft += 0.6; // vitesse douce (~35 px/s)
+          if (el.scrollLeft >= half) el.scrollLeft -= half; // boucle sans couture
+        }
+      }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const pause = () => { pausedRef.current = true; };
+  const resume = () => { pausedRef.current = false; };
+
+  // Liste dupliquée pour permettre la boucle infinie
+  const loopItems = [...items, ...items];
+
   return (
     <FadeInSection>
       <section id="bubble-promo" className="py-16 scroll-mt-24">
@@ -992,10 +1021,14 @@ function BubblePromoCarousel() {
         <div
           ref={scrollRef}
           onScroll={updateArrows}
-          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide snap-x snap-mandatory"
+          onMouseEnter={pause}
+          onMouseLeave={resume}
+          onTouchStart={pause}
+          onTouchEnd={resume}
+          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"
         >
-          {items.map((product) => (
-            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72 snap-start">
+          {loopItems.map((product, i) => (
+            <div key={`${product.id}-${i}`} className="group flex-shrink-0 w-64 md:w-72">
               <Link href={`/products/${product.id}`}>
               <div className="relative overflow-hidden bg-white mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
                 <Image
