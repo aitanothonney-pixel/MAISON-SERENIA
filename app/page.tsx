@@ -1613,7 +1613,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
 
       <div className="flex justify-center mb-3">
         <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-          Rabais de {formatPrice(bundle.rabais, cur)}
+          Rabais de {formatPrice(Math.max(0, sum - BUNDLE_PRICE), cur)}
         </span>
       </div>
 

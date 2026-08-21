@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!detail) return { title: 'Pack | Maison Serenia' };
   return {
     title: `Ensemble Bubble ${detail.bundle.color} | Maison Serenia`,
-    description: `Canapé et fauteuil Bubble ${detail.bundle.color.toLowerCase()} assortis, avec un tableau (50×70 cm) offert. Économisez ${detail.bundle.rabais} CHF.`,
+    description: `Canapé et fauteuil Bubble ${detail.bundle.color.toLowerCase()} assortis, avec un tableau (50×70 cm) offert. Économisez ${detail.sum - detail.price} CHF.`,
   };
 }
 
@@ -44,7 +44,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           >
             ← Retour aux ensembles
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais <Price value={bundle.rabais} /></p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Ensemble Bubble {bundle.color}
           </h1>
@@ -110,7 +110,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           </div>
           <div className="flex mb-5 mt-3">
             <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-              Vous économisez <Price value={bundle.rabais} />
+              Vous économisez <Price value={sum - price} />
             </span>
           </div>
 
