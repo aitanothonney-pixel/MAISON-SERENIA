@@ -8,7 +8,7 @@ export interface CollectionMeta {
 }
 
 export const COLLECTIONS: CollectionMeta[] = [
-  { slug: 'salon', label: 'Salon', kicker: 'Collection', description: 'Canapés et fauteuils sculpturaux de la collection Bubble, pensés pour sublimer votre intérieur.' },
+  { slug: 'salon', label: 'Salon', kicker: 'Collection', description: 'Canapés, fauteuils et tables pour sublimer votre salon.' },
   { slug: 'figurines', label: 'Décorations', kicker: 'Collection', description: 'Sculptures et pièces de collection — KAWS, Bearbrick et éditions rares.' },
   { slug: 'meubles', label: 'Meubles', kicker: 'Collection', description: 'Meubles TV, tables et rangements pour aménager tout votre intérieur.' },
   { slug: 'bubble', label: 'Collection Bubble', kicker: 'Signature · −30%', description: "La collection signature aux formes gonflées iconiques, en édition limitée." },
@@ -66,14 +66,9 @@ export function getCollectionProducts(slug: string): Product[] {
       return a.id - b.id;
     });
   }
-  // Dans le Salon, on affiche les produits Bubble en dernier
+  // Le Salon exclut les produits Bubble (uniquement présents dans la collection Bubble)
   if (cat === 'Salon') {
-    return [...list].sort((a, b) => {
-      const aB = a.name.includes('Bubble') ? 1 : 0;
-      const bB = b.name.includes('Bubble') ? 1 : 0;
-      if (aB !== bB) return aB - bB;
-      return a.id - b.id;
-    });
+    return list.filter((p) => !p.name.includes('Bubble'));
   }
   return list;
 }

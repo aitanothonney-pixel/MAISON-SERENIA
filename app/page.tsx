@@ -1263,7 +1263,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
 
 // ─── Product Filter Bar ───────────────────────────────────────────────────────
 
-const filterCategories = ['Meubles', 'Salon', 'Bubble', 'Décorations'];
+const filterCategories = ['Salon', 'Meubles', 'Décorations', 'Bubble'];
 
 function ProductFilterBar({
   active,
@@ -2207,7 +2207,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 
 export default function Home() {
   const cur = useCurrency();
-  const [activeFilter, setActiveFilter] = useState('Meubles');
+  const [activeFilter, setActiveFilter] = useState('Salon');
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -2272,16 +2272,10 @@ export default function Home() {
     : activeFilter === 'Bubble'
       ? products.filter((p) => p.name.includes('Bubble'))
       : (() => {
-            const list = collapseVariantDuplicates(products.filter((p) => p.category === activeFilter));
-            // Dans le Salon, on affiche les produits Bubble en dernier
-            if (activeFilter === 'Salon') {
-              return list.sort((a, b) => {
-                const aB = a.name.includes('Bubble') ? 1 : 0;
-                const bB = b.name.includes('Bubble') ? 1 : 0;
-                if (aB !== bB) return aB - bB;
-                return a.id - b.id;
-              });
-            }
+            // Le Salon exclut les produits Bubble (ils sont uniquement dans la section Bubble)
+            const list = collapseVariantDuplicates(
+              products.filter((p) => p.category === activeFilter && (activeFilter !== 'Salon' || !p.name.includes('Bubble'))),
+            );
             // Dans les Décorations : tableaux en premier, figurines en dernier
             if (activeFilter === 'Décorations') {
               const rank = (n: string) => {
