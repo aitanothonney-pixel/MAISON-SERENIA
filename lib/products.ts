@@ -46,10 +46,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 67, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 65, color: 'Vert', colorHex: '#8aa876' },
   ],
-  'sculpture-resine': [
-    { productId: 70, color: 'Noir', colorHex: '#1a1a1a' },
-    { productId: 69, color: 'Bleu', colorHex: '#4a6b8a' },
-  ],
   'vase-ceramique-duo': [
     { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 73, color: 'Noir', colorHex: '#1a1a1a' },
@@ -403,35 +399,6 @@ const rawProducts: Product[] = [
     dimensions: 'Table basse à roulettes, double plateau',
     material: 'Métal et plateau laqué noir',
     details: ['Double plateau de rangement', 'Roulettes pour un déplacement facile', 'Multifonction : thé, jeux, appoint', 'Finition noire élégante'],
-  },
-  // ── Décorations : Sculpture artistique en résine ───────────────────────────────
-  {
-    id: 69,
-    name: 'Sculpture artistique en résine bleue',
-    category: 'Décorations',
-    price: 250,
-    description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris gris bleuté, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
-    images: [
-      'https://i.ibb.co/274kX9Bw/Capture-d-e-cran-2026-07-23-a-21-43-24.png',
-      'https://i.ibb.co/pBZSfvx3/Capture-d-e-cran-2026-07-23-a-21-44-13.png',
-    ],
-    dimensions: 'Sculpture verticale sur socle',
-    material: 'Résine artistique, sphère cristal, socle laqué',
-    details: ['Design abstrait new classical', 'Coloris gris bleuté', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
-  },
-  // ── Décorations : Sculpture artistique en résine — Noir ────────────────────────
-  {
-    id: 70,
-    name: 'Sculpture artistique en résine bleue',
-    category: 'Décorations',
-    price: 250,
-    description: 'Sculpture décorative verticale en résine, inspirée du mouvement de l\'eau et du vent. Design abstrait new classical / post-modern en coloris noir profond, avec sphère de cristal sur socle. Une pièce d\'ambiance unique pour sublimer une entrée ou un salon de luxe.',
-    images: [
-      'https://i.ibb.co/nN8Nr9JH/Capture-d-e-cran-2026-07-23-a-21-44-36.png',
-    ],
-    dimensions: 'Sculpture verticale sur socle',
-    material: 'Résine artistique, sphère cristal, socle laqué',
-    details: ['Design abstrait new classical', 'Coloris noir profond', 'Sphère de cristal sur socle', 'Pièce décorative d\'exception'],
   },
   // ── Décorations : Vase céramique coquille ────────────────────────────────────
   {
