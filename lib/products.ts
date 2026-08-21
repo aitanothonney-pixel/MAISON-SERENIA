@@ -77,13 +77,24 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 98, color: 'Brun', colorHex: '#6b4a30' },
     { productId: 99, color: 'Vert', colorHex: '#4a5d4a' },
   ],
+  'canape-l-nuage': [
+    { productId: 100, color: 'Gris anthracite', colorHex: '#2f2f2f' },
+    { productId: 102, color: 'Blanc chaud', colorHex: '#f0ede8' },
+    { productId: 101, color: 'Beige', colorHex: '#d8c8a8' },
+  ],
 };
+
+// Groupes qui gardent chaque couleur comme carte distincte dans les listes,
+// tout en proposant le sélecteur de couleur sur la fiche produit.
+const NON_COLLAPSING_GROUPS = new Set(['canape-l-nuage']);
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule
 // carte dans les listes. Les produits Bubble restent affichés par couleur.
 export function collapseVariantDuplicates(list: Product[]): Product[] {
   return list.filter((p) => {
     if (p.name.includes('Bubble')) return true;
+    const key = getVariantGroupKey(p.id);
+    if (key && NON_COLLAPSING_GROUPS.has(key)) return true; // toutes les couleurs restent visibles
     const grp = getVariantGroup(p.id);
     if (grp) {
       // On ne garde que le représentant du groupe (le premier)
@@ -96,6 +107,13 @@ export function collapseVariantDuplicates(list: Product[]): Product[] {
 export function getVariantGroup(productId: number): ProductVariant[] | null {
   for (const group of Object.values(variantGroups)) {
     if (group.some((v) => v.productId === productId)) return group;
+  }
+  return null;
+}
+
+export function getVariantGroupKey(productId: number): string | null {
+  for (const [key, group] of Object.entries(variantGroups)) {
+    if (group.some((v) => v.productId === productId)) return key;
   }
   return null;
 }
