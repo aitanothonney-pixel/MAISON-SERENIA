@@ -77,11 +77,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 98, color: 'Brun', colorHex: '#6b4a30' },
     { productId: 99, color: 'Vert', colorHex: '#4a5d4a' },
   ],
-  'canape-l-nuage': [
-    { productId: 100, color: 'Gris anthracite', colorHex: '#3a3f44' },
-    { productId: 101, color: 'Beige', colorHex: '#d8c8a8' },
-    { productId: 102, color: 'Blanc chaud', colorHex: '#efe9dd' },
-  ],
 };
 
 // Regroupe les variantes non-Bubble (ventilateur, bracelet, table) en une seule

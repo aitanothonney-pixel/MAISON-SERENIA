@@ -2254,11 +2254,17 @@ export default function Home() {
             const list = collapseVariantDuplicates(
               products.filter((p) => p.category === activeFilter && (activeFilter !== 'Salon' || !p.name.includes('Bubble'))),
             );
-            // Dans le Salon : canapés & fauteuils en premier, puis les meubles (tables, TV…)
+            // Dans le Salon : ordre prioritaire choisi, puis le reste
             if (activeFilter === 'Salon') {
-              const isSeat = (n: string) => n.includes('Canapé') || n.includes('Fauteuil');
+              const PRIORITY = [100, 102, 87, 88, 94, 89];
+              const rank = (p: typeof products[number]) => {
+                const i = PRIORITY.indexOf(p.id);
+                if (i !== -1) return i;                       // 0..5 : ordre prioritaire
+                if (p.name.includes('Canapé')) return 100;    // autres canapés ensuite
+                return 200;                                    // meubles (TV…) en dernier
+              };
               return list.sort((a, b) => {
-                const ra = isSeat(a.name) ? 0 : 1, rb = isSeat(b.name) ? 0 : 1;
+                const ra = rank(a), rb = rank(b);
                 if (ra !== rb) return ra - rb;
                 return a.id - b.id;
               });
