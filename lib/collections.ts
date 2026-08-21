@@ -84,10 +84,17 @@ export function getCollectionProducts(slug: string): Product[] {
         return a.id - b.id;
       });
   }
-  // Meubles : ordre prioritaire choisi, puis le reste par id
+  // Meubles : ordre prioritaire choisi, puis le reste, puis certains forcés en fin
   if (cat === 'Meubles') {
     const PRIORITY = [77, 83, 78, 79, 81, 84, 75, 76];
-    const rank = (id: number) => { const i = PRIORITY.indexOf(id); return i === -1 ? PRIORITY.length : i; };
+    const LAST = [68, 66, 82]; // forcés tout à la fin, dans cet ordre
+    const rank = (id: number) => {
+      const i = PRIORITY.indexOf(id);
+      if (i !== -1) return i;
+      const l = LAST.indexOf(id);
+      if (l !== -1) return 1000 + l;
+      return 500;
+    };
     return [...list].sort((a, b) => {
       const ra = rank(a.id);
       const rb = rank(b.id);
