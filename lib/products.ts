@@ -1,3 +1,8 @@
+export interface ProductSize {
+  label: string;
+  price: number;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -8,6 +13,8 @@ export interface Product {
   dimensions: string;
   material: string;
   details: string[];
+  // Optionnel : tailles au choix avec prix différent (ex. tableaux muraux)
+  sizes?: ProductSize[];
 }
 
 export interface ProductVariant {
@@ -1034,6 +1041,48 @@ const exactPriceProducts: Product[] = [
     dimensions: 'L 365 × P 185 × H 80 cm (canapé en L)',
     material: 'Velours côtelé, assise moelleuse',
     details: ['Forme en L modulable', 'Velours côtelé doux « style nuage »', 'Pouf mobile & coussins inclus', 'Assise profonde et enveloppante'],
+  },
+  // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
+  {
+    id: 103,
+    name: 'Tableau abstrait doré & brun',
+    category: 'Décorations',
+    price: 60,
+    description: "Peinture à l'huile abstraite dorée et brune, peinte à la main. Art mural texturé aux tons neutres et chauds, effet métallique moderne et luxueux — une pièce maîtresse pour sublimer un salon. Livrée sans cadre, disponible dans de nombreuses tailles.",
+    images: [
+      'https://i.ibb.co/bRPbynxq/Capture-d-e-cran-2026-08-20-a-21-07-56.png',
+      'https://i.ibb.co/Fb5JF8L8/Capture-d-e-cran-2026-08-20-a-21-08-16.png',
+      'https://i.ibb.co/0xC2tgb/Capture-d-e-cran-2026-08-20-a-21-07-51.png',
+      'https://i.ibb.co/LzHkC34q/Capture-d-e-cran-2026-08-20-a-21-07-46.png',
+      'https://i.ibb.co/RGmw2zjc/Capture-d-e-cran-2026-08-20-a-21-08-10.png',
+      'https://i.ibb.co/fzcp8mJN/Capture-d-e-cran-2026-08-20-a-21-07-40.png',
+    ],
+    dimensions: 'Plusieurs tailles disponibles (voir sélecteur)',
+    material: "Peinture à l'huile texturée sur toile, sans cadre",
+    details: ['Peinte à la main', 'Texture en relief effet métallique', 'Tons neutres et chauds (doré/brun)', 'Livrée sans cadre — nombreuses tailles'],
+    sizes: [
+      { label: '50×70 cm', price: 60 },
+      { label: '60×80 cm', price: 75 },
+      { label: '60×90 cm', price: 90 },
+      { label: '75×100 cm', price: 105 },
+      { label: '80×120 cm', price: 120 },
+      { label: '80×140 cm', price: 135 },
+      { label: '80×160 cm', price: 150 },
+      { label: '90×120 cm', price: 165 },
+      { label: '90×130 cm', price: 180 },
+      { label: '90×150 cm', price: 195 },
+      { label: '90×180 cm', price: 210 },
+      { label: '100×160 cm', price: 225 },
+      { label: '100×180 cm', price: 240 },
+      { label: '110×160 cm', price: 255 },
+      { label: '110×220 cm', price: 270 },
+      { label: '120×180 cm', price: 285 },
+      { label: '120×200 cm', price: 300 },
+      { label: '150×220 cm', price: 315 },
+      { label: '120×240 cm', price: 330 },
+      { label: '130×260 cm', price: 345 },
+      { label: '150×250 cm', price: 360 },
+    ],
   },
 ];
 

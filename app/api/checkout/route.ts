@@ -69,7 +69,7 @@ export async function POST(req: Request) {
   const { key, error: keyError } = validateKey(process.env.STRIPE_SECRET_KEY);
   if (!key) return Response.json({ error: 'config', message: keyError }, { status: 500 });
 
-  let body: { items?: { id: number; qty: number }[]; promo?: boolean };
+  let body: { items?: { id: number; qty: number; size?: string }[]; promo?: boolean };
   try {
     body = await req.json();
   } catch {
@@ -82,10 +82,13 @@ export async function POST(req: Request) {
       const product = products.find((p) => p.id === Number(it.id));
       if (!product) return null;
       const qty = Math.max(1, Math.min(20, Math.floor(Number(it.qty) || 1)));
-      const unit = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
-      return { product, qty, unit };
+      // Prix selon la taille choisie si le produit en propose, sinon prix de base (Bubble -30%)
+      const sizeMatch = product.sizes && it.size ? product.sizes.find((s) => s.label === it.size) : undefined;
+      const unit = sizeMatch ? sizeMatch.price : isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
+      const label = sizeMatch ? `${product.name} — ${sizeMatch.label}` : product.name;
+      return { product, qty, unit, label };
     })
-    .filter(Boolean) as { product: typeof products[0]; qty: number; unit: number }[];
+    .filter(Boolean) as { product: typeof products[0]; qty: number; unit: number; label: string }[];
 
   if (cart.length === 0) return Response.json({ error: 'Panier vide' }, { status: 400 });
 
@@ -118,7 +121,7 @@ export async function POST(req: Request) {
       params[`line_items[${i}][quantity]`] = String(x.qty);
       params[`line_items[${i}][price_data][currency]`] = 'chf';
       params[`line_items[${i}][price_data][unit_amount]`] = String(chf(x.unit * factor));
-      params[`line_items[${i}][price_data][product_data][name]`] = x.product.name;
+      params[`line_items[${i}][price_data][product_data][name]`] = x.label;
       const img = x.product.images[0];
       if (img) params[`line_items[${i}][price_data][product_data][images][0]`] = img;
     });

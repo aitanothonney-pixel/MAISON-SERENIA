@@ -76,9 +76,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const cartProducts = items.map((item) => {
     const product = products.find((p) => p.id === item.id);
     if (!product) return null;
-    const price = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
-    return { ...item, product, price };
-  }).filter(Boolean) as { id: number; qty: number; product: typeof products[0]; price: number }[];
+    // Prix de base selon la taille choisie si le produit en propose
+    const sizeMatch = product.sizes && item.size ? product.sizes.find((s) => s.label === item.size) : undefined;
+    const base = sizeMatch ? sizeMatch.price : product.price;
+    const price = isBubble(product.id) ? Math.round(base * 0.7) : base;
+    return { ...item, product, price, orig: base };
+  }).filter(Boolean) as { id: number; qty: number; size?: string; product: typeof products[0]; price: number; orig: number }[];
 
   useEffect(() => {
     if (open) {
@@ -98,7 +101,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const totalQty = cartProducts.reduce((sum, x) => sum + x.qty, 0);
   const subtotal = cartProducts.reduce((sum, x) => sum + x.price * x.qty, 0);
   // Prix d'origine (avant la promo -30% des pièces Bubble) et économie correspondante
-  const originalSubtotal = cartProducts.reduce((sum, x) => sum + x.product.price * x.qty, 0);
+  const originalSubtotal = cartProducts.reduce((sum, x) => sum + x.orig * x.qty, 0);
   const bubbleSavings = Math.round((originalSubtotal - subtotal) * 100) / 100;
 
   // Remise pack : chaque trio complet canapé+fauteuil+figurine est facturé au prix bundle
@@ -168,7 +171,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: items.map((i) => ({ id: i.id, qty: i.qty })), promo: welcomeActive }),
+        body: JSON.stringify({ items: items.map((i) => ({ id: i.id, qty: i.qty, size: i.size })), promo: welcomeActive }),
       });
       const data = await res.json();
       if (data?.url) {
@@ -364,9 +367,9 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       </div>
                     ) : (
                       <div className="px-6 py-5 space-y-5">
-                        {cartProducts.map(({ id, qty, product, price }) => (
+                        {cartProducts.map(({ id, qty, product, price, size }) => (
                           <motion.div
-                            key={id}
+                            key={`${id}|${size || ''}`}
                             layout
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -384,13 +387,13 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                               <div className="flex items-start justify-between gap-2">
                                 <div className="flex-1 min-w-0">
                                   <p className="text-[15px] text-black leading-snug">{product.name}</p>
-                                  <p className="text-xs text-neutral-400 mt-1">{product.category}</p>
+                                  <p className="text-xs text-neutral-400 mt-1">{size ? `Taille : ${size}` : product.category}</p>
                                   <p className="text-[17px] font-bold text-black mt-2 price-luxe">
                                     {formatPrice(price, cur)}
                                   </p>
                                 </div>
                                 <button
-                                  onClick={() => removeItem(id)}
+                                  onClick={() => removeItem(id, size)}
                                   className="shrink-0 p-1 text-neutral-400 hover:text-black transition-colors"
                                   aria-label="Supprimer"
                                 >
@@ -399,7 +402,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                               </div>
                               <div className="flex items-center gap-0 mt-3">
                                 <button
-                                  onClick={() => updateQty(id, Math.max(1, qty - 1))}
+                                  onClick={() => updateQty(id, Math.max(1, qty - 1), size)}
                                   className="w-8 h-8 border border-neutral-200 flex items-center justify-center hover:border-black transition-colors text-neutral-700"
                                   aria-label="Diminuer"
                                 >
@@ -407,7 +410,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                                 </button>
                                 <span className="w-10 h-8 flex items-center justify-center text-sm text-black">{qty}</span>
                                 <button
-                                  onClick={() => updateQty(id, qty + 1)}
+                                  onClick={() => updateQty(id, qty + 1, size)}
                                   className="w-8 h-8 border border-neutral-200 flex items-center justify-center hover:border-black transition-colors text-neutral-700"
                                   aria-label="Augmenter"
                                 >

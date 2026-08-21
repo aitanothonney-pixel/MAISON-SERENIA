@@ -8,7 +8,12 @@ const EVENT = 'ms_cart_change';
 export interface CartItem {
   id: number;
   qty: number;
+  size?: string; // taille choisie (ex. tableaux muraux) — facultatif
 }
+
+// Deux lignes de panier sont identiques si même produit ET même taille.
+const sameLine = (a: CartItem, b: { id: number; size?: string }) =>
+  a.id === b.id && (a.size || '') === (b.size || '');
 
 function readStorage(): CartItem[] {
   try {
@@ -37,29 +42,29 @@ export function useCart() {
     };
   }, []);
 
-  const addItem = useCallback((id: number) => {
+  const addItem = useCallback((id: number, size?: string) => {
     setItems((prev) => {
-      const existing = prev.find((x) => x.id === id);
+      const existing = prev.find((x) => sameLine(x, { id, size }));
       const next = existing
-        ? prev.map((x) => (x.id === id ? { ...x, qty: x.qty + 1 } : x))
-        : [...prev, { id, qty: 1 }];
+        ? prev.map((x) => (sameLine(x, { id, size }) ? { ...x, qty: x.qty + 1 } : x))
+        : [...prev, { id, qty: 1, ...(size ? { size } : {}) }];
       persist(next);
       return next;
     });
   }, []);
 
-  const removeItem = useCallback((id: number) => {
+  const removeItem = useCallback((id: number, size?: string) => {
     setItems((prev) => {
-      const next = prev.filter((x) => x.id !== id);
+      const next = prev.filter((x) => !sameLine(x, { id, size }));
       persist(next);
       return next;
     });
   }, []);
 
-  const updateQty = useCallback((id: number, qty: number) => {
+  const updateQty = useCallback((id: number, qty: number, size?: string) => {
     if (qty < 1) return;
     setItems((prev) => {
-      const next = prev.map((x) => (x.id === id ? { ...x, qty } : x));
+      const next = prev.map((x) => (sameLine(x, { id, size }) ? { ...x, qty } : x));
       persist(next);
       return next;
     });

@@ -117,10 +117,14 @@ function CheckoutDrawer({
   open,
   onClose,
   product,
+  unitPrice,
+  size,
 }: {
   open: boolean;
   onClose: () => void;
   product: { id: number; name: string; price: number; images: string[]; category: string };
+  unitPrice?: number;
+  size?: string;
 }) {
   const cur = useCurrency();
   const [step, setStep] = useState<CheckoutStep>('cart');
@@ -133,7 +137,7 @@ function CheckoutDrawer({
   const [promoError, setPromoError] = useState(false);
 
   const isBubble = product.name.includes('Bubble');
-  const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+  const promoPrice = unitPrice ?? (isBubble ? Math.round(product.price * 0.7) : product.price);
   const bubbleDiscount = isBubble ? product.price - promoPrice : 0; // remise -30%
   const welcomeDiscount = welcomeActive ? Math.round(promoPrice * 0.10 * 100) / 100 : 0;
   const merchandiseTotal = promoPrice - welcomeDiscount;
@@ -226,7 +230,7 @@ function CheckoutDrawer({
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: [{ id: product.id, qty: 1 }], promo: welcomeActive }),
+        body: JSON.stringify({ items: [{ id: product.id, qty: 1, size }], promo: welcomeActive }),
       });
       const data = await res.json();
       if (data?.url) {
@@ -817,7 +821,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [addedComplement, setAddedComplement] = useState(false);
   const [openDim, setOpenDim] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const barVisible = useAnnouncementBarVisible();
+
+  // Taille par défaut = la plus petite (première) si le produit propose des tailles
+  useEffect(() => {
+    if (product?.sizes?.length) setSelectedSize(product.sizes[0].label);
+  }, [product]);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }); }, [id]);
 
@@ -883,12 +893,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   };
 
   const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+  // Prix affiché : selon la taille choisie si le produit en propose, sinon prix promo
+  const unitPrice = product.sizes
+    ? (product.sizes.find((s) => s.label === selectedSize)?.price ?? product.sizes[0].price)
+    : promoPrice;
 
   const complementId = bubbleComplement[product.id];
   const complementProduct = complementId ? products.find((p) => p.id === complementId) : undefined;
 
   const handleAddToCart = () => {
-    addToCart(product.id);
+    addToCart(product.id, product.sizes ? selectedSize : undefined);
     setAdded(true);
     setToastMessage(product.name);
     setShowToast(true);
@@ -952,7 +966,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     <>
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={toastMessage || product.name} />
-      <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} />
+      <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} unitPrice={unitPrice} size={product.sizes ? selectedSize : undefined} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {/* Navbar */}
@@ -1170,7 +1184,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="border-y border-neutral-200 py-5 mb-6">
                 <div className="flex items-end justify-between gap-4">
                   <div className="flex items-baseline gap-3">
-                    <p className="text-4xl text-black price-luxe">{formatPrice(promoPrice, cur)}</p>
+                    <p className="text-4xl text-black price-luxe">{formatPrice(unitPrice, cur)}</p>
                     {isBubble && (
                       <p className="text-sm text-neutral-400 line-through price-luxe">{formatPrice(product.price, cur)}</p>
                     )}
@@ -1195,6 +1209,35 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-500">
                     Édition limitée — plus que {stockUrgency.stock} exemplaires
                   </p>
+                </div>
+              )}
+
+              {/* Size selector — tailles au choix (ex. tableaux) */}
+              {product.sizes && (
+                <div className="mb-6">
+                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
+                    Taille — <span className="text-black font-medium">{selectedSize}</span>
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    {product.sizes.map((s) => (
+                      <button
+                        key={s.label}
+                        onClick={() => setSelectedSize(s.label)}
+                        className={`px-3 py-2.5 text-[13px] border transition-all duration-200 flex flex-col items-center leading-tight ${
+                          s.label === selectedSize
+                            ? 'border-black bg-black text-white'
+                            : 'border-neutral-200 text-neutral-700 hover:border-neutral-400'
+                        }`}
+                      >
+                        <span>{s.label}</span>
+                        <span className={`text-[11px] ${s.label === selectedSize ? 'text-white/70' : 'text-neutral-400'}`}>{formatPrice(s.price, cur)}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs mt-3">
+                    <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
+                    <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
+                  </div>
                 </div>
               )}
 
