@@ -575,6 +575,19 @@ const exactPriceProducts: Product[] = [
     material: 'Velours doux, sans armature',
     details: ['Grand canapé en U modulable', 'Assise profonde et enveloppante', 'Modules déplaçables', 'Coloris gris élégant'],
   },
+  // ── Décorations : Ensemble de vases en céramique bohème ──────────────────────
+  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
+  {
+    id: 116,
+    name: 'Ensemble de vases en céramique bohème',
+    category: 'Décorations',
+    price: 69,
+    description: 'Ensemble de vases décoratifs en céramique au style bohème et minimaliste. Formes sculpturales et organiques, finition mate raffinée — parfait pour sublimer un salon, une chambre ou une table à manger. Un trio d\'ornements qui apporte caractère et élégance à votre intérieur.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Ensemble de vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Style bohème & minimaliste', 'Formes sculpturales organiques', 'Finition céramique mate', 'Idéal salon, chambre ou table'],
+  },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
     id: 77,
