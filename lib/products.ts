@@ -512,7 +512,6 @@ function bumpPrice(price: number): number {
 // Produits à prix fixe défini par la boutique (non concernés par la hausse +10%)
 const exactPriceProducts: Product[] = [
   // ── Salon : Canapé sectionnel convertible 3 places gris ──────────────────────
-  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
   {
     id: 112,
     name: 'Canapé sectionnel convertible 3 places gris',
@@ -520,7 +519,10 @@ const exactPriceProducts: Product[] = [
     price: 749,
     description: 'Grand canapé sectionnel convertible 3 places en velours côtelé gris, sans armature apparente. Assise profonde et enveloppante, coussins moelleux inclus. Modulable et personnalisable selon votre espace, il se transforme en couchage d\'appoint — un choix parfait pour un salon cosy et contemporain.',
     images: [
-      'https://i.ibb.co/J6r17WR/Capture-d-e-cran-2026-08-20-a-19-54-18.png',
+      'https://i.ibb.co/0pLxdQnx/Capture-d-e-cran-2026-08-22-a-12-52-18.png',
+      'https://i.ibb.co/sdDj8LRX/Capture-d-e-cran-2026-08-22-a-12-52-31.png',
+      'https://i.ibb.co/zhTmJSDw/Capture-d-e-cran-2026-08-22-a-12-52-48.png',
+      'https://i.ibb.co/QFmhnQWJ/Capture-d-e-cran-2026-08-22-a-12-52-56.png',
     ],
     dimensions: 'L 280 × P 90 × H 85 cm (convertible)',
     material: 'Velours côtelé gris, sans armature',
