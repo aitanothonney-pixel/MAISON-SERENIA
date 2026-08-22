@@ -83,6 +83,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 114, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 115, color: 'Gris', colorHex: '#9e9e9e' },
   ],
+  'vases-boheme': [
+    { productId: 116, color: 'Beige', colorHex: '#d8c8a8' },
+    { productId: 117, color: 'Noir', colorHex: '#1a1a1a' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -575,15 +579,33 @@ const exactPriceProducts: Product[] = [
     material: 'Velours doux, sans armature',
     details: ['Grand canapé en U modulable', 'Assise profonde et enveloppante', 'Modules déplaçables', 'Coloris gris élégant'],
   },
-  // ── Décorations : Ensemble de vases en céramique bohème ──────────────────────
-  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
+  // ── Décorations : Ensemble de vases en céramique bohème (2 couleurs) ──────────
   {
     id: 116,
-    name: 'Ensemble de vases en céramique bohème',
+    name: 'Ensemble de vases en céramique bohème beige',
     category: 'Décorations',
     price: 69,
-    description: 'Ensemble de vases décoratifs en céramique au style bohème et minimaliste. Formes sculpturales et organiques, finition mate raffinée — parfait pour sublimer un salon, une chambre ou une table à manger. Un trio d\'ornements qui apporte caractère et élégance à votre intérieur.',
-    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    description: 'Ensemble de vases décoratifs en céramique au style bohème et minimaliste. Formes sculpturales et organiques, finition mate raffinée — parfait pour sublimer un salon, une chambre ou une table à manger. Coloris beige chaleureux qui apporte caractère et élégance à votre intérieur.',
+    images: [
+      'https://i.ibb.co/353fq0rq/Capture-d-e-cran-2026-08-22-a-13-29-03.png',
+      'https://i.ibb.co/J02WCK6/Capture-d-e-cran-2026-08-22-a-13-29-25.png',
+      'https://i.ibb.co/Kx0wNVyR/Capture-d-e-cran-2026-08-22-a-13-29-46.png',
+      'https://i.ibb.co/bMyd1zrT/Capture-d-e-cran-2026-08-22-a-13-29-11.png',
+    ],
+    dimensions: 'Ensemble de vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Style bohème & minimaliste', 'Formes sculpturales organiques', 'Finition céramique mate', 'Idéal salon, chambre ou table'],
+  },
+  {
+    id: 117,
+    name: 'Ensemble de vases en céramique bohème noir',
+    category: 'Décorations',
+    price: 69,
+    description: 'Ensemble de vases décoratifs en céramique au style bohème et minimaliste. Formes sculpturales et organiques, finition mate raffinée — parfait pour sublimer un salon, une chambre ou une table à manger. Coloris noir profond qui apporte caractère et élégance à votre intérieur.',
+    images: [
+      'https://i.ibb.co/M5Wxch5M/Capture-d-e-cran-2026-08-22-a-13-28-57.png',
+      'https://i.ibb.co/3ypvdyCf/Capture-d-e-cran-2026-08-22-a-13-29-59.png',
+    ],
     dimensions: 'Ensemble de vases décoratifs',
     material: 'Céramique, finition mate',
     details: ['Style bohème & minimaliste', 'Formes sculpturales organiques', 'Finition céramique mate', 'Idéal salon, chambre ou table'],
