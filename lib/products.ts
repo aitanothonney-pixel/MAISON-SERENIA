@@ -87,6 +87,12 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 116, color: 'Beige', colorHex: '#d8c8a8' },
     { productId: 117, color: 'Noir', colorHex: '#1a1a1a' },
   ],
+  'vases-double': [
+    { productId: 118, color: 'Orange', colorHex: '#d4622a' },
+    { productId: 119, color: 'Vert matcha', colorHex: '#8a9a5b' },
+    { productId: 120, color: 'Chocolat', colorHex: '#6b4a30' },
+    { productId: 121, color: 'Blanc cassé', colorHex: '#ece7de' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -609,6 +615,52 @@ const exactPriceProducts: Product[] = [
     dimensions: 'Ensemble de vases décoratifs',
     material: 'Céramique, finition mate',
     details: ['Style bohème & minimaliste', 'Formes sculpturales organiques', 'Finition céramique mate', 'Idéal salon, chambre ou table'],
+  },
+  // ── Décorations : Ensemble de 2 vases double forme spéciale (4 couleurs) ──────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 118,
+    name: 'Ensemble de 2 vases double forme spéciale orange',
+    category: 'Décorations',
+    price: 49,
+    description: 'Ensemble de 2 vases double au design sculptural et original, idéal pour fleurs séchées. Formes torsadées créatives et modernes qui subliment un salon, une chambre ou une cuisine. Coloris orange chaleureux — une touche artistique et contemporaine pour votre intérieur.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Lot de 2 vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Lot de 2 vases double', 'Design sculptural torsadé', 'Idéal fleurs séchées', 'Style moderne & créatif'],
+  },
+  {
+    id: 119,
+    name: 'Ensemble de 2 vases double forme spéciale vert matcha',
+    category: 'Décorations',
+    price: 49,
+    description: 'Ensemble de 2 vases double au design sculptural et original, idéal pour fleurs séchées. Formes torsadées créatives et modernes qui subliment un salon, une chambre ou une cuisine. Coloris vert matcha doux — une touche artistique et contemporaine pour votre intérieur.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Lot de 2 vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Lot de 2 vases double', 'Design sculptural torsadé', 'Idéal fleurs séchées', 'Style moderne & créatif'],
+  },
+  {
+    id: 120,
+    name: 'Ensemble de 2 vases double forme spéciale chocolat',
+    category: 'Décorations',
+    price: 49,
+    description: 'Ensemble de 2 vases double au design sculptural et original, idéal pour fleurs séchées. Formes torsadées créatives et modernes qui subliment un salon, une chambre ou une cuisine. Coloris chocolat élégant — une touche artistique et contemporaine pour votre intérieur.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Lot de 2 vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Lot de 2 vases double', 'Design sculptural torsadé', 'Idéal fleurs séchées', 'Style moderne & créatif'],
+  },
+  {
+    id: 121,
+    name: 'Ensemble de 2 vases double forme spéciale blanc cassé',
+    category: 'Décorations',
+    price: 49,
+    description: 'Ensemble de 2 vases double au design sculptural et original, idéal pour fleurs séchées. Formes torsadées créatives et modernes qui subliment un salon, une chambre ou une cuisine. Coloris blanc cassé épuré — une touche artistique et contemporaine pour votre intérieur.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Lot de 2 vases décoratifs',
+    material: 'Céramique, finition mate',
+    details: ['Lot de 2 vases double', 'Design sculptural torsadé', 'Idéal fleurs séchées', 'Style moderne & créatif'],
   },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
