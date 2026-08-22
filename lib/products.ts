@@ -511,6 +511,21 @@ function bumpPrice(price: number): number {
 
 // Produits à prix fixe défini par la boutique (non concernés par la hausse +10%)
 const exactPriceProducts: Product[] = [
+  // ── Salon : Canapé sectionnel convertible 3 places gris ──────────────────────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 112,
+    name: 'Canapé sectionnel convertible 3 places gris',
+    category: 'Salon',
+    price: 749,
+    description: 'Grand canapé sectionnel convertible 3 places en velours côtelé gris, sans armature apparente. Assise profonde et enveloppante, coussins moelleux inclus. Modulable et personnalisable selon votre espace, il se transforme en couchage d\'appoint — un choix parfait pour un salon cosy et contemporain.',
+    images: [
+      'https://i.ibb.co/J6r17WR/Capture-d-e-cran-2026-08-20-a-19-54-18.png',
+    ],
+    dimensions: 'L 280 × P 90 × H 85 cm (convertible)',
+    material: 'Velours côtelé gris, sans armature',
+    details: ['Canapé-lit convertible 3 places', 'Velours côtelé doux et moelleux', 'Modulable et personnalisable', 'Coussins moelleux inclus'],
+  },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
     id: 77,
