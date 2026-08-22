@@ -78,6 +78,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 102, color: 'Blanc chaud', colorHex: '#f0ede8' },
     { productId: 101, color: 'Beige', colorHex: '#d8c8a8' },
   ],
+  'canape-u-nuage': [
+    { productId: 113, color: 'Blanc', colorHex: '#f0ede8' },
+    { productId: 114, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 115, color: 'Gris', colorHex: '#9e9e9e' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -527,6 +532,41 @@ const exactPriceProducts: Product[] = [
     dimensions: 'L 280 × P 90 × H 85 cm (convertible)',
     material: 'Velours côtelé gris, sans armature',
     details: ['Canapé-lit convertible 3 places', 'Velours côtelé doux et moelleux', 'Modulable et personnalisable', 'Coussins moelleux inclus'],
+  },
+  // ── Salon : Canapé modulable en U style nuage (3 couleurs) ───────────────────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 113,
+    name: 'Canapé modulable en U style nuage blanc',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé modulable en forme de U, style nuage, revêtu d\'un velours doux et enveloppant. Sans armature apparente, assise profonde et généreuse, modules déplaçables selon votre espace. Coloris blanc lumineux et élégant — un salon cosy et contemporain.',
+    images: ['https://i.ibb.co/R4JgzMB0/9.avif'],
+    dimensions: 'L 275 × P 155 × H 85 cm (modulable en U)',
+    material: 'Velours doux, sans armature',
+    details: ['Grand canapé en U modulable', 'Assise profonde et enveloppante', 'Modules déplaçables', 'Coloris blanc lumineux'],
+  },
+  {
+    id: 114,
+    name: 'Canapé modulable en U style nuage noir',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé modulable en forme de U, style nuage, revêtu d\'un velours doux et enveloppant. Sans armature apparente, assise profonde et généreuse, modules déplaçables selon votre espace. Coloris noir profond et raffiné — un salon cosy et contemporain.',
+    images: ['https://i.ibb.co/0pLxdQnx/Capture-d-e-cran-2026-08-22-a-12-52-18.png'],
+    dimensions: 'L 275 × P 155 × H 85 cm (modulable en U)',
+    material: 'Velours doux, sans armature',
+    details: ['Grand canapé en U modulable', 'Assise profonde et enveloppante', 'Modules déplaçables', 'Coloris noir profond'],
+  },
+  {
+    id: 115,
+    name: 'Canapé modulable en U style nuage gris',
+    category: 'Salon',
+    price: 849,
+    description: 'Grand canapé modulable en forme de U, style nuage, revêtu d\'un velours doux et enveloppant. Sans armature apparente, assise profonde et généreuse, modules déplaçables selon votre espace. Coloris gris élégant et intemporel — un salon cosy et contemporain.',
+    images: ['https://i.ibb.co/J6r17WR/Capture-d-e-cran-2026-08-20-a-19-54-18.png'],
+    dimensions: 'L 275 × P 155 × H 85 cm (modulable en U)',
+    material: 'Velours doux, sans armature',
+    details: ['Grand canapé en U modulable', 'Assise profonde et enveloppante', 'Modules déplaçables', 'Coloris gris élégant'],
   },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
