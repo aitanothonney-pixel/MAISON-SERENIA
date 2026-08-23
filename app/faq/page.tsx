@@ -18,11 +18,11 @@ const FAQ_DATA: FaqGroup[] = [
       },
       {
         q: 'La livraison est-elle gratuite ?',
-        a: "Oui, la livraison Colissimo Standard est offerte pour toute commande d'un montant supérieur à 40 €. En dessous, le tarif est de 4,90 €.",
+        a: "Oui, la livraison standard est offerte pour toute commande supérieure à 40 CHF. En dessous, le tarif est de 4,90 CHF.",
       },
       {
         q: 'Comment suivre ma commande ?',
-        a: "Vous recevrez un e-mail avec votre numéro de suivi dès l'expédition de votre colis. Vous pourrez suivre son acheminement directement sur le site Colissimo ou Chronopost.",
+        a: "Vous recevrez un e-mail avec votre numéro de suivi dès l'expédition de votre colis. Vous pourrez suivre son acheminement directement sur le site du transporteur.",
       },
       {
         q: 'Livrez-vous en dehors de la France ?',

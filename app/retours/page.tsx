@@ -68,7 +68,7 @@ export default function RetoursPage() {
                 step: '02',
                 icon: <Package className="w-5 h-5" />,
                 title: "Renvoyez l'article",
-                desc: "Emballez soigneusement l'article dans son emballage d'origine et déposez-le en point relais ou colissimo.",
+                desc: "Emballez soigneusement l'article dans son emballage d'origine et déposez-le dans un point de dépôt ou un bureau de poste.",
               },
               {
                 step: '03',

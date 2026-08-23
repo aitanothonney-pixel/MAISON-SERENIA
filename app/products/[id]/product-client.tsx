@@ -437,7 +437,7 @@ function CheckoutDrawer({
                     ))}
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        { key: 'ville', label: 'Ville', placeholder: 'Paris' },
+                        { key: 'ville', label: 'Ville', placeholder: 'Genève' },
                         { key: 'code', label: 'Code postal', placeholder: '75001' },
                       ].map((f) => (
                         <div key={f.key}>

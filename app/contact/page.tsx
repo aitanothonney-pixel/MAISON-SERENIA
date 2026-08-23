@@ -265,7 +265,7 @@ export default function ContactPage() {
               <p className="text-neutral-400 text-xs leading-relaxed">
                 Lundi – Vendredi<br />
                 9h00 – 18h00<br />
-                <span className="text-neutral-500">(Heure de Paris)</span>
+                <span className="text-neutral-500">(Heure de Genève)</span>
               </p>
             </div>
 

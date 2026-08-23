@@ -101,20 +101,30 @@ const OPEN: Record<number, string[]> = {
     '{Dem} {noun} est superbe.', 'Je recommande les yeux fermés.', 'Parfait du début à la fin.',
     '{Dem} {noun} rend encore mieux en vrai.', 'Sans hésiter, un excellent choix.',
     'Je suis vraiment conquise.', 'Rien à redire, du grand soin.',
+    'Absolument ravi(e) de cet achat.', 'Au-delà de mes attentes.',
+    '{Dem} {noun} dépasse mes espérances.', 'Une réussite totale.',
+    'Je ne pouvais pas mieux tomber.', 'Coup de cœur immédiat.',
   ],
   4: [
     'Très satisfait de mon achat.', '{Dem} {noun} correspond bien à la description.',
     'Content dans l’ensemble.', '{Dem} {noun} est de belle facture.', 'Achat que je referais.',
-    'Globalement très bien.',
+    'Globalement très bien.', 'Une bonne surprise dans l’ensemble.',
+    'Très bon achat, quelques détails près.', '{Dem} {noun} me plaît beaucoup.',
   ],
   3: [
     '{Dem} {noun} est convenable dans l’ensemble.', 'Correct, sans plus.', 'Mon avis est partagé.',
+    'Un achat en demi-teinte.', 'Ni déçu(e) ni conquis(e).', '{Dem} {noun} fait le travail, sans plus.',
+    'Résultat correct pour le prix.', 'Dans la moyenne, sans surprise.',
   ],
   2: [
     'Un peu déçu(e) par {artl} {noun}.', 'Expérience en demi-teinte.',
+    'Pas totalement convaincu(e).', 'Quelques réserves sur cet achat.',
+    'En dessous de ce que j’espérais.',
   ],
   1: [
     'Déçu(e) de cet achat.', 'Pas à la hauteur de mes attentes.',
+    'Franchement décevant.', 'Je m’attendais à bien mieux.',
+    'Vraiment pas convaincu(e).',
   ],
 };
 
@@ -123,25 +133,34 @@ const DETAIL: Record<Family, Record<number, string[]>> = {
     5: [
       "L'assise est incroyablement confortable et {mat}.", 'On s’y sent tout de suite bien, et {mat}.',
       'Le maintien est parfait et {mat}.', 'Il transforme le salon, {mat}.',
-      'La couleur est fidèle aux photos et {mat}.', 'On s’y enfonce comme dans un nuage.',
-      'Le confort d’assise est vraiment au rendez-vous.', 'Il a beaucoup d’allure dans mon salon.',
+      'La couleur est fidèle aux photos et {mat}.', 'On s’y enfonce comme dans un nuage, {mat}.',
+      'Le confort d’assise est vraiment au rendez-vous, {mat}.', 'Il a beaucoup d’allure dans mon salon, {mat}.',
+      'Moelleux à souhait, {mat}.', 'Les assises sont profondes et {mat}.',
+      'Un confort digne d’une boutique haut de gamme, {mat}.',
     ],
     4: [
       'Confortable au quotidien, {mat}.', 'Bonne assise, {mat}.', 'Agréable à l’usage, {mat}.',
-      'Confortable, avec juste un léger délai de livraison.', 'L’assise est accueillante.',
+      'Confortable, avec juste un léger délai de livraison.', 'L’assise est accueillante, {mat}.',
+      'Très cosy au quotidien, {mat}.', 'Belle assise enveloppante, {mat}.',
     ],
     3: [
       'L’assise reste correcte et {mat}, malgré un emballage perfectible.',
       'Le confort est là, {mat}, mais la teinte diffère un peu de l’écran.',
       'Confortable, mais la livraison a été un peu longue.',
+      'Assise agréable, {mat}, même si les coussins manquent un peu de fermeté.',
+      'Correct à l’usage, {mat}, mais rien d’exceptionnel.',
     ],
     2: [
       'Le confort est correct une fois installé, mais la livraison a traîné.',
       'Assise correcte, mais l’emballage laissait à désirer.',
+      'Le rendu est sympa, {mat}, mais les finitions manquent de soin.',
+      'Assise un peu ferme à mon goût, malgré un joli tissu.',
     ],
     1: [
       '{art} {noun} plaît beaucoup, mais l’attente a vraiment gâché l’expérience.',
       'Confort au rendez-vous, mais le délai était bien trop long.',
+      'Déçu(e) : l’assise s’affaisse plus vite que prévu.',
+      'Le tissu marque vite, dommage pour le prix.',
     ],
   },
   furniture: {
@@ -159,14 +178,20 @@ const DETAIL: Record<Family, Record<number, string[]>> = {
       'L’ensemble reste stable et {mat}, mais la livraison a été longue.',
       'Quelques finitions perfectibles, même si {mat}.',
       'Correct, mais le montage demande un peu de patience.',
+      'Fait le travail, {mat}, mais la notice est peu claire.',
+      'Correct dans l’ensemble, {mat}, sans être haut de gamme.',
     ],
     2: [
       'Un angle légèrement marqué à l’arrivée, mais {artl} {noun} reste utilisable.',
       'Montage laborieux, mais le résultat est correct.',
+      'Quelques traces à la réception, même si {mat}.',
+      'Les finitions manquent de soin pour ce tarif.',
     ],
     1: [
       '{art} {noun} tient ses promesses, mais l’attente a été bien trop longue.',
       'Produit correct, mais la livraison a vraiment traîné.',
+      'Une pièce arrivée abîmée, difficile à monter.',
+      'Matériau plus léger que prévu, déçu(e).',
     ],
   },
   deco: {
@@ -183,9 +208,19 @@ const DETAIL: Record<Family, Record<number, string[]>> = {
     3: [
       'Correct dans l’ensemble et {mat}, mais la taille surprend un peu.',
       'Joli, mais un peu plus petit que prévu.',
+      'Bel objet, {mat}, mais la teinte diffère un peu des photos.',
+      'Sympa pour le prix, sans être exceptionnel.',
     ],
-    2: ['L’emballage était juste, mais la pièce est arrivée intacte.'],
-    1: ['La pièce est belle mais la livraison a été bien trop longue.'],
+    2: [
+      'L’emballage était juste, mais la pièce est arrivée intacte.',
+      'Plus petit que ce que j’imaginais, un peu déçu(e).',
+      'Finition correcte, mais la couleur est moins vive en vrai.',
+    ],
+    1: [
+      'La pièce est belle mais la livraison a été bien trop longue.',
+      'Arrivée avec un léger défaut, dommage.',
+      'Ne correspond pas tout à fait aux photos.',
+    ],
   },
 };
 
@@ -194,19 +229,25 @@ const CLOSE: Record<number, string[]> = {
     'Livraison soignée, rien à redire.', 'Emballage impeccable.', 'Le rendu est vraiment haut de gamme.',
     'Je recommande cette boutique.', 'Un achat que je ne regrette pas.', 'Merci Maison Serenia !',
     'Expédition rapide et soignée.', 'Je repasserai commande sans hésiter.',
+    'Une boutique sérieuse, je reviendrai.', 'Colis parfaitement protégé.',
+    'Service au top du début à la fin.', 'Exactement conforme à la description.',
   ],
   4: [
     'Bon rapport qualité-prix.', 'Service client réactif.', 'Livraison correcte dans les temps.',
-    'Rien à signaler côté livraison.',
+    'Rien à signaler côté livraison.', 'Emballage soigné dans l’ensemble.',
+    'Une boutique fiable.',
   ],
   3: [
     'Le SAV a tout de même été à l’écoute.', 'Reste correct pour le prix.',
+    'Un achat correct au final.', 'Ça reste acceptable.', 'Rien d’exceptionnel, mais ça va.',
   ],
   2: [
     'Le service a fini par arranger les choses.', 'Communication à améliorer.',
+    'J’espérais un peu mieux.', 'Peut mieux faire.',
   ],
   1: [
     'Suivi de commande décevant.', 'J’espère que le service s’améliorera.',
+    'Je ne recommande pas vraiment.', 'Expérience à revoir.',
   ],
 };
 
@@ -227,6 +268,11 @@ export interface Review {
 }
 
 const pick = <T,>(pool: T[], rng: () => number): T => pool[Math.floor(rng() * pool.length)];
+
+// Comme pick, mais décale l'index d'un « sel » propre au produit : deux produits
+// différents ne tombent (quasi) jamais sur la même combinaison de phrases.
+const pickRot = <T,>(pool: T[], rng: () => number, salt: number): T =>
+  pool[(Math.floor(rng() * pool.length) + (salt % pool.length) + pool.length) % pool.length];
 
 // Génère les avis d'un produit : spécifiques (type + matière), variés, sans doublon interne.
 export function buildAllReviews(productId: number, category = 'Meubles', name = '', cap = 999): Review[] {
@@ -272,7 +318,7 @@ export function buildAllReviews(productId: number, category = 'Meubles', name = 
       for (let attempt = 0; attempt < 12; attempt++) {
         const mp = pick(matVariants, rng);
         const candidate =
-          `${fill(pick(OPEN[rating], rng), mp)} ${fill(pick(DETAIL[family][rating], rng), mp)} ${fill(pick(CLOSE[rating], rng), mp)}`;
+          `${fill(pickRot(OPEN[rating], rng, productId), mp)} ${fill(pickRot(DETAIL[family][rating], rng, productId * 2 + 1), mp)} ${fill(pickRot(CLOSE[rating], rng, productId * 3 + 2), mp)}`;
         text = candidate;
         if (!seenTexts.has(candidate)) break;
       }
