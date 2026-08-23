@@ -16,8 +16,8 @@ function rangeOf(name: string): string {
   if (n.includes('canapé')) return 'Canapés';
   if (n.includes('fauteuil')) return 'Fauteuils';
   // Meubles (du plus spécifique au plus général)
-  if (n.includes('table basse')) return 'Tables basses';
-  if (n.includes("table d'appoint") || n.includes('appoint') || n.includes('gigogne')) return "Tables d'appoint";
+  if (n.includes('table basse') || n.includes('gigogne')) return 'Tables basses';
+  if (n.includes("table d'appoint") || n.includes('appoint')) return "Tables d'appoint";
   if (n.includes('table')) return 'Tables';
   if (n.includes('meuble tv') || n.includes('meuble télé')) return 'Meubles TV';
   if (n.includes('commode')) return 'Commodes';
