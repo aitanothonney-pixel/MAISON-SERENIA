@@ -19,6 +19,24 @@ import { buildReviewStats, buildAllReviews } from '@/lib/reviews';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
+// Gamme (sous-onglet) d'un produit — doit rester synchronisé avec collection-grid.tsx
+function rangeOfName(name: string): string | null {
+  const n = name.toLowerCase();
+  if (n.includes('tableau')) return 'Tableaux';
+  if (n.includes('vase')) return 'Vases';
+  if (n.includes('lampe') || n.includes('lustre') || n.includes('suspendue') || n.includes('luminaire')) return 'Luminaires';
+  if (n.includes('canapé')) return 'Canapés';
+  if (n.includes('fauteuil')) return 'Fauteuils';
+  if (n.includes('table basse') || n.includes('gigogne')) return 'Tables basses';
+  if (n.includes("table d'appoint") || n.includes('appoint')) return "Tables d'appoint";
+  if (n.includes('table')) return 'Tables';
+  if (n.includes('meuble tv') || n.includes('meuble télé')) return 'Meubles TV';
+  if (n.includes('commode')) return 'Commodes';
+  if (n.includes('armoire')) return 'Armoires';
+  if (n.includes('buffet')) return 'Buffets';
+  return null;
+}
+
 // Couleur (hex) devinée à partir d'un mot de couleur français
 const COLOR_HEX: [string, string][] = [
   ['vert foncé', '#3a5a40'], ['vert thé', '#b7c4a0'], ['vert', '#6a8f5f'],
@@ -1059,6 +1077,21 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             >
               {product.category}
             </Link>
+            {(() => {
+              const g = rangeOfName(product.name);
+              if (!g) return null;
+              return (
+                <>
+                  <ChevronRight className="w-3 h-3" />
+                  <Link
+                    href={`/collections/${categoryToSlug(product.category)}?g=${encodeURIComponent(g)}`}
+                    className="hover:text-black transition-colors"
+                  >
+                    {g}
+                  </Link>
+                </>
+              );
+            })()}
             <ChevronRight className="w-3 h-3" />
             <span className="text-black">{product.name}</span>
           </nav>

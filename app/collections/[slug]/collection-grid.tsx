@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Product } from '@/lib/products';
 import { CollectionCard } from './collection-card';
@@ -42,7 +43,10 @@ export function CollectionGrid({ items }: { items: Product[] }) {
     return ORDER.filter((r) => present.has(r));
   }, [items]);
 
-  const [active, setActive] = useState<string>('Tous');
+  // Sous-onglet initial : depuis l'URL (?g=Luminaires) si valide, sinon « Tous »
+  const searchParams = useSearchParams();
+  const initialG = searchParams.get('g');
+  const [active, setActive] = useState<string>(initialG && ranges.includes(initialG) ? initialG : 'Tous');
   const PAGE_SIZE = 12;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
