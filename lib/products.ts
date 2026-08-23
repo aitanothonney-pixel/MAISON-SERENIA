@@ -100,6 +100,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 123, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 124, color: 'Or', colorHex: '#c9a96e' },
   ],
+  'fauteuil-cuir-nordique': [
+    { productId: 126, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 127, color: 'Beige', colorHex: '#d8c8a8' },
+    { productId: 128, color: 'Brun', colorHex: '#6b4a30' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -755,6 +760,41 @@ const exactPriceProducts: Product[] = [
       { label: 'Duo · Petit beige + Grand noir', price: 45, image: 'https://i.ibb.co/7N03Thzf/Capture-d-e-cran-2026-08-23-a-17-33-03.png' },
       { label: 'Duo · Petit noir + Grand beige', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
     ],
+  },
+  // ── Meubles : Fauteuil individuel en cuir style nordique (3 couleurs) ────────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 126,
+    name: 'Fauteuil individuel en cuir style nordique noir',
+    category: 'Meubles',
+    price: 349,
+    description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris noir intemporel.',
+    images: ['https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg'],
+    dimensions: 'Fauteuil individuel avec accoudoirs',
+    material: 'Cuir, structure métal soudée',
+    details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
+  },
+  {
+    id: 127,
+    name: 'Fauteuil individuel en cuir style nordique beige',
+    category: 'Meubles',
+    price: 349,
+    description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris beige chaleureux.',
+    images: ['https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg'],
+    dimensions: 'Fauteuil individuel avec accoudoirs',
+    material: 'Cuir, structure métal soudée',
+    details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
+  },
+  {
+    id: 128,
+    name: 'Fauteuil individuel en cuir style nordique brun',
+    category: 'Meubles',
+    price: 349,
+    description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris brun élégant.',
+    images: ['https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg'],
+    dimensions: 'Fauteuil individuel avec accoudoirs',
+    material: 'Cuir, structure métal soudée',
+    details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
   },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
