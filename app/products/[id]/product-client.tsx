@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, Gift } from 'lucide-react';
-import { products, getVariantGroup } from '@/lib/products';
+import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -903,11 +903,30 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           return p.id !== product.id;
         });
       })()
-    : product.category === 'Décorations'
-      ? products.filter((p) => p.category === 'Décorations' && p.id !== product.id)
-      : isBubble
-        ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
-        : products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+    : isBubble
+      ? bubbleOrder.filter((bid) => bid !== product.id).map((bid) => products.find((p) => p.id === bid)!).filter(Boolean)
+      : (() => {
+          // Suggestions par thème : tableau→tableaux, vase→vases, luminaire→luminaires, canapé→canapés…
+          const themeOf = (name: string) => {
+            const s = name.toLowerCase();
+            if (s.includes('tableau')) return 'tableau';
+            if (s.includes('vase')) return 'vase';
+            if (s.includes('lampe') || s.includes('lustre') || s.includes('suspendue') || s.includes('luminaire')) return 'luminaire';
+            if (s.includes('canapé')) return 'canapé';
+            if (s.includes('fauteuil')) return 'fauteuil';
+            if (s.includes('table')) return 'table';
+            if (s.includes('commode') || s.includes('meuble tv') || s.includes('meuble télé')) return 'meuble';
+            return 'autre';
+          };
+          const myTheme = themeOf(product.name);
+          const sameTheme = collapseVariantDuplicates(
+            products.filter((p) => p.id !== product.id && !p.name.includes('Bubble') && themeOf(p.name) === myTheme),
+          );
+          if (sameTheme.length > 0) return sameTheme;
+          return collapseVariantDuplicates(
+            products.filter((p) => p.category === product.category && p.id !== product.id && !p.name.includes('Bubble')),
+          ).slice(0, 8);
+        })();
 
   const relatedScrollRef = useRef<HTMLDivElement>(null);
   const scrollRelated = (dir: 'left' | 'right') => {
