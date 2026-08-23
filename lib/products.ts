@@ -952,7 +952,11 @@ const exactPriceProducts: Product[] = [
     category: 'Meubles',
     price: 199,
     description: 'Lot de 2 tables basses rondes gigognes en bois finition noyer, au style nordique épuré. Plateaux ronds et piètement sculptural — parfaites pour un salon, un balcon ou un petit appartement. Se glissent l\'une sous l\'autre pour gagner de la place.',
-    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    images: [
+      'https://i.ibb.co/Kzy67HkR/Capture-d-e-cran-2026-08-23-a-22-30-14.png',
+      'https://i.ibb.co/Y4VN9RzY/Capture-d-e-cran-2026-08-23-a-22-30-24.png',
+      'https://i.ibb.co/qLgFqJS7/Capture-d-e-cran-2026-08-23-a-22-30-32.png',
+    ],
     dimensions: 'Lot de 2 · grande Ø 60 cm & petite Ø 40 cm',
     material: 'Bois, finition noyer',
     details: ['Lot de 2 tables basses rondes', 'Style nordique épuré', 'Gigognes, gain de place', 'Finition bois noyer'],
