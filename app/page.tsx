@@ -2219,6 +2219,9 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 export default function Home() {
   const cur = useCurrency();
   const [activeFilter, setActiveFilter] = useState('Salon');
+  const [visibleCount, setVisibleCount] = useState(12);
+  // Réinitialise l'affichage à 12 produits quand on change d'onglet
+  useEffect(() => { setVisibleCount(12); }, [activeFilter]);
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -2342,12 +2345,10 @@ export default function Home() {
     return 0;
   });
 
-  // Onglet "Tous" : on limite l'aperçu à 16 produits (le reste via "Voir plus")
-  const ALL_PREVIEW_LIMIT = 16;
-  const showViewMore = activeFilter === 'Tous' && filteredProducts.length > ALL_PREVIEW_LIMIT;
-  const displayedProducts = activeFilter === 'Tous'
-    ? filteredProducts.slice(0, ALL_PREVIEW_LIMIT)
-    : filteredProducts;
+  // Affichage progressif : 12 produits, puis « Voir plus » (12 de plus à chaque clic)
+  const PAGE_SIZE = 12;
+  const displayedProducts = filteredProducts.slice(0, visibleCount);
+  const showViewMore = filteredProducts.length > visibleCount;
 
   return (
     <div className="bg-white">
@@ -2555,14 +2556,17 @@ export default function Home() {
               </AnimatePresence>
 
               {showViewMore && (
-                <div className="flex justify-center mt-12">
-                  <Link
-                    href="/produits"
+                <div className="flex flex-col items-center gap-3 mt-12">
+                  <button
+                    onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
                     className="inline-flex items-center gap-2 border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-black hover:text-white transition-colors duration-300"
                   >
                     Voir plus de produits
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
+                    <ChevronRight className="w-4 h-4 rotate-90" />
+                  </button>
+                  <span className="text-[11px] tracking-wide text-neutral-400">
+                    {displayedProducts.length} sur {filteredProducts.length} produits
+                  </span>
                 </div>
               )}
             </div>
