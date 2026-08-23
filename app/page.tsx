@@ -141,8 +141,8 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
   // Métadonnées connues par catégorie — toute nouvelle catégorie ajoutée au
   // catalogue apparaît automatiquement ici avec des valeurs par défaut.
   const categoryMeta: Record<string, { name?: string; desc: string; section: string; imgId?: number }> = {
-    'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 10 },
-    'Meubles': { desc: 'Meubles & pièces d\'intérieur', section: 'section-bureau' },
+    'Salon': { desc: 'Canapés & Fauteuils Bubble', section: 'section-salon', imgId: 87 },
+    'Meubles': { desc: 'Meubles & pièces d\'intérieur', section: 'section-bureau', imgId: 77 },
     'Décorations': { desc: 'Tableaux & pièces déco', section: 'section-figurines', imgId: 103 },
   };
 
