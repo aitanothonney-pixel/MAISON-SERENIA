@@ -716,9 +716,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 <div>
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Nos suggestions</p>
                   {(() => {
-                    const suggestionIds = [61, 63, 74, 71, 68, 77, 100, 103, 116, 129, 87, 89];
+                    const suggestionIds = [112, 77, 105, 100, 126, 110, 113, 83, 109, 94, 78, 107, 87, 79, 108, 89, 61, 111];
                     const all = suggestionIds.map((id) => products.find((p) => p.id === id)).filter(Boolean) as typeof products;
-                    const shown = suggMore ? all.slice(0, 12) : all.slice(0, 6);
+                    const shown = suggMore ? all : all.slice(0, 6);
                     return (
                       <>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
