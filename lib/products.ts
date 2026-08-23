@@ -93,6 +93,11 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 120, color: 'Chocolat', colorHex: '#6b4a30' },
     { productId: 121, color: 'Blanc cassé', colorHex: '#ece7de' },
   ],
+  'vase-abstrait-resine': [
+    { productId: 122, color: 'Noir', colorHex: '#1a1a1a' },
+    { productId: 123, color: 'Blanc', colorHex: '#ece7de' },
+    { productId: 124, color: 'Or', colorHex: '#c9a96e' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -668,6 +673,41 @@ const exactPriceProducts: Product[] = [
     dimensions: 'Lot de 2 vases décoratifs',
     material: 'Céramique, finition mate',
     details: ['Lot de 2 vases double', 'Design sculptural torsadé', 'Idéal fleurs séchées', 'Style moderne & créatif'],
+  },
+  // ── Décorations : Vase décoratif abstrait moderne en résine (3 couleurs) ─────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 122,
+    name: 'Vase décoratif abstrait moderne en résine noir',
+    category: 'Décorations',
+    price: 39,
+    description: 'Vase décoratif abstrait en résine, sculpture de luxe au style nordique et minimaliste. Surface texturée sculpturale, silhouette élancée et épurée — parfait pour un coin salon ou une table à manger. Coloris noir profond, élégant et contemporain.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'H 13,6 × Ø 5,5 cm',
+    material: 'Résine, finition texturée',
+    details: ['Style nordique minimaliste', 'Surface sculpturale texturée', 'Silhouette élancée épurée', 'Idéal salon ou table à manger'],
+  },
+  {
+    id: 123,
+    name: 'Vase décoratif abstrait moderne en résine blanc',
+    category: 'Décorations',
+    price: 39,
+    description: 'Vase décoratif abstrait en résine, sculpture de luxe au style nordique et minimaliste. Surface texturée sculpturale, silhouette élancée et épurée — parfait pour un coin salon ou une table à manger. Coloris blanc lumineux, élégant et contemporain.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'H 13,6 × Ø 5,5 cm',
+    material: 'Résine, finition texturée',
+    details: ['Style nordique minimaliste', 'Surface sculpturale texturée', 'Silhouette élancée épurée', 'Idéal salon ou table à manger'],
+  },
+  {
+    id: 124,
+    name: 'Vase décoratif abstrait moderne en résine or',
+    category: 'Décorations',
+    price: 39,
+    description: 'Vase décoratif abstrait en résine, sculpture de luxe au style nordique et minimaliste. Surface texturée sculpturale, silhouette élancée et épurée — parfait pour un coin salon ou une table à manger. Coloris or raffiné, élégant et contemporain.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'H 13,6 × Ø 5,5 cm',
+    material: 'Résine, finition texturée',
+    details: ['Style nordique minimaliste', 'Surface sculpturale texturée', 'Silhouette élancée épurée', 'Idéal salon ou table à manger'],
   },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
