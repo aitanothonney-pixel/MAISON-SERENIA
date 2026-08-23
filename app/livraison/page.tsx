@@ -105,7 +105,7 @@ export default function LivraisonPage() {
                   {
                     icon: <MapPin className="w-4 h-4" />,
                     title: 'Zone de livraison',
-                    desc: 'France métropolitaine uniquement pour le mobilier. Délai : 7 à 21 jours ouvrés selon disponibilité.',
+                    desc: 'Suisse et Union Européenne. Délai : 1 à 4 semaines selon disponibilité.',
                   },
                 ].map((card, i) => (
                   <div

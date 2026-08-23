@@ -20,7 +20,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
     `Livraison offerte dès ${formatPrice(40, cur)} d'achat`,
     'Collection Bubble 2026 — Jusqu\'à −30%',
     'Paiement 100% sécurisé · SSL 256-bit',
-    'Expédition sous 24-48h · Suivi inclus',
+    'Livraison en 1 à 4 semaines · Suivi inclus',
   ]
   const [visible, setVisible] = useState(false)
   const [index, setIndex] = useState(0)

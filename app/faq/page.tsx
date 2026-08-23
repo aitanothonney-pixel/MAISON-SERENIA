@@ -14,7 +14,7 @@ const FAQ_DATA: FaqGroup[] = [
     items: [
       {
         q: 'Quels sont les délais de livraison ?',
-        a: "La livraison standard Colissimo prend 3 à 5 jours ouvrés. En express 24h (commande avant 14h), vous recevez votre colis le lendemain. Pour l'Europe, comptez 7 à 14 jours ouvrés.",
+        a: "Comptez 1 à 4 semaines pour la livraison de votre commande, avec un numéro de suivi inclus dès l'expédition.",
       },
       {
         q: 'La livraison est-elle gratuite ?',
@@ -26,7 +26,7 @@ const FAQ_DATA: FaqGroup[] = [
       },
       {
         q: 'Livrez-vous en dehors de la France ?',
-        a: "Nous livrons dans l'ensemble de l'Union Européenne. Les frais et délais varient selon le pays de destination (à partir de 12,90 € pour 7 à 14 jours ouvrés).",
+        a: "Nous livrons en Suisse et dans l'ensemble de l'Union Européenne. Comptez 1 à 4 semaines selon le pays de destination.",
       },
     ],
   },

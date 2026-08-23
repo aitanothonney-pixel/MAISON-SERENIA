@@ -467,7 +467,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     </div>
                     <div className="flex items-center gap-2 text-xs text-neutral-400 bg-neutral-50 p-3">
                       <Truck className="w-4 h-4 shrink-0" />
-                      <span>Livraison à domicile offerte · 3 à 6 semaines</span>
+                      <span>Livraison à domicile offerte · 1 à 4 semaines</span>
                     </div>
                   </motion.div>
                 )}
@@ -712,7 +712,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500 pt-1">
                           <Package className="w-3.5 h-3.5" />
-                          <span>Expédition estimée : 3 à 6 semaines</span>
+                          <span>Expédition estimée : 1 à 4 semaines</span>
                         </div>
                       </div>
                       <button

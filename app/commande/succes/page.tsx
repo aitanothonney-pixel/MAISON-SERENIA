@@ -31,7 +31,7 @@ export default function CommandeSuccesPage() {
         </p>
         <div className="flex items-center justify-center gap-2 text-xs text-neutral-500 mb-10">
           <Package className="w-4 h-4" />
-          <span>Expédition estimée : 3 à 6 semaines</span>
+          <span>Expédition estimée : 1 à 4 semaines</span>
         </div>
         <Link
           href="/"

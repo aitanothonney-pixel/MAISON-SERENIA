@@ -104,7 +104,7 @@ function buildStockUrgency(productId: number) {
 }
 
 const FAQ_ITEMS = [
-  { q: 'Combien de temps pour la livraison ?', a: 'Les commandes standard sont expédiées sous 24 à 48h. Pour les meubles de la collection Bubble, fabriqués sur demande, comptez 3 à 6 semaines.' },
+  { q: 'Combien de temps pour la livraison ?', a: 'Comptez 1 à 4 semaines pour la livraison de votre commande, avec un suivi inclus dès l\'expédition.' },
   { q: 'Comment retourner un article ?', a: "Vous disposez de 30 jours pour changer d'avis. Contactez notre service client pour lancer un retour : l'enlèvement à domicile est organisé gratuitement." },
   { q: 'Le produit est-il conforme aux photos ?', a: 'Oui, nos photos sont fidèles au produit livré. De légères variations de teinte peuvent survenir selon les écrans.' },
 ];
@@ -389,7 +389,7 @@ function CheckoutDrawer({
 
                     <div className="flex items-center gap-2 text-xs text-neutral-400 mb-6 bg-neutral-50 rounded-xl p-3">
                       <Truck className="w-4 h-4 shrink-0" />
-                      <span>Livraison à domicile offerte · 3 à 6 semaines</span>
+                      <span>Livraison à domicile offerte · 1 à 4 semaines</span>
                     </div>
                   </motion.div>
                 )}
@@ -679,7 +679,7 @@ function CheckoutDrawer({
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500">
                           <Package className="w-3.5 h-3.5" />
-                          <span>Expédition estimée : 3 à 6 semaines</span>
+                          <span>Expédition estimée : 1 à 4 semaines</span>
                         </div>
                       </div>
                       <button
@@ -947,7 +947,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       title: 'Livraison',
       content: (
         <div className="text-sm text-neutral-600 space-y-2">
-          <p>Livraison à domicile offerte, installation comprise. Délai : 3 à 6 semaines selon disponibilité.</p>
+          <p>Livraison à domicile offerte, installation comprise. Délai : 1 à 4 semaines selon disponibilité.</p>
         </div>
       ),
     },
@@ -1236,7 +1236,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </div>
                   <div className="flex items-center gap-2 text-xs mt-3">
                     <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                    <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
+                    <span className="text-neutral-500">En stock · Livraison en 1 à 4 semaines</span>
                   </div>
                 </div>
               )}
@@ -1264,7 +1264,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   {!isBubble && (
                     <div className="flex items-center gap-2 text-xs mt-3">
                       <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                      <span className="text-neutral-500">En stock · Expédié sous 24-48h</span>
+                      <span className="text-neutral-500">En stock · Livraison en 1 à 4 semaines</span>
                     </div>
                   )}
                 </div>
