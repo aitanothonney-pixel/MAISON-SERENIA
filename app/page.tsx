@@ -1555,7 +1555,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
   const [offerOn, setOfferOn] = useState(true);
 
   const GIFT_SIZE = '50×70 cm';
-  const GIFT_PRICE = 80;
+  const GIFT_PRICE = 60;
   const canape = products.find((p) => p.id === bundle.canapeId)!;
   const fauteuil = products.find((p) => p.id === bundle.fauteuilId)!;
   const gift = products.find((p) => p.id === selectedTableau)!;

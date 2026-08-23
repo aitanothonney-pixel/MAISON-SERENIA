@@ -12,7 +12,7 @@ export const BUNDLE_PRICE = 1900;
 // Tableau offert avec chaque ensemble (taille 50×70 cm)
 export const GIFT_TABLEAU_ID = 103;
 export const GIFT_TABLEAU_SIZE = '50×70 cm';
-export const GIFT_TABLEAU_PRICE = 80;
+export const GIFT_TABLEAU_PRICE = 60;
 
 export const BUNDLES: Bundle[] = [
   { slug: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, rabais: 175 },

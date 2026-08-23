@@ -123,7 +123,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
             tableaux={tableaux}
             defaultGiftId={gift.id}
             giftSize="50×70 cm"
-            giftPrice={80}
+            giftPrice={60}
           />
 
           <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">

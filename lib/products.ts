@@ -766,7 +766,7 @@ const exactPriceProducts: Product[] = [
     id: 129,
     name: 'Lampe suspendue LED bois minimaliste',
     category: 'Décorations',
-    price: 89,
+    price: 109,
     description: 'Lampe suspendue LED au style minimaliste et moderne, en bois, pierre naturelle et métal. Lumière chaude (3000K) tamisée, câble ajustable jusqu\'à 150 cm. Parfaite pour une salle à manger, une chambre ou un chevet. Choisissez le nombre de lumières selon votre espace.',
     images: [
       'https://i.ibb.co/fzNJVGfp/Capture-d-e-cran-2026-08-23-a-18-49-26.png',
@@ -784,10 +784,10 @@ const exactPriceProducts: Product[] = [
     material: 'Bois, pierre naturelle & métal · LED 7W (3000K)',
     details: ['Style minimaliste & moderne', 'Bois, pierre naturelle et métal', 'Lumière chaude 3000K, câble ajustable', 'Format 1 à 4 lumières au choix'],
     sizes: [
-      { label: '1 lumière', price: 89, image: 'https://i.ibb.co/fzNJVGfp/Capture-d-e-cran-2026-08-23-a-18-49-26.png' },
-      { label: '2 lumières', price: 149, image: 'https://i.ibb.co/043wbjX/Capture-d-e-cran-2026-08-23-a-18-49-49.png' },
-      { label: '3 lumières', price: 199, image: 'https://i.ibb.co/TDN75jVV/Capture-d-e-cran-2026-08-23-a-18-49-39.png' },
-      { label: '4 lumières', price: 249, image: 'https://i.ibb.co/4wCDHY7M/Capture-d-e-cran-2026-08-23-a-18-49-18.png' },
+      { label: '1 lumière', price: 109, image: 'https://i.ibb.co/fzNJVGfp/Capture-d-e-cran-2026-08-23-a-18-49-26.png' },
+      { label: '2 lumières', price: 169, image: 'https://i.ibb.co/043wbjX/Capture-d-e-cran-2026-08-23-a-18-49-49.png' },
+      { label: '3 lumières', price: 219, image: 'https://i.ibb.co/TDN75jVV/Capture-d-e-cran-2026-08-23-a-18-49-39.png' },
+      { label: '4 lumières', price: 269, image: 'https://i.ibb.co/4wCDHY7M/Capture-d-e-cran-2026-08-23-a-18-49-18.png' },
     ],
   },
   // ── Meubles : Fauteuil individuel en cuir style nordique (3 couleurs) ────────
@@ -1537,18 +1537,10 @@ const exactPriceProducts: Product[] = [
 // Produits à afficher en dernier dans leur section (Meubles)
 const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table basse mobile noire
 
-// Augmentation globale appliquée à chaque produit (prix de base + toutes les tailles/options)
-const GLOBAL_PRICE_BUMP = 20;
-const applyGlobalBump = (p: Product): Product => ({
-  ...p,
-  price: p.price + GLOBAL_PRICE_BUMP,
-  sizes: p.sizes?.map((s) => ({ ...s, price: s.price + GLOBAL_PRICE_BUMP })),
-});
-
 const allProducts: Product[] = [
   ...rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) })),
   ...exactPriceProducts,
-].map(applyGlobalBump);
+];
 
 export const products: Product[] = [
   ...allProducts.filter((p) => !SHOW_LAST_IDS.includes(p.id)),
