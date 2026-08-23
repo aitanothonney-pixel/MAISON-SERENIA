@@ -2555,15 +2555,28 @@ export default function Home() {
                 </motion.div>
               </AnimatePresence>
 
-              {showViewMore && (
+              {(showViewMore || visibleCount > PAGE_SIZE) && (
                 <div className="flex flex-col items-center gap-3 mt-12">
-                  <button
-                    onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-                    className="inline-flex items-center gap-2 border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-black hover:text-white transition-colors duration-300"
-                  >
-                    Voir plus de produits
-                    <ChevronRight className="w-4 h-4 rotate-90" />
-                  </button>
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    {showViewMore && (
+                      <button
+                        onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                        className="inline-flex items-center gap-2 border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-black hover:text-white transition-colors duration-300"
+                      >
+                        Voir plus de produits
+                        <ChevronRight className="w-4 h-4 rotate-90" />
+                      </button>
+                    )}
+                    {visibleCount > PAGE_SIZE && (
+                      <button
+                        onClick={() => setVisibleCount(PAGE_SIZE)}
+                        className="inline-flex items-center gap-2 border border-neutral-300 text-neutral-600 text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:border-black hover:text-black transition-colors duration-300"
+                      >
+                        Voir moins
+                        <ChevronRight className="w-4 h-4 -rotate-90" />
+                      </button>
+                    )}
+                  </div>
                   <span className="text-[11px] tracking-wide text-neutral-400">
                     {displayedProducts.length} sur {filteredProducts.length} produits
                   </span>
