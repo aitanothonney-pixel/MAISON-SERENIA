@@ -65,14 +65,6 @@ export function CollectionCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* Points indicateurs */}
-        {hasMultiple && (
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 pointer-events-none">
-            {product.images.map((_, i) => (
-              <span key={i} className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-black' : 'bg-black/25'}`} />
-            ))}
-          </div>
-        )}
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-1">
