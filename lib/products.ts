@@ -771,6 +771,11 @@ const exactPriceProducts: Product[] = [
     price: 119,
     description: 'Petit lustre suspendu vintage en vitrail, parfait comme lampe de chevet, en salle à manger ou dans une entrée. Abat-jour en verre coloré et douille E27 — un luminaire décoratif chaleureux au charme rétro. De nombreux coloris au choix.',
     images: [
+      'https://i.ibb.co/bg80kHtg/Capture-d-e-cran-2026-08-23-a-20-09-49.png',
+      'https://i.ibb.co/x4bxxV6/Capture-d-e-cran-2026-08-23-a-20-09-58.png',
+      'https://i.ibb.co/CqwrBK8/Capture-d-e-cran-2026-08-23-a-20-10-09.png',
+      'https://i.ibb.co/chmhfY2w/Capture-d-e-cran-2026-08-23-a-20-10-16.png',
+      'https://i.ibb.co/v6V9pCXB/Capture-d-e-cran-2026-08-23-a-20-10-27.png',
       'https://i.ibb.co/7JDZR9dz/Capture-d-e-cran-2026-08-23-a-20-10-34.png',
       'https://i.ibb.co/84N6251m/Capture-d-e-cran-2026-08-23-a-20-10-42.png',
       'https://i.ibb.co/8n7qyXCP/Capture-d-e-cran-2026-08-23-a-20-10-48.png',
