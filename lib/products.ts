@@ -723,6 +723,31 @@ const exactPriceProducts: Product[] = [
     material: 'Résine, finition texturée',
     details: ['Style nordique minimaliste', 'Surface sculpturale texturée', 'Silhouette élancée épurée', 'Idéal salon ou table à manger'],
   },
+  // ── Décorations : Vase plastique élégant Boho Chic (tailles + couleurs) ──────
+  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
+  {
+    id: 125,
+    name: 'Vase plastique élégant Boho Chic',
+    category: 'Décorations',
+    price: 19,
+    description: 'Vase décoratif au style Boho Chic, nervuré et minimaliste, parfait comme centre de table pour la maison, le bureau ou le salon. Choisissez votre format — petit, grand ou le duo — et la couleur de chaque pièce (beige ou noir) selon vos envies.',
+    images: [
+      'https://i.ibb.co/353fq0rq/Capture-d-e-cran-2026-08-22-a-13-29-03.png',
+    ],
+    dimensions: 'Petit : H 14 × Ø 8,5 cm · Grand : H 25 × Ø 8,5 cm',
+    material: 'Plastique nervuré, style Boho Chic',
+    details: ['Style Boho Chic nervuré', 'Formats petit, grand ou duo', 'Couleur au choix : beige ou noir', 'Idéal centre de table déco'],
+    sizes: [
+      { label: 'Petit · Beige', price: 19 },
+      { label: 'Petit · Noir', price: 19 },
+      { label: 'Grand · Beige', price: 29 },
+      { label: 'Grand · Noir', price: 29 },
+      { label: 'Duo · Beige (petit + grand)', price: 45 },
+      { label: 'Duo · Noir (petit + grand)', price: 45 },
+      { label: 'Duo · Petit beige + Grand noir', price: 45 },
+      { label: 'Duo · Petit noir + Grand beige', price: 45 },
+    ],
+  },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
     id: 77,
