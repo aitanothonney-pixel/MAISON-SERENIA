@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import type { Product } from '@/lib/products';
 import { CollectionCard } from './collection-card';
 
@@ -58,11 +59,20 @@ export function CollectionGrid({ items }: { items: Product[] }) {
         <p className="text-neutral-500 text-center py-20">Aucun produit dans cette gamme pour le moment.</p>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-            {displayed.map((product) => (
-              <CollectionCard key={product.id} product={product} />
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8"
+            >
+              {displayed.map((product) => (
+                <CollectionCard key={product.id} product={product} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
           {(showMore || visibleCount > PAGE_SIZE) && (
             <div className="flex flex-col items-center gap-3 mt-12">
