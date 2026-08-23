@@ -354,11 +354,11 @@ const rawProducts: Product[] = [
     material: 'Bois massif, plateau ovale, piètement cannelé',
     details: ['Plateau ovale en bois massif', 'Jusqu\'à 6 personnes', 'Design contemporain épuré', 'Coloris Dark Brown'],
   },
-  // ── Salon : Meuble TV industriel brun rustique ───────────────────────────────
+  // ── Meubles : Meuble TV industriel brun rustique ─────────────────────────────
   {
     id: 64,
     name: 'Meuble TV industriel brun rustique',
-    category: 'Salon',
+    category: 'Meubles',
     price: 98,
     description: 'Banc TV de style industriel en brun rustique, pour téléviseur jusqu\'à 55 pouces. Compartiments ouverts, étagère réglable et structure métal noir robuste. Idéal pour salon ou chambre.',
     images: [
