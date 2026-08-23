@@ -518,8 +518,8 @@ const rawProducts: Product[] = [
     price: 150,
     description: 'Commode de rangement moderne à 6 tiroirs, en blanc épuré. Grande capacité pour la chambre, le salon ou un couloir. Lignes minimalistes et finition soignée qui s\'accordent à tous les intérieurs.',
     images: [
-      'https://i.ibb.co/xK73wXnm/Capture-d-e-cran-2026-08-02-a-14-26-49.png',
       'https://i.ibb.co/QjKfjjHr/Capture-d-e-cran-2026-08-02-a-14-27-14.png',
+      'https://i.ibb.co/xK73wXnm/Capture-d-e-cran-2026-08-02-a-14-26-49.png',
       'https://i.ibb.co/DPSMdRnk/Capture-d-e-cran-2026-08-02-a-14-27-22.png',
       'https://i.ibb.co/F2Sb5GL/Capture-d-e-cran-2026-08-02-a-14-26-59.png',
     ],
