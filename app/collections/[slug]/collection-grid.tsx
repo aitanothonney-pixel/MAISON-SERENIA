@@ -28,9 +28,9 @@ function rangeOf(name: string): string {
 }
 
 const ORDER = [
-  'Canapés', 'Fauteuils',
-  'Tables basses', "Tables d'appoint", 'Tables',
-  'Commodes', 'Meubles TV', 'Armoires', 'Buffets', 'Rangements',
+  'Canapés',
+  'Tables basses', 'Meubles TV', 'Commodes', 'Fauteuils', 'Tables', "Tables d'appoint",
+  'Armoires', 'Buffets', 'Rangements',
   'Tableaux', 'Vases', 'Luminaires',
   'Autres',
 ];
