@@ -958,9 +958,9 @@ const exactPriceProducts: Product[] = [
     material: 'Bois, pierre naturelle & métal · LED 7W (3000K)',
     details: ['Style minimaliste & moderne', 'Bois, pierre naturelle et métal', 'Lumière chaude 3000K, câble ajustable', 'Format 1 à 4 lumières au choix'],
     sizes: [
-      { label: '3 lumières', price: 269, image: 'https://i.ibb.co/TDN75jVV/Capture-d-e-cran-2026-08-23-a-18-49-39.png' },
-      { label: '2 lumières', price: 219, image: 'https://i.ibb.co/043wbjX/Capture-d-e-cran-2026-08-23-a-18-49-49.png' },
       { label: '1 lumière', price: 159, image: 'https://i.ibb.co/fzNJVGfp/Capture-d-e-cran-2026-08-23-a-18-49-26.png' },
+      { label: '2 lumières', price: 219, image: 'https://i.ibb.co/043wbjX/Capture-d-e-cran-2026-08-23-a-18-49-49.png' },
+      { label: '3 lumières', price: 269, image: 'https://i.ibb.co/TDN75jVV/Capture-d-e-cran-2026-08-23-a-18-49-39.png' },
       { label: '4 lumières', price: 319, image: 'https://i.ibb.co/4wCDHY7M/Capture-d-e-cran-2026-08-23-a-18-49-18.png' },
     ],
   },
