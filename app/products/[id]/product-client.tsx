@@ -19,6 +19,31 @@ import { buildReviewStats, buildAllReviews } from '@/lib/reviews';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
+// Couleur (hex) devinée à partir d'un mot de couleur français
+const COLOR_HEX: [string, string][] = [
+  ['vert foncé', '#3a5a40'], ['vert thé', '#b7c4a0'], ['vert', '#6a8f5f'],
+  ['bordeaux', '#6b1f2a'], ['rouge', '#b3222f'], ['rose', '#e8a9b6'],
+  ['beige', '#d8c8a8'], ['blanc', '#f2efe9'], ['jaune', '#e6c24a'],
+  ['orange', '#d97b34'], ['noir', '#1a1a1a'], ['gris', '#9e9e9e'], ['brun', '#6b4a30'],
+];
+function hexForWord(word: string): string | null {
+  const w = word.trim().toLowerCase();
+  for (const [name, hex] of COLOR_HEX) if (w.includes(name)) return hex;
+  return null;
+}
+// Deux hex à partir d'un libellé « X + Y » (pour une pastille bi-ton)
+function swatchColors(label: string): [string, string] | null {
+  const parts = label.split('+').map((p) => p.trim());
+  if (parts.length < 2) {
+    const single = hexForWord(label);
+    return single ? [single, single] : null;
+  }
+  const a = hexForWord(parts[0]);
+  const b = hexForWord(parts[1]);
+  if (!a && !b) return null;
+  return [a ?? b!, b ?? a!];
+}
+
 // Canapé Bubble ↔ Fauteuil Bubble de même couleur
 const bubbleComplement: Record<number, number> = {
   10: 2, 2: 10,   // blanc
@@ -1246,6 +1271,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                             : 'border-neutral-200 text-neutral-700 hover:border-neutral-400'
                         }`}
                       >
+                        {(() => {
+                          const sw = swatchColors(s.label);
+                          if (!sw) return null;
+                          return (
+                            <span
+                              className={`w-4 h-4 rounded-full mb-1 border ${s.label === selectedSize ? 'border-white/40' : 'border-black/10'}`}
+                              style={{ background: `linear-gradient(135deg, ${sw[0]} 0 50%, ${sw[1]} 50% 100%)` }}
+                            />
+                          );
+                        })()}
                         <span>{s.label}</span>
                         <span className={`text-[11px] ${s.label === selectedSize ? 'text-white/70' : 'text-neutral-400'}`}>{formatPrice(s.price, cur)}</span>
                       </button>
