@@ -944,6 +944,19 @@ const exactPriceProducts: Product[] = [
     material: 'Cuir, structure métal soudée',
     details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
   },
+  // ── Meubles : Lot de 2 tables basses rondes noyer ────────────────────────────
+  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
+  {
+    id: 133,
+    name: 'Lot de 2 tables basses rondes noyer',
+    category: 'Meubles',
+    price: 199,
+    description: 'Lot de 2 tables basses rondes gigognes en bois finition noyer, au style nordique épuré. Plateaux ronds et piètement sculptural — parfaites pour un salon, un balcon ou un petit appartement. Se glissent l\'une sous l\'autre pour gagner de la place.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Lot de 2 · grande Ø 60 cm & petite Ø 40 cm',
+    material: 'Bois, finition noyer',
+    details: ['Lot de 2 tables basses rondes', 'Style nordique épuré', 'Gigognes, gain de place', 'Finition bois noyer'],
+  },
   // ── Meubles : Table à manger en bois massif nordique ─────────────────────────
   // ⚠️ Image temporaire — à remplacer par les vraies photos du client
   {
