@@ -25,6 +25,8 @@ const COLOR_HEX: [string, string][] = [
   ['bordeaux', '#6b1f2a'], ['rouge', '#b3222f'], ['rose', '#e8a9b6'],
   ['beige', '#d8c8a8'], ['blanc', '#f2efe9'], ['jaune', '#e6c24a'],
   ['orange', '#d97b34'], ['noir', '#1a1a1a'], ['gris', '#9e9e9e'], ['brun', '#6b4a30'],
+  // Couleurs en anglais (labels de certains produits)
+  ['brown', '#6b4a30'], ['pink', '#e8a9b6'], ['white', '#f2efe9'], ['green', '#6a8f5f'],
 ];
 function hexForWord(word: string): string | null {
   const w = word.trim().toLowerCase();
