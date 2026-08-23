@@ -944,6 +944,19 @@ const exactPriceProducts: Product[] = [
     material: 'Cuir, structure métal soudée',
     details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
   },
+  // ── Meubles : Table à manger en bois massif nordique ─────────────────────────
+  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
+  {
+    id: 132,
+    name: 'Table à manger en bois massif nordique',
+    category: 'Meubles',
+    price: 549,
+    description: 'Table à manger en bois massif au style nordique, épurée et chaleureuse. Piètement fuselé et plateau généreux — parfaite pour un repas en famille comme pour un petit appartement. Une pièce intemporelle qui structure la salle à manger.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'L 120 × P 70 × H 75 cm',
+    material: 'Bois massif',
+    details: ['Bois massif nordique', 'Piètement fuselé élégant', 'Plateau spacieux', 'Idéale salle à manger ou petit espace'],
+  },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
   {
     id: 77,
