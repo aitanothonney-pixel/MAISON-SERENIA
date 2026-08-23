@@ -290,7 +290,7 @@ const rawProducts: Product[] = [
   {
     id: 60,
     name: 'Meuble TV bois 150 cm',
-    category: 'Salon',
+    category: 'Meubles',
     price: 215,
     description: 'Meuble TV contemporain en bois avec 2 tiroirs et niche ouverte. Façades cannelées, piètement métal noir incliné — un banc bas élégant qui structure votre salon, compatible TV jusqu\'à 60 pouces.',
     images: [
@@ -308,7 +308,7 @@ const rawProducts: Product[] = [
   {
     id: 61,
     name: 'Meuble TV extensible noir',
-    category: 'Salon',
+    category: 'Meubles',
     price: 150,
     description: 'Meuble TV au design extensible (146 à 180 cm), en rotin avec 2 tiroirs, compartiments ouverts et rangement à 2 portes. Finition noir chêne élégante, parfait pour structurer un salon contemporain.',
     images: [
