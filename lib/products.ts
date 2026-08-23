@@ -1526,10 +1526,18 @@ const exactPriceProducts: Product[] = [
 // Produits à afficher en dernier dans leur section (Meubles)
 const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table basse mobile noire
 
+// Augmentation globale appliquée à chaque produit (prix de base + toutes les tailles/options)
+const GLOBAL_PRICE_BUMP = 20;
+const applyGlobalBump = (p: Product): Product => ({
+  ...p,
+  price: p.price + GLOBAL_PRICE_BUMP,
+  sizes: p.sizes?.map((s) => ({ ...s, price: s.price + GLOBAL_PRICE_BUMP })),
+});
+
 const allProducts: Product[] = [
   ...rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) })),
   ...exactPriceProducts,
-];
+].map(applyGlobalBump);
 
 export const products: Product[] = [
   ...allProducts.filter((p) => !SHOW_LAST_IDS.includes(p.id)),
