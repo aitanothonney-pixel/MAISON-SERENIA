@@ -675,7 +675,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       // Salon : Canapé d'angle 3 places crème
                       { slug: 'salon', label: 'Salon', cat: null, id: 87, img: null, fit: 'cover', position: 'center' },
                       // Meubles : image personnalisée
-                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, img: 'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png', fit: 'cover', position: 'center' },
+                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, img: 'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png', fit: 'cover', position: 'center 32%' },
                       // Décorations : tableau abstrait
                       { slug: 'figurines', label: 'Décorations', cat: null, id: 103, img: null, fit: 'cover', position: 'center' },
                       // Bubble : image personnalisée
