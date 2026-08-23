@@ -8,13 +8,32 @@ import { CollectionCard } from './collection-card';
 // Détermine la gamme d'un produit à partir de son nom
 function rangeOf(name: string): string {
   const n = name.toLowerCase();
+  // Décorations
   if (n.includes('tableau')) return 'Tableaux';
   if (n.includes('vase')) return 'Vases';
   if (n.includes('lampe') || n.includes('lustre') || n.includes('suspendue') || n.includes('luminaire')) return 'Luminaires';
+  // Salon
+  if (n.includes('canapé')) return 'Canapés';
+  if (n.includes('fauteuil')) return 'Fauteuils';
+  // Meubles (du plus spécifique au plus général)
+  if (n.includes('table basse')) return 'Tables basses';
+  if (n.includes("table d'appoint") || n.includes('appoint') || n.includes('gigogne')) return "Tables d'appoint";
+  if (n.includes('table')) return 'Tables';
+  if (n.includes('meuble tv') || n.includes('meuble télé')) return 'Meubles TV';
+  if (n.includes('commode')) return 'Commodes';
+  if (n.includes('armoire')) return 'Armoires';
+  if (n.includes('buffet')) return 'Buffets';
+  if (n.includes('étagère') || n.includes('etagere') || n.includes('rangement')) return 'Rangements';
   return 'Autres';
 }
 
-const ORDER = ['Tableaux', 'Vases', 'Luminaires', 'Autres'];
+const ORDER = [
+  'Canapés', 'Fauteuils',
+  'Tables basses', "Tables d'appoint", 'Tables',
+  'Commodes', 'Meubles TV', 'Armoires', 'Buffets', 'Rangements',
+  'Tableaux', 'Vases', 'Luminaires',
+  'Autres',
+];
 
 export function CollectionGrid({ items }: { items: Product[] }) {
   // Gammes présentes, dans l'ordre défini
