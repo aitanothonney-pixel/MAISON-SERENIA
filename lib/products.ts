@@ -760,6 +760,25 @@ const exactPriceProducts: Product[] = [
       { label: 'Duo · Petit noir + Grand beige', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
     ],
   },
+  // ── Décorations : Lampe suspendue LED bois minimaliste (1 à 4 lumières) ──────
+  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
+  {
+    id: 129,
+    name: 'Lampe suspendue LED bois minimaliste',
+    category: 'Décorations',
+    price: 89,
+    description: 'Lampe suspendue LED au style minimaliste et moderne, en bois, pierre naturelle et métal. Lumière chaude (3000K) tamisée, câble ajustable jusqu\'à 150 cm. Parfaite pour une salle à manger, une chambre ou un chevet. Choisissez le nombre de lumières selon votre espace.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Abat-jour Ø 17 cm · câble ajustable 150 cm · barre 60 à 100 cm selon le format',
+    material: 'Bois, pierre naturelle & métal · LED 7W (3000K)',
+    details: ['Style minimaliste & moderne', 'Bois, pierre naturelle et métal', 'Lumière chaude 3000K, câble ajustable', 'Format 1 à 4 lumières au choix'],
+    sizes: [
+      { label: '1 lumière', price: 89 },
+      { label: '2 lumières', price: 149 },
+      { label: '3 lumières', price: 199 },
+      { label: '4 lumières', price: 249 },
+    ],
+  },
   // ── Meubles : Fauteuil individuel en cuir style nordique (3 couleurs) ────────
   // ⚠️ Images temporaires — à remplacer par les vraies photos du client
   {
