@@ -23,8 +23,14 @@ export function CollectionGrid({ items }: { items: Product[] }) {
   }, [items]);
 
   const [active, setActive] = useState<string>('Tous');
+  const PAGE_SIZE = 12;
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const filtered = active === 'Tous' ? items : items.filter((p) => rangeOf(p.name) === active);
+  const displayed = filtered.slice(0, visibleCount);
+  const showMore = filtered.length > visibleCount;
+
+  const selectRange = (r: string) => { setActive(r); setVisibleCount(PAGE_SIZE); };
 
   return (
     <>
@@ -34,7 +40,7 @@ export function CollectionGrid({ items }: { items: Product[] }) {
           {['Tous', ...ranges].map((r) => (
             <button
               key={r}
-              onClick={() => setActive(r)}
+              onClick={() => selectRange(r)}
               className={`text-[12px] tracking-[0.15em] uppercase whitespace-nowrap pb-3 -mb-px border-b-2 transition-colors ${
                 active === r ? 'text-black border-black' : 'text-neutral-400 border-transparent hover:text-black'
               }`}
@@ -51,11 +57,39 @@ export function CollectionGrid({ items }: { items: Product[] }) {
       {filtered.length === 0 ? (
         <p className="text-neutral-500 text-center py-20">Aucun produit dans cette gamme pour le moment.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-          {filtered.map((product) => (
-            <CollectionCard key={product.id} product={product} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
+            {displayed.map((product) => (
+              <CollectionCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          {(showMore || visibleCount > PAGE_SIZE) && (
+            <div className="flex flex-col items-center gap-3 mt-12">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {showMore && (
+                  <button
+                    onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                    className="inline-flex items-center gap-2 border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-black hover:text-white transition-colors duration-300"
+                  >
+                    Voir plus de produits
+                  </button>
+                )}
+                {visibleCount > PAGE_SIZE && (
+                  <button
+                    onClick={() => setVisibleCount(PAGE_SIZE)}
+                    className="inline-flex items-center gap-2 border border-neutral-300 text-neutral-600 text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:border-black hover:text-black transition-colors duration-300"
+                  >
+                    Voir moins
+                  </button>
+                )}
+              </div>
+              <span className="text-[11px] tracking-wide text-neutral-400">
+                {displayed.length} sur {filtered.length} produits
+              </span>
+            </div>
+          )}
+        </>
       )}
     </>
   );
