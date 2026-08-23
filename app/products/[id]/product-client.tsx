@@ -1045,7 +1045,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSelectedImage((selectedImage - 1 + product.images.length) % product.images.length);
+                        const ni = (selectedImage - 1 + product.images.length) % product.images.length;
+                        setSelectedImage(ni);
+                        const m = product.sizes?.find((s) => s.image === product.images[ni]);
+                        if (m) setSelectedSize(m.label);
                       }}
                       aria-label="Image précédente"
                       className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
@@ -1055,7 +1058,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSelectedImage((selectedImage + 1) % product.images.length);
+                        const ni = (selectedImage + 1) % product.images.length;
+                        setSelectedImage(ni);
+                        const m = product.sizes?.find((s) => s.image === product.images[ni]);
+                        if (m) setSelectedSize(m.label);
                       }}
                       aria-label="Image suivante"
                       className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
@@ -1123,7 +1129,12 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   {product.images.map((img, i) => (
                     <button
                       key={i}
-                      onClick={() => setSelectedImage(i)}
+                      onClick={() => {
+                        setSelectedImage(i);
+                        // Si cette image correspond à un coloris, on le sélectionne à droite
+                        const match = product.sizes?.find((s) => s.image === img);
+                        if (match) setSelectedSize(match.label);
+                      }}
                       className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-neutral-50 transition-all duration-200 ${
                         selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
                       }`}
