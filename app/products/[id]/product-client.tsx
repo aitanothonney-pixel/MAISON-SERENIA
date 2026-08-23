@@ -1222,7 +1222,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     {product.sizes.map((s) => (
                       <button
                         key={s.label}
-                        onClick={() => setSelectedSize(s.label)}
+                        onClick={() => {
+                          setSelectedSize(s.label);
+                          if (s.image) {
+                            const idx = product.images.indexOf(s.image);
+                            if (idx >= 0) setSelectedImage(idx);
+                          }
+                        }}
                         className={`px-3 py-2.5 text-[13px] border transition-all duration-200 flex flex-col items-center leading-tight ${
                           s.label === selectedSize
                             ? 'border-black bg-black text-white'

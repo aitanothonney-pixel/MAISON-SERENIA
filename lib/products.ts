@@ -1,6 +1,8 @@
 export interface ProductSize {
   label: string;
   price: number;
+  // Optionnel : image à afficher quand cette option est sélectionnée (doit figurer dans images[])
+  image?: string;
 }
 
 export interface Product {
@@ -744,14 +746,14 @@ const exactPriceProducts: Product[] = [
     material: 'Plastique nervuré, style Boho Chic',
     details: ['Style Boho Chic nervuré', 'Formats petit, grand ou duo', 'Couleur au choix : beige ou noir', 'Idéal centre de table déco'],
     sizes: [
-      { label: 'Petit · Beige', price: 19 },
-      { label: 'Petit · Noir', price: 19 },
-      { label: 'Grand · Beige', price: 29 },
-      { label: 'Grand · Noir', price: 29 },
-      { label: 'Duo · Beige (petit + grand)', price: 45 },
-      { label: 'Duo · Noir (petit + grand)', price: 45 },
-      { label: 'Duo · Petit beige + Grand noir', price: 45 },
-      { label: 'Duo · Petit noir + Grand beige', price: 45 },
+      { label: 'Petit · Beige', price: 19, image: 'https://i.ibb.co/6cmGBbKB/Capture-d-e-cran-2026-08-23-a-17-32-55.png' },
+      { label: 'Petit · Noir', price: 19, image: 'https://i.ibb.co/3XvT16r/Capture-d-e-cran-2026-08-23-a-17-33-08.png' },
+      { label: 'Grand · Beige', price: 29, image: 'https://i.ibb.co/2047kmL1/Capture-d-e-cran-2026-08-23-a-17-33-21.png' },
+      { label: 'Grand · Noir', price: 29, image: 'https://i.ibb.co/JFCgKtb5/Capture-d-e-cran-2026-08-23-a-17-33-27.png' },
+      { label: 'Duo · Beige (petit + grand)', price: 45, image: 'https://i.ibb.co/7N03Thzf/Capture-d-e-cran-2026-08-23-a-17-33-03.png' },
+      { label: 'Duo · Noir (petit + grand)', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
+      { label: 'Duo · Petit beige + Grand noir', price: 45, image: 'https://i.ibb.co/7N03Thzf/Capture-d-e-cran-2026-08-23-a-17-33-03.png' },
+      { label: 'Duo · Petit noir + Grand beige', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
     ],
   },
   // ── Meubles : Table basse Farmhouse en bois ─────────────────────────────────
