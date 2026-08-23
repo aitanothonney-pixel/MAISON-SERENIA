@@ -671,18 +671,19 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Explorer les collections</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
-                      // Meubles : scène d'intérieur — plein cadre
-                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, fit: 'cover', position: 'center' },
                       // Salon : Canapé d'angle 3 places crème
-                      { slug: 'salon', label: 'Salon', cat: null, id: 87, fit: 'cover', position: 'center' },
-                      // Bubble : Canapé Bubble blanc mis en avant
-                      { slug: 'bubble', label: 'Bubble', cat: null, id: 10, fit: 'cover', position: 'center' },
+                      { slug: 'salon', label: 'Salon', cat: null, id: 87, img: null, fit: 'cover', position: 'center' },
+                      // Meubles : image personnalisée
+                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, img: 'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png', fit: 'cover', position: 'center' },
                       // Décorations : tableau abstrait
-                      { slug: 'figurines', label: 'Décorations', cat: null, id: 103, fit: 'cover', position: 'center' },
+                      { slug: 'figurines', label: 'Décorations', cat: null, id: 103, img: null, fit: 'cover', position: 'center' },
+                      // Bubble : image personnalisée
+                      { slug: 'bubble', label: 'Bubble', cat: null, id: 10, img: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', fit: 'cover', position: 'center' },
                     ].map((c) => {
                       const rep = c.id != null
                         ? products.find((p) => p.id === c.id)
                         : products.find((p) => p.category === c.cat);
+                      const imgSrc = c.img ?? rep?.images[0];
                       const isContain = c.fit === 'contain';
                       return (
                         <Link
@@ -691,9 +692,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           onClick={() => { setSearchFocused(false); setSearchQ(''); }}
                           className="group relative aspect-[4/5] overflow-hidden bg-white"
                         >
-                          {rep && (
+                          {imgSrc && (
                             <img
-                              src={rep.images[0]}
+                              src={imgSrc}
                               alt={c.label}
                               className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain scale-125' : 'object-cover'}`}
                               style={{ objectPosition: c.position }}
