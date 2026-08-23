@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { COLLECTIONS, getCollectionMeta, getCollectionProducts } from '@/lib/collections';
-import { CollectionCard } from './collection-card';
+import { CollectionGrid } from './collection-grid';
 
 export function generateStaticParams() {
   return COLLECTIONS.map((c) => ({ slug: c.slug }));
@@ -79,11 +79,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         {items.length === 0 ? (
           <p className="text-neutral-500 text-center py-20">Aucun produit dans cette collection pour le moment.</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-            {items.map((product) => (
-              <CollectionCard key={product.id} product={product} />
-            ))}
-          </div>
+          <CollectionGrid items={items} />
         )}
       </section>
     </main>
