@@ -1216,7 +1216,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {product.sizes && (
                 <div className="mb-6">
                   <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
-                    Taille — <span className="text-black font-medium">{selectedSize}</span>
+                    {product.sizeLabel ?? 'Taille'} — <span className="text-black font-medium">{selectedSize}</span>
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {product.sizes.map((s) => (

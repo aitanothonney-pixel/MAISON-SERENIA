@@ -17,6 +17,8 @@ export interface Product {
   details: string[];
   // Optionnel : tailles au choix avec prix différent (ex. tableaux muraux)
   sizes?: ProductSize[];
+  // Optionnel : libellé du sélecteur d'options (par défaut « Taille », ex. « Coloris »)
+  sizeLabel?: string;
 }
 
 export interface ProductVariant {
@@ -758,6 +760,37 @@ const exactPriceProducts: Product[] = [
       { label: 'Duo · Noir (petit + grand)', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
       { label: 'Duo · Petit beige + Grand noir', price: 45, image: 'https://i.ibb.co/7N03Thzf/Capture-d-e-cran-2026-08-23-a-17-33-03.png' },
       { label: 'Duo · Petit noir + Grand beige', price: 45, image: 'https://i.ibb.co/FLHyZXnm/Capture-d-e-cran-2026-08-23-a-17-32-49.png' },
+    ],
+  },
+  // ── Décorations : Lustre en verre rétro nordique (nombreux coloris) ──────────
+  // ⚠️ Image temporaire — à remplacer par les vraies photos de chaque coloris
+  {
+    id: 130,
+    name: 'Lustre en verre rétro nordique',
+    category: 'Décorations',
+    price: 149,
+    description: 'Lustre suspendu en verre au style rétro nordique, pour salon, salle à manger, chambre ou cuisine. Abat-jour en verre bi-ton et éclairage LED chaleureux (E27). Un luminaire déco élégant qui apporte du caractère à votre intérieur. De nombreux coloris au choix.',
+    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    dimensions: 'Ø 25 cm · H 20 cm · câble ajustable jusqu\'à 150 cm',
+    material: 'Verre & métal · douille E27 (LED)',
+    details: ['Style rétro nordique', 'Abat-jour en verre bi-ton', 'Éclairage chaleureux E27 (LED)', 'Nombreux coloris au choix'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Rose + Vert thé', price: 149 },
+      { label: 'Rouge bordeaux + Vert thé', price: 149 },
+      { label: 'Rouge bordeaux + Orange', price: 149 },
+      { label: 'Vert foncé + Vert thé', price: 149 },
+      { label: 'Vert foncé + Orange', price: 149 },
+      { label: 'Beige + Blanc', price: 149 },
+      { label: 'Beige + Vert thé', price: 149 },
+      { label: 'Jaune + Orange', price: 149 },
+      { label: 'Beige + Orange', price: 149 },
+      { label: 'Rouge bordeaux + Blanc', price: 149 },
+      { label: 'Vert foncé + Blanc', price: 149 },
+      { label: 'Rose + Blanc', price: 149 },
+      { label: 'Jaune + Vert', price: 149 },
+      { label: 'Vert foncé + Vert', price: 149 },
+      { label: 'Beige + Vert', price: 149 },
     ],
   },
   // ── Décorations : Lampe suspendue LED bois minimaliste (1 à 4 lumières) ──────
