@@ -403,6 +403,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [suggMore, setSuggMore] = useState(false);
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
@@ -714,27 +715,44 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 {/* Suggestions */}
                 <div>
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Nos suggestions</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
-                    {[61, 63, 74, 71, 35, 68].map((id) => products.find((p) => p.id === id)).filter(Boolean).slice(0, 6).map((p) => {
-                      const prod = p!;
-                      const promoPrice = prod.name.includes('Bubble') ? Math.round(prod.price * 0.7) : prod.price;
-                      const contain = prod.name.includes('Bubble') || prod.category === 'Décorations' || prod.category === 'Été';
-                      return (
-                        <Link
-                          key={prod.id}
-                          href={`/products/${prod.id}`}
-                          onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                          className="group"
-                        >
-                          <div className={`relative aspect-square overflow-hidden bg-white mb-2 ${contain ? 'p-3' : ''}`}>
-                            <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className={`w-full h-full transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`} />
+                  {(() => {
+                    const suggestionIds = [61, 63, 74, 71, 68, 77, 100, 103, 116, 129, 87, 89];
+                    const all = suggestionIds.map((id) => products.find((p) => p.id === id)).filter(Boolean) as typeof products;
+                    const shown = suggMore ? all.slice(0, 12) : all.slice(0, 6);
+                    return (
+                      <>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
+                          {shown.map((prod) => {
+                            const promoPrice = prod.name.includes('Bubble') ? Math.round(prod.price * 0.7) : prod.price;
+                            return (
+                              <Link
+                                key={prod.id}
+                                href={`/products/${prod.id}`}
+                                onClick={() => { setSearchFocused(false); setSearchQ(''); }}
+                                className="group"
+                              >
+                                <div className="relative aspect-square overflow-hidden bg-white mb-2">
+                                  <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
+                                <p className="text-xs text-neutral-500 price-luxe mt-0.5">{formatPrice(promoPrice, cur)}</p>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                        {!suggMore && all.length > 6 && (
+                          <div className="flex justify-center mt-6">
+                            <button
+                              onClick={() => setSuggMore(true)}
+                              className="border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-8 py-3 hover:bg-black hover:text-white transition-colors duration-300"
+                            >
+                              Voir plus
+                            </button>
                           </div>
-                          <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
-                          <p className="text-xs text-neutral-500 price-luxe mt-0.5">{formatPrice(promoPrice, cur)}</p>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
             )}
