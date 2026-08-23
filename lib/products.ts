@@ -952,7 +952,12 @@ const exactPriceProducts: Product[] = [
     category: 'Meubles',
     price: 549,
     description: 'Table à manger en bois massif au style nordique, épurée et chaleureuse. Piètement fuselé et plateau généreux — parfaite pour un repas en famille comme pour un petit appartement. Une pièce intemporelle qui structure la salle à manger.',
-    images: ['https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png'],
+    images: [
+      'https://i.ibb.co/mWcMT0V/Capture-d-e-cran-2026-08-23-a-22-21-14.png',
+      'https://i.ibb.co/39kJVNJ2/Capture-d-e-cran-2026-08-23-a-22-21-21.png',
+      'https://i.ibb.co/PsWJd40f/Capture-d-e-cran-2026-08-23-a-22-21-27.png',
+      'https://i.ibb.co/ZpX2KPDT/Capture-d-e-cran-2026-08-23-a-22-22-15.png',
+    ],
     dimensions: 'L 120 × P 70 × H 75 cm',
     material: 'Bois massif',
     details: ['Bois massif nordique', 'Piètement fuselé élégant', 'Plateau spacieux', 'Idéale salle à manger ou petit espace'],
