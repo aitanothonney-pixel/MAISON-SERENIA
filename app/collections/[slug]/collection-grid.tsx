@@ -6,9 +6,10 @@ import { CollectionCard } from './collection-card';
 
 // Détermine la gamme d'un produit à partir de son nom
 function rangeOf(name: string): string {
-  if (name.includes('Tableau')) return 'Tableaux';
-  if (name.includes('Vase')) return 'Vases';
-  if (name.includes('Lampe') || name.includes('Lustre') || name.includes('suspendue')) return 'Luminaires';
+  const n = name.toLowerCase();
+  if (n.includes('tableau')) return 'Tableaux';
+  if (n.includes('vase')) return 'Vases';
+  if (n.includes('lampe') || n.includes('lustre') || n.includes('suspendue') || n.includes('luminaire')) return 'Luminaires';
   return 'Autres';
 }
 
