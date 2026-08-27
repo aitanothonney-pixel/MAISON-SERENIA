@@ -66,23 +66,26 @@ export function getCollectionProducts(slug: string): Product[] {
       return a.id - b.id;
     });
   }
-  // Le Salon exclut les Bubble ; ordre prioritaire, puis les autres canapés, puis les meubles
+  // Le Salon : ordre prioritaire, puis les autres canapés, puis les meubles ;
+  // les Bubble (canapés et fauteuils) sont placés tout à la fin de leur gamme.
   if (cat === 'Salon') {
     const PRIORITY = [100, 102, 101, 87, 88, 94, 89];
     const rank = (p: Product) => {
+      // Bubble en dernier : canapés Bubble après les autres canapés,
+      // fauteuils Bubble après les autres fauteuils.
+      if (p.name.includes('Bubble')) return p.name.includes('Canapé') ? 300 : 400;
       const i = PRIORITY.indexOf(p.id);
       if (i !== -1) return i;                     // 0..5 : ordre prioritaire
       if (p.name.includes('Canapé')) return 100;  // autres canapés ensuite
+      if (p.name.includes('Fauteuil')) return 150; // fauteuils
       return 200;                                 // meubles (TV…) en dernier
     };
-    return list
-      .filter((p) => !p.name.includes('Bubble'))
-      .sort((a, b) => {
-        const ra = rank(a);
-        const rb = rank(b);
-        if (ra !== rb) return ra - rb;
-        return a.id - b.id;
-      });
+    return list.sort((a, b) => {
+      const ra = rank(a);
+      const rb = rank(b);
+      if (ra !== rb) return ra - rb;
+      return a.id - b.id;
+    });
   }
   // Meubles : ordre prioritaire choisi, puis le reste, puis certains forcés en fin
   if (cat === 'Meubles') {
