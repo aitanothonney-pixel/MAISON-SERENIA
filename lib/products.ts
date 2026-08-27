@@ -969,7 +969,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 126,
     name: 'Fauteuil individuel en cuir style nordique noir',
-    category: 'Meubles',
+    category: 'Salon',
     price: 349,
     description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris noir intemporel.',
     images: [
@@ -985,7 +985,7 @@ const exactPriceProducts: Product[] = [
   {
     id: 127,
     name: 'Fauteuil individuel en cuir style nordique blanc',
-    category: 'Meubles',
+    category: 'Salon',
     price: 349,
     description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris blanc lumineux.',
     images: [
