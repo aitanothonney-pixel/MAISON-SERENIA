@@ -2064,7 +2064,11 @@ function DécorationsSection() {
   const figurines = products
     .filter((p) => p.category === 'Décorations')
     .sort((a, b) => {
-      const rank = (n: string) => (n.includes('Tableau') ? 0 : n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine') ? 2 : 1);
+      const rank = (n: string) => {
+        const l = n.toLowerCase();
+        if (l.includes('lampe') || l.includes('lustre') || l.includes('suspendue') || l.includes('luminaire')) return 0;
+        return n.includes('Tableau') ? 1 : n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine') ? 3 : 2;
+      };
       const ra = rank(a.name), rb = rank(b.name);
       if (ra !== rb) return ra - rb;
       return b.id - a.id;
@@ -2341,12 +2345,14 @@ export default function Home() {
                 return a.id - b.id;
               });
             }
-            // Dans les Décorations : tableaux en premier, figurines en dernier
+            // Dans les Décorations : luminaires en premier, puis tableaux, figurines en dernier
             if (activeFilter === 'Décorations') {
               const rank = (n: string) => {
-                if (n.includes('Tableau')) return 0;
-                if (n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine')) return 2;
-                return 1;
+                const l = n.toLowerCase();
+                if (l.includes('lampe') || l.includes('lustre') || l.includes('suspendue') || l.includes('luminaire')) return 0;
+                if (n.includes('Tableau')) return 1;
+                if (n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine')) return 3;
+                return 2;
               };
               return list.sort((a, b) => {
                 const ra = rank(a.name), rb = rank(b.name);
