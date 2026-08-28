@@ -174,7 +174,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
       section: 'section-salon',
       filter: 'Bubble',
       slug: 'bubble',
-      img: products.find((p) => p.id === 22)?.images[0] ?? '',
+      img: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg',
     },
   ];
 
