@@ -2418,7 +2418,7 @@ export default function Home() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png"
+            src="https://i.ibb.co/84Tdfk2Z/IMG-6086.avif"
             alt="Salon d'exception signé Maison Serenia"
             fill
             sizes="100vw"
