@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     description: 'Canapés & fauteuils Bubble, tableaux d\'art, mobilier et décoration design. Livraison offerte dès 40 CHF.',
     type: 'website',
     locale: 'fr_FR',
-    images: [{ url: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg', width: 1200, height: 630 }],
+    images: [{ url: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés & fauteuils Bubble, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg'] },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés & fauteuils Bubble, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png'] },
   robots: { index: true, follow: true },
 };
 
@@ -69,8 +69,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               '@type': 'Organization',
               name: 'Maison Serenia',
               url: 'https://maison-serenia.com',
-              logo: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg',
-              image: 'https://i.ibb.co/SDWTh9Xy/49-EA93-CC-D55-A-4-E02-90-F6-81-AFD9-AC86-D8.jpg',
+              logo: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
+              image: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
               email: 'maisonserenia@gmail.com',
               description: 'Mobilier de luxe et design contemporain : canapés et fauteuils Bubble, tables, pièces de collection et décoration.',
               address: {
