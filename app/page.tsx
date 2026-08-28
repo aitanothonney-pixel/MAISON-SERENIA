@@ -1429,8 +1429,9 @@ function ShopByCategory() {
       slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
-      img: 'https://i.ibb.co/MxPD6Ykm/Capture-d-e-cran-2026-08-06-a-01-52-14.png',
+      img: 'https://i.ibb.co/cXXBStKz/6.avif',
       big: true,
+      position: 'center 55%',
     },
     {
       slug: 'meubles',
@@ -1469,6 +1470,7 @@ function ShopByCategory() {
               <img
                 src={t.img}
                 alt={t.label}
+                style={{ objectPosition: t.position ?? 'center' }}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-300 group-hover:from-black/80" />
