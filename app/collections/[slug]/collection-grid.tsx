@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Product } from '@/lib/products';
+import { formatPrice, useCurrency } from '@/lib/currency';
 import { CollectionCard } from './collection-card';
 
 // Détermine la gamme d'un produit à partir de son nom
@@ -36,11 +37,26 @@ const ORDER = [
   'Autres',
 ];
 
+type SortKey = 'recommande' | 'prix-asc' | 'prix-desc' | 'nouveaute';
+
+// Prix affiché en tenant compte de la promo Bubble (-30 %)
+function displayPrice(p: Product): number {
+  return p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+}
+
 export function CollectionGrid({ items }: { items: Product[] }) {
+  const cur = useCurrency();
+
   // Gammes présentes, dans l'ordre défini
   const ranges = useMemo(() => {
     const present = new Set(items.map((p) => rangeOf(p.name)));
     return ORDER.filter((r) => present.has(r));
+  }, [items]);
+
+  // Bornes de prix globales (sur toute la collection)
+  const [minBound, maxBound] = useMemo(() => {
+    const prices = items.map(displayPrice);
+    return [Math.floor(Math.min(...prices)), Math.ceil(Math.max(...prices))];
   }, [items]);
 
   // Sous-onglet initial : depuis l'URL (?g=Luminaires) si valide, sinon « Tous »
@@ -50,17 +66,43 @@ export function CollectionGrid({ items }: { items: Product[] }) {
   const PAGE_SIZE = 12;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const filtered = active === 'Tous' ? items : items.filter((p) => rangeOf(p.name) === active);
+  // Tri + fourchette de prix
+  const [sortKey, setSortKey] = useState<SortKey>('recommande');
+  const [minPrice, setMinPrice] = useState(minBound);
+  const [maxPrice, setMaxPrice] = useState(maxBound);
+
+  // Recale la fourchette si la collection change
+  useEffect(() => { setMinPrice(minBound); setMaxPrice(maxBound); }, [minBound, maxBound]);
+
+  const byRange = active === 'Tous' ? items : items.filter((p) => rangeOf(p.name) === active);
+  const filtered = useMemo(() => {
+    const lo = Math.min(minPrice, maxPrice);
+    const hi = Math.max(minPrice, maxPrice);
+    const list = byRange.filter((p) => {
+      const price = displayPrice(p);
+      return price >= lo && price <= hi;
+    });
+    const sorted = [...list];
+    if (sortKey === 'prix-asc') sorted.sort((a, b) => displayPrice(a) - displayPrice(b));
+    else if (sortKey === 'prix-desc') sorted.sort((a, b) => displayPrice(b) - displayPrice(a));
+    else if (sortKey === 'nouveaute') sorted.sort((a, b) => b.id - a.id);
+    return sorted;
+  }, [byRange, minPrice, maxPrice, sortKey]);
+
   const displayed = filtered.slice(0, visibleCount);
   const showMore = filtered.length > visibleCount;
 
   const selectRange = (r: string) => { setActive(r); setVisibleCount(PAGE_SIZE); };
+  useEffect(() => { setVisibleCount(PAGE_SIZE); }, [minPrice, maxPrice, sortKey]);
+
+  const rangeActive = minPrice > minBound || maxPrice < maxBound;
+  const pct = (v: number) => maxBound === minBound ? 0 : ((v - minBound) / (maxBound - minBound)) * 100;
 
   return (
     <>
       {/* Sous-filtres par gamme (affichés seulement s'il y a plusieurs gammes) */}
       {ranges.length > 1 && (
-        <div className="flex items-center gap-6 border-b border-neutral-100 mb-10 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center gap-6 border-b border-neutral-100 mb-8 overflow-x-auto scrollbar-hide">
           {['Tous', ...ranges].map((r) => (
             <button
               key={r}
@@ -78,8 +120,66 @@ export function CollectionGrid({ items }: { items: Product[] }) {
         </div>
       )}
 
+      {/* Barre de tri + fourchette de prix */}
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+        {/* Fourchette de prix */}
+        <div className="w-full md:max-w-sm">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">Fourchette de prix</span>
+            {rangeActive && (
+              <button
+                onClick={() => { setMinPrice(minBound); setMaxPrice(maxBound); }}
+                className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 hover:text-black transition-colors"
+              >
+                Réinitialiser
+              </button>
+            )}
+          </div>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-sm font-semibold text-black tabular-nums">{formatPrice(Math.min(minPrice, maxPrice), cur)}</span>
+            <span className="flex-1 h-px bg-neutral-200" />
+            <span className="text-sm font-semibold text-black tabular-nums">{formatPrice(Math.max(minPrice, maxPrice), cur)}</span>
+          </div>
+          {/* Double curseur */}
+          <div className="relative h-5 select-none">
+            <div className="absolute top-1/2 -translate-y-1/2 h-[3px] w-full rounded-full bg-neutral-200" />
+            <div
+              className="absolute top-1/2 -translate-y-1/2 h-[3px] rounded-full bg-black"
+              style={{ left: `${pct(Math.min(minPrice, maxPrice))}%`, right: `${100 - pct(Math.max(minPrice, maxPrice))}%` }}
+            />
+            <input
+              type="range" min={minBound} max={maxBound} value={minPrice}
+              onChange={(e) => setMinPrice(Math.min(Number(e.target.value), maxPrice))}
+              className="range-thumb absolute w-full top-0 appearance-none bg-transparent pointer-events-none"
+              aria-label="Prix minimum"
+            />
+            <input
+              type="range" min={minBound} max={maxBound} value={maxPrice}
+              onChange={(e) => setMaxPrice(Math.max(Number(e.target.value), minPrice))}
+              className="range-thumb absolute w-full top-0 appearance-none bg-transparent pointer-events-none"
+              aria-label="Prix maximum"
+            />
+          </div>
+        </div>
+
+        {/* Tri */}
+        <div className="md:text-right">
+          <label className="block text-[10px] tracking-[0.25em] uppercase text-neutral-400 mb-2">Trier par</label>
+          <select
+            value={sortKey}
+            onChange={(e) => setSortKey(e.target.value as SortKey)}
+            className="border border-neutral-300 bg-white text-sm text-black px-4 py-2.5 pr-8 focus:outline-none focus:border-black transition-colors cursor-pointer"
+          >
+            <option value="recommande">Recommandés</option>
+            <option value="prix-asc">Prix croissant</option>
+            <option value="prix-desc">Prix décroissant</option>
+            <option value="nouveaute">Nouveautés</option>
+          </select>
+        </div>
+      </div>
+
       {filtered.length === 0 ? (
-        <p className="text-neutral-500 text-center py-20">Aucun produit dans cette gamme pour le moment.</p>
+        <p className="text-neutral-500 text-center py-20">Aucun produit dans cette fourchette de prix.</p>
       ) : (
         <>
           <AnimatePresence mode="wait">
