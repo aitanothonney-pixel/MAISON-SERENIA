@@ -42,16 +42,16 @@ const jost = Jost({
 export const metadata: Metadata = {
   metadataBase: new URL('https://maison-serenia.com'),
   title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-  description: 'Découvrez MAISON SERENIA : canapés & fauteuils Bubble, tableaux d\'art, mobilier et décoration design. Livraison offerte dès 40 CHF.',
-  keywords: ['mobilier luxe', 'fauteuil design', 'canapé Bubble', 'tableau abstrait', 'décoration intérieure', 'Maison Serenia'],
+  description: 'Découvrez MAISON SERENIA : canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design. Livraison offerte dès 40 CHF.',
+  keywords: ['mobilier luxe', 'fauteuil design', 'canapé design', 'table basse', 'luminaire design', 'tableau abstrait', 'décoration intérieure', 'Maison Serenia'],
   openGraph: {
     title: 'Maison Serenia | Mobilier de Luxe & Design Contemporain',
-    description: 'Canapés & fauteuils Bubble, tableaux d\'art, mobilier et décoration design. Livraison offerte dès 40 CHF.',
+    description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design. Livraison offerte dès 40 CHF.',
     type: 'website',
     locale: 'fr_FR',
     images: [{ url: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés & fauteuils Bubble, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png'] },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png'] },
   robots: { index: true, follow: true },
 };
 
@@ -72,7 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               logo: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
               image: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
               email: 'maisonserenia@gmail.com',
-              description: 'Mobilier de luxe et design contemporain : canapés et fauteuils Bubble, tables, pièces de collection et décoration.',
+              description: 'Mobilier de luxe et design contemporain : canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration.',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Genève',
