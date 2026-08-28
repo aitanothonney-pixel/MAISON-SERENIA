@@ -824,8 +824,11 @@ const exactPriceProducts: Product[] = [
     price: 129,
     description: 'Suspension au style nordique moderne et minimaliste, abat-jour en verre teinté soufflé et douille en métal doré. Lumière LED (blanc chaud, blanc froid ou 3 teintes selon l\'ampoule). Câble ajustable jusqu\'à 2 m. Du petit Ø16 cm au grand Ø38 cm, en Ambré ou Gris fumé — choisissez le format qui sublime votre comptoir, salle à manger ou salon.',
     images: [
-      'https://i.ibb.co/XfgB6Jk4/Capture-d-e-cran-2026-08-23-a-22-41-39.png',
-      'https://i.ibb.co/3mqzRn5f/Capture-d-e-cran-2026-08-23-a-22-41-33.png',
+      'https://i.ibb.co/bRQYZMw4/Capture-d-e-cran-2026-08-28-a-13-36-00.png',
+      'https://i.ibb.co/Q3ZpjThG/Capture-d-e-cran-2026-08-28-a-13-36-19.png',
+      'https://i.ibb.co/Vc1b84vX/Capture-d-e-cran-2026-08-28-a-13-36-09.png',
+      'https://i.ibb.co/YF68MMZ7/Capture-d-e-cran-2026-08-28-a-13-35-48.png',
+      'https://i.ibb.co/Dcr6vB5/Capture-d-e-cran-2026-08-28-a-13-36-29.png',
     ],
     dimensions: 'Ø 16 à 38 cm selon le format · câble ajustable jusqu\'à 2 m',
     material: 'Verre teinté soufflé & métal doré · douille LED',
