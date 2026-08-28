@@ -815,6 +815,35 @@ const exactPriceProducts: Product[] = [
       { label: 'Transparent · 5 têtes barre 70 cm', price: 239, image: 'https://i.ibb.co/YBKk4DR7/Capture-d-e-cran-2026-08-23-a-22-43-39.png' },
     ],
   },
+  // ── Décorations : Lustre en verre teinté nordique (Ø16→38, Amber/Gris fumé) ──
+  // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb (Amber & Gris fumé, chaque diamètre)
+  {
+    id: 135,
+    name: 'Lustre en verre teinté style nordique',
+    category: 'Décorations',
+    price: 129,
+    description: 'Suspension au style nordique moderne et minimaliste, abat-jour en verre teinté soufflé et douille en métal doré. Lumière LED (blanc chaud, blanc froid ou 3 teintes selon l\'ampoule). Câble ajustable jusqu\'à 2 m. Du petit Ø16 cm au grand Ø38 cm, en Ambré ou Gris fumé — choisissez le format qui sublime votre comptoir, salle à manger ou salon.',
+    images: [
+      'https://i.ibb.co/XfgB6Jk4/Capture-d-e-cran-2026-08-23-a-22-41-39.png',
+      'https://i.ibb.co/3mqzRn5f/Capture-d-e-cran-2026-08-23-a-22-41-33.png',
+    ],
+    dimensions: 'Ø 16 à 38 cm selon le format · câble ajustable jusqu\'à 2 m',
+    material: 'Verre teinté soufflé & métal doré · douille LED',
+    details: ['Style nordique minimaliste', 'Verre teinté soufflé', 'Diamètres Ø16 à Ø38 cm au choix', 'Coloris Ambré ou Gris fumé'],
+    sizeLabel: 'Modèle',
+    sizes: [
+      { label: 'Ambré · Ø16 cm', price: 129 },
+      { label: 'Gris fumé · Ø16 cm', price: 129 },
+      { label: 'Ambré · Ø23 cm', price: 159 },
+      { label: 'Gris fumé · Ø23 cm', price: 159 },
+      { label: 'Ambré · Ø26 cm', price: 179 },
+      { label: 'Gris fumé · Ø26 cm', price: 179 },
+      { label: 'Ambré · Ø33 cm', price: 199 },
+      { label: 'Gris fumé · Ø33 cm', price: 199 },
+      { label: 'Ambré · Ø38 cm', price: 299 },
+      { label: 'Gris fumé · Ø38 cm', price: 299 },
+    ],
+  },
   // ── Décorations : Lustre vintage en vitrail (24 coloris) ─────────────────────
   // ⚠️ Image temporaire — à remplacer par les vraies photos de chaque coloris
   {
