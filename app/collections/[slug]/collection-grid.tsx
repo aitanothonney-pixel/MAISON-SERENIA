@@ -32,7 +32,7 @@ const ORDER = [
   'Canapés',
   'Tables basses', 'Meubles TV', 'Commodes', 'Fauteuils', 'Tables', "Tables d'appoint",
   'Armoires', 'Buffets', 'Rangements',
-  'Tableaux', 'Vases', 'Luminaires',
+  'Luminaires', 'Tableaux', 'Vases',
   'Autres',
 ];
 

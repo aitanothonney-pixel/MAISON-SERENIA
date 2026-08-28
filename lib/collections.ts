@@ -55,9 +55,12 @@ export function getCollectionProducts(slug: string): Product[] {
   // Dans les Décorations : tableaux en premier, figurines (KAWS, Bearbrick) en dernier
   if (cat === 'Décorations') {
     const rank = (n: string) => {
-      if (n.includes('Tableau')) return 0;
-      if (n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine')) return 2;
-      return 1;
+      const l = n.toLowerCase();
+      // Luminaires tout en haut
+      if (l.includes('lampe') || l.includes('lustre') || l.includes('suspendue') || l.includes('luminaire')) return 0;
+      if (n.includes('Tableau')) return 1;
+      if (n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine')) return 3;
+      return 2;
     };
     return [...list].sort((a, b) => {
       const ra = rank(a.name);
