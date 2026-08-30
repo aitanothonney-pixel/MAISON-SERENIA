@@ -54,9 +54,9 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png'] },
   robots: { index: true, follow: true },
   icons: {
-    icon: 'https://i.ibb.co/BKCYGHtR/Capture-d-e-cran-2026-08-28-a-14-44-01.png',
-    shortcut: 'https://i.ibb.co/BKCYGHtR/Capture-d-e-cran-2026-08-28-a-14-44-01.png',
-    apple: 'https://i.ibb.co/BKCYGHtR/Capture-d-e-cran-2026-08-28-a-14-44-01.png',
+    icon: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
+    shortcut: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
+    apple: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
   },
 };
 
