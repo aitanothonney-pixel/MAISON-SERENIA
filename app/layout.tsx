@@ -5,6 +5,8 @@ import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -94,6 +96,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AnnouncementBar>{children}</AnnouncementBar>
           <WelcomePopup />
         </CurrencyProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
