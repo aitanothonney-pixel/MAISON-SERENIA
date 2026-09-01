@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { Check, Package } from 'lucide-react';
+import { brevoTrackOrder } from '@/lib/brevoTracking';
 
 export default function CommandeSuccesPage() {
   // On vide le panier après un paiement réussi
@@ -11,6 +12,8 @@ export default function CommandeSuccesPage() {
       localStorage.setItem('ms_cart', '[]');
       window.dispatchEvent(new CustomEvent('ms_cart_change'));
     } catch { /* ignore */ }
+    // Signale la commande à Brevo → annule toute relance « panier abandonné »
+    brevoTrackOrder();
   }, []);
 
   return (

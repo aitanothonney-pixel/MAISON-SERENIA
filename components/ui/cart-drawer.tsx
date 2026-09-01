@@ -7,6 +7,7 @@ import { products } from '@/lib/products';
 import { useCart } from '@/lib/useCart';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
+import { brevoTrackCart, brevoTrackOrder } from '@/lib/brevoTracking';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
@@ -134,6 +135,23 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - merchandise);
   const freeShippingProgress = Math.min(100, Math.round((merchandise / FREE_SHIPPING_THRESHOLD) * 100));
   const total = merchandise + shipping;
+
+  // Suivi Brevo « panier abandonné » : on signale le panier à chaque changement.
+  useEffect(() => {
+    if (cartProducts.length === 0) return;
+    brevoTrackCart({
+      total,
+      url: 'https://maison-serenia.com',
+      items: cartProducts.map((x) => ({
+        name: x.product.name,
+        price: x.price,
+        quantity: x.qty,
+        image: x.product.images[0],
+        url: `https://maison-serenia.com/products/${x.id}`,
+      })),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
   // Produits à ajouter pour franchir le seuil de livraison gratuite
   const cartIds = cartProducts.map((x) => x.id);
   const shippingBoosters = shipping > 0
@@ -205,6 +223,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const handlePay = () => {
     setPayLoading(true);
     setOrderTotal(total);
+    brevoTrackOrder({ total });
     setTimeout(() => {
       setPayLoading(false);
       clearCart();

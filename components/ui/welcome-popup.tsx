@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Copy, Sparkles } from 'lucide-react';
+import { brevoIdentify } from '@/lib/brevoTracking';
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
 export const WELCOME_CODE = 'MAISON SERENIA';
@@ -70,6 +71,8 @@ export function WelcomePopup() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, source: 'popup-bienvenue' }),
     }).catch(() => { /* silencieux : ne gêne pas le visiteur */ });
+    // Lie ce visiteur à son email dans le suivi Brevo (panier abandonné)
+    brevoIdentify(email);
     setDone(true);
   };
 

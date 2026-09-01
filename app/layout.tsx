@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
+import { BrevoTracker } from '@/components/ui/brevo-tracker'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
 import Script from 'next/script'
 
@@ -97,6 +98,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AnnouncementBar>{children}</AnnouncementBar>
           <WelcomePopup />
         </CurrencyProvider>
+        <BrevoTracker />
         {GA_ID && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
