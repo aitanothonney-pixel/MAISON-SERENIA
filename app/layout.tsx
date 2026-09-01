@@ -5,8 +5,9 @@ import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import Script from 'next/script'
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -96,8 +97,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AnnouncementBar>{children}</AnnouncementBar>
           <WelcomePopup />
         </CurrencyProvider>
-        <Analytics />
-        <SpeedInsights />
+        {GA_ID && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )
