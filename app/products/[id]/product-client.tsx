@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, Gift } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, Gift, Flame } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1303,6 +1303,24 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 </div>
               )}
 
+              {/* Preuve sociale — visiteurs en direct & ventes du mois */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-[11px] tracking-wide text-neutral-500">
+                <span className="flex items-center gap-1.5">
+                  <Eye className="w-3.5 h-3.5 text-[#A07840]" />
+                  <strong className="text-black font-medium tabular-nums">{stockUrgency.viewers}</strong>&nbsp;personnes regardent ce produit
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-[#A07840]" />
+                  <strong className="text-black font-medium tabular-nums">{stockUrgency.soldThisMonth}</strong>&nbsp;vendus ce mois-ci
+                </span>
+                {!isBubble && (
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] shrink-0" />
+                    Plus que&nbsp;<strong className="text-black font-medium tabular-nums">{stockUrgency.stock}</strong>&nbsp;en stock
+                  </span>
+                )}
+              </div>
+
               {/* Size selector — tailles au choix (ex. tableaux) */}
               {product.sizes && (
                 <div className="mb-6">
@@ -1389,6 +1407,20 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 shrink-0">Matière</span>
                   <span className="text-sm text-neutral-700 text-right">{product.material}</span>
                 </div>
+              </div>
+
+              {/* Livraison estimée */}
+              <div className="flex items-center gap-2.5 mb-5 px-4 py-3 border border-neutral-100 bg-neutral-50/60">
+                <Truck className="w-4 h-4 text-[#A07840] shrink-0" />
+                <p className="text-xs text-neutral-600">
+                  Commandez aujourd'hui — livraison estimée entre le{' '}
+                  <strong className="text-black font-medium">
+                    {new Date(Date.now() + 7 * 864e5).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' })}
+                  </strong>{' '}et le{' '}
+                  <strong className="text-black font-medium">
+                    {new Date(Date.now() + 28 * 864e5).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' })}
+                  </strong>
+                </p>
               </div>
 
               {/* CTA Buttons */}
