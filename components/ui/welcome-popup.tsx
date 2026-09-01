@@ -64,6 +64,12 @@ export function WelcomePopup() {
       // Prévenir le panier (même onglet) que la remise est active
       window.dispatchEvent(new Event('welcome-discount-updated'));
     } catch { /* ignore */ }
+    // Envoi de l'email dans la newsletter (Brevo) — sans bloquer l'affichage
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, source: 'popup-bienvenue' }),
+    }).catch(() => { /* silencieux : ne gêne pas le visiteur */ });
     setDone(true);
   };
 
