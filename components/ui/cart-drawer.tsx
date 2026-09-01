@@ -222,6 +222,53 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     return d.length >= 3 ? d.slice(0, 2) + '/' + d.slice(2) : d;
   };
 
+  // Vente croisée « Complétez votre intérieur » — pièces complémentaires populaires
+  const CROSS_SELL_IDS = [77, 105, 83, 100, 129, 78, 87, 108];
+  const crossSell = (() => {
+    const seen = new Set<string>();
+    return CROSS_SELL_IDS
+      .map((id) => products.find((p) => p.id === id))
+      .filter((p): p is typeof products[0] => !!p && !cartIds.includes(p.id))
+      .filter((p) => { if (seen.has(p.name)) return false; seen.add(p.name); return true; })
+      .slice(0, 3)
+      .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }));
+  })();
+
+  const renderCrossSell = () => {
+    if (crossSell.length === 0) return null;
+    return (
+      <div className="px-6 pb-5">
+        <p className="text-[10px] tracking-[0.25em] uppercase text-[#A07840] font-bold mb-3">
+          Complétez votre intérieur
+        </p>
+        <div className="space-y-2.5">
+          {crossSell.map(({ p, price }) => (
+            <div key={p.id} className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <img
+                  src={p.images[0]}
+                  alt={p.name}
+                  className={`w-full h-full ${isBubble(p.id) || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[12px] text-black truncate leading-tight">{p.name}</p>
+                <p className="text-[12px] font-bold text-black price-luxe">{formatPrice(price, cur)}</p>
+              </div>
+              <button
+                onClick={() => addItem(p.id)}
+                className="shrink-0 flex items-center gap-1 border border-black px-3 h-8 text-[10px] font-semibold tracking-widest uppercase hover:bg-black hover:text-white transition-colors"
+                aria-label={`Ajouter ${p.name} au panier`}
+              >
+                <Plus className="w-3.5 h-3.5" /> Ajouter
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   const renderShippingBoosters = () => {
     if (shippingBoosters.length === 0) return null;
     return (
@@ -429,6 +476,11 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             </div>
                           </motion.div>
                         ))}
+                      </div>
+                    )}
+                    {cartProducts.length > 0 && (
+                      <div className="border-t border-neutral-100 pt-5">
+                        {renderCrossSell()}
                       </div>
                     )}
                   </motion.div>
