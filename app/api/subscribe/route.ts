@@ -10,11 +10,9 @@ export async function POST(req: Request) {
   }
 
   let email = '';
-  let source = 'site';
   try {
     const body = await req.json();
     email = String(body?.email ?? '').trim().toLowerCase();
-    if (body?.source) source = String(body.source);
   } catch {
     return NextResponse.json({ ok: false, error: 'bad_request' }, { status: 400 });
   }
@@ -36,7 +34,6 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         email,
         updateEnabled: true,
-        attributes: { SOURCE: source },
         ...(listId ? { listIds: [listId] } : {}),
       }),
     });
