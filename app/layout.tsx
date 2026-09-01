@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design. Livraison offerte dès 40 CHF.',
     type: 'website',
     locale: 'fr_FR',
-    images: [{ url: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png', width: 1200, height: 630 }],
+    images: [{ url: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png'] },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png'] },
   robots: { index: true, follow: true },
   icons: {
     icon: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
@@ -74,8 +74,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               '@type': 'Organization',
               name: 'Maison Serenia',
               url: 'https://maison-serenia.com',
-              logo: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
-              image: 'https://i.ibb.co/35HzVhfK/Capture-d-e-cran-2026-08-28-a-14-37-00.png',
+              logo: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png',
+              image: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png',
               email: 'maisonserenia@gmail.com',
               description: 'Mobilier de luxe et design contemporain : canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration.',
               address: {
