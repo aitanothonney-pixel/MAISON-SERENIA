@@ -1844,6 +1844,21 @@ const exactPriceProducts: Product[] = [
       { label: 'Bleu', price: 59, image: 'https://i.ibb.co/yFJ3LmF2/Capture-d-e-cran-2026-09-02-a-10-54-51.png' },
     ],
   },
+  // ── Décorations : Étagère à livres en forme de boule (4 coloris) ─────────────
+  // ⚠️ Images TEMPORAIRES + coloris à compléter (noms + photos à envoyer)
+  {
+    id: 139,
+    name: 'Étagère à livres design en forme de boule',
+    category: 'Décorations',
+    price: 69,
+    description: 'Serre-livres organiseur au design contemporain, associant une sphère laquée et un support métallique fin façon Bauhaus. Une pièce sculpturale qui maintient et met en valeur vos livres, magazines ou vinyles sur un bureau, une console ou une étagère. À la fois décorative et fonctionnelle. Disponible en plusieurs coloris.',
+    images: [
+      'https://i.ibb.co/S4fdwnPM/Capture-d-e-cran-2026-09-02-a-10-54-28.png',
+    ],
+    dimensions: 'Organiseur de bureau · dimensions compactes',
+    material: 'Sphère laquée & support métal',
+    details: ['Design sculptural en forme de boule', 'Support métallique façon Bauhaus', 'Maintient livres, magazines & vinyles', 'Décoratif pour bureau ou console'],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
