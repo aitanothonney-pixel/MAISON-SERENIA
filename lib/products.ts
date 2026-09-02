@@ -1853,11 +1853,25 @@ const exactPriceProducts: Product[] = [
     price: 69,
     description: 'Serre-livres organiseur au design contemporain, associant une sphère laquée et un support métallique fin façon Bauhaus. Une pièce sculpturale qui maintient et met en valeur vos livres, magazines ou vinyles sur un bureau, une console ou une étagère. À la fois décorative et fonctionnelle. Disponible en plusieurs coloris.',
     images: [
-      'https://i.ibb.co/S4fdwnPM/Capture-d-e-cran-2026-09-02-a-10-54-28.png',
+      'https://i.ibb.co/LdKyj9QY/Capture-d-e-cran-2026-09-02-a-11-02-17.png',
+      'https://i.ibb.co/mMH6rpq/Capture-d-e-cran-2026-09-02-a-11-02-23.png',
+      'https://i.ibb.co/LDPvfHh2/Capture-d-e-cran-2026-09-02-a-11-02-28.png',
+      'https://i.ibb.co/hx20MPsj/Capture-d-e-cran-2026-09-02-a-11-02-33.png',
+      'https://i.ibb.co/vCdcP52g/Capture-d-e-cran-2026-09-02-a-11-02-40.png',
+      'https://i.ibb.co/8DdBQpQS/Capture-d-e-cran-2026-09-02-a-11-03-47.png',
     ],
     dimensions: 'Organiseur de bureau · dimensions compactes',
     material: 'Sphère laquée & support métal',
     details: ['Design sculptural en forme de boule', 'Support métallique façon Bauhaus', 'Maintient livres, magazines & vinyles', 'Décoratif pour bureau ou console'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Argent', price: 69, image: 'https://i.ibb.co/LdKyj9QY/Capture-d-e-cran-2026-09-02-a-11-02-17.png' },
+      { label: 'Noir', price: 69, image: 'https://i.ibb.co/mMH6rpq/Capture-d-e-cran-2026-09-02-a-11-02-23.png' },
+      { label: 'Bleu', price: 69, image: 'https://i.ibb.co/LDPvfHh2/Capture-d-e-cran-2026-09-02-a-11-02-28.png' },
+      { label: 'Rouge', price: 69, image: 'https://i.ibb.co/hx20MPsj/Capture-d-e-cran-2026-09-02-a-11-02-33.png' },
+      { label: 'Jaune', price: 69, image: 'https://i.ibb.co/vCdcP52g/Capture-d-e-cran-2026-09-02-a-11-02-40.png' },
+      { label: 'Rose', price: 69, image: 'https://i.ibb.co/8DdBQpQS/Capture-d-e-cran-2026-09-02-a-11-03-47.png' },
+    ],
   },
 ];
 
