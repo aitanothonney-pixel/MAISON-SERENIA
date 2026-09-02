@@ -1757,6 +1757,21 @@ const exactPriceProducts: Product[] = [
     material: 'Cuir noir, structure acier inoxydable',
     details: ['Design d\'inspiration Bauhaus', 'Cuir noir capitonné', 'Structure en acier inoxydable', 'Assise rembourrée confortable'],
   },
+  // ── Salon : Fauteuil paresseux convertible cuir noir ────────────────────────
+  // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
+  {
+    id: 136,
+    name: 'Fauteuil paresseux convertible en cuir noir',
+    category: 'Salon',
+    price: 249,
+    description: 'Fauteuil paresseux moderne et enveloppant, au design minimaliste. Format 2-en-1 : fauteuil compact en mode assise, ou déplié en couchage grâce à son repose-pieds intégré. Revêtement cuir noir doux, rembourrage moelleux — idéal pour un coin détente, un petit espace ou une chambre d\'ami.',
+    images: [
+      'https://i.ibb.co/5hxD47TZ/Capture-d-e-cran-2026-09-02-a-10-22-21.png',
+    ],
+    dimensions: 'Mode fauteuil ~65 cm · Mode ouvert (déplié) plus long',
+    material: 'Revêtement cuir noir, rembourrage mousse',
+    details: ['Format 2-en-1 : fauteuil ou couchage', 'Repose-pieds intégré dépliable', 'Revêtement cuir noir moelleux', 'Idéal petit espace ou coin détente'],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
