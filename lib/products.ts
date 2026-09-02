@@ -1822,11 +1822,27 @@ const exactPriceProducts: Product[] = [
     price: 59,
     description: 'Étagère-organiseur en spirale au design créatif et sculptural. Structure métallique en ressort hélicoïdal qui présente élégamment livres, magazines et dossiers. Pièce à la fois pratique et décorative, parfaite pour un bureau, une bibliothèque ou un salon design. Disponible en plusieurs coloris.',
     images: [
-      'https://i.ibb.co/5XBjDkn8/Capture-d-e-cran-2026-09-02-a-10-48-42.png',
+      'https://i.ibb.co/S4fdwnPM/Capture-d-e-cran-2026-09-02-a-10-54-28.png',
+      'https://i.ibb.co/4ZF9mQjR/Capture-d-e-cran-2026-09-02-a-10-54-11.png',
+      'https://i.ibb.co/C34JWFKk/Capture-d-e-cran-2026-09-02-a-10-54-20.png',
+      'https://i.ibb.co/4wcbG79H/Capture-d-e-cran-2026-09-02-a-10-55-05.png',
+      'https://i.ibb.co/BVKmnGyD/Capture-d-e-cran-2026-09-02-a-10-54-44.png',
+      'https://i.ibb.co/LXJt0qg8/Capture-d-e-cran-2026-09-02-a-10-54-57.png',
+      'https://i.ibb.co/yFJ3LmF2/Capture-d-e-cran-2026-09-02-a-10-54-51.png',
     ],
     dimensions: 'L 30 × H 20 cm environ',
     material: 'Métal laqué',
     details: ['Design spirale créatif', 'Métal robuste finition laquée', 'Présentoir livres & magazines', 'Décoratif pour bureau ou salon'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Argent', price: 59, image: 'https://i.ibb.co/S4fdwnPM/Capture-d-e-cran-2026-09-02-a-10-54-28.png' },
+      { label: 'Noir', price: 59, image: 'https://i.ibb.co/4ZF9mQjR/Capture-d-e-cran-2026-09-02-a-10-54-11.png' },
+      { label: 'Beige', price: 59, image: 'https://i.ibb.co/C34JWFKk/Capture-d-e-cran-2026-09-02-a-10-54-20.png' },
+      { label: 'Rose', price: 59, image: 'https://i.ibb.co/4wcbG79H/Capture-d-e-cran-2026-09-02-a-10-55-05.png' },
+      { label: 'Rouge', price: 59, image: 'https://i.ibb.co/BVKmnGyD/Capture-d-e-cran-2026-09-02-a-10-54-44.png' },
+      { label: 'Jaune', price: 59, image: 'https://i.ibb.co/LXJt0qg8/Capture-d-e-cran-2026-09-02-a-10-54-57.png' },
+      { label: 'Bleu', price: 59, image: 'https://i.ibb.co/yFJ3LmF2/Capture-d-e-cran-2026-09-02-a-10-54-51.png' },
+    ],
   },
 ];
 
