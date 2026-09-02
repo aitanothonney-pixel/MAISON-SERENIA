@@ -1774,6 +1774,7 @@ const exactPriceProducts: Product[] = [
       'https://i.ibb.co/fYsyWwSt/Capture-d-e-cran-2026-09-02-a-10-31-53.png',
       'https://i.ibb.co/NgTD0Pk9/Capture-d-e-cran-2026-09-02-a-10-32-41.png',
       'https://i.ibb.co/WNkJF8GX/Capture-d-e-cran-2026-09-02-a-10-32-21.png',
+      'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png',
     ],
     dimensions: 'Mode fauteuil ~65 cm · Mode ouvert (déplié) plus long',
     material: 'Revêtement cuir, rembourrage mousse',
@@ -1782,7 +1783,7 @@ const exactPriceProducts: Product[] = [
     sizes: [
       { label: 'Noir', price: 249, image: 'https://i.ibb.co/jkp35HwD/Capture-d-e-cran-2026-09-02-a-10-31-46.png' },
       { label: 'Brun', price: 249, image: 'https://i.ibb.co/fYsyWwSt/Capture-d-e-cran-2026-09-02-a-10-31-53.png' },
-      { label: 'Orange', price: 249 },
+      { label: 'Orange', price: 249, image: 'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png' },
     ],
   },
 ];
