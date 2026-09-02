@@ -181,6 +181,7 @@ function CheckoutDrawer({
   const [welcomeActive, setWelcomeActive] = useState(false);
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState(false);
+  const [promoNeedsSignup, setPromoNeedsSignup] = useState(false);
 
   const isBubble = product.name.includes('Bubble');
   const promoPrice = unitPrice ?? (isBubble ? Math.round(product.price * 0.7) : product.price);
@@ -205,17 +206,27 @@ function CheckoutDrawer({
   }, []);
 
   const applyPromo = (raw: string) => {
-    if (normalizeCode(raw) === normalizeCode(WELCOME_CODE)) {
-      setWelcomeActive(true);
-      setPromoError(false);
-      setPromoInput('');
-      try {
-        localStorage.setItem('welcome-discount', WELCOME_CODE);
-        window.dispatchEvent(new Event('welcome-discount-updated'));
-      } catch { /* ignore */ }
-    } else {
+    if (normalizeCode(raw) !== normalizeCode(WELCOME_CODE)) {
+      setPromoNeedsSignup(false);
       setPromoError(true);
+      return;
     }
+    // Le code −10% est réservé aux inscrits (popup ou newsletter du pied de page)
+    let subscribed = false;
+    try { subscribed = !!localStorage.getItem('welcome-email'); } catch { /* ignore */ }
+    if (!subscribed) {
+      setPromoNeedsSignup(true);
+      setPromoError(true);
+      return;
+    }
+    setWelcomeActive(true);
+    setPromoError(false);
+    setPromoNeedsSignup(false);
+    setPromoInput('');
+    try {
+      localStorage.setItem('welcome-discount', WELCOME_CODE);
+      window.dispatchEvent(new Event('welcome-discount-updated'));
+    } catch { /* ignore */ }
   };
 
   const removePromo = () => {
@@ -255,7 +266,7 @@ function CheckoutDrawer({
             Appliquer
           </button>
         </div>
-        {promoError && <p className="text-[11px] text-red-500 mt-1.5">Ce code n&apos;est pas valide.</p>}
+        {promoError && <p className="text-[11px] text-red-500 mt-1.5">{promoNeedsSignup ? 'Code réservé aux inscrits — inscrivez-vous à la newsletter pour l’activer.' : 'Ce code n’est pas valide.'}</p>}
       </div>
     )
   );
