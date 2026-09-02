@@ -1813,6 +1813,21 @@ const exactPriceProducts: Product[] = [
       { label: 'Bleu', price: 69, image: 'https://i.ibb.co/cKTW2xdR/Capture-d-e-cran-2026-09-02-a-10-49-13.png' },
     ],
   },
+  // ── Décorations : Étagère rotative en spirale à ressort (8 coloris) ──────────
+  // ⚠️ Images TEMPORAIRES + coloris à compléter (noms + photos à envoyer)
+  {
+    id: 138,
+    name: 'Étagère rotative en spirale à ressort',
+    category: 'Décorations',
+    price: 59,
+    description: 'Étagère-organiseur en spirale au design créatif et sculptural. Structure métallique en ressort hélicoïdal qui présente élégamment livres, magazines et dossiers. Pièce à la fois pratique et décorative, parfaite pour un bureau, une bibliothèque ou un salon design. Disponible en plusieurs coloris.',
+    images: [
+      'https://i.ibb.co/5XBjDkn8/Capture-d-e-cran-2026-09-02-a-10-48-42.png',
+    ],
+    dimensions: 'L 30 × H 20 cm environ',
+    material: 'Métal laqué',
+    details: ['Design spirale créatif', 'Métal robuste finition laquée', 'Présentoir livres & magazines', 'Décoratif pour bureau ou salon'],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
