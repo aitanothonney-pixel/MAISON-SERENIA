@@ -1761,16 +1761,22 @@ const exactPriceProducts: Product[] = [
   // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
   {
     id: 136,
-    name: 'Fauteuil paresseux convertible en cuir noir',
+    name: 'Fauteuil paresseux convertible en cuir',
     category: 'Salon',
     price: 249,
-    description: 'Fauteuil paresseux moderne et enveloppant, au design minimaliste. Format 2-en-1 : fauteuil compact en mode assise, ou déplié en couchage grâce à son repose-pieds intégré. Revêtement cuir noir doux, rembourrage moelleux — idéal pour un coin détente, un petit espace ou une chambre d\'ami.',
+    description: 'Fauteuil paresseux moderne et enveloppant, au design minimaliste. Format 2-en-1 : fauteuil compact en mode assise, ou déplié en couchage grâce à son repose-pieds intégré. Revêtement cuir doux, rembourrage moelleux — idéal pour un coin détente, un petit espace ou une chambre d\'ami. Disponible en noir, brun et orange.',
     images: [
       'https://i.ibb.co/5hxD47TZ/Capture-d-e-cran-2026-09-02-a-10-22-21.png',
     ],
     dimensions: 'Mode fauteuil ~65 cm · Mode ouvert (déplié) plus long',
-    material: 'Revêtement cuir noir, rembourrage mousse',
-    details: ['Format 2-en-1 : fauteuil ou couchage', 'Repose-pieds intégré dépliable', 'Revêtement cuir noir moelleux', 'Idéal petit espace ou coin détente'],
+    material: 'Revêtement cuir, rembourrage mousse',
+    details: ['Format 2-en-1 : fauteuil ou couchage', 'Repose-pieds intégré dépliable', 'Revêtement cuir moelleux', 'Idéal petit espace ou coin détente'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Noir', price: 249 },
+      { label: 'Brun', price: 249 },
+      { label: 'Orange', price: 249 },
+    ],
   },
 ];
 
