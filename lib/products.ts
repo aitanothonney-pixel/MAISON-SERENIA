@@ -1786,6 +1786,29 @@ const exactPriceProducts: Product[] = [
       { label: 'Orange', price: 249, image: 'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png' },
     ],
   },
+  // ── Décorations : Support de livres en spirale rotatif (5 coloris) ───────────
+  // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
+  {
+    id: 137,
+    name: 'Support de livres en spirale rotatif en métal',
+    category: 'Décorations',
+    price: 69,
+    description: 'Support de livres et documents en spirale, au design moderne et sculptural. Structure en métal robuste finition laquée, forme hélicoïdale qui maintient élégamment vos livres, magazines ou dossiers. Une pièce à la fois pratique et décorative pour un bureau, une étagère ou un salon design.',
+    images: [
+      'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png',
+    ],
+    dimensions: 'L 20 × H 20 cm environ',
+    material: 'Métal laqué',
+    details: ['Design spirale sculptural', 'Métal robuste finition laquée', 'Maintient livres, magazines & dossiers', 'Décoratif pour bureau ou salon'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Argent', price: 69 },
+      { label: 'Noir', price: 69 },
+      { label: 'Rouge', price: 69 },
+      { label: 'Orange', price: 69 },
+      { label: 'Bleu', price: 69 },
+    ],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
