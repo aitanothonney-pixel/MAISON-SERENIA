@@ -150,30 +150,45 @@ export function WelcomePopup() {
             ) : (
               <div className="px-8 py-10 text-center">
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                  initial={{ scale: 0, rotate: -8 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-[#C9A96E]/30"
                   style={{ background: GOLD_GRADIENT }}
                 >
-                  <Check className="w-8 h-8 text-white" />
+                  <Check className="w-7 h-7 text-white" strokeWidth={1.6} />
                 </motion.div>
-                <h2 className="text-2xl font-serif text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>
-                  Bienvenue chez Maison Serenia
+
+                <p className="text-[10px] tracking-[0.35em] uppercase text-[#A07840] mb-3">Offre activée</p>
+                <h2 className="text-[26px] leading-tight font-serif text-black mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  Bienvenue chez<br />Maison Serenia
                 </h2>
-                <p className="text-sm text-neutral-500 mb-6">
-                  Votre réduction est activée. Elle s&apos;appliquera automatiquement dans votre panier.
+                <p className="text-sm text-neutral-500 mb-7 max-w-xs mx-auto leading-relaxed">
+                  Votre remise de bienvenue vous attend — elle s&apos;appliquera automatiquement au panier.
                 </p>
 
-                <button
-                  onClick={copyCode}
-                  className="w-full flex items-center justify-between gap-2 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/5 px-4 py-3.5 mb-6 group"
-                >
-                  <span className="text-lg font-bold tracking-[0.15em] text-[#A07840]">{WELCOME_CODE}</span>
-                  <span className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-neutral-500 group-hover:text-black transition-colors">
-                    {copied ? <><Check className="w-3.5 h-3.5" /> Copié</> : <><Copy className="w-3.5 h-3.5" /> Copier</>}
-                  </span>
-                </button>
+                {/* Carte code — présentation raffinée */}
+                <div className="relative mb-7">
+                  <div className="absolute inset-0" style={{ background: GOLD_GRADIENT, opacity: 0.08 }} />
+                  <div className="relative border border-[#C9A96E]/50 px-5 py-5">
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <span className="h-px w-6 bg-[#C9A96E]/50" />
+                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#A07840]">−10 % · Votre code</span>
+                      <span className="h-px w-6 bg-[#C9A96E]/50" />
+                    </div>
+                    <p className="text-xl font-semibold tracking-[0.22em] text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+                      {WELCOME_CODE}
+                    </p>
+                    <button
+                      onClick={copyCode}
+                      className={`inline-flex items-center gap-2 px-5 py-2 text-[10px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 ${
+                        copied ? 'bg-[#A07840] text-white' : 'border border-black text-black hover:bg-black hover:text-white'
+                      }`}
+                    >
+                      {copied ? <><Check className="w-3.5 h-3.5" /> Code copié</> : <><Copy className="w-3.5 h-3.5" /> Copier le code</>}
+                    </button>
+                  </div>
+                </div>
 
                 <button
                   onClick={close}
