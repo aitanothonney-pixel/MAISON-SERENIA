@@ -1742,7 +1742,6 @@ const exactPriceProducts: Product[] = [
     ],
   },
   // ── Salon : Fauteuil Bauhaus cuir noir & acier ──────────────────────────────
-  // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
   {
     id: 135,
     name: 'Fauteuil Bauhaus en cuir noir & acier',
@@ -1750,7 +1749,9 @@ const exactPriceProducts: Product[] = [
     price: 549,
     description: 'Fauteuil d\'inspiration Bauhaus au design épuré et intemporel : assise et dossier en cuir noir capitonné, structure en acier inoxydable. Un fauteuil sculptural et confortable, à la fois rétro et contemporain, parfait pour un salon élégant, un coin lecture ou une salle de réception.',
     images: [
-      'https://i.ibb.co/jvTFghrm/Capture-d-e-cran-2026-08-23-a-18-39-56.png',
+      'https://i.ibb.co/5hxD47TZ/Capture-d-e-cran-2026-09-02-a-10-22-21.png',
+      'https://i.ibb.co/DPM5VyVh/Capture-d-e-cran-2026-09-02-a-10-22-30.png',
+      'https://i.ibb.co/rRsgdLK0/Capture-d-e-cran-2026-09-02-a-10-22-38.png',
     ],
     dimensions: 'Fauteuil individuel avec accoudoirs',
     material: 'Cuir noir, structure acier inoxydable',
