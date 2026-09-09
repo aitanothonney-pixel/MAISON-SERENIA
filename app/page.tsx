@@ -1092,7 +1092,7 @@ function BubblePromoCarousel() {
 
 // ─── Bestsellers Section ──────────────────────────────────────────────────────
 
-const bestsellerIds = [100, 135, 81, 103];
+const bestsellerIds = [100, 135, 140, 103];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const cur = useCurrency();
