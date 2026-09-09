@@ -1138,8 +1138,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         e.stopPropagation();
                         const ni = (selectedImage - 1 + product.images.length) % product.images.length;
                         setSelectedImage(ni);
-                        const m = product.sizes?.find((s) => s.image === product.images[ni]);
-                        if (m) setSelectedSize(m.label);
+                        const lbl = product.imageColor?.[ni] || product.sizes?.find((s) => s.image === product.images[ni])?.label;
+                        if (lbl) setSelectedSize(lbl);
                       }}
                       aria-label="Image précédente"
                       className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
@@ -1151,8 +1151,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         e.stopPropagation();
                         const ni = (selectedImage + 1) % product.images.length;
                         setSelectedImage(ni);
-                        const m = product.sizes?.find((s) => s.image === product.images[ni]);
-                        if (m) setSelectedSize(m.label);
+                        const lbl = product.imageColor?.[ni] || product.sizes?.find((s) => s.image === product.images[ni])?.label;
+                        if (lbl) setSelectedSize(lbl);
                       }}
                       aria-label="Image suivante"
                       className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
@@ -1223,8 +1223,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       onClick={() => {
                         setSelectedImage(i);
                         // Si cette image correspond à un coloris, on le sélectionne à droite
-                        const match = product.sizes?.find((s) => s.image === img);
-                        if (match) setSelectedSize(match.label);
+                        const lbl = product.imageColor?.[i] || product.sizes?.find((s) => s.image === img)?.label;
+                        if (lbl) setSelectedSize(lbl);
                       }}
                       className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-neutral-50 transition-all duration-200 ${
                         selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
@@ -1344,10 +1344,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         key={s.label}
                         onClick={() => {
                           setSelectedSize(s.label);
-                          if (s.image) {
-                            const idx = product.images.indexOf(s.image);
-                            if (idx >= 0) setSelectedImage(idx);
-                          }
+                          // Saute à la 1ʳᵉ photo de ce coloris (via imageColor si dispo, sinon l'image de l'option)
+                          const idx = product.imageColor
+                            ? product.imageColor.indexOf(s.label)
+                            : (s.image ? product.images.indexOf(s.image) : -1);
+                          if (idx >= 0) setSelectedImage(idx);
                         }}
                         className={`px-3 py-2.5 text-[13px] border transition-all duration-200 flex flex-col items-center leading-tight ${
                           s.label === selectedSize

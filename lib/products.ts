@@ -19,6 +19,10 @@ export interface Product {
   sizes?: ProductSize[];
   // Optionnel : libellé du sélecteur d'options (par défaut « Taille », ex. « Coloris »)
   sizeLabel?: string;
+  // Optionnel : coloris associé à chaque image (même longueur que images[]).
+  // Permet de sélectionner le bon coloris quand on parcourt plusieurs photos
+  // d'une même couleur. Valeur vide = aucun changement de coloris.
+  imageColor?: string[];
 }
 
 export interface ProductVariant {
@@ -1895,6 +1899,7 @@ const exactPriceProducts: Product[] = [
     material: 'Tissu bouclé, piètement métal',
     details: ['Design sculptural inspiration nuage', 'Tissu bouclé doux', 'Piètement métallique fin', 'Idéal coin lecture ou salon design'],
     sizeLabel: 'Coloris',
+    imageColor: ['Blanc', 'Blanc', 'Noir', 'Noir', 'Noir', 'Noir', '', ''],
     sizes: [
       { label: 'Blanc', price: 499, image: 'https://i.ibb.co/3mLfrnw3/Capture-d-e-cran-2026-09-02-a-11-31-37.png' },
       { label: 'Noir', price: 499, image: 'https://i.ibb.co/qYJdtnTf/Capture-d-e-cran-2026-09-02-a-11-30-47.png' },
