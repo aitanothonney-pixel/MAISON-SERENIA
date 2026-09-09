@@ -1882,11 +1882,23 @@ const exactPriceProducts: Product[] = [
     price: 499,
     description: 'Fauteuil lounge au design sculptural et enveloppant, inspiration nuage. Assise généreuse en tissu bouclé doux au toucher, portée par un piètement métallique fin et élégant. Une pièce contemporaine et cosy, parfaite pour un coin lecture, un salon design ou une chambre. Confort moelleux et présence forte.',
     images: [
-      'https://i.ibb.co/jvTFghrm/Capture-d-e-cran-2026-08-23-a-18-39-56.png',
+      'https://i.ibb.co/3mLfrnw3/Capture-d-e-cran-2026-09-02-a-11-31-37.png',
+      'https://i.ibb.co/6cVcQP6q/Capture-d-e-cran-2026-09-02-a-11-31-55.png',
+      'https://i.ibb.co/qYJdtnTf/Capture-d-e-cran-2026-09-02-a-11-30-47.png',
+      'https://i.ibb.co/Rdgcjq0/Capture-d-e-cran-2026-09-02-a-11-30-42.png',
+      'https://i.ibb.co/hJdHV8RP/Capture-d-e-cran-2026-09-02-a-11-31-22.png',
+      'https://i.ibb.co/ywtZF7X/Capture-d-e-cran-2026-09-02-a-11-31-04.png',
+      'https://i.ibb.co/fz5TZhZJ/Capture-d-e-cran-2026-09-02-a-11-31-10.png',
+      'https://i.ibb.co/WvPV4V6V/Capture-d-e-cran-2026-09-02-a-11-31-28.png',
     ],
     dimensions: 'Fauteuil individuel · assise enveloppante',
     material: 'Tissu bouclé, piètement métal',
     details: ['Design sculptural inspiration nuage', 'Tissu bouclé doux', 'Piètement métallique fin', 'Idéal coin lecture ou salon design'],
+    sizeLabel: 'Coloris',
+    sizes: [
+      { label: 'Blanc', price: 499, image: 'https://i.ibb.co/3mLfrnw3/Capture-d-e-cran-2026-09-02-a-11-31-37.png' },
+      { label: 'Noir', price: 499, image: 'https://i.ibb.co/qYJdtnTf/Capture-d-e-cran-2026-09-02-a-11-30-47.png' },
+    ],
   },
 ];
 
