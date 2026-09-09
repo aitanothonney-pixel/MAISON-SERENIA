@@ -1873,6 +1873,21 @@ const exactPriceProducts: Product[] = [
       { label: 'Rose', price: 69, image: 'https://i.ibb.co/8DdBQpQS/Capture-d-e-cran-2026-09-02-a-11-03-47.png' },
     ],
   },
+  // ── Salon : Fauteuil lounge nuage bouclé (coloris + prix à confirmer) ────────
+  // ⚠️ Image TEMPORAIRE + coloris à compléter (prix, noms & photos à envoyer)
+  {
+    id: 140,
+    name: 'Fauteuil lounge nuage bouclé',
+    category: 'Salon',
+    price: 499,
+    description: 'Fauteuil lounge au design sculptural et enveloppant, inspiration nuage. Assise généreuse en tissu bouclé doux au toucher, portée par un piètement métallique fin et élégant. Une pièce contemporaine et cosy, parfaite pour un coin lecture, un salon design ou une chambre. Confort moelleux et présence forte.',
+    images: [
+      'https://i.ibb.co/jvTFghrm/Capture-d-e-cran-2026-08-23-a-18-39-56.png',
+    ],
+    dimensions: 'Fauteuil individuel · assise enveloppante',
+    material: 'Tissu bouclé, piètement métal',
+    details: ['Design sculptural inspiration nuage', 'Tissu bouclé doux', 'Piètement métallique fin', 'Idéal coin lecture ou salon design'],
+  },
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
