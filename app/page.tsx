@@ -403,7 +403,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
-  const [suggMore, setSuggMore] = useState(false);
   const { count: wishCount } = useWishlist();
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
@@ -718,11 +717,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   {(() => {
                     const suggestionIds = [112, 77, 105, 100, 126, 110, 113, 83, 109, 94, 78, 107, 87, 79, 108];
                     const all = suggestionIds.map((id) => products.find((p) => p.id === id)).filter(Boolean) as typeof products;
-                    const shown = suggMore ? all : all.slice(0, 6);
                     return (
                       <>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
-                          {shown.map((prod) => {
+                          {all.map((prod) => {
                             const promoPrice = prod.name.includes('Bubble') ? Math.round(prod.price * 0.7) : prod.price;
                             return (
                               <Link
@@ -740,16 +738,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                             );
                           })}
                         </div>
-                        {!suggMore && all.length > 6 && (
-                          <div className="flex justify-center mt-6">
-                            <button
-                              onClick={() => setSuggMore(true)}
-                              className="border border-black text-black text-xs font-bold tracking-[0.2em] uppercase px-8 py-3 hover:bg-black hover:text-white transition-colors duration-300"
-                            >
-                              Voir plus
-                            </button>
-                          </div>
-                        )}
                       </>
                     );
                   })()}
