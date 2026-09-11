@@ -25,7 +25,7 @@ function rangeOf(name: string): string {
   if (n.includes('commode')) return 'Commodes';
   if (n.includes('armoire')) return 'Armoires';
   if (n.includes('buffet')) return 'Buffets';
-  if (n.includes('étagère') || n.includes('etagere') || n.includes('rangement')) return 'Rangements';
+  if (n.includes('étagère') || n.includes('etagere') || n.includes('rangement') || n.includes('support de livres') || n.includes('serre-livre') || n.includes('porte-revues')) return 'Rangements';
   return 'Autres';
 }
 
