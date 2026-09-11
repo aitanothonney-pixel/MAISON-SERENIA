@@ -1761,35 +1761,6 @@ const exactPriceProducts: Product[] = [
     material: 'Cuir noir, structure acier inoxydable',
     details: ['Design d\'inspiration Bauhaus', 'Cuir noir capitonné', 'Structure en acier inoxydable', 'Assise rembourrée confortable'],
   },
-  // ── Salon : Fauteuil paresseux convertible cuir noir ────────────────────────
-  // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
-  {
-    id: 136,
-    name: 'Fauteuil paresseux convertible en cuir',
-    category: 'Salon',
-    price: 249,
-    description: 'Fauteuil paresseux moderne et enveloppant, au design minimaliste. Format 2-en-1 : fauteuil compact en mode assise, ou déplié en couchage grâce à son repose-pieds intégré. Revêtement cuir doux, rembourrage moelleux — idéal pour un coin détente, un petit espace ou une chambre d\'ami. Disponible en noir, brun et orange.',
-    images: [
-      'https://i.ibb.co/jkp35HwD/Capture-d-e-cran-2026-09-02-a-10-31-46.png',
-      'https://i.ibb.co/F9qrYBp/Capture-d-e-cran-2026-09-02-a-10-31-59.png',
-      'https://i.ibb.co/Gv4jjBWc/Capture-d-e-cran-2026-09-02-a-10-32-05.png',
-      'https://i.ibb.co/WN765YJ3/Capture-d-e-cran-2026-09-02-a-10-32-35.png',
-      'https://i.ibb.co/Xx9h0Kmz/Capture-d-e-cran-2026-09-02-a-10-32-28.png',
-      'https://i.ibb.co/fYsyWwSt/Capture-d-e-cran-2026-09-02-a-10-31-53.png',
-      'https://i.ibb.co/NgTD0Pk9/Capture-d-e-cran-2026-09-02-a-10-32-41.png',
-      'https://i.ibb.co/WNkJF8GX/Capture-d-e-cran-2026-09-02-a-10-32-21.png',
-      'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png',
-    ],
-    dimensions: 'Mode fauteuil ~65 cm · Mode ouvert (déplié) plus long',
-    material: 'Revêtement cuir, rembourrage mousse',
-    details: ['Format 2-en-1 : fauteuil ou couchage', 'Repose-pieds intégré dépliable', 'Revêtement cuir moelleux', 'Idéal petit espace ou coin détente'],
-    sizeLabel: 'Coloris',
-    sizes: [
-      { label: 'Noir', price: 249, image: 'https://i.ibb.co/jkp35HwD/Capture-d-e-cran-2026-09-02-a-10-31-46.png' },
-      { label: 'Brun', price: 249, image: 'https://i.ibb.co/fYsyWwSt/Capture-d-e-cran-2026-09-02-a-10-31-53.png' },
-      { label: 'Orange', price: 249, image: 'https://i.ibb.co/TMX6G46Q/Capture-d-e-cran-2026-09-02-a-10-34-12.png' },
-    ],
-  },
   // ── Décorations : Support de livres en spirale rotatif (5 coloris) ───────────
   // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
   {
