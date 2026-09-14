@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Check, Gift } from 'lucide-react';
+import { Check, Gift, Eye, X } from 'lucide-react';
 import { Price } from '@/lib/currency';
 import { useCart } from '@/lib/useCart';
 
@@ -29,6 +29,7 @@ export function PackCheckout({
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
   const [selectedGift, setSelectedGift] = useState<number>(defaultGiftId);
+  const [lightbox, setLightbox] = useState(false);
 
   const gift = tableaux.find((t) => t.id === selectedGift) ?? tableaux[0];
 
@@ -50,9 +51,17 @@ export function PackCheckout({
         </div>
         <div className="flex items-center gap-3">
           {gift && (
-            <div className="relative w-16 h-16 bg-white border border-neutral-100 shrink-0 overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setLightbox(true)}
+              title="Voir le tableau en grand"
+              className="relative w-16 h-16 bg-white border border-neutral-100 shrink-0 overflow-hidden group/gift cursor-zoom-in"
+            >
               <Image src={gift.image} alt={gift.name} fill className="object-cover" />
-            </div>
+              <span className="absolute inset-0 bg-black/0 group-hover/gift:bg-black/30 transition-colors flex items-center justify-center">
+                <Eye className="w-4 h-4 text-white opacity-0 group-hover/gift:opacity-100 transition-opacity" />
+              </span>
+            </button>
           )}
           <div className="flex-1 min-w-0">
             <select
@@ -92,6 +101,26 @@ export function PackCheckout({
         >
           Acheter cet ensemble
         </button>
+      )}
+
+      {/* Lightbox du tableau offert */}
+      {lightbox && gift && (
+        <div
+          onClick={() => setLightbox(false)}
+          className="fixed inset-0 z-[130] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm cursor-zoom-out"
+        >
+          <button
+            onClick={() => setLightbox(false)}
+            aria-label="Fermer"
+            className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <div onClick={(e) => e.stopPropagation()} className="max-w-2xl w-full text-center">
+            <Image src={gift.image} alt={gift.name} width={900} height={1200} className="w-full h-auto max-h-[80vh] object-contain shadow-2xl" />
+            <p className="text-white text-sm mt-4 tracking-wide">{gift.name} · {giftSize}</p>
+          </div>
+        </div>
       )}
     </div>
   );
