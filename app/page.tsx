@@ -1562,6 +1562,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
   const tableaux = products.filter((p) => p.name.includes('Tableau'));
   const [selectedTableau, setSelectedTableau] = useState<number>(tableaux[0]?.id ?? 103);
   const [offerOn, setOfferOn] = useState(true);
+  const [giftLightbox, setGiftLightbox] = useState(false);
 
   const GIFT_SIZE = '50×70 cm';
   const GIFT_PRICE = 60;
@@ -1607,12 +1608,11 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
         <div className="flex justify-center my-3"><span className="text-neutral-300 text-2xl leading-none">+</span></div>
         <div className={`transition-opacity duration-200 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
           <div className="flex items-center gap-4">
-            <Link
-              href={`/products/${selectedTableau}`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setGiftLightbox(true)}
               title="Voir le tableau en grand"
-              className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-neutral-100 group/gift"
+              className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-neutral-100 group/gift cursor-zoom-in"
             >
               <Image src={gift.images[0]} alt={gift.name} width={140} height={140} className="object-cover w-full h-full transition-transform duration-300 group-hover/gift:scale-105" />
               <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">Offert</span>
@@ -1621,7 +1621,27 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
                   <Eye className="w-3 h-3" /> Voir
                 </span>
               </span>
-            </Link>
+            </button>
+
+            {/* Lightbox du tableau offert */}
+            {giftLightbox && (
+              <div
+                onClick={() => setGiftLightbox(false)}
+                className="fixed inset-0 z-[130] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm cursor-zoom-out"
+              >
+                <button
+                  onClick={() => setGiftLightbox(false)}
+                  aria-label="Fermer"
+                  className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <div onClick={(e) => e.stopPropagation()} className="max-w-2xl w-full text-center">
+                  <Image src={gift.images[0]} alt={gift.name} width={900} height={1200} className="w-full h-auto max-h-[80vh] object-contain shadow-2xl" />
+                  <p className="text-white text-sm mt-4 tracking-wide">{gift.name} · 50×70 cm</p>
+                </div>
+              </div>
+            )}
             <div className="flex-1 min-w-0">
               <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07840] mb-1">Tableau offert · 50×70 cm</p>
               <select
