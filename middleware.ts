@@ -2,12 +2,19 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 // Détecte le pays du visiteur (en-tête géo de Vercel) et pose un cookie devise :
 // Suisse -> CHF, partout ailleurs -> EUR.
+// Le paramètre ?devise=CHF (ou EUR) force la devise : il est utilisé par les liens
+// du flux Google Merchant Center (/feed.xml), pour que Google voie les prix en CHF
+// même quand son robot visite le site depuis l'étranger.
 export function middleware(request: NextRequest) {
   const country =
     request.headers.get('x-vercel-ip-country') ||
     request.headers.get('cf-ipcountry') ||
     '';
-  const currency = country.toUpperCase() === 'CH' ? 'CHF' : 'EUR';
+  const forced = request.nextUrl.searchParams.get('devise')?.toUpperCase();
+  const currency =
+    forced === 'CHF' || forced === 'EUR'
+      ? forced
+      : country.toUpperCase() === 'CH' ? 'CHF' : 'EUR';
 
   const res = NextResponse.next();
   res.cookies.set('mss-currency', currency, {
