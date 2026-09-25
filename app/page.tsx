@@ -2410,8 +2410,11 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center min-h-[100dvh] overflow-hidden">
+      {/* Hero — décalé sous le header fixe pour que l'image soit entièrement visible */}
+      <section
+        className="relative flex flex-col items-center justify-center overflow-hidden"
+        style={{ marginTop: barVisible ? 190 : 150, minHeight: `calc(100dvh - ${barVisible ? 190 : 150}px)` }}
+      >
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
