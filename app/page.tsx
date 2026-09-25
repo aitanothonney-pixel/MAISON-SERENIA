@@ -408,6 +408,17 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState('FR');
+
+  useEffect(() => {
+    try { const l = localStorage.getItem('mss-lang'); if (l) setLang(l); } catch { /* ignore */ }
+  }, []);
+  const chooseLang = (l: string) => {
+    setLang(l);
+    setLangOpen(false);
+    try { localStorage.setItem('mss-lang', l); } catch { /* ignore */ }
+  };
 
   useEffect(() => {
     try {
@@ -474,15 +485,41 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Très bien noté</span>
           </div>
           <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
-          <button className="flex items-center gap-1 hover:text-black transition-colors" aria-label="Langue">
-            FR <ChevronDown className="w-3.5 h-3.5" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setLangOpen((o) => !o)}
+              className="flex items-center gap-1 hover:text-black transition-colors"
+              aria-label="Langue"
+            >
+              {lang} <ChevronDown className={`w-3.5 h-3.5 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {langOpen && (
+              <>
+                <div className="fixed inset-0 z-[60]" onClick={() => setLangOpen(false)} />
+                <div className="absolute right-0 top-full mt-2 z-[61] bg-white border border-neutral-200 shadow-lg min-w-[140px] py-1">
+                  {[{ c: 'FR', n: 'Français' }, { c: 'EN', n: 'English' }, { c: 'DE', n: 'Deutsch' }].map((o) => (
+                    <button
+                      key={o.c}
+                      onClick={() => chooseLang(o.c)}
+                      className={`w-full text-left px-4 py-2 text-[13px] hover:bg-neutral-50 transition-colors flex items-center justify-between ${o.c === lang ? 'text-black font-semibold' : 'text-neutral-600'}`}
+                    >
+                      {o.n} <span className="text-[11px] text-neutral-400">{o.c}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Row 2 — logo + recherche + icônes + Trustpilot */}
       <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-[70px] flex items-center gap-4 lg:gap-8">
-        <Link href="/" className="shrink-0"><Logo color="black" size="md" /></Link>
+        <Link
+          href="/"
+          onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+          className="shrink-0"
+        ><Logo color="black" size="md" /></Link>
 
         {/* Recherche */}
         <button
@@ -535,9 +572,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         </div>
       </div>
 
-      {/* Row 3 — navigation catégories */}
+      {/* Row 3 — navigation catégories (répartie sur toute la largeur) */}
       <nav className="border-t border-neutral-200 bg-white">
-        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-11 flex items-center gap-5 lg:gap-7 overflow-x-auto scrollbar-hide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-11 flex items-center gap-5 overflow-x-auto scrollbar-hide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
           <button onClick={() => setDrawerOpen(true)} className="flex items-center gap-2 text-[13px] text-black shrink-0 pr-1" aria-label="Menu">
             <span className="flex flex-col gap-[3px]">
               <span className="block w-4 h-[1.5px] bg-black" />
@@ -546,12 +583,14 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             </span>
             <span className="hidden sm:inline uppercase tracking-[0.15em] text-[12px]">Menu</span>
           </button>
-          {navLinks.map((l) => (
-            <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap transition-colors shrink-0">
-              {l.label}
-            </Link>
-          ))}
-          <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap transition-colors shrink-0">Promotions</Link>
+          <div className="flex-1 flex items-center justify-between gap-5 lg:gap-6">
+            {navLinks.map((l) => (
+              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap transition-colors">
+                {l.label}
+              </Link>
+            ))}
+            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap transition-colors">Promotions</Link>
+          </div>
         </div>
       </nav>
     </header>
