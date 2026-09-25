@@ -8,6 +8,7 @@ import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp,
   Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift, Eye,
+  CreditCard, ChevronDown, User, Award, Star,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -448,106 +449,111 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
     };
   }, [searchFocused]);
 
-  const hoverBg = scrolled ? 'hover:bg-black/5' : 'hover:bg-white/15';
-  const textColor = scrolled ? 'text-black' : 'text-white';
-  const iconColor = scrolled ? 'text-black' : 'text-white';
+  const navLinks = [
+    { label: 'Salon', href: '/collections/salon' },
+    { label: 'Meubles', href: '/collections/meubles' },
+    { label: 'Décorations', href: '/collections/figurines' },
+    { label: 'Luminaires', href: '/collections/figurines?g=Luminaires' },
+    { label: 'Tableaux', href: '/collections/figurines?g=Tableaux' },
+    { label: 'Bubble', href: '/collections/bubble' },
+    { label: 'Inspiration', href: '/#section-explorer' },
+  ];
 
   return (
     <>
     <header
-      className={`fixed left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${
-        scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-100'
-          : 'bg-transparent border-b border-transparent'
-      }`}
+      className={`fixed left-0 right-0 z-50 bg-white transition-shadow duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
     >
-      {/* Main nav row */}
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 grid grid-cols-3 items-center h-16 lg:h-[68px]">
-        {/* LEFT — Menu + Search */}
-        <div className="flex items-center gap-2 lg:gap-3">
-          {/* Menu button (all breakpoints) */}
-          <button
-            onClick={() => setDrawerOpen(true)}
-            className={`flex items-center gap-2 px-2.5 py-2 transition-colors ${hoverBg}`}
-            aria-label="Menu"
-          >
-            <span className="flex flex-col gap-[3px]">
-              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
-              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
-              <span className={`block w-4 h-[1.5px] ${scrolled ? 'bg-black' : 'bg-white'}`} />
-            </span>
-            <span className={`hidden sm:inline text-[11px] tracking-[0.3em] uppercase ${textColor}`} style={{ fontFamily: 'var(--font-jost, sans-serif)', fontWeight: 400 }}>Menu</span>
-          </button>
-
-          {/* Search trigger — opens full-screen search overlay */}
-          <button
-            onClick={() => setSearchFocused(true)}
-            className={`hidden lg:flex items-center gap-2 px-3 py-2 border transition-colors ${
-              scrolled
-                ? 'border-neutral-200 bg-white hover:border-neutral-300 text-neutral-400'
-                : 'border-white/25 bg-white/5 hover:bg-white/10 text-white/60'
-            }`}
-            aria-label="Rechercher"
-          >
-            <Search className={`w-4 h-4 ${scrolled ? 'text-neutral-400' : 'text-white/70'}`} />
-            <span className="w-52 xl:w-64 text-xs text-left tracking-wide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
-          </button>
-        </div>
-
-        {/* CENTER — Logo */}
-        <div className="flex justify-center">
-          <Logo color={scrolled ? 'black' : 'white'} size="md" />
-        </div>
-
-        {/* RIGHT — CONTACTEZ-NOUS + user + cart */}
-        <div className="flex items-center gap-1 justify-end">
-          <Link
-            href="/contact"
-            className={`hidden lg:inline-block text-[11px] tracking-[0.3em] uppercase px-3 py-2 transition-colors ${textColor} ${hoverBg}`}
-            style={{ fontFamily: 'var(--font-jost, sans-serif)', fontWeight: 400 }}
-          >
-            Contactez-nous
-          </Link>
-
-          {/* Favoris (opens wishlist) */}
-          <button
-            onClick={onWishlistOpen}
-            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
-              scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
-            }`}
-            aria-label="Favoris"
-          >
-            <Heart className={`w-4 h-4 transition-colors ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : iconColor}`} strokeWidth={1.3} />
-            {mounted && wishCount > 0 && (
-              <span
-                className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
-                style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
-              >
-                {wishCount}
-              </span>
-            )}
-          </button>
-
-          {/* Cart */}
-          <button
-            onClick={onCartOpen}
-            className={`relative w-9 h-9 flex items-center justify-center border transition-all duration-300 ${
-              scrolled ? 'border-black/15 hover:border-black' : 'border-white/30 hover:border-white'
-            }`}
-            aria-label="Panier"
-          >
-            <ShoppingBag className={`w-4 h-4 ${iconColor}`} strokeWidth={1.5} />
-            {mounted && cartCount > 0 && (
-              <span
-                className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
-                style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
-              >
-                {cartCount}
-              </span>
-            )}
+      {/* Row 1 — barre d'arguments + langue */}
+      <div className="bg-[#f4f2ee] border-b border-neutral-200">
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-9 flex items-center justify-between text-[12px] text-neutral-700" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
+          <div className="hidden md:flex items-center gap-6 lg:gap-10">
+            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Livraison offerte</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Qualité vérifiée</span>
+            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Paiement facile</span>
+            <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Très bien noté</span>
+          </div>
+          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
+          <button className="flex items-center gap-1 hover:text-black transition-colors" aria-label="Langue">
+            FR <ChevronDown className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
+
+      {/* Row 2 — logo + recherche + icônes + Trustpilot */}
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-[70px] flex items-center gap-4 lg:gap-8">
+        <Link href="/" className="shrink-0"><Logo color="black" size="md" /></Link>
+
+        {/* Recherche */}
+        <button
+          onClick={() => setSearchFocused(true)}
+          className="flex-1 max-w-2xl flex items-stretch h-11 border border-neutral-300 hover:border-neutral-400 transition-colors group"
+          aria-label="Rechercher"
+        >
+          <span className="flex-1 flex items-center px-4 text-left text-sm text-neutral-400" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
+          <span className="w-12 bg-black flex items-center justify-center group-hover:bg-neutral-800 transition-colors">
+            <Search className="w-4 h-4 text-white" />
+          </span>
+        </button>
+
+        <div className="flex items-center gap-3 lg:gap-4 shrink-0 ml-auto">
+          {/* Compte / contact */}
+          <Link href="/contact" className="hidden sm:flex flex-col items-center text-neutral-700 hover:text-black transition-colors" aria-label="Contact">
+            <User className="w-[22px] h-[22px]" strokeWidth={1.4} />
+          </Link>
+
+          {/* Favoris */}
+          <button onClick={onWishlistOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Favoris">
+            <Heart className={`w-[22px] h-[22px] ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : ''}`} strokeWidth={1.4} />
+            {mounted && wishCount > 0 && (
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{wishCount}</span>
+            )}
+          </button>
+
+          {/* Panier */}
+          <button onClick={onCartOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Panier">
+            <ShoppingBag className="w-[22px] h-[22px]" strokeWidth={1.4} />
+            {mounted && cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{cartCount}</span>
+            )}
+          </button>
+
+          {/* Trustpilot */}
+          <div className="hidden xl:flex flex-col items-start pl-4 ml-1 border-l border-neutral-200 leading-tight">
+            <span className="text-[13px] font-bold text-black">Excellent</span>
+            <div className="flex items-center gap-0.5 my-0.5">
+              {[0,1,2,3,4].map((i) => (
+                <span key={i} className="w-3.5 h-3.5 bg-[#00b67a] flex items-center justify-center">
+                  <Star className="w-2.5 h-2.5 text-white" fill="white" strokeWidth={0} />
+                </span>
+              ))}
+            </div>
+            <span className="flex items-center gap-1 text-[11px] text-neutral-600">
+              <Star className="w-3 h-3 text-[#00b67a]" fill="#00b67a" strokeWidth={0} /> Trustpilot
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Row 3 — navigation catégories */}
+      <nav className="border-t border-neutral-200 bg-white">
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-11 flex items-center gap-5 lg:gap-7 overflow-x-auto scrollbar-hide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
+          <button onClick={() => setDrawerOpen(true)} className="flex items-center gap-2 text-[13px] text-black shrink-0 pr-1" aria-label="Menu">
+            <span className="flex flex-col gap-[3px]">
+              <span className="block w-4 h-[1.5px] bg-black" />
+              <span className="block w-4 h-[1.5px] bg-black" />
+              <span className="block w-4 h-[1.5px] bg-black" />
+            </span>
+            <span className="hidden sm:inline uppercase tracking-[0.15em] text-[12px]">Menu</span>
+          </button>
+          {navLinks.map((l) => (
+            <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap transition-colors shrink-0">
+              {l.label}
+            </Link>
+          ))}
+          <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap transition-colors shrink-0">Promotions</Link>
+        </div>
+      </nav>
     </header>
 
     {/* Full-screen search overlay */}
