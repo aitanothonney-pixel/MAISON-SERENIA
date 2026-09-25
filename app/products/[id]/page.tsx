@@ -1,5 +1,4 @@
 import { products } from '@/lib/products';
-import { buildReviewStats } from '@/lib/reviews';
 import { categoryToSlug } from '@/lib/collections';
 import ProductClient from './product-client';
 
@@ -34,11 +33,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const product = products.find(p => p.id === Number(id));
 
-  const stats = product ? buildReviewStats(product.id) : null;
   // Date de validité du prix (1 an), requise par Google pour les offres.
   const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
 
-  const jsonLd = product && stats
+  const jsonLd = product
     ? {
         '@context': 'https://schema.org',
         '@type': 'Product',
@@ -48,13 +46,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         category: product.category,
         material: product.material,
         brand: { '@type': 'Brand', name: 'Maison Serenia' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: stats.avg,
-          reviewCount: stats.total,
-          bestRating: 5,
-          worstRating: 1,
-        },
         offers: {
           '@type': 'Offer',
           url: `${BASE}/products/${product.id}`,

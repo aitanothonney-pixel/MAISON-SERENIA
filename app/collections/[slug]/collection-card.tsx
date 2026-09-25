@@ -3,7 +3,6 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Star } from 'lucide-react';
 import type { Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
 
@@ -69,10 +68,6 @@ export function CollectionCard({ product }: { product: Product }) {
       <div className="p-4">
         <div className="flex items-center justify-between mb-1">
           <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">{product.category}</p>
-          <div className="flex items-center gap-1">
-            <Star className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
-            <span className="text-[10px] text-neutral-400 tabular-nums">{(4.6 + (product.id % 4) * 0.1).toFixed(1)}</span>
-          </div>
         </div>
         <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
           {product.name}

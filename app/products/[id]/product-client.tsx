@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, Star, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Eye, Gift, Flame } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Gift } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -15,7 +15,6 @@ import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
-import { buildReviewStats, buildAllReviews } from '@/lib/reviews';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
@@ -73,16 +72,6 @@ const bubbleComplement: Record<number, number> = {
   22: 8, 8: 22,   // rouge
 };
 
-// ─── Deterministic per-product mock data (same product always shows the same numbers) ──
-
-function seedFromId(seed: number) {
-  let s = seed;
-  return function next() {
-    s = (s * 9301 + 49297) % 233280;
-    return s / 233280;
-  };
-}
-
 function dimensionGuideExtra(category: string) {
   if (category === 'Décorations') {
     return {
@@ -102,57 +91,9 @@ function dimensionGuideExtra(category: string) {
   };
 }
 
-const ACTIVITY_NAMES = ['Claude D.', 'Diane M.', 'Boris D.', 'Emma L.', 'Julien K.', 'Nadia S.', 'Marc T.', 'Alice V.', 'Hugo P.', 'Léa R.'];
-
-function buildLiveActivity(productId: number) {
-  const rng = seedFromId(productId * 17 + 55);
-  const viewers = 3 + Math.floor(rng() * 10);
-  const buyers = 1 + Math.floor(rng() * 7);
-  const names = [...ACTIVITY_NAMES].sort(() => rng() - 0.5);
-
-  // Nombre de lignes aléatoire (4 à 6)
-  const count = 4 + Math.floor(rng() * 3);
-  const feed: { name: string; action: string; type: 'view' | 'buy'; time: string }[] = [];
-  let elapsed = Math.floor(rng() * 3); // minutes depuis maintenant
-  let nameIdx = 0;
-
-  for (let i = 0; i < count; i++) {
-    const isBuy = rng() < 0.45;
-    // De temps en temps, une ligne groupée "+N personnes"
-    const grouped = isBuy && rng() < 0.3;
-    const name = grouped
-      ? `+${2 + Math.floor(rng() * 7)} personnes`
-      : names[nameIdx++ % names.length];
-    const time =
-      elapsed === 0 ? "à l'instant"
-      : elapsed === 1 ? 'il y a 1 min'
-      : elapsed < 60 ? `il y a ${elapsed} min`
-      : `il y a ${Math.floor(elapsed / 60)} h`;
-    feed.push({
-      name,
-      action: isBuy
-        ? (grouped ? 'ont acheté cet article' : 'a acheté cet article')
-        : 'regarde ce produit',
-      type: isBuy ? 'buy' : 'view',
-      time,
-    });
-    elapsed += 1 + Math.floor(rng() * 18); // écart aléatoire entre chaque ligne
-  }
-  return { viewers, buyers, feed };
-}
-
-// Prix élevé + forte marge (collection Bubble) => vaut la peine de pousser l'urgence d'achat
-function buildStockUrgency(productId: number) {
-  const rng = seedFromId(productId * 31 + 911);
-  const stock = 1 + Math.floor(rng() * 5);
-  const viewers = 2 + Math.floor(rng() * 9);
-  const soldThisMonth = 15 + Math.floor(rng() * 60);
-  return { stock, viewers, soldThisMonth };
-}
-
 const FAQ_ITEMS = [
   { q: 'Combien de temps pour la livraison ?', a: 'Comptez 1 à 4 semaines pour la livraison de votre commande, avec un suivi inclus dès l\'expédition.' },
-  { q: 'Comment retourner un article ?', a: "Vous disposez de 30 jours pour changer d'avis. Contactez notre service client pour lancer un retour : l'enlèvement à domicile est organisé gratuitement." },
+  { q: 'Comment retourner un article ?', a: "Vous disposez de 30 jours pour changer d'avis. Contactez notre service client pour lancer un retour. Les frais de retour sont à votre charge, sauf article défectueux ou erreur de notre part." },
   { q: 'Le produit est-il conforme aux photos ?', a: 'Oui, nos photos sont fidèles au produit livré. De légères variations de teinte peuvent survenir selon les écrans.' },
 ];
 
@@ -1002,9 +943,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     { title: dimExtra.title, content: dimExtra.content },
   ];
 
-  const reviewStats = buildReviewStats(product.id);
-  const reviews = buildAllReviews(product.id, product.category, product.name).slice(0, 3);
-  const stockUrgency = buildStockUrgency(product.id);
 
   const accordions = [
     {
@@ -1247,22 +1185,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400">{product.category}</p>
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-0.5">
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-300'}`}
-                        strokeWidth={i < Math.round(reviewStats.avg) ? 0 : 1.5}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs text-neutral-500 font-medium">{reviewStats.avg}</span>
-                  <span className="text-neutral-200">·</span>
-                  <Link href={`/products/${product.id}/avis`} className="text-xs text-neutral-400 underline underline-offset-2 hover:text-black transition-colors">
-                    {reviewStats.total} avis
-                  </Link>
-                </div>
                 {/* Social Share */}
                 <div className="flex gap-3 items-center text-neutral-400 text-xs mt-2">
                   <button
@@ -1302,34 +1224,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <p className="text-xs text-neutral-400 mt-3 tracking-wide">
                     Livraison offerte · Installation comprise
                   </p>
-                )}
-              </div>
-
-              {/* Disponibilité — mention discrète, sans alarmisme */}
-              {isBubble && (
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="w-1.5 h-1.5 rotate-45 shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)' }} />
-                  <p className="text-[11px] tracking-[0.18em] uppercase text-neutral-500">
-                    Édition limitée — plus que {stockUrgency.stock} exemplaires
-                  </p>
-                </div>
-              )}
-
-              {/* Preuve sociale — visiteurs en direct & ventes du mois */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-[11px] tracking-wide text-neutral-500">
-                <span className="flex items-center gap-1.5">
-                  <Eye className="w-3.5 h-3.5 text-[#A07840]" />
-                  <strong className="text-black font-medium tabular-nums">{stockUrgency.viewers}</strong>&nbsp;personnes regardent ce produit
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-[#A07840]" />
-                  <strong className="text-black font-medium tabular-nums">{stockUrgency.soldThisMonth}</strong>&nbsp;vendus ce mois-ci
-                </span>
-                {!isBubble && (
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] shrink-0" />
-                    Plus que&nbsp;<strong className="text-black font-medium tabular-nums">{stockUrgency.stock}</strong>&nbsp;en stock
-                  </span>
                 )}
               </div>
 
@@ -1625,65 +1519,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </AnimatePresence>
                 </div>
               ))}
-            </div>
-          </section>
-
-          {/* Avis de nos clients */}
-          <section className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-black mb-1">Avis de nos clients</h2>
-            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
-            <div className="bg-neutral-50 border border-neutral-200 p-6 mb-6 flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="text-center shrink-0 md:pr-6 md:border-r md:border-neutral-200 w-full md:w-auto">
-                <p className="text-4xl font-serif font-bold text-black">{reviewStats.avg}</p>
-                <div className="flex justify-center gap-0.5 my-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-4 h-4 ${i < Math.round(reviewStats.avg) ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-300'}`} />
-                  ))}
-                </div>
-                <p className="text-xs text-neutral-400">{reviewStats.total} avis vérifiés</p>
-              </div>
-              <div className="flex-1 w-full space-y-1.5">
-                {[
-                  { star: 5, count: reviewStats.five },
-                  { star: 4, count: reviewStats.four },
-                  { star: 3, count: reviewStats.three },
-                  { star: 2, count: reviewStats.two },
-                  { star: 1, count: reviewStats.one },
-                ].map(({ star, count }) => {
-                  const pct = reviewStats.total ? (count / reviewStats.total) * 100 : 0;
-                  return (
-                    <div key={star} className="flex items-center gap-3 text-xs">
-                      <span className="w-6 text-neutral-400 shrink-0">{star}★</span>
-                      <div className="flex-1 h-2 bg-neutral-200 overflow-hidden">
-                        <div className="h-full bg-[#C9A96E]" style={{ width: `${pct}%` }} />
-                      </div>
-                      <span className="w-8 text-right text-neutral-400 shrink-0">{count}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="space-y-3 mb-6">
-              {reviews.map((r, i) => (
-                <div key={i} className="border border-neutral-200 p-4">
-                  <div className="flex items-center justify-between mb-1.5 gap-2 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <span className="font-serif font-bold text-sm text-black">{r.name}</span>
-                      <span className="text-[10px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">Achat vérifié</span>
-                    </div>
-                    <span className="text-xs text-neutral-400">{r.date}</span>
-                  </div>
-                  <div className="flex gap-0.5 mb-1.5">
-                    {[...Array(5)].map((_, i2) => (
-                      <Star key={i2} className={`w-3.5 h-3.5 ${i2 < r.rating ? 'fill-[#C9A96E] text-[#C9A96E]' : 'text-neutral-200'}`} />
-                    ))}
-                  </div>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{r.text}</p>
-                </div>
-              ))}
-            </div>
-            <div className="text-center">
-              <Link href={`/products/${product.id}/avis`} className="text-sm font-semibold text-black hover:underline">Voir tous les avis →</Link>
             </div>
           </section>
 

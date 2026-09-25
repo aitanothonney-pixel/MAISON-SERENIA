@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
-  Search, X, Star, ArrowLeft, ArrowRight, Clock, TrendingUp,
+  Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp,
   Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift, Eye,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
@@ -1148,10 +1148,6 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
                 </div>
-                <div className="flex items-center gap-1 mb-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-2.5 h-2.5 fill-black text-black" />)}
-                  <span className="text-[10px] text-neutral-400 ml-1">(4,3)</span>
-                </div>
                 <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
@@ -1267,10 +1263,6 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
         <div className="p-4">
           <div className="flex items-center justify-between mb-1">
             <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400">{product.category}</p>
-            <div className="flex items-center gap-1">
-              <Star className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
-              <span className="text-[10px] text-neutral-400 tabular-nums">{(4.6 + (product.id % 4) * 0.1).toFixed(1)}</span>
-            </div>
           </div>
           <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
           <p className="text-neutral-400 text-[11px] mb-3 line-clamp-1">{product.description}</p>
@@ -1780,8 +1772,8 @@ function TrustStrip() {
   const items = [
     { Icon: Truck, title: 'Livraison Offerte', subtitle: `dès ${formatPrice(40, cur)}` },
     { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
-    { Icon: RotateCcw, title: 'Retours Gratuits', subtitle: '30 jours' },
-    { Icon: Star, title: '4.3/5', subtitle: '+1 200 clients' },
+    { Icon: RotateCcw, title: 'Retours 30 jours', subtitle: 'Satisfait ou remboursé' },
+    { Icon: Clock, title: 'Service client', subtitle: 'Réponse sous 48 h ouvrées' },
   ];
   return (
     <FadeInSection>
@@ -1794,16 +1786,7 @@ function TrustStrip() {
                 <Icon size={18} className="text-black relative" strokeWidth={1.2} />
               </div>
               <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
-              {title === '4.3/5' ? (
-                <div className="flex items-center gap-0.5">
-                  {[0, 1, 2, 3, 4].map((s) => (
-                    <Star key={s} size={11} className="text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
-                  ))}
-                  <span className="text-[10px] text-neutral-500 tracking-wide ml-1.5">{subtitle}</span>
-                </div>
-              ) : (
-                <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
-              )}
+              <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
             </div>
           ))}
         </div>
@@ -2483,16 +2466,6 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/80"
           >
-            <span className="flex items-center gap-1.5 text-[11px] tracking-wide">
-              <span className="flex items-center gap-0.5">
-                {[0, 1, 2, 3, 4].map((s) => (
-                  <Star key={s} className="w-3 h-3 text-[#C9A96E]" fill="#C9A96E" strokeWidth={0} />
-                ))}
-              </span>
-              <span className="font-medium">4,3/5</span>
-              <span className="text-white/50">· +1 200 clients</span>
-            </span>
-            <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
