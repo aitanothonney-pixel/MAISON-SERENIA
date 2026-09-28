@@ -410,6 +410,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setLang] = useState('FR');
+  const [headerHidden, setHeaderHidden] = useState(false);
 
   useEffect(() => {
     try { const l = localStorage.getItem('mss-lang'); if (l) setLang(l); } catch { /* ignore */ }
@@ -443,8 +444,16 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > (hasBar ? 76 : 40));
-    window.addEventListener('scroll', onScroll);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > (hasBar ? 76 : 40));
+      // Masque le header en défilant vers le bas, le révèle en remontant
+      if (y > lastY && y > 240) setHeaderHidden(true);
+      else if (y < lastY) setHeaderHidden(false);
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
     const t = setTimeout(() => setMounted(true), 800);
     return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
   }, [hasBar]);
@@ -473,7 +482,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   return (
     <>
     <header
-      className={`fixed left-0 right-0 z-50 bg-white transition-shadow duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
+      className={`fixed left-0 right-0 z-50 bg-white transition-[transform,box-shadow] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
+      style={{ transform: headerHidden ? `translateY(-${hasBar ? 190 : 150}px)` : 'translateY(0)' }}
     >
       {/* Row 1 — barre d'arguments + langue */}
       <div className="bg-[#f4f2ee] border-b border-neutral-200">
