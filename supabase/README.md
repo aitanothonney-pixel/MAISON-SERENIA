@@ -13,12 +13,30 @@ lancées manuellement, après validation (voir Phase 8).
 | Fichier | Contenu |
 |---|---|
 | `0001_init.sql` | Schéma initial : tables, contraintes, index, RLS, statuts |
-| `0002_*` (à venir) | Fonctions atomiques réservation → vente (Phase 4/5) |
+| `0002_stock_functions.sql` | Fonctions atomiques réservation → vente + anti-survente |
 | `0003_seed_catalog.sql` | **Généré** : amorçage catalogue (86 produits · 343 variantes) |
 
-> Les migrations s'appliquent dans l'ordre du numéro. `0002` (fonctions atomiques)
-> sera écrit en Phase 4, avant tout déploiement ; `0003` ne dépend que du schéma
-> `0001`, donc l'ordre reste correct même si `0002` arrive après dans le temps.
+> Les migrations s'appliquent dans l'ordre du numéro. `0003` ne dépend que du
+> schéma `0001` ; `0002` ajoute les fonctions de stock. Aucune ne crée de stock.
+
+### Fonctions de stock (`0002`, Phase 4)
+
+Protection anti-survente par **verrouillage de ligne** (`select … for update`).
+Disponible à la vente = `stock` − Σ réservations `active` non expirées.
+
+- `reserve_stock(p_items, p_token, p_ttl_minutes)` — réserve **tout ou rien**.
+  N'agit que sur les variantes `active = true` ; une variante inconnue ou non
+  gérée n'est **ni réservée ni bloquée**. Items : `[{legacy_id, size, qty}]`.
+- `release_reservation(p_token)` — libère les réservations d'un jeton (abandon).
+- `consume_reservation(p_token, p_order_id)` — paiement confirmé : décrémente le
+  stock **une seule fois**, journalise un mouvement `sale` (appelé en Phase 5).
+- `cleanup_expired_reservations()` — passe les réservations échues en `expired`.
+- Vue `variant_availability` — `stock`, `reserved`, `available` par variante.
+
+Exécution **réservée à `service_role`** (serveur). Le checkout
+(`app/api/checkout/route.ts`) réserve via `lib/inventory.ts` **avant** de créer
+la session Stripe et transmet le jeton dans `metadata`. En **fail-open** : si
+Supabase n'est pas configuré ou répond en erreur, la vente passe comme avant.
 
 ### Amorçage du catalogue (`0003`, Phase 3)
 

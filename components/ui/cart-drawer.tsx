@@ -212,6 +212,15 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         body: JSON.stringify({ items: items.map((i) => ({ id: i.id, qty: i.qty, size: i.size })), promo: welcomeActive }),
       });
       const data = await res.json();
+      // Rupture de stock sur un article géré : message clair, aucun paiement lancé.
+      if (res.status === 409 && data?.error === 'out_of_stock') {
+        const lignes = (data.unavailable || [])
+          .map((u: { name?: string | null; size?: string | null; available: number }) =>
+            `• ${u.name || 'Article'}${u.size ? ` (${u.size})` : ''} — ${u.available > 0 ? `reste ${u.available}` : 'épuisé'}`)
+          .join('\n');
+        alert(`Stock insuffisant pour certains articles :\n${lignes}\n\nMerci d'ajuster les quantités avant de valider.`);
+        return;
+      }
       if (data?.url) {
         window.location.href = data.url;
         return;

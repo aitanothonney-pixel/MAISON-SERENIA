@@ -1,4 +1,5 @@
 import { products } from '@/lib/products';
+import { reserveStock, releaseReservation } from '@/lib/inventory';
 
 // Runtime Node.js, jamais mis en cache
 export const runtime = 'nodejs';
@@ -93,7 +94,29 @@ export async function POST(req: Request) {
 
   if (cart.length === 0) return Response.json({ error: 'Panier vide' }, { status: 400 });
 
+  // Jeton de réservation, transmis à Stripe (metadata) pour la Phase 5 (webhook).
+  const reservationToken = `rsv_${globalThis.crypto.randomUUID()}`;
+
   try {
+    // ── Réservation de stock AVANT paiement ──────────────────────────────────
+    // Sans effet si le suivi de stock n'est pas activé (variante active = false
+    // ou Supabase non configuré) : le checkout reste identique à aujourd'hui.
+    const reservation = await reserveStock(
+      rawItems.map((it) => ({
+        legacy_id: Number(it.id),
+        size: it.size ?? null,
+        qty: Math.max(1, Math.min(20, Math.floor(Number(it.qty) || 1))),
+      })),
+      reservationToken,
+    );
+    if (!reservation.ok) {
+      const unavailable = reservation.unavailable.map((u) => ({
+        ...u,
+        name: products.find((p) => p.id === u.legacy_id)?.name ?? null,
+      }));
+      return Response.json({ error: 'out_of_stock', unavailable }, { status: 409 });
+    }
+
     // Recalcul sécurisé côté serveur
     const subtotal = cart.reduce((s, x) => s + x.unit * x.qty, 0);
     const qtyOf = (id: number) => cart.find((x) => x.product.id === id)?.qty ?? 0;
@@ -127,6 +150,9 @@ export async function POST(req: Request) {
       mode: 'payment',
       'phone_number_collection[enabled]': 'true',
       locale: 'fr',
+      // Jeton de réservation : lu par le webhook (Phase 5) pour consommer/libérer le stock.
+      'metadata[reservation_token]': reservationToken,
+      'payment_intent_data[metadata][reservation_token]': reservationToken,
     };
 
     cart.forEach((x, i) => {
@@ -158,6 +184,8 @@ export async function POST(req: Request) {
     const session = await stripeRequest('/checkout/sessions', key, params);
     return Response.json({ url: session.url });
   } catch (err) {
+    // La création Stripe a échoué : on libère la réservation éventuelle (best-effort).
+    await releaseReservation(reservationToken).catch(() => {});
     console.error('Stripe checkout error:', err);
     return Response.json({ error: 'checkout_failed', message: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
