@@ -193,3 +193,10 @@ create policy "public read active variants" on product_variants
 -- Aucune policy pour `anon` sur les autres tables => accès refusé par défaut.
 -- Les écritures et les lectures sensibles passent par la clé `service_role`
 -- (serveur uniquement), qui contourne la RLS. Ne JAMAIS exposer service_role au client.
+
+-- Privilèges de table : une policy filtre les LIGNES mais ne donne pas le droit
+-- SELECT. On l'accorde explicitement sur les deux tables en lecture publique
+-- (la RLS ci-dessus limite ensuite aux lignes published / active). Les rôles
+-- anon / authenticated existent déjà sur Supabase.
+grant usage on schema public to anon, authenticated;
+grant select on products, product_variants to anon, authenticated;
