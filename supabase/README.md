@@ -15,6 +15,7 @@ lancées manuellement, après validation (voir Phase 8).
 | `0001_init.sql` | Schéma initial : tables, contraintes, index, RLS, statuts |
 | `0002_stock_functions.sql` | Fonctions atomiques réservation → vente + anti-survente |
 | `0003_seed_catalog.sql` | **Généré** : amorçage catalogue (86 produits · 343 variantes) |
+| `0004_admin_functions.sql` | Ajustement de stock admin (`set_variant_stock`) + journal |
 
 > Les migrations s'appliquent dans l'ordre du numéro. `0003` ne dépend que du
 > schéma `0001` ; `0002` ajoute les fonctions de stock. Aucune ne crée de stock.
@@ -137,10 +138,25 @@ Une réservation `consumed` **ne peut pas** être libérée.
 
 À définir dans Vercel au moment du déploiement (Phase 8) :
 
-- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_URL` *(ou `SUPABASE_URL` côté serveur)*
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`  *(serveur uniquement — jamais `NEXT_PUBLIC`)*
 - `STRIPE_WEBHOOK_SECRET`
+- `ADMIN_PASSWORD` *(déjà utilisé — accès à `/gestion`)*
+- `ADMIN_SESSION_SECRET` *(optionnel — signe le cookie de session admin ; à défaut, dérivé de `ADMIN_PASSWORD`)*
+
+## Espace de gestion (Phase 6)
+
+`/gestion/commandes` et `/gestion/stock`, protégés par une **session en cookie
+httpOnly signé** (HMAC) — le mot de passe ne transite qu'en POST (`/api/admin/login`),
+plus jamais dans l'URL. Routes : `GET/PATCH /api/admin/orders[/:id]`,
+`GET/PATCH /api/admin/stock[/:variantId]`, `GET /api/admin/session`.
+
+- **Commandes** : lues depuis la base si Supabase est configuré, sinon repli en
+  lecture Stripe (statuts non modifiables tant que la base n'existe pas). Édition
+  du statut d'expédition, du transporteur et du numéro de suivi.
+- **Stock** : stock + bascule « géré » (`active`) par variante, via
+  `set_variant_stock()` (journalisé). Décocher « géré » = vente sans limite.
 
 ## Appliquer (plus tard, après validation)
 
