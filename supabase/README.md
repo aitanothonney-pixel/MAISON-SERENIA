@@ -14,6 +14,37 @@ lancées manuellement, après validation (voir Phase 8).
 |---|---|
 | `0001_init.sql` | Schéma initial : tables, contraintes, index, RLS, statuts |
 | `0002_*` (à venir) | Fonctions atomiques réservation → vente (Phase 4/5) |
+| `0003_seed_catalog.sql` | **Généré** : amorçage catalogue (86 produits · 343 variantes) |
+
+> Les migrations s'appliquent dans l'ordre du numéro. `0002` (fonctions atomiques)
+> sera écrit en Phase 4, avant tout déploiement ; `0003` ne dépend que du schéma
+> `0001`, donc l'ordre reste correct même si `0002` arrive après dans le temps.
+
+### Amorçage du catalogue (`0003`, Phase 3)
+
+Fichier **généré**, jamais édité à la main :
+
+```bash
+npm run export:catalog
+```
+
+Le script `scripts/export-catalog.mjs` lit `lib/products.ts` et produit :
+
+- `supabase/migrations/0003_seed_catalog.sql` — un `insert` par produit + un par variante.
+- `supabase/catalog-mapping.json` — correspondance **ancien id → slug + SKU** (traçabilité).
+
+Règles de l'amorçage :
+
+- **SKU stable** par variante : `P<id>` (sans option) ou `P<id>-<OPTION>` (ex. `P137-ARGENT`,
+  `P134-AMBER-5-TETES`). `legacy_size_label` = le champ `size` du panier.
+- `price_cents` = **prix catalogue (liste)** en centimes CHF, *avant* remises dynamiques
+  (Bubble −30 %, packs 1900.-, tableau offert, −10 % membre). Ces remises restent
+  appliquées au paiement (`app/api/checkout/route.ts`) et seront ré-appliquées en
+  Phase 4/5 à partir de ce prix de base — **aucun** changement de prix affiché.
+- **Aucun stock inventé** : `stock = 0`, `active = false`, `published = false` partout.
+  La boutique publique continue de lire `lib/products.ts` jusqu'à la bascule validée.
+- **Idempotent** : `on conflict do nothing` — rejouer la migration ne réécrase ni le
+  stock ni l'état `active` qu'un admin aurait réglés après l'amorçage.
 
 ## Modèle de données (0001)
 

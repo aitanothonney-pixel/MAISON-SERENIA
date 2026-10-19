@@ -1,0 +1,2754 @@
+{
+  "generated_at": "2026-10-19",
+  "source": "lib/products.ts",
+  "products": 86,
+  "variants": 343,
+  "items": [
+    {
+      "legacy_id": 2,
+      "slug": "fauteuil-bubble-blanc",
+      "name": "Fauteuil Bubble blanc",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P2",
+          "option": "Default",
+          "size": null,
+          "price_cents": 78900
+        }
+      ]
+    },
+    {
+      "legacy_id": 10,
+      "slug": "canape-bubble-blanc",
+      "name": "Canapé Bubble blanc",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P10",
+          "option": "Default",
+          "size": null,
+          "price_cents": 235900
+        }
+      ]
+    },
+    {
+      "legacy_id": 6,
+      "slug": "fauteuil-bubble-bleu",
+      "name": "Fauteuil Bubble bleu",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P6",
+          "option": "Default",
+          "size": null,
+          "price_cents": 78900
+        }
+      ]
+    },
+    {
+      "legacy_id": 13,
+      "slug": "canape-bubble-bleu",
+      "name": "Canapé Bubble bleu",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P13",
+          "option": "Default",
+          "size": null,
+          "price_cents": 235900
+        }
+      ]
+    },
+    {
+      "legacy_id": 8,
+      "slug": "fauteuil-bubble-rouge",
+      "name": "Fauteuil Bubble rouge",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P8",
+          "option": "Default",
+          "size": null,
+          "price_cents": 78900
+        }
+      ]
+    },
+    {
+      "legacy_id": 22,
+      "slug": "canape-bubble-rouge",
+      "name": "Canapé Bubble rouge",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P22",
+          "option": "Default",
+          "size": null,
+          "price_cents": 235900
+        }
+      ]
+    },
+    {
+      "legacy_id": 12,
+      "slug": "canape-bubble-violet-special",
+      "name": "Canapé Bubble violet spécial",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P12",
+          "option": "Default",
+          "size": null,
+          "price_cents": 235900
+        }
+      ]
+    },
+    {
+      "legacy_id": 7,
+      "slug": "fauteuil-bubble-vert",
+      "name": "Fauteuil Bubble vert",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P7",
+          "option": "Default",
+          "size": null,
+          "price_cents": 78900
+        }
+      ]
+    },
+    {
+      "legacy_id": 9,
+      "slug": "fauteuil-bubble-orange",
+      "name": "Fauteuil Bubble orange",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P9",
+          "option": "Default",
+          "size": null,
+          "price_cents": 78900
+        }
+      ]
+    },
+    {
+      "legacy_id": 60,
+      "slug": "meuble-tv-bois-150-cm",
+      "name": "Meuble TV bois 150 cm",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P60",
+          "option": "Default",
+          "size": null,
+          "price_cents": 23900
+        }
+      ]
+    },
+    {
+      "legacy_id": 61,
+      "slug": "meuble-tv-extensible-noir",
+      "name": "Meuble TV extensible noir",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P61",
+          "option": "Default",
+          "size": null,
+          "price_cents": 16900
+        }
+      ]
+    },
+    {
+      "legacy_id": 62,
+      "slug": "table-a-manger-ovale-en-bois-massif",
+      "name": "Table à manger ovale en bois massif",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P62",
+          "option": "Default",
+          "size": null,
+          "price_cents": 23900
+        }
+      ]
+    },
+    {
+      "legacy_id": 63,
+      "slug": "table-a-manger-ovale-en-bois-massif-63",
+      "name": "Table à manger ovale en bois massif",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P63",
+          "option": "Default",
+          "size": null,
+          "price_cents": 23900
+        }
+      ]
+    },
+    {
+      "legacy_id": 64,
+      "slug": "meuble-tv-industriel-brun-rustique",
+      "name": "Meuble TV industriel brun rustique",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P64",
+          "option": "Default",
+          "size": null,
+          "price_cents": 10900
+        }
+      ]
+    },
+    {
+      "legacy_id": 71,
+      "slug": "vase-ceramique-coquille",
+      "name": "Vase céramique coquille",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P71",
+          "option": "Default",
+          "size": null,
+          "price_cents": 7900
+        }
+      ]
+    },
+    {
+      "legacy_id": 72,
+      "slug": "vase-ceramique-minimaliste",
+      "name": "Vase céramique minimaliste",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P72",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 73,
+      "slug": "vase-ceramique-minimaliste-73",
+      "name": "Vase céramique minimaliste",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P73",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 74,
+      "slug": "commode-6-tiroirs-bois-noir",
+      "name": "Commode 6 tiroirs bois & noir",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P74",
+          "option": "Default",
+          "size": null,
+          "price_cents": 18900
+        }
+      ]
+    },
+    {
+      "legacy_id": 75,
+      "slug": "commode-meuble-tv-long-a-tiroirs",
+      "name": "Commode meuble TV long à tiroirs",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P75",
+          "option": "Default",
+          "size": null,
+          "price_cents": 21900
+        }
+      ]
+    },
+    {
+      "legacy_id": 76,
+      "slug": "commode-blanche-6-tiroirs",
+      "name": "Commode blanche 6 tiroirs",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P76",
+          "option": "Default",
+          "size": null,
+          "price_cents": 16900
+        }
+      ]
+    },
+    {
+      "legacy_id": 112,
+      "slug": "canape-sectionnel-convertible-3-places-gris",
+      "name": "Canapé sectionnel convertible 3 places gris",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P112",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 113,
+      "slug": "canape-modulable-en-u-style-nuage-blanc",
+      "name": "Canapé modulable en U style nuage blanc",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P113",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 114,
+      "slug": "canape-modulable-en-u-style-nuage-noir",
+      "name": "Canapé modulable en U style nuage noir",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P114",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 115,
+      "slug": "canape-modulable-en-u-style-nuage-gris",
+      "name": "Canapé modulable en U style nuage gris",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P115",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 116,
+      "slug": "ensemble-de-vases-en-ceramique-boheme-beige",
+      "name": "Ensemble de vases en céramique bohème beige",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P116",
+          "option": "Default",
+          "size": null,
+          "price_cents": 6900
+        }
+      ]
+    },
+    {
+      "legacy_id": 117,
+      "slug": "ensemble-de-vases-en-ceramique-boheme-noir",
+      "name": "Ensemble de vases en céramique bohème noir",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P117",
+          "option": "Default",
+          "size": null,
+          "price_cents": 6900
+        }
+      ]
+    },
+    {
+      "legacy_id": 118,
+      "slug": "ensemble-de-2-vases-double-forme-speciale-orange",
+      "name": "Ensemble de 2 vases double forme spéciale orange",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P118",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 119,
+      "slug": "ensemble-de-2-vases-double-forme-speciale-vert-matcha",
+      "name": "Ensemble de 2 vases double forme spéciale vert matcha",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P119",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 120,
+      "slug": "ensemble-de-2-vases-double-forme-speciale-chocolat",
+      "name": "Ensemble de 2 vases double forme spéciale chocolat",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P120",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 121,
+      "slug": "ensemble-de-2-vases-double-forme-speciale-blanc-casse",
+      "name": "Ensemble de 2 vases double forme spéciale blanc cassé",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P121",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 122,
+      "slug": "vase-decoratif-abstrait-moderne-en-resine-noir",
+      "name": "Vase décoratif abstrait moderne en résine noir",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P122",
+          "option": "Default",
+          "size": null,
+          "price_cents": 3900
+        }
+      ]
+    },
+    {
+      "legacy_id": 123,
+      "slug": "vase-decoratif-abstrait-moderne-en-resine-blanc",
+      "name": "Vase décoratif abstrait moderne en résine blanc",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P123",
+          "option": "Default",
+          "size": null,
+          "price_cents": 3900
+        }
+      ]
+    },
+    {
+      "legacy_id": 124,
+      "slug": "vase-decoratif-abstrait-moderne-en-resine-or",
+      "name": "Vase décoratif abstrait moderne en résine or",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P124",
+          "option": "Default",
+          "size": null,
+          "price_cents": 3900
+        }
+      ]
+    },
+    {
+      "legacy_id": 125,
+      "slug": "vase-plastique-elegant-boho-chic",
+      "name": "Vase plastique élégant Boho Chic",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P125-PETIT-BEIGE",
+          "option": "Petit · Beige",
+          "size": "Petit · Beige",
+          "price_cents": 1900
+        },
+        {
+          "sku": "P125-PETIT-NOIR",
+          "option": "Petit · Noir",
+          "size": "Petit · Noir",
+          "price_cents": 1900
+        },
+        {
+          "sku": "P125-GRAND-BEIGE",
+          "option": "Grand · Beige",
+          "size": "Grand · Beige",
+          "price_cents": 2900
+        },
+        {
+          "sku": "P125-GRAND-NOIR",
+          "option": "Grand · Noir",
+          "size": "Grand · Noir",
+          "price_cents": 2900
+        },
+        {
+          "sku": "P125-DUO-BEIGE-PETIT-GRAND",
+          "option": "Duo · Beige (petit + grand)",
+          "size": "Duo · Beige (petit + grand)",
+          "price_cents": 4500
+        },
+        {
+          "sku": "P125-DUO-NOIR-PETIT-GRAND",
+          "option": "Duo · Noir (petit + grand)",
+          "size": "Duo · Noir (petit + grand)",
+          "price_cents": 4500
+        },
+        {
+          "sku": "P125-DUO-PETIT-BEIGE-GRAND-NO",
+          "option": "Duo · Petit beige + Grand noir",
+          "size": "Duo · Petit beige + Grand noir",
+          "price_cents": 4500
+        },
+        {
+          "sku": "P125-DUO-PETIT-NOIR-GRAND-BEI",
+          "option": "Duo · Petit noir + Grand beige",
+          "size": "Duo · Petit noir + Grand beige",
+          "price_cents": 4500
+        }
+      ]
+    },
+    {
+      "legacy_id": 134,
+      "slug": "lustre-suspension-en-verre-a-globes",
+      "name": "Lustre suspension en verre à globes",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P134-SMOKY-GRAY",
+          "option": "Smoky gray",
+          "size": "Smoky gray",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P134-AMBER",
+          "option": "Amber",
+          "size": "Amber",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P134-TRANSPARENT",
+          "option": "Transparent",
+          "size": "Transparent",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P134-AMBER-3-TETES",
+          "option": "Amber · 3 têtes",
+          "size": "Amber · 3 têtes",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-SMOKE-GRAY-3-TETES",
+          "option": "Smoke gray · 3 têtes",
+          "size": "Smoke gray · 3 têtes",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-TRANSPARENT-3-TETES",
+          "option": "Transparent · 3 têtes",
+          "size": "Transparent · 3 têtes",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-AMBER-BARRE-3-LONG",
+          "option": "Amber · Barre 3 (Long)",
+          "size": "Amber · Barre 3 (Long)",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-SMOKE-GRAY-BARRE-3-LONG",
+          "option": "Smoke gray · Barre 3 (Long)",
+          "size": "Smoke gray · Barre 3 (Long)",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-TRANSPARENT-BARRE-3-LONG",
+          "option": "Transparent · Barre 3 (Long)",
+          "size": "Transparent · Barre 3 (Long)",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P134-COMBINAISON",
+          "option": "Combinaison",
+          "size": "Combinaison",
+          "price_cents": 13900
+        },
+        {
+          "sku": "P134-SMOKE-GRAY-5-TETES",
+          "option": "Smoke gray · 5 têtes",
+          "size": "Smoke gray · 5 têtes",
+          "price_cents": 19900
+        },
+        {
+          "sku": "P134-AMBER-5-TETES",
+          "option": "Amber · 5 têtes",
+          "size": "Amber · 5 têtes",
+          "price_cents": 19900
+        },
+        {
+          "sku": "P134-TRANSPARENT-5-TETES",
+          "option": "Transparent · 5 têtes",
+          "size": "Transparent · 5 têtes",
+          "price_cents": 19900
+        },
+        {
+          "sku": "P134-AMBER-5-TETES-BARRE-70-C",
+          "option": "Amber · 5 têtes barre 70 cm",
+          "size": "Amber · 5 têtes barre 70 cm",
+          "price_cents": 23900
+        },
+        {
+          "sku": "P134-SMOKE-GRAY-5-TETES-BARRE",
+          "option": "Smoke gray · 5 têtes barre 70 cm",
+          "size": "Smoke gray · 5 têtes barre 70 cm",
+          "price_cents": 23900
+        },
+        {
+          "sku": "P134-TRANSPARENT-5-TETES-BARR",
+          "option": "Transparent · 5 têtes barre 70 cm",
+          "size": "Transparent · 5 têtes barre 70 cm",
+          "price_cents": 23900
+        }
+      ]
+    },
+    {
+      "legacy_id": 131,
+      "slug": "lustre-vintage-en-vitrail",
+      "name": "Lustre vintage en vitrail",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P131-BROWN-1",
+          "option": "Brown 1",
+          "size": "Brown 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-ORANGE-1",
+          "option": "Matte Orange 1",
+          "size": "Matte Orange 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-ORANGE-2",
+          "option": "Matte Orange 2",
+          "size": "Matte Orange 2",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-ORANGE-3",
+          "option": "Matte Orange 3",
+          "size": "Matte Orange 3",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-ORANGE-4",
+          "option": "Matte Orange 4",
+          "size": "Matte Orange 4",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-ORANGE-5",
+          "option": "Matte Orange 5",
+          "size": "Matte Orange 5",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-PINK-1",
+          "option": "Pink 1",
+          "size": "Pink 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-PINK-2",
+          "option": "Pink 2",
+          "size": "Pink 2",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-PINK-3",
+          "option": "Pink 3",
+          "size": "Pink 3",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-PINK-4",
+          "option": "Pink 4",
+          "size": "Pink 4",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-PINK-5",
+          "option": "Pink 5",
+          "size": "Pink 5",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-WHITE-1",
+          "option": "White 1",
+          "size": "White 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-WHITE-2",
+          "option": "White 2",
+          "size": "White 2",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-WHITE-3",
+          "option": "White 3",
+          "size": "White 3",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-WHITE-4",
+          "option": "White 4",
+          "size": "White 4",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-WHITE-5",
+          "option": "White 5",
+          "size": "White 5",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-BROWN-2",
+          "option": "Brown 2",
+          "size": "Brown 2",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-BROWN-3",
+          "option": "Brown 3",
+          "size": "Brown 3",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-BROWN-4",
+          "option": "Brown 4",
+          "size": "Brown 4",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-BROWN-5",
+          "option": "Brown 5",
+          "size": "Brown 5",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-GREEN-1",
+          "option": "Matte Green 1",
+          "size": "Matte Green 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-MATTE-GREEN-2",
+          "option": "Matte Green 2",
+          "size": "Matte Green 2",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-GREEN-1",
+          "option": "Green 1",
+          "size": "Green 1",
+          "price_cents": 11900
+        },
+        {
+          "sku": "P131-GREEN-2",
+          "option": "Green 2",
+          "size": "Green 2",
+          "price_cents": 11900
+        }
+      ]
+    },
+    {
+      "legacy_id": 130,
+      "slug": "lustre-en-verre-retro-nordique",
+      "name": "Lustre en verre rétro nordique",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P130-BEIGE-BLANC",
+          "option": "Beige + Blanc",
+          "size": "Beige + Blanc",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-ROSE-BLANC",
+          "option": "Rose + Blanc",
+          "size": "Rose + Blanc",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-BORDEAUX-BLANC",
+          "option": "Bordeaux + Blanc",
+          "size": "Bordeaux + Blanc",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-VERT-FONCE-BLANC",
+          "option": "Vert foncé + Blanc",
+          "size": "Vert foncé + Blanc",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-BEIGE-VERT-THE",
+          "option": "Beige + Vert thé",
+          "size": "Beige + Vert thé",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-ROSE-VERT-THE",
+          "option": "Rose + Vert thé",
+          "size": "Rose + Vert thé",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-BORDEAUX-VERT-THE",
+          "option": "Bordeaux + Vert thé",
+          "size": "Bordeaux + Vert thé",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-JAUNE-ORANGE",
+          "option": "Jaune + Orange",
+          "size": "Jaune + Orange",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-BORDEAUX-ORANGE",
+          "option": "Bordeaux + Orange",
+          "size": "Bordeaux + Orange",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-VERT-FONCE-ORANGE",
+          "option": "Vert foncé + Orange",
+          "size": "Vert foncé + Orange",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-VERT-FONCE-VERT-THE",
+          "option": "Vert foncé + Vert thé",
+          "size": "Vert foncé + Vert thé",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-BEIGE-VERT",
+          "option": "Beige + Vert",
+          "size": "Beige + Vert",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-VERT-FONCE-VERT",
+          "option": "Vert foncé + Vert",
+          "size": "Vert foncé + Vert",
+          "price_cents": 14900
+        },
+        {
+          "sku": "P130-JAUNE-VERT",
+          "option": "Jaune + Vert",
+          "size": "Jaune + Vert",
+          "price_cents": 14900
+        }
+      ]
+    },
+    {
+      "legacy_id": 129,
+      "slug": "lampe-suspendue-led-bois-minimaliste",
+      "name": "Lampe suspendue LED bois minimaliste",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P129-1-LUMIERE",
+          "option": "1 lumière",
+          "size": "1 lumière",
+          "price_cents": 15900
+        },
+        {
+          "sku": "P129-2-LUMIERES",
+          "option": "2 lumières",
+          "size": "2 lumières",
+          "price_cents": 21900
+        },
+        {
+          "sku": "P129-3-LUMIERES",
+          "option": "3 lumières",
+          "size": "3 lumières",
+          "price_cents": 26900
+        },
+        {
+          "sku": "P129-4-LUMIERES",
+          "option": "4 lumières",
+          "size": "4 lumières",
+          "price_cents": 31900
+        }
+      ]
+    },
+    {
+      "legacy_id": 126,
+      "slug": "fauteuil-individuel-en-cuir-style-nordique-noir",
+      "name": "Fauteuil individuel en cuir style nordique noir",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P126",
+          "option": "Default",
+          "size": null,
+          "price_cents": 34900
+        }
+      ]
+    },
+    {
+      "legacy_id": 127,
+      "slug": "fauteuil-individuel-en-cuir-style-nordique-blanc",
+      "name": "Fauteuil individuel en cuir style nordique blanc",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P127",
+          "option": "Default",
+          "size": null,
+          "price_cents": 34900
+        }
+      ]
+    },
+    {
+      "legacy_id": 133,
+      "slug": "lot-de-2-tables-basses-rondes-noyer",
+      "name": "Lot de 2 tables basses rondes noyer",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P133",
+          "option": "Default",
+          "size": null,
+          "price_cents": 19900
+        }
+      ]
+    },
+    {
+      "legacy_id": 132,
+      "slug": "table-a-manger-en-bois-massif-nordique",
+      "name": "Table à manger en bois massif nordique",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P132",
+          "option": "Default",
+          "size": null,
+          "price_cents": 54900
+        }
+      ]
+    },
+    {
+      "legacy_id": 77,
+      "slug": "table-basse-farmhouse-en-bois",
+      "name": "Table basse Farmhouse en bois",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P77",
+          "option": "Default",
+          "size": null,
+          "price_cents": 21800
+        }
+      ]
+    },
+    {
+      "legacy_id": 78,
+      "slug": "table-basse-industrielle-2-niveaux",
+      "name": "Table basse industrielle 2 niveaux",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P78",
+          "option": "Default",
+          "size": null,
+          "price_cents": 9800
+        }
+      ]
+    },
+    {
+      "legacy_id": 79,
+      "slug": "table-basse-ovale-vintage-2-niveaux",
+      "name": "Table basse ovale vintage 2 niveaux",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P79",
+          "option": "Default",
+          "size": null,
+          "price_cents": 12800
+        }
+      ]
+    },
+    {
+      "legacy_id": 80,
+      "slug": "table-basse-ovale-vintage-2-niveaux-80",
+      "name": "Table basse ovale vintage 2 niveaux",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P80",
+          "option": "Default",
+          "size": null,
+          "price_cents": 12800
+        }
+      ]
+    },
+    {
+      "legacy_id": 81,
+      "slug": "table-basse-moderne-noire-2-etageres",
+      "name": "Table basse moderne noire 2 étagères",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P81",
+          "option": "Default",
+          "size": null,
+          "price_cents": 14800
+        }
+      ]
+    },
+    {
+      "legacy_id": 82,
+      "slug": "table-d-appoint-2-niveaux-noyer",
+      "name": "Table d'appoint 2 niveaux noyer",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P82",
+          "option": "Default",
+          "size": null,
+          "price_cents": 9800
+        }
+      ]
+    },
+    {
+      "legacy_id": 83,
+      "slug": "table-basse-bicolore-a-niveaux-decales",
+      "name": "Table basse bicolore à niveaux décalés",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P83",
+          "option": "Default",
+          "size": null,
+          "price_cents": 9800
+        }
+      ]
+    },
+    {
+      "legacy_id": 84,
+      "slug": "lot-de-2-tables-gigognes",
+      "name": "Lot de 2 tables gigognes",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P84",
+          "option": "Default",
+          "size": null,
+          "price_cents": 12800
+        }
+      ]
+    },
+    {
+      "legacy_id": 85,
+      "slug": "lot-de-2-tables-gigognes-85",
+      "name": "Lot de 2 tables gigognes",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P85",
+          "option": "Default",
+          "size": null,
+          "price_cents": 12800
+        }
+      ]
+    },
+    {
+      "legacy_id": 86,
+      "slug": "lot-de-2-tables-gigognes-86",
+      "name": "Lot de 2 tables gigognes",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P86",
+          "option": "Default",
+          "size": null,
+          "price_cents": 12800
+        }
+      ]
+    },
+    {
+      "legacy_id": 87,
+      "slug": "canape-d-angle-3-places-creme",
+      "name": "Canapé d'angle 3 places crème",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P87",
+          "option": "Default",
+          "size": null,
+          "price_cents": 79800
+        }
+      ]
+    },
+    {
+      "legacy_id": 88,
+      "slug": "canape-d-angle-en-l-chenille-bleu",
+      "name": "Canapé d'angle en L chenille bleu",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P88",
+          "option": "Default",
+          "size": null,
+          "price_cents": 79800
+        }
+      ]
+    },
+    {
+      "legacy_id": 89,
+      "slug": "canape-lit-modulaire-chenille",
+      "name": "Canapé-lit modulaire chenille",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P89",
+          "option": "Default",
+          "size": null,
+          "price_cents": 75000
+        }
+      ]
+    },
+    {
+      "legacy_id": 90,
+      "slug": "canape-lit-modulaire-chenille-90",
+      "name": "Canapé-lit modulaire chenille",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P90",
+          "option": "Default",
+          "size": null,
+          "price_cents": 75000
+        }
+      ]
+    },
+    {
+      "legacy_id": 91,
+      "slug": "canape-lit-modulaire-chenille-91",
+      "name": "Canapé-lit modulaire chenille",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P91",
+          "option": "Default",
+          "size": null,
+          "price_cents": 75000
+        }
+      ]
+    },
+    {
+      "legacy_id": 92,
+      "slug": "canape-lit-modulaire-chenille-92",
+      "name": "Canapé-lit modulaire chenille",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P92",
+          "option": "Default",
+          "size": null,
+          "price_cents": 75000
+        }
+      ]
+    },
+    {
+      "legacy_id": 93,
+      "slug": "canape-lit-modulaire-flanelle",
+      "name": "Canapé-lit modulaire flanelle",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P93",
+          "option": "Default",
+          "size": null,
+          "price_cents": 99900
+        }
+      ]
+    },
+    {
+      "legacy_id": 94,
+      "slug": "canape-d-angle-modulable-en-u-gris-fonce",
+      "name": "Canapé d'angle modulable en U gris foncé",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P94",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 95,
+      "slug": "canape-d-angle-modulable-en-u-noir",
+      "name": "Canapé d'angle modulable en U noir",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P95",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 96,
+      "slug": "canape-d-angle-modulable-en-u-gris-clair",
+      "name": "Canapé d'angle modulable en U gris clair",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P96",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 97,
+      "slug": "canape-d-angle-modulable-en-u-beige",
+      "name": "Canapé d'angle modulable en U beige",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P97",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 98,
+      "slug": "canape-d-angle-modulable-en-u-brun",
+      "name": "Canapé d'angle modulable en U brun",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P98",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 99,
+      "slug": "canape-d-angle-modulable-en-u-vert",
+      "name": "Canapé d'angle modulable en U vert",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P99",
+          "option": "Default",
+          "size": null,
+          "price_cents": 74900
+        }
+      ]
+    },
+    {
+      "legacy_id": 100,
+      "slug": "canape-modulable-en-l-style-nuage-gris-anthracite",
+      "name": "Canapé modulable en L style nuage gris anthracite",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P100",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 101,
+      "slug": "canape-modulable-en-l-style-nuage-beige",
+      "name": "Canapé modulable en L style nuage beige",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P101",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 102,
+      "slug": "canape-modulable-en-l-style-nuage-blanc-chaud",
+      "name": "Canapé modulable en L style nuage blanc chaud",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P102",
+          "option": "Default",
+          "size": null,
+          "price_cents": 84900
+        }
+      ]
+    },
+    {
+      "legacy_id": 103,
+      "slug": "tableau-abstrait-dore-brun",
+      "name": "Tableau abstrait doré & brun",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P103-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P103-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P103-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P103-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P103-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P103-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P103-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P103-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P103-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P103-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P103-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P103-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P103-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P103-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P103-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P103-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P103-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P103-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P103-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P103-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P103-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 104,
+      "slug": "tableau-abstrait-texture",
+      "name": "Tableau abstrait texturé",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P104-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P104-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P104-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P104-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P104-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P104-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P104-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P104-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P104-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P104-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P104-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P104-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P104-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P104-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P104-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P104-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P104-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P104-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P104-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P104-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P104-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 105,
+      "slug": "tableau-abstrait-horizon-dore",
+      "name": "Tableau abstrait Horizon doré",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P105-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P105-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P105-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P105-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P105-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P105-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P105-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P105-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P105-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P105-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P105-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P105-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P105-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P105-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P105-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P105-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P105-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P105-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P105-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P105-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P105-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 106,
+      "slug": "tableau-abstrait-brume",
+      "name": "Tableau abstrait Brume",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P106-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P106-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P106-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P106-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P106-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P106-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P106-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P106-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P106-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P106-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P106-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P106-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P106-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P106-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P106-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P106-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P106-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P106-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P106-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P106-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P106-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 107,
+      "slug": "tableau-abstrait-terre-or",
+      "name": "Tableau abstrait Terre & Or",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P107-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P107-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P107-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P107-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P107-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P107-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P107-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P107-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P107-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P107-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P107-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P107-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P107-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P107-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P107-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P107-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P107-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P107-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P107-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P107-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P107-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 108,
+      "slug": "tableau-abstrait-eclat",
+      "name": "Tableau abstrait Éclat",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P108-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P108-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P108-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P108-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P108-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P108-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P108-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P108-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P108-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P108-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P108-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P108-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P108-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P108-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P108-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P108-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P108-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P108-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P108-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P108-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P108-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 109,
+      "slug": "tableau-abstrait-serenite",
+      "name": "Tableau abstrait Sérénité",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P109-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P109-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P109-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P109-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P109-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P109-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P109-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P109-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P109-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P109-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P109-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P109-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P109-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P109-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P109-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P109-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P109-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P109-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P109-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P109-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P109-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 110,
+      "slug": "tableau-abstrait-nuance",
+      "name": "Tableau abstrait Nuance",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P110-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P110-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P110-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P110-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P110-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P110-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P110-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P110-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P110-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P110-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P110-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P110-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P110-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P110-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P110-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P110-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P110-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P110-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P110-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P110-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P110-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 111,
+      "slug": "tableau-abstrait-reflets",
+      "name": "Tableau abstrait Reflets",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P111-50X70-CM",
+          "option": "50×70 cm",
+          "size": "50×70 cm",
+          "price_cents": 6000
+        },
+        {
+          "sku": "P111-60X80-CM",
+          "option": "60×80 cm",
+          "size": "60×80 cm",
+          "price_cents": 7500
+        },
+        {
+          "sku": "P111-60X90-CM",
+          "option": "60×90 cm",
+          "size": "60×90 cm",
+          "price_cents": 9000
+        },
+        {
+          "sku": "P111-75X100-CM",
+          "option": "75×100 cm",
+          "size": "75×100 cm",
+          "price_cents": 10500
+        },
+        {
+          "sku": "P111-80X120-CM",
+          "option": "80×120 cm",
+          "size": "80×120 cm",
+          "price_cents": 12000
+        },
+        {
+          "sku": "P111-80X140-CM",
+          "option": "80×140 cm",
+          "size": "80×140 cm",
+          "price_cents": 13500
+        },
+        {
+          "sku": "P111-80X160-CM",
+          "option": "80×160 cm",
+          "size": "80×160 cm",
+          "price_cents": 15000
+        },
+        {
+          "sku": "P111-90X120-CM",
+          "option": "90×120 cm",
+          "size": "90×120 cm",
+          "price_cents": 16500
+        },
+        {
+          "sku": "P111-90X130-CM",
+          "option": "90×130 cm",
+          "size": "90×130 cm",
+          "price_cents": 18000
+        },
+        {
+          "sku": "P111-90X150-CM",
+          "option": "90×150 cm",
+          "size": "90×150 cm",
+          "price_cents": 19500
+        },
+        {
+          "sku": "P111-90X180-CM",
+          "option": "90×180 cm",
+          "size": "90×180 cm",
+          "price_cents": 21000
+        },
+        {
+          "sku": "P111-100X160-CM",
+          "option": "100×160 cm",
+          "size": "100×160 cm",
+          "price_cents": 22500
+        },
+        {
+          "sku": "P111-100X180-CM",
+          "option": "100×180 cm",
+          "size": "100×180 cm",
+          "price_cents": 24000
+        },
+        {
+          "sku": "P111-110X160-CM",
+          "option": "110×160 cm",
+          "size": "110×160 cm",
+          "price_cents": 25500
+        },
+        {
+          "sku": "P111-110X220-CM",
+          "option": "110×220 cm",
+          "size": "110×220 cm",
+          "price_cents": 27000
+        },
+        {
+          "sku": "P111-120X180-CM",
+          "option": "120×180 cm",
+          "size": "120×180 cm",
+          "price_cents": 28500
+        },
+        {
+          "sku": "P111-120X200-CM",
+          "option": "120×200 cm",
+          "size": "120×200 cm",
+          "price_cents": 30000
+        },
+        {
+          "sku": "P111-150X220-CM",
+          "option": "150×220 cm",
+          "size": "150×220 cm",
+          "price_cents": 31500
+        },
+        {
+          "sku": "P111-120X240-CM",
+          "option": "120×240 cm",
+          "size": "120×240 cm",
+          "price_cents": 33000
+        },
+        {
+          "sku": "P111-130X260-CM",
+          "option": "130×260 cm",
+          "size": "130×260 cm",
+          "price_cents": 34500
+        },
+        {
+          "sku": "P111-150X250-CM",
+          "option": "150×250 cm",
+          "size": "150×250 cm",
+          "price_cents": 36000
+        }
+      ]
+    },
+    {
+      "legacy_id": 135,
+      "slug": "fauteuil-bauhaus-en-cuir-noir-acier",
+      "name": "Fauteuil Bauhaus en cuir noir & acier",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P135",
+          "option": "Default",
+          "size": null,
+          "price_cents": 54900
+        }
+      ]
+    },
+    {
+      "legacy_id": 137,
+      "slug": "support-de-livres-en-spirale-rotatif-en-metal",
+      "name": "Support de livres en spirale rotatif en métal",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P137-ARGENT",
+          "option": "Argent",
+          "size": "Argent",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P137-NOIR",
+          "option": "Noir",
+          "size": "Noir",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P137-ROUGE",
+          "option": "Rouge",
+          "size": "Rouge",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P137-ORANGE",
+          "option": "Orange",
+          "size": "Orange",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P137-BLEU",
+          "option": "Bleu",
+          "size": "Bleu",
+          "price_cents": 6900
+        }
+      ]
+    },
+    {
+      "legacy_id": 138,
+      "slug": "etagere-rotative-en-spirale-a-ressort",
+      "name": "Étagère rotative en spirale à ressort",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P138-ARGENT",
+          "option": "Argent",
+          "size": "Argent",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-NOIR",
+          "option": "Noir",
+          "size": "Noir",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-BEIGE",
+          "option": "Beige",
+          "size": "Beige",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-ROSE",
+          "option": "Rose",
+          "size": "Rose",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-ROUGE",
+          "option": "Rouge",
+          "size": "Rouge",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-JAUNE",
+          "option": "Jaune",
+          "size": "Jaune",
+          "price_cents": 5900
+        },
+        {
+          "sku": "P138-BLEU",
+          "option": "Bleu",
+          "size": "Bleu",
+          "price_cents": 5900
+        }
+      ]
+    },
+    {
+      "legacy_id": 139,
+      "slug": "etagere-a-livres-design-en-forme-de-boule",
+      "name": "Étagère à livres design en forme de boule",
+      "category": "Décorations",
+      "variants": [
+        {
+          "sku": "P139-ARGENT",
+          "option": "Argent",
+          "size": "Argent",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P139-NOIR",
+          "option": "Noir",
+          "size": "Noir",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P139-BLEU",
+          "option": "Bleu",
+          "size": "Bleu",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P139-ROUGE",
+          "option": "Rouge",
+          "size": "Rouge",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P139-JAUNE",
+          "option": "Jaune",
+          "size": "Jaune",
+          "price_cents": 6900
+        },
+        {
+          "sku": "P139-ROSE",
+          "option": "Rose",
+          "size": "Rose",
+          "price_cents": 6900
+        }
+      ]
+    },
+    {
+      "legacy_id": 140,
+      "slug": "fauteuil-lounge-nuage-boucle",
+      "name": "Fauteuil lounge nuage bouclé",
+      "category": "Salon",
+      "variants": [
+        {
+          "sku": "P140-BLANC",
+          "option": "Blanc",
+          "size": "Blanc",
+          "price_cents": 49900
+        },
+        {
+          "sku": "P140-NOIR",
+          "option": "Noir",
+          "size": "Noir",
+          "price_cents": 49900
+        }
+      ]
+    },
+    {
+      "legacy_id": 65,
+      "slug": "table-d-appoint-double-couche",
+      "name": "Table d'appoint double couche",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P65",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 66,
+      "slug": "table-d-appoint-double-couche-66",
+      "name": "Table d'appoint double couche",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P66",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 67,
+      "slug": "table-d-appoint-double-couche-67",
+      "name": "Table d'appoint double couche",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P67",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    },
+    {
+      "legacy_id": 68,
+      "slug": "table-basse-mobile-noire",
+      "name": "Table basse mobile noire",
+      "category": "Meubles",
+      "variants": [
+        {
+          "sku": "P68",
+          "option": "Default",
+          "size": null,
+          "price_cents": 4900
+        }
+      ]
+    }
+  ]
+}
