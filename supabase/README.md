@@ -38,6 +38,33 @@ Exécution **réservée à `service_role`** (serveur). Le checkout
 la session Stripe et transmet le jeton dans `metadata`. En **fail-open** : si
 Supabase n'est pas configuré ou répond en erreur, la vente passe comme avant.
 
+### Webhook Stripe (Phase 5)
+
+Endpoint : `POST /api/stripe/webhook` (`app/api/stripe/webhook/route.ts`).
+
+- **Vérifie la signature** Stripe sur le corps brut (`STRIPE_WEBHOOK_SECRET`).
+- **Idempotent** : `orders` est upserté sur `stripe_session_id` (clé unique) —
+  une relance Stripe ne crée jamais de doublon. Table `stripe_events` = journal.
+- `checkout.session.completed` → crée `orders` + `order_items` (prix figés depuis
+  les lignes Stripe) puis `consume_reservation()` (décrément stock une fois).
+- `checkout.session.expired` / échec → `release_reservation()`.
+- `charge.refunded` → passe la commande en `refunded` / `partially_refunded`.
+- Sans Supabase configuré : la signature est vérifiée puis l'événement est
+  **acquitté** sans rien persister (aucune relance inutile).
+
+À configurer côté Stripe (Phase 8) : un point de terminaison vers
+`https://<domaine>/api/stripe/webhook` écoutant `checkout.session.completed`,
+`checkout.session.expired`, `charge.refunded`. Planifier aussi
+`cleanup_expired_reservations()` (tâche régulière) pour solder les réservations
+échues.
+
+### Lier les variantes aux `order_items`
+
+En Phase 5, `order_items.sku = 'N/A'` et `variant_id = null` : la source figée
+est la ligne Stripe (nom + prix net facturé). Le rattachement précis à une
+variante se fera quand le suivi de stock sera activé (via les réservations
+consommées). Cela n'affecte ni le montant ni l'affichage client.
+
 ### Amorçage du catalogue (`0003`, Phase 3)
 
 Fichier **généré**, jamais édité à la main :
