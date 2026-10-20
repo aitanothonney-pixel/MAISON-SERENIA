@@ -166,7 +166,7 @@ export default function FaqPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
           <h1
             className="text-4xl md:text-5xl font-bold text-black mb-4"
@@ -213,7 +213,7 @@ export default function FaqPage() {
               className="text-2xl font-bold text-white mb-3"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Vous n'avez pas trouvé votre réponse ?
+              Vous n&apos;avez pas trouvé votre réponse ?
             </h3>
             <p
               className="text-neutral-400 text-sm mb-6"

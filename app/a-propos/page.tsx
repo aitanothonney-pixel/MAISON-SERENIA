@@ -24,7 +24,7 @@ export default function AProposPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-white transition-colors mb-10"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
           <p
             className="text-xs uppercase tracking-[0.3em] text-neutral-400 mb-4"
@@ -42,7 +42,7 @@ export default function AProposPage() {
             className="text-neutral-400 text-lg max-w-xl leading-relaxed"
             style={{ fontFamily: 'var(--font-dm-sans)' }}
           >
-            MAISON SERENIA est née d'une conviction simple : chaque intérieur mérite des pièces au design fort, choisies avec soin et rendues accessibles.
+            MAISON SERENIA est née d&apos;une conviction simple : chaque intérieur mérite des pièces au design fort, choisies avec soin et rendues accessibles.
           </p>
         </div>
       </section>
@@ -59,13 +59,13 @@ export default function AProposPage() {
               Une passion pour le design
             </h2>
             <p className="text-neutral-600 leading-relaxed mb-4">
-              Fondée en 2024 à Genève, MAISON SERENIA s'est donné pour mission de rendre le design d'exception accessible. Nous parcourons les tendances déco pour vous proposer une sélection resserrée de pièces sculpturales, de collection et de décoration contemporaine.
+              Fondée en 2024 à Genève, MAISON SERENIA s&apos;est donné pour mission de rendre le design d&apos;exception accessible. Nous parcourons les tendances déco pour vous proposer une sélection resserrée de pièces sculpturales, de collection et de décoration contemporaine.
             </p>
             <p className="text-neutral-600 leading-relaxed mb-4">
               Notre approche est simple : sélectionner des pièces au caractère affirmé, aux lignes qui traversent les saisons, et les livrer chez vous avec le plus grand soin.
             </p>
             <p className="text-neutral-600 leading-relaxed">
-              Notre nom, SERENIA, évoque la sérénité que peut procurer un intérieur soigné. C'est cette émotion que nous cherchons à créer pour chacun de nos clients.
+              Notre nom, SERENIA, évoque la sérénité que peut procurer un intérieur soigné. C&apos;est cette émotion que nous cherchons à créer pour chacun de nos clients.
             </p>
           </div>
           <div className="bg-neutral-950 p-10 flex flex-col justify-center min-h-[300px]">

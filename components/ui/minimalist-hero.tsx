@@ -81,7 +81,7 @@ export function MinimalistHeroSection() {
                 <path id="circle-path" d="M 100,100 m -70,0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
               </defs>
               <text fontSize="7" letterSpacing="4" fill="#999">
-                <textPath href="#circle-path">MAISON SERENIA · COLLECTION 2026 · MOBILIER D'EXCEPTION · </textPath>
+                <textPath href="#circle-path">MAISON SERENIA · COLLECTION 2026 · MOBILIER D&apos;EXCEPTION ·</textPath>
               </text>
             </svg>
           </motion.div>

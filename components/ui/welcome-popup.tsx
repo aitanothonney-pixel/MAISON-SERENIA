@@ -38,6 +38,11 @@ export function WelcomePopup() {
     return () => { window.removeEventListener('scroll', trigger); clearTimeout(fallback); };
   }, []);
 
+  const close = () => {
+    try { localStorage.setItem('welcome-popup-seen', '1'); } catch { /* ignore */ }
+    setVisible(false);
+  };
+
   useEffect(() => {
     if (!visible) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
@@ -49,11 +54,6 @@ export function WelcomePopup() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
-
-  const close = () => {
-    try { localStorage.setItem('welcome-popup-seen', '1'); } catch { /* ignore */ }
-    setVisible(false);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

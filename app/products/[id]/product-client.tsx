@@ -822,6 +822,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const barVisible = useAnnouncementBarVisible();
+  // Refs de défilement déclarées avant tout return anticipé (règles des hooks)
+  const relatedScrollRef = useRef<HTMLDivElement>(null);
+  const recentScrollRef = useRef<HTMLDivElement>(null);
+  // Fourchette de livraison estimée, calculée une seule fois (évite un appel
+  // impur — Date.now — pendant le rendu).
+  const [deliveryRange] = useState(() => {
+    const fmt = (days: number) =>
+      new Date(Date.now() + days * 864e5).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' });
+    return { from: fmt(7), to: fmt(28) };
+  });
 
   // Taille par défaut = la plus petite (première) si le produit propose des tailles
   useEffect(() => {
@@ -900,12 +910,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           ).slice(0, 8);
         })();
 
-  const relatedScrollRef = useRef<HTMLDivElement>(null);
   const scrollRelated = (dir: 'left' | 'right') => {
     relatedScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
 
-  const recentScrollRef = useRef<HTMLDivElement>(null);
   const scrollRecent = (dir: 'left' | 'right') => {
     recentScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
@@ -1320,13 +1328,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="flex items-center gap-2.5 mb-5 px-4 py-3 border border-neutral-100 bg-neutral-50/60">
                 <Truck className="w-4 h-4 text-[#A07840] shrink-0" />
                 <p className="text-xs text-neutral-600">
-                  Commandez aujourd'hui — livraison estimée entre le{' '}
-                  <strong className="text-black font-medium">
-                    {new Date(Date.now() + 7 * 864e5).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' })}
-                  </strong>{' '}et le{' '}
-                  <strong className="text-black font-medium">
-                    {new Date(Date.now() + 28 * 864e5).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' })}
-                  </strong>
+                  Commandez aujourd&apos;hui — livraison estimée entre le{' '}
+                  <strong className="text-black font-medium">{deliveryRange.from}</strong>{' '}et le{' '}
+                  <strong className="text-black font-medium">{deliveryRange.to}</strong>
                 </p>
               </div>
 

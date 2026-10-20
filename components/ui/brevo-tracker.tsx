@@ -17,8 +17,7 @@ export function BrevoTracker() {
     w.sib = { equeue: [], client_key: CLIENT_KEY };
     w.sendinblue = {};
     ['track', 'identify', 'trackLink', 'page'].forEach((k) => {
-      w.sendinblue[k] = function () {
-        const arg = Array.prototype.slice.call(arguments);
+      w.sendinblue[k] = function (...arg: any[]) {
         (w.sib[k] || function () { const t: any = {}; t[k] = arg; w.sib.equeue.push(t); })(arg[0], arg[1], arg[2], arg[3]);
       };
     });

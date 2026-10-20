@@ -22,7 +22,7 @@ export default function RetoursPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
@@ -143,7 +143,7 @@ export default function RetoursPage() {
             </div>
           </div>
           <p className="mt-6 text-xs text-neutral-400" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Les frais de retour sont à la charge du client sauf en cas d'erreur de notre part ou d'article défectueux.
+            Les frais de retour sont à la charge du client sauf en cas d&apos;erreur de notre part ou d&apos;article défectueux.
           </p>
         </section>
 
@@ -212,7 +212,7 @@ export default function RetoursPage() {
                   <option value="">Sélectionnez un motif</option>
                   <option value="defect">Article défectueux</option>
                   <option value="wrong">Article incorrect reçu</option>
-                  <option value="change">Changement d'avis</option>
+                  <option value="change">Changement d&apos;avis</option>
                   <option value="size">Taille / dimensions non conformes</option>
                   <option value="other">Autre</option>
                 </select>

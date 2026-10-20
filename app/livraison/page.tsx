@@ -17,7 +17,7 @@ export default function LivraisonPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
@@ -55,7 +55,7 @@ export default function LivraisonPage() {
                 Suivi de commande
               </h2>
               <p className="text-neutral-600 mb-4" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                Dès l'expédition de votre colis, vous recevrez un e-mail contenant votre numéro de suivi. Vous pouvez à tout moment suivre l'acheminement de votre commande directement sur le site du transporteur.
+                Dès l&apos;expédition de votre colis, vous recevrez un e-mail contenant votre numéro de suivi. Vous pouvez à tout moment suivre l&apos;acheminement de votre commande directement sur le site du transporteur.
               </p>
               <ul className="space-y-3" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                 {[

@@ -59,7 +59,7 @@ export default function ContactPage() {
             href="/"
             className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
           <div className="flex items-center gap-4 mb-4">
             <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
@@ -73,7 +73,7 @@ export default function ContactPage() {
             </h1>
           </div>
           <p className="text-neutral-500 text-lg" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Une question, un projet, ou simplement envie d'échanger — nous sommes là.
+            Une question, un projet, ou simplement envie d&apos;échanger — nous sommes là.
           </p>
         </div>
       </section>
