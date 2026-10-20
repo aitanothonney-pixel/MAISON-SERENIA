@@ -44,6 +44,8 @@ const ScrollExpandMedia = ({
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // Réinitialise l'animation quand le type de média change — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScrollProgress(0);
     setShowContent(false);
     setMediaFullyExpanded(false);

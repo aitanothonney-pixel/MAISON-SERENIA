@@ -52,7 +52,6 @@ export function WelcomePopup() {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   const handleSubmit = (e: React.FormEvent) => {

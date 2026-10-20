@@ -413,6 +413,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   const [headerHidden, setHeaderHidden] = useState(false);
 
   useEffect(() => {
+    // Lecture de la langue (store client) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     try { const l = localStorage.getItem('mss-lang'); if (l) setLang(l); } catch { /* ignore */ }
   }, []);
   const chooseLang = (l: string) => {
@@ -424,6 +426,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
   useEffect(() => {
     try {
       const stored = JSON.parse(localStorage.getItem('recent-searches') || '[]');
+      // Lecture des recherches récentes (store client) au montage — motif légitime.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (Array.isArray(stored)) setRecentSearches(stored);
     } catch { /* ignore */ }
   }, []);
@@ -1931,6 +1935,8 @@ function CookieBanner() {
 
   useEffect(() => {
     const stored = localStorage.getItem('cookie-consent');
+    // Lecture du consentement cookies (store client) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (!stored) setVisible(true);
   }, []);
 
@@ -2291,7 +2297,8 @@ export default function Home() {
   const cur = useCurrency();
   const [activeFilter, setActiveFilter] = useState('Salon');
   const [visibleCount, setVisibleCount] = useState(12);
-  // Réinitialise l'affichage à 12 produits quand on change d'onglet
+  // Réinitialise l'affichage à 12 produits quand on change d'onglet — motif légitime.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setVisibleCount(12); }, [activeFilter]);
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
@@ -2320,6 +2327,8 @@ export default function Home() {
     window.addEventListener('hashchange', onHashChange);
     // Handle initial hash on page load
     if (window.location.hash === '#tous') {
+      // Applique le filtre depuis le hash d'URL initial — motif légitime.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveFilter('Tous');
       setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
     }

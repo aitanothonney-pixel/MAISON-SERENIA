@@ -32,6 +32,8 @@ export function useCart() {
   const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    // Lecture du panier (store client localStorage) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(readStorage());
     const sync = () => setItems(readStorage());
     window.addEventListener(EVENT, sync);

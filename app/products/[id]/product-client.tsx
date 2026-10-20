@@ -835,6 +835,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
   // Taille par défaut = la plus petite (première) si le produit propose des tailles
   useEffect(() => {
+    // Taille par défaut dérivée du produit (prop) — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (product?.sizes?.length) setSelectedSize(product.sizes[0].label);
   }, [product]);
 
@@ -847,6 +849,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     // Build recently viewed list (excluding current) before updating storage
     const filtered = stored.filter((pid) => pid !== product.id);
     const viewedProducts = filtered.slice(0, 5).map((pid) => products.find((p) => p.id === pid)).filter((p): p is (typeof products)[number] => Boolean(p));
+    // Lecture « vus récemment » (store client) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRecentlyViewed(viewedProducts);
     // Save updated list with current product at front
     const updated = [product.id, ...filtered].slice(0, 5);

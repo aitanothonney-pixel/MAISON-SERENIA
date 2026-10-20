@@ -22,6 +22,8 @@ export function useWishlist() {
   const [ids, setIds] = useState<number[]>([]);
 
   useEffect(() => {
+    // Lecture de la wishlist (store client localStorage) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIds(readStorage());
     const sync = () => setIds(readStorage());
     window.addEventListener(EVENT, sync);

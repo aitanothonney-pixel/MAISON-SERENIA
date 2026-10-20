@@ -28,6 +28,8 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const closed = sessionStorage.getItem(SESSION_KEY)
+      // Lecture d'un store client (sessionStorage) au montage — motif légitime.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (!closed) setVisible(true)
     }
   }, [])

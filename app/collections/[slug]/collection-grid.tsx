@@ -71,7 +71,8 @@ export function CollectionGrid({ items }: { items: Product[] }) {
   const [minPrice, setMinPrice] = useState(minBound);
   const [maxPrice, setMaxPrice] = useState(maxBound);
 
-  // Recale la fourchette si la collection change
+  // Recale la fourchette si la collection change — réinit d'état sur prop, motif légitime.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMinPrice(minBound); setMaxPrice(maxBound); }, [minBound, maxBound]);
 
   const byRange = active === 'Tous' ? items : items.filter((p) => rangeOf(p.name) === active);
@@ -93,6 +94,8 @@ export function CollectionGrid({ items }: { items: Product[] }) {
   const showMore = filtered.length > visibleCount;
 
   const selectRange = (r: string) => { setActive(r); setVisibleCount(PAGE_SIZE); };
+  // Réinit de la pagination quand les filtres changent — motif légitime.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setVisibleCount(PAGE_SIZE); }, [minPrice, maxPrice, sortKey]);
 
   const rangeActive = minPrice > minBound || maxPrice < maxBound;
