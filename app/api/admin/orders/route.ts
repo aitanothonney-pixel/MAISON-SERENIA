@@ -38,7 +38,8 @@ async function readStripeOrders(): Promise<AdminOrder[]> {
     .filter((s) => s.payment_status === 'paid' || s.status === 'complete')
     .map((s): AdminOrder => {
       const cd = (s.customer_details || {}) as Record<string, unknown>;
-      const shipping = (s.shipping_details || s.shipping || null) as Record<string, unknown> | null;
+      const collected = (s.collected_information || null) as Record<string, unknown> | null;
+      const shipping = (s.shipping_details || s.shipping || collected?.shipping_details || null) as Record<string, unknown> | null;
       const addr = (shipping?.address || cd.address || null) as Record<string, unknown> | null;
       const lineItems = ((s.line_items as Record<string, unknown>)?.data || []) as Record<string, unknown>[];
       return {

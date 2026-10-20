@@ -195,14 +195,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     }, 400);
   };
 
-  const startCheckout = (method: PayMethod) => {
-    setPayMethod(method);
-    setStep('delivery');
-  };
-
-  // Paiement réel via Stripe si configuré, sinon repli sur le tunnel de démonstration.
+  // Paiement réel via Stripe. En cas d'indisponibilité : message d'erreur clair,
+  // jamais de fausse confirmation, panier conservé.
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const handleCheckout = async (method: PayMethod) => {
+  const handleCheckout = async () => {
     if (checkoutLoading) return;
     setCheckoutLoading(true);
     try {
@@ -225,16 +221,13 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         window.location.href = data.url;
         return;
       }
-      // Repli sur le tunnel de démonstration UNIQUEMENT si Stripe n'est pas configuré
-      if (data?.enabled === false) {
-        startCheckout(method);
-        return;
-      }
-      // Stripe configuré mais erreur → surtout pas de fausse confirmation
-      alert('Paiement indisponible.\n\nEtape: ' + (data?.stage || '?') + '\n' + (data?.message || 'Réessayez.'));
+      // Aucune URL de paiement = indisponible côté serveur (Stripe non
+      // configuré, etc.). JAMAIS de fausse confirmation : le panier est
+      // conservé et rien n'est débité.
+      alert('Le paiement est momentanément indisponible. Votre commande n\'a pas été enregistrée — merci de réessayer dans un instant.' + (data?.message ? `\n\n(${data.message})` : ''));
     } catch {
-      // Erreur réseau : on tente le tunnel de démonstration (aucun débit)
-      startCheckout(method);
+      // Erreur réseau : aucune commande enregistrée, aucune fausse confirmation.
+      alert('Connexion interrompue. Votre commande n\'a pas été enregistrée — merci de réessayer.');
     } finally {
       setCheckoutLoading(false);
     }
@@ -922,7 +915,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   </div>
 
                   <button
-                    onClick={() => handleCheckout('card')}
+                    onClick={() => handleCheckout()}
                     disabled={checkoutLoading}
                     className="w-full text-white py-4 text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-60"
                     style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}

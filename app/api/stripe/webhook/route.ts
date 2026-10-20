@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { sbInsert, sbUpsertIgnore, sbUpdate, sbRpc, isSupabaseConfigured } from '@/lib/supabaseAdmin';
+import { sbInsert, sbUpsertIgnore, sbUpdate, sbRpc, sbSelect, isSupabaseConfigured } from '@/lib/supabaseAdmin';
 
 // Le webhook lit le corps BRUT (vérification de signature) : runtime Node, jamais caché.
 export const runtime = 'nodejs';
@@ -78,7 +78,10 @@ export async function POST(req: Request) {
 
 // ─────────────────────────── paiement confirmé ─────────────────────────────
 async function handleCompleted(stripe: Stripe, session: SessionLike) {
-  if (session.payment_status !== 'paid' && session.status !== 'complete') return;
+  // Ne traiter que les sessions réellement payées. Une méthode à notification
+  // différée (virement/SEPA…) arrive en « completed » avec payment_status
+  // != 'paid' ; on ne crée la commande ni ne décrémente le stock qu'au paiement.
+  if (session.payment_status !== 'paid') return;
 
   const cd = session.customer_details;
   const shipping = session.shipping_details || session.collected_information?.shipping_details || null;
@@ -86,7 +89,7 @@ async function handleCompleted(stripe: Stripe, session: SessionLike) {
   const paymentIntentId =
     typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id ?? null;
 
-  // Upsert idempotent : si la commande existe déjà (même session), on s'arrête.
+  // Upsert idempotent sur stripe_session_id : jamais de commande en double.
   const inserted = await sbUpsertIgnore(
     'orders',
     [
@@ -107,26 +110,43 @@ async function handleCompleted(stripe: Stripe, session: SessionLike) {
     'stripe_session_id',
   );
 
-  if (inserted.length === 0) return; // déjà traité lors d'une livraison précédente
-  const orderId = inserted[0].id as string;
+  // Résoudre l'id de commande, qu'elle vienne d'être créée OU qu'elle existe
+  // déjà (relance Stripe). On NE sort PAS si elle existe : les effets de bord
+  // ci-dessous sont idempotents et doivent être rejoués si une livraison
+  // précédente a créé la commande mais échoué avant de les terminer.
+  let orderId: string;
+  if (inserted.length > 0) {
+    orderId = inserted[0].id as string;
+  } else {
+    const existing = await sbSelect(
+      'orders',
+      `select=id&stripe_session_id=eq.${encodeURIComponent(session.id)}&limit=1`,
+    );
+    if (existing.length === 0) return;
+    orderId = existing[0].id as string;
+  }
+
+  // Articles figés depuis les lignes Stripe (ce qui a réellement été facturé).
+  // Insérés une seule fois : garde d'idempotence au niveau des lignes.
+  const existingItems = await sbSelect('order_items', `select=id&order_id=eq.${orderId}&limit=1`);
+  if (existingItems.length === 0) {
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
+    const items = lineItems.data
+      .filter((li) => (li.description || '') !== 'Frais de livraison')
+      .map((li) => ({
+        order_id: orderId,
+        sku: 'N/A',
+        product_name: li.description || 'Article',
+        option_label: null,
+        quantity: li.quantity ?? 1,
+        unit_price_cents: li.quantity ? Math.round((li.amount_total ?? 0) / li.quantity) : li.amount_total ?? 0,
+      }));
+    if (items.length) await sbInsert('order_items', items);
+  }
+
+  // Consomme les réservations liées (décrément du stock une seule fois).
+  // consume_reservation ne touche que les réservations 'active' => idempotent.
   const token = session.metadata?.reservation_token;
-
-  // Articles figés depuis les lignes Stripe = ce qui a réellement été facturé
-  // (prix nets après remises déjà répartis au checkout).
-  const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
-  const items = lineItems.data
-    .filter((li) => (li.description || '') !== 'Frais de livraison')
-    .map((li) => ({
-      order_id: orderId,
-      sku: 'N/A',
-      product_name: li.description || 'Article',
-      option_label: null,
-      quantity: li.quantity ?? 1,
-      unit_price_cents: li.quantity ? Math.round((li.amount_total ?? 0) / li.quantity) : li.amount_total ?? 0,
-    }));
-  if (items.length) await sbInsert('order_items', items);
-
-  // Consomme les réservations liées (décrément du stock une seule fois). No-op sinon.
   if (token) await sbRpc('consume_reservation', { p_token: token, p_order_id: orderId });
 }
 

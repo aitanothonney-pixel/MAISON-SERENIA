@@ -128,6 +128,9 @@ function CheckoutDrawer({
   const isBubble = product.name.includes('Bubble');
   const promoPrice = unitPrice ?? (isBubble ? Math.round(product.price * 0.7) : product.price);
   const bubbleDiscount = isBubble ? product.price - promoPrice : 0; // remise -30%
+  // Prix d'origine (avant remises), conscient de la taille choisie : pour un
+  // produit à tailles, c'est le prix de la taille, pas le prix de base.
+  const originalPrice = promoPrice + bubbleDiscount;
   const welcomeDiscount = welcomeActive ? Math.round(promoPrice * 0.10 * 100) / 100 : 0;
   const merchandiseTotal = promoPrice - welcomeDiscount;
   // Livraison offerte dès 40.–, sinon 4,90
@@ -224,7 +227,8 @@ function CheckoutDrawer({
 
   const handlePay = async () => {
     setPayLoading(true);
-    // Paiement réel via Stripe si configuré, sinon confirmation de démonstration.
+    // Paiement réel via Stripe uniquement. En cas d'indisponibilité : message
+    // d'erreur clair, JAMAIS de fausse confirmation.
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
@@ -236,18 +240,12 @@ function CheckoutDrawer({
         window.location.href = data.url;
         return;
       }
-      // Stripe configuré mais erreur → pas de fausse confirmation
-      if (data?.enabled !== false) {
-        setPayLoading(false);
-        alert('Paiement indisponible.\n\nEtape: ' + (data?.stage || '?') + '\n' + (data?.message || 'Réessayez.'));
-        return;
-      }
-      // Stripe non configuré → confirmation de démonstration
-    } catch { /* erreur réseau → démonstration */ }
-    setTimeout(() => {
       setPayLoading(false);
-      setStep('confirmation');
-    }, 1800);
+      alert('Le paiement est momentanément indisponible. Votre commande n\'a pas été enregistrée — merci de réessayer dans un instant.' + (data?.message ? `\n\n(${data.message})` : ''));
+    } catch {
+      setPayLoading(false);
+      alert('Connexion interrompue. Votre commande n\'a pas été enregistrée — merci de réessayer.');
+    }
   };
 
   const handleClose = () => {
@@ -354,7 +352,7 @@ function CheckoutDrawer({
 
                     <div className="space-y-2 mb-6 text-sm">
                       <div className="flex justify-between text-neutral-500">
-                        <span>Prix d&apos;origine</span><span>{formatPrice(product.price, cur)}</span>
+                        <span>Prix d&apos;origine</span><span>{formatPrice(originalPrice, cur)}</span>
                       </div>
                       {bubbleDiscount > 0 && (
                         <div className="flex justify-between text-[#A07840] font-semibold">
@@ -603,7 +601,7 @@ function CheckoutDrawer({
                     <div className="space-y-1.5">
                       {(bubbleDiscount > 0 || welcomeDiscount > 0) && (
                         <div className="flex justify-between text-sm text-neutral-500">
-                          <span>Prix d&apos;origine</span><span>{formatPrice(product.price, cur)}</span>
+                          <span>Prix d&apos;origine</span><span>{formatPrice(originalPrice, cur)}</span>
                         </div>
                       )}
                       {bubbleDiscount > 0 && (
