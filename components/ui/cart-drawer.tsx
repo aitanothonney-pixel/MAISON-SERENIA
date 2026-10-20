@@ -121,10 +121,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   // et un tableau 50×70 par paire est offert.
   const qtyOf = (id: number) => cartProducts.find((x) => x.id === id)?.qty ?? 0;
   const priceOf = (id: number) => cartProducts.find((x) => x.id === id)?.price ?? 0;
-  let totalPacks = 0;
-  const pairDiscount = BUNDLES.reduce((sum, b) => {
-    const packs = Math.min(qtyOf(b.canape), qtyOf(b.fauteuil));
-    totalPacks += packs;
+  const packsPerBundle = BUNDLES.map((b) => Math.min(qtyOf(b.canape), qtyOf(b.fauteuil)));
+  const totalPacks = packsPerBundle.reduce((sum, packs) => sum + packs, 0);
+  const pairDiscount = BUNDLES.reduce((sum, b, i) => {
+    const packs = packsPerBundle[i];
     if (packs === 0) return sum;
     const pairPrice = priceOf(b.canape) + priceOf(b.fauteuil);
     return sum + packs * Math.max(0, pairPrice - BUNDLE_PRICE);
@@ -183,7 +183,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     if (window.location.pathname === '/') {
       setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
     } else {
-      window.location.href = '/#section-salon';
+      window.location.assign('/#section-salon');
     }
   };
 
