@@ -152,7 +152,7 @@ const rawProducts: Product[] = [
     id: 2,
     name: 'Fauteuil Bubble blanc',
     category: 'Salon',
-    price: 713,
+    price: 1217,
     description: 'Le Fauteuil Bubble en version blanc immaculé — une silhouette sculpturale aux formes généreuses et organiques. Confort enveloppant, esthétique contemporaine, présence forte dans tout intérieur.',
     images: [
       'https://i.ibb.co/Fk1YZvkY/IMG-2568.jpg',
@@ -167,7 +167,7 @@ const rawProducts: Product[] = [
     id: 10,
     name: 'Canapé Bubble blanc',
     category: 'Salon',
-    price: 2143,
+    price: 2787,
     description: 'Le Canapé Bubble 3 places en blanc crème immaculé — silhouette sculpturale et enveloppante, tissu bouclé doux au toucher. Une pièce maîtresse qui transforme instantanément votre salon.',
     images: [
       'https://i.ibb.co/wZRJYt6F/IMG-5364.jpg',
@@ -183,7 +183,7 @@ const rawProducts: Product[] = [
     id: 6,
     name: 'Fauteuil Bubble bleu',
     category: 'Salon',
-    price: 713,
+    price: 1217,
     description: 'Le Fauteuil Bubble dans un bleu Klein intense et vibrant — une déclaration artistique autant qu\'une invitation au confort absolu. Texture unique en maille 3D structurée.',
     images: [
       'https://i.ibb.co/j941fSYQ/9-E1-B62-F9-998-D-4476-AE71-C8-C6-E2831-AC1.jpg',
@@ -199,7 +199,7 @@ const rawProducts: Product[] = [
     id: 13,
     name: 'Canapé Bubble bleu',
     category: 'Salon',
-    price: 2143,
+    price: 2787,
     description: 'Le Canapé Bubble 3 places en bleu Klein intense — une présence sculpturale et chromatique forte. Texture maille 3D signature, assise généreuse et enveloppante.',
     images: [
       'https://i.ibb.co/R1tJYDf/IMG-2491.jpg',
@@ -215,7 +215,7 @@ const rawProducts: Product[] = [
     id: 8,
     name: 'Fauteuil Bubble rouge',
     category: 'Salon',
-    price: 713,
+    price: 1217,
     description: 'Le Fauteuil Bubble dans un rouge vif et audacieux — énergie, caractère et confort sculptural réunis. Une pièce iconique qui s\'impose dès le premier regard dans votre salon.',
     images: [
       'https://i.ibb.co/7Jc2Rvd8/IMG-5360.jpg',
@@ -230,7 +230,7 @@ const rawProducts: Product[] = [
     id: 22,
     name: 'Canapé Bubble rouge',
     category: 'Salon',
-    price: 2143,
+    price: 2787,
     description: 'Le Canapé Bubble 3 places en rouge vif et ardent — énergie, caractère et confort sculptural. Une pièce iconique qui s\'impose avec force dans votre espace de vie.',
     images: [
       'https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png',
@@ -246,7 +246,7 @@ const rawProducts: Product[] = [
     id: 12,
     name: 'Canapé Bubble violet spécial',
     category: 'Salon',
-    price: 2143,
+    price: 2787,
     description: 'Le Canapé Bubble 3 places dans un violet prune intense et vibrant — une édition spéciale aux proportions généreuses. Texture maille 3D unique, confort sculptural signature.',
     images: [
       'https://i.ibb.co/My8fK90B/IMG-2525.jpg',
@@ -263,7 +263,7 @@ const rawProducts: Product[] = [
     id: 7,
     name: 'Fauteuil Bubble vert',
     category: 'Salon',
-    price: 713,
+    price: 1217,
     description: 'Le Fauteuil Bubble dans un vert pistache lumineux — douceur organique et présence végétale. Même confort sculpturale signature, dans une teinte qui renouvelle l\'intérieur.',
     images: [
       'https://i.ibb.co/0pnzSpFV/IMG-2557.jpg',
@@ -279,7 +279,7 @@ const rawProducts: Product[] = [
     id: 9,
     name: 'Fauteuil Bubble orange',
     category: 'Salon',
-    price: 713,
+    price: 1217,
     description: 'Le Fauteuil Bubble dans un orange soleil audacieux — même silhouette sculpturale, même confort enveloppant, avec une couleur qui illumine instantanément votre intérieur.',
     images: [
       'https://i.ibb.co/xQ4XWSy/IMG-2530.jpg',
@@ -1881,8 +1881,12 @@ const exactPriceProducts: Product[] = [
 // Produits à afficher en dernier dans leur section (Meubles)
 const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table basse mobile noire
 
+// Produits Bubble : prix catalogue fixé à la main (non majoré par bumpPrice).
+// La remise -30% reste appliquée au paiement/affichage.
+const BUBBLE_FIXED_IDS = new Set([2, 6, 7, 8, 9, 10, 12, 13, 22]);
+
 const allProducts: Product[] = [
-  ...rawProducts.map((p) => ({ ...p, price: bumpPrice(p.price) })),
+  ...rawProducts.map((p) => ({ ...p, price: BUBBLE_FIXED_IDS.has(p.id) ? p.price : bumpPrice(p.price) })),
   ...exactPriceProducts,
 ];
 
