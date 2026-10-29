@@ -480,7 +480,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
     { label: 'Luminaires', href: '/collections/figurines?g=Luminaires' },
     { label: 'Tableaux', href: '/collections/figurines?g=Tableaux' },
     { label: 'Bubble', href: '/collections/bubble' },
-    { label: 'Inspiration', href: '/#section-explorer' },
   ];
 
   return (
