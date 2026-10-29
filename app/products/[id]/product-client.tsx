@@ -1066,18 +1066,14 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div
                 className="group relative overflow-hidden rounded-xl bg-neutral-50"
               >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={selectedImage}
-                    src={product.images[selectedImage]}
-                    alt={product.name}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="w-full h-auto block"
-                  />
-                </AnimatePresence>
+                <img
+                  key={selectedImage}
+                  src={product.images[selectedImage]}
+                  alt={product.name}
+                  loading="eager"
+                  decoding="async"
+                  className="w-full h-auto block"
+                />
 
                 {/* Flèches de navigation */}
                 {product.images.length > 1 && (
