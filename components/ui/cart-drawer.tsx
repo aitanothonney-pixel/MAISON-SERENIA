@@ -22,7 +22,7 @@ const BUNDLES = [
   { canape: 13, fauteuil: 6 },  // bleu
   { canape: 22, fauteuil: 8 },  // rouge
 ];
-const BUNDLE_PRICE = 1900;
+const BUNDLE_PRICE = 2500;
 const GIFT_TABLEAU_PRICE = 60; // tableau 50×70 offert avec un ensemble
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
