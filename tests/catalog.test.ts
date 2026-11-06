@@ -48,8 +48,11 @@ describe('buildCatalog(products)', () => {
   });
 
   it('fige le prix LISTE : Bubble non remisé en base (−30 % au paiement)', () => {
+    const p2src = products.find((p) => p.id === 2)!;
     const p2 = items.find((i: { legacy_id: number }) => i.legacy_id === 2);
-    expect(p2?.variants[0]).toMatchObject({ sku: 'P2', price_cents: 78900 });
+    // Le prix stocké = prix catalogue (liste) courant, PAS le prix remisé -30 %.
+    expect(p2?.variants[0]).toMatchObject({ sku: 'P2', price_cents: Math.round(p2src.price * 100) });
+    expect(p2?.variants[0].price_cents).not.toBe(Math.round(p2src.price * 0.7 * 100));
   });
 
   it('variante à options : legacy_size_label (size) présent', () => {

@@ -8,11 +8,11 @@ export interface Bundle {
   rabais: number;
 }
 
-export const BUNDLE_PRICE = 2500;
+export const BUNDLE_PRICE = 2778;
 // Tableau offert avec chaque ensemble (taille 50×70 cm)
 export const GIFT_TABLEAU_ID = 103;
 export const GIFT_TABLEAU_SIZE = '50×70 cm';
-export const GIFT_TABLEAU_PRICE = 60;
+export const GIFT_TABLEAU_PRICE = 67;
 
 export const BUNDLES: Bundle[] = [
   { slug: 'blanc', color: 'Blanc', canapeId: 10, fauteuilId: 2, rabais: 175 },

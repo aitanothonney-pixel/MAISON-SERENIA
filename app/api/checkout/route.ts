@@ -16,8 +16,8 @@ const BUNDLES = [
   { canape: 13, fauteuil: 6 },
   { canape: 22, fauteuil: 8 },
 ];
-const BUNDLE_PRICE = 2500;
-const GIFT_TABLEAU_PRICE = 60; // tableau 50×70 offert avec un ensemble
+const BUNDLE_PRICE = 2778;
+const GIFT_TABLEAU_PRICE = 67; // tableau 50×70 offert avec un ensemble
 
 const FREE_SHIPPING_THRESHOLD = 40;
 const SHIPPING_FEE = 4.9;

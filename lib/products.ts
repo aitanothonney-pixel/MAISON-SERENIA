@@ -1885,10 +1885,21 @@ const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table
 // La remise -30% reste appliquée au paiement/affichage.
 const BUBBLE_FIXED_IDS = new Set([2, 6, 7, 8, 9, 10, 12, 13, 22]);
 
+// Hausse générale des prix pour que le code membre -10% ramène au prix cible.
+// Un non-inscrit paie le prix affiché (×1/0.9) ; un inscrit (code -10%) retombe
+// au prix voulu. Appliqué à tous les prix et à toutes les tailles.
+const PRICE_UPLIFT = 1 / 0.9;
+const uplift = (n: number) => Math.round(n * PRICE_UPLIFT);
+const applyUplift = (p: Product): Product => ({
+  ...p,
+  price: uplift(p.price),
+  ...(p.sizes ? { sizes: p.sizes.map((s) => ({ ...s, price: uplift(s.price) })) } : {}),
+});
+
 const allProducts: Product[] = [
   ...rawProducts.map((p) => ({ ...p, price: BUBBLE_FIXED_IDS.has(p.id) ? p.price : bumpPrice(p.price) })),
   ...exactPriceProducts,
-];
+].map(applyUplift);
 
 export const products: Product[] = [
   ...allProducts.filter((p) => !SHOW_LAST_IDS.includes(p.id)),
