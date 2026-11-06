@@ -1064,15 +1064,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative overflow-hidden rounded-xl bg-neutral-50"
+                className="group relative overflow-hidden rounded-xl bg-neutral-50 aspect-square"
               >
-                <img
+                <Image
                   key={selectedImage}
                   src={product.images[selectedImage]}
                   alt={product.name}
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-auto block"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                  className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}
                 />
 
                 {/* Flèches de navigation */}
