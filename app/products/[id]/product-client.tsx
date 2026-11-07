@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Gift } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Gift, Sparkles } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -182,36 +182,70 @@ function CheckoutDrawer({
     } catch { /* ignore */ }
   };
 
+  // Bouton « offre exceptionnelle » : applique la remise −10% en un seul clic,
+  // sans saisie du code ni condition d'inscription. Objectif : inciter à l'achat.
+  const applyWelcomeOffer = () => {
+    setWelcomeActive(true);
+    setPromoError(false);
+    setPromoNeedsSignup(false);
+    setPromoInput('');
+    try {
+      localStorage.setItem('welcome-discount', WELCOME_CODE);
+      window.dispatchEvent(new Event('welcome-discount-updated'));
+    } catch { /* ignore */ }
+  };
+
   const PromoField = () => (
     welcomeActive ? (
       <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
         <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
-          <Check className="w-3.5 h-3.5" /> Code « {WELCOME_CODE} » — −10%
+          <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
         </span>
         <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
       </div>
     ) : (
-      <div>
-        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Code promo</label>
-        <div className="flex gap-2">
-          <input
-            value={promoInput}
-            onChange={(e) => { setPromoInput(e.target.value); setPromoError(false); }}
-            onPaste={(e) => { const t = e.clipboardData.getData('text'); setTimeout(() => applyPromo(t), 0); }}
-            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); applyPromo(promoInput); } }}
-            placeholder="MAISON SERENIA"
-            className={`flex-1 border rounded-xl px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none transition-colors ${promoError ? 'border-red-400' : 'border-neutral-200 focus:border-black'}`}
-          />
-          <button
-            type="button"
-            onClick={() => applyPromo(promoInput)}
-            disabled={!promoInput.trim()}
-            className="px-4 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase rounded-xl hover:bg-neutral-800 transition-colors disabled:opacity-40"
-          >
-            Appliquer
-          </button>
+      <div className="space-y-3">
+        {/* Bouton « offre exceptionnelle » : applique la remise −10% en un clic */}
+        <button
+          type="button"
+          onClick={applyWelcomeOffer}
+          className="group w-full flex items-center justify-between gap-3 rounded-xl border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840] hover:shadow-sm"
+        >
+          <span className="flex items-center gap-2.5 min-w-0">
+            <Sparkles className="w-4 h-4 text-[#A07840] shrink-0" />
+            <span className="flex flex-col min-w-0">
+              <span className="text-[13px] font-bold text-[#A07840] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+              <span className="text-[11px] text-[#A07840]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+            </span>
+          </span>
+          <span className="shrink-0 rounded-lg bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
+            J&apos;en profite
+          </span>
+        </button>
+
+        {/* Repli : saisie manuelle du code pour qui le possède déjà */}
+        <div>
+          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Vous avez un code promo ?</label>
+          <div className="flex gap-2">
+            <input
+              value={promoInput}
+              onChange={(e) => { setPromoInput(e.target.value); setPromoError(false); }}
+              onPaste={(e) => { const t = e.clipboardData.getData('text'); setTimeout(() => applyPromo(t), 0); }}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); applyPromo(promoInput); } }}
+              placeholder="MAISON SERENIA"
+              className={`flex-1 border rounded-xl px-3 py-2.5 text-sm uppercase tracking-wider focus:outline-none transition-colors ${promoError ? 'border-red-400' : 'border-neutral-200 focus:border-black'}`}
+            />
+            <button
+              type="button"
+              onClick={() => applyPromo(promoInput)}
+              disabled={!promoInput.trim()}
+              className="px-4 bg-black text-white text-[11px] font-semibold tracking-[0.15em] uppercase rounded-xl hover:bg-neutral-800 transition-colors disabled:opacity-40"
+            >
+              Appliquer
+            </button>
+          </div>
+          {promoError && <p className="text-[11px] text-red-500 mt-1.5">{promoNeedsSignup ? 'Code réservé aux inscrits — inscrivez-vous à la newsletter pour l’activer.' : 'Ce code n’est pas valide.'}</p>}
         </div>
-        {promoError && <p className="text-[11px] text-red-500 mt-1.5">{promoNeedsSignup ? 'Code réservé aux inscrits — inscrivez-vous à la newsletter pour l’activer.' : 'Ce code n’est pas valide.'}</p>}
       </div>
     )
   );
