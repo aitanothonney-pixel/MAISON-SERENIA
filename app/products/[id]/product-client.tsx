@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Gift, Sparkles } from 'lucide-react';
-import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
+import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -127,7 +127,7 @@ function CheckoutDrawer({
   const [promoNeedsSignup, setPromoNeedsSignup] = useState(false);
 
   const isBubble = product.name.includes('Bubble');
-  const promoPrice = unitPrice ?? (isBubble ? Math.round(product.price * 0.7) : product.price);
+  const promoPrice = unitPrice ?? (isBubble ? nice99(Math.round(product.price * 0.7)) : product.price);
   const bubbleDiscount = isBubble ? product.price - promoPrice : 0; // remise -30%
   // Prix d'origine (avant remises), conscient de la taille choisie : pour un
   // produit à tailles, c'est le prix de la taille, pas le prix de base.
@@ -957,7 +957,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     recentScrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
 
-  const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+  const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
   // Prix affiché : selon la taille choisie si le produit en propose, sinon prix promo
   const unitPrice = product.sizes
     ? (product.sizes.find((s) => s.label === selectedSize)?.price ?? product.sizes[0].price)
@@ -1466,7 +1466,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="space-y-3 mb-4">
                 {(() => {
                   const cp = complementProduct;
-                  const cpPromo = Math.round(cp.price * 0.7);
+                  const cpPromo = nice99(Math.round(cp.price * 0.7));
                   return (
                     <div className="flex items-center gap-4 p-4 border border-neutral-200">
                       <Link href={`/products/${cp.id}`} className="shrink-0 w-16 h-16 bg-neutral-50 flex items-center justify-center overflow-hidden">
@@ -1581,7 +1581,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div ref={recentScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
                 {recentlyViewed.map((p) => {
                   const pIsBubble = [2, 10, 6, 13, 8, 22, 12, 7, 9].includes(p.id);
-                  const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
+                  const pPromo = pIsBubble ? nice99(Math.round(p.price * 0.7)) : p.price;
                   return (
                     <motion.div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start"
                       whileHover={{ y: -4 }}
@@ -1634,7 +1634,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div ref={relatedScrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
                 {related.map((p) => {
                   const pIsBubble = bubbleOrder.includes(p.id);
-                  const pPromo = pIsBubble ? Math.round(p.price * 0.7) : p.price;
+                  const pPromo = pIsBubble ? nice99(Math.round(p.price * 0.7)) : p.price;
                   return (
                     <motion.div key={p.id} className="group flex-shrink-0 w-64 md:w-80 snap-start"
                       whileHover={{ y: -4 }}
@@ -1714,7 +1714,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               ) : (
                 <div className="space-y-4">
                   {products.filter((p) => isWished(p.id)).map((p) => {
-                    const price = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                    const price = p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
                     return (
                       <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
                         <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">

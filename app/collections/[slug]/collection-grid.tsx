@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Product } from '@/lib/products';
+import { nice99, type Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { CollectionCard } from './collection-card';
 
@@ -41,7 +41,7 @@ type SortKey = 'recommande' | 'prix-asc' | 'prix-desc' | 'nouveaute';
 
 // Prix affiché en tenant compte de la promo Bubble (-30 %)
 function displayPrice(p: Product): number {
-  return p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+  return p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
 }
 
 export function CollectionGrid({ items }: { items: Product[] }) {

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Price } from '@/lib/currency';
 import Image from 'next/image';
-import { products, collapseVariantDuplicates } from '@/lib/products';
+import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 
 export const metadata = {
   title: 'Tous nos produits | Maison Serenia',
@@ -51,7 +51,7 @@ export default function ProduitsPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
           {items.map((product) => {
             const isBubble = bubbleName(product.name);
-            const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+            const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
             const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
             return (
               <Link key={product.id} href={`/products/${product.id}`} className="group block border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500">

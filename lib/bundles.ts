@@ -1,4 +1,4 @@
-import { products } from './products';
+import { products, nice99 } from './products';
 
 export interface Bundle {
   slug: string;
@@ -32,8 +32,8 @@ export function getBundleDetail(slug: string) {
   const fauteuil = products.find((p) => p.id === bundle.fauteuilId);
   const gift = products.find((p) => p.id === GIFT_TABLEAU_ID);
   if (!canape || !fauteuil || !gift) return undefined;
-  const canapePromo = Math.round(canape.price * 0.7);
-  const fauteuilPromo = Math.round(fauteuil.price * 0.7);
+  const canapePromo = nice99(Math.round(canape.price * 0.7));
+  const fauteuilPromo = nice99(Math.round(fauteuil.price * 0.7));
   const sum = canapePromo + fauteuilPromo + GIFT_TABLEAU_PRICE;
   return { bundle, canape, fauteuil, gift, canapePromo, fauteuilPromo, sum, price: BUNDLE_PRICE };
 }

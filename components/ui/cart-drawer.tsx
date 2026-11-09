@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, X, Minus, Plus, Trash2, Lock, Check, Truck, CreditCard, Package, Sparkles } from 'lucide-react';
-import { products } from '@/lib/products';
+import { products, nice99 } from '@/lib/products';
 import { useCart } from '@/lib/useCart';
 import { trackBeginCheckout } from '@/lib/analytics';
 import { formatPrice, useCurrency } from '@/lib/currency';
@@ -107,7 +107,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     // Prix de base selon la taille choisie si le produit en propose
     const sizeMatch = product.sizes && item.size ? product.sizes.find((s) => s.label === item.size) : undefined;
     const base = sizeMatch ? sizeMatch.price : product.price;
-    const price = isBubble(product.id) ? Math.round(base * 0.7) : base;
+    const price = isBubble(product.id) ? nice99(Math.round(base * 0.7)) : base;
     return { ...item, product, price, orig: base };
   }).filter(Boolean) as { id: number; qty: number; size?: string; product: typeof products[0]; price: number; orig: number }[];
 
@@ -185,7 +185,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         const seenNames = new Set<string>();
         return products
           .filter((p) => !cartIds.includes(p.id))
-          .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }))
+          .map((p) => ({ p, price: isBubble(p.id) ? nice99(Math.round(p.price * 0.7)) : p.price }))
           .filter((x) => x.price >= remainingForFreeShipping && x.price <= remainingForFreeShipping + 60)
           .sort((a, b) => a.price - b.price)
           .filter((x) => { if (seenNames.has(x.p.name)) return false; seenNames.add(x.p.name); return true; })
@@ -279,7 +279,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
       .filter((p): p is typeof products[0] => !!p && !cartIds.includes(p.id))
       .filter((p) => { if (seen.has(p.name)) return false; seen.add(p.name); return true; })
       .slice(0, 3)
-      .map((p) => ({ p, price: isBubble(p.id) ? Math.round(p.price * 0.7) : p.price }));
+      .map((p) => ({ p, price: isBubble(p.id) ? nice99(Math.round(p.price * 0.7)) : p.price }));
   })();
 
   const renderCrossSell = () => {

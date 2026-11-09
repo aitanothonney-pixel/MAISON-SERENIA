@@ -14,7 +14,7 @@ import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/products';
+import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -248,7 +248,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 {menuMatches.length > 0 && (
                   <div className="mt-3 space-y-1">
                     {menuMatches.map((p) => {
-                      const promo = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                      const promo = p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
                       return (
                         <Link
                           key={p.id}
@@ -783,7 +783,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       <>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-6">
                           {all.map((prod) => {
-                            const promoPrice = prod.name.includes('Bubble') ? Math.round(prod.price * 0.7) : prod.price;
+                            const promoPrice = prod.name.includes('Bubble') ? nice99(Math.round(prod.price * 0.7)) : prod.price;
                             return (
                               <Link
                                 key={prod.id}
@@ -831,7 +831,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-5">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                     {results.slice(0, 30).map((p) => {
-                      const promoPrice = p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+                      const promoPrice = p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
                       const contain = p.name.includes('Bubble') || p.category === 'Décorations' || p.category === 'Été';
                       return (
                         <Link
@@ -1128,7 +1128,7 @@ function BubblePromoCarousel() {
               </div>
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm price-luxe">{formatPrice(Math.round(product.price * 0.7), cur)}</span>
+                <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
                 <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
               </div>
             </Link>
@@ -1215,7 +1215,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                 <div className="flex items-center gap-2">
                   {product.name.includes('Bubble') ? (
                     <>
-                      <p className="text-black font-bold text-sm price-luxe">{formatPrice(Math.round(product.price * 0.7), cur)}</p>
+                      <p className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</p>
                       <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
                     </>
                   ) : (
@@ -1332,7 +1332,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-black font-bold text-sm price-luxe">
-                {formatPrice(isBubble ? Math.round(product.price * 0.7) : product.price, cur)}
+                {formatPrice(isBubble ? nice99(Math.round(product.price * 0.7)) : product.price, cur)}
               </span>
               {isBubble && (
                 <span className="text-neutral-400 line-through text-xs price-luxe">
@@ -1631,8 +1631,8 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
   const canape = products.find((p) => p.id === bundle.canapeId)!;
   const fauteuil = products.find((p) => p.id === bundle.fauteuilId)!;
   const gift = products.find((p) => p.id === selectedTableau)!;
-  const canapePromo = Math.round(canape.price * 0.7);
-  const fauteuilPromo = Math.round(fauteuil.price * 0.7);
+  const canapePromo = nice99(Math.round(canape.price * 0.7));
+  const fauteuilPromo = nice99(Math.round(fauteuil.price * 0.7));
   const sum = canapePromo + fauteuilPromo + (offerOn ? GIFT_PRICE : 0);
 
   const addBundle = (open: boolean) => {
@@ -2262,7 +2262,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
               ) : (
                 <div className="space-y-4">
                   {wishedProducts.map((product) => {
-                    const price = isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
+                    const price = isBubble(product.id) ? nice99(Math.round(product.price * 0.7)) : product.price;
                     return (
                       <motion.div
                         key={product.id}

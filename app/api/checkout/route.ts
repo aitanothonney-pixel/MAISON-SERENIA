@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { products, nice99 } from '@/lib/products';
 import { reserveStock, releaseReservation } from '@/lib/inventory';
 
 // Runtime Node.js, jamais mis en cache
@@ -86,7 +86,7 @@ export async function POST(req: Request) {
       const qty = Math.max(1, Math.min(20, Math.floor(Number(it.qty) || 1)));
       // Prix selon la taille choisie si le produit en propose, sinon prix de base (Bubble -30%)
       const sizeMatch = product.sizes && it.size ? product.sizes.find((s) => s.label === it.size) : undefined;
-      const unit = sizeMatch ? sizeMatch.price : isBubble(product.id) ? Math.round(product.price * 0.7) : product.price;
+      const unit = sizeMatch ? sizeMatch.price : isBubble(product.id) ? nice99(Math.round(product.price * 0.7)) : product.price;
       const label = sizeMatch ? `${product.name} — ${sizeMatch.label}` : product.name;
       return { product, qty, unit, label };
     })

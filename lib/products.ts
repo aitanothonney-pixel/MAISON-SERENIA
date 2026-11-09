@@ -1896,10 +1896,21 @@ const applyUplift = (p: Product): Product => ({
   ...(p.sizes ? { sizes: p.sizes.map((s) => ({ ...s, price: uplift(s.price) })) } : {}),
 });
 
+// Prix « charme » : tout prix de vente se termine par ,99 (arrondi à la dizaine
+// supérieure, puis −0,01). Ex. 523 → 529,99 · 946 → 949,99 · 2168 → 2169,99.
+// Appliqué aux prix hors-Bubble et à toutes les tailles. Les articles Bubble
+// sont arrondis au moment de la remise −30% (nice99(Math.round(price * 0.7))).
+export const nice99 = (v: number) => Math.round((Math.ceil(v / 10) * 10 - 0.01) * 100) / 100;
+const finalizePrices = (p: Product): Product => ({
+  ...p,
+  price: p.name.includes('Bubble') ? p.price : nice99(p.price),
+  ...(p.sizes ? { sizes: p.sizes.map((s) => ({ ...s, price: nice99(s.price) })) } : {}),
+});
+
 const allProducts: Product[] = [
   ...rawProducts.map((p) => ({ ...p, price: BUBBLE_FIXED_IDS.has(p.id) ? p.price : bumpPrice(p.price) })),
   ...exactPriceProducts,
-].map(applyUplift);
+].map(applyUplift).map(finalizePrices);
 
 export const products: Product[] = [
   ...allProducts.filter((p) => !SHOW_LAST_IDS.includes(p.id)),

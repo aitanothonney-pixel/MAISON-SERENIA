@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Price } from '@/lib/currency';
 import Image from 'next/image';
 import { Gift } from 'lucide-react';
-import { products } from '@/lib/products';
+import { products, nice99 } from '@/lib/products';
 import { BUNDLES, getBundleDetail } from '@/lib/bundles';
 
 export const metadata = {
@@ -41,7 +41,7 @@ export default function PromotionsPage() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
           {items.map((product) => {
-            const promoPrice = Math.round(product.price * 0.7);
+            const promoPrice = nice99(Math.round(product.price * 0.7));
             return (
               <Link key={product.id} href={`/products/${product.id}`} className="group block">
                 <div className="relative aspect-[4/3] overflow-hidden bg-white mb-3 p-4">

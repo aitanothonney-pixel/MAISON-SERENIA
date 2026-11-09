@@ -7,7 +7,7 @@
 // → achat) pour savoir où les visiteurs abandonnent et optimiser les conversions.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { products } from './products';
+import { products, nice99 } from './products';
 
 declare global {
   interface Window {
@@ -38,7 +38,7 @@ function displayUnit(p: (typeof products)[number], size?: string): number {
     const s = p.sizes.find((x) => x.label === size);
     if (s) return s.price;
   }
-  return p.name.includes('Bubble') ? Math.round(p.price * 0.7) : p.price;
+  return p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
 }
 
 function itemOf(id: number, qty = 1, size?: string) {

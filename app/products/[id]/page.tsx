@@ -1,4 +1,4 @@
-import { products } from '@/lib/products';
+import { products, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import ProductClient from './product-client';
 
@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           '@type': 'Offer',
           url: `${BASE}/products/${product.id}`,
           priceCurrency: 'CHF',
-          price: (product.name.includes('Bubble') ? Math.round(product.price * 0.7) : product.price).toString(),
+          price: (product.name.includes('Bubble') ? nice99(Math.round(product.price * 0.7)) : product.price).toString(),
           priceValidUntil,
           availability: 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',

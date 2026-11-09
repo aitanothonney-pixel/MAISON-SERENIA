@@ -1,4 +1,4 @@
-import { products, getVariantGroup, getVariantGroupKey, type Product } from '@/lib/products';
+import { products, getVariantGroup, getVariantGroupKey, nice99, type Product } from '@/lib/products';
 
 // Flux produits Google Merchant Center (RSS 2.0 + espace de noms g:).
 // URL publique : https://maison-serenia.com/feed.xml
@@ -32,7 +32,7 @@ function esc(value: string): string {
 // - sinon : prix de base
 function sellingPrice(p: Product): number {
   if (p.sizes?.length) return p.sizes[0].price;
-  if (p.name.includes('Bubble')) return Math.round(p.price * 0.7);
+  if (p.name.includes('Bubble')) return nice99(Math.round(p.price * 0.7));
   return p.price;
 }
 

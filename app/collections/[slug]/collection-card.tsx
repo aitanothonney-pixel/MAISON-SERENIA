@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Product } from '@/lib/products';
+import { nice99, type Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
 
 export function CollectionCard({ product }: { product: Product }) {
@@ -11,7 +11,7 @@ export function CollectionCard({ product }: { product: Product }) {
   const [idx, setIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
-  const promoPrice = isBubble ? Math.round(product.price * 0.7) : product.price;
+  const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
   const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
   const hasMultiple = product.images.length > 1;
 
