@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { trackAddToCart } from './analytics';
 
 const KEY = 'ms_cart';
 const EVENT = 'ms_cart_change';
@@ -53,6 +54,7 @@ export function useCart() {
       persist(next);
       return next;
     });
+    trackAddToCart(id, size);
   }, []);
 
   const removeItem = useCallback((id: number, size?: string) => {

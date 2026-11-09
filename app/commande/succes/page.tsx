@@ -4,10 +4,16 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { Check, Package } from 'lucide-react';
 import { brevoTrackOrder } from '@/lib/brevoTracking';
+import { trackPurchaseFromPending } from '@/lib/analytics';
 
 export default function CommandeSuccesPage() {
   // On vide le panier après un paiement réussi
   useEffect(() => {
+    // Conversion GA4 « purchase » — lit l'identifiant de session Stripe dans l'URL.
+    try {
+      const sessionId = new URLSearchParams(window.location.search).get('session_id') || `ms_${Date.now()}`;
+      trackPurchaseFromPending(sessionId);
+    } catch { /* ignore */ }
     try {
       localStorage.setItem('ms_cart', '[]');
       window.dispatchEvent(new CustomEvent('ms_cart_change'));

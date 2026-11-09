@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, X, Minus, Plus, Trash2, Lock, Check, Truck, CreditCard, Package, Sparkles } from 'lucide-react';
 import { products } from '@/lib/products';
 import { useCart } from '@/lib/useCart';
+import { trackBeginCheckout } from '@/lib/analytics';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { brevoTrackCart, brevoTrackOrder } from '@/lib/brevoTracking';
@@ -214,6 +216,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const handleCheckout = async () => {
     if (checkoutLoading) return;
     setCheckoutLoading(true);
+    trackBeginCheckout(items.map((i) => ({ id: i.id, qty: i.qty, size: i.size })), merchandise);
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
@@ -290,9 +293,11 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
           {crossSell.map(({ p, price }) => (
             <div key={p.id} className="flex items-center gap-3">
               <div className="w-12 h-12 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
-                <img
+                <Image
                   src={p.images[0]}
                   alt={p.name}
+                  width={48}
+                  height={48}
                   className={`w-full h-full ${isBubble(p.id) || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
                 />
               </div>
@@ -325,9 +330,11 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
           {shippingBoosters.map(({ p, price }) => (
             <div key={p.id} className="flex items-center gap-3">
               <div className="w-11 h-11 bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
-                <img
+                <Image
                   src={p.images[0]}
                   alt={p.name}
+                  width={44}
+                  height={44}
                   className={`w-full h-full ${isBubble(p.id) || p.category === 'Décorations' || p.category === 'Été' ? 'object-contain p-1' : 'object-cover'}`}
                 />
               </div>
@@ -478,9 +485,11 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             className="flex items-start gap-4"
                           >
                             <div className="shrink-0 w-[92px] h-[92px] bg-white border border-neutral-100 overflow-hidden flex items-center justify-center">
-                              <img
+                              <Image
                                 src={product.images[0]}
                                 alt={product.name}
+                                width={92}
+                                height={92}
                                 className={`w-full h-full ${isBubble(id) || product.category === 'Figurines' || product.category === 'Été' ? 'object-contain p-2' : 'object-cover'}`}
                               />
                             </div>

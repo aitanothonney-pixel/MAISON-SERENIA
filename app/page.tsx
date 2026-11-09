@@ -257,7 +257,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                           className="flex items-center gap-3 p-2 hover:bg-neutral-50 transition-colors"
                         >
                           <div className="w-10 h-10 bg-neutral-50 border border-neutral-100 shrink-0 flex items-center justify-center overflow-hidden">
-                            <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className="w-full h-full object-contain p-0.5" />
+                            <Image src={p.images[0]} alt={p.name} width={40} height={40} className="w-full h-full object-contain p-0.5" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate">{p.name}</p>
@@ -306,9 +306,11 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     >
                       <div className="w-16 h-16 rounded-lg bg-neutral-50 border border-neutral-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
                         {c.img ? (
-                          <img
+                          <Image
                             src={c.img}
                             alt={c.name}
+                            width={64}
+                            height={64}
                             className="w-full h-full object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
                           />
                         ) : null}
@@ -751,10 +753,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           className="group relative aspect-[4/5] overflow-hidden bg-white"
                         >
                           {imgSrc && (
-                            <img
+                            <Image
                               src={imgSrc}
                               alt={c.label}
-                              className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain scale-125' : 'object-cover'}`}
+                              fill
+                              sizes="(max-width: 768px) 50vw, 25vw"
+                              className={`transition-transform duration-700 group-hover:scale-105 ${isContain ? 'object-contain scale-125' : 'object-cover'}`}
                               style={{ objectPosition: c.position }}
                             />
                           )}
@@ -788,7 +792,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                                 className="group"
                               >
                                 <div className="relative aspect-square overflow-hidden bg-white mb-2">
-                                  <img loading="lazy" decoding="async" src={prod.images[0]} alt={prod.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                  <Image src={prod.images[0]} alt={prod.name} fill sizes="(max-width: 640px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                                 </div>
                                 <p className="text-[13px] font-semibold text-black leading-tight truncate group-hover:underline">{prod.name}</p>
                                 <p className="text-xs text-neutral-500 price-luxe mt-0.5">{formatPrice(promoPrice, cur)}</p>
@@ -837,7 +841,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           className="flex items-center gap-4 p-2 -mx-2 rounded hover:bg-neutral-50 transition-colors group"
                         >
                           <div className={`w-16 h-16 overflow-hidden bg-white border border-neutral-100 flex-shrink-0 flex items-center justify-center ${contain ? 'p-1.5' : ''}`}>
-                            <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
+                            <Image src={p.images[0]} alt={p.name} width={64} height={64} className={`w-full h-full ${contain ? 'object-contain' : 'object-cover'}`} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
@@ -1404,10 +1408,12 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
           <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
             {/* Salon */}
             <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
-              <img
+              <Image
                 src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
                 alt="Salon MAISON SERENIA"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-all duration-300 group-hover:from-black/70" />
               <div className="absolute bottom-4 left-4 text-white">
@@ -1423,10 +1429,12 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
 
             {/* Décorations */}
             <button onClick={() => onCategoryClick('Décorations', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
-              <img
+              <Image
                 src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
                 alt="Décorations"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Décorations</div>
@@ -1439,10 +1447,12 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
 
             {/* Meubles */}
             <button onClick={() => onCategoryClick('Meubles', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
                 alt="Meubles"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
               <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Meubles</div>
@@ -1505,11 +1515,13 @@ function ShopByCategory() {
               href={`/collections/${t.slug}`}
               className={`relative overflow-hidden rounded-2xl group text-left block ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
             >
-              <img
+              <Image
                 src={t.img}
                 alt={t.label}
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
                 style={{ objectPosition: t.position ?? 'center' }}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-300 group-hover:from-black/80" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -2261,7 +2273,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                         className="flex items-center gap-4 p-3 border border-neutral-100 hover:border-neutral-200 transition-colors"
                       >
                         <Link href={`/products/${product.id}`} onClick={onClose} className="shrink-0 w-20 h-20 bg-white border border-neutral-100 overflow-hidden flex items-center justify-center">
-                          <img loading="lazy" decoding="async" src={product.images[0]} alt={product.name} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
+                          <Image src={product.images[0]} alt={product.name} width={80} height={80} className={`w-full h-full ${isBubble(product.id) ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${product.id}`} onClick={onClose}>

@@ -10,6 +10,7 @@ import { products, getVariantGroup, collapseVariantDuplicates } from '@/lib/prod
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
+import { trackViewItem, trackBeginCheckout } from '@/lib/analytics';
 import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
@@ -261,6 +262,7 @@ function CheckoutDrawer({
 
   const handlePay = async () => {
     setPayLoading(true);
+    trackBeginCheckout([{ id: product.id, qty: 1, size }], merchandiseTotal);
     // Paiement réel via Stripe uniquement. En cas d'indisponibilité : message
     // d'erreur clair, JAMAIS de fausse confirmation.
     try {
@@ -876,6 +878,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
   useEffect(() => {
     if (!product) return;
+    trackViewItem(product.id);
     const key = 'ms_recently_viewed';
     const stored: number[] = JSON.parse(localStorage.getItem(key) ?? '[]');
     // Build recently viewed list (excluding current) before updating storage
@@ -1467,7 +1470,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   return (
                     <div className="flex items-center gap-4 p-4 border border-neutral-200">
                       <Link href={`/products/${cp.id}`} className="shrink-0 w-16 h-16 bg-neutral-50 flex items-center justify-center overflow-hidden">
-                        <img loading="lazy" decoding="async" src={cp.images[0]} alt={cp.name} className="w-full h-full object-contain p-1.5" />
+                        <Image src={cp.images[0]} alt={cp.name} width={64} height={64} className="w-full h-full object-contain p-1.5" />
                       </Link>
                       <div className="flex-1 min-w-0">
                         <Link href={`/products/${cp.id}`} className="font-serif font-bold text-sm text-black hover:underline">{cp.name}</Link>
@@ -1715,7 +1718,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     return (
                       <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
                         <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
-                          <img loading="lazy" decoding="async" src={p.images[0]} alt={p.name} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
+                          <Image src={p.images[0]} alt={p.name} width={80} height={80} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
