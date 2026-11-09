@@ -4,6 +4,10 @@ import ProductClient from './product-client';
 
 const BASE = 'https://maison-serenia.com';
 
+// Les images du catalogue sont désormais servies en local (/catalog/...).
+// Les métadonnées sociales et les données structurées exigent une URL absolue.
+const toAbsolute = (src: string) => (src.startsWith('http') ? src : `${BASE}${src}`);
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = products.find(p => p.id === Number(id));
@@ -18,13 +22,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       description: desc,
       type: 'website',
       url: `${BASE}/products/${product.id}`,
-      images: [{ url: product.images[0], alt: product.name }],
+      images: [{ url: toAbsolute(product.images[0]), alt: product.name }],
     },
     twitter: {
       card: 'summary_large_image',
       title: product.name,
       description: desc,
-      images: [product.images[0]],
+      images: [toAbsolute(product.images[0])],
     },
   };
 }
@@ -41,7 +45,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: product.name,
-        image: product.images,
+        image: product.images.map(toAbsolute),
         description: product.description,
         category: product.category,
         material: product.material,

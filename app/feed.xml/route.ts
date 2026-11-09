@@ -13,6 +13,10 @@ export const dynamic = 'force-static';
 const BASE = 'https://maison-serenia.com';
 const BRAND = 'Maison Serenia';
 
+// Les images du catalogue sont servies en local (/catalog/…) ; Google Merchant
+// exige des URLs absolues.
+const toAbs = (src: string) => (src.startsWith('http') ? src : `${BASE}${src}`);
+
 function esc(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -51,8 +55,8 @@ function item(p: Product): string {
     `<g:title>${esc(p.name.slice(0, 150))}</g:title>`,
     `<g:description>${esc(description(p))}</g:description>`,
     `<g:link>${esc(link)}</g:link>`,
-    `<g:image_link>${esc(mainImage)}</g:image_link>`,
-    ...extraImages.slice(0, 10).map((img) => `<g:additional_image_link>${esc(img)}</g:additional_image_link>`),
+    `<g:image_link>${esc(toAbs(mainImage))}</g:image_link>`,
+    ...extraImages.slice(0, 10).map((img) => `<g:additional_image_link>${esc(toAbs(img))}</g:additional_image_link>`),
     `<g:availability>in_stock</g:availability>`,
     `<g:price>${sellingPrice(p).toFixed(2)} CHF</g:price>`,
     `<g:condition>new</g:condition>`,

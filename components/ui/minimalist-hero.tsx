@@ -89,7 +89,7 @@ export function MinimalistHeroSection() {
           {/* Product image — clickable */}
           <Link href="/products/22" className="relative z-10 group">
             <motion.img
-              src="https://i.ibb.co/zH4qtJVB/IMG-2511.jpg"
+              src="/catalog/zH4qtJVB.jpg"
               alt="Canapé Bubble rouge MAISON SERENIA"
               initial={{ opacity: 0, y: 60, scale: 0.85 }}
               animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}

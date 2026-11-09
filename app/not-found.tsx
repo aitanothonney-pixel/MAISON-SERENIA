@@ -41,7 +41,7 @@ export default function NotFound() {
         {/* Decorative sofa image */}
         <div style={{ position: 'relative', width: 160, height: 100 }}>
           <Image
-            src="https://i.ibb.co/xSV6MBVx/47-B09888-A4-A8-44-E7-A80-D-7-E1-D7-BDDF6-ED.png"
+            src="/catalog/xSV6MBVx.png"
             alt="Bubble sofa MAISON SERENIA"
             fill
             style={{ objectFit: 'contain' }}

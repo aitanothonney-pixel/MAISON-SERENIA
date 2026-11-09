@@ -172,7 +172,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         name: x.product.name,
         price: x.price,
         quantity: x.qty,
-        image: x.product.images[0],
+        image: x.product.images[0].startsWith('http') ? x.product.images[0] : `https://maison-serenia.com${x.product.images[0]}`,
         url: `https://maison-serenia.com/products/${x.id}`,
       })),
     });

@@ -175,7 +175,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
       section: 'section-salon',
       filter: 'Bubble',
       slug: 'bubble',
-      img: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg',
+      img: '/catalog/BVT612D7.jpg',
     },
   ];
 
@@ -734,11 +734,11 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       // Salon : Canapé d'angle 3 places crème
                       { slug: 'salon', label: 'Salon', cat: null, id: 87, img: null, fit: 'cover', position: 'center' },
                       // Meubles : image personnalisée
-                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, img: 'https://i.ibb.co/WpP25YqM/Capture-d-e-cran-2026-07-23-a-14-36-15.png', fit: 'cover', position: 'center 32%' },
+                      { slug: 'meubles', label: 'Meubles', cat: 'Meubles', id: null, img: '/catalog/WpP25YqM.png', fit: 'cover', position: 'center 32%' },
                       // Décorations : tableau abstrait
                       { slug: 'figurines', label: 'Décorations', cat: null, id: 103, img: null, fit: 'cover', position: 'center' },
                       // Bubble : image personnalisée
-                      { slug: 'bubble', label: 'Bubble', cat: null, id: 10, img: 'https://i.ibb.co/BVT612D7/IMG-2481.jpg', fit: 'cover', position: 'center' },
+                      { slug: 'bubble', label: 'Bubble', cat: null, id: 10, img: '/catalog/BVT612D7.jpg', fit: 'cover', position: 'center' },
                     ].map((c) => {
                       const rep = c.id != null
                         ? products.find((p) => p.id === c.id)
@@ -917,7 +917,7 @@ function PromoBanner() {
             aria-label="Voir la photo en grand"
           >
             <Image
-              src="https://i.ibb.co/99H4L0sP/IMG-2616.jpg"
+              src="/catalog/99H4L0sP.jpg"
               alt="Collection Salon Bubble en promotion"
               fill
               sizes="100vw"
@@ -982,7 +982,7 @@ function PromoBanner() {
             onClick={() => setLightbox(false)}
           >
             <motion.img
-              src="https://i.ibb.co/99H4L0sP/IMG-2616.jpg"
+              src="/catalog/99H4L0sP.jpg"
               alt="Collection Salon Bubble en promotion"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -1409,7 +1409,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
             {/* Salon */}
             <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
               <Image
-                src="https://i.ibb.co/j9h5SNVC/IMG-2392.jpg"
+                src="/catalog/j9h5SNVC.jpg"
                 alt="Salon MAISON SERENIA"
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
@@ -1430,7 +1430,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
             {/* Décorations */}
             <button onClick={() => onCategoryClick('Décorations', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
               <Image
-                src="https://i.ibb.co/hxfV4W3d/IMG-0663.jpg"
+                src="/catalog/hxfV4W3d.jpg"
                 alt="Décorations"
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -1477,7 +1477,7 @@ function ShopByCategory() {
       slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
-      img: 'https://i.ibb.co/cXXBStKz/6.avif',
+      img: '/catalog/cXXBStKz.avif',
       big: true,
       position: 'center 55%',
     },
@@ -1485,14 +1485,14 @@ function ShopByCategory() {
       slug: 'meubles',
       label: 'Meubles',
       desc: 'Tables, TV, rangements',
-      img: 'https://i.ibb.co/SD1GmP8Z/Capture-d-e-cran-2026-08-06-a-01-08-32.png',
+      img: '/catalog/SD1GmP8Z.png',
       big: false,
     },
     {
       slug: 'figurines',
       label: 'Décorations',
       desc: 'Pièces & objets déco',
-      img: 'https://i.ibb.co/MXbJ1Ss/Capture-d-e-cran-2026-07-23-a-21-55-49.png',
+      img: '/catalog/MXbJ1Ss.png',
       big: false,
     },
   ];
@@ -2487,7 +2487,7 @@ export default function Home() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png"
+            src="/catalog/WW4mTJDL.png"
             alt="Salon d'exception signé Maison Serenia"
             fill
             sizes="100vw"

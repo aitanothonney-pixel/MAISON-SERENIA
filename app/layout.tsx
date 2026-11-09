@@ -53,14 +53,14 @@ export const metadata: Metadata = {
     description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design. Livraison offerte dès 40 CHF.',
     type: 'website',
     locale: 'fr_FR',
-    images: [{ url: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png', width: 1200, height: 630 }],
+    images: [{ url: '/catalog/WW4mTJDL.png', width: 1200, height: 630 }],
   },
-  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png'] },
+  twitter: { card: 'summary_large_image', title: 'Maison Serenia | Mobilier de Luxe', description: 'Canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration design.', images: ['/catalog/WW4mTJDL.png'] },
   robots: { index: true, follow: true },
   icons: {
-    icon: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
-    shortcut: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
-    apple: 'https://i.ibb.co/Gf8GN24S/1713523-F-A797-45-C1-8-F6-A-87-BC05494-A43.jpg',
+    icon: '/catalog/Gf8GN24S.jpg',
+    shortcut: '/catalog/Gf8GN24S.jpg',
+    apple: '/catalog/Gf8GN24S.jpg',
   },
 };
 
@@ -78,8 +78,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               '@type': 'Organization',
               name: 'Maison Serenia',
               url: 'https://maison-serenia.com',
-              logo: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png',
-              image: 'https://i.ibb.co/WW4mTJDL/Capture-d-e-cran-2026-08-18-a-19-25-58.png',
+              logo: 'https://maison-serenia.com/catalog/WW4mTJDL.png',
+              image: 'https://maison-serenia.com/catalog/WW4mTJDL.png',
               email: 'maisonserenia@gmail.com',
               description: 'Mobilier de luxe et design contemporain : canapés, fauteuils, tables, luminaires, tableaux d\'art et décoration.',
               address: {

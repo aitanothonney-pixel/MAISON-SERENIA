@@ -146,6 +146,12 @@ export async function POST(req: Request) {
     // On répartit les remises (pack + membre) proportionnellement dans les prix
     const factor = subtotal > 0 ? merchandise / subtotal : 1;
 
+    // Origine de la requête : sert aux URLs de retour ET à rendre les images
+    // produit absolues (les images du catalogue sont servies en local /catalog/…,
+    // or Stripe exige des URLs absolues).
+    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://maison-serenia.com';
+    const absImg = (src: string) => (src.startsWith('http') ? src : `${origin}${src}`);
+
     const params: Record<string, string> = {
       mode: 'payment',
       'phone_number_collection[enabled]': 'true',
@@ -161,7 +167,7 @@ export async function POST(req: Request) {
       params[`line_items[${i}][price_data][unit_amount]`] = String(chf(x.unit * factor));
       params[`line_items[${i}][price_data][product_data][name]`] = x.label;
       const img = x.product.images[0];
-      if (img) params[`line_items[${i}][price_data][product_data][images][0]`] = img;
+      if (img) params[`line_items[${i}][price_data][product_data][images][0]`] = absImg(img);
     });
 
     // Frais de livraison en ligne séparée si applicable
@@ -177,7 +183,6 @@ export async function POST(req: Request) {
       params[`shipping_address_collection[allowed_countries][${i}]`] = c;
     });
 
-    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://maison-serenia.com';
     params['success_url'] = `${origin}/commande/succes?session_id={CHECKOUT_SESSION_ID}`;
     params['cancel_url'] = `${origin}/?panier=annule`;
 
