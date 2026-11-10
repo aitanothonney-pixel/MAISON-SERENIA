@@ -293,6 +293,26 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 </Link>
               </div>
 
+              {/* NOTRE HISTOIRE */}
+              <div className="px-6 py-5 border-b border-neutral-100">
+                <Link
+                  href="/a-propos"
+                  onClick={onClose}
+                  className="flex items-center gap-4 group"
+                >
+                  <span className="relative w-11 h-11 rounded-full border border-[#C9A96E]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#C9A96E]">
+                    <Award className="w-4 h-4 text-black" strokeWidth={1.4} />
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                      Notre Histoire
+                    </p>
+                    <p className="text-xs text-neutral-400 mt-0.5">L&apos;esprit MAISON SERENIA</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
+                </Link>
+              </div>
+
               {/* NOS COLLECTIONS */}
               <div className="px-6 py-6 border-b border-neutral-100">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Nos collections</p>
@@ -482,6 +502,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
     { label: 'Luminaires', href: '/collections/figurines?g=Luminaires' },
     { label: 'Tableaux', href: '/collections/figurines?g=Tableaux' },
     { label: 'Bubble', href: '/collections/bubble' },
+    { label: 'Notre Histoire', href: '/a-propos' },
   ];
 
   return (

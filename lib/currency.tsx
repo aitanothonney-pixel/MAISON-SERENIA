@@ -22,9 +22,16 @@ export function convertPrice(amountChf: number, cur: Currency): number {
 }
 
 // Formate un montant (stocké en CHF) dans la devise du visiteur.
+// EUR : toujours 2 décimales (ex. « 1 419,60 € »), car la conversion peut
+// tomber sur une seule décimale. CHF : décimales affichées seulement si besoin
+// (les entiers restent nets, ex. « 1 352 CHF », et les prix charme « 949,99 CHF »).
 export function formatPrice(amountChf: number, cur: Currency): string {
   const v = convertPrice(amountChf, cur);
-  const num = v.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
+  const num = v.toLocaleString('fr-FR',
+    cur === 'EUR'
+      ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+      : { maximumFractionDigits: 2 },
+  );
   return cur === 'CHF' ? `${num} CHF` : `${num} €`;
 }
 
