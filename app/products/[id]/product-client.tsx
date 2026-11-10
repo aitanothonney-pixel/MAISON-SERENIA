@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Shield, RotateCcw, Link2, Plus, Gift, Sparkles } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, RotateCcw, Link2, Plus, Gift, Sparkles } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1424,7 +1424,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   { icon: <CreditCard className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Paiement sécurisé', sub: 'Stripe · 3D Secure' },
                   { icon: <Truck className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Livraison offerte', sub: 'dès 40 CHF d’achat' },
                   { icon: <RotateCcw className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Retour sous 30 jours', sub: 'satisfait ou remboursé' },
-                  { icon: <Shield className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Garantie 2 ans', sub: 'emballage protecteur' },
+                  { icon: <Package className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Emballage soigné', sub: 'expédié avec soin' },
                 ].map((r, i) => (
                   <div key={i} className="flex items-center gap-2.5">
                     <span className="shrink-0 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center text-black">{r.icon}</span>
