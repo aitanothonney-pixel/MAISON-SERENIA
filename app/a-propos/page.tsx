@@ -60,8 +60,8 @@ export default function AProposPage() {
         <section className="relative bg-neutral-950 text-white px-8 md:px-14 py-14 overflow-hidden">
           <Quote className="w-10 h-10 text-[#C9A96E] mb-6" strokeWidth={1.2} />
           <p
-            className="text-2xl md:text-[32px] leading-snug font-medium max-w-2xl"
-            style={{ fontFamily: 'var(--font-playfair)' }}
+            className="text-[26px] md:text-[34px] leading-snug max-w-2xl"
+            style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}
           >
             « Un bel objet ne se contente pas de remplir une pièce. Il la rend vivante, et un peu plus sereine chaque jour. »
           </p>
