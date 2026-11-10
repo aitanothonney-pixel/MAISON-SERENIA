@@ -916,10 +916,12 @@ function PromoBanner() {
       localStorage.setItem('promo-deadline', String(deadline));
     }
     const calc = () => {
-      const diff = deadline - Date.now();
+      let diff = deadline - Date.now();
       if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
+        // Ré-armer l'échéance pour ne JAMAIS rester bloqué à 00:00:00.
+        deadline = Date.now() + DURATION;
+        try { localStorage.setItem('promo-deadline', String(deadline)); } catch { /* ignore */ }
+        diff = deadline - Date.now();
       }
       setTimeLeft({
         days: Math.floor(diff / (1000 * 60 * 60 * 24)),

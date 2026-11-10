@@ -1418,20 +1418,22 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 </div>
               </div>
 
-              {/* Reassurance Badges */}
-              <div className="flex gap-3 flex-wrap mb-8">
-                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
-                  <Shield className="w-3 h-3" /> Garantie 2 ans
-                </span>
-                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
-                  <Package className="w-3 h-3" /> Emballage protecteur
-                </span>
-                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
-                  <RotateCcw className="w-3 h-3" /> Retour 30j
-                </span>
-                <span className="text-[10px] tracking-wide text-neutral-500 flex items-center gap-1">
-                  <CreditCard className="w-3 h-3" /> Paiement sécurisé
-                </span>
+              {/* Réassurance — panneau sous les boutons d'achat */}
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-8 border border-neutral-200 rounded-xl p-4">
+                {[
+                  { icon: <CreditCard className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Paiement sécurisé', sub: 'Stripe · 3D Secure' },
+                  { icon: <Truck className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Livraison offerte', sub: 'dès 40 CHF d’achat' },
+                  { icon: <RotateCcw className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Retour sous 30 jours', sub: 'satisfait ou remboursé' },
+                  { icon: <Shield className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Garantie 2 ans', sub: 'emballage protecteur' },
+                ].map((r, i) => (
+                  <div key={i} className="flex items-center gap-2.5">
+                    <span className="shrink-0 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center text-black">{r.icon}</span>
+                    <div className="min-w-0 leading-tight">
+                      <p className="text-[12px] font-semibold text-black leading-tight">{r.title}</p>
+                      <p className="text-[11px] text-neutral-400 leading-tight mt-0.5">{r.sub}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {/* Accordions */}
