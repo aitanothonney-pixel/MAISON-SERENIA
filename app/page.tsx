@@ -2617,15 +2617,15 @@ export default function Home() {
 
       {/* Mon Intérieur IA — bannière CTA éditoriale */}
       <FadeInSection>
-        <section className="max-w-7xl mx-auto px-6 lg:px-10 py-6">
-          <div className="relative overflow-hidden rounded-2xl min-h-[440px] md:min-h-[480px] flex items-center">
+        <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14 md:py-20">
+          <div className="relative overflow-hidden min-h-[440px] md:min-h-[480px] flex items-center">
             <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="(max-width: 1280px) 100vw, 1200px" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
             <div className="relative px-8 md:px-16 py-14 max-w-xl text-white">
               <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-5">
                 <Sparkles className="w-4 h-4" /> Nouveau · Mon Intérieur IA
               </span>
-              <h2 className="text-3xl md:text-5xl leading-[1.1] mb-5" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>
+              <h2 className="text-3xl md:text-4xl font-semibold leading-[1.2] mb-5" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
                 Votre conseiller déco personnel, propulsé par l&apos;IA
               </h2>
               <p className="text-neutral-300 max-w-md mb-8 text-sm md:text-[15px] leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)' }}>
