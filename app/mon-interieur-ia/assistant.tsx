@@ -56,25 +56,23 @@ const SUBQ: Partial<Record<RoomKey, { value: string; label: string }[]>> = {
   ],
   'salle-a-manger': [
     { value: 'tout', label: 'Aménager toute la pièce' },
-    { value: 'mobilier', label: 'Table & assises' },
+    { value: 'mobilier', label: 'Table à manger' },
     { value: 'deco', label: 'Décoration & ambiance' },
   ],
   bureau: [
     { value: 'tout', label: 'Aménager mon bureau' },
-    { value: 'mobilier', label: 'Mobilier de travail' },
-    { value: 'deco', label: 'Décoration & rangement' },
+    { value: 'mobilier', label: 'Rangement & étagères' },
+    { value: 'deco', label: 'Décoration & luminaire' },
   ],
   entree: [
     { value: 'tout', label: 'Aménager mon entrée' },
-    { value: 'mobilier', label: 'Mobilier (console, rangement)' },
-    { value: 'deco', label: 'Miroir, tableau, déco' },
+    { value: 'mobilier', label: 'Rangement (commode, étagère)' },
+    { value: 'deco', label: 'Tableau & déco' },
   ],
   decoration: [
-    { value: 'murale', label: 'Décoration murale' },
+    { value: 'murale', label: 'Décoration murale (tableaux)' },
     { value: 'luminaires', label: 'Luminaires' },
-    { value: 'objets', label: 'Objets décoratifs' },
-    { value: 'tapis', label: 'Tapis' },
-    { value: 'accessoires', label: 'Accessoires' },
+    { value: 'objets', label: 'Objets décoratifs (vases)' },
     { value: 'autre', label: 'Je ne sais pas encore' },
   ],
 };

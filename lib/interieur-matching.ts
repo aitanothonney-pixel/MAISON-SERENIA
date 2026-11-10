@@ -80,22 +80,23 @@ export function productColors(p: Product): string[] {
 }
 
 // Pièce → catégories du catalogue + mots-clés de nom pertinents.
+// Mots-clés UNIQUEMENT sur des types de produits réellement présents au catalogue
+// (canapés, fauteuils, commodes, meubles TV, tables, étagères, vases, tableaux,
+// lampes/lustres). Aucun type non vendu (miroir, console, buffet, chaise, lit, tapis…).
 const ROOM_MAP: Record<RoomKey, { categories: string[]; nameHints: string[] }> = {
-  salon:            { categories: ['Salon', 'Décorations'], nameHints: ['canapé', 'fauteuil', 'table basse', 'méridienne'] },
-  chambre:          { categories: ['Meubles', 'Décorations'], nameHints: ['commode', 'chevet', 'lit', 'tête de lit', 'tapis', 'lampe'] },
-  'salle-a-manger': { categories: ['Meubles', 'Salon'], nameHints: ['table', 'chaise', 'buffet', 'vaisselier'] },
-  bureau:           { categories: ['Meubles', 'Décorations'], nameHints: ['bureau', 'étagère', 'bibliothèque', 'chaise', 'lampe'] },
-  entree:           { categories: ['Meubles', 'Décorations'], nameHints: ['console', 'miroir', 'meuble', 'tableau', 'patère'] },
+  salon:            { categories: ['Salon', 'Décorations'], nameHints: ['canapé', 'fauteuil', 'table basse'] },
+  chambre:          { categories: ['Meubles', 'Décorations'], nameHints: ['commode', 'table basse', 'lampe', 'tableau'] },
+  'salle-a-manger': { categories: ['Meubles', 'Salon', 'Décorations'], nameHints: ['table à manger', 'table', 'lustre', 'suspension'] },
+  bureau:           { categories: ['Meubles', 'Décorations'], nameHints: ['étagère', 'commode', 'lampe', 'support'] },
+  entree:           { categories: ['Meubles', 'Décorations'], nameHints: ['commode', 'étagère', 'tableau', 'lampe'] },
   decoration:       { categories: ['Décorations'], nameHints: [] },
   autre:            { categories: ['Salon', 'Meubles', 'Décorations'], nameHints: [] },
 };
 
 const DECO_HINTS: Record<string, string[]> = {
-  murale: ['tableau', 'cadre', 'miroir', 'affiche'],
-  luminaires: ['lampe', 'luminaire', 'suspension', 'applique', 'lampadaire'],
-  objets: ['vase', 'statue', 'statuette', 'figurine', 'bougeoir', 'objet', 'sculpture', 'bearbrick', 'kaws'],
-  tapis: ['tapis'],
-  accessoires: ['coussin', 'plaid', 'miroir', 'horloge', 'cache-pot', 'panier'],
+  murale: ['tableau'],
+  luminaires: ['lampe', 'lustre', 'suspension'],
+  objets: ['vase', 'support', 'étagère'],
   autre: [],
 };
 
@@ -135,11 +136,11 @@ function placementTip(category: string, name: string): string {
   if (n.includes('canapé')) return 'À placer face au point focal de la pièce (TV, cheminée) en laissant ~80 cm de passage.';
   if (n.includes('fauteuil')) return 'Idéal en angle de lecture près d’une fenêtre ou en complément du canapé.';
   if (n.includes('table basse')) return 'Centrez-la devant le canapé en gardant ~40 cm d’écart pour circuler.';
-  if (n.includes('table')) return 'Prévoyez ~90 cm autour pour reculer les chaises confortablement.';
-  if (n.includes('tableau') || n.includes('miroir')) return 'À accrocher à hauteur des yeux (~150 cm du sol) sur un mur dégagé.';
-  if (n.includes('lampe') || n.includes('suspension') || n.includes('luminaire')) return 'Parfait pour réchauffer un angle ou créer une lumière d’ambiance tamisée.';
-  if (n.includes('tapis')) return 'Choisissez-le assez grand pour passer sous les pieds avant des assises.';
-  if (n.includes('vase') || n.includes('objet') || n.includes('statue')) return 'À poser sur une console, une étagère ou une table basse pour rythmer la pièce.';
+  if (n.includes('table')) return 'Prévoyez ~90 cm de dégagement autour pour circuler confortablement.';
+  if (n.includes('tableau')) return 'À accrocher à hauteur des yeux (~150 cm du sol) sur un mur dégagé.';
+  if (n.includes('lampe') || n.includes('suspension') || n.includes('lustre')) return 'Parfait pour réchauffer un angle ou créer une lumière d’ambiance tamisée.';
+  if (n.includes('étagère') || n.includes('support')) return 'À adosser à un mur pour exposer livres et objets sans encombrer le sol.';
+  if (n.includes('vase')) return 'À poser sur une étagère, une commode ou une table basse pour rythmer la pièce.';
   if (category === 'Meubles') return 'À adosser à un mur libre pour structurer l’espace sans gêner la circulation.';
   return 'S’intègre facilement comme pièce d’accent dans votre composition.';
 }
@@ -148,12 +149,12 @@ function placementTip(category: string, name: string): string {
 function complementFor(p: Product, pool: Product[]): Product | undefined {
   const n = p.name.toLowerCase();
   const find = (kw: string) => pool.find((x) => x.id !== p.id && x.name.toLowerCase().includes(kw));
-  if (n.includes('canapé')) return find('table basse') || find('fauteuil') || find('tapis') || find('lampe');
-  if (n.includes('fauteuil')) return find('lampe') || find('table') || find('tapis');
-  if (n.includes('table')) return find('chaise') || find('suspension') || find('vase');
+  if (n.includes('canapé')) return find('table basse') || find('fauteuil') || find('lampe') || find('tableau');
+  if (n.includes('fauteuil')) return find('lampe') || find('table basse') || find('tableau');
+  if (n.includes('table')) return find('suspension') || find('lustre') || find('vase');
   if (n.includes('tableau')) return find('lampe') || find('vase');
-  if (n.includes('lampe') || n.includes('luminaire')) return find('tableau') || find('vase');
-  return find('vase') || find('tableau') || find('tapis');
+  if (n.includes('lampe') || n.includes('lustre')) return find('tableau') || find('vase');
+  return find('vase') || find('tableau') || find('étagère');
 }
 
 export interface MatchResult {
