@@ -12,14 +12,7 @@ export default function AProposPage() {
   return (
     <main className="bg-white min-h-screen">
       {/* ─── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative border-b border-neutral-100 bg-neutral-950 py-28 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)',
-            backgroundSize: '20px 20px',
-          }}
-        />
+      <section className="relative bg-black py-28">
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <Link
             href="/"
@@ -31,8 +24,8 @@ export default function AProposPage() {
             Genève · Depuis 2024
           </p>
           <h1
-            className="text-5xl md:text-7xl font-bold text-white leading-[1.05] mb-7"
-            style={{ fontFamily: 'var(--font-playfair)' }}
+            className="text-5xl md:text-7xl font-normal text-white leading-[1.1] mb-7"
+            style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}
           >
             L&apos;art de vivre,<br />en toute sérénité.
           </h1>
