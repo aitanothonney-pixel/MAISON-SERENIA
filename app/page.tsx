@@ -2615,20 +2615,21 @@ export default function Home() {
       {/* Acheter par catégorie — bien visible, style meublier */}
       <ShopByCategory />
 
-      {/* Mon Intérieur IA — bannière CTA */}
+      {/* Mon Intérieur IA — bannière CTA éditoriale */}
       <FadeInSection>
         <section className="max-w-7xl mx-auto px-6 lg:px-10 py-6">
-          <div className="relative overflow-hidden rounded-2xl bg-black text-white px-8 py-12 md:px-14 md:py-16 text-center">
-            <div className="absolute inset-0 opacity-[0.07]" style={{ background: 'radial-gradient(circle at 50% 0%, #C9A96E 0%, transparent 60%)' }} />
-            <div className="relative">
+          <div className="relative overflow-hidden rounded-2xl min-h-[440px] md:min-h-[480px] flex items-center">
+            <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="(max-width: 1280px) 100vw, 1200px" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+            <div className="relative px-8 md:px-16 py-14 max-w-xl text-white">
               <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-5">
                 <Sparkles className="w-4 h-4" /> Nouveau · Mon Intérieur IA
               </span>
-              <h2 className="text-3xl md:text-5xl leading-tight mb-4 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>
+              <h2 className="text-3xl md:text-5xl leading-[1.1] mb-5" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>
                 Votre conseiller déco personnel, propulsé par l&apos;IA
               </h2>
-              <p className="text-neutral-400 max-w-xl mx-auto mb-8 text-sm md:text-base" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                Décrivez votre espace, votre style et votre budget : nous vous recommandons les pièces de notre collection faites pour votre intérieur.
+              <p className="text-neutral-300 max-w-md mb-8 text-sm md:text-[15px] leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
               </p>
               <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors">
                 Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
