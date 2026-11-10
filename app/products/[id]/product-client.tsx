@@ -1419,18 +1419,18 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               </div>
 
               {/* Réassurance — panneau sous les boutons d'achat */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-8 border border-neutral-200 rounded-xl p-4">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-8 border border-neutral-200 p-4">
                 {[
                   { icon: <CreditCard className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Paiement sécurisé', sub: 'Stripe · 3D Secure' },
                   { icon: <Truck className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Livraison offerte', sub: 'dès 40 CHF d’achat' },
-                  { icon: <RotateCcw className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Retour sous 30 jours', sub: 'satisfait ou remboursé' },
+                  { icon: <RotateCcw className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Retour sous 30 jours', sub: '' },
                   { icon: <Package className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Emballage soigné', sub: 'expédié avec soin' },
                 ].map((r, i) => (
                   <div key={i} className="flex items-center gap-2.5">
                     <span className="shrink-0 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center text-black">{r.icon}</span>
                     <div className="min-w-0 leading-tight">
                       <p className="text-[12px] font-semibold text-black leading-tight">{r.title}</p>
-                      <p className="text-[11px] text-neutral-400 leading-tight mt-0.5">{r.sub}</p>
+                      {r.sub && <p className="text-[11px] text-neutral-400 leading-tight mt-0.5">{r.sub}</p>}
                     </div>
                   </div>
                 ))}
