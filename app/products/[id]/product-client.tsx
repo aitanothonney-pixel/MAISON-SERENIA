@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, RotateCcw, Link2, Plus, Gift, Sparkles } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, RotateCcw, Link2, Plus, Gift, Sparkles, FileText } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1248,6 +1248,21 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <Link2 className="w-3.5 h-3.5" />
                     {linkCopied ? <span className="text-green-600 font-medium">Lien copié !</span> : <span>Partager</span>}
                   </button>
+                  {product.name.includes('Bubble') && product.name.toLowerCase().includes('canapé') && (
+                    <>
+                      <span className="text-neutral-200">·</span>
+                      <a
+                        href="/docs/fiche-dimensions-bubble.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 hover:text-black transition-colors"
+                        title="Fiche descriptive et dimensions (PDF)"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        <span>Descriptif &amp; dimensions</span>
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
 
