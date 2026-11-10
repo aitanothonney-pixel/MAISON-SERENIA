@@ -536,10 +536,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           className="shrink-0"
         ><Logo color="black" size="md" /></Link>
 
-        {/* Recherche */}
+        {/* Recherche — barre complète sur desktop uniquement */}
         <button
           onClick={() => setSearchFocused(true)}
-          className="flex-1 max-w-2xl flex items-stretch h-11 border border-neutral-300 hover:border-neutral-400 transition-colors group"
+          className="hidden md:flex flex-1 max-w-2xl items-stretch h-11 border border-neutral-300 hover:border-neutral-400 transition-colors group"
           aria-label="Rechercher"
         >
           <span className="flex-1 flex items-center px-4 text-left text-sm text-neutral-400" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
@@ -549,6 +549,11 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         </button>
 
         <div className="flex items-center gap-3 lg:gap-4 shrink-0 ml-auto">
+          {/* Recherche — icône sur mobile (ouvre la recherche plein écran) */}
+          <button onClick={() => setSearchFocused(true)} className="md:hidden flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Rechercher">
+            <Search className="w-[22px] h-[22px]" strokeWidth={1.4} />
+          </button>
+
           {/* Compte / contact */}
           <Link href="/contact" className="hidden sm:flex flex-col items-center text-neutral-700 hover:text-black transition-colors" aria-label="Contact">
             <User className="w-[22px] h-[22px]" strokeWidth={1.4} />
@@ -598,7 +603,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             </span>
             <span className="hidden sm:inline uppercase tracking-[0.15em] text-[12px]">Menu</span>
           </button>
-          <div className="flex-1 flex items-center justify-between gap-5 lg:gap-6">
+          {/* Liens catégories : masqués sur mobile (le menu ☰ gère la navigation) */}
+          <div className="hidden md:flex flex-1 items-center justify-between gap-5 lg:gap-6">
             {navLinks.map((l) => (
               <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap transition-colors">
                 {l.label}
@@ -606,6 +612,8 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             ))}
             <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap transition-colors">Promotions</Link>
           </div>
+          {/* Sur mobile : on garde l'accès direct aux Promotions à côté du menu */}
+          <Link href="/promotions" className="md:hidden ml-auto text-[13px] font-medium text-red-600 hover:text-red-700 whitespace-nowrap uppercase tracking-[0.1em] transition-colors">Promotions</Link>
         </div>
       </nav>
     </header>
