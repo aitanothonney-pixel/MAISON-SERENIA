@@ -8,7 +8,7 @@ import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp,
   Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift, Eye,
-  CreditCard, ChevronDown, User, Award, Star,
+  CreditCard, ChevronDown, User, Award, Star, Sparkles,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
@@ -313,6 +313,22 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 </Link>
               </div>
 
+              {/* MON INTÉRIEUR IA */}
+              <div className="px-6 py-5 border-b border-neutral-100 bg-gradient-to-r from-[#C9A96E]/10 to-transparent">
+                <Link href="/mon-interieur-ia" onClick={onClose} className="flex items-center gap-4 group">
+                  <span className="relative w-11 h-11 rounded-full bg-black flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-[#C9A96E]" strokeWidth={1.6} />
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                      Mon Intérieur IA
+                    </p>
+                    <p className="text-xs text-neutral-400 mt-0.5">Votre conseiller déco personnalisé</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
+                </Link>
+              </div>
+
               {/* NOS COLLECTIONS */}
               <div className="px-6 py-6 border-b border-neutral-100">
                 <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Nos collections</p>
@@ -503,6 +519,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
     { label: 'Tableaux', href: '/collections/figurines?g=Tableaux' },
     { label: 'Bubble', href: '/collections/bubble' },
     { label: 'Notre Histoire', href: '/a-propos' },
+    { label: 'Mon Intérieur IA', href: '/mon-interieur-ia' },
   ];
 
   return (
@@ -2597,6 +2614,29 @@ export default function Home() {
 
       {/* Acheter par catégorie — bien visible, style meublier */}
       <ShopByCategory />
+
+      {/* Mon Intérieur IA — bannière CTA */}
+      <FadeInSection>
+        <section className="max-w-7xl mx-auto px-6 lg:px-10 py-6">
+          <div className="relative overflow-hidden rounded-2xl bg-black text-white px-8 py-12 md:px-14 md:py-16 text-center">
+            <div className="absolute inset-0 opacity-[0.07]" style={{ background: 'radial-gradient(circle at 50% 0%, #C9A96E 0%, transparent 60%)' }} />
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-5">
+                <Sparkles className="w-4 h-4" /> Nouveau · Mon Intérieur IA
+              </span>
+              <h2 className="text-3xl md:text-5xl leading-tight mb-4 max-w-2xl mx-auto" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>
+                Votre conseiller déco personnel, propulsé par l&apos;IA
+              </h2>
+              <p className="text-neutral-400 max-w-xl mx-auto mb-8 text-sm md:text-base" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                Décrivez votre espace, votre style et votre budget : nous vous recommandons les pièces de notre collection faites pour votre intérieur.
+              </p>
+              <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors">
+                Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </FadeInSection>
 
       <div className="w-full">
           {/* Promotions mises en avant */}
