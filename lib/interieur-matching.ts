@@ -160,7 +160,7 @@ function complementFor(p: Product, pool: Product[]): Product | undefined {
 export interface MatchResult {
   recos: Reco[];
   complements: { id: number; name: string; category: string; priceChf: number; images: string[] }[];
-  meta: { candidateCount: number; roomLabel: string; note?: string };
+  meta: { candidateCount: number; roomLabel: string; noExactMatch?: boolean; note?: string };
 }
 
 const ROOM_LABELS: Record<RoomKey, string> = {
@@ -174,12 +174,28 @@ export function matchProducts(brief: InterieurBrief): MatchResult {
   const colorKws = (brief.colors || []).map((c) => c.toLowerCase());
   const budget = brief.budgetChf && brief.budgetChf !== 'tbd' ? brief.budgetChf : undefined;
 
-  // Mots-clés de nom (selon intention / type de déco)
+  // Mots-clés de nom (selon intention / type de déco).
+  // Objectif : coller au plus près de ce que l'utilisateur demande vraiment.
   let nameHints = map.nameHints;
   if (brief.room === 'decoration' && brief.decoType) nameHints = DECO_HINTS[brief.decoType] ?? [];
   if (brief.intent === 'canape') nameHints = ['canapé'];
   if (brief.intent === 'fauteuil') nameHints = ['fauteuil'];
-  if (brief.intent === 'deco' || brief.intent === 'decoration') nameHints = [];
+  // « Je cherche du mobilier / rangement / table » → on cible le vrai type de meuble de la pièce
+  if (brief.intent === 'mobilier') {
+    const MOBILIER_HINTS: Partial<Record<RoomKey, string[]>> = {
+      salle_a_manger: ['table à manger', 'table'],
+      'salle-a-manger': ['table à manger', 'table'],
+      chambre: ['commode', 'table'],
+      bureau: ['étagère', 'commode', 'support'],
+      entree: ['commode', 'étagère'],
+    } as Partial<Record<RoomKey, string[]>>;
+    nameHints = MOBILIER_HINTS[brief.room] ?? map.nameHints;
+  }
+  // « Ajouter de la décoration / luminaire » dans une pièce → on cible les objets décoratifs réels
+  if (brief.intent === 'deco' || brief.intent === 'decoration') {
+    nameHints = brief.room === 'decoration' ? [] : ['tableau', 'lampe', 'lustre', 'suspension', 'vase'];
+  }
+  // « Aménager toute la pièce » / « petit espace » : on garde les pistes par défaut de la pièce.
 
   const scored = products
     .filter((p) => map.categories.includes(p.category))
@@ -187,10 +203,14 @@ export function matchProducts(brief: InterieurBrief): MatchResult {
       const price = sellingChf(p);
       const hay = `${p.name} ${p.description} ${p.material}`.toLowerCase();
       let score = 10;
-      // Correspondance type de produit (intention / déco)
+      // Correspondance type de produit (intention / déco).
+      // typeMatch = ce produit est-il VRAIMENT le bon type demandé ?
+      // (si aucune piste de type n'est donnée, tout produit de la pièce convient)
+      const typeMatch = nameHints.length === 0
+        ? true
+        : nameHints.some((h) => p.name.toLowerCase().includes(h));
       if (nameHints.length) {
-        const hit = nameHints.some((h) => p.name.toLowerCase().includes(h));
-        score += hit ? 40 : (brief.room === 'decoration' ? -30 : -5);
+        score += typeMatch ? 40 : (brief.room === 'decoration' ? -30 : -5);
       }
       // Déco : si room = decoration mais catégorie = Décorations, bonus de base
       if (brief.room === 'decoration' && p.category === 'Décorations') score += 10;
@@ -215,13 +235,51 @@ export function matchProducts(brief: InterieurBrief): MatchResult {
       else if (dim.verdict === 'tight') score += 5;
       else if (dim.verdict === 'too-big') score -= 25;
 
-      return { p, price, score, budgetFit, styleHits, colorHits, dim };
+      // Distance au budget (0 = dans la fourchette) — sert au classement de secours
+      let budgetDistance = 0;
+      if (budget) {
+        if (budget.min != null && price < budget.min) budgetDistance = budget.min - price;
+        else if (budget.max != null && price > budget.max) budgetDistance = price - budget.max;
+      }
+      return { p, price, score, budgetFit, typeMatch, budgetDistance, styleHits, colorHits, dim };
     })
-    // on écarte les hors-budget francs quand un budget est donné
-    .filter((x) => !budget || x.budgetFit || x.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  const top = scored.slice(0, 5);
+  // 1) On ne garde comme vraies recommandations que les produits qui
+  //    correspondent au BON TYPE demandé ET (si un budget est fixé) au budget.
+  const strong = scored.filter((x) => x.typeMatch && (!budget || x.budgetFit));
+
+  // 2) Si rien ne colle vraiment, on bascule sur une sélection de secours :
+  //    on propose les produits les plus proches (bon type en priorité, puis
+  //    le plus proche du budget) et on prévient honnêtement l'utilisateur.
+  // On évite d'afficher plusieurs variantes au nom identique (ex. mêmes modèles
+  // déclinés en coloris) : une seule carte par nom de produit.
+  const dedupeByName = <T extends { p: Product }>(list: T[]): T[] => {
+    const seenNames = new Set<string>();
+    return list.filter((x) => {
+      const key = x.p.name.trim().toLowerCase();
+      if (seenNames.has(key)) return false;
+      seenNames.add(key);
+      return true;
+    });
+  };
+
+  let noExactMatch = false;
+  let top: typeof scored;
+  if (strong.length > 0) {
+    top = dedupeByName(strong).slice(0, 5);
+  } else {
+    noExactMatch = true;
+    const ordered = [...scored].sort((a, b) => {
+      // le bon type d'abord
+      if (a.typeMatch !== b.typeMatch) return a.typeMatch ? -1 : 1;
+      // puis le plus proche du budget
+      if (a.budgetDistance !== b.budgetDistance) return a.budgetDistance - b.budgetDistance;
+      // puis le meilleur score global
+      return b.score - a.score;
+    });
+    top = dedupeByName(ordered).slice(0, 4);
+  }
   const pool = products;
 
   const recos: Reco[] = top.map((x) => {
@@ -268,7 +326,12 @@ export function matchProducts(brief: InterieurBrief): MatchResult {
     meta: {
       candidateCount: scored.length,
       roomLabel: ROOM_LABELS[brief.room],
-      note: recos.length === 0 ? 'Aucun produit ne correspond précisément à ces critères dans notre catalogue actuel.' : undefined,
+      noExactMatch,
+      note: recos.length === 0
+        ? 'Aucun produit ne correspond précisément à ces critères dans notre catalogue actuel.'
+        : (noExactMatch
+          ? 'Nous n’avons pas exactement ce produit, mais voici nos suggestions les plus proches.'
+          : undefined),
     },
   };
 }

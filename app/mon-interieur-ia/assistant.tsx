@@ -27,7 +27,7 @@ interface RecoCard {
 interface ApiResult {
   aiEnabled: boolean; intro: string; recos: RecoCard[];
   complements: { id: number; name: string; category: string; priceChf: number; images: string[] }[];
-  meta: { candidateCount: number; roomLabel: string; note?: string };
+  meta: { candidateCount: number; roomLabel: string; noExactMatch?: boolean; note?: string };
 }
 
 const ROOMS: { key: RoomKey; label: string; icon: React.ElementType }[] = [
@@ -220,6 +220,16 @@ export default function Assistant() {
             <div className="text-center py-16 border border-neutral-200">
               <p className="text-neutral-600">{result.meta.note || 'Aucun produit trouvé pour ces critères.'}</p>
               <button onClick={() => { setResult(null); setStepIdx(0); }} className="mt-6 inline-flex items-center gap-2 border border-black px-6 py-3 text-sm uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Ajuster mes critères</button>
+            </div>
+          )}
+
+          {result.recos.length > 0 && result.meta.noExactMatch && (
+            <div className="border border-[#C9A96E]/50 bg-[#FBF8F2] px-6 py-5">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-[#A07840] mb-2">Pas de correspondance exacte</p>
+              <p className="text-neutral-700 leading-relaxed text-sm">
+                Désolé, nous n&apos;avons pas exactement ce produit dans notre catalogue pour ces critères.
+                Voici nos suggestions les plus proches, que nous vous conseillons volontiers.
+              </p>
             </div>
           )}
 

@@ -54,10 +54,10 @@ function extractJson<T>(text: string): T | null {
   } catch { return null; }
 }
 
-async function enrich(client: Anthropic, brief: InterieurBrief, recos: Reco[]): Promise<AiEnrich | null> {
+async function enrich(client: Anthropic, brief: InterieurBrief, recos: Reco[], noExactMatch: boolean): Promise<AiEnrich | null> {
   const prompt = `Projet du client :
 ${briefSummary(brief)}
-
+${noExactMatch ? `\nIMPORTANT : nous n'avons PAS dans notre catalogue le produit correspondant exactement à ces critères. Les candidats ci-dessous sont les ALTERNATIVES les plus proches. Dans l'intro, dis-le honnêtement et chaleureusement (ex. « Nous n'avons pas exactement cette pièce, mais voici ce que nous vous conseillons de plus proche »), sans jamais prétendre que c'est une correspondance parfaite.\n` : ''}
 Candidats RÉELS du catalogue (n'utilise que ceux-ci) :
 ${candidatesBlock(recos)}
 
@@ -129,7 +129,7 @@ export async function POST(req: Request) {
   if (aiEnabled && recos.length) {
     try {
       const client = new Anthropic({ apiKey });
-      const ai = await enrich(client, brief, recos);
+      const ai = await enrich(client, brief, recos, !!match.meta.noExactMatch);
       if (ai) {
         intro = ai.intro;
         const byId = new Map(ai.items.map((i) => [i.id, i]));
@@ -143,14 +143,15 @@ export async function POST(req: Request) {
 
   return Response.json({
     aiEnabled,
-    intro: intro || defaultIntro(match.meta.roomLabel, recos.length),
+    intro: intro || defaultIntro(match.meta.roomLabel, recos.length, !!match.meta.noExactMatch),
     recos,
     complements: match.complements,
     meta: match.meta,
   });
 }
 
-function defaultIntro(roomLabel: string, n: number): string {
+function defaultIntro(roomLabel: string, n: number, noExactMatch = false): string {
   if (n === 0) return "Nous n'avons pas trouvé de pièce correspondant exactement à ces critères dans notre catalogue actuel. Ajustez le budget ou le style pour élargir la recherche.";
+  if (noExactMatch) return `Nous n'avons pas exactement cette pièce dans notre catalogue, mais voici ${n} suggestion${n > 1 ? 's' : ''} parmi les plus proches de votre projet pour votre ${roomLabel.toLowerCase()}.`;
   return `Voici une sélection de ${n} pièce${n > 1 ? 's' : ''} de notre collection, choisies pour votre ${roomLabel.toLowerCase()} selon vos critères.`;
 }

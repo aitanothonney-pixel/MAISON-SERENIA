@@ -2615,13 +2615,14 @@ export default function Home() {
       {/* Acheter par catégorie — bien visible, style meublier */}
       <ShopByCategory />
 
-      {/* Mon Intérieur IA — bannière CTA éditoriale */}
+      {/* Mon Intérieur IA — bannière CTA éditoriale, pleine largeur */}
       <FadeInSection>
-        <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14 md:py-20">
-          <div className="relative overflow-hidden min-h-[440px] md:min-h-[480px] flex items-center">
-            <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="(max-width: 1280px) 100vw, 1200px" className="object-cover" />
+        <section className="w-full">
+          <div className="relative overflow-hidden min-h-[440px] md:min-h-[520px] flex items-center">
+            <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-            <div className="relative px-8 md:px-16 py-14 max-w-xl text-white">
+            <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 py-14 text-white">
+              <div className="max-w-xl">
               <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-5">
                 <Sparkles className="w-4 h-4" /> Nouveau · Mon Intérieur IA
               </span>
@@ -2634,6 +2635,7 @@ export default function Home() {
               <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors">
                 Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+              </div>
             </div>
           </div>
         </section>
