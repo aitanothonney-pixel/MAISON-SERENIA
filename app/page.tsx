@@ -2621,8 +2621,11 @@ export default function Home() {
         <PromoBanner />
       </motion.div>
 
-      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur.
-             Même animation : elle remonte vers la promo quand elle apparaît. */}
+      {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
+      <ShopByCategory />
+
+      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur,
+             placée juste sous « Notre univers ». Animation : remonte à l'apparition. */}
       <motion.section
         className="w-full"
         initial={{ opacity: 0, marginTop: 64 }}
@@ -2651,9 +2654,6 @@ export default function Home() {
             </div>
           </div>
       </motion.section>
-
-      {/* Acheter par catégorie — bien visible, style meublier */}
-      <ShopByCategory />
 
       <div className="w-full">
           {/* Bande de réassurance */}
