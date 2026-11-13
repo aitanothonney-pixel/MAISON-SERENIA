@@ -2616,9 +2616,8 @@ export default function Home() {
       <ShopByCategory />
 
       {/* Mon Intérieur IA — bannière CTA éditoriale, pleine largeur */}
-      <FadeInSection>
-        <section className="w-full">
-          <div className="relative overflow-hidden min-h-[560px] md:min-h-[680px] lg:min-h-[760px] flex items-center">
+      <section className="w-full">
+          <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex items-center">
             <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
             <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 py-14 text-white">
@@ -2638,8 +2637,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-      </FadeInSection>
+      </section>
 
       <div className="w-full">
           {/* Promotions mises en avant */}
