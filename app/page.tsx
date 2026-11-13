@@ -2612,10 +2612,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Acheter par catégorie — bien visible, style meublier */}
-      <ShopByCategory />
+      {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero */}
+      <PromoBanner />
 
-      {/* Mon Intérieur IA — bannière CTA éditoriale, pleine largeur */}
+      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur */}
       <section className="w-full">
           <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex items-center">
             <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
@@ -2639,11 +2639,11 @@ export default function Home() {
           </div>
       </section>
 
-      <div className="w-full">
-          {/* Promotions mises en avant */}
-          <PromoBanner />
+      {/* Acheter par catégorie — bien visible, style meublier */}
+      <ShopByCategory />
 
-          {/* Bande de réassurance — sous la bannière promo */}
+      <div className="w-full">
+          {/* Bande de réassurance */}
           <TrustStrip />
 
           {/* Bubble Promo Carousel */}
