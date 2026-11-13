@@ -2615,11 +2615,10 @@ export default function Home() {
       {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero.
              L'espace reste, mais au scroll la section « remonte » vers le hero. */}
       <motion.div
-        className="mt-6 md:mt-10"
-        initial={{ opacity: 0, y: 70 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, marginTop: 64 }}
+        whileInView={{ opacity: 1, marginTop: 0 }}
         viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <PromoBanner />
       </motion.div>
@@ -2627,11 +2626,11 @@ export default function Home() {
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur.
              Même animation : elle remonte vers la promo quand elle apparaît. */}
       <motion.section
-        className="w-full mt-6 md:mt-10"
-        initial={{ opacity: 0, y: 70 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="w-full"
+        initial={{ opacity: 0, marginTop: 64 }}
+        whileInView={{ opacity: 1, marginTop: 0 }}
         viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
           <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex items-center">
             <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
