@@ -641,17 +641,15 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             </span>
             <span className="hidden sm:inline uppercase tracking-[0.15em] text-[12px]">Menu</span>
           </button>
-          {/* Liens catégories : masqués sur mobile (le menu ☰ gère la navigation) */}
-          <div className="hidden md:flex flex-1 items-center justify-between gap-5 lg:gap-6">
+          {/* Liens catégories : bande défilante sur mobile, répartie sur toute la largeur en desktop */}
+          <div className="flex flex-1 items-center gap-5 lg:gap-6 md:justify-between overflow-x-auto scrollbar-hide">
             {navLinks.map((l) => (
-              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap transition-colors">
+              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap shrink-0 transition-colors">
                 {l.label}
               </Link>
             ))}
-            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap transition-colors">Promotions</Link>
+            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap shrink-0 font-medium transition-colors">Promotions</Link>
           </div>
-          {/* Sur mobile : on garde l'accès direct aux Promotions à côté du menu */}
-          <Link href="/promotions" className="md:hidden ml-auto text-[13px] font-medium text-red-600 hover:text-red-700 whitespace-nowrap uppercase tracking-[0.1em] transition-colors">Promotions</Link>
         </div>
       </nav>
     </header>
