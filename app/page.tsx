@@ -2613,10 +2613,12 @@ export default function Home() {
       </section>
 
       {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero */}
-      <PromoBanner />
+      <div className="mt-6 md:mt-10">
+        <PromoBanner />
+      </div>
 
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur */}
-      <section className="w-full">
+      <section className="w-full mt-6 md:mt-10">
           <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex items-center">
             <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
