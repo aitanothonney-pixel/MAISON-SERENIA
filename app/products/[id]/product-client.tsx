@@ -907,6 +907,15 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
+  // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
+  const FICHE_PDF_BY_ID: Record<number, string> = {
+    100: '/docs/fiche-canape-angle-cotele.pdf', // Canapé modulable en L style nuage gris anthracite
+  };
+  const fichePdfNameLc = product.name.toLowerCase();
+  const fichePdfHref = FICHE_PDF_BY_ID[product.id]
+    ?? (product.name.includes('Bubble') && fichePdfNameLc.includes('fauteuil') ? '/docs/fiche-dimensions-fauteuil-bubble.pdf'
+      : product.name.includes('Bubble') && fichePdfNameLc.includes('canapé') ? '/docs/fiche-dimensions-bubble.pdf'
+      : undefined);
   const currentGroup = getVariantGroup(product.id);
   const related = product.category === 'Été'
     ? (() => {
@@ -1248,11 +1257,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <Link2 className="w-3.5 h-3.5" />
                     {linkCopied ? <span className="text-green-600 font-medium">Lien copié !</span> : <span>Partager</span>}
                   </button>
-                  {product.name.includes('Bubble') && (product.name.toLowerCase().includes('canapé') || product.name.toLowerCase().includes('fauteuil')) && (
+                  {fichePdfHref && (
                     <>
                       <span className="text-neutral-200">·</span>
                       <a
-                        href={product.name.toLowerCase().includes('fauteuil') ? '/docs/fiche-dimensions-fauteuil-bubble.pdf' : '/docs/fiche-dimensions-bubble.pdf'}
+                        href={fichePdfHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 hover:text-black transition-colors"
