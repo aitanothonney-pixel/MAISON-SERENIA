@@ -910,6 +910,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_BY_ID: Record<number, string> = {
     87: '/docs/fiche-canape-angle-creme.pdf', // Canapé d'angle 3 places crème
+    // Canapés-lits modulables chenille (2 places convertibles)
+    89: '/docs/fiche-canape-lit-vert-emeraude.pdf', // chenille vert ≈ vert émeraude
+    90: '/docs/fiche-canape-lit-anthracite.pdf', // chenille noir ≈ gris anthracite
+    91: '/docs/fiche-canape-lit-beige-creme.pdf', // chenille beige ≈ beige crème
+    92: '/docs/fiche-canape-lit-bleu-profond.pdf', // chenille bleu ≈ bleu profond
     // Canapés sectionnels en U (chenille, double méridienne)
     94: '/docs/fiche-canape-u-chenille-anthracite.pdf', // U gris foncé ≈ anthracite
     95: '/docs/fiche-canape-u-chenille-noir.pdf', // U noir
