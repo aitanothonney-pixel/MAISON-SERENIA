@@ -909,6 +909,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const isBubble = bubbleOrder.includes(product.id);
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_BY_ID: Record<number, string> = {
+    77: '/docs/fiche-table-basse-farmhouse.pdf', // Table basse Farmhouse en bois
     87: '/docs/fiche-canape-angle-creme.pdf', // Canapé d'angle 3 places crème
     // Canapés-lits modulables chenille (2 places convertibles)
     89: '/docs/fiche-canape-lit-vert-emeraude.pdf', // chenille vert ≈ vert émeraude
