@@ -910,6 +910,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_BY_ID: Record<number, string> = {
     87: '/docs/fiche-canape-angle-creme.pdf', // Canapé d'angle 3 places crème
+    // Canapés sectionnels en U (chenille, double méridienne)
+    94: '/docs/fiche-canape-u-chenille-anthracite.pdf', // U gris foncé ≈ anthracite
+    95: '/docs/fiche-canape-u-chenille-noir.pdf', // U noir
+    96: '/docs/fiche-canape-u-chenille-gris-clair.pdf', // U gris clair
+    97: '/docs/fiche-canape-u-chenille-ivoire.pdf', // U beige ≈ blanc ivoire
+    98: '/docs/fiche-canape-u-chenille-terracotta.pdf', // U brun ≈ terracotta
+    99: '/docs/fiche-canape-u-chenille-vert-sauge.pdf', // U vert ≈ vert sauge
     100: '/docs/fiche-canape-angle-cotele.pdf', // Canapé modulable en L style nuage gris anthracite
     113: '/docs/fiche-canape-u-blanc.pdf', // Canapé modulable en U style nuage blanc
     114: '/docs/fiche-canape-u-noir.pdf', // Canapé modulable en U style nuage noir
