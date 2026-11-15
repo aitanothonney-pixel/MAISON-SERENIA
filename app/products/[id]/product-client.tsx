@@ -910,8 +910,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_BY_ID: Record<number, string> = {
     87: '/docs/fiche-canape-angle-creme.pdf', // Canapé d'angle 3 places crème
-    95: '/docs/fiche-canape-u-noir.pdf', // Canapé d'angle modulable en U noir
     100: '/docs/fiche-canape-angle-cotele.pdf', // Canapé modulable en L style nuage gris anthracite
+    113: '/docs/fiche-canape-u-blanc.pdf', // Canapé modulable en U style nuage blanc
+    114: '/docs/fiche-canape-u-noir.pdf', // Canapé modulable en U style nuage noir
+    115: '/docs/fiche-canape-u-gris.pdf', // Canapé modulable en U style nuage gris
     102: '/docs/fiche-canape-angle-blanc.pdf', // Canapé modulable en L style nuage blanc chaud
   };
   const fichePdfNameLc = product.name.toLowerCase();
