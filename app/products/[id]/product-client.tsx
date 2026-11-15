@@ -1248,11 +1248,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <Link2 className="w-3.5 h-3.5" />
                     {linkCopied ? <span className="text-green-600 font-medium">Lien copié !</span> : <span>Partager</span>}
                   </button>
-                  {product.name.includes('Bubble') && product.name.toLowerCase().includes('canapé') && (
+                  {product.name.includes('Bubble') && (product.name.toLowerCase().includes('canapé') || product.name.toLowerCase().includes('fauteuil')) && (
                     <>
                       <span className="text-neutral-200">·</span>
                       <a
-                        href="/docs/fiche-dimensions-bubble.pdf"
+                        href={product.name.toLowerCase().includes('fauteuil') ? '/docs/fiche-dimensions-fauteuil-bubble.pdf' : '/docs/fiche-dimensions-bubble.pdf'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1 hover:text-black transition-colors"
