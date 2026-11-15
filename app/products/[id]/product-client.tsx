@@ -910,6 +910,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_BY_ID: Record<number, string> = {
     100: '/docs/fiche-canape-angle-cotele.pdf', // Canapé modulable en L style nuage gris anthracite
+    102: '/docs/fiche-canape-angle-blanc.pdf', // Canapé modulable en L style nuage blanc chaud
   };
   const fichePdfNameLc = product.name.toLowerCase();
   const fichePdfHref = FICHE_PDF_BY_ID[product.id]
