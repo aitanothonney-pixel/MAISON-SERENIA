@@ -908,32 +908,38 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const bubbleOrder = [2, 10, 6, 13, 8, 22, 12, 7, 9];
   const isBubble = bubbleOrder.includes(product.id);
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
-  const FICHE_PDF_BY_ID: Record<number, string> = {
-    77: '/docs/fiche-table-basse-farmhouse.pdf', // Table basse Farmhouse en bois
-    87: '/docs/fiche-canape-angle-creme.pdf', // Canapé d'angle 3 places crème
+  const FICHE_PDF_NAME_BY_ID: Record<number, string> = {
+    77: 'Table basse Farmhouse en bois',
+    87: 'Canapé d\'angle 3 places crème',
     // Canapés-lits modulables chenille (2 places convertibles)
-    89: '/docs/fiche-canape-lit-vert-emeraude.pdf', // chenille vert ≈ vert émeraude
-    90: '/docs/fiche-canape-lit-anthracite.pdf', // chenille noir ≈ gris anthracite
-    91: '/docs/fiche-canape-lit-beige-creme.pdf', // chenille beige ≈ beige crème
-    92: '/docs/fiche-canape-lit-bleu-profond.pdf', // chenille bleu ≈ bleu profond
+    89: 'Canapé-lit modulaire chenille vert',
+    90: 'Canapé-lit modulaire chenille noir',
+    91: 'Canapé-lit modulaire chenille beige',
+    92: 'Canapé-lit modulaire chenille bleu',
     // Canapés sectionnels en U (chenille, double méridienne)
-    94: '/docs/fiche-canape-u-chenille-anthracite.pdf', // U gris foncé ≈ anthracite
-    95: '/docs/fiche-canape-u-chenille-noir.pdf', // U noir
-    96: '/docs/fiche-canape-u-chenille-gris-clair.pdf', // U gris clair
-    97: '/docs/fiche-canape-u-chenille-ivoire.pdf', // U beige ≈ blanc ivoire
-    98: '/docs/fiche-canape-u-chenille-terracotta.pdf', // U brun ≈ terracotta
-    99: '/docs/fiche-canape-u-chenille-vert-sauge.pdf', // U vert ≈ vert sauge
-    100: '/docs/fiche-canape-angle-cotele.pdf', // Canapé modulable en L style nuage gris anthracite
-    113: '/docs/fiche-canape-u-blanc.pdf', // Canapé modulable en U style nuage blanc
-    114: '/docs/fiche-canape-u-noir.pdf', // Canapé modulable en U style nuage noir
-    115: '/docs/fiche-canape-u-gris.pdf', // Canapé modulable en U style nuage gris
-    102: '/docs/fiche-canape-angle-blanc.pdf', // Canapé modulable en L style nuage blanc chaud
+    94: 'Canapé d\'angle modulable en U gris foncé',
+    95: 'Canapé d\'angle modulable en U noir',
+    96: 'Canapé d\'angle modulable en U gris clair',
+    97: 'Canapé d\'angle modulable en U beige',
+    98: 'Canapé d\'angle modulable en U brun',
+    99: 'Canapé d\'angle modulable en U vert',
+    // Canapés modulables en L et en U « style nuage »
+    100: 'Canapé modulable en L style nuage gris anthracite',
+    102: 'Canapé modulable en L style nuage blanc chaud',
+    113: 'Canapé modulable en U style nuage blanc',
+    114: 'Canapé modulable en U style nuage noir',
+    115: 'Canapé modulable en U style nuage gris',
   };
+  // Fiches communes à toute une gamme (Bubble)
   const fichePdfNameLc = product.name.toLowerCase();
-  const fichePdfHref = FICHE_PDF_BY_ID[product.id]
-    ?? (product.name.includes('Bubble') && fichePdfNameLc.includes('fauteuil') ? '/docs/fiche-dimensions-fauteuil-bubble.pdf'
-      : product.name.includes('Bubble') && fichePdfNameLc.includes('canapé') ? '/docs/fiche-dimensions-bubble.pdf'
+  const fichePdfName = FICHE_PDF_NAME_BY_ID[product.id]
+    ?? (product.name.includes('Bubble') && fichePdfNameLc.includes('fauteuil') ? 'Fauteuil Bubble'
+      : product.name.includes('Bubble') && fichePdfNameLc.includes('canapé') ? 'Canapé Bubble'
       : undefined);
+  // Lien vers public/docs/MAISON SERENIA DESCRIPTIF - <produit>.pdf (encodé : espaces, accents, apostrophes)
+  const fichePdfHref = fichePdfName
+    ? `/docs/${encodeURIComponent(`MAISON SERENIA DESCRIPTIF - ${fichePdfName}.pdf`)}`
+    : undefined;
   const currentGroup = getVariantGroup(product.id);
   const related = product.category === 'Été'
     ? (() => {
