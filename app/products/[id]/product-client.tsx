@@ -932,6 +932,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     113: 'Canapé modulable en U style nuage blanc',
     114: 'Canapé modulable en U style nuage noir',
     115: 'Canapé modulable en U style nuage gris',
+    // Tables basses
+    133: 'Lot de 2 tables basses rondes noyer',
   };
   // Fiches communes à toute une gamme (Bubble)
   const fichePdfNameLc = product.name.toLowerCase();
