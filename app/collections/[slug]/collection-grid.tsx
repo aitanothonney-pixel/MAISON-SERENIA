@@ -115,9 +115,6 @@ export function CollectionGrid({ items }: { items: Product[] }) {
               }`}
             >
               {r}
-              <span className="ml-1.5 text-neutral-300">
-                {r === 'Tous' ? items.length : items.filter((p) => rangeOf(p.name) === r).length}
-              </span>
             </button>
           ))}
         </div>
