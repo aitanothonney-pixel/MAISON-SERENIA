@@ -974,7 +974,7 @@ function PromoBanner() {
           <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
             <p className="text-xs tracking-[0.35em] uppercase mb-3 text-[#C9A96E]">Édition limitée</p>
             <h2 className="text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Jusqu&apos;à −30% sur<br className="hidden md:block" /> la collection Bubble
+              Jusqu&apos;à −30% grâce au Black Friday<br className="hidden md:block" /> sur la collection Bubble
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
               Offre à durée limitée — dans la limite des stocks disponibles.
