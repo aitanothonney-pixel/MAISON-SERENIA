@@ -508,7 +508,6 @@ const rawProducts: Product[] = [
       '/catalog/QF9bT2B6.png',
       '/catalog/dwQYzJc7.png',
       '/catalog/ZpbfLsNS.png',
-      '/catalog/DHTCpCs4.png',
     ],
     dimensions: 'Meuble TV long avec étagère',
     material: 'Panneaux bois, tiroirs en tissu, roulettes',
