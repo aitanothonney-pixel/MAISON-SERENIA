@@ -2633,7 +2633,7 @@ export default function Home() {
       <ShopByCategory />
 
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur,
-             placée juste sous « Notre univers ». Animation : remonte à l'apparition. */}
+             placée juste sous « Notre univers ». Animation : remonte à l'apparition. Mise en page « salon rouge plein cadre » : texte en bas à gauche. */}
       <motion.section
         className="w-full"
         initial={{ opacity: 0, marginTop: 64 }}
@@ -2641,18 +2641,18 @@ export default function Home() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-          <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex items-center">
-            <Image src="/catalog/j9h5SNVC.jpg" alt="Intérieur d'exception MAISON SERENIA" fill sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-            <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 py-14 text-white">
-              <div className="max-w-xl">
-              <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-5">
-                <Sparkles className="w-4 h-4" /> Nouveau · Mon Intérieur IA
+          <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex flex-col justify-end">
+            <Image src="/catalog/99H4L0sP.jpg" alt="Salon avec canapé Bubble rouge" fill sizes="100vw" className="object-cover object-[center_40%]" />
+            <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%)' }} />
+            <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-22 pt-14 pb-16 md:pb-[72px] text-white">
+              <div className="max-w-[640px]">
+              <span className="block text-xs uppercase tracking-[0.35em] text-[#C9A96E] mb-6">
+                Nouveau · Mon Intérieur IA
               </span>
-              <h2 className="text-3xl md:text-4xl font-semibold leading-[1.2] mb-5" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+              <h2 className="text-4xl md:text-[52px] font-semibold leading-[1.16] mb-[22px]" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
                 Votre conseiller déco personnel, propulsé par l&apos;IA
               </h2>
-              <p className="text-neutral-300 max-w-md mb-8 text-sm md:text-[15px] leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+              <p className="text-neutral-200 max-w-[520px] mb-8 text-[15px] md:text-base leading-[1.7]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                 Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
               </p>
               <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors">
