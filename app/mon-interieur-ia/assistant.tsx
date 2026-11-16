@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -101,7 +101,6 @@ const VERDICT_BADGE: Record<RecoCard['dimensionVerdict'], { label: string; cls: 
 
 export default function Assistant() {
   const cur = useCurrency();
-  const [started, setStarted] = useState(false);
   const [stepIdx, setStepIdx] = useState(0);
   const [brief, setBrief] = useState<Brief>({ dims: {}, styles: [], colors: [] });
   const [loading, setLoading] = useState(false);
@@ -109,6 +108,9 @@ export default function Assistant() {
   const [chatMsgs, setChatMsgs] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+
+  // Le questionnaire s'ouvre directement (plus d'écran d'accueil)
+  useEffect(() => { gaEvent('ia_assistant_open'); }, []);
 
   const flow = useMemo(() => {
     const hasSub = brief.room ? !!SUBQ[brief.room] : false;
@@ -171,32 +173,6 @@ export default function Assistant() {
     } finally {
       setChatLoading(false);
     }
-  }
-
-  // ── Écran d'accueil ──────────────────────────────────────────────────────
-  if (!started) {
-    return (
-      <main className="relative bg-black min-h-screen text-white flex flex-col items-center justify-center px-6 py-24 text-center overflow-hidden">
-        <Image src="/catalog/j9h5SNVC.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-black/90" />
-        <div className="relative flex flex-col items-center">
-          <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-[#C9A96E] mb-6"><Sparkles className="w-4 h-4" /> Mon Intérieur IA</span>
-          <h1 className="text-4xl md:text-6xl leading-[1.1] mb-6 max-w-3xl" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>
-            Imaginez votre intérieur idéal
-          </h1>
-          <p className="text-neutral-300 max-w-xl leading-relaxed mb-10" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Décrivez votre espace, vos envies et vos dimensions. Notre assistant IA vous aide à trouver les meubles et accessoires adaptés à votre intérieur parmi notre collection Maison Serenia.
-          </p>
-          <button
-            onClick={() => { setStarted(true); gaEvent('ia_assistant_open'); }}
-            className="group inline-flex items-center gap-3 bg-white text-black px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors"
-          >
-            Commencer mon projet <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <Link href="/" className="mt-8 text-xs uppercase tracking-widest text-neutral-400 hover:text-white transition-colors">← Retour à la boutique</Link>
-        </div>
-      </main>
-    );
   }
 
   // ── Résultats ────────────────────────────────────────────────────────────
