@@ -917,6 +917,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     76: 'Commode blanche 6 tiroirs',
     77: 'Table basse Farmhouse en bois',
     83: 'Table basse bicolore à niveaux décalés',
+    84: 'Lot de 2 tables gigognes',
+    85: 'Lot de 2 tables gigognes',
+    86: 'Lot de 2 tables gigognes',
     87: 'Canapé d\'angle 3 places crème',
     // Canapés-lits modulables chenille (2 places convertibles)
     89: 'Canapé-lit modulaire chenille vert',
