@@ -2629,8 +2629,10 @@ export default function Home() {
       {/* Carrousel Bubble — juste sous la bannière Black Friday */}
       <BubblePromoCarousel />
 
-      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur,
-             placée juste au-dessus de « Acheter par catégorie ». Animation : remonte à l'apparition. Mise en page « salon rouge plein cadre » : texte en bas à gauche. */}
+      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur, juste au-dessus de
+             « Acheter par catégorie ». Animation : remonte à l'apparition.
+             Mise en page validée (proposition 23) : fond beige, fauteuil Bubble rouge détouré.
+             Texte à gauche et fauteuil à droite à partir de xl ; empilés en dessous. */}
       <motion.section
         className="w-full"
         initial={{ opacity: 0, marginTop: 64 }}
@@ -2638,25 +2640,32 @@ export default function Home() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-          <div className="relative overflow-hidden min-h-[460px] md:min-h-[560px] lg:min-h-[600px] flex flex-col justify-end">
-            <Image src="/catalog/99H4L0sP.jpg" alt="Salon avec canapé Bubble rouge" fill sizes="100vw" className="object-cover object-[center_40%]" />
-            <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0) 80%)' }} />
-            <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-22 pt-14 pb-16 md:pb-[72px] text-white">
-              <div className="max-w-[640px]">
-              <span className="block text-xs uppercase tracking-[0.35em] text-[#C9A96E] mb-6">
-                Nouveau · Mon Intérieur IA
-              </span>
-              <h2 className="text-4xl md:text-[52px] font-semibold leading-[1.16] mb-[22px]" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-                Votre conseiller déco personnel, propulsé par l&apos;IA
-              </h2>
-              <p className="text-neutral-200 max-w-[520px] mb-8 text-[15px] md:text-base leading-[1.7]" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
-              </p>
-              <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors">
-                Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+          <div className="relative overflow-hidden bg-[#F3F0E9] text-[#111]">
+            <div className="relative w-full max-w-7xl mx-auto px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
+              <div className="max-w-[520px]">
+                <span className="block text-xs uppercase tracking-[0.35em] text-[#7A5A2B] mb-6">
+                  Nouveau · Mon Intérieur IA
+                </span>
+                <h2 className="text-4xl md:text-[44px] font-semibold leading-[1.16] text-[#111] mb-6" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                  Votre conseiller déco personnel, propulsé par l&apos;IA
+                </h2>
+                <p className="max-w-[460px] text-[15px] leading-[1.7] text-[#333] mb-8" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+                  Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
+                </p>
+                <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#111] text-white px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-[#111] transition-colors">
+                  Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
+              <Image
+                src="/catalog/fauteuil-bubble-rouge.png"
+                alt="Fauteuil Bubble rouge"
+                width={900}
+                height={675}
+                sizes="(min-width: 1280px) 470px, 80vw"
+                className="relative mx-auto mt-12 h-auto w-[80vw] max-w-[420px] xl:absolute xl:bottom-14 xl:right-20 xl:mx-0 xl:mt-0 xl:w-[470px] xl:max-w-none"
+              />
             </div>
+            <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#A07840] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
           </div>
       </motion.section>
 
