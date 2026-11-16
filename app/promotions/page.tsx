@@ -29,7 +29,7 @@ export default function PromotionsPage() {
           <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4">Black Friday</p>
           <p className="text-[11px] tracking-[0.35em] uppercase text-white/70 mb-2">Jusqu&apos;à</p>
           <p
-            className="text-[96px] md:text-[190px] leading-none font-semibold text-[#C9A96E]"
+            className="text-[96px] md:text-[160px] leading-none font-semibold text-[#C9A96E]"
             style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
           >
             −30%
