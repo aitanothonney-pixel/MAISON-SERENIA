@@ -1084,7 +1084,7 @@ function BubblePromoCarousel() {
     const reduce = typeof window !== 'undefined'
       && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return; // respecte la préférence « réduire les animations »
-    const SPEED = 70; // px par seconde, identique sur tous les écrans
+    const SPEED = 50; // px par seconde, identique sur tous les écrans
     let raf = 0;
     let last = 0; // horodatage de la frame précédente
     let pos = el.scrollLeft; // position suivie avec décimales (le navigateur arrondit scrollLeft)
