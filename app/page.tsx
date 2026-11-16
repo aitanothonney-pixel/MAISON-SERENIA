@@ -1053,7 +1053,8 @@ function PromoBanner() {
 
 // ─── Bubble Promo Carousel ────────────────────────────────────────────────────
 
-const bubblePromoProducts = [2, 10, 6, 13, 8, 22, 12, 7, 9];
+// Ordre d'affichage du carrousel : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
+const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
 
 function BubblePromoCarousel() {
   const cur = useCurrency();
@@ -2618,6 +2619,9 @@ export default function Home() {
         <PromoBanner />
       </motion.div>
 
+      {/* Carrousel Bubble — juste sous la bannière Black Friday */}
+      <BubblePromoCarousel />
+
       {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
       <ShopByCategory />
 
@@ -2655,9 +2659,6 @@ export default function Home() {
       <div className="w-full">
           {/* Bande de réassurance */}
           <TrustStrip />
-
-          {/* Bubble Promo Carousel */}
-          <BubblePromoCarousel />
 
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
