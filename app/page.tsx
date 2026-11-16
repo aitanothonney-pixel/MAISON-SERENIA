@@ -1084,14 +1084,21 @@ function BubblePromoCarousel() {
     const reduce = typeof window !== 'undefined'
       && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return; // respecte la préférence « réduire les animations »
+    const SPEED = 70; // px par seconde, identique sur tous les écrans
     let raf = 0;
-    const step = () => {
-      if (el && !pausedRef.current) {
-        const half = el.scrollWidth / 2; // la liste est dupliquée une fois
-        if (half > 0) {
-          el.scrollLeft += 0.6; // vitesse douce (~35 px/s)
-          if (el.scrollLeft >= half) el.scrollLeft -= half; // boucle sans couture
-        }
+    let last = 0; // horodatage de la frame précédente
+    let pos = el.scrollLeft; // position suivie avec décimales (le navigateur arrondit scrollLeft)
+    let written = pos; // dernière valeur écrite dans scrollLeft
+    const step = (t: number) => {
+      const dt = last ? Math.min(t - last, 100) : 0; // borné (onglet masqué, retour de veille)
+      last = t;
+      // Si l'utilisateur a glissé le carrousel, on repart de sa position réelle
+      if (Math.abs(el.scrollLeft - written) > 2) pos = el.scrollLeft;
+      const half = el.scrollWidth / 2; // la liste est dupliquée une fois
+      if (!pausedRef.current && half > 0) {
+        pos = (pos + (SPEED * dt) / 1000) % half; // boucle sans couture
+        written = pos;
+        el.scrollLeft = pos;
       }
       raf = requestAnimationFrame(step);
     };
