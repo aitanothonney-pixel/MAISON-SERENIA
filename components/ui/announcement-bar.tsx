@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
 import { useCurrency, formatPrice } from '@/lib/currency'
 
 const SESSION_KEY = 'announcement-bar-closed'
@@ -16,11 +17,13 @@ export function useAnnouncementBarVisible() {
 
 export function AnnouncementBar({ children }: { children?: ReactNode }) {
   const cur = useCurrency()
-  const MESSAGES = [
-    `Livraison offerte dès ${formatPrice(40, cur)} d'achat`,
-    'Collection Bubble 2026 — Jusqu\'à −30%',
-    'Paiement 100% sécurisé · SSL 256-bit',
-    'Livraison en 1 à 4 semaines · Suivi inclus',
+  // Messages qui défilent. Un message avec `href` ouvre cette page au clic.
+  const MESSAGES: { text: string; href?: string }[] = [
+    { text: 'Profitez du Black Friday', href: '/promotions' },
+    { text: `Livraison offerte dès ${formatPrice(40, cur)} d'achat` },
+    { text: 'Collection Bubble 2026 — Jusqu\'à −30%' },
+    { text: 'Paiement 100% sécurisé · SSL 256-bit' },
+    { text: 'Livraison en 1 à 4 semaines · Suivi inclus' },
   ]
   const [visible, setVisible] = useState(false)
   const [index, setIndex] = useState(0)
@@ -41,6 +44,8 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
     }, INTERVAL_MS)
     return () => clearInterval(timer)
   }, [visible])
+
+  const current = MESSAGES[index]
 
   const handleClose = () => {
     setVisible(false)
@@ -65,7 +70,13 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
                 transition={{ duration: 0.4 }}
                 className="text-[11px] tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
               >
-                {MESSAGES[index]}
+                {current.href ? (
+                  <Link href={current.href} className="hover:text-[#C9A96E] transition-colors">
+                    {current.text}
+                  </Link>
+                ) : (
+                  current.text
+                )}
               </motion.span>
             </AnimatePresence>
             <span className="h-1 w-1 rounded-full bg-[#C9A96E] shrink-0" />
