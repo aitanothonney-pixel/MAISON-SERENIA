@@ -12,61 +12,77 @@ export const metadata = {
 
 export default function PromotionsPage() {
   // Produits en promotion : toute la collection Bubble (−30%)
-  const items = products.filter((p) => p.name.includes('Bubble'));
+  // Ordre d'affichage : Bubble rouges, puis Bubble blancs, puis les autres coloris (ordre d'origine conservé)
+  const colorRank = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes('rouge')) return 0;
+    if (n.includes('blanc')) return 1;
+    return 2;
+  };
+  const items = products
+    .filter((p) => p.name.includes('Bubble'))
+    .sort((a, b) => colorRank(a.name) - colorRank(b.name));
 
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-      {/* Hero — bannière Black Friday avec la photo de la bannière Mon Intérieur IA */}
-      <section className="relative overflow-hidden bg-black text-white min-h-[620px] md:min-h-[680px] flex flex-col justify-end">
+      {/* Hero — bannière Black Friday centrée, avec la photo de la bannière Mon Intérieur IA */}
+      <section className="relative overflow-hidden bg-black text-white h-[680px] flex items-center justify-center">
         <Image
           src="/catalog/99H4L0sP.jpg"
           alt="Salon avec canapé Bubble rouge"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_40%]"
+          className="object-cover object-[50%_45%] md:object-[50%_40%]"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.78) 55%, rgba(0,0,0,0.5) 100%)' }}
+          className="absolute inset-0 md:hidden"
+          style={{ background: 'radial-gradient(ellipse 85% 60% at 50% 50%, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.64) 70%, rgba(0,0,0,0.45) 100%)' }}
         />
-        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-22 pt-24 pb-16 md:pb-[72px]">
-          <div className="max-w-[720px]">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/80 hover:text-white transition-colors mb-10"
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 hidden md:block"
+          style={{ background: 'radial-gradient(ellipse 58% 62% at 50% 50%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.4) 100%)' }}
+        />
+        <Link
+          href="/"
+          className="absolute top-8 left-6 md:top-10 md:left-[88px] z-10 text-xs uppercase tracking-widest text-white/80 hover:text-white transition-colors"
+        >
+          ← Retour à l&apos;accueil
+        </Link>
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-16 lg:px-[88px] py-16 flex flex-col items-center text-center">
+          <div className="flex items-center gap-3 md:gap-[18px]">
+            <span className="block w-7 md:w-14 h-px bg-[#C9A96E]" />
+            <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] indent-[0.5em]">Black Friday</p>
+            <span className="block w-7 md:w-14 h-px bg-[#C9A96E]" />
+          </div>
+          <p className="mt-4 text-[11px] tracking-[0.35em] uppercase text-white/80 indent-[0.35em]">Jusqu&apos;à</p>
+          <p
+            className="text-[120px] md:text-[190px] leading-[0.95] font-semibold text-[#C9A96E]"
+            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+          >
+            −30%
+          </p>
+          <h1
+            className="mt-[18px] max-w-[760px] text-[22px] md:text-[34px] leading-[1.25] font-semibold"
+            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+          >
+            PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
+          </h1>
+          <p className="mt-[18px] max-w-[520px] text-neutral-200 text-[15px] md:text-base leading-[1.7]">
+            Sur toute la collection Salon Bubble, dans la limite des stocks disponibles.
+          </p>
+          <div className="mt-[30px] flex flex-col items-center gap-[18px]">
+            <a
+              href="#promo-grid"
+              className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors"
             >
-              ← Retour à l&apos;accueil
-            </Link>
-            <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3">Black Friday</p>
-            <p className="text-[11px] tracking-[0.35em] uppercase text-white/80 mb-1">Jusqu&apos;à</p>
-            <p
-              className="text-[96px] md:text-[136px] leading-none font-semibold text-[#C9A96E]"
-              style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
-            >
-              −30%
+              Voir les produits <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E]">
+              {items.length} produit{items.length > 1 ? 's' : ''} en promotion
             </p>
-            <h1
-              className="mt-6 text-2xl md:text-4xl font-semibold leading-tight"
-              style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
-            >
-              PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
-            </h1>
-            <p className="mt-5 max-w-[520px] text-neutral-200 text-[15px] md:text-base leading-[1.7]">
-              Sur toute la collection Salon Bubble, dans la limite des stocks disponibles.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <a
-                href="#promo-grid"
-                className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors"
-              >
-                Voir les produits <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E]">
-                {items.length} produit{items.length > 1 ? 's' : ''} en promotion
-              </p>
-            </div>
           </div>
         </div>
       </section>
