@@ -7,7 +7,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ShoppingBag, ChevronRight, Share2, Heart, Globe,
   Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp,
-  Truck, Shield, RotateCcw, ArrowUp, Home as HomeIcon, Gift, Eye,
+  Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye,
   CreditCard, ChevronDown, User, Award, Star, Sparkles,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
@@ -1888,15 +1888,14 @@ function TrustStrip() {
   const items = [
     { Icon: Truck, title: 'Livraison Offerte', subtitle: `dès ${formatPrice(40, cur)}` },
     { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
-    { Icon: RotateCcw, title: 'Retours 30 jours', subtitle: 'Satisfait ou remboursé' },
     { Icon: Clock, title: 'Service client', subtitle: 'Réponse sous 48 h ouvrées' },
   ];
   return (
     <FadeInSection>
       <div className="w-full" style={{ background: '#f9f9f9' }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-neutral-200">
+        <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-neutral-200">
           {items.map(({ Icon, title, subtitle }) => (
-            <div key={title} className="flex flex-col items-center justify-center gap-3 py-8 px-4 text-center group">
+            <div key={title} className="flex flex-col items-center justify-center gap-3 py-8 px-2 md:px-4 text-center group">
               <div className="relative w-12 h-12 rounded-full border border-[#C9A96E]/50 flex items-center justify-center transition-colors duration-300 group-hover:border-[#C9A96E]">
                 <div className="absolute inset-1 rounded-full border border-neutral-200" />
                 <Icon size={18} className="text-black relative" strokeWidth={1.2} />
@@ -2593,8 +2592,6 @@ export default function Home() {
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
-            <span className="hidden md:block w-px h-3 bg-white/25" />
-            <span className="hidden md:flex items-center gap-1.5 text-[11px] tracking-wide"><RotateCcw className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Retours 30 jours</span>
           </motion.div>
         </motion.div>
 

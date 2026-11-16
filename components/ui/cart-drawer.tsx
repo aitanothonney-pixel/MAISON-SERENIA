@@ -393,7 +393,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             {/* Bandeau réassurance */}
             <div className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#F5F1EA] border-b border-[#E7DFD1] flex-shrink-0 text-[11px] tracking-wide text-[#8a7658]">
               <Truck className="w-3.5 h-3.5 shrink-0" />
-              <span>Livraison offerte dès {formatPrice(40, cur)} · Retours sous 30 jours</span>
+              <span>Livraison offerte dès {formatPrice(40, cur)}</span>
             </div>
 
             {/* Header */}

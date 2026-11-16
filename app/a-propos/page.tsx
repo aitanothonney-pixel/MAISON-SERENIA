@@ -146,7 +146,7 @@ export default function AProposPage() {
               {[
                 { icon: <Leaf className="w-4 h-4" />, title: 'Sélection responsable', desc: 'Des pièces pensées pour durer, à contre-courant du mobilier jetable.' },
                 { icon: <Star className="w-4 h-4" />, title: 'Transparence totale', desc: 'Tarifs clairs, fiches détaillées, conditions de retour explicites. Aucune surprise.' },
-                { icon: <Heart className="w-4 h-4" />, title: 'Satisfaction garantie', desc: 'Retour sous 30 jours, service client réactif, remboursement rapide.' },
+                { icon: <Heart className="w-4 h-4" />, title: 'Satisfaction garantie', desc: 'Service client réactif, remboursement rapide.' },
                 { icon: <Award className="w-4 h-4" />, title: 'Des pièces qui durent', desc: 'Des designs intemporels pour un intérieur qui évolue avec vous.' },
               ].map((eng, i) => (
                 <div key={i} className="flex items-start gap-4 bg-white border border-neutral-200 p-5">
