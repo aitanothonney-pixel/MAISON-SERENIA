@@ -2669,13 +2669,13 @@ export default function Home() {
           </div>
       </motion.section>
 
+      {/* Bande de réassurance, juste sous la bannière Mon Intérieur IA */}
+      <TrustStrip />
+
       {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
       <ShopByCategory />
 
       <div className="w-full">
-          {/* Bande de réassurance */}
-          <TrustStrip />
-
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
             setActiveFilter('Bubble');
