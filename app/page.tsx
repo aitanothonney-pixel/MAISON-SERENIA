@@ -2640,7 +2640,7 @@ export default function Home() {
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-          <div className="relative overflow-hidden bg-[#F3F0E9] text-[#111]">
+          <div className="relative overflow-hidden bg-white text-[#111]">
             <div className="relative w-full max-w-7xl mx-auto px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
               <div className="max-w-[520px]">
                 <span className="block text-xs uppercase tracking-[0.35em] text-[#7A5A2B] mb-6">
