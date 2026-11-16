@@ -1559,7 +1559,7 @@ function ShopByCategory() {
             <Link
               key={t.slug}
               href={`/collections/${t.slug}`}
-              className={`relative overflow-hidden rounded-2xl group text-left block ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
+              className={`relative overflow-hidden group text-left block ${t.big ? 'col-span-2 row-span-2' : 'col-span-1'}`}
             >
               <Image
                 src={t.img}
