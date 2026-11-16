@@ -911,6 +911,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const FICHE_PDF_NAME_BY_ID: Record<number, string> = {
     62: 'Table à manger ovale en bois massif',
     63: 'Table à manger ovale en bois massif',
+    75: 'Commode meuble TV long à tiroirs',
     77: 'Table basse Farmhouse en bois',
     83: 'Table basse bicolore à niveaux décalés',
     87: 'Canapé d\'angle 3 places crème',
