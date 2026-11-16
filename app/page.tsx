@@ -1531,15 +1531,16 @@ function ShopByCategory() {
       slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
-      img: '/catalog/cXXBStKz.avif',
+      img: '/catalog/5hxD47TZ.png', // Fauteuil Bauhaus en cuir noir & acier (id 135)
       big: true,
-      position: 'center 55%',
+      position: 'center 64%',
     },
     {
       slug: 'meubles',
       label: 'Meubles',
       desc: 'Tables, TV, rangements',
-      img: '/catalog/SD1GmP8Z.png',
+      img: '/catalog/SDHV1Yz6.png', // Table basse Farmhouse en bois (id 77)
+      position: 'center 100%',
       big: false,
     },
     {
