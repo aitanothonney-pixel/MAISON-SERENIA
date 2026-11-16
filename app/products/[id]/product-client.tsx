@@ -1326,6 +1326,17 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* Divider */}
               <div className="h-px bg-neutral-100 mb-6" />
 
+              {/* Bannière Black Friday — remise −30 % mise en avant sur la collection Bubble */}
+              {isBubble && (
+                <div className="mb-5 flex items-center justify-between gap-4 bg-black border border-[#C9A96E] px-5 py-4">
+                  <div className="min-w-0">
+                    <p className="text-[10px] tracking-[0.35em] uppercase text-[#C9A96E]">Black Friday</p>
+                    <p className="text-[13px] text-white/70 mt-1.5">Offre limitée sur toute la collection Bubble</p>
+                  </div>
+                  <p className="text-5xl md:text-6xl leading-none text-white shrink-0" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>−30%</p>
+                </div>
+              )}
+
               {/* Price block — sobre, encadré de filets fins */}
               <div className="border-y border-neutral-200 py-5 mb-6">
                 <div className="flex items-end justify-between gap-4">
@@ -1335,11 +1346,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       <p className="text-sm text-neutral-400 line-through price-luxe">{formatPrice(product.price, cur)}</p>
                     )}
                   </div>
-                  {isBubble && (
-                    <span className="text-[10px] tracking-[0.25em] uppercase text-[#A07840] border border-[#C9A96E]/50 px-3 py-1.5 whitespace-nowrap">
-                      −30% · Offre limitée
-                    </span>
-                  )}
                 </div>
                 {isBubble && (
                   <p className="text-xs text-neutral-400 mt-3 tracking-wide">

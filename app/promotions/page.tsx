@@ -25,9 +25,9 @@ export default function PromotionsPage() {
           >
             ← Retour à l&apos;accueil
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Édition limitée</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
-            Nos promotions
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Black Friday</p>
+          <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+            PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
           </h1>
           <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
           <p className="text-neutral-500 max-w-xl leading-relaxed">
