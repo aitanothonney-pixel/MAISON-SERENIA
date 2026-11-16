@@ -1118,7 +1118,7 @@ function BubblePromoCarousel() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-400">Offre limitée · −30%</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#C9A96E]">Black Friday</span></h2>
           </div>
           <div className="flex items-center gap-2">
             <motion.button
