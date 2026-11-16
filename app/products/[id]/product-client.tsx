@@ -910,6 +910,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_NAME_BY_ID: Record<number, string> = {
     77: 'Table basse Farmhouse en bois',
+    83: 'Table basse bicolore à niveaux décalés',
     87: 'Canapé d\'angle 3 places crème',
     // Canapés-lits modulables chenille (2 places convertibles)
     89: 'Canapé-lit modulaire chenille vert',
