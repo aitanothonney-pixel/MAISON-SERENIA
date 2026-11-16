@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Price } from '@/lib/currency';
 import Image from 'next/image';
-import { Gift } from 'lucide-react';
+import { ArrowRight, Gift } from 'lucide-react';
 import { products, nice99 } from '@/lib/products';
 import { BUNDLES, getBundleDetail } from '@/lib/bundles';
 
@@ -16,42 +16,63 @@ export default function PromotionsPage() {
 
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-      {/* Hero — bannière Black Friday typographique, sans image */}
-      <section className="relative overflow-hidden bg-black text-white">
-        <div className="absolute inset-4 md:inset-8 border border-[#C9A96E]/50 pointer-events-none" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors mb-12"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-          <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4">Black Friday</p>
-          <p className="text-[11px] tracking-[0.35em] uppercase text-white/70 mb-2">Jusqu&apos;à</p>
-          <p
-            className="text-[96px] md:text-[136px] leading-none font-semibold text-[#C9A96E]"
-            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
-          >
-            −30%
-          </p>
-          <h1
-            className="mt-8 text-2xl md:text-4xl font-semibold leading-tight max-w-3xl mx-auto"
-            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
-          >
-            PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
-          </h1>
-          <span className="block w-16 h-px mx-auto mt-8 mb-6" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
-          <p className="text-white/70 text-sm md:text-base max-w-md mx-auto leading-relaxed">
-            Sur toute la collection Salon Bubble, dans la limite des stocks disponibles.
-          </p>
-          <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E] mt-8">
-            {items.length} produit{items.length > 1 ? 's' : ''} en promotion
-          </p>
+      {/* Hero — bannière Black Friday avec la photo de la bannière Mon Intérieur IA */}
+      <section className="relative overflow-hidden bg-black text-white min-h-[620px] md:min-h-[680px] flex flex-col justify-end">
+        <Image
+          src="/catalog/99H4L0sP.jpg"
+          alt="Salon avec canapé Bubble rouge"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_40%]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.78) 55%, rgba(0,0,0,0.5) 100%)' }}
+        />
+        <div className="relative w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-22 pt-24 pb-16 md:pb-[72px]">
+          <div className="max-w-[720px]">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/80 hover:text-white transition-colors mb-10"
+            >
+              ← Retour à l&apos;accueil
+            </Link>
+            <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3">Black Friday</p>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-white/80 mb-1">Jusqu&apos;à</p>
+            <p
+              className="text-[96px] md:text-[136px] leading-none font-semibold text-[#C9A96E]"
+              style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+            >
+              −30%
+            </p>
+            <h1
+              className="mt-6 text-2xl md:text-4xl font-semibold leading-tight"
+              style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+            >
+              PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
+            </h1>
+            <p className="mt-5 max-w-[520px] text-neutral-200 text-[15px] md:text-base leading-[1.7]">
+              Sur toute la collection Salon Bubble, dans la limite des stocks disponibles.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-6">
+              <a
+                href="#promo-grid"
+                className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors"
+              >
+                Voir les produits <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E]">
+                {items.length} produit{items.length > 1 ? 's' : ''} en promotion
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Grid */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+      <section id="promo-grid" className="scroll-mt-24 max-w-7xl mx-auto px-6 lg:px-10 py-14">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
           {items.map((product) => {
             const promoPrice = nice99(Math.round(product.price * 0.7));
