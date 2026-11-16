@@ -2629,11 +2629,8 @@ export default function Home() {
       {/* Carrousel Bubble — juste sous la bannière Black Friday */}
       <BubblePromoCarousel />
 
-      {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
-      <ShopByCategory />
-
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur,
-             placée juste sous « Notre univers ». Animation : remonte à l'apparition. Mise en page « salon rouge plein cadre » : texte en bas à gauche. */}
+             placée juste au-dessus de « Acheter par catégorie ». Animation : remonte à l'apparition. Mise en page « salon rouge plein cadre » : texte en bas à gauche. */}
       <motion.section
         className="w-full"
         initial={{ opacity: 0, marginTop: 64 }}
@@ -2662,6 +2659,9 @@ export default function Home() {
             </div>
           </div>
       </motion.section>
+
+      {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
+      <ShopByCategory />
 
       <div className="w-full">
           {/* Bande de réassurance */}
