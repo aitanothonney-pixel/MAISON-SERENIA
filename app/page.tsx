@@ -2662,7 +2662,7 @@ export default function Home() {
                 width={900}
                 height={675}
                 sizes="(min-width: 1280px) 400px, 68vw"
-                className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:bottom-14 xl:right-20 xl:mx-0 xl:mt-0 xl:w-[400px] xl:max-w-none"
+                className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:top-1/2 xl:right-20 xl:-translate-y-1/2 xl:mx-0 xl:mt-0 xl:w-[400px] xl:max-w-none"
               />
             </div>
             <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#A07840] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
