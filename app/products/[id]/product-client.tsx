@@ -909,6 +909,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const isBubble = bubbleOrder.includes(product.id);
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_NAME_BY_ID: Record<number, string> = {
+    60: 'Meuble TV bois 150 cm',
     62: 'Table à manger ovale en bois massif',
     63: 'Table à manger ovale en bois massif',
     68: 'Table basse mobile noire',
