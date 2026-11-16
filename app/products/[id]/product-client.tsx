@@ -913,6 +913,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     61: 'Meuble TV extensible noir',
     62: 'Table à manger ovale en bois massif',
     63: 'Table à manger ovale en bois massif',
+    64: 'Meuble TV industriel brun rustique',
     68: 'Table basse mobile noire',
     74: 'Commode 6 tiroirs bois & noir',
     75: 'Commode meuble TV long à tiroirs',
