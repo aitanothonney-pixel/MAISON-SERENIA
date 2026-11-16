@@ -909,6 +909,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const isBubble = bubbleOrder.includes(product.id);
   // Fiche descriptive PDF à proposer à côté du bouton « Partager ».
   const FICHE_PDF_NAME_BY_ID: Record<number, string> = {
+    62: 'Table à manger ovale en bois massif',
+    63: 'Table à manger ovale en bois massif',
     77: 'Table basse Farmhouse en bois',
     83: 'Table basse bicolore à niveaux décalés',
     87: 'Canapé d\'angle 3 places crème',
