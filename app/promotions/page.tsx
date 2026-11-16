@@ -16,24 +16,37 @@ export default function PromotionsPage() {
 
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      {/* Hero — bannière Black Friday, même DA que la bannière d'accueil */}
+      <section className="relative overflow-hidden bg-black min-h-[560px] md:min-h-[600px] flex items-center">
+        <Image
+          src="/catalog/99H4L0sP.jpg"
+          alt="Collection Salon Bubble en promotion — Black Friday"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/65 pointer-events-none" />
+        <div className="relative z-10 w-full px-6 lg:px-10 py-16 text-center text-white">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/60 hover:text-white transition-colors mb-10"
           >
             ← Retour à l&apos;accueil
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Black Friday</p>
-          <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+          <p className="text-xs tracking-[0.35em] uppercase text-[#C9A96E] mb-4">Black Friday</p>
+          <h1
+            className="text-3xl md:text-5xl font-semibold leading-tight mx-auto max-w-4xl mb-6"
+            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+          >
             PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
           </h1>
-          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
-          <p className="text-neutral-500 max-w-xl leading-relaxed">
+          <p className="text-white/70 text-sm md:text-base max-w-md mx-auto leading-relaxed">
             Jusqu&apos;à −30% sur la collection Salon Bubble — dans la limite des stocks disponibles.
           </p>
-          <p className="text-xs text-neutral-400 mt-4">{items.length} produit{items.length > 1 ? 's' : ''} en promotion</p>
+          <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E] mt-8">
+            {items.length} produit{items.length > 1 ? 's' : ''} en promotion
+          </p>
         </div>
       </section>
 
