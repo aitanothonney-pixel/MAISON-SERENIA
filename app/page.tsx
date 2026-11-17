@@ -1531,9 +1531,9 @@ function ShopByCategory() {
       slug: 'salon',
       label: 'Salon',
       desc: 'Canapés & fauteuils',
-      img: '/catalog/5hxD47TZ.png', // Fauteuil Bauhaus en cuir noir & acier (id 135)
+      img: '/catalog/cXXBStKz.avif',
       big: true,
-      position: 'center 64%',
+      position: 'center 55%',
     },
     {
       slug: 'meubles',
