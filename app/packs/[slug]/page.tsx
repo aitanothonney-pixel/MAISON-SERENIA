@@ -49,11 +49,11 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
           >
             ← Retour aux ensembles
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Ensemble Bubble {bundle.color}
           </h1>
-          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
           <p className="text-neutral-500 max-w-xl leading-relaxed">
             Le canapé et son fauteuil Bubble {bundle.color.toLowerCase()} assortis, pensés ensemble.
             Un tableau (50×70 cm) au choix est offert avec cet ensemble.

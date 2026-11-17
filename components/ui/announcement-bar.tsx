@@ -65,7 +65,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
           className="fixed top-0 left-0 right-0 z-[75] bg-black text-white flex items-center justify-center px-12"
         >
           <div className="flex items-center gap-2.5">
-            <span className="h-1 w-1 rounded-full bg-[#C9A96E] shrink-0" />
+            <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />
             <AnimatePresence mode="wait">
               <motion.span
                 key={index}
@@ -76,7 +76,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
                 className="text-[11px] tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
               >
                 {current.href ? (
-                  <Link href={current.href} className="hover:text-[#C9A96E] transition-colors">
+                  <Link href={current.href} className="hover:text-[#A68A6D] transition-colors">
                     {current.text}
                   </Link>
                 ) : (
@@ -84,7 +84,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
                 )}
               </motion.span>
             </AnimatePresence>
-            <span className="h-1 w-1 rounded-full bg-[#C9A96E] shrink-0" />
+            <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />
           </div>
           <button
             onClick={() => setPaused((p) => !p)}

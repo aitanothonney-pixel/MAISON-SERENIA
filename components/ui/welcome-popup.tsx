@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Copy, Sparkles } from 'lucide-react';
 import { brevoIdentify } from '@/lib/brevoTracking';
 
-const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
+const GOLD_GRADIENT = 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)';
 export const WELCOME_CODE = 'MAISON SERENIA 10%';
 
 export function WelcomePopup() {
@@ -103,7 +103,7 @@ export function WelcomePopup() {
 
             {!done ? (
               <div className="px-8 py-10 text-center">
-                <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6" style={{ color: '#A07840', border: '1px solid rgba(201,169,110,0.4)' }}>
+                <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6" style={{ color: '#7F6A52', border: '1px solid rgba(201,169,110,0.4)' }}>
                   <Sparkles className="w-3 h-3" /> Offre de bienvenue
                 </div>
 
@@ -122,7 +122,7 @@ export function WelcomePopup() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="votre@email.com"
-                    className="w-full border border-neutral-300 px-4 py-3.5 text-sm text-center outline-none focus:border-[#C9A96E] transition-colors"
+                    className="w-full border border-neutral-300 px-4 py-3.5 text-sm text-center outline-none focus:border-[#A68A6D] transition-colors"
                   />
                   <label className="flex items-start gap-3 text-left text-[11px] leading-relaxed text-neutral-600 cursor-pointer mb-4">
                     <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 w-4 h-4 accent-black shrink-0" />
@@ -132,7 +132,7 @@ export function WelcomePopup() {
                     type="submit"
                     disabled={!consent}
                     className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-transform hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, #34322F 0%, #000 100%)' }}
                   >
                     Je profite des −10%
                   </button>
@@ -148,13 +148,13 @@ export function WelcomePopup() {
                   initial={{ scale: 0, rotate: -8 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-[#C9A96E]/30"
+                  className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-6 ring-1 ring-[#A68A6D]/30"
                   style={{ background: GOLD_GRADIENT }}
                 >
                   <Check className="w-7 h-7 text-white" strokeWidth={1.6} />
                 </motion.div>
 
-                <p className="text-[10px] tracking-[0.35em] uppercase text-[#8A6A35] mb-3">Offre activée</p>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-[#7F6A52] mb-3">Offre activée</p>
                 <h2 className="text-[26px] leading-tight font-serif text-black mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
                   Bienvenue chez<br />Maison Serenia
                 </h2>
@@ -165,11 +165,11 @@ export function WelcomePopup() {
                 {/* Carte code — présentation raffinée */}
                 <div className="relative mb-7">
                   <div className="absolute inset-0" style={{ background: GOLD_GRADIENT, opacity: 0.08 }} />
-                  <div className="relative border border-[#C9A96E]/50 px-5 py-5">
+                  <div className="relative border border-[#A68A6D]/50 px-5 py-5">
                     <div className="flex items-center justify-center gap-2 mb-3">
-                      <span className="h-px w-6 bg-[#C9A96E]/50" />
-                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35]">−10 % · Votre code</span>
-                      <span className="h-px w-6 bg-[#C9A96E]/50" />
+                      <span className="h-px w-6 bg-[#7F6A52]/50" />
+                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52]">−10 % · Votre code</span>
+                      <span className="h-px w-6 bg-[#7F6A52]/50" />
                     </div>
                     <p className="text-xl font-semibold tracking-[0.22em] text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
                       {WELCOME_CODE}
@@ -177,7 +177,7 @@ export function WelcomePopup() {
                     <button
                       onClick={copyCode}
                       className={`inline-flex items-center gap-2 px-5 py-2 text-[10px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 ${
-                        copied ? 'bg-[#A07840] text-white' : 'border border-black text-black hover:bg-black hover:text-white'
+                        copied ? 'bg-[#7F6A52] text-white' : 'border border-black text-black hover:bg-black hover:text-white'
                       }`}
                     >
                       {copied ? <><Check className="w-3.5 h-3.5" /> Code copié</> : <><Copy className="w-3.5 h-3.5" /> Copier le code</>}

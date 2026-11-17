@@ -55,7 +55,7 @@ export default function NotFound() {
             fontFamily: 'var(--font-playfair, Georgia, serif)',
             fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
             fontWeight: 600,
-            color: '#1a1a1a',
+            color: '#34322F',
             margin: 0,
           }}
         >
@@ -90,7 +90,7 @@ export default function NotFound() {
             style={{
               display: 'inline-block',
               padding: '0.75rem 2rem',
-              backgroundColor: '#1a1a1a',
+              backgroundColor: '#34322F',
               color: '#fff',
               textDecoration: 'none',
               fontSize: '0.875rem',
@@ -108,13 +108,13 @@ export default function NotFound() {
               display: 'inline-block',
               padding: '0.75rem 2rem',
               backgroundColor: 'transparent',
-              color: '#1a1a1a',
+              color: '#34322F',
               textDecoration: 'none',
               fontSize: '0.875rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               fontWeight: 500,
-              border: '1px solid #1a1a1a',
+              border: '1px solid #34322F',
             }}
           >
             Voir nos produits

@@ -43,10 +43,10 @@ function rangeOfName(name: string): string | null {
 const COLOR_HEX: [string, string][] = [
   ['vert foncé', '#3a5a40'], ['vert thé', '#b7c4a0'], ['vert', '#6a8f5f'],
   ['bordeaux', '#6b1f2a'], ['rouge', '#b3222f'], ['rose', '#e8a9b6'],
-  ['beige', '#d8c8a8'], ['blanc', '#f2efe9'], ['jaune', '#e6c24a'],
-  ['orange', '#d97b34'], ['noir', '#1a1a1a'], ['gris', '#9e9e9e'], ['brun', '#6b4a30'],
+  ['beige', '#d8c8a8'], ['blanc', '#F6F2EB'], ['jaune', '#e6c24a'],
+  ['orange', '#d97b34'], ['noir', '#34322F'], ['gris', '#9e9e9e'], ['brun', '#6b4a30'],
   // Couleurs en anglais (labels de certains produits)
-  ['brown', '#6b4a30'], ['pink', '#e8a9b6'], ['white', '#f2efe9'], ['green', '#6a8f5f'],
+  ['brown', '#6b4a30'], ['pink', '#e8a9b6'], ['white', '#F6F2EB'], ['green', '#6a8f5f'],
   ['amber', '#d9a15a'], ['smoky', '#6e6e6e'], ['smoke', '#6e6e6e'], ['transparent', '#dfe6ea'],
 ];
 function hexForWord(word: string): string | null {
@@ -199,8 +199,8 @@ function CheckoutDrawer({
 
   const PromoField = () => (
     welcomeActive ? (
-      <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
+      <div className="flex items-center justify-between bg-[#7F6A52]/5 border border-[#A68A6D]/40 rounded-xl px-3 py-2.5">
+        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#7F6A52]">
           <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
         </span>
         <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
@@ -211,16 +211,16 @@ function CheckoutDrawer({
         <button
           type="button"
           onClick={applyWelcomeOffer}
-          className="group w-full flex items-center justify-between gap-3 rounded-xl border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840] hover:shadow-sm"
+          className="group w-full flex items-center justify-between gap-3 rounded-xl border border-[#A68A6D]/60 bg-gradient-to-r from-[#A68A6D]/15 to-[#A68A6D]/5 px-4 py-3 text-left transition-all hover:border-[#7F6A52] hover:shadow-sm"
         >
           <span className="flex items-center gap-2.5 min-w-0">
-            <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
             <span className="flex flex-col min-w-0">
-              <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-              <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+              <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
             </span>
           </span>
-          <span className="shrink-0 rounded-lg bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
+          <span className="shrink-0 rounded-lg bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
             J&apos;en profite
           </span>
         </button>
@@ -381,9 +381,9 @@ function CheckoutDrawer({
                     <div className="mb-4">{PromoField()}</div>
 
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
-                      <div className="flex items-center gap-2 mb-4 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-                        <Gift className="w-4 h-4 text-[#8A6A35] shrink-0" />
-                        <span className="text-[12px] text-[#8A6A35] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                      <div className="flex items-center gap-2 mb-4 bg-[#7F6A52]/5 border border-[#A68A6D]/40 rounded-xl px-3 py-2.5">
+                        <Gift className="w-4 h-4 text-[#7F6A52] shrink-0" />
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
                       </div>
                     )}
 
@@ -392,12 +392,12 @@ function CheckoutDrawer({
                         <span>Prix d&apos;origine</span><span>{formatPrice(originalPrice, cur)}</span>
                       </div>
                       {bubbleDiscount > 0 && (
-                        <div className="flex justify-between text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-[#7F6A52] font-semibold">
                           <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-[#7F6A52] font-semibold">
                           <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
@@ -628,9 +628,9 @@ function CheckoutDrawer({
                     {PromoField()}
 
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
-                      <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-                        <Gift className="w-4 h-4 text-[#8A6A35] shrink-0" />
-                        <span className="text-[12px] text-[#8A6A35] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                      <div className="flex items-center gap-2 bg-[#7F6A52]/5 border border-[#A68A6D]/40 rounded-xl px-3 py-2.5">
+                        <Gift className="w-4 h-4 text-[#7F6A52] shrink-0" />
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
                       </div>
                     )}
 
@@ -642,12 +642,12 @@ function CheckoutDrawer({
                         </div>
                       )}
                       {bubbleDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
                           <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
                           <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
@@ -1140,7 +1140,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {cartCount > 0 && (
                 <span
                   className="absolute -top-1 -right-1 text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none"
-                  style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}
                 >
                   {cartCount}
                 </span>
@@ -1359,9 +1359,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
               {/* Bannière Black Friday — remise −30 % mise en avant sur la collection Bubble */}
               {isBubble && (
-                <div className="mb-5 flex items-center justify-between gap-4 bg-black border border-[#C9A96E] px-5 py-4">
+                <div className="mb-5 flex items-center justify-between gap-4 bg-black border border-[#A68A6D] px-5 py-4">
                   <div className="min-w-0">
-                    <p className="text-[10px] tracking-[0.35em] uppercase text-[#C9A96E]">Black Friday</p>
+                    <p className="text-[10px] tracking-[0.35em] uppercase text-[#A68A6D]">Black Friday</p>
                     <p className="text-[13px] text-white/70 mt-1.5">{BLACK_FRIDAY_PROMO.endsAt ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}</> : <>Remise de 30 % sur toute la collection Bubble</>}</p>
                   </div>
                   <p className="text-5xl md:text-6xl leading-none text-white shrink-0" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>−30%</p>
@@ -1476,7 +1476,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
               {/* Livraison estimée */}
               <div className="flex items-center gap-2.5 mb-5 px-4 py-3 border border-neutral-100 bg-neutral-50/60">
-                <Truck className="w-4 h-4 text-[#8A6A35] shrink-0" />
+                <Truck className="w-4 h-4 text-[#7F6A52] shrink-0" />
                 <p className="text-xs text-neutral-600">
                   Commandez aujourd&apos;hui — livraison estimée entre le{' '}
                   <strong className="text-black font-medium">{deliveryRange.from}</strong>{' '}et le{' '}
@@ -1613,7 +1613,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           <section className="mt-16">
             <div className="bg-neutral-50 p-6 md:p-10">
               <h2 className="text-2xl font-serif font-bold text-black mb-1">Guide des dimensions &amp; tailles</h2>
-              <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+              <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
               <div className="space-y-3">
                 {dimensionAccordions.map((acc, i) => (
                   <div key={i} className="bg-white border border-neutral-200">
@@ -1640,7 +1640,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </div>
                 ))}
               </div>
-              <div className="mt-4 bg-neutral-50 border-l-2 border-[#C9A96E] px-5 py-4 text-sm text-neutral-600">
+              <div className="mt-4 bg-neutral-50 border-l-2 border-[#A68A6D] px-5 py-4 text-sm text-neutral-600">
                 Besoin d&apos;aide ? Notre équipe vous accompagne pour choisir les bonnes dimensions. <Link href="/contact" className="text-black underline font-semibold hover:no-underline">Contactez-nous</Link>
               </div>
             </div>
@@ -1649,7 +1649,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {/* Questions fréquentes */}
           <section className="mt-16">
             <h2 className="text-2xl font-serif font-bold text-black mb-1">Questions fréquentes</h2>
-            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+            <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
             <div className="space-y-3">
               {FAQ_ITEMS.map((item, i) => (
                 <div key={i} className="border border-neutral-200">

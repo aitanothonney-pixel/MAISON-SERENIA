@@ -16,9 +16,9 @@
   --ring: #0a0a0a;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --gold: #C9A96E;
-  --gold-light: #E8D5B0;
-  --gold-dark: #A07840;
+  --gold: #A68A6D;
+  --gold-light: #D8C9B5;
+  --gold-dark: #7F6A52;
 }
 
 @theme inline {
@@ -75,18 +75,18 @@ html {
 
 /* ── Gold gradient utility ───────────────────────── */
 .text-gold {
-  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #A07840 100%);
+  background: linear-gradient(135deg, #A68A6D 0%, #D8C9B5 50%, #7F6A52 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .bg-gold {
-  background: linear-gradient(135deg, #C9A96E 0%, #E8D5B0 50%, #A07840 100%);
+  background: linear-gradient(135deg, #A68A6D 0%, #D8C9B5 50%, #7F6A52 100%);
 }
 
 .border-gold {
-  border-color: #C9A96E;
+  border-color: #A68A6D;
 }
 
 /* ── Premium card hover ──────────────────────────── */
@@ -105,7 +105,7 @@ html {
 }
 
 .shimmer-gold {
-  background: linear-gradient(90deg, #C9A96E 0%, #E8D5B0 40%, #C9A96E 60%, #A07840 100%);
+  background: linear-gradient(90deg, #A68A6D 0%, #D8C9B5 40%, #A68A6D 60%, #7F6A52 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -129,12 +129,12 @@ html {
 /* ── Luxury divider ──────────────────────────────── */
 .divider-gold {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #C9A96E, transparent);
+  background: linear-gradient(90deg, transparent, #A68A6D, transparent);
 }
 
 /* ── Button premium ──────────────────────────────── */
 .btn-gold {
-  background: linear-gradient(135deg, #C9A96E 0%, #A07840 100%);
+  background: linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%);
   color: white;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(201,169,110,0.3);
@@ -227,7 +227,7 @@ html {
 /* ── Accessibilité ─────────────────────────────────────────────── */
 /* Focus clavier visible sur tous les contrôles (WCAG 2.4.7). */
 :focus-visible {
-  outline: 2px solid #A07840;
+  outline: 2px solid #7F6A52;
   outline-offset: 2px;
 }
 

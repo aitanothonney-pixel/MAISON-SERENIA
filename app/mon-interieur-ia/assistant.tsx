@@ -79,7 +79,7 @@ const SUBQ: Partial<Record<RoomKey, { value: string; label: string }[]>> = {
 
 const STYLES = ['Moderne', 'Minimaliste', 'Contemporain', 'Scandinave', 'Vintage', 'Industriel', 'Luxe', 'Chaleureux', 'Je ne sais pas encore'];
 const COLORS: { name: string; hex: string }[] = [
-  { name: 'Beige', hex: '#D9CBB3' }, { name: 'Blanc', hex: '#F4F2ED' }, { name: 'Noir', hex: '#1A1A1A' },
+  { name: 'Beige', hex: '#D9CBB3' }, { name: 'Blanc', hex: '#F4F2ED' }, { name: 'Noir', hex: '#34322F' },
   { name: 'Gris', hex: '#9A9A9A' }, { name: 'Marron', hex: '#6B4A33' }, { name: 'Violet', hex: '#6B4E8A' },
   { name: 'Bleu', hex: '#3C5A86' }, { name: 'Vert', hex: '#4F6A51' }, { name: 'Autre', hex: 'transparent' },
 ];
@@ -182,7 +182,7 @@ export default function Assistant() {
         <div className="border-b border-neutral-100 bg-neutral-50">
           <div className="max-w-5xl mx-auto px-6 py-10">
             <div className="mb-6"><Logo color="black" size="sm" /></div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-[#8A6A35] mb-3 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Votre sélection</p>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-[#7F6A52] mb-3 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Votre sélection</p>
             <h1 className="text-3xl md:text-5xl text-black mb-4" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>Voici notre sélection pour votre intérieur</h1>
             <p className="text-neutral-600 max-w-2xl leading-relaxed">{result.intro}</p>
             {!result.aiEnabled && (
@@ -200,8 +200,8 @@ export default function Assistant() {
           )}
 
           {result.recos.length > 0 && result.meta.noExactMatch && (
-            <div className="border border-[#C9A96E]/50 bg-[#FBF8F2] px-6 py-5">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-[#8A6A35] mb-2">Pas de correspondance exacte</p>
+            <div className="border border-[#A68A6D]/50 bg-[#FBF8F2] px-6 py-5">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-[#7F6A52] mb-2">Pas de correspondance exacte</p>
               <p className="text-neutral-700 leading-relaxed text-sm">
                 Désolé, nous n&apos;avons pas exactement ce produit dans notre catalogue pour ces critères.
                 Voici nos suggestions les plus proches, que nous vous conseillons volontiers.
@@ -261,7 +261,7 @@ export default function Assistant() {
 
           {/* Conversation */}
           <div className="border-t border-neutral-100 pt-8">
-            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-playfair)' }}><Wand2 className="w-5 h-5 text-[#8A6A35]" /> Affiner avec l&apos;assistant</h2>
+            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-playfair)' }}><Wand2 className="w-5 h-5 text-[#7F6A52]" /> Affiner avec l&apos;assistant</h2>
             {chatMsgs.length > 0 && (
               <div className="space-y-3 mb-4">
                 {chatMsgs.map((m, i) => (
@@ -299,7 +299,7 @@ export default function Assistant() {
             <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">Étape {stepIdx + 1} / {flow.length}</span>
           </div>
           <div className="h-1 bg-neutral-100 overflow-hidden rounded-full">
-            <motion.div className="h-full bg-[#C9A96E]" animate={{ width: `${progress}%` }} transition={{ duration: 0.3 }} />
+            <motion.div className="h-full bg-[#7F6A52]" animate={{ width: `${progress}%` }} transition={{ duration: 0.3 }} />
           </div>
         </div>
       </div>
@@ -318,7 +318,7 @@ export default function Assistant() {
                     return (
                       <button key={r.key} onClick={() => { set({ room: r.key, intent: undefined, decoType: undefined }); gaEvent('ia_select_room', { room: r.key }); }}
                         className={`flex flex-col items-center gap-3 border p-6 transition-all ${active ? 'border-black bg-neutral-50 shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}>
-                        <Icon className={`w-7 h-7 ${active ? 'text-[#8A6A35]' : 'text-neutral-700'}`} strokeWidth={1.4} />
+                        <Icon className={`w-7 h-7 ${active ? 'text-[#7F6A52]' : 'text-neutral-700'}`} strokeWidth={1.4} />
                         <span className="text-sm font-medium text-black">{r.label}</span>
                       </button>
                     );
@@ -339,7 +339,7 @@ export default function Assistant() {
                       <button key={o.value} onClick={() => set(brief.room === 'decoration' ? { decoType: o.value } : { intent: o.value })}
                         className={`w-full flex items-center justify-between border px-5 py-4 text-left transition-all ${active ? 'border-black bg-neutral-50' : 'border-neutral-200 hover:border-neutral-400'}`}>
                         <span className="text-sm text-black">{o.label}</span>
-                        {active && <Check className="w-4 h-4 text-[#8A6A35]" />}
+                        {active && <Check className="w-4 h-4 text-[#7F6A52]" />}
                       </button>
                     );
                   })}
@@ -429,7 +429,7 @@ export default function Assistant() {
           </button>
           {current === 'budget' ? (
             <button onClick={analyze} disabled={loading}
-              className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] hover:bg-[#A07840] transition-colors disabled:opacity-60">
+              className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] hover:bg-[#7F6A52] transition-colors disabled:opacity-60">
               {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Analyse en cours…</> : <><Sparkles className="w-4 h-4" /> Analyser mon intérieur avec l&apos;IA</>}
             </button>
           ) : (

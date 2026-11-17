@@ -29,12 +29,12 @@ export function PromoCountdown({ endsAt, className = '' }: { endsAt: string | nu
 
   return (
     <div className={className}>
-      <p className="text-[11px] tracking-[0.4em] uppercase text-[#C9A96E] mb-4">Offre se termine dans</p>
+      <p className="text-[11px] tracking-[0.4em] uppercase text-[#D8C9B5] mb-4">Offre se termine dans</p>
       <div className="flex gap-3 md:gap-5 mb-10" role="timer">
         {parts.map(({ value, label }) => (
           <div
             key={label}
-            className="flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm border-2 border-[#C9A96E] px-4 md:px-6 py-3 md:py-4 min-w-[70px] md:min-w-[90px] shadow-2xl"
+            className="flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm border-2 border-[#A68A6D] px-4 md:px-6 py-3 md:py-4 min-w-[70px] md:min-w-[90px] shadow-2xl"
           >
             <span
               className="text-white text-3xl md:text-5xl font-bold leading-none tabular-nums"
@@ -42,7 +42,7 @@ export function PromoCountdown({ endsAt, className = '' }: { endsAt: string | nu
             >
               {pad(value)}
             </span>
-            <span className="text-[9px] md:text-[10px] text-[#C9A96E] uppercase tracking-[0.25em] mt-2 md:mt-3">
+            <span className="text-[9px] md:text-[10px] text-[#D8C9B5] uppercase tracking-[0.25em] mt-2 md:mt-3">
               {label}
             </span>
           </div>

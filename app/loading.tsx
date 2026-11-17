@@ -4,7 +4,7 @@ export default function Loading() {
       <div className="relative flex items-center justify-center">
         {/* Spinner ring */}
         <div
-          className="absolute rounded-full border border-[#C9A96E] animate-spin"
+          className="absolute rounded-full border border-[#A68A6D] animate-spin"
           style={{
             width: '90px',
             height: '90px',

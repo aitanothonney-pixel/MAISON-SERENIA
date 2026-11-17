@@ -21,7 +21,7 @@ export default function AProposPage() {
           >
             ← Retour à l&apos;accueil
           </Link>
-          <p className="text-xs uppercase tracking-[0.35em] text-[#C9A96E] mb-5" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+          <p className="text-xs uppercase tracking-[0.35em] text-[#A68A6D] mb-5" style={{ fontFamily: 'var(--font-dm-sans)' }}>
             Genève · Depuis 2024
           </p>
           <h1
@@ -40,7 +40,7 @@ export default function AProposPage() {
 
         {/* ─── Le récit ──────────────────────────────────────────────────── */}
         <section className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35]">Notre histoire</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[#7F6A52]">Notre histoire</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
             Tout commence à Genève
           </h2>
@@ -59,7 +59,7 @@ export default function AProposPage() {
 
         {/* ─── Manifeste / citation ──────────────────────────────────────── */}
         <section className="relative bg-neutral-950 text-white px-8 md:px-14 py-14 overflow-hidden">
-          <Quote className="w-10 h-10 text-[#C9A96E] mb-6" strokeWidth={1.2} />
+          <Quote className="w-10 h-10 text-[#A68A6D] mb-6" strokeWidth={1.2} />
           <p
             className="text-[26px] md:text-[34px] leading-snug max-w-2xl"
             style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}
@@ -72,7 +72,7 @@ export default function AProposPage() {
         {/* ─── La signature : Bubble ─────────────────────────────────────── */}
         <section className="grid md:grid-cols-2 gap-10 md:gap-14 items-center border-t border-neutral-100 pt-20">
           <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35]">Notre signature</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#7F6A52]">Notre signature</p>
             <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
               La collection Bubble
             </h2>
@@ -84,7 +84,7 @@ export default function AProposPage() {
             </p>
             <Link
               href="/collections/bubble"
-              className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-black border-b-2 border-[#C9A96E] pb-1 hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 text-sm uppercase tracking-widest text-black border-b-2 border-[#A68A6D] pb-1 hover:gap-3 transition-all"
             >
               Découvrir la collection →
             </Link>
@@ -98,7 +98,7 @@ export default function AProposPage() {
         {/* ─── Valeurs ───────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-100 pt-20">
           <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35] mb-3">Ce qui nous guide</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#7F6A52] mb-3">Ce qui nous guide</p>
             <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
               Nos valeurs
             </h2>

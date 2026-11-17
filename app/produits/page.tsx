@@ -35,11 +35,11 @@ export default function ProduitsPage() {
           >
             ← Retour à l&apos;accueil
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-3">Catalogue complet</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-3">Catalogue complet</p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Tous nos produits
           </h1>
-          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
           <p className="text-neutral-500 max-w-xl leading-relaxed">
             L&apos;intégralité de nos collections : mobilier Bubble, pièces de collection et accessoires.
           </p>

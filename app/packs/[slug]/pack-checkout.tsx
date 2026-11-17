@@ -44,10 +44,10 @@ export function PackCheckout({
       {/* Choix du tableau offert */}
       <div className="border border-neutral-200 p-4 mb-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>
+          <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>
             <Gift className="w-3 h-3 text-white" strokeWidth={2} />
           </span>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-[#8A6A35]">Votre tableau offert · {giftSize}</p>
+          <p className="text-[10px] tracking-[0.2em] uppercase text-[#7F6A52]">Votre tableau offert · {giftSize}</p>
         </div>
         <div className="flex items-center gap-3">
           {gift && (

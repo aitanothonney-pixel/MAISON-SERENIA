@@ -27,11 +27,11 @@ export default function CommandeSuccesPage() {
       <div className="max-w-md w-full text-center">
         <div
           className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-          style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}
         >
           <Check className="w-10 h-10 text-white" />
         </div>
-        <p className="text-[11px] tracking-[0.3em] uppercase text-[#8A6A35] mb-3">Paiement confirmé</p>
+        <p className="text-[11px] tracking-[0.3em] uppercase text-[#7F6A52] mb-3">Paiement confirmé</p>
         <h1 className="text-3xl font-serif text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
           Merci pour votre commande !
         </h1>

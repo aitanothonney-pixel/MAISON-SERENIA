@@ -6,7 +6,7 @@ import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, ChevronRight, Share2, Heart, Globe, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Star, Sparkles, Pause, Play } from 'lucide-react';
+import { ShoppingBag, ChevronRight, Share2, Heart, Globe, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles, Pause, Play } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
 import { VERIFIED_TESTIMONIALS } from '@/lib/testimonials';
@@ -63,7 +63,7 @@ function ScrollProgressBar() {
         top: 0,
         left: 0,
         height: '2px',
-        backgroundColor: '#C9A96E',
+        backgroundColor: '#A68A6D',
         width: scrollPercent + '%',
         zIndex: 9999,
         transition: 'width 0.1s linear',
@@ -228,7 +228,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
             <div className="flex-1 overflow-y-auto">
               {/* RECHERCHE */}
               <div className="px-6 py-5 border-b border-neutral-100">
-                <div className="flex items-center gap-2 border border-neutral-200 rounded-lg px-3 py-3 focus-within:border-[#C9A96E] transition-colors">
+                <div className="flex items-center gap-2 border border-neutral-200 rounded-lg px-3 py-3 focus-within:border-[#A68A6D] transition-colors">
                   <Search className="w-4 h-4 text-neutral-500 shrink-0" />
                   <input
                     type="text"
@@ -278,7 +278,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   onClick={onClose}
                   className="flex items-center gap-4 group"
                 >
-                  <span className="relative w-11 h-11 rounded-full border border-[#C9A96E]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#C9A96E]">
+                  <span className="relative w-11 h-11 rounded-full border border-[#A68A6D]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#A68A6D]">
                     <HomeIcon className="w-4 h-4 text-black" strokeWidth={1.4} />
                   </span>
                   <div className="flex-1 min-w-0">
@@ -298,7 +298,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   onClick={onClose}
                   className="flex items-center gap-4 group"
                 >
-                  <span className="relative w-11 h-11 rounded-full border border-[#C9A96E]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#C9A96E]">
+                  <span className="relative w-11 h-11 rounded-full border border-[#A68A6D]/50 flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:border-[#A68A6D]">
                     <Award className="w-4 h-4 text-black" strokeWidth={1.4} />
                   </span>
                   <div className="flex-1 min-w-0">
@@ -312,10 +312,10 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
               </div>
 
               {/* MON INTÉRIEUR IA */}
-              <div className="px-6 py-5 border-b border-neutral-100 bg-gradient-to-r from-[#C9A96E]/10 to-transparent">
+              <div className="px-6 py-5 border-b border-neutral-100 bg-gradient-to-r from-[#A68A6D]/10 to-transparent">
                 <Link href="/mon-interieur-ia" onClick={onClose} className="flex items-center gap-4 group">
                   <span className="relative w-11 h-11 rounded-full bg-black flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 text-[#C9A96E]" strokeWidth={1.6} />
+                    <Sparkles className="w-4 h-4 text-[#A68A6D]" strokeWidth={1.6} />
                   </span>
                   <div className="flex-1 min-w-0">
                     <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
@@ -353,7 +353,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                         <p className="font-serif text-base font-semibold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
                         <p className="text-xs text-neutral-500 mt-0.5">{c.desc}</p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#8A6A35] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#7F6A52] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -368,11 +368,11 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 >
                   <span className="absolute -right-6 -top-6 w-24 h-24 rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.35), transparent 70%)' }} />
                   <div className="relative flex items-start gap-3">
-                    <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E, #A07840)' }}>
+                    <span className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #A68A6D, #7F6A52)' }}>
                       <Gift className="w-4 h-4 text-white" />
                     </span>
                     <div>
-                      <p className="text-[10px] tracking-[0.3em] uppercase text-[#E8D5B0] mb-1">Offre exclusive</p>
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-[#D8C9B5] mb-1">Offre exclusive</p>
                       <h3 className="text-xl font-bold leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                         Packs &amp; Ensembles
                       </h3>
@@ -530,12 +530,11 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
       <div className="bg-[#f4f2ee] border-b border-neutral-200">
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-9 flex items-center justify-between text-[12px] text-neutral-700" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
           <div className="hidden md:flex items-center gap-6 lg:gap-10">
-            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte</span>
-            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Qualité vérifiée</span>
-            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Paiement facile</span>
-            <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Très bien noté</span>
+            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Livraison offerte</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Qualité vérifiée</span>
+            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Paiement facile</span>
           </div>
-          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
+          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
           <div className="relative">
             <button
               onClick={() => setLangOpen((o) => !o)}
@@ -564,7 +563,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
         </div>
       </div>
 
-      {/* Row 2 — logo + recherche + icônes + Trustpilot */}
+      {/* Row 2 — logo + recherche + icônes */}
       <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-[70px] flex items-center gap-4 lg:gap-8">
         <Logo
           color="black"
@@ -598,9 +597,9 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
           {/* Favoris */}
           <button onClick={onWishlistOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Favoris">
-            <Heart className={`w-[22px] h-[22px] ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : ''}`} strokeWidth={1.4} />
+            <Heart className={`w-[22px] h-[22px] ${mounted && wishCount > 0 ? 'fill-[#A68A6D] text-[#A68A6D]' : ''}`} strokeWidth={1.4} />
             {mounted && wishCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{wishCount}</span>
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>{wishCount}</span>
             )}
           </button>
 
@@ -608,24 +607,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           <button onClick={onCartOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Panier">
             <ShoppingBag className="w-[22px] h-[22px]" strokeWidth={1.4} />
             {mounted && cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{cartCount}</span>
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>{cartCount}</span>
             )}
           </button>
 
-          {/* Trustpilot */}
-          <div className="hidden xl:flex flex-col items-start pl-4 ml-1 border-l border-neutral-200 leading-tight">
-            <span className="text-[13px] font-bold text-black">Excellent</span>
-            <div className="flex items-center gap-0.5 my-0.5">
-              {[0,1,2,3,4].map((i) => (
-                <span key={i} className="w-3.5 h-3.5 bg-[#00b67a] flex items-center justify-center">
-                  <Star className="w-2.5 h-2.5 text-white" fill="white" strokeWidth={0} />
-                </span>
-              ))}
-            </div>
-            <span className="flex items-center gap-1 text-[11px] text-neutral-600">
-              <Star className="w-3 h-3 text-[#00b67a]" fill="#00b67a" strokeWidth={0} /> Trustpilot
-            </span>
-          </div>
         </div>
       </div>
 
@@ -692,7 +677,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
           <div className="max-w-4xl mx-auto px-5 md:px-8 pt-10 md:pt-16 pb-20">
             {/* Big search input */}
-            <div className="relative border-b-2 border-neutral-900 mb-3 transition-colors focus-within:border-[#C9A96E]">
+            <div className="relative border-b-2 border-neutral-900 mb-3 transition-colors focus-within:border-[#A68A6D]">
               <input
                 type="text"
                 autoFocus
@@ -761,7 +746,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       <button
                         key={s.label}
                         onClick={() => setSearchQ(s.q)}
-                        className="text-[11px] tracking-[0.18em] uppercase font-medium border border-neutral-200 px-4 py-2.5 text-neutral-600 hover:border-[#C9A96E] hover:text-[#8a6d38] hover:bg-[#C9A96E]/5 transition-all duration-200"
+                        className="text-[11px] tracking-[0.18em] uppercase font-medium border border-neutral-200 px-4 py-2.5 text-neutral-600 hover:border-[#A68A6D] hover:text-[#7F6A52] hover:bg-[#7F6A52]/5 transition-all duration-200"
                       >
                         {s.label}
                       </button>
@@ -892,7 +877,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <p className="text-sm font-bold text-black price-luxe">{formatPrice(promoPrice, cur)}</p>
-                            <ArrowRight className="w-4 h-4 text-neutral-300 group-hover:text-[#C9A96E] transition-colors" />
+                            <ArrowRight className="w-4 h-4 text-neutral-300 group-hover:text-[#A68A6D] transition-colors" />
                           </div>
                         </Link>
                       );
@@ -939,9 +924,9 @@ function PromoBanner() {
           </button>
           <div className="absolute inset-0 bg-black/65 pointer-events-none" />
           <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
-            <p className="inline-block border border-[#C9A96E] text-[#C9A96E] text-xs md:text-sm font-semibold tracking-[0.35em] uppercase px-5 py-2 mb-6">Black Friday</p>
+            <p className="inline-block border border-[#A68A6D] text-[#D8C9B5] text-xs md:text-sm font-semibold tracking-[0.35em] uppercase px-5 py-2 mb-6">Black Friday</p>
             <h2 className="text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Jusqu&apos;à −30% grâce au <span className="text-[#C9A96E]">Black Friday</span><br className="hidden md:block" /> sur la collection Bubble
+              Jusqu&apos;à −30% grâce au <span className="text-[#D8C9B5]">Black Friday</span><br className="hidden md:block" /> sur la collection Bubble
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
               {BLACK_FRIDAY_PROMO.endsAt
@@ -952,7 +937,7 @@ function PromoBanner() {
 
             <Link
               href="/promotions"
-              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#C9A96E] hover:text-white transition-colors"
+              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#7F6A52] hover:text-white transition-colors"
             >
               Voir les produits en promotion
             </Link>
@@ -1066,7 +1051,7 @@ function BubblePromoCarousel() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#C9A96E]">Black Friday</span></h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -1165,11 +1150,11 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
       <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-2">Top ventes</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Top ventes</p>
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
               Coups de cœur
             </h2>
-            <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+            <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
           </div>
           <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
             Tout voir <ChevronRight className="w-3 h-3" />
@@ -1513,11 +1498,11 @@ function ShopByCategory() {
     <FadeInSection>
       <section className="py-14 md:py-20 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-2">Notre univers</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-2">Notre univers</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
             Acheter par catégorie
           </h2>
-          <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
+          <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #A68A6D, transparent)' }} />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[232px]">
@@ -1541,7 +1526,7 @@ function ShopByCategory() {
                   {t.label}
                 </p>
                 <p className="text-white/75 text-xs md:text-sm mt-0.5">{t.desc}</p>
-                <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-widest uppercase text-white/90 group-hover:text-[#E8D5B0] transition-colors">
+                <span className="inline-flex items-center gap-1 mt-2 text-[11px] font-bold tracking-widest uppercase text-white/90 group-hover:text-[#D8C9B5] transition-colors">
                   Découvrir <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </div>
@@ -1648,7 +1633,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#8A6A35] mb-1">Tableau offert · 50×70 cm</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#7F6A52] mb-1">Tableau offert · 50×70 cm</p>
               <select aria-label="Choisir le tableau offert"
                 value={selectedTableau}
                 onChange={(e) => setSelectedTableau(Number(e.target.value))}
@@ -1687,7 +1672,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
       <div className="flex items-center justify-center gap-2 mb-6 text-center min-h-[20px]">
         {offerOn ? (
           <>
-            <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>
+            <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>
               <Gift className="w-3 h-3 text-white" strokeWidth={2} />
             </span>
             <p className="text-[11px] tracking-wide text-neutral-600">
@@ -1794,7 +1779,7 @@ function TrustStrip() {
         <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-neutral-200">
           {items.map(({ Icon, title, subtitle }) => (
             <div key={title} className="flex flex-col items-center justify-center gap-3 py-8 px-2 md:px-4 text-center group">
-              <div className="relative w-12 h-12 rounded-full border border-[#C9A96E]/50 flex items-center justify-center transition-colors duration-300 group-hover:border-[#C9A96E]">
+              <div className="relative w-12 h-12 rounded-full border border-[#A68A6D]/50 flex items-center justify-center transition-colors duration-300 group-hover:border-[#A68A6D]">
                 <div className="absolute inset-1 rounded-full border border-neutral-200" />
                 <Icon size={18} className="text-black relative" strokeWidth={1.2} />
               </div>
@@ -1830,7 +1815,7 @@ function NewsletterSection() {
     <section className="w-full bg-white py-20 px-6 border-y border-neutral-100">
       <div className="max-w-2xl mx-auto text-center">
         <FadeInSection>
-          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#8A6A35] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
+          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#7F6A52] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
             <Gift className="w-3 h-3" /> −10% offerts à l&apos;inscription
           </div>
           <h2
@@ -1849,8 +1834,8 @@ function NewsletterSection() {
               className="max-w-md mx-auto"
             >
               <p className="text-black text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
-              <div className="flex items-center justify-center gap-3 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/10 px-4 py-3">
-                <span className="text-lg font-bold tracking-[0.15em] text-[#8A6A35]">{WELCOME_CODE}</span>
+              <div className="flex items-center justify-center gap-3 border-2 border-dashed border-[#A68A6D] bg-[#7F6A52]/10 px-4 py-3">
+                <span className="text-lg font-bold tracking-[0.15em] text-[#7F6A52]">{WELCOME_CODE}</span>
                 <span className="text-[11px] uppercase tracking-widest text-neutral-500">−10%</span>
               </div>
               <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
@@ -2018,7 +2003,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
               ))}
             </ul>
             <div className="mt-5 flex items-center gap-2 text-xs text-neutral-500">
-              <Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} />
+              <Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} />
               Livraison offerte dès 40 CHF
             </div>
           </div>
@@ -2178,7 +2163,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
             <div className="px-6 py-5 border-b border-neutral-100">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-1">Ma sélection</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-1">Ma sélection</p>
                   <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                     Favoris {ids.length > 0 && <span className="text-neutral-500 text-base">({ids.length})</span>}
                   </h2>
@@ -2193,8 +2178,8 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {wishedProducts.length === 0 ? (
                 <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center px-4">
-                  <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F5F1EA 0%, #EDE4D3 100%)' }}>
-                    <Heart className="w-7 h-7 text-[#C9A96E]" strokeWidth={1.4} />
+                  <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F6F2EB 0%, #F6F2EB 100%)' }}>
+                    <Heart className="w-7 h-7 text-[#A68A6D]" strokeWidth={1.4} />
                   </div>
                   <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Votre liste de favoris est vide</p>
                   <p className="text-sm text-neutral-500 max-w-[240px]">Ajoutez vos coups de cœur en cliquant sur le cœur d&apos;un produit.</p>
@@ -2447,7 +2432,7 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
         >
-          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#E8D5B0] mb-6">
+          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#D8C9B5] mb-6">
             Collection 2026 · Mobilier d&apos;exception
           </p>
           <h1
@@ -2461,14 +2446,14 @@ export default function Home() {
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 h-px w-28 origin-center"
-            style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }}
+            style={{ background: 'linear-gradient(90deg, transparent, #A68A6D, transparent)' }}
           />
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
             <Link
               href="/collections/salon"
-              className="bg-white text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#C9A96E] hover:text-white transition-colors duration-300"
+              className="bg-white text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#7F6A52] hover:text-white transition-colors duration-300"
             >
               Découvrir la collection Salon
             </Link>
@@ -2487,9 +2472,9 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/80"
           >
-            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
-            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#C9A96E]" strokeWidth={1.5} /> Paiement sécurisé</span>
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Paiement sécurisé</span>
           </motion.div>
         </motion.div>
 
@@ -2542,7 +2527,7 @@ export default function Home() {
                 <p className="max-w-[460px] text-[15px] leading-[1.7] text-[#333] mb-8" style={{ fontFamily: 'var(--font-dm-sans)' }}>
                   Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
                 </p>
-                <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#111] text-white px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-[#111] transition-colors">
+                <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#111] text-white px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#7F6A52] hover:text-white transition-colors">
                   Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -2555,7 +2540,7 @@ export default function Home() {
                 className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:top-1/2 xl:right-20 xl:-translate-y-1/2 xl:mx-0 xl:mt-0 xl:w-[400px] xl:max-w-none"
               />
             </div>
-            <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#A07840] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
+            <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#7F6A52] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
           </div>
       </motion.section>
 
@@ -2581,11 +2566,11 @@ export default function Home() {
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#8A6A35]">Sélection</p>
+                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#7F6A52]">Sélection</p>
                     <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
                       Nos Pièces Signatures
                     </h2>
-                    <span className="block w-10 h-px mt-3 mb-2" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+                    <span className="block w-10 h-px mt-3 mb-2" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
                     <p className="text-neutral-500 max-w-lg text-sm">
                       {filteredProducts.length} produit{filteredProducts.length > 1 ? 's' : ''}
                     </p>

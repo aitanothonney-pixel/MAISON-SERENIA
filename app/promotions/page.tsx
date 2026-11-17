@@ -54,13 +54,13 @@ export default function PromotionsPage() {
         </Link>
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-16 lg:px-[88px] py-16 flex flex-col items-center text-center">
           <div className="flex items-center gap-3 md:gap-[18px]">
-            <span className="block w-7 md:w-14 h-px bg-[#C9A96E]" />
-            <p className="text-[11px] tracking-[0.5em] uppercase text-[#C9A96E] indent-[0.5em]">Black Friday</p>
-            <span className="block w-7 md:w-14 h-px bg-[#C9A96E]" />
+            <span className="block w-7 md:w-14 h-px bg-[#7F6A52]" />
+            <p className="text-[11px] tracking-[0.5em] uppercase text-[#D8C9B5] indent-[0.5em]">Black Friday</p>
+            <span className="block w-7 md:w-14 h-px bg-[#7F6A52]" />
           </div>
           <p className="mt-4 text-[11px] tracking-[0.35em] uppercase text-white/80 indent-[0.35em]">Jusqu&apos;à</p>
           <p
-            className="text-[120px] md:text-[190px] leading-[0.95] font-semibold text-[#C9A96E]"
+            className="text-[120px] md:text-[190px] leading-[0.95] font-semibold text-[#D8C9B5]"
             style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
           >
             −30%
@@ -77,11 +77,11 @@ export default function PromotionsPage() {
           <div className="mt-[30px] flex flex-col items-center gap-[18px]">
             <a
               href="#promo-grid"
-              className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#C9A96E] hover:text-white transition-colors"
+              className="group inline-flex items-center gap-3 bg-white text-black px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#7F6A52] hover:text-white transition-colors"
             >
               Voir les produits <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-            <p className="text-[11px] tracking-[0.3em] uppercase text-[#C9A96E]">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-[#A68A6D]">
               {items.length} produit{items.length > 1 ? 's' : ''} en promotion
             </p>
           </div>
@@ -125,11 +125,11 @@ export default function PromotionsPage() {
       <section className="bg-neutral-50 border-t border-neutral-100 py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-2">Économisez plus</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-2">Économisez plus</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
               Nos ensembles Bubble
             </h2>
-            <span className="block w-10 h-px mt-3 mx-auto" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
+            <span className="block w-10 h-px mt-3 mx-auto" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
             <p className="text-neutral-500 text-sm mt-4 max-w-md mx-auto">
               Le canapé et son fauteuil assortis, avec un tableau (50×70 cm) offert — le meilleur prix.
             </p>
@@ -155,7 +155,7 @@ export default function PromotionsPage() {
                     <span className="text-sm text-neutral-500 line-through"><Price value={sum} /></span>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
-                    <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />
+                    <Gift className="w-3.5 h-3.5 text-[#A68A6D]" />
                     <span><span className="font-semibold text-black">{gift.name}</span> (50×70) offert · −<Price value={sum - price} /></span>
                   </div>
                   <Link

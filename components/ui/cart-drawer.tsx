@@ -16,7 +16,7 @@ const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase()
 type Step = 'cart' | 'delivery' | 'payment' | 'confirmation';
 type PayMethod = 'card' | 'paypal' | 'twint' | 'applepay';
 
-const GOLD_GRADIENT = 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)';
+const GOLD_GRADIENT = 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)';
 
 // Ensembles canapé + fauteuil — prix fixe, avec tableau 50×70 offert (au choix)
 const BUNDLES = [
@@ -286,7 +286,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     if (crossSell.length === 0) return null;
     return (
       <div className="px-6 pb-5">
-        <p className="text-[10px] tracking-[0.25em] uppercase text-[#8A6A35] font-bold mb-3">
+        <p className="text-[10px] tracking-[0.25em] uppercase text-[#7F6A52] font-bold mb-3">
           Complétez votre intérieur
         </p>
         <div className="space-y-2.5">
@@ -322,8 +322,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   const renderShippingBoosters = () => {
     if (shippingBoosters.length === 0) return null;
     return (
-      <div className="border border-[#C9A96E]/40 bg-[#C9A96E]/5 rounded-lg p-3 mt-1">
-        <p className="text-[10px] tracking-widest uppercase text-[#8A6A35] font-bold mb-2.5 flex items-center gap-1.5">
+      <div className="border border-[#A68A6D]/40 bg-[#7F6A52]/5 rounded-lg p-3 mt-1">
+        <p className="text-[10px] tracking-widest uppercase text-[#7F6A52] font-bold mb-2.5 flex items-center gap-1.5">
           <Truck className="w-3.5 h-3.5" /> Ajoutez un article & livraison offerte
         </p>
         <div className="space-y-2.5">
@@ -391,7 +391,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-[61] flex flex-col shadow-2xl"
           >
             {/* Bandeau réassurance */}
-            <div className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#F5F1EA] border-b border-[#E7DFD1] flex-shrink-0 text-[11px] tracking-wide text-[#8a7658]">
+            <div className="flex items-center justify-center gap-2 px-5 py-2.5 bg-[#F6F2EB] border-b border-[#E7DFD1] flex-shrink-0 text-[11px] tracking-wide text-[#8a7658]">
               <Truck className="w-3.5 h-3.5 shrink-0" />
               <span>Livraison offerte dès {formatPrice(40, cur)}</span>
             </div>
@@ -399,7 +399,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-1">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-1">
                   {step === 'cart' ? 'Votre commande' : step === 'delivery' ? 'Étape 1 / 2' : step === 'payment' ? 'Étape 2 / 2' : 'Merci'}
                 </p>
                 <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
@@ -430,7 +430,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             i < stepIndex
                               ? 'text-white shadow-sm'
                               : i === stepIndex
-                                ? 'border-[1.5px] border-[#C9A96E] text-black bg-white shadow-sm'
+                                ? 'border-[1.5px] border-[#A68A6D] text-black bg-white shadow-sm'
                                 : 'border border-neutral-200 text-neutral-300'
                           }`}
                           style={i < stepIndex ? { background: GOLD_GRADIENT } : undefined}
@@ -442,7 +442,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       {i < indicatorSteps.length - 1 && (
                         <div
                           className="flex-1 h-px transition-colors duration-300 bg-neutral-200"
-                          style={i < stepIndex ? { background: 'linear-gradient(90deg, #C9A96E, #A07840)' } : undefined}
+                          style={i < stepIndex ? { background: 'linear-gradient(90deg, #A68A6D, #7F6A52)' } : undefined}
                         />
                       )}
                     </div>
@@ -459,8 +459,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   <motion.div key="cart" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.25 }}>
                     {cartProducts.length === 0 ? (
                       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center px-6 py-16">
-                        <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F5F1EA 0%, #EDE4D3 100%)' }}>
-                          <ShoppingBag className="w-7 h-7 text-[#C9A96E]" strokeWidth={1.4} />
+                        <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F6F2EB 0%, #F6F2EB 100%)' }}>
+                          <ShoppingBag className="w-7 h-7 text-[#A68A6D]" strokeWidth={1.4} />
                         </div>
                         <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                           Votre panier est vide
@@ -699,8 +699,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
                     {/* Code promo */}
                     {welcomeActive ? (
-                      <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
+                      <div className="flex items-center justify-between bg-[#7F6A52]/5 border border-[#A68A6D]/40 px-3 py-2.5">
+                        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#7F6A52]">
                           <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
                         </span>
                         <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
@@ -711,16 +711,16 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <button
                           type="button"
                           onClick={applyWelcomeOffer}
-                          className="group w-full flex items-center justify-between gap-3 border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840]"
+                          className="group w-full flex items-center justify-between gap-3 border border-[#A68A6D]/60 bg-gradient-to-r from-[#A68A6D]/15 to-[#A68A6D]/5 px-4 py-3 text-left transition-all hover:border-[#7F6A52]"
                         >
                           <span className="flex items-center gap-2.5 min-w-0">
-                            <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
+                            <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
                             <span className="flex flex-col min-w-0">
-                              <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                              <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+                              <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
                             </span>
                           </span>
-                          <span className="shrink-0 bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
+                          <span className="shrink-0 bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
                             J&apos;en profite
                           </span>
                         </button>
@@ -752,8 +752,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     )}
 
                     {(bubbleSavings > 0 && welcomeDiscount > 0) && (
-                      <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                        <span className="text-[12px] text-[#8A6A35] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
+                      <div className="flex items-center gap-2 bg-[#7F6A52]/5 border border-[#A68A6D]/40 px-3 py-2.5">
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
                       </div>
                     )}
 
@@ -766,19 +766,19 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         </div>
                       )}
                       {bubbleSavings > 0 && (
-                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
                           <span>Promotion −30%</span>
                           <span>−{formatPrice(bubbleSavings, cur)}</span>
                         </div>
                       )}
                       {packDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
                           <span>Remise Pack</span>
                           <span>−{formatPrice(packDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
+                        <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
                           <span>Code membre −10%</span>
                           <span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
@@ -859,8 +859,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 {/* Code promo */}
                 <div className="px-6 pt-5">
                   {welcomeActive ? (
-                    <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                      <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
+                    <div className="flex items-center justify-between bg-[#7F6A52]/5 border border-[#A68A6D]/40 px-3 py-2.5">
+                      <span className="flex items-center gap-2 text-[12px] font-semibold text-[#7F6A52]">
                         <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
                       </span>
                       <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
@@ -871,16 +871,16 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <button
                         type="button"
                         onClick={applyWelcomeOffer}
-                        className="group w-full flex items-center justify-between gap-3 border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840]"
+                        className="group w-full flex items-center justify-between gap-3 border border-[#A68A6D]/60 bg-gradient-to-r from-[#A68A6D]/15 to-[#A68A6D]/5 px-4 py-3 text-left transition-all hover:border-[#7F6A52]"
                       >
                         <span className="flex items-center gap-2.5 min-w-0">
-                          <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
+                          <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
                           <span className="flex flex-col min-w-0">
-                            <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                            <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                            <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+                            <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
                           </span>
                         </span>
-                        <span className="shrink-0 bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
+                        <span className="shrink-0 bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
                           J&apos;en profite
                         </span>
                       </button>
@@ -911,21 +911,21 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <span className="text-sm text-neutral-600 price-luxe">{formatPrice((bubbleSavings > 0 ? originalSubtotal : subtotal), cur)}</span>
                   </div>
                   {bubbleSavings > 0 && (
-                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Promotion −30%</span>
-                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(bubbleSavings, cur)}</span>
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#A68A6D]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#7F6A52]">Promotion −30%</span>
+                      <span className="text-lg font-bold text-[#7F6A52] price-luxe">−{formatPrice(bubbleSavings, cur)}</span>
                     </div>
                   )}
                   {packDiscount > 0 && (
-                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Remise Pack</span>
-                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(packDiscount, cur)}</span>
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#A68A6D]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#7F6A52]">Remise Pack</span>
+                      <span className="text-lg font-bold text-[#7F6A52] price-luxe">−{formatPrice(packDiscount, cur)}</span>
                     </div>
                   )}
                   {welcomeDiscount > 0 && (
-                    <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Bienvenue −10%</span>
-                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(welcomeDiscount, cur)}</span>
+                    <div className="flex items-center justify-between bg-neutral-50 border border-[#A68A6D]/40 px-3 py-2.5 -mx-1">
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#7F6A52]">Bienvenue −10%</span>
+                      <span className="text-lg font-bold text-[#7F6A52] price-luxe">−{formatPrice(welcomeDiscount, cur)}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between">
@@ -942,7 +942,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <div className="pt-1">
                       {shipping > 0 ? (
                         <p className="text-[11px] text-neutral-500 mb-1.5">
-                          Plus que <span className="font-bold text-[#8A6A35]">{formatPrice(remainingForFreeShipping, cur)}</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
+                          Plus que <span className="font-bold text-[#7F6A52]">{formatPrice(remainingForFreeShipping, cur)}</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
                         </p>
                       ) : (
                         <p className="text-[11px] text-emerald-700 font-medium mb-1.5 flex items-center gap-1">
@@ -963,7 +963,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
 
                 <div className="px-6">
-                  <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, #C9A96E, transparent)' }} />
+                  <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, #A68A6D, transparent)' }} />
                 </div>
 
                 <div className="px-6 py-5">
@@ -978,7 +978,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     onClick={() => handleCheckout()}
                     disabled={checkoutLoading}
                     className="w-full text-white py-4 text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-60"
-                    style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, #34322F 0%, #000 100%)' }}
                   >
                     {checkoutLoading ? (
                       <>
@@ -1004,7 +1004,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
 
                 <div className="border-t border-neutral-100 bg-neutral-50 px-6 py-4 flex items-start gap-2.5">
-                  <Lock className="w-3.5 h-3.5 text-[#C9A96E] shrink-0 mt-0.5" />
+                  <Lock className="w-3.5 h-3.5 text-[#A68A6D] shrink-0 mt-0.5" />
                   <div>
                     <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-black mb-1">Paiement sécurisé</p>
                     <p className="text-xs text-neutral-500 leading-relaxed">
