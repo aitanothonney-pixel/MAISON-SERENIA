@@ -941,7 +941,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     99: 'Canapé d\'angle modulable en U vert',
     // Canapés modulables en L et en U « style nuage »
     100: 'Canapé modulable en L style nuage gris anthracite',
-    102: 'Canapé modulable en L style nuage blanc chaud',
+    101: 'Canapé modulable en L style nuage gris anthracite',
+    102: 'Canapé modulable en L style nuage gris anthracite',
     113: 'Canapé modulable en U style nuage blanc',
     114: 'Canapé modulable en U style nuage noir',
     115: 'Canapé modulable en U style nuage gris',
