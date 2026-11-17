@@ -6,6 +6,7 @@ import { products, nice99 } from '@/lib/products';
 import { BUNDLES, getBundleDetail } from '@/lib/bundles';
 
 export const metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/promotions' },
   title: 'Promotions | Maison Serenia',
   description: 'Découvrez tous les produits en promotion — jusqu’à −30% sur la collection Bubble.',
 };
@@ -106,13 +107,13 @@ export default function PromotionsPage() {
                     −30%
                   </div>
                 </div>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 mb-1">{product.category}</p>
+                <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
                 <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
                   {product.name}
                 </h2>
                 <div className="flex items-baseline gap-2 mt-1.5">
                   <span className="text-sm font-semibold text-black"><Price value={promoPrice} /></span>
-                  <span className="text-xs text-neutral-400 line-through"><Price value={product.price} /></span>
+                  <span className="text-xs text-neutral-500 line-through"><Price value={product.price} /></span>
                 </div>
               </Link>
             );
@@ -124,7 +125,7 @@ export default function PromotionsPage() {
       <section className="bg-neutral-50 border-t border-neutral-100 py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Économisez plus</p>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-2">Économisez plus</p>
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
               Nos ensembles Bubble
             </h2>
@@ -141,7 +142,7 @@ export default function PromotionsPage() {
               const { canape, fauteuil, gift, sum, price } = detail;
               return (
                 <div key={b.slug} className="bg-white border border-neutral-200 p-6 flex flex-col">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-4">Ensemble {b.color}</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-4">Ensemble {b.color}</p>
                   <div className="flex items-center gap-3 mb-5">
                     {[canape, fauteuil, gift].map((p) => (
                       <div key={p.id} className="relative w-16 h-16 bg-white shrink-0">
@@ -151,7 +152,7 @@ export default function PromotionsPage() {
                   </div>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}><Price value={price} /></span>
-                    <span className="text-sm text-neutral-400 line-through"><Price value={sum} /></span>
+                    <span className="text-sm text-neutral-500 line-through"><Price value={sum} /></span>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">
                     <Gift className="w-3.5 h-3.5 text-[#C9A96E]" />

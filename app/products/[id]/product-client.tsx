@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Link2, Plus, Gift, Sparkles, FileText } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
+import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
 import { categoryToSlug } from '@/lib/collections';
 import { useWishlist } from '@/lib/useWishlist';
 import { useCart } from '@/lib/useCart';
@@ -199,10 +200,10 @@ function CheckoutDrawer({
   const PromoField = () => (
     welcomeActive ? (
       <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
+        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
           <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
         </span>
-        <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
+        <button type="button" onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
       </div>
     ) : (
       <div className="space-y-3">
@@ -213,10 +214,10 @@ function CheckoutDrawer({
           className="group w-full flex items-center justify-between gap-3 rounded-xl border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840] hover:shadow-sm"
         >
           <span className="flex items-center gap-2.5 min-w-0">
-            <Sparkles className="w-4 h-4 text-[#A07840] shrink-0" />
+            <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
             <span className="flex flex-col min-w-0">
-              <span className="text-[13px] font-bold text-[#A07840] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-              <span className="text-[11px] text-[#A07840]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+              <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+              <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
             </span>
           </span>
           <span className="shrink-0 rounded-lg bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
@@ -226,7 +227,7 @@ function CheckoutDrawer({
 
         {/* Repli : saisie manuelle du code pour qui le possède déjà */}
         <div>
-          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Vous avez un code promo ?</label>
+          <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">Vous avez un code promo ?</label>
           <div className="flex gap-2">
             <input
               value={promoInput}
@@ -367,11 +368,11 @@ function CheckoutDrawer({
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-sm text-black leading-tight mb-1">{product.name}</p>
-                        <p className="text-xs text-neutral-400 mb-2">{product.category} · Qté 1</p>
+                        <p className="text-xs text-neutral-500 mb-2">{product.category} · Qté 1</p>
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-black price-luxe">{formatPrice(promoPrice, cur)}</span>
                           {product.name.includes('Bubble') && (
-                            <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
+                            <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
                           )}
                         </div>
                       </div>
@@ -381,8 +382,8 @@ function CheckoutDrawer({
 
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 mb-4 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-                        <Gift className="w-4 h-4 text-[#A07840] shrink-0" />
-                        <span className="text-[12px] text-[#A07840] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                        <Gift className="w-4 h-4 text-[#8A6A35] shrink-0" />
+                        <span className="text-[12px] text-[#8A6A35] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
                       </div>
                     )}
 
@@ -391,19 +392,19 @@ function CheckoutDrawer({
                         <span>Prix d&apos;origine</span><span>{formatPrice(originalPrice, cur)}</span>
                       </div>
                       {bubbleDiscount > 0 && (
-                        <div className="flex justify-between text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-[#8A6A35] font-semibold">
                           <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-[#8A6A35] font-semibold">
                           <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-neutral-500">
                         <span>Livraison</span>
                         {shippingFee === 0 ? (
-                          <span className="text-emerald-600">Offerte</span>
+                          <span className="text-emerald-700">Offerte</span>
                         ) : (
                           <span>{formatPrice(shippingFee, cur)}</span>
                         )}
@@ -411,7 +412,7 @@ function CheckoutDrawer({
                       {shippingFee > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 rounded-lg p-2.5">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de <span className="font-semibold text-black">{formatPrice(shippingFee, cur)}</span> car la commande est inférieure à {formatPrice(40, cur)}. Ajoutez {formatPrice((40 - merchandiseTotal), cur)} pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                          <span>Frais de <span className="font-semibold text-black">{formatPrice(shippingFee, cur)}</span> car la commande est inférieure à {formatPrice(40, cur)}. Ajoutez {formatPrice((40 - merchandiseTotal), cur)} pour l&apos;obtenir <span className="font-semibold text-emerald-700">offerte</span>.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-2" />
@@ -420,7 +421,7 @@ function CheckoutDrawer({
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs text-neutral-400 mb-6 bg-neutral-50 rounded-xl p-3">
+                    <div className="flex items-center gap-2 text-xs text-neutral-500 mb-6 bg-neutral-50 rounded-xl p-3">
                       <Truck className="w-4 h-4 shrink-0" />
                       <span>Livraison à domicile offerte · 1 à 4 semaines</span>
                     </div>
@@ -443,7 +444,7 @@ function CheckoutDrawer({
                         { key: 'nom', label: 'Nom', col: 1 },
                       ].map((f) => (
                         <div key={f.key}>
-                          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                          <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">{f.label}</label>
                           <input
                             value={delivery[f.key as keyof typeof delivery]}
                             onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
@@ -458,7 +459,7 @@ function CheckoutDrawer({
                       { key: 'adresse', label: 'Adresse', placeholder: '12 rue de la Paix' },
                     ].map((f) => (
                       <div key={f.key}>
-                        <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                        <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">{f.label}</label>
                         <input
                           type={f.type || 'text'}
                           value={delivery[f.key as keyof typeof delivery]}
@@ -474,7 +475,7 @@ function CheckoutDrawer({
                         { key: 'code', label: 'Code postal', placeholder: '75001' },
                       ].map((f) => (
                         <div key={f.key}>
-                          <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">{f.label}</label>
+                          <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">{f.label}</label>
                           <input
                             value={delivery[f.key as keyof typeof delivery]}
                             onChange={(e) => setDelivery({ ...delivery, [f.key]: e.target.value })}
@@ -497,9 +498,9 @@ function CheckoutDrawer({
                     transition={{ duration: 0.25 }}
                     className="p-6 space-y-4"
                   >
-                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 rounded-xl p-3">
+                    <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 rounded-xl p-3">
                       <Lock className="w-3.5 h-3.5 shrink-0" />
-                      <span>Paiement 100% sécurisé — chiffrement SSL 256 bits</span>
+                      <span>Paiement sécurisé par Stripe</span>
                     </div>
 
                     {/* Method tabs */}
@@ -529,25 +530,25 @@ function CheckoutDrawer({
                       {payMethod === 'card' && (
                         <motion.div key="card" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }} className="space-y-4">
                           <div>
-                            <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Titulaire de la carte</label>
+                            <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">Titulaire de la carte</label>
                             <input value={payment.titulaire} onChange={(e) => setPayment({ ...payment, titulaire: e.target.value })}
                               className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors" placeholder="Jean Dupont" />
                           </div>
                           <div>
-                            <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Numéro de carte</label>
+                            <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">Numéro de carte</label>
                             <input value={payment.carte} onChange={(e) => setPayment({ ...payment, carte: formatCard(e.target.value) })}
                               className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono tracking-wider"
                               placeholder="1234 5678 9012 3456" maxLength={19} />
                           </div>
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">Expiration</label>
+                              <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">Expiration</label>
                               <input value={payment.expiry} onChange={(e) => setPayment({ ...payment, expiry: formatExpiry(e.target.value) })}
                                 className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
                                 placeholder="MM/AA" maxLength={5} />
                             </div>
                             <div>
-                              <label className="text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block">CVV</label>
+                              <label className="text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block">CVV</label>
                               <input value={payment.cvv} onChange={(e) => setPayment({ ...payment, cvv: e.target.value.replace(/\D/g, '').slice(0, 3) })}
                                 className="w-full border border-neutral-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors font-mono"
                                 placeholder="123" maxLength={3} type="password" />
@@ -566,7 +567,7 @@ function CheckoutDrawer({
                             </div>
                           </div>
                           <p className="text-sm text-neutral-600">Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.</p>
-                          <p className="text-xs text-neutral-400">Compte PayPal ou carte bancaire acceptés</p>
+                          <p className="text-xs text-neutral-500">Compte PayPal ou carte bancaire acceptés</p>
                         </motion.div>
                       )}
 
@@ -579,7 +580,7 @@ function CheckoutDrawer({
                             <span className="font-bold text-lg tracking-tight">Apple Pay</span>
                           </div>
                           <p className="text-sm text-neutral-600">Confirmez le paiement avec Face ID ou Touch ID sur votre appareil Apple.</p>
-                          <p className="text-xs text-neutral-400">Disponible sur iPhone, iPad et Mac</p>
+                          <p className="text-xs text-neutral-500">Disponible sur iPhone, iPad et Mac</p>
                         </motion.div>
                       )}
 
@@ -619,7 +620,7 @@ function CheckoutDrawer({
                               <rect x="72" y="60" width="4" height="4" fill="black"/>
                             </svg>
                           </div>
-                          <p className="text-xs text-neutral-400">Valable 5 minutes</p>
+                          <p className="text-xs text-neutral-500">Valable 5 minutes</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -628,8 +629,8 @@ function CheckoutDrawer({
 
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 rounded-xl px-3 py-2.5">
-                        <Gift className="w-4 h-4 text-[#A07840] shrink-0" />
-                        <span className="text-[12px] text-[#A07840] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                        <Gift className="w-4 h-4 text-[#8A6A35] shrink-0" />
+                        <span className="text-[12px] text-[#8A6A35] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
                       </div>
                     )}
 
@@ -641,19 +642,19 @@ function CheckoutDrawer({
                         </div>
                       )}
                       {bubbleDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
                           <span>Promotion −30%</span><span>−{formatPrice(bubbleDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
                           <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm text-neutral-500">
                         <span>Livraison</span>
                         {shippingFee === 0 ? (
-                          <span className="text-emerald-600 font-medium">Offerte</span>
+                          <span className="text-emerald-700 font-medium">Offerte</span>
                         ) : (
                           <span>{formatPrice(shippingFee, cur)}</span>
                         )}
@@ -707,7 +708,7 @@ function CheckoutDrawer({
                           </div>
                           <div>
                             <p className="font-semibold text-sm">{product.name}</p>
-                            <p className="text-xs text-neutral-400">{formatPrice(finalTotal, cur)} · Livraison offerte</p>
+                            <p className="text-xs text-neutral-500">{formatPrice(finalTotal, cur)} · Livraison offerte</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-neutral-500">
@@ -788,7 +789,7 @@ function CheckoutDrawer({
                 {step !== 'cart' && (
                   <button
                     onClick={() => setStep(step === 'payment' ? 'delivery' : 'cart')}
-                    className="w-full text-center text-xs text-neutral-400 hover:text-black transition-colors"
+                    className="w-full text-center text-xs text-neutral-500 hover:text-black transition-colors"
                   >
                     ← Retour
                   </button>
@@ -1123,7 +1124,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       <div className={barVisible ? 'pt-[104px]' : 'pt-16'}>
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
-          <nav className="flex items-center gap-2 text-xs text-neutral-400">
+          <nav className="flex items-center gap-2 text-xs text-neutral-500">
             <Link href="/" className="hover:text-black transition-colors">Accueil</Link>
             <ChevronRight className="w-3 h-3" />
             <Link
@@ -1289,11 +1290,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="h-px w-6 bg-black" />
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400">{product.category}</p>
+                  <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500">{product.category}</p>
                 </div>
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
                 {/* Social Share */}
-                <div className="flex gap-3 items-center text-neutral-400 text-xs mt-2">
+                <div className="flex gap-3 items-center text-neutral-500 text-xs mt-2">
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(window.location.href);
@@ -1332,7 +1333,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 <div className="mb-5 flex items-center justify-between gap-4 bg-black border border-[#C9A96E] px-5 py-4">
                   <div className="min-w-0">
                     <p className="text-[10px] tracking-[0.35em] uppercase text-[#C9A96E]">Black Friday</p>
-                    <p className="text-[13px] text-white/70 mt-1.5">Offre limitée sur toute la collection Bubble</p>
+                    <p className="text-[13px] text-white/70 mt-1.5">{BLACK_FRIDAY_PROMO.endsAt ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}</> : <>Remise de 30 % sur toute la collection Bubble</>}</p>
                   </div>
                   <p className="text-5xl md:text-6xl leading-none text-white shrink-0" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>−30%</p>
                 </div>
@@ -1344,12 +1345,12 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <div className="flex items-baseline gap-3">
                     <p className="text-4xl text-black price-luxe">{formatPrice(unitPrice, cur)}</p>
                     {isBubble && (
-                      <p className="text-sm text-neutral-400 line-through price-luxe">{formatPrice(product.price, cur)}</p>
+                      <p className="text-sm text-neutral-500 line-through price-luxe">{formatPrice(product.price, cur)}</p>
                     )}
                   </div>
                 </div>
                 {isBubble && (
-                  <p className="text-xs text-neutral-400 mt-3 tracking-wide">
+                  <p className="text-xs text-neutral-500 mt-3 tracking-wide">
                     Livraison offerte · Installation comprise
                   </p>
                 )}
@@ -1358,7 +1359,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* Size selector — tailles au choix (ex. tableaux) */}
               {product.sizes && (
                 <div className="mb-6">
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
+                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 mb-3">
                     {product.sizeLabel ?? 'Taille'} — <span className="text-black font-medium">{selectedSize}</span>
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1390,13 +1391,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           );
                         })()}
                         <span>{s.label}</span>
-                        <span className={`text-[11px] ${s.label === selectedSize ? 'text-white/70' : 'text-neutral-400'}`}>{formatPrice(s.price, cur)}</span>
+                        <span className={`text-[11px] ${s.label === selectedSize ? 'text-white/70' : 'text-neutral-500'}`}>{formatPrice(s.price, cur)}</span>
                       </button>
                     ))}
                   </div>
                   <div className="flex items-center gap-2 text-xs mt-3">
                     <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                    <span className="text-neutral-500">En stock · Livraison en 1 à 4 semaines</span>
+                    <span className="text-neutral-500">Livraison en 1 à 4 semaines</span>
                   </div>
                 </div>
               )}
@@ -1404,7 +1405,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* Color variants */}
               {variants && (
                 <div className="mb-6">
-                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-3">
+                  <p className="text-xs tracking-[0.2em] uppercase text-neutral-500 mb-3">
                     Couleur — <span className="text-black font-medium">{variants.find(v => v.productId === product.id)?.color}</span>
                   </p>
                   <div className="flex items-center gap-3">
@@ -1424,7 +1425,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   {!isBubble && (
                     <div className="flex items-center gap-2 text-xs mt-3">
                       <span className="w-2 h-2 rounded-full bg-green-500 shrink-0" />
-                      <span className="text-neutral-500">En stock · Livraison en 1 à 4 semaines</span>
+                      <span className="text-neutral-500">Livraison en 1 à 4 semaines</span>
                     </div>
                   )}
                 </div>
@@ -1435,18 +1436,18 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* Caractéristiques — rangées épurées */}
               <div className="border-t border-neutral-100 divide-y divide-neutral-100 mb-8">
                 <div className="flex items-center justify-between gap-6 py-3">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 shrink-0">Dimensions</span>
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 shrink-0">Dimensions</span>
                   <span className="text-sm text-neutral-700 text-right">{product.dimensions}</span>
                 </div>
                 <div className="flex items-center justify-between gap-6 py-3">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 shrink-0">Matière</span>
+                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 shrink-0">Matière</span>
                   <span className="text-sm text-neutral-700 text-right">{product.material}</span>
                 </div>
               </div>
 
               {/* Livraison estimée */}
               <div className="flex items-center gap-2.5 mb-5 px-4 py-3 border border-neutral-100 bg-neutral-50/60">
-                <Truck className="w-4 h-4 text-[#A07840] shrink-0" />
+                <Truck className="w-4 h-4 text-[#8A6A35] shrink-0" />
                 <p className="text-xs text-neutral-600">
                   Commandez aujourd&apos;hui — livraison estimée entre le{' '}
                   <strong className="text-black font-medium">{deliveryRange.from}</strong>{' '}et le{' '}
@@ -1508,7 +1509,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <span className="shrink-0 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center text-black">{r.icon}</span>
                     <div className="min-w-0 leading-tight">
                       <p className="text-[12px] font-semibold text-black leading-tight">{r.title}</p>
-                      {r.sub && <p className="text-[11px] text-neutral-400 leading-tight mt-0.5">{r.sub}</p>}
+                      {r.sub && <p className="text-[11px] text-neutral-500 leading-tight mt-0.5">{r.sub}</p>}
                     </div>
                   </div>
                 ))}
@@ -1523,7 +1524,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       onClick={() => setOpenAccordion(openAccordion === i ? null : i)}
                     >
                       {acc.title}
-                      <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-300 ${openAccordion === i ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${openAccordion === i ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openAccordion === i && (
@@ -1559,7 +1560,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </Link>
                       <div className="flex-1 min-w-0">
                         <Link href={`/products/${cp.id}`} className="font-serif font-bold text-sm text-black hover:underline">{cp.name}</Link>
-                        <p className="text-xs text-neutral-400 mt-0.5">{cp.category}</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">{cp.category}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
                         <span className="font-bold text-black text-sm price-luxe">{formatPrice(cpPromo, cur)}</span>
@@ -1591,7 +1592,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       onClick={() => setOpenDim(openDim === i ? null : i)}
                     >
                       {acc.title}
-                      <ChevronDown className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform duration-300 ${openDim === i ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-neutral-500 shrink-0 transition-transform duration-300 ${openDim === i ? 'rotate-180' : ''}`} />
                     </button>
                     <AnimatePresence>
                       {openDim === i && (
@@ -1627,7 +1628,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     {item.q}
-                    <ChevronDown className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 text-neutral-500 shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
                   </button>
                   <AnimatePresence>
                     {openFaq === i && (
@@ -1682,7 +1683,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
-                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                            aria-label="Ajouter aux favoris" aria-pressed={isWished(p.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                           >
                             <Heart className={`w-3.5 h-3.5 transition-all ${isWished(p.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                           </button>
@@ -1691,7 +1692,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
-                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
+                        {pIsBubble && <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
@@ -1741,7 +1742,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           )}
                           <button
                             onClick={(e) => { e.preventDefault(); toggleWish(p.id); }}
-                            className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                            aria-label="Ajouter aux favoris" aria-pressed={isWished(p.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full p-1.5 transition-all duration-300 hover:bg-white hover:scale-110 ${isWished(p.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                           >
                             <Heart className={`w-3.5 h-3.5 transition-all ${isWished(p.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                           </button>
@@ -1750,7 +1751,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
-                        {pIsBubble && <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
+                        {pIsBubble && <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
@@ -1761,7 +1762,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
           {/* Back button */}
           <div className="mt-16">
-            <Link href="/#tous" className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-black transition-colors">
+            <Link href="/#tous" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-black transition-colors">
               <ArrowLeft className="w-4 h-4" />
               Retour à la boutique
             </Link>
@@ -1793,7 +1794,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {products.filter((p) => isWished(p.id)).length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
                   <Heart className="w-12 h-12 text-neutral-200" />
-                  <p className="font-serif text-lg text-neutral-400">Aucun favori pour l&apos;instant</p>
+                  <p className="font-serif text-lg text-neutral-500">Aucun favori pour l&apos;instant</p>
                   <p className="text-sm text-neutral-300">Cliquez sur le cœur d&apos;un produit pour l&apos;ajouter ici.</p>
                 </div>
               ) : (

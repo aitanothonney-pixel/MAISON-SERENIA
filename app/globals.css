@@ -223,3 +223,25 @@ html {
 .range-thumb::-moz-range-track {
   background: transparent;
 }
+
+/* ── Accessibilité ─────────────────────────────────────────────── */
+/* Focus clavier visible sur tous les contrôles (WCAG 2.4.7). */
+:focus-visible {
+  outline: 2px solid #A07840;
+  outline-offset: 2px;
+}
+
+/* Curseurs de prix : cible tactile d'au moins 24 px (WCAG 2.5.8). */
+.range-thumb { height: 24px; }
+.range-thumb::-webkit-slider-thumb { height: 24px; width: 24px; }
+.range-thumb::-moz-range-thumb { height: 24px; width: 24px; }
+
+/* Préférence « réduire les mouvements » : animations CSS ramenées à un cycle instantané. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

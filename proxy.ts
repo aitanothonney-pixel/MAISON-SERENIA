@@ -5,7 +5,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 // Le paramètre ?devise=CHF (ou EUR) force la devise : il est utilisé par les liens
 // du flux Google Merchant Center (/feed.xml), pour que Google voie les prix en CHF
 // même quand son robot visite le site depuis l'étranger.
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const country =
     request.headers.get('x-vercel-ip-country') ||
     request.headers.get('cf-ipcountry') ||

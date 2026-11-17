@@ -47,7 +47,7 @@ export function PackCheckout({
           <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>
             <Gift className="w-3 h-3 text-white" strokeWidth={2} />
           </span>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07840]">Votre tableau offert · {giftSize}</p>
+          <p className="text-[10px] tracking-[0.2em] uppercase text-[#8A6A35]">Votre tableau offert · {giftSize}</p>
         </div>
         <div className="flex items-center gap-3">
           {gift && (
@@ -64,7 +64,7 @@ export function PackCheckout({
             </button>
           )}
           <div className="flex-1 min-w-0">
-            <select
+            <select aria-label="Choisir le cadeau"
               value={selectedGift}
               onChange={(e) => setSelectedGift(Number(e.target.value))}
               disabled={added}
@@ -75,8 +75,8 @@ export function PackCheckout({
               ))}
             </select>
             <p className="flex items-center gap-2 mt-1.5">
-              <span className="text-neutral-400 line-through text-xs"><Price value={giftPrice} /></span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offert</span>
+              <span className="text-neutral-500 line-through text-xs"><Price value={giftPrice} /></span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Offert</span>
             </p>
           </div>
         </div>

@@ -37,7 +37,7 @@ export function MinimalistHeroSection() {
         >
           <div className="inline-flex items-center gap-2 mb-5">
             <div className="h-px w-8 bg-neutral-300" />
-            <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500">
               Collection 2026
             </p>
           </div>
@@ -101,7 +101,7 @@ export function MinimalistHeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease, delay: 1.1 }}
-              className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.25em] uppercase whitespace-nowrap transition-colors duration-300 text-neutral-400"
+              className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.25em] uppercase whitespace-nowrap transition-colors duration-300 text-neutral-500"
             >
               Voir le produit →
             </motion.span>

@@ -6,7 +6,7 @@ interface LogoProps {
   color?: 'black' | 'white';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   className?: string;
 }
 

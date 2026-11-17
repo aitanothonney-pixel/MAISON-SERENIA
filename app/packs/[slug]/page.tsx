@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const detail = getBundleDetail(slug);
   if (!detail) return { title: 'Pack | Maison Serenia' };
   return {
+    alternates: { canonical: `https://maison-serenia.com/packs/${slug}` },
     title: `Ensemble Bubble ${detail.bundle.color} | Maison Serenia`,
     description: `Canapé et fauteuil Bubble ${detail.bundle.color.toLowerCase()} assortis, avec un tableau (50×70 cm) offert. Économisez ${detail.sum - detail.price} CHF.`,
   };
@@ -44,11 +45,11 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
         <div className="max-w-5xl mx-auto px-6">
           <Link
             href="/#section-packs"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour aux ensembles
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Ensemble Bubble {bundle.color}
           </h1>
@@ -82,7 +83,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400 mb-1">{product.category}</p>
+                  <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
                   <h3 className="font-serif font-bold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
                     {product.name}
                   </h3>
@@ -90,8 +91,8 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                   <div className="flex items-center gap-2 mt-2">
                     {offert ? (
                       <>
-                        <span className="text-sm text-neutral-400 line-through"><Price value={p} /></span>
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offerte</span>
+                        <span className="text-sm text-neutral-500 line-through"><Price value={p} /></span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Offerte</span>
                       </>
                     ) : (
                       <span className="text-sm font-semibold text-black"><Price value={p} /></span>
@@ -105,12 +106,12 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
 
         {/* Récapitulatif */}
         <aside className="lg:sticky lg:top-8 h-fit border border-neutral-200 p-6">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-1">Prix du pack</p>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-1">Prix du pack</p>
           <div className="flex items-baseline gap-3 mb-1">
             <span className="text-4xl font-bold text-black leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
               <Price value={price} />
             </span>
-            <span className="text-sm text-neutral-400 line-through"><Price value={sum} /></span>
+            <span className="text-sm text-neutral-500 line-through"><Price value={sum} /></span>
           </div>
           <div className="flex mb-5 mt-3">
             <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
@@ -126,7 +127,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
             giftPrice={60}
           />
 
-          <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
+          <p className="text-[10px] text-neutral-500 text-center mt-3 tracking-wide">
             Livraison gratuite à partir de <Price value={40} />
           </p>
         </aside>

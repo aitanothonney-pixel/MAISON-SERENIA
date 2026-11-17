@@ -286,7 +286,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     if (crossSell.length === 0) return null;
     return (
       <div className="px-6 pb-5">
-        <p className="text-[10px] tracking-[0.25em] uppercase text-[#A07840] font-bold mb-3">
+        <p className="text-[10px] tracking-[0.25em] uppercase text-[#8A6A35] font-bold mb-3">
           Complétez votre intérieur
         </p>
         <div className="space-y-2.5">
@@ -323,7 +323,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     if (shippingBoosters.length === 0) return null;
     return (
       <div className="border border-[#C9A96E]/40 bg-[#C9A96E]/5 rounded-lg p-3 mt-1">
-        <p className="text-[10px] tracking-widest uppercase text-[#A07840] font-bold mb-2.5 flex items-center gap-1.5">
+        <p className="text-[10px] tracking-widest uppercase text-[#8A6A35] font-bold mb-2.5 flex items-center gap-1.5">
           <Truck className="w-3.5 h-3.5" /> Ajoutez un article & livraison offerte
         </p>
         <div className="space-y-2.5">
@@ -370,7 +370,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
   ];
 
   const inputClass = 'w-full border border-neutral-200 px-3 py-2.5 text-sm focus:outline-none focus:border-black transition-colors';
-  const labelClass = 'text-[10px] tracking-widest uppercase text-neutral-400 mb-1 block';
+  const labelClass = 'text-[10px] tracking-widest uppercase text-neutral-500 mb-1 block';
 
   return (
     <AnimatePresence>
@@ -399,12 +399,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-100 flex-shrink-0">
               <div>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-1">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-1">
                   {step === 'cart' ? 'Votre commande' : step === 'delivery' ? 'Étape 1 / 2' : step === 'payment' ? 'Étape 2 / 2' : 'Merci'}
                 </p>
                 <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                   {stepTitle[step]}
-                  {step === 'cart' && totalQty > 0 && <span className="text-neutral-400 text-base"> ({totalQty})</span>}
+                  {step === 'cart' && totalQty > 0 && <span className="text-neutral-500 text-base"> ({totalQty})</span>}
                 </h2>
               </div>
               <button onClick={handleClose} className="p-2 -mr-2 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
@@ -465,7 +465,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                           Votre panier est vide
                         </p>
-                        <p className="text-sm text-neutral-400 max-w-[240px]">Découvrez nos pièces et commencez votre sélection.</p>
+                        <p className="text-sm text-neutral-500 max-w-[240px]">Découvrez nos pièces et commencez votre sélection.</p>
                         <button
                           onClick={goShopping}
                           className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-neutral-800 transition-colors"
@@ -497,14 +497,14 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                               <div className="flex items-start justify-between gap-2">
                                 <div className="flex-1 min-w-0">
                                   <p className="text-[15px] text-black leading-snug">{product.name}</p>
-                                  <p className="text-xs text-neutral-400 mt-1">{size ? `Taille : ${size}` : product.category}</p>
+                                  <p className="text-xs text-neutral-500 mt-1">{size ? `Taille : ${size}` : product.category}</p>
                                   <p className="text-[17px] font-bold text-black mt-2 price-luxe">
                                     {formatPrice(price, cur)}
                                   </p>
                                 </div>
                                 <button
                                   onClick={() => removeItem(id, size)}
-                                  className="shrink-0 p-1 text-neutral-400 hover:text-black transition-colors"
+                                  className="shrink-0 p-1 text-neutral-500 hover:text-black transition-colors"
                                   aria-label="Supprimer"
                                 >
                                   <Trash2 className="w-4 h-4" strokeWidth={1.5} />
@@ -571,7 +571,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <input value={delivery.code} onChange={(e) => setDelivery({ ...delivery, code: e.target.value })} className={inputClass} placeholder="1201" />
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-neutral-400 bg-neutral-50 p-3">
+                    <div className="flex items-center gap-2 text-xs text-neutral-500 bg-neutral-50 p-3">
                       <Truck className="w-4 h-4 shrink-0" />
                       <span>Livraison à domicile offerte · 1 à 4 semaines</span>
                     </div>
@@ -581,9 +581,9 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 {/* ── PAYMENT ── */}
                 {step === 'payment' && (
                   <motion.div key="payment" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }} className="p-6 space-y-4">
-                    <div className="flex items-center gap-2 text-xs text-emerald-600 bg-emerald-50 p-3">
+                    <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 p-3">
                       <Lock className="w-3.5 h-3.5 shrink-0" />
-                      <span>Paiement 100% sécurisé — chiffrement SSL 256 bits</span>
+                      <span>Paiement sécurisé par Stripe</span>
                     </div>
 
                     {/* Method tabs */}
@@ -643,7 +643,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             </div>
                           </div>
                           <p className="text-sm text-neutral-600">Vous serez redirigé vers PayPal pour finaliser votre paiement en toute sécurité.</p>
-                          <p className="text-xs text-neutral-400">Compte PayPal ou carte bancaire acceptés</p>
+                          <p className="text-xs text-neutral-500">Compte PayPal ou carte bancaire acceptés</p>
                         </motion.div>
                       )}
 
@@ -655,7 +655,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                             <span className="font-bold text-lg tracking-tight">Apple Pay</span>
                           </div>
                           <p className="text-sm text-neutral-600">Confirmez le paiement avec Face ID ou Touch ID sur votre appareil Apple.</p>
-                          <p className="text-xs text-neutral-400">Disponible sur iPhone, iPad et Mac</p>
+                          <p className="text-xs text-neutral-500">Disponible sur iPhone, iPad et Mac</p>
                         </motion.div>
                       )}
 
@@ -692,7 +692,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                               <rect x="72" y="60" width="4" height="4" fill="black"/>
                             </svg>
                           </div>
-                          <p className="text-xs text-neutral-400">Valable 5 minutes</p>
+                          <p className="text-xs text-neutral-500">Valable 5 minutes</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -700,10 +700,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     {/* Code promo */}
                     {welcomeActive ? (
                       <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
+                        <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
                           <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
                         </span>
-                        <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
+                        <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
                       </div>
                     ) : (
                       <div className="space-y-3">
@@ -714,10 +714,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                           className="group w-full flex items-center justify-between gap-3 border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840]"
                         >
                           <span className="flex items-center gap-2.5 min-w-0">
-                            <Sparkles className="w-4 h-4 text-[#A07840] shrink-0" />
+                            <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
                             <span className="flex flex-col min-w-0">
-                              <span className="text-[13px] font-bold text-[#A07840] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                              <span className="text-[11px] text-[#A07840]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                              <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+                              <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
                             </span>
                           </span>
                           <span className="shrink-0 bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
@@ -753,7 +753,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
                     {(bubbleSavings > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                        <span className="text-[12px] text-[#A07840] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
+                        <span className="text-[12px] text-[#8A6A35] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
                       </div>
                     )}
 
@@ -766,19 +766,19 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         </div>
                       )}
                       {bubbleSavings > 0 && (
-                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
                           <span>Promotion −30%</span>
                           <span>−{formatPrice(bubbleSavings, cur)}</span>
                         </div>
                       )}
                       {packDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
                           <span>Remise Pack</span>
                           <span>−{formatPrice(packDiscount, cur)}</span>
                         </div>
                       )}
                       {welcomeDiscount > 0 && (
-                        <div className="flex justify-between text-sm text-[#A07840] font-semibold">
+                        <div className="flex justify-between text-sm text-[#8A6A35] font-semibold">
                           <span>Code membre −10%</span>
                           <span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
@@ -786,7 +786,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <div className="flex justify-between text-sm text-neutral-500">
                         <span>Livraison</span>
                         {shipping === 0 ? (
-                          <span className="text-emerald-600 font-medium">Offerte</span>
+                          <span className="text-emerald-700 font-medium">Offerte</span>
                         ) : (
                           <span>{formatPrice(shipping, cur)}</span>
                         )}
@@ -794,7 +794,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       {shipping > 0 && (
                         <div className="flex items-start gap-2 text-[11px] text-neutral-500 bg-neutral-50 p-2.5 rounded-lg">
                           <Truck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                          <span>Frais de livraison de <span className="font-semibold text-black">{formatPrice(SHIPPING_FEE, cur)}</span> appliqués car votre commande est inférieure à {formatPrice(40, cur)}. Ajoutez {formatPrice(remainingForFreeShipping, cur)} d&apos;articles pour l&apos;obtenir <span className="font-semibold text-emerald-600">offerte</span>.</span>
+                          <span>Frais de livraison de <span className="font-semibold text-black">{formatPrice(SHIPPING_FEE, cur)}</span> appliqués car votre commande est inférieure à {formatPrice(40, cur)}. Ajoutez {formatPrice(remainingForFreeShipping, cur)} d&apos;articles pour l&apos;obtenir <span className="font-semibold text-emerald-700">offerte</span>.</span>
                         </div>
                       )}
                       <div className="h-px bg-neutral-100 my-1" />
@@ -860,10 +860,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <div className="px-6 pt-5">
                   {welcomeActive ? (
                     <div className="flex items-center justify-between bg-[#C9A96E]/5 border border-[#C9A96E]/40 px-3 py-2.5">
-                      <span className="flex items-center gap-2 text-[12px] font-semibold text-[#A07840]">
+                      <span className="flex items-center gap-2 text-[12px] font-semibold text-[#8A6A35]">
                         <Check className="w-3.5 h-3.5" /> Offre −10% activée · code « {WELCOME_CODE} »
                       </span>
-                      <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">Retirer</button>
+                      <button onClick={removePromo} className="text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">Retirer</button>
                     </div>
                   ) : (
                     <div className="space-y-3">
@@ -874,10 +874,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         className="group w-full flex items-center justify-between gap-3 border border-[#C9A96E]/60 bg-gradient-to-r from-[#C9A96E]/15 to-[#C9A96E]/5 px-4 py-3 text-left transition-all hover:border-[#A07840]"
                       >
                         <span className="flex items-center gap-2.5 min-w-0">
-                          <Sparkles className="w-4 h-4 text-[#A07840] shrink-0" />
+                          <Sparkles className="w-4 h-4 text-[#8A6A35] shrink-0" />
                           <span className="flex flex-col min-w-0">
-                            <span className="text-[13px] font-bold text-[#A07840] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                            <span className="text-[11px] text-[#A07840]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                            <span className="text-[13px] font-bold text-[#8A6A35] leading-tight">Offre exceptionnelle — −10% immédiat</span>
+                            <span className="text-[11px] text-[#8A6A35]/80 leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
                           </span>
                         </span>
                         <span className="shrink-0 bg-[#A07840] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
@@ -907,31 +907,31 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 </div>
                 <div className="px-6 pt-4 pb-4 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">{bubbleSavings > 0 ? 'Prix d’origine' : 'Sous-total'}</span>
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-500">{bubbleSavings > 0 ? 'Prix d’origine' : 'Sous-total'}</span>
                     <span className="text-sm text-neutral-600 price-luxe">{formatPrice((bubbleSavings > 0 ? originalSubtotal : subtotal), cur)}</span>
                   </div>
                   {bubbleSavings > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Promotion −30%</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(bubbleSavings, cur)}</span>
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Promotion −30%</span>
+                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(bubbleSavings, cur)}</span>
                     </div>
                   )}
                   {packDiscount > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Remise Pack</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(packDiscount, cur)}</span>
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Remise Pack</span>
+                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(packDiscount, cur)}</span>
                     </div>
                   )}
                   {welcomeDiscount > 0 && (
                     <div className="flex items-center justify-between bg-neutral-50 border border-[#C9A96E]/40 px-3 py-2.5 -mx-1">
-                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#A07840]">Bienvenue −10%</span>
-                      <span className="text-lg font-bold text-[#A07840] price-luxe">−{formatPrice(welcomeDiscount, cur)}</span>
+                      <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8A6A35]">Bienvenue −10%</span>
+                      <span className="text-lg font-bold text-[#8A6A35] price-luxe">−{formatPrice(welcomeDiscount, cur)}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-400">Livraison</span>
+                    <span className="text-[11px] tracking-[0.2em] uppercase text-neutral-500">Livraison</span>
                     {shipping === 0 ? (
-                      <span className="text-sm text-emerald-600 font-medium">Offerte</span>
+                      <span className="text-sm text-emerald-700 font-medium">Offerte</span>
                     ) : (
                       <span className="text-sm text-neutral-600 price-luxe">{formatPrice(shipping, cur)}</span>
                     )}
@@ -942,10 +942,10 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                     <div className="pt-1">
                       {shipping > 0 ? (
                         <p className="text-[11px] text-neutral-500 mb-1.5">
-                          Plus que <span className="font-bold text-[#A07840]">{formatPrice(remainingForFreeShipping, cur)}</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
+                          Plus que <span className="font-bold text-[#8A6A35]">{formatPrice(remainingForFreeShipping, cur)}</span> pour la <span className="font-medium text-black">livraison offerte</span> 🚚
                         </p>
                       ) : (
-                        <p className="text-[11px] text-emerald-600 font-medium mb-1.5 flex items-center gap-1">
+                        <p className="text-[11px] text-emerald-700 font-medium mb-1.5 flex items-center gap-1">
                           <Check className="w-3.5 h-3.5" /> Bravo, vous bénéficiez de la livraison offerte !
                         </p>
                       )}
@@ -998,7 +998,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                   </button>
 
                   {/* Moyens de paiement disponibles sur la page sécurisée Stripe */}
-                  <p className="text-center text-[10px] tracking-wide text-neutral-400 mt-3">
+                  <p className="text-center text-[10px] tracking-wide text-neutral-500 mt-3">
                     Carte · Apple Pay · TWINT · PayPal · Klarna · Link
                   </p>
                 </div>
@@ -1053,7 +1053,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 )}
                 <button
                   onClick={() => setStep(step === 'payment' ? 'delivery' : 'cart')}
-                  className="w-full text-center text-xs text-neutral-400 hover:text-black transition-colors"
+                  className="w-full text-center text-xs text-neutral-500 hover:text-black transition-colors"
                 >
                   ← Retour
                 </button>

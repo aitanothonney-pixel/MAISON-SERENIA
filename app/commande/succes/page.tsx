@@ -31,7 +31,7 @@ export default function CommandeSuccesPage() {
         >
           <Check className="w-10 h-10 text-white" />
         </div>
-        <p className="text-[11px] tracking-[0.3em] uppercase text-[#A07840] mb-3">Paiement confirmé</p>
+        <p className="text-[11px] tracking-[0.3em] uppercase text-[#8A6A35] mb-3">Paiement confirmé</p>
         <h1 className="text-3xl font-serif text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
           Merci pour votre commande !
         </h1>

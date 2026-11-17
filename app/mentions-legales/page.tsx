@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/mentions-legales' },
   title: 'Mentions légales | MAISON SERENIA',
   description: "Mentions légales du site MAISON SERENIA : éditeur, hébergeur et informations réglementaires.",
 };
@@ -15,7 +16,7 @@ export default function MentionsLegalesPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -98,7 +99,7 @@ export default function MentionsLegalesPage() {
           </p>
         </Section>
 
-        <p className="text-xs text-neutral-400 pt-8 border-t border-neutral-100">
+        <p className="text-xs text-neutral-500 pt-8 border-t border-neutral-100">
           Dernière mise à jour : 24 juillet 2026
         </p>
       </div>

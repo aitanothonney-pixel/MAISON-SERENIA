@@ -20,7 +20,7 @@ export default function RetoursPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -107,7 +107,7 @@ export default function RetoursPage() {
           <div className="grid sm:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-dm-sans)' }}>
             <div>
               <h3 className="font-semibold text-black mb-3 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-600" /> Articles acceptés
+                <CheckCircle className="w-4 h-4 text-emerald-700" /> Articles acceptés
               </h3>
               <ul className="space-y-2 text-neutral-600 text-sm">
                 {[
@@ -142,7 +142,7 @@ export default function RetoursPage() {
               </ul>
             </div>
           </div>
-          <p className="mt-6 text-xs text-neutral-400" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+          <p className="mt-6 text-xs text-neutral-500" style={{ fontFamily: 'var(--font-dm-sans)' }}>
             Les frais de retour sont à la charge du client sauf en cas d&apos;erreur de notre part ou d&apos;article défectueux.
           </p>
         </section>
@@ -158,7 +158,7 @@ export default function RetoursPage() {
 
           {submitted ? (
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-10 text-center">
-              <CheckCircle className="w-10 h-10 text-emerald-600 mx-auto mb-4" />
+              <CheckCircle className="w-10 h-10 text-emerald-700 mx-auto mb-4" />
               <p
                 className="text-lg font-semibold text-black mb-2"
                 style={{ fontFamily: 'var(--font-playfair)' }}
@@ -203,7 +203,7 @@ export default function RetoursPage() {
                 <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
                   Motif du retour *
                 </label>
-                <select
+                <select aria-label="Motif du retour"
                   required
                   value={form.reason}
                   onChange={e => setForm(f => ({ ...f, reason: e.target.value }))}

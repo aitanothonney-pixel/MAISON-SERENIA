@@ -22,7 +22,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
     { text: 'Profitez du Black Friday', href: '/promotions' },
     { text: `Livraison offerte dès ${formatPrice(40, cur)} d'achat` },
     { text: 'Collection Bubble 2026 — Jusqu\'à −30%' },
-    { text: 'Paiement 100% sécurisé · SSL 256-bit' },
+    { text: 'Paiement sécurisé par Stripe' },
     { text: 'Livraison en 1 à 4 semaines · Suivi inclus' },
   ]
   const [visible, setVisible] = useState(false)

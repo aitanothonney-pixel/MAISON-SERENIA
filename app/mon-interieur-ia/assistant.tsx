@@ -181,12 +181,12 @@ export default function Assistant() {
       <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
         <div className="border-b border-neutral-100 bg-neutral-50">
           <div className="max-w-5xl mx-auto px-6 py-10">
-            <Link href="/" className="inline-block mb-6"><Logo color="black" size="sm" /></Link>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-[#A07840] mb-3 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Votre sélection</p>
+            <div className="mb-6"><Logo color="black" size="sm" /></div>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-[#8A6A35] mb-3 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Votre sélection</p>
             <h1 className="text-3xl md:text-5xl text-black mb-4" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>Voici notre sélection pour votre intérieur</h1>
             <p className="text-neutral-600 max-w-2xl leading-relaxed">{result.intro}</p>
             {!result.aiEnabled && (
-              <p className="mt-3 text-[12px] text-neutral-400">Sélection fondée sur votre brief et notre catalogue réel. Les explications personnalisées et le chat s&apos;activent une fois la clé IA configurée.</p>
+              <p className="mt-3 text-[12px] text-neutral-500">Sélection fondée sur votre brief et notre catalogue réel. Les explications personnalisées et le chat s&apos;activent une fois la clé IA configurée.</p>
             )}
           </div>
         </div>
@@ -201,7 +201,7 @@ export default function Assistant() {
 
           {result.recos.length > 0 && result.meta.noExactMatch && (
             <div className="border border-[#C9A96E]/50 bg-[#FBF8F2] px-6 py-5">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-[#A07840] mb-2">Pas de correspondance exacte</p>
+              <p className="text-[11px] uppercase tracking-[0.25em] text-[#8A6A35] mb-2">Pas de correspondance exacte</p>
               <p className="text-neutral-700 leading-relaxed text-sm">
                 Désolé, nous n&apos;avons pas exactement ce produit dans notre catalogue pour ces critères.
                 Voici nos suggestions les plus proches, que nous vous conseillons volontiers.
@@ -220,7 +220,7 @@ export default function Assistant() {
                 <div className="min-w-0">
                   <div className="flex items-start justify-between gap-4 mb-1">
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-neutral-400">{r.category}</p>
+                      <p className="text-[10px] uppercase tracking-widest text-neutral-500">{r.category}</p>
                       <h3 className="text-xl text-black" style={{ fontFamily: 'var(--font-playfair)' }}>{r.name}</h3>
                     </div>
                     <p className="text-lg font-bold text-black shrink-0 price-luxe">{formatPrice(r.priceChf, cur)}</p>
@@ -261,7 +261,7 @@ export default function Assistant() {
 
           {/* Conversation */}
           <div className="border-t border-neutral-100 pt-8">
-            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-playfair)' }}><Wand2 className="w-5 h-5 text-[#A07840]" /> Affiner avec l&apos;assistant</h2>
+            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-playfair)' }}><Wand2 className="w-5 h-5 text-[#8A6A35]" /> Affiner avec l&apos;assistant</h2>
             {chatMsgs.length > 0 && (
               <div className="space-y-3 mb-4">
                 {chatMsgs.map((m, i) => (
@@ -276,7 +276,7 @@ export default function Assistant() {
                 className="flex-1 border border-neutral-300 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors" />
               <button onClick={sendChat} disabled={!chatInput.trim() || chatLoading} className="bg-black text-white px-5 flex items-center justify-center hover:bg-neutral-800 transition-colors disabled:opacity-40"><Send className="w-4 h-4" /></button>
             </div>
-            <button onClick={() => { setResult(null); setChatMsgs([]); setStepIdx(0); }} className="mt-6 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">← Recommencer un projet</button>
+            <button onClick={() => { setResult(null); setChatMsgs([]); setStepIdx(0); }} className="mt-6 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">← Recommencer un projet</button>
           </div>
         </div>
       </main>
@@ -295,8 +295,8 @@ export default function Assistant() {
       <div className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-neutral-100">
         <div className="max-w-3xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-2">
-            <Link href="/"><Logo color="black" size="sm" /></Link>
-            <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-400">Étape {stepIdx + 1} / {flow.length}</span>
+            <Logo color="black" size="sm" />
+            <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">Étape {stepIdx + 1} / {flow.length}</span>
           </div>
           <div className="h-1 bg-neutral-100 overflow-hidden rounded-full">
             <motion.div className="h-full bg-[#C9A96E]" animate={{ width: `${progress}%` }} transition={{ duration: 0.3 }} />
@@ -310,7 +310,7 @@ export default function Assistant() {
 
             {current === 'room' && (
               <>
-                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Quelle pièce souhaitez-vous aménager ?</h2>
+                <h1 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Quelle pièce souhaitez-vous aménager ?</h1>
                 <p className="text-neutral-500 mb-8">Sélectionnez un espace pour commencer.</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {ROOMS.map((r) => {
@@ -318,7 +318,7 @@ export default function Assistant() {
                     return (
                       <button key={r.key} onClick={() => { set({ room: r.key, intent: undefined, decoType: undefined }); gaEvent('ia_select_room', { room: r.key }); }}
                         className={`flex flex-col items-center gap-3 border p-6 transition-all ${active ? 'border-black bg-neutral-50 shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}>
-                        <Icon className={`w-7 h-7 ${active ? 'text-[#A07840]' : 'text-neutral-700'}`} strokeWidth={1.4} />
+                        <Icon className={`w-7 h-7 ${active ? 'text-[#8A6A35]' : 'text-neutral-700'}`} strokeWidth={1.4} />
                         <span className="text-sm font-medium text-black">{r.label}</span>
                       </button>
                     );
@@ -339,7 +339,7 @@ export default function Assistant() {
                       <button key={o.value} onClick={() => set(brief.room === 'decoration' ? { decoType: o.value } : { intent: o.value })}
                         className={`w-full flex items-center justify-between border px-5 py-4 text-left transition-all ${active ? 'border-black bg-neutral-50' : 'border-neutral-200 hover:border-neutral-400'}`}>
                         <span className="text-sm text-black">{o.label}</span>
-                        {active && <Check className="w-4 h-4 text-[#A07840]" />}
+                        {active && <Check className="w-4 h-4 text-[#8A6A35]" />}
                       </button>
                     );
                   })}
@@ -354,14 +354,14 @@ export default function Assistant() {
                 <textarea value={brief.description || ''} onChange={(e) => set({ description: e.target.value })} rows={5}
                   placeholder="Mon salon fait environ 25 m². J'ai un mur de 3 mètres de largeur. Je souhaite un canapé design, quelques éléments de décoration et une ambiance moderne, chaleureuse et minimaliste."
                   className="w-full border border-neutral-300 px-4 py-3 text-sm leading-relaxed focus:outline-none focus:border-black transition-colors resize-none" />
-                <p className="text-[11px] uppercase tracking-widest text-neutral-400 mt-8 mb-3">Dimensions (facultatif)</p>
+                <p className="text-[11px] uppercase tracking-widest text-neutral-500 mt-8 mb-3">Dimensions (facultatif)</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {([
                     ['length', 'Longueur pièce (m)'], ['width', 'Largeur pièce (m)'], ['height', 'Hauteur plafond (m)'],
                     ['maxWidth', 'Largeur max meuble (cm)'], ['maxDepth', 'Profondeur max (cm)'],
                   ] as [keyof Dims, string][]).map(([k, label]) => (
                     <div key={k}>
-                      <label className="text-[11px] text-neutral-400 block mb-1">{label}</label>
+                      <label className="text-[11px] text-neutral-500 block mb-1">{label}</label>
                       <input type="number" min="0" inputMode="decimal" value={brief.dims[k] ?? ''}
                         onChange={(e) => set({ dims: { ...brief.dims, [k]: e.target.value ? Number(e.target.value) : undefined } })}
                         className="w-full border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:border-black transition-colors" />
@@ -384,7 +384,7 @@ export default function Assistant() {
                     );
                   })}
                 </div>
-                <p className="text-[11px] uppercase tracking-widest text-neutral-400 mb-3">Couleurs souhaitées</p>
+                <p className="text-[11px] uppercase tracking-widest text-neutral-500 mb-3">Couleurs souhaitées</p>
                 <div className="flex flex-wrap gap-3">
                   {COLORS.map((c) => {
                     const active = brief.colors.includes(c.name);

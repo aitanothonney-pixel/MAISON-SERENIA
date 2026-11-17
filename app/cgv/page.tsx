@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ScrollText } from 'lucide-react';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/cgv' },
   title: 'Conditions Générales de Vente | MAISON SERENIA',
   description: "Conditions générales de vente applicables aux commandes passées sur MAISON SERENIA.",
 };
@@ -15,7 +16,7 @@ export default function CGVPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -129,7 +130,7 @@ export default function CGVPage() {
           </p>
         </Section>
 
-        <p className="text-xs text-neutral-400 pt-8 border-t border-neutral-100">
+        <p className="text-xs text-neutral-500 pt-8 border-t border-neutral-100">
           Dernière mise à jour : 7 août 2026
         </p>
       </div>

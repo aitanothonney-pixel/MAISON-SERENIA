@@ -11,6 +11,7 @@ export const WELCOME_CODE = 'MAISON SERENIA 10%';
 export function WelcomePopup() {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState('');
+  const [consent, setConsent] = useState(false);
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -46,7 +47,7 @@ export function WelcomePopup() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    if (!consent || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
     try {
       localStorage.setItem('welcome-email', email);
       localStorage.setItem('welcome-discount', WELCOME_CODE);
@@ -94,7 +95,7 @@ export function WelcomePopup() {
 
             <button
               onClick={close}
-              className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors z-10"
+              className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center text-neutral-500 hover:text-black transition-colors z-10"
               aria-label="Fermer"
             >
               <X className="w-5 h-5" strokeWidth={1.5} />
@@ -123,16 +124,21 @@ export function WelcomePopup() {
                     placeholder="votre@email.com"
                     className="w-full border border-neutral-300 px-4 py-3.5 text-sm text-center outline-none focus:border-[#C9A96E] transition-colors"
                   />
+                  <label className="flex items-start gap-3 text-left text-[11px] leading-relaxed text-neutral-600 cursor-pointer mb-4">
+                    <input type="checkbox" required checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 w-4 h-4 accent-black shrink-0" />
+                    <span>J’accepte de recevoir les emails de Maison Serenia (offres et nouveautés). Désinscription possible à tout moment. Lire la <a href="/confidentialite" className="underline underline-offset-2 hover:text-black">politique de confidentialité</a>.</span>
+                  </label>
                   <button
                     type="submit"
-                    className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-transform hover:scale-[1.01]"
+                    disabled={!consent}
+                    className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-transform hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                     style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)' }}
                   >
                     Je profite des −10%
                   </button>
                 </form>
 
-                <button onClick={close} className="mt-4 text-[11px] text-neutral-400 hover:text-black transition-colors underline underline-offset-2">
+                <button onClick={close} className="mt-4 text-[11px] text-neutral-500 hover:text-black transition-colors underline underline-offset-2">
                   Non merci, je paie plein tarif
                 </button>
               </div>
@@ -148,7 +154,7 @@ export function WelcomePopup() {
                   <Check className="w-7 h-7 text-white" strokeWidth={1.6} />
                 </motion.div>
 
-                <p className="text-[10px] tracking-[0.35em] uppercase text-[#A07840] mb-3">Offre activée</p>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-[#8A6A35] mb-3">Offre activée</p>
                 <h2 className="text-[26px] leading-tight font-serif text-black mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
                   Bienvenue chez<br />Maison Serenia
                 </h2>
@@ -162,7 +168,7 @@ export function WelcomePopup() {
                   <div className="relative border border-[#C9A96E]/50 px-5 py-5">
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <span className="h-px w-6 bg-[#C9A96E]/50" />
-                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#A07840]">−10 % · Votre code</span>
+                      <span className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35]">−10 % · Votre code</span>
                       <span className="h-px w-6 bg-[#C9A96E]/50" />
                     </div>
                     <p className="text-xl font-semibold tracking-[0.22em] text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>

@@ -54,7 +54,7 @@ export default function AdminGate({ active, children }: { active: 'commandes' | 
   if (status === 'loading') {
     return (
       <main className="min-h-screen bg-neutral-50 flex items-center justify-center">
-        <p className="text-sm text-neutral-400">Chargement…</p>
+        <p className="text-sm text-neutral-500">Chargement…</p>
       </main>
     );
   }
@@ -108,7 +108,7 @@ export default function AdminGate({ active, children }: { active: 'commandes' | 
             {tab('/gestion/commandes', 'Commandes', Package, 'commandes')}
             {tab('/gestion/stock', 'Stock', Boxes, 'stock')}
           </div>
-          <button onClick={logout} className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">
+          <button onClick={logout} className="flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-neutral-500 hover:text-black transition-colors">
             <LogOut className="w-3.5 h-3.5" /> Déconnexion
           </button>
         </div>

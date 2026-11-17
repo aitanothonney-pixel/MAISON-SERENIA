@@ -26,7 +26,7 @@ const FAQ_DATA: FaqGroup[] = [
       },
       {
         q: 'Livrez-vous en dehors de la France ?',
-        a: "Nous livrons en Suisse et dans l'ensemble de l'Union Européenne. Comptez 1 à 4 semaines selon le pays de destination.",
+        a: "Nous livrons en Suisse, en France, en Allemagne, en Italie, en Autriche, en Belgique et au Luxembourg. Comptez 1 à 4 semaines selon le pays de destination.",
       },
     ],
   },
@@ -48,7 +48,7 @@ const FAQ_DATA: FaqGroup[] = [
     items: [
       {
         q: 'Quels moyens de paiement acceptez-vous ?',
-        a: 'Nous acceptons les cartes Visa, Mastercard, American Express, ainsi que le paiement via PayPal. Tous les paiements sont sécurisés par chiffrement SSL.',
+        a: 'Nous acceptons les cartes Visa, Mastercard, American Express, ainsi que le paiement via PayPal. Tous les paiements sont traités de manière sécurisée par Stripe.',
       },
       {
         q: 'Mes données bancaires sont-elles sécurisées ?',
@@ -110,7 +110,7 @@ function FaqAccordion({ item, isOpen, onToggle }: { item: FaqItem; isOpen: boole
           transition={{ duration: 0.2, ease: 'easeInOut' }}
           className="flex-shrink-0 mt-0.5"
         >
-          <ChevronDown className="w-4 h-4 text-neutral-400" />
+          <ChevronDown className="w-4 h-4 text-neutral-500" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
@@ -164,7 +164,7 @@ export default function FaqPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -186,7 +186,7 @@ export default function FaqPage() {
           <section key={group.theme}>
             <div className="flex items-center gap-4 mb-6">
               <h2
-                className="text-xs uppercase tracking-[0.3em] font-semibold text-neutral-400"
+                className="text-xs uppercase tracking-[0.3em] font-semibold text-neutral-500"
                 style={{ fontFamily: 'var(--font-dm-sans)' }}
               >
                 {group.theme}

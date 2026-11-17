@@ -130,16 +130,16 @@ function OrdersPanel() {
           <div key={o.id} className="bg-white border border-neutral-200 rounded-lg p-5">
             <div className="flex items-start justify-between gap-3 mb-4">
               <div>
-                <p className="text-[11px] uppercase tracking-widest text-neutral-400">{o.order_ref} · {fmtDate(o.created_at)}</p>
+                <p className="text-[11px] uppercase tracking-widest text-neutral-500">{o.order_ref} · {fmtDate(o.created_at)}</p>
                 <p className="text-lg font-bold mt-0.5">{money(o.amount_total_cents, o.currency)}</p>
               </div>
-              <span className="text-[10px] uppercase tracking-widest bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full font-semibold">
+              <span className="text-[10px] uppercase tracking-widest bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-semibold">
                 {o.payment_status === 'paid' ? 'Payée' : o.payment_status}
               </span>
             </div>
 
             <div className="border-t border-neutral-100 pt-3 mb-3">
-              <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">Articles</p>
+              <p className="text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Articles</p>
               <ul className="space-y-1">
                 {o.items.map((it, i) => (
                   <li key={i} className="flex justify-between text-sm">
@@ -172,8 +172,8 @@ function OrdersPanel() {
             {o.editable ? (
               <div className="border-t border-neutral-100 pt-3 mt-3 grid sm:grid-cols-[auto_1fr_1fr_auto] gap-2 items-end">
                 <label className="text-xs">
-                  <span className="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Statut</span>
-                  <select
+                  <span className="block text-[10px] uppercase tracking-widest text-neutral-500 mb-1">Statut</span>
+                  <select aria-label="Filtrer les commandes"
                     value={o.fulfillment_status || 'to_prepare'}
                     onChange={(e) => patch(o.id, { fulfillment_status: e.target.value })}
                     className="border border-neutral-200 px-2 py-1.5 text-sm focus:outline-none focus:border-black"
@@ -182,11 +182,11 @@ function OrdersPanel() {
                   </select>
                 </label>
                 <label className="text-xs">
-                  <span className="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Transporteur</span>
+                  <span className="block text-[10px] uppercase tracking-widest text-neutral-500 mb-1">Transporteur</span>
                   <input value={o.carrier || ''} onChange={(e) => patch(o.id, { carrier: e.target.value })} placeholder="La Poste, DHL…" className="w-full border border-neutral-200 px-2 py-1.5 text-sm focus:outline-none focus:border-black" />
                 </label>
                 <label className="text-xs">
-                  <span className="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">N° de suivi</span>
+                  <span className="block text-[10px] uppercase tracking-widest text-neutral-500 mb-1">N° de suivi</span>
                   <input value={o.tracking_number || ''} onChange={(e) => patch(o.id, { tracking_number: e.target.value })} placeholder="Numéro" className="w-full border border-neutral-200 px-2 py-1.5 text-sm focus:outline-none focus:border-black" />
                 </label>
                 <button onClick={() => save(o)} disabled={savingId === o.id} className="flex items-center justify-center gap-1.5 bg-black text-white px-3 py-2 text-[11px] font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-colors disabled:opacity-50">
@@ -194,7 +194,7 @@ function OrdersPanel() {
                 </button>
               </div>
             ) : (
-              <p className="border-t border-neutral-100 pt-3 mt-3 text-[11px] text-neutral-400">
+              <p className="border-t border-neutral-100 pt-3 mt-3 text-[11px] text-neutral-500">
                 Gestion des statuts disponible une fois Supabase activé.
               </p>
             )}

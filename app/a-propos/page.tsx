@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Star, Heart, Leaf, Award, Quote } from 'lucide-react';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/a-propos' },
   title: 'Notre Histoire | MAISON SERENIA',
   description:
     "L'histoire de MAISON SERENIA, maison de design fondée à Genève : une sélection de mobilier sculptural et de pièces d'exception, pour composer un intérieur serein et plein de caractère.",
@@ -16,7 +17,7 @@ export default function AProposPage() {
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-white transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-white transition-colors mb-10"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -39,7 +40,7 @@ export default function AProposPage() {
 
         {/* ─── Le récit ──────────────────────────────────────────────────── */}
         <section className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#A07840]">Notre histoire</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35]">Notre histoire</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
             Tout commence à Genève
           </h2>
@@ -71,7 +72,7 @@ export default function AProposPage() {
         {/* ─── La signature : Bubble ─────────────────────────────────────── */}
         <section className="grid md:grid-cols-2 gap-10 md:gap-14 items-center border-t border-neutral-100 pt-20">
           <div className="space-y-5">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#A07840]">Notre signature</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35]">Notre signature</p>
             <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
               La collection Bubble
             </h2>
@@ -97,7 +98,7 @@ export default function AProposPage() {
         {/* ─── Valeurs ───────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-100 pt-20">
           <div className="text-center mb-12">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#A07840] mb-3">Ce qui nous guide</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[#8A6A35] mb-3">Ce qui nous guide</p>
             <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
               Nos valeurs
             </h2>

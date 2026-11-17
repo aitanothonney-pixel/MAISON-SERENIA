@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
+import { MotionProvider } from '@/components/ui/motion-provider'
 import { BrevoTracker } from '@/components/ui/brevo-tracker'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
 import Script from 'next/script'
@@ -94,10 +95,24 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Maison Serenia',
+              url: 'https://maison-serenia.com',
+              inLanguage: 'fr-CH',
+            }),
+          }}
+        />
+        <MotionProvider>
         <CurrencyProvider value={currency}>
           <AnnouncementBar>{children}</AnnouncementBar>
           <WelcomePopup />
         </CurrencyProvider>
+        </MotionProvider>
         <BrevoTracker />
         {GA_ID && (
           <>

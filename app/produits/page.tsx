@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 
 export const metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/produits' },
   title: 'Tous nos produits | Maison Serenia',
   description: "Découvrez l'intégralité du catalogue Maison Serenia : mobilier Bubble, tableaux d'art et décoration.",
 };
@@ -30,11 +31,11 @@ export default function ProduitsPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">Catalogue complet</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-3">Catalogue complet</p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             Tous nos produits
           </h1>
@@ -42,7 +43,7 @@ export default function ProduitsPage() {
           <p className="text-neutral-500 max-w-xl leading-relaxed">
             L&apos;intégralité de nos collections : mobilier Bubble, pièces de collection et accessoires.
           </p>
-          <p className="text-xs text-neutral-400 mt-4">{items.length} produits</p>
+          <p className="text-xs text-neutral-500 mt-4">{items.length} produits</p>
         </div>
       </section>
 
@@ -71,7 +72,7 @@ export default function ProduitsPage() {
                 </div>
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400">{product.category}</p>
+                    <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
                   </div>
                   <h2 className="font-serif font-semibold text-black text-sm leading-snug group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
                     {product.name}
@@ -80,7 +81,7 @@ export default function ProduitsPage() {
                   <div className="flex items-baseline gap-2">
                     <span className="text-sm font-semibold text-black"><Price value={promoPrice} /></span>
                     {isBubble && (
-                      <span className="text-xs text-neutral-400 line-through"><Price value={product.price} /></span>
+                      <span className="text-xs text-neutral-500 line-through"><Price value={product.price} /></span>
                     )}
                   </div>
                 </div>

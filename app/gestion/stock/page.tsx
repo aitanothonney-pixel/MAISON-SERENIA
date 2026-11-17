@@ -123,7 +123,7 @@ function StockPanel() {
           <div key={v.id} className="p-4 grid grid-cols-1 sm:grid-cols-[1fr_auto_auto_auto_auto] gap-3 items-center">
             <div className="min-w-0">
               <p className="text-sm font-medium truncate">{v.product_name}</p>
-              <p className="text-[11px] text-neutral-400">
+              <p className="text-[11px] text-neutral-500">
                 {v.option_label && v.option_label !== 'Default' ? `${v.option_label} · ` : ''}{v.sku} · {money(v.price_cents)}
               </p>
             </div>
@@ -132,7 +132,7 @@ function StockPanel() {
               <span className="block">dispo {v.available}</span>
             </div>
             <label className="text-xs">
-              <span className="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Stock</span>
+              <span className="block text-[10px] uppercase tracking-widest text-neutral-500 mb-1">Stock</span>
               <input
                 type="number"
                 min={0}
@@ -159,7 +159,7 @@ function StockPanel() {
         )}
       </div>
 
-      <p className="text-[11px] text-neutral-400 mt-3">
+      <p className="text-[11px] text-neutral-500 mt-3">
         « Géré » = la variante est suivie en stock (vente bloquée si rupture). Décochez pour vendre sans limite.
       </p>
     </>

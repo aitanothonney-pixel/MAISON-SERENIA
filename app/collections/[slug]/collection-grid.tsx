@@ -111,7 +111,7 @@ export function CollectionGrid({ items }: { items: Product[] }) {
               key={r}
               onClick={() => selectRange(r)}
               className={`text-[12px] tracking-[0.15em] uppercase whitespace-nowrap pb-3 -mb-px border-b-2 transition-colors ${
-                active === r ? 'text-black border-black' : 'text-neutral-400 border-transparent hover:text-black'
+                active === r ? 'text-black border-black' : 'text-neutral-500 border-transparent hover:text-black'
               }`}
             >
               {r}
@@ -125,11 +125,11 @@ export function CollectionGrid({ items }: { items: Product[] }) {
         {/* Fourchette de prix */}
         <div className="w-full md:max-w-sm">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">Fourchette de prix</span>
+            <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-500">Fourchette de prix</span>
             {rangeActive && (
               <button
                 onClick={() => { setMinPrice(minBound); setMaxPrice(maxBound); }}
-                className="text-[10px] tracking-[0.15em] uppercase text-neutral-400 hover:text-black transition-colors"
+                className="text-[10px] tracking-[0.15em] uppercase text-neutral-500 hover:text-black transition-colors"
               >
                 Réinitialiser
               </button>
@@ -164,8 +164,8 @@ export function CollectionGrid({ items }: { items: Product[] }) {
 
         {/* Tri */}
         <div className="md:text-right">
-          <label className="block text-[10px] tracking-[0.25em] uppercase text-neutral-400 mb-2">Trier par</label>
-          <select
+          <label className="block text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-2">Trier par</label>
+          <select aria-label="Trier par"
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as SortKey)}
             className="border border-neutral-300 bg-white text-sm text-black px-4 py-2.5 pr-8 focus:outline-none focus:border-black transition-colors cursor-pointer"
@@ -217,7 +217,7 @@ export function CollectionGrid({ items }: { items: Product[] }) {
                   </button>
                 )}
               </div>
-              <span className="text-[11px] tracking-wide text-neutral-400">
+              <span className="text-[11px] tracking-wide text-neutral-500">
                 {displayed.length} sur {filtered.length} produits
               </span>
             </div>

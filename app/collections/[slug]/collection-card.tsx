@@ -29,7 +29,7 @@ export function CollectionCard({ product }: { product: Product }) {
         <div
           ref={scrollRef}
           onScroll={onScroll}
-          className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          tabIndex={0} role="region" aria-label="Photos du produit" className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: 'none' }}
         >
           {product.images.map((img, i) => (
@@ -67,7 +67,7 @@ export function CollectionCard({ product }: { product: Product }) {
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between mb-1">
-          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-400">{product.category}</p>
+          <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500">{product.category}</p>
         </div>
         <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
           {product.name}
@@ -75,7 +75,7 @@ export function CollectionCard({ product }: { product: Product }) {
         <div className="flex items-baseline gap-2 mt-1.5">
           <span className="text-sm font-semibold text-black">{formatPrice(promoPrice, cur)}</span>
           {isBubble && (
-            <span className="text-xs text-neutral-400 line-through">{formatPrice(product.price, cur)}</span>
+            <span className="text-xs text-neutral-500 line-through">{formatPrice(product.price, cur)}</span>
           )}
         </div>
       </div>

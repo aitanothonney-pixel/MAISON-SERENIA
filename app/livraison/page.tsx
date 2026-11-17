@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Truck, Package, Phone, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://maison-serenia.com/livraison' },
   title: 'Livraison & Délais | MAISON SERENIA',
   description: 'Informations sur nos modes de livraison, délais et suivi de commande.',
 };
@@ -15,7 +16,7 @@ export default function LivraisonPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -105,7 +106,7 @@ export default function LivraisonPage() {
                   {
                     icon: <MapPin className="w-4 h-4" />,
                     title: 'Zone de livraison',
-                    desc: 'Suisse et Union Européenne. Délai : 1 à 4 semaines selon disponibilité.',
+                    desc: 'Suisse, France, Allemagne, Italie, Autriche, Belgique et Luxembourg. Délai : 1 à 4 semaines selon disponibilité.',
                   },
                 ].map((card, i) => (
                   <div

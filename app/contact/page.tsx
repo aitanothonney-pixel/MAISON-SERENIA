@@ -57,7 +57,7 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-400 hover:text-black transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
           >
             ← Retour à l&apos;accueil
           </Link>
@@ -92,7 +92,7 @@ export default function ContactPage() {
 
             {submitted ? (
               <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-10 text-center">
-                <CheckCircle className="w-10 h-10 text-emerald-600 mx-auto mb-4" />
+                <CheckCircle className="w-10 h-10 text-emerald-700 mx-auto mb-4" />
                 <p
                   className="text-lg font-semibold text-black mb-2"
                   style={{ fontFamily: 'var(--font-playfair)' }}
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
                     Sujet *
                   </label>
-                  <select
+                  <select aria-label="Sujet de votre message"
                     required
                     value={form.sujet}
                     onChange={e => setForm(f => ({ ...f, sujet: e.target.value }))}
@@ -195,7 +195,7 @@ export default function ContactPage() {
                     >
                       <span className="font-semibold text-black text-sm">{item.q}</span>
                       <ChevronDown
-                        className="w-4 h-4 text-neutral-400 flex-shrink-0 transition-transform duration-200"
+                        className="w-4 h-4 text-neutral-500 flex-shrink-0 transition-transform duration-200"
                         style={{ transform: openFaq === i ? "rotate(180deg)" : "rotate(0deg)" }}
                       />
                     </button>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                     <Mail className="w-3.5 h-3.5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">E-mail</p>
+                    <p className="text-xs uppercase tracking-widest text-neutral-500 mb-1">E-mail</p>
                     <a
                       href="mailto:maisonserenia@gmail.com"
                       className="text-black text-sm hover:underline"
@@ -239,7 +239,7 @@ export default function ContactPage() {
                     <Clock className="w-3.5 h-3.5 text-black" />
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">Délai de réponse</p>
+                    <p className="text-xs uppercase tracking-widest text-neutral-500 mb-1">Délai de réponse</p>
                     <p className="text-black text-sm font-semibold">48 heures ouvrées</p>
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function ContactPage() {
                     <MessageCircle className="w-3.5 h-3.5 text-black" />
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-neutral-400 mb-1">Langues</p>
+                    <p className="text-xs uppercase tracking-widest text-neutral-500 mb-1">Langues</p>
                     <p className="text-black text-sm">Français · English</p>
                   </div>
                 </div>
@@ -265,12 +265,12 @@ export default function ContactPage() {
               <p className="text-neutral-400 text-xs leading-relaxed">
                 Lundi – Vendredi<br />
                 9h00 – 18h00<br />
-                <span className="text-neutral-500">(Heure de Genève)</span>
+                <span className="text-neutral-400">(Heure de Genève)</span>
               </p>
             </div>
 
             <div className="border border-neutral-200 p-5">
-              <p className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Consultez aussi</p>
+              <p className="text-xs uppercase tracking-widest text-neutral-500 mb-2">Consultez aussi</p>
               <div className="space-y-2">
                 <Link href="/faq" className="block text-black text-sm hover:underline">→ FAQ complète</Link>
                 <Link href="/livraison" className="block text-black text-sm hover:underline">→ Livraison & Délais</Link>

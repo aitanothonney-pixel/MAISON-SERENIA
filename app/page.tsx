@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState, useRef, useMemo } from 'react';
+import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
+import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
@@ -11,7 +13,8 @@ import {
   CreditCard, ChevronDown, User, Award, Star, Sparkles,
 } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
-import { TestimonialsColumn } from '@/components/ui/testimonials-columns-1';
+import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
+import { VERIFIED_TESTIMONIALS } from '@/lib/testimonials';
 import { motion as motionLib } from 'motion/react';
 import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
@@ -231,17 +234,17 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
               {/* RECHERCHE */}
               <div className="px-6 py-5 border-b border-neutral-100">
                 <div className="flex items-center gap-2 border border-neutral-200 rounded-lg px-3 py-3 focus-within:border-[#C9A96E] transition-colors">
-                  <Search className="w-4 h-4 text-neutral-400 shrink-0" />
+                  <Search className="w-4 h-4 text-neutral-500 shrink-0" />
                   <input
                     type="text"
                     value={menuQ}
                     onChange={(e) => setMenuQ(e.target.value)}
                     placeholder="Rechercher un produit…"
-                    className="w-full text-sm outline-none bg-transparent text-black placeholder:text-neutral-400"
+                    className="w-full text-sm outline-none bg-transparent text-black placeholder:text-neutral-500"
                   />
                   {menuQ && (
                     <button onClick={() => setMenuQ('')} aria-label="Effacer">
-                      <X className="w-3.5 h-3.5 text-neutral-400" />
+                      <X className="w-3.5 h-3.5 text-neutral-500" />
                     </button>
                   )}
                 </div>
@@ -261,7 +264,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate">{p.name}</p>
-                            <p className="text-[10px] text-neutral-400">{p.category}</p>
+                            <p className="text-[10px] text-neutral-500">{p.category}</p>
                           </div>
                           <p className="text-sm font-bold text-black shrink-0">{formatPrice(promo, cur)}</p>
                         </Link>
@@ -270,7 +273,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                   </div>
                 )}
                 {menuQ.trim().length >= 1 && menuMatches.length === 0 && (
-                  <p className="text-xs text-neutral-400 mt-3">Aucun produit trouvé.</p>
+                  <p className="text-xs text-neutral-500 mt-3">Aucun produit trouvé.</p>
                 )}
               </div>
               {/* ACCUEIL */}
@@ -287,7 +290,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Accueil
                     </p>
-                    <p className="text-xs text-neutral-400 mt-0.5">Retour à la page principale</p>
+                    <p className="text-xs text-neutral-500 mt-0.5">Retour à la page principale</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
                 </Link>
@@ -307,7 +310,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Notre Histoire
                     </p>
-                    <p className="text-xs text-neutral-400 mt-0.5">L&apos;esprit MAISON SERENIA</p>
+                    <p className="text-xs text-neutral-500 mt-0.5">L&apos;esprit MAISON SERENIA</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
                 </Link>
@@ -323,7 +326,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                       Mon Intérieur IA
                     </p>
-                    <p className="text-xs text-neutral-400 mt-0.5">Votre conseiller déco personnalisé</p>
+                    <p className="text-xs text-neutral-500 mt-0.5">Votre conseiller déco personnalisé</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-colors shrink-0" />
                 </Link>
@@ -331,7 +334,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
               {/* NOS COLLECTIONS */}
               <div className="px-6 py-6 border-b border-neutral-100">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Nos collections</p>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500 mb-4">Nos collections</p>
                 <div className="flex flex-col gap-1">
                   {collections.map((c) => (
                     <Link
@@ -353,9 +356,9 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-serif text-base font-semibold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
-                        <p className="text-xs text-neutral-400 mt-0.5">{c.desc}</p>
+                        <p className="text-xs text-neutral-500 mt-0.5">{c.desc}</p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#A07840] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                      <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#8A6A35] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -386,7 +389,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
               {/* AIDE & SERVICES */}
               <div className="px-6 py-6 border-b border-neutral-100">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Aide &amp; Services</p>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500 mb-4">Aide &amp; Services</p>
                 <div className="flex flex-col">
                   {services.map((s) => (
                     <Link
@@ -403,7 +406,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
               {/* INFORMATIONS */}
               <div className="px-6 py-6">
-                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-400 mb-4">Informations</p>
+                <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500 mb-4">Informations</p>
                 <div className="flex flex-col">
                   {informations.map((s) => (
                     <Link
@@ -425,7 +428,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                 <span aria-hidden>🚚</span>
                 <span>Livraison offerte dès {formatPrice(40, cur)} · Suisse</span>
               </p>
-              <p className="text-[11px] text-neutral-400 mt-1.5">© 2026 Maison Serenia</p>
+              <p className="text-[11px] text-neutral-500 mt-1.5">© 2026 Maison Serenia</p>
             </div>
           </motion.aside>
         </>
@@ -532,12 +535,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
       <div className="bg-[#f4f2ee] border-b border-neutral-200">
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-9 flex items-center justify-between text-[12px] text-neutral-700" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
           <div className="hidden md:flex items-center gap-6 lg:gap-10">
-            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Livraison offerte</span>
-            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Qualité vérifiée</span>
-            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Paiement facile</span>
-            <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Très bien noté</span>
+            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Qualité vérifiée</span>
+            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Paiement facile</span>
+            <span className="flex items-center gap-2"><Award className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Très bien noté</span>
           </div>
-          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
+          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
           <div className="relative">
             <button
               onClick={() => setLangOpen((o) => !o)}
@@ -556,7 +559,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                       onClick={() => chooseLang(o.c)}
                       className={`w-full text-left px-4 py-2 text-[13px] hover:bg-neutral-50 transition-colors flex items-center justify-between ${o.c === lang ? 'text-black font-semibold' : 'text-neutral-600'}`}
                     >
-                      {o.n} <span className="text-[11px] text-neutral-400">{o.c}</span>
+                      {o.n} <span className="text-[11px] text-neutral-500">{o.c}</span>
                     </button>
                   ))}
                 </div>
@@ -568,11 +571,12 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
       {/* Row 2 — logo + recherche + icônes + Trustpilot */}
       <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-[70px] flex items-center gap-4 lg:gap-8">
-        <Link
-          href="/"
-          onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+        <Logo
+          color="black"
+          size="md"
           className="shrink-0"
-        ><Logo color="black" size="md" /></Link>
+          onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+        />
 
         {/* Recherche — barre complète sur desktop uniquement */}
         <button
@@ -580,7 +584,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
           className="hidden md:flex flex-1 max-w-2xl items-stretch h-11 border border-neutral-300 hover:border-neutral-400 transition-colors group"
           aria-label="Rechercher"
         >
-          <span className="flex-1 flex items-center px-4 text-left text-sm text-neutral-400" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
+          <span className="flex-1 flex items-center px-4 text-left text-sm text-neutral-500" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
           <span className="w-12 bg-black flex items-center justify-center group-hover:bg-neutral-800 transition-colors">
             <Search className="w-4 h-4 text-white" />
           </span>
@@ -683,7 +687,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               </div>
               <button
                 onClick={() => { setSearchFocused(false); setSearchQ(''); }}
-                className="w-9 h-9 flex items-center justify-center text-neutral-400 hover:text-black transition-colors justify-self-end"
+                className="w-9 h-9 flex items-center justify-center text-neutral-500 hover:text-black transition-colors justify-self-end"
                 aria-label="Fermer la recherche"
               >
                 <X className="w-5 h-5" strokeWidth={1.5} />
@@ -707,7 +711,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
               {searchQ ? (
                 <button
                   onClick={() => setSearchQ('')}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-black transition-colors"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-neutral-500 hover:text-black transition-colors"
                   aria-label="Effacer"
                 >
                   <X className="w-6 h-6" strokeWidth={1.5} />
@@ -716,7 +720,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 <Search className="absolute right-0 top-1/2 -translate-y-1/2 w-7 h-7 text-neutral-300 pointer-events-none" strokeWidth={1.5} />
               )}
             </div>
-            <p className="text-[11px] text-neutral-400 mb-12">Appuyez sur <span className="font-medium text-neutral-500">Échap</span> ou « Retour » pour revenir à la boutique.</p>
+            <p className="text-[11px] text-neutral-500 mb-12">Appuyez sur <span className="font-medium text-neutral-500">Échap</span> ou « Retour » pour revenir à la boutique.</p>
 
             {/* ── Idle state (no query) ── */}
             {!searchQ && (
@@ -725,10 +729,10 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 {recentSearches.length > 0 && (
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-400">
+                      <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-500">
                         <Clock className="w-3.5 h-3.5" /> Recherches récentes
                       </p>
-                      <button onClick={clearRecentSearches} className="text-[11px] text-neutral-400 hover:text-black transition-colors">Effacer</button>
+                      <button onClick={clearRecentSearches} className="text-[11px] text-neutral-500 hover:text-black transition-colors">Effacer</button>
                     </div>
                     <div className="flex flex-wrap gap-2.5">
                       {recentSearches.map((s) => (
@@ -737,7 +741,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           onClick={() => setSearchQ(s)}
                           className="flex items-center gap-2 text-sm bg-neutral-100 rounded-full px-4 py-2 hover:bg-neutral-200 transition-colors text-neutral-700"
                         >
-                          <Search className="w-3.5 h-3.5 text-neutral-400" />
+                          <Search className="w-3.5 h-3.5 text-neutral-500" />
                           {s}
                         </button>
                       ))}
@@ -747,7 +751,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
                 {/* Popular searches */}
                 <div>
-                  <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">
+                  <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-neutral-500 mb-4">
                     <TrendingUp className="w-3.5 h-3.5" /> Recherches populaires
                   </p>
                   <div className="flex flex-wrap gap-2.5">
@@ -772,7 +776,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
                 {/* Collections shortcuts */}
                 <div>
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Explorer les collections</p>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-500 mb-4">Explorer les collections</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
                       // Salon : Canapé d'angle 3 places crème
@@ -819,7 +823,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
                 {/* Suggestions */}
                 <div>
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-4">Nos suggestions</p>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-500 mb-4">Nos suggestions</p>
                   {(() => {
                     const suggestionIds = [112, 77, 105, 100, 126, 110, 113, 83, 109, 94, 78, 107, 87, 79, 108];
                     const all = suggestionIds.map((id) => products.find((p) => p.id === id)).filter(Boolean) as typeof products;
@@ -866,13 +870,13 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                 return (
                   <div className="text-center py-16">
                     <p className="font-serif text-2xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Aucun résultat</p>
-                    <p className="text-sm text-neutral-400">Rien ne correspond à « {searchQ} ». Essayez un autre mot-clé.</p>
+                    <p className="text-sm text-neutral-500">Rien ne correspond à « {searchQ} ». Essayez un autre mot-clé.</p>
                   </div>
                 );
               }
               return (
                 <div>
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-400 mb-5">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-500 mb-5">{results.length} résultat{results.length > 1 ? 's' : ''}</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                     {results.slice(0, 30).map((p) => {
                       const promoPrice = p.name.includes('Bubble') ? nice99(Math.round(p.price * 0.7)) : p.price;
@@ -889,7 +893,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-black truncate group-hover:underline">{p.name}</p>
-                            <p className="text-[11px] tracking-wide uppercase text-neutral-400 mt-0.5">{p.category}</p>
+                            <p className="text-[11px] tracking-wide uppercase text-neutral-500 mt-0.5">{p.category}</p>
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <p className="text-sm font-bold text-black price-luxe">{formatPrice(promoPrice, cur)}</p>
@@ -920,38 +924,6 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
 function PromoBanner() {
   const [lightbox, setLightbox] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    // Durée de l'offre : 2 jours et 34 minutes à partir de la première visite du client.
-    const DURATION = (2 * 24 * 60 + 34) * 60 * 1000; // ms
-    let deadline = Number(localStorage.getItem('promo-deadline'));
-    if (!deadline || Number.isNaN(deadline)) {
-      deadline = Date.now() + DURATION;
-      localStorage.setItem('promo-deadline', String(deadline));
-    }
-    const calc = () => {
-      let diff = deadline - Date.now();
-      if (diff <= 0) {
-        // Ré-armer l'échéance pour ne JAMAIS rester bloqué à 00:00:00.
-        deadline = Date.now() + DURATION;
-        try { localStorage.setItem('promo-deadline', String(deadline)); } catch { /* ignore */ }
-        diff = deadline - Date.now();
-      }
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    };
-    calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const pad = (n: number) => String(n).padStart(2, '0');
-
   return (
     <FadeInSection>
       <section className="w-full overflow-hidden relative">
@@ -977,34 +949,11 @@ function PromoBanner() {
               Jusqu&apos;à −30% grâce au <span className="text-[#C9A96E]">Black Friday</span><br className="hidden md:block" /> sur la collection Bubble
             </h2>
             <p className="text-white/70 text-sm mb-8 max-w-md">
-              Offre à durée limitée — dans la limite des stocks disponibles.
+              {BLACK_FRIDAY_PROMO.endsAt
+                ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}, dans la limite des stocks disponibles.</>
+                : <>Remise appliquée automatiquement sur les pièces de la collection Bubble.</>}
             </p>
-
-            {/* Countdown — grande visibilité */}
-            <p className="text-[11px] tracking-[0.4em] uppercase text-[#C9A96E] mb-4">Offre se termine dans</p>
-            <div className="flex gap-3 md:gap-5 mb-10">
-              {[
-                { value: pad(timeLeft.days), label: 'Jours' },
-                { value: pad(timeLeft.hours), label: 'Heures' },
-                { value: pad(timeLeft.minutes), label: 'Min' },
-                { value: pad(timeLeft.seconds), label: 'Sec' },
-              ].map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm border-2 border-[#C9A96E] px-4 md:px-6 py-3 md:py-4 min-w-[70px] md:min-w-[90px] shadow-2xl"
-                >
-                  <span
-                    className="text-white text-3xl md:text-5xl font-bold leading-none tabular-nums"
-                    style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-                  >
-                    {value}
-                  </span>
-                  <span className="text-[9px] md:text-[10px] text-[#C9A96E] uppercase tracking-[0.25em] mt-2 md:mt-3">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
+            <PromoCountdown endsAt={BLACK_FRIDAY_PROMO.endsAt} className="flex flex-col items-center" />
 
             <Link
               href="/promotions"
@@ -1117,7 +1066,7 @@ function BubblePromoCarousel() {
       <section id="bubble-promo" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-400">Offre limitée · −30%</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#C9A96E]">Black Friday</span></h2>
           </div>
           <div className="flex items-center gap-2">
@@ -1175,7 +1124,7 @@ function BubblePromoCarousel() {
                 </div>
                 <button
                   onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                  className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                 >
                   <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                 </button>
@@ -1183,7 +1132,7 @@ function BubblePromoCarousel() {
               <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
               <div className="flex items-center gap-2">
                 <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
-                <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
+                <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
               </div>
             </Link>
             </div>
@@ -1208,7 +1157,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
       <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-2">Top ventes</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-2">Top ventes</p>
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
               Coups de cœur
             </h2>
@@ -1259,7 +1208,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                   </div>
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                    aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                   >
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
@@ -1270,7 +1219,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                   {product.name.includes('Bubble') ? (
                     <>
                       <p className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</p>
-                      <p className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
+                      <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
                     </>
                   ) : (
                     <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
@@ -1364,7 +1313,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           {/* Wishlist */}
           <button
             onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-            className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+            aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
           >
             <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
           </button>
@@ -1378,10 +1327,10 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
         </div>
         <div className="p-4">
           <div className="flex items-center justify-between mb-1">
-            <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-400">{product.category}</p>
+            <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
           </div>
           <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-          <p className="text-neutral-400 text-[11px] mb-3 line-clamp-1">{product.description}</p>
+          <p className="text-neutral-500 text-[11px] mb-3 line-clamp-1">{product.description}</p>
           <div className="h-px bg-neutral-100 mb-3" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -1389,12 +1338,12 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
                 {formatPrice(isBubble ? nice99(Math.round(product.price * 0.7)) : product.price, cur)}
               </span>
               {isBubble && (
-                <span className="text-neutral-400 line-through text-xs price-luxe">
+                <span className="text-neutral-500 line-through text-xs price-luxe">
                   {formatPrice(product.price, cur)}
                 </span>
               )}
               {isSale && !isBubble && (
-                <span className="text-neutral-400 line-through text-xs price-luxe">
+                <span className="text-neutral-500 line-through text-xs price-luxe">
                   {formatPrice(Math.round(product.price * 1.25), cur)}
                 </span>
               )}
@@ -1429,7 +1378,7 @@ function ProductFilterBar({
           className={`shrink-0 text-[11px] tracking-[0.25em] uppercase px-4 sm:px-6 py-4 border-b-2 transition-all duration-200 -mb-px whitespace-nowrap ${
             active === cat
               ? 'border-black text-black font-semibold'
-              : 'border-transparent text-neutral-400 hover:text-black hover:border-neutral-300'
+              : 'border-transparent text-neutral-500 hover:text-black hover:border-neutral-300'
           }`}
         >
           {cat}
@@ -1448,7 +1397,7 @@ function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: s
         <ContainerScroll
           titleComponent={
             <div className="mb-8">
-              <p className="text-xs tracking-[0.3em] uppercase mb-4 text-neutral-400">L&apos;art de vivre</p>
+              <p className="text-xs tracking-[0.3em] uppercase mb-4 text-neutral-500">L&apos;art de vivre</p>
               <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
                 Des intérieurs qui vous <br />
                 <span className="italic">ressemblent</span>
@@ -1556,7 +1505,7 @@ function ShopByCategory() {
     <FadeInSection>
       <section className="py-14 md:py-20 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-2">Notre univers</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-2">Notre univers</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
             Acheter par catégorie
           </h2>
@@ -1598,76 +1547,7 @@ function ShopByCategory() {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
-const testimonials = [
-  {
-    text: "Le Fauteuil Bubble blanc est une vraie sculpture vivante. Il trône au centre de mon salon et tout le monde me demande où je l'ai trouvé. Confort incroyable, qualité irréprochable.",
-    image: '', name: 'Sophie Marchand', role: 'Cliente vérifiée',
-  },
-  {
-    text: "J'ai craqué pour le Canapé Bubble violet spécial et je ne le regrette pas une seconde. La couleur est encore plus intense en vrai, et on s'y enfonce comme dans un nuage.",
-    image: '', name: 'Thomas Lefebvre', role: 'Client vérifié',
-  },
-  {
-    text: "La Figurine KAWS câlin est absolument magnifique. Le niveau de détail est impressionnant, c'est une vraie pièce d'art. Je l'ai posée sur mon bureau et tout le monde la remarque.",
-    image: '', name: 'Léa Fontaine', role: 'Cliente vérifiée',
-  },
-  {
-    text: "Le Fauteuil Bubble bleu est exactement ce qu'il me fallait pour apporter du caractère à mon intérieur. La texture maille 3D est unique, je n'ai jamais vu ça ailleurs.",
-    image: '', name: 'Camille Rousseau', role: 'Cliente vérifiée',
-  },
-  {
-    text: "La Figurine KAWS gris monde est simplement splendide. La finition est irréprochable et l'emballage était parfait. Un cadeau idéal pour les amateurs de streetwear.",
-    image: '', name: 'Hugo Blanc', role: 'Client vérifié',
-  },
-  {
-    text: "Livraison soignée, montage facile, et le Canapé Bubble blanc est tout simplement magnifique. Il a complètement transformé mon salon. Mes amis sont jaloux !",
-    image: '', name: 'Antoine Dubois', role: 'Client vérifié',
-  },
-  {
-    text: "Le Bearbrick x Bape est incroyable. La collaboration est iconique et la qualité de la figurine est au niveau du prix. Je collectionne depuis des années et c'est une des meilleures pièces de ma collection.",
-    image: '', name: 'Romain Vidal', role: 'Client vérifié',
-  },
-  {
-    text: "Le Fauteuil Bubble rouge est une déclaration artistique à lui seul. Il donne une âme à toute la pièce. Je suis fan de la collection Bubble, je vais sûrement en commander un deuxième.",
-    image: '', name: 'Isabelle Fontaine', role: 'Cliente vérifiée',
-  },
-  {
-    text: "La Figurine Kaws noir 28 cm est arrivée parfaitement emballée. La qualité du vinyle est top, les finitions sont nettes. Je recommande MAISON SERENIA les yeux fermés.",
-    image: '', name: 'Clémence Garnier', role: 'Cliente vérifiée',
-  },
-  {
-    text: "J'ai hésité longtemps entre le vert et l'orange, j'ai finalement pris le Fauteuil Bubble vert. La teinte pistache est parfaite avec ma déco naturelle. Un coup de cœur absolu.",
-    image: '', name: 'Marie-Claire Petit', role: 'Cliente vérifiée',
-  },
-  {
-    text: "Le Bearbrick x Bape rose est une rareté. Je cherchais cette colorway depuis longtemps, super content de l'avoir trouvée ici. Livraison rapide et emballage impeccable.",
-    image: '', name: 'Maxime Renard', role: 'Client vérifié',
-  },
-  {
-    text: "Le Canapé Bubble bleu est monumental. Sa présence dans mon loft est impressionnante. La qualité de fabrication est au rendez-vous, chaque détail est soigné.",
-    image: '', name: 'Julien Bernard', role: 'Client vérifié',
-  },
-  {
-    text: "La Figurine KAWS gris monde est une merveille de précision. Les détails du globe terrestre sont parfaitement reproduits. Une pièce collector qui a toute sa place dans mon salon.",
-    image: '', name: 'Aurélie Simon', role: 'Cliente vérifiée',
-  },
-  {
-    text: "Le Fauteuil Bubble orange illumine mon bureau à la maison. Je travaille en souriant depuis qu'il est là. MAISON SERENIA crée des pièces vraiment uniques.",
-    image: '', name: 'Nathalie Girard', role: 'Cliente vérifiée',
-  },
-  {
-    text: "Le Bearbrick x Bape noir est impressionnant en vrai. La colorway est parfaite et la qualité est irréprochable. Je l'ai mis en vitrine et c'est la première chose que les gens remarquent.",
-    image: '', name: 'Lucas Moreau', role: 'Client vérifié',
-  },
-  {
-    text: "Commandé le Canapé Bubble rouge pour ma salle de réception. Nos clients le remarquent immédiatement, c'est devenu la pièce signature de notre espace. Bravo MAISON SERENIA.",
-    image: '', name: 'Pierre Morel', role: 'Client vérifié',
-  },
-  {
-    text: "La Figurine Kaws 28 cm est tout simplement parfaite. Le noir mat est élégant, la pose est emblématique. Un must-have pour tout fan de KAWS.",
-    image: '', name: 'Sara Dupont', role: 'Cliente vérifiée',
-  },
-];
+const testimonials: Testimonial[] = VERIFIED_TESTIMONIALS;
 
 
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
@@ -1760,8 +1640,8 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
               </div>
             )}
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#A07840] mb-1">Tableau offert · 50×70 cm</p>
-              <select
+              <p className="text-[10px] tracking-[0.2em] uppercase text-[#8A6A35] mb-1">Tableau offert · 50×70 cm</p>
+              <select aria-label="Choisir le tableau offert"
                 value={selectedTableau}
                 onChange={(e) => setSelectedTableau(Number(e.target.value))}
                 disabled={!offerOn}
@@ -1770,13 +1650,13 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
                 {tableaux.map((t) => (<option key={t.id} value={t.id}>{t.name}</option>))}
               </select>
               <p className="flex items-center gap-2 mt-1.5">
-                <span className="text-neutral-400 line-through text-xs price-luxe">{formatPrice(GIFT_PRICE, cur)}</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Offert</span>
+                <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(GIFT_PRICE, cur)}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Offert</span>
               </p>
             </div>
           </div>
           <label className="flex items-center gap-2 mt-3 cursor-pointer select-none">
-            <input type="checkbox" checked={offerOn} onChange={(e) => setOfferOn(e.target.checked)} className="w-4 h-4 accent-black" />
+            <input type="checkbox" aria-label="Ajouter le tableau offert au panier" checked={offerOn} onChange={(e) => setOfferOn(e.target.checked)} className="w-4 h-4 accent-black" />
             <span className="text-[12px] text-neutral-600">Ajouter le tableau offert (50×70 cm) — gratuit</span>
           </label>
         </div>
@@ -1785,8 +1665,8 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
       <div className="h-px bg-neutral-200 my-6" />
 
       <div className="flex items-center justify-between mb-3">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400">Prix de l&apos;ensemble</p>
-        <p className="text-neutral-400 line-through text-sm price-luxe">{formatPrice(sum, cur)}</p>
+        <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">Prix de l&apos;ensemble</p>
+        <p className="text-neutral-500 line-through text-sm price-luxe">{formatPrice(sum, cur)}</p>
       </div>
       <p className="text-4xl font-bold text-black mb-5 leading-none price-luxe">{formatPrice(BUNDLE_PRICE, cur)}</p>
 
@@ -1807,7 +1687,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
             </p>
           </>
         ) : (
-          <p className="text-[11px] tracking-wide text-neutral-400">Ensemble sans le tableau offert</p>
+          <p className="text-[11px] tracking-wide text-neutral-500">Ensemble sans le tableau offert</p>
         )}
       </div>
 
@@ -1817,7 +1697,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
       <button onClick={() => addBundle(false)} className={`w-full text-xs font-bold tracking-widest uppercase py-3.5 mt-2.5 border transition-colors ${added ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-black text-black hover:bg-black hover:text-white'}`}>
         {added ? 'Ajouté au panier ✓' : 'Ajouter au panier'}
       </button>
-      <p className="text-[10px] text-neutral-400 text-center mt-3 tracking-wide">
+      <p className="text-[10px] text-neutral-500 text-center mt-3 tracking-wide">
         Livraison gratuite à partir de {formatPrice(40, cur)}
       </p>
     </div>
@@ -1830,7 +1710,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
       <section id="section-packs" className="py-20 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-14">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">Économisez plus</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-2">Économisez plus</p>
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
               Nos ensembles Bubble
             </h2>
@@ -1852,6 +1732,7 @@ const secondColumn = testimonials.slice(3, 6);
 const thirdColumn = testimonials.slice(6, 9);
 
 function TestimonialsSection() {
+  if (testimonials.length === 0) return null; // aucun avis réel : section non affichée
   return (
     <FadeInSection>
       <section className="bg-white py-20">
@@ -1872,7 +1753,7 @@ function TestimonialsSection() {
               Ce que disent nos clients
             </h2>
             <p className="text-center mt-5 text-neutral-500 text-sm">
-              Des dizaine de clients satisfaits font confiance à MAISON SERENIA pour sublimer leur intérieur.
+              Notre sélection, pensée pour sublimer votre intérieur.
             </p>
           </motionLib.div>
 
@@ -1896,7 +1777,7 @@ function TrustStrip() {
   const cur = useCurrency();
   const items = [
     { Icon: Truck, title: 'Livraison Offerte', subtitle: `dès ${formatPrice(40, cur)}` },
-    { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'SSL 256-bit' },
+    { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'Via Stripe' },
     { Icon: Clock, title: 'Service client', subtitle: 'Réponse sous 48 h ouvrées' },
   ];
   return (
@@ -1941,7 +1822,7 @@ function NewsletterSection() {
     <section className="w-full bg-white py-20 px-6 border-y border-neutral-100">
       <div className="max-w-2xl mx-auto text-center">
         <FadeInSection>
-          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#A07840] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
+          <div className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.3em] uppercase font-semibold px-3 py-1.5 mb-6 text-[#8A6A35] bg-white/60" style={{ border: '1px solid rgba(160,120,64,0.3)' }}>
             <Gift className="w-3 h-3" /> −10% offerts à l&apos;inscription
           </div>
           <h2
@@ -1961,7 +1842,7 @@ function NewsletterSection() {
             >
               <p className="text-black text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
               <div className="flex items-center justify-center gap-3 border-2 border-dashed border-[#C9A96E] bg-[#C9A96E]/10 px-4 py-3">
-                <span className="text-lg font-bold tracking-[0.15em] text-[#A07840]">{WELCOME_CODE}</span>
+                <span className="text-lg font-bold tracking-[0.15em] text-[#8A6A35]">{WELCOME_CODE}</span>
                 <span className="text-[11px] uppercase tracking-widest text-neutral-500">−10%</span>
               </div>
               <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
@@ -2129,13 +2010,13 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
               ))}
             </ul>
             <div className="mt-5 flex items-center gap-2 text-xs text-neutral-500">
-              <Truck className="w-4 h-4 text-[#A07840]" strokeWidth={1.5} />
+              <Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} />
               Livraison offerte dès 40 CHF
             </div>
           </div>
         </div>
 
-        <div className="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+        <div className="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>
             © 2026 Maison Serenia · Genève, Suisse
           </p>
@@ -2197,7 +2078,7 @@ function DécorationsSection() {
     <FadeInSection>
       <section id="section-figurines" className="py-16 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
         <div className="mb-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-400">Collection</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-500">Collection</p>
           <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
             Décorations
           </h2>
@@ -2223,7 +2104,7 @@ function DécorationsSection() {
                   />
                   <button
                     onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                    aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                   >
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
@@ -2289,9 +2170,9 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
             <div className="px-6 py-5 border-b border-neutral-100">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#A07840] mb-1">Ma sélection</p>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#8A6A35] mb-1">Ma sélection</p>
                   <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-                    Favoris {ids.length > 0 && <span className="text-neutral-400 text-base">({ids.length})</span>}
+                    Favoris {ids.length > 0 && <span className="text-neutral-500 text-base">({ids.length})</span>}
                   </h2>
                 </div>
                 <button onClick={onClose} className="p-2 -mr-2 hover:bg-neutral-100 transition-colors" aria-label="Fermer">
@@ -2308,7 +2189,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                     <Heart className="w-7 h-7 text-[#C9A96E]" strokeWidth={1.4} />
                   </div>
                   <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Votre liste de favoris est vide</p>
-                  <p className="text-sm text-neutral-400 max-w-[240px]">Ajoutez vos coups de cœur en cliquant sur le cœur d&apos;un produit.</p>
+                  <p className="text-sm text-neutral-500 max-w-[240px]">Ajoutez vos coups de cœur en cliquant sur le cœur d&apos;un produit.</p>
                   <button onClick={onClose} className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-neutral-800 transition-colors">
                     Parcourir la boutique
                   </button>
@@ -2333,7 +2214,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
                           <Link href={`/products/${product.id}`} onClick={onClose}>
                             <p className="font-serif font-semibold text-sm text-black leading-snug line-clamp-2 hover:underline">{product.name}</p>
                           </Link>
-                          <p className="text-xs text-neutral-400 mt-0.5">{product.category}</p>
+                          <p className="text-xs text-neutral-500 mt-0.5">{product.category}</p>
                           <p className="font-bold text-sm text-black mt-1 price-luxe">{formatPrice(price, cur)}</p>
                         </div>
                         <button
@@ -2692,7 +2573,7 @@ export default function Home() {
               <FadeInSection>
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
-                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#A07840]">Sélection</p>
+                    <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#8A6A35]">Sélection</p>
                     <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
                       Nos Pièces Signatures
                     </h2>
@@ -2701,7 +2582,7 @@ export default function Home() {
                       {filteredProducts.length} produit{filteredProducts.length > 1 ? 's' : ''}
                     </p>
                   </div>
-                  <select
+                  <select aria-label="Trier les produits"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                     className="text-xs border border-neutral-200 px-4 py-2.5 text-neutral-500 outline-none hover:border-neutral-400 transition-colors cursor-pointer self-start md:self-end"
@@ -2763,7 +2644,7 @@ export default function Home() {
                       </button>
                     )}
                   </div>
-                  <span className="text-[11px] tracking-wide text-neutral-400">
+                  <span className="text-[11px] tracking-wide text-neutral-500">
                     {displayedProducts.length} sur {filteredProducts.length} produits
                   </span>
                 </div>

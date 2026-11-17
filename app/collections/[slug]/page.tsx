@@ -50,7 +50,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
                   key={c.slug}
                   href={`/collections/${c.slug}`}
                   className={`text-[12px] tracking-[0.15em] uppercase whitespace-nowrap py-1 border-b-2 transition-colors ${
-                    active ? 'text-black border-black' : 'text-neutral-400 border-transparent hover:text-black'
+                    active ? 'text-black border-black' : 'text-neutral-500 border-transparent hover:text-black'
                   }`}
                 >
                   {shortLabel(c.label)}
@@ -64,13 +64,13 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
       {/* Hero */}
       <section className="border-b border-neutral-100 bg-white py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">{meta.kicker}</p>
+          <p className="text-[10px] tracking-[0.4em] uppercase text-[#8A6A35] mb-3">{meta.kicker}</p>
           <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
             {meta.label}
           </h1>
           <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #C9A96E, #E8D5B0)' }} />
           <p className="text-neutral-500 max-w-xl leading-relaxed">{meta.description}</p>
-          <p className="text-xs text-neutral-400 mt-4">{items.length} pièce{items.length > 1 ? 's' : ''}</p>
+          <p className="text-xs text-neutral-500 mt-4">{items.length} pièce{items.length > 1 ? 's' : ''}</p>
         </div>
       </section>
 
