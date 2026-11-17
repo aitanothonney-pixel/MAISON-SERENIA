@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Star, Heart, Leaf, Award, Quote } from 'lucide-react';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://maison-serenia.com/a-propos' },
@@ -91,7 +92,7 @@ export default function AProposPage() {
           </div>
           <div className="relative aspect-square overflow-hidden rounded-xl bg-neutral-50">
             {/* Visuel signature (image locale du catalogue) */}
-            <img src="/catalog/j9h5SNVC.jpg" alt="Collection Bubble — MAISON SERENIA" className="w-full h-full object-cover" />
+            <Image src="/catalog/j9h5SNVC.jpg" alt="Collection Bubble — MAISON SERENIA" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
           </div>
         </section>
 
