@@ -237,7 +237,7 @@ const rawProducts: Product[] = [
     price: 2787,
     description: 'Le Canapé Bubble 3 places en rouge vif et ardent — énergie, caractère et confort sculptural. Une pièce iconique qui s\'impose avec force dans votre espace de vie.',
     images: [
-      '/catalog/bubble-rouge-1.webp',
+      '/catalog/bubble-rouge-nuage-boucle.webp',
       '/catalog/bubble-rouge-2.webp',
       '/catalog/bubble-rouge-3.webp',
       '/catalog/bubble-rouge-effet-nuage-texture.webp',
