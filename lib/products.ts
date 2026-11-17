@@ -205,6 +205,7 @@ const rawProducts: Product[] = [
       '/catalog/bubble-bleu-royal-1.webp',
       '/catalog/bubble-bleu-royal-2.webp',
       '/catalog/bubble-bleu-royal-3.webp',
+      '/catalog/bubble-bleu-fauteuil-nuage-texture.webp',
       '/catalog/bubble-bleu-royal-4.webp',
     ],
     dimensions: 'L 225 × P 114 × H 76 cm',
