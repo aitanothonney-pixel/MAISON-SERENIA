@@ -238,6 +238,7 @@ const rawProducts: Product[] = [
       '/catalog/bubble-rouge-1.webp',
       '/catalog/bubble-rouge-2.webp',
       '/catalog/bubble-rouge-3.webp',
+      '/catalog/bubble-rouge-effet-nuage-texture.webp',
       '/catalog/bubble-rouge-4.webp',
     ],
     dimensions: 'L 225 × P 114 × H 76 cm',
