@@ -65,6 +65,21 @@ html {
   letter-spacing: 0.02em;
 }
 
+/* ── Fiche produit (mise en page V2) : Inter Tight pour les titres et prix, Inter pour le texte ── */
+.pdp {
+  font-family: var(--font-pdp-inter, system-ui), system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+.pdp-display {
+  font-family: var(--font-pdp-inter-tight, var(--font-pdp-inter, system-ui)), system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+.pdp-kicker {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b6660;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

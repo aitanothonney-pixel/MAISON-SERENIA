@@ -1,6 +1,7 @@
 import { products, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import ProductClient from './product-client';
+import { productInter, productInterTight } from '@/lib/product-fonts';
 
 const BASE = 'https://maison-serenia.com';
 
@@ -76,7 +77,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     : null;
 
   return (
-    <>
+    <div className={`${productInter.variable} ${productInterTight.variable}`}>
       {jsonLd && (
         <script
           type="application/ld+json"
@@ -90,6 +91,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         />
       )}
       <ProductClient params={params} />
-    </>
+    </div>
   );
 }

@@ -1154,16 +1154,15 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     },
   ];
 
-  const isBubbleGallery = product.name.includes('Bubble');
   return (
     <>
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={toastMessage || product.name} />
       {ctaOut && (
-        <div className="fixed inset-x-0 bottom-0 z-[60] md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
+        <div className="pdp fixed inset-x-0 bottom-0 z-[60] md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="text-[12px] text-neutral-600 truncate">{product.name}</p>
-            <p className="text-[15px] font-semibold text-black price-luxe">{formatPrice(unitPrice, cur)}</p>
+            <p className="text-[15px] font-semibold text-black pdp-display">{formatPrice(unitPrice, cur)}</p>
           </div>
           <button
             type="button"
@@ -1209,7 +1208,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
         </div>
       </header>
 
-      <div className={`${barVisible ? 'pt-[104px]' : 'pt-16'}${ctaOut ? ' pb-24 md:pb-0' : ''}`}>
+      <div className={`pdp ${barVisible ? 'pt-[104px]' : 'pt-16'}${ctaOut ? ' pb-24 md:pb-0' : ''}`}>
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <nav className="flex items-center gap-2 text-xs text-neutral-500">
@@ -1243,125 +1242,42 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
         {/* Main content */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 pb-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.12fr_1fr] gap-10 lg:gap-14">
 
             {/* Image Gallery */}
-            <div className="space-y-4">
-              {!isBubbleGallery && (
-                <div
-                className="group relative overflow-hidden rounded-xl bg-white aspect-square touch-pan-y"
-                onPointerDown={(e) => { swipeStartRef.current = { x: e.clientX, y: e.clientY }; }}
-                onPointerUp={(e) => {
-                  const s = swipeStartRef.current;
-                  swipeStartRef.current = null;
-                  if (!s) return;
-                  const dx = e.clientX - s.x;
-                  const dy = e.clientY - s.y;
-                  if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) stepImage(dx < 0 ? 1 : -1);
-                }}
-                onPointerCancel={() => { swipeStartRef.current = null; }}
-              >
-                {/* Toutes les images sont préchargées et empilées : changer d'image
-                    = simple bascule d'opacité (aucun rechargement, instantané). */}
-                {product.images.map((img, i) => (
-                  <Image
-                    key={i}
-                    src={img}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    preload={i === 0}
-                    loading={i === 0 ? undefined : 'eager'}
-                    className={`${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'} transition-opacity duration-150 ${i === selectedImage ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                  />
-                ))}
-
-                {/* Agrandissement (clavier et tactile) */}
+            <div className="space-y-2.5">
+{/* Grande photo et grille des autres vues (mise en page V2, toutes les fiches) */}
+              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]">
+                <Image
+                  src={product.images[selectedImage]}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  preload={selectedImage === 0}
+                  className="object-contain p-2"
+                />
                 <button
                   type="button"
                   onClick={(e) => openLightbox(e.currentTarget)}
                   aria-label="Agrandir la photo"
-                  className="absolute right-4 top-4 z-10 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] hover:bg-white transition-colors"
+                  className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-white/90 text-black shadow-[0_2px_12px_rgba(0,0,0,0.12)] transition-colors hover:bg-white"
                 >
-                  <Maximize2 className="w-4 h-4" strokeWidth={1.5} />
+                  <Maximize2 className="h-4 w-4" strokeWidth={1.5} />
                 </button>
-
-                {/* Flèches de navigation */}
-                {product.images.length > 1 && (
-                  <>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const ni = (selectedImage - 1 + product.images.length) % product.images.length;
-                        setSelectedImage(ni);
-                        const lbl = product.imageColor?.[ni] || product.sizes?.find((s) => s.image === product.images[ni])?.label;
-                        if (lbl) setSelectedSize(lbl);
-                      }}
-                      aria-label="Image précédente"
-                      className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
-                    >
-                      <ChevronRight className="w-5 h-5 rotate-180" strokeWidth={1} />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const ni = (selectedImage + 1) % product.images.length;
-                        setSelectedImage(ni);
-                        const lbl = product.imageColor?.[ni] || product.sizes?.find((s) => s.image === product.images[ni])?.label;
-                        if (lbl) setSelectedSize(lbl);
-                      }}
-                      aria-label="Image suivante"
-                      className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
-                    >
-                      <ChevronRight className="w-5 h-5" strokeWidth={1} />
-                    </button>
-
-                    {/* Points indicateurs */}
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                      {product.images.map((_, i) => (
-                        <span key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === selectedImage ? 'w-5 bg-black' : 'w-1.5 bg-black/25'}`} />
-                      ))}
-                    </div>
-                  </>
-                )}
               </div>
-              )}
-
-{isBubbleGallery && (
-                <div className="bg-[#F6F2EB] p-2">
-                  <div className="group relative aspect-[4/3] overflow-hidden bg-white">
-                    <Image
-                      src={product.images[selectedImage]}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      preload={selectedImage === 0}
-                      className="object-contain p-2"
-                    />
+              {product.images.length > 1 && (
+                <div className={`grid gap-2.5 ${product.images.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  {product.images.map((img, i) => i === selectedImage ? null : (
                     <button
+                      key={i}
                       type="button"
-                      onClick={(e) => openLightbox(e.currentTarget)}
-                      aria-label="Agrandir la photo"
-                      className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-white/90 text-black shadow-[0_2px_12px_rgba(0,0,0,0.12)] transition-colors hover:bg-white"
+                      onClick={(e) => { goToImage(i); openLightbox(e.currentTarget); }}
+                      aria-label={`Agrandir la photo ${i + 1}`}
+                      className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
                     >
-                      <Maximize2 className="h-4 w-4" strokeWidth={1.5} />
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-contain p-2" />
                     </button>
-                  </div>
-                  {product.images.length > 1 && (
-                    <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                      {product.images.map((img, i) => i === selectedImage ? null : (
-                        <button
-                          key={i}
-                          type="button"
-                          onClick={(e) => { goToImage(i); openLightbox(e.currentTarget); }}
-                          aria-label={`Agrandir la photo ${i + 1}`}
-                          className="relative aspect-[4/3] overflow-hidden bg-white"
-                        >
-                          <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-contain p-2" />
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                  ))}
                 </div>
               )}
 
@@ -1459,37 +1375,15 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 )}
               </AnimatePresence>
 
-              {!isBubbleGallery && product.images.length > 1 && (
-                <div className="flex gap-2 flex-wrap">
-                  {product.images.map((img, i) => (
-                    <button
-                      key={i}
-                      onClick={() => {
-                        setSelectedImage(i);
-                        // Si cette image correspond à un coloris, on le sélectionne à droite
-                        const lbl = product.imageColor?.[i] || product.sizes?.find((s) => s.image === img)?.label;
-                        if (lbl) setSelectedSize(lbl);
-                      }}
-                      className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-white transition-all duration-200 ${
-                        selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
-                      }`}
-                    >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="120px" className="object-contain p-1" />
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Product Info */}
-            <div className="lg:pt-4">
-              {/* Category + name */}
+            <div className="lg:pt-2">
+              {/* Catégorie, nom et description */}
               <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="h-px w-6 bg-black" />
-                  <p className="text-[10px] tracking-[0.35em] uppercase text-neutral-500">{product.category}</p>
-                </div>
-                <h1 className="text-3xl md:text-4xl font-serif font-bold text-black leading-tight mb-4">{product.name}</h1>
+                <p className="pdp-kicker mb-3">{product.category}</p>
+                <h1 className="pdp-display mb-4 text-[34px] font-semibold leading-[1.02] tracking-[-0.03em] text-balance text-black md:text-[44px]">{product.name}</h1>
+                <p className="mb-5 text-[15px] leading-[1.6] text-[#4d4842]">{product.description}</p>
                 {/* Social Share */}
                 <div className="flex gap-3 items-center text-neutral-500 text-xs mt-2">
                   <button
@@ -1522,34 +1416,27 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 </div>
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-neutral-100 mb-6" />
-
-              {/* Bannière Black Friday — remise −30 % mise en avant sur la collection Bubble */}
+              {/* Bannière Black Friday — remise −30 % sur la collection Bubble */}
               {isBubble && (
-                <div className="mb-5 flex items-center justify-between gap-4 bg-black border border-[#A68A6D] px-5 py-4">
+                <div className="mb-6 flex items-center justify-between gap-4 border border-[#34322F] bg-white px-5 py-4">
                   <div className="min-w-0">
-                    <p className="text-[10px] tracking-[0.35em] uppercase text-[#A68A6D]">Black Friday</p>
-                    <p className="text-[13px] text-white/70 mt-1.5">{BLACK_FRIDAY_PROMO.endsAt ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}</> : <>Remise de 30 % sur toute la collection Bubble</>}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7F6A52]">Black Friday</p>
+                    <p className="mt-1.5 text-[14px] text-[#4d4842]">{BLACK_FRIDAY_PROMO.endsAt ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}</> : <>Remise de 30 % sur toute la collection Bubble</>}</p>
                   </div>
-                  <p className="text-5xl md:text-6xl leading-none text-white shrink-0" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>−30%</p>
+                  <p className="pdp-display shrink-0 text-[28px] font-bold leading-none text-black">−30%</p>
                 </div>
               )}
 
-              {/* Price block — sobre, encadré de filets fins */}
-              <div className="border-y border-neutral-200 py-5 mb-6">
-                <div className="flex items-end justify-between gap-4">
-                  <div className="flex items-baseline gap-3">
-                    <p className="text-4xl text-black price-luxe">{formatPrice(unitPrice, cur)}</p>
-                    {isBubble && (
-                      <p className="text-sm text-neutral-500 line-through price-luxe">{formatPrice(product.price, cur)}</p>
-                    )}
-                  </div>
+              {/* Prix */}
+              <div className="mb-5">
+                <div className="flex items-baseline gap-3">
+                  <p className="pdp-display text-[36px] font-medium leading-none tracking-[-0.02em] text-black">{formatPrice(unitPrice, cur)}</p>
+                  {isBubble && (
+                    <p className="pdp-display text-[14px] text-neutral-500 line-through">{formatPrice(product.price, cur)}</p>
+                  )}
                 </div>
                 {isBubble && (
-                  <p className="text-xs text-neutral-500 mt-3 tracking-wide">
-                    Livraison offerte · Installation comprise
-                  </p>
+                  <p className="mt-3 text-[13px] text-[#4d4842]">Livraison offerte · Installation comprise</p>
                 )}
               </div>
 
@@ -1611,7 +1498,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         key={v.productId}
                         onClick={() => router.push(`/products/${v.productId}`)}
                         title={v.color}
-                        className={`w-8 h-8 border-2 transition-all duration-200 ${
+                        className={`w-10 h-10 border-2 transition-all duration-200 ${
                           v.productId === product.id ? 'border-black scale-110 shadow-md' : 'border-neutral-200 hover:border-neutral-400 hover:scale-105'
                         }`}
                         style={{ backgroundColor: v.colorHex }}
@@ -1628,57 +1515,45 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 </div>
               )}
 
-              <p className="text-neutral-500 leading-relaxed mb-6 text-sm">{product.description}</p>
-
-              {/* Caractéristiques — rangées épurées */}
-              <div className="border-t border-neutral-100 divide-y divide-neutral-100 mb-8">
-                <div className="flex items-center justify-between gap-6 py-3">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 shrink-0">Dimensions</span>
-                  <span className="text-sm text-neutral-700 text-right">{product.dimensions}</span>
+              {/* Caractéristiques */}
+              <div className="mb-8 border-t border-[#e6dfd3] text-sm">
+                <div className="flex items-center justify-between gap-6 border-b border-[#e6dfd3] py-3.5">
+                  <span className="shrink-0 text-[#6b6660]">Dimensions</span>
+                  <span className="text-right text-[#34322F]">{product.dimensions}</span>
                 </div>
-                <div className="flex items-center justify-between gap-6 py-3">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 shrink-0">Matière</span>
-                  <span className="text-sm text-neutral-700 text-right">{product.material}</span>
+                <div className="flex items-center justify-between gap-6 border-b border-[#e6dfd3] py-3.5">
+                  <span className="shrink-0 text-[#6b6660]">Matière</span>
+                  <span className="text-right text-[#34322F]">{product.material}</span>
                 </div>
               </div>
 
-              {/* Livraison estimée */}
-              <div className="flex items-center gap-2.5 mb-5 px-4 py-3 border border-neutral-100 bg-neutral-50/60">
-                <Truck className="w-4 h-4 text-[#7F6A52] shrink-0" />
-                <p className="text-xs text-neutral-600">
-                  Commandez aujourd&apos;hui — livraison estimée entre le{' '}
-                  <strong className="text-black font-medium">{deliveryRange.from}</strong>{' '}et le{' '}
-                  <strong className="text-black font-medium">{deliveryRange.to}</strong>
-                </p>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="space-y-2 mb-10">
+              {/* Boutons d'achat */}
+              <div className="mb-4 space-y-2.5">
                 <motion.button
                   ref={setCtaNode}
                   onClick={handleAddToCart}
                   whileTap={{ scale: 0.99 }}
-                  className="w-full py-4 font-semibold text-sm tracking-[0.2em] uppercase text-white relative overflow-hidden flex items-center justify-center gap-3 border border-black transition-colors duration-300"
-                  style={{ background: added ? '#333' : '#000' }}
+                  className="relative flex h-[54px] w-full items-center justify-center gap-2.5 overflow-hidden text-[15px] font-semibold text-white transition-colors duration-300"
+                  style={{ background: added ? '#6b6660' : '#34322F' }}
                 >
                   <AnimatePresence mode="wait">
                     {added ? (
-                      <motion.span key="added" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
+                      <motion.span key="added" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-2.5">
                         <Check className="w-4 h-4" /> Ajouté au panier
                       </motion.span>
                     ) : (
-                      <motion.span key="add" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
+                      <motion.span key="add" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-2.5">
                         <ShoppingBag className="w-4 h-4" /> Ajouter au panier
                       </motion.span>
                     )}
                   </AnimatePresence>
                 </motion.button>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2.5">
                   <motion.button
                     onClick={() => setCheckoutOpen(true)}
                     whileTap={{ scale: 0.99 }}
-                    className="py-4 font-semibold text-sm tracking-[0.2em] uppercase border border-black bg-white text-black hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                    className="flex h-[54px] items-center justify-center gap-2 border border-[#34322F] bg-white text-[14px] font-semibold text-[#34322F] transition-colors duration-300 hover:bg-[#34322F] hover:text-white"
                   >
                     <Lock className="w-4 h-4" /> Acheter
                   </motion.button>
@@ -1686,8 +1561,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <motion.button
                     onClick={() => toggleWish(product.id)}
                     whileTap={{ scale: 0.99 }}
-                    className={`py-4 font-semibold text-sm tracking-[0.2em] uppercase border transition-all duration-300 flex items-center justify-center gap-2 ${
-                      isWished(product.id) ? 'border-red-400 bg-red-50 text-red-500' : 'border-neutral-300 bg-white text-neutral-500 hover:border-black hover:text-black'
+                    className={`flex h-[54px] items-center justify-center gap-2 border text-[14px] font-semibold transition-colors duration-300 ${
+                      isWished(product.id) ? 'border-red-400 bg-red-50 text-red-500' : 'border-[#34322F] bg-white text-[#34322F] hover:bg-neutral-100'
                     }`}
                   >
                     <Heart className={`w-4 h-4 ${isWished(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
@@ -1695,6 +1570,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </motion.button>
                 </div>
               </div>
+
+              {/* Livraison estimée */}
+              <p className="mb-8 flex items-start gap-2 text-[13px] text-[#4d4842]">
+                <Truck className="mt-0.5 h-4 w-4 shrink-0 text-[#7F6A52]" />
+                <span>
+                  Commandez aujourd&apos;hui — livraison estimée entre le{' '}
+                  <strong className="whitespace-nowrap font-semibold text-black">{deliveryRange.from}</strong>{' '}et le{' '}
+                  <strong className="whitespace-nowrap font-semibold text-black">{deliveryRange.to}</strong>
+                </span>
+              </p>
 
               {/* Réassurance — panneau sous les boutons d'achat */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-4 mb-8 border border-neutral-200 p-4">
@@ -1746,7 +1631,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {/* Souvent acheté ensemble */}
           {complementProduct && (
             <section className="mt-16">
-              <h2 className="text-2xl font-serif font-bold text-black mb-6">Souvent acheté ensemble</h2>
+              <h2 className="pdp-display mb-6 text-2xl font-semibold tracking-[-0.02em] text-black">Souvent acheté ensemble</h2>
               <div className="space-y-3 mb-4">
                 {(() => {
                   const cp = complementProduct;
@@ -1757,11 +1642,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         <Image src={cp.images[0]} alt={cp.name} width={64} height={64} className="w-full h-full object-contain p-1.5" />
                       </Link>
                       <div className="flex-1 min-w-0">
-                        <Link href={`/products/${cp.id}`} className="font-serif font-bold text-sm text-black hover:underline">{cp.name}</Link>
+                        <Link href={`/products/${cp.id}`} className="pdp-display text-[15px] font-semibold text-black hover:underline">{cp.name}</Link>
                         <p className="text-xs text-neutral-500 mt-0.5">{cp.category}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="font-bold text-black text-sm price-luxe">{formatPrice(cpPromo, cur)}</span>
+                        <span className="pdp-display text-[15px] font-semibold text-black">{formatPrice(cpPromo, cur)}</span>
                         <button
                           onClick={handleAddComplement}
                           className="w-9 h-9 bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
@@ -1780,13 +1665,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {/* Guide des dimensions & tailles */}
           <section className="mt-16">
             <div className="bg-neutral-50 p-6 md:p-10">
-              <h2 className="text-2xl font-serif font-bold text-black mb-1">Guide des dimensions &amp; tailles</h2>
+              <h2 className="pdp-display mb-1 text-2xl font-semibold tracking-[-0.02em] text-black">Guide des dimensions &amp; tailles</h2>
               <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
               <div className="space-y-3">
                 {dimensionAccordions.map((acc, i) => (
                   <div key={i} className="bg-white border border-neutral-200">
                     <button
-                      className="w-full flex items-center justify-between px-5 py-4 text-sm font-serif font-bold text-black text-left"
+                      className="pdp-display w-full flex items-center justify-between px-5 py-4 text-[15px] font-semibold text-black text-left"
                       onClick={() => setOpenDim(openDim === i ? null : i)}
                     >
                       {acc.title}
@@ -1816,13 +1701,13 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
           {/* Questions fréquentes */}
           <section className="mt-16">
-            <h2 className="text-2xl font-serif font-bold text-black mb-1">Questions fréquentes</h2>
+            <h2 className="pdp-display mb-1 text-2xl font-semibold tracking-[-0.02em] text-black">Questions fréquentes</h2>
             <span className="block w-10 h-px mb-6" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
             <div className="space-y-3">
               {FAQ_ITEMS.map((item, i) => (
                 <div key={i} className="border border-neutral-200">
                   <button
-                    className="w-full flex items-center justify-between px-5 py-4 text-sm font-serif font-bold text-black text-left bg-neutral-50"
+                    className="pdp-display w-full flex items-center justify-between px-5 py-4 text-[15px] font-semibold text-black text-left bg-neutral-50"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     {item.q}
@@ -1850,7 +1735,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {recentlyViewed.length > 0 && (
             <section className="mt-24">
               <div className="flex items-end justify-between mb-10">
-                <h2 className="text-2xl font-serif font-bold">Consultés récemment</h2>
+                <h2 className="pdp-display text-2xl font-semibold tracking-[-0.02em]">Consultés récemment</h2>
                 <div className="flex items-center gap-2">
                   <motion.button onClick={() => scrollRecent('left')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                     className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
@@ -1889,8 +1774,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
-                        {pIsBubble && <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
+                        <p className="pdp-display text-[15px] font-semibold text-black">{formatPrice(pPromo, cur)}</p>
+                        {pIsBubble && <p className="pdp-display text-neutral-500 line-through text-xs">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
@@ -1903,7 +1788,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           {related.length > 0 && (
             <section className="mt-24">
               <div className="flex items-end justify-between mb-10">
-                <h2 className="text-2xl font-serif font-bold">Vous aimerez aussi</h2>
+                <h2 className="pdp-display text-2xl font-semibold tracking-[-0.02em]">Vous aimerez aussi</h2>
                 <div className="flex items-center gap-2">
                   <motion.button onClick={() => scrollRelated('left')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                     className="w-9 h-9 border border-neutral-200 bg-white flex items-center justify-center hover:border-black hover:shadow-sm transition-colors duration-200" aria-label="Précédent">
@@ -1948,8 +1833,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </Link>
                       <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <p className="font-bold text-sm text-black price-luxe">{formatPrice(pPromo, cur)}</p>
-                        {pIsBubble && <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(p.price, cur)}</p>}
+                        <p className="pdp-display text-[15px] font-semibold text-black">{formatPrice(pPromo, cur)}</p>
+                        {pIsBubble && <p className="pdp-display text-neutral-500 line-through text-xs">{formatPrice(p.price, cur)}</p>}
                       </div>
                     </motion.div>
                   );
