@@ -1171,7 +1171,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     alt={product.name}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority={i === 0}
+                    preload={i === 0}
                     loading={i === 0 ? undefined : 'eager'}
                     className={`${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'} transition-opacity duration-150 ${i === selectedImage ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                   />

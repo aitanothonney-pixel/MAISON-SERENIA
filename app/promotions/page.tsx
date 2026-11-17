@@ -32,7 +32,7 @@ export default function PromotionsPage() {
           src="/catalog/99H4L0sP.jpg"
           alt="Salon avec canapé Bubble rouge"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover object-[50%_45%] md:object-[50%_40%]"
         />

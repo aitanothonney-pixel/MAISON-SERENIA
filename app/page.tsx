@@ -2426,7 +2426,7 @@ export default function Home() {
             alt="Salon d'exception signé Maison Serenia"
             fill
             sizes="100vw"
-            priority
+            preload
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
