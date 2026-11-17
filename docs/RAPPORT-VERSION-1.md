@@ -96,6 +96,8 @@ Ajustements faits après la rédaction du rapport, sur la branche de développem
 
 Vérifications : TypeScript sans erreur ; ESLint sans erreur sur les fichiers modifiés ; 24/24 tests unitaires ; 11/11 tests de parcours. Les mesures Lighthouse de la section 3 n'ont pas été refaites après ces derniers ajustements.
 
+- Priorité réseau (`fetchpriority=high`) sur l'image du hero et sur la première image de collection, recommandée par Lighthouse. Pas de gain mesurable : sur le même build, les scores varient fortement d'un passage à l'autre (performance de 75 à 85, temps bloquant de 130 à 368 ms), et le LCP de l'accueil reste entre 4,2 et 4,5 s sur huit passages. Les mesures de la section 3 sont donc à lire avec une marge d'erreur large.
+
 Affirmations nouvelles à valider :
 - « Réponse sous 48 h ouvrées » (barre de confiance, mobile) : engagement de service à confirmer.
 - « Livraison en 1 à 4 semaines · Suivi inclus » (barre d'annonce) : délai et suivi à confirmer.

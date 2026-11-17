@@ -2421,6 +2421,7 @@ export default function Home() {
             fill
             sizes="100vw"
             preload
+            fetchPriority="high"
             className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75" />
