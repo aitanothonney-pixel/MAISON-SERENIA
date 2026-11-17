@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, use, useRef, useEffect } from 'react';
+import { useState, use, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -857,6 +857,19 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
   const barVisible = useAnnouncementBarVisible();
+  // Barre d'achat fixe (mobile) : visible quand le bouton principal sort de l'écran
+  const [ctaOut, setCtaOut] = useState(false);
+  const ctaObserver = useRef<IntersectionObserver | null>(null);
+  // Ref de rappel : l'observateur est posé dès que le bouton existe dans le DOM
+  const setCtaNode = useCallback((el: HTMLButtonElement | null) => {
+    ctaObserver.current?.disconnect();
+    ctaObserver.current = null;
+    if (el && typeof IntersectionObserver !== 'undefined') {
+      const io = new IntersectionObserver(([entry]) => setCtaOut(!entry.isIntersecting && entry.boundingClientRect.top < 0), { threshold: 0 });
+      io.observe(el);
+      ctaObserver.current = io;
+    }
+  }, []);
   // Refs de défilement déclarées avant tout return anticipé (règles des hooks)
   const relatedScrollRef = useRef<HTMLDivElement>(null);
   const recentScrollRef = useRef<HTMLDivElement>(null);
@@ -1087,6 +1100,22 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     <>
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={toastMessage || product.name} />
+      {ctaOut && (
+        <div className="fixed inset-x-0 bottom-0 z-[60] md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-[12px] text-neutral-600 truncate">{product.name}</p>
+            <p className="text-[15px] font-semibold text-black price-luxe">{formatPrice(unitPrice, cur)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="shrink-0 px-5 py-3.5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase flex items-center gap-2"
+          >
+            {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
+            {added ? 'Ajouté' : 'Ajouter'}
+          </button>
+        </div>
+      )}
       <CheckoutDrawer open={checkoutOpen} onClose={() => setCheckoutOpen(false)} product={product} unitPrice={unitPrice} size={product.sizes ? selectedSize : undefined} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
@@ -1121,7 +1150,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
         </div>
       </header>
 
-      <div className={barVisible ? 'pt-[104px]' : 'pt-16'}>
+      <div className={`${barVisible ? 'pt-[104px]' : 'pt-16'}${ctaOut ? ' pb-24 md:pb-0' : ''}`}>
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <nav className="flex items-center gap-2 text-xs text-neutral-500">
@@ -1458,6 +1487,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               {/* CTA Buttons */}
               <div className="space-y-2 mb-10">
                 <motion.button
+                  ref={setCtaNode}
                   onClick={handleAddToCart}
                   whileTap={{ scale: 0.99 }}
                   className="w-full py-4 font-semibold text-sm tracking-[0.2em] uppercase text-white relative overflow-hidden flex items-center justify-center gap-3 border border-black transition-colors duration-300"

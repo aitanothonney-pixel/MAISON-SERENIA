@@ -6,12 +6,7 @@ import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import {
-  ShoppingBag, ChevronRight, Share2, Heart, Globe,
-  Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp,
-  Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye,
-  CreditCard, ChevronDown, User, Award, Star, Sparkles,
-} from 'lucide-react';
+import { ShoppingBag, ChevronRight, Share2, Heart, Globe, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Star, Sparkles, Pause, Play } from 'lucide-react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
 import { VERIFIED_TESTIMONIALS } from '@/lib/testimonials';
@@ -1027,6 +1022,9 @@ function BubblePromoCarousel() {
 
   // Défilement automatique doux, en boucle infinie, en pause au survol
   const pausedRef = useRef(false);
+  // Pause choisie par le visiteur (bouton visible, accessible au clavier)
+  const userPausedRef = useRef(false);
+  const [carouselPaused, setCarouselPaused] = useState(false);
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -1044,7 +1042,7 @@ function BubblePromoCarousel() {
       // Si l'utilisateur a glissé le carrousel, on repart de sa position réelle
       if (Math.abs(el.scrollLeft - written) > 2) pos = el.scrollLeft;
       const half = el.scrollWidth / 2; // la liste est dupliquée une fois
-      if (!pausedRef.current && half > 0) {
+      if (!pausedRef.current && !userPausedRef.current && half > 0) {
         pos = (pos + (SPEED * dt) / 1000) % half; // boucle sans couture
         written = pos;
         el.scrollLeft = pos;
@@ -1057,6 +1055,7 @@ function BubblePromoCarousel() {
 
   const pause = () => { pausedRef.current = true; };
   const resume = () => { pausedRef.current = false; };
+  const toggleCarousel = () => { const next = !userPausedRef.current; userPausedRef.current = next; setCarouselPaused(next); };
 
   // Liste dupliquée pour permettre la boucle infinie
   const loopItems = [...items, ...items];
@@ -1070,6 +1069,15 @@ function BubblePromoCarousel() {
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#C9A96E]">Black Friday</span></h2>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleCarousel}
+              aria-label={carouselPaused ? 'Reprendre le défilement de la collection' : 'Mettre en pause le défilement de la collection'}
+              aria-pressed={carouselPaused}
+              className="w-9 h-9 flex items-center justify-center border border-neutral-300 hover:border-black text-neutral-700 hover:text-black transition-colors"
+            >
+              {carouselPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+            </button>
             <motion.button
               onClick={() => scroll('left')}
               animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
