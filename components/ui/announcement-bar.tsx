@@ -62,9 +62,9 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
       {visible && (
         <div
           style={{ height: ANNOUNCEMENT_BAR_HEIGHT }}
-          className="fixed top-0 left-0 right-0 z-[75] bg-black text-white flex items-center justify-center px-12"
+          className="fixed top-0 left-0 right-0 z-[75] bg-black text-white flex items-center justify-center px-10 sm:px-12"
         >
-          <div className="flex items-center gap-2.5">
+          <div className="flex min-w-0 items-center gap-2.5">
             <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />
             <AnimatePresence mode="wait">
               <motion.span
@@ -73,7 +73,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.4 }}
-                className="text-[11px] tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
+                className="min-w-0 max-w-[calc(100vw-7rem)] overflow-hidden text-ellipsis text-[10px] sm:max-w-none sm:text-[11px] tracking-[0.08em] sm:tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
               >
                 {current.href ? (
                   <Link href={current.href} className="hover:text-[#A68A6D] transition-colors">
@@ -90,14 +90,14 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
             onClick={() => setPaused((p) => !p)}
             aria-label={paused ? 'Reprendre le défilement des annonces' : 'Mettre en pause le défilement des annonces'}
             aria-pressed={paused}
-            className="absolute right-12 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-white/60 hover:text-white transition-colors sm:left-auto sm:right-12"
           >
             {paused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
           </button>
           <button
             onClick={handleClose}
             aria-label="Fermer la barre d'annonce"
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-white/60 hover:text-white transition-colors leading-none text-base"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-white/60 hover:text-white transition-colors leading-none text-base"
           >
             ×
           </button>

@@ -1659,7 +1659,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-4 mb-8 border border-neutral-200 p-4">
                 {[
                   { icon: <CreditCard className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Paiement sécurisé', sub: 'Stripe · 3D Secure' },
-                  { icon: <Truck className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Livraison offerte', sub: 'dès 40 CHF d’achat' },
+                  { icon: <Truck className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Livraison offerte', sub: `dès ${formatPrice(40, cur)} d’achat` },
                   { icon: <Package className="w-[18px] h-[18px]" strokeWidth={1.5} />, title: 'Emballage soigné', sub: 'expédié avec soin' },
                 ].map((r, i) => (
                   <div key={i} className="flex items-center gap-2.5">

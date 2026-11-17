@@ -83,3 +83,19 @@ Audit complet : 20 pages, 8 largeurs (de 320 à 1920 px).
 ## 6. Production
 
 Rien n'est déployé. Pour déployer cette version, votre accord écrit est nécessaire. La branche de production reste à `b9dafc4`, qui sert de point de retour arrière.
+
+## 7. Mise à jour après le rapport (accueil et barre d'annonce)
+
+Ajustements faits après la rédaction du rapport, sur la branche de développement :
+
+- « Best-seller » et « Top ventes » remplacés par « Coup de cœur » et « Notre sélection » : aucune donnée de vente ne justifie ces mentions.
+- Lien « Voir → » des cartes produit : 11 px, gris foncé (il était en 9 px, gris très pâle).
+- Seuil de livraison : le « 40 CHF » écrit en dur est remplacé par le montant dans la devise du visiteur (accueil, pied de page, fiche produit). La FAQ et les métadonnées de référence restent en CHF.
+- Barre d'annonce sur téléphone : le texte ne passe plus sous les boutons (le bouton pause est passé à gauche, le texte est tronqué si nécessaire).
+- Hero : dégradé plus sombre, accroche et ligne de réassurance plus lisibles.
+
+Vérifications : TypeScript sans erreur ; ESLint sans erreur sur les fichiers modifiés ; 24/24 tests unitaires ; 11/11 tests de parcours. Les mesures Lighthouse de la section 3 n'ont pas été refaites après ces derniers ajustements.
+
+Affirmations nouvelles à valider :
+- « Réponse sous 48 h ouvrées » (barre de confiance, mobile) : engagement de service à confirmer.
+- « Livraison en 1 à 4 semaines · Suivi inclus » (barre d'annonce) : délai et suivi à confirmer.

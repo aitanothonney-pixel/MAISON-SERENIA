@@ -534,7 +534,7 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
             <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Qualité vérifiée</span>
             <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Paiement facile</span>
           </div>
-          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
+          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
           <div className="relative">
             <button
               onClick={() => setLangOpen((o) => !o)}
@@ -1150,7 +1150,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
       <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Top ventes</p>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
             <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
               Coups de cœur
             </h2>
@@ -1191,7 +1191,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                     <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                      Best-seller
+                      Coup de cœur
                     </div>
                     {product.name.includes('Bubble') && (
                       <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
@@ -1341,7 +1341,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
                 </span>
               )}
             </div>
-            <span className="text-[9px] font-semibold tracking-wider uppercase text-neutral-300 group-hover:text-black transition-colors">
+            <span className="text-[11px] font-semibold tracking-wider uppercase text-neutral-600 group-hover:text-black transition-colors">
               Voir →
             </span>
           </div>
@@ -1920,6 +1920,7 @@ function CookieBanner() {
 }
 
 function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: string) => void }) {
+  const cur = useCurrency();
   return (
     <footer className="bg-white text-neutral-500 border-t border-neutral-200 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -2004,7 +2005,7 @@ function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: str
             </ul>
             <div className="mt-5 flex items-center gap-2 text-xs text-neutral-500">
               <Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} />
-              Livraison offerte dès 40 CHF
+              Livraison offerte dès {formatPrice(40, cur)}
             </div>
           </div>
         </div>
@@ -2422,7 +2423,7 @@ export default function Home() {
             preload
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75" />
         </div>
 
         {/* Content */}
@@ -2432,7 +2433,7 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
         >
-          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#D8C9B5] mb-6">
+          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#D8C9B5] mb-6 [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]">
             Collection 2026 · Mobilier d&apos;exception
           </p>
           <h1
@@ -2470,7 +2471,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/80"
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]"
           >
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
