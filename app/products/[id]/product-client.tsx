@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Link2, Plus, Gift, Sparkles, FileText } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Link2, Plus, Gift, Sparkles, FileText, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
 import { categoryToSlug } from '@/lib/collections';
@@ -906,6 +906,64 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     localStorage.setItem(key, JSON.stringify(updated));
   }, [product]);
 
+  // Photos : navigation (flèches, clavier, glissement) et agrandissement
+  const swipeStartRef = useRef<{ x: number; y: number } | null>(null);
+  const lightboxOpenerRef = useRef<HTMLElement | null>(null);
+  const lightboxDialogRef = useRef<HTMLDivElement | null>(null);
+  const lightboxCloseRef = useRef<HTMLButtonElement | null>(null);
+  const [zoomed, setZoomed] = useState(false);
+
+  const goToImage = useCallback((ni: number) => {
+    if (!product) return;
+    setSelectedImage(ni);
+    const lbl = product.imageColor?.[ni] || product.sizes?.find((s) => s.image === product.images[ni])?.label;
+    if (lbl) setSelectedSize(lbl);
+  }, [product]);
+
+  const stepImage = useCallback((delta: number) => {
+    if (!product || product.images.length < 2) return;
+    const n = product.images.length;
+    goToImage((selectedImage + delta + n) % n);
+  }, [product, selectedImage, goToImage]);
+
+  const openLightbox = (opener: HTMLElement) => {
+    lightboxOpenerRef.current = opener;
+    setZoomed(false);
+    setLightbox(true);
+  };
+
+  const closeLightbox = useCallback(() => {
+    setLightbox(false);
+    setZoomed(false);
+    lightboxOpenerRef.current?.focus();
+  }, []);
+
+  // Clavier dans l'agrandissement : Échap, flèches, focus maintenu dans la fenêtre, fond non défilant
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (e.key === 'ArrowRight') { stepImage(1); return; }
+      if (e.key === 'ArrowLeft') { stepImage(-1); return; }
+      if (e.key === 'Tab' && lightboxDialogRef.current) {
+        const focusable = lightboxDialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled])');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    lightboxCloseRef.current?.focus();
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [lightbox, stepImage, closeLightbox]);
+
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -1189,7 +1247,17 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative overflow-hidden rounded-xl bg-neutral-50 aspect-square"
+                className="group relative overflow-hidden rounded-xl bg-neutral-50 aspect-square touch-pan-y"
+                onPointerDown={(e) => { swipeStartRef.current = { x: e.clientX, y: e.clientY }; }}
+                onPointerUp={(e) => {
+                  const s = swipeStartRef.current;
+                  swipeStartRef.current = null;
+                  if (!s) return;
+                  const dx = e.clientX - s.x;
+                  const dy = e.clientY - s.y;
+                  if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) stepImage(dx < 0 ? 1 : -1);
+                }}
+                onPointerCancel={() => { swipeStartRef.current = null; }}
               >
                 {/* Toutes les images sont préchargées et empilées : changer d'image
                     = simple bascule d'opacité (aucun rechargement, instantané). */}
@@ -1206,6 +1274,16 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   />
                 ))}
 
+                {/* Agrandissement (clavier et tactile) */}
+                <button
+                  type="button"
+                  onClick={(e) => openLightbox(e.currentTarget)}
+                  aria-label="Agrandir la photo"
+                  className="absolute right-4 top-4 z-10 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] hover:bg-white transition-colors"
+                >
+                  <Maximize2 className="w-4 h-4" strokeWidth={1.5} />
+                </button>
+
                 {/* Flèches de navigation */}
                 {product.images.length > 1 && (
                   <>
@@ -1218,7 +1296,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         if (lbl) setSelectedSize(lbl);
                       }}
                       aria-label="Image précédente"
-                      className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
+                      className="absolute left-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
                     >
                       <ChevronRight className="w-5 h-5 rotate-180" strokeWidth={1} />
                     </button>
@@ -1231,7 +1309,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         if (lbl) setSelectedSize(lbl);
                       }}
                       aria-label="Image suivante"
-                      className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
+                      className="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center text-black bg-white/85 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.12)] opacity-0 group-hover:opacity-100 pointer-coarse:opacity-100 hover:shadow-[0_4px_18px_rgba(0,0,0,0.18)] transition-all duration-300 z-10"
                     >
                       <ChevronRight className="w-5 h-5" strokeWidth={1} />
                     </button>
@@ -1249,43 +1327,92 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               <AnimatePresence>
                 {lightbox && (
                   <motion.div
+                    ref={lightboxDialogRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={`Photo agrandie : ${product.name}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center"
-                    onClick={() => setLightbox(false)}
+                    className="fixed inset-0 z-[200] flex overflow-auto bg-black/90"
+                    onClick={closeLightbox}
                   >
                     <motion.div
-                      initial={{ scale: 0.88, opacity: 0 }}
+                      initial={{ scale: 0.92, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.88, opacity: 0 }}
+                      exit={{ scale: 0.92, opacity: 0 }}
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative max-w-[90vw] max-h-[90vh]"
+                      className={`relative m-auto transition-[width,height] duration-300 ${zoomed ? 'w-[200vw] h-[200vh]' : 'w-[92vw] h-[84vh]'}`}
                       onClick={(e) => e.stopPropagation()}
+                      onPointerDown={(e) => { swipeStartRef.current = { x: e.clientX, y: e.clientY }; }}
+                      onPointerUp={(e) => {
+                        const s = swipeStartRef.current;
+                        swipeStartRef.current = null;
+                        if (!s || zoomed) return;
+                        const dx = e.clientX - s.x;
+                        const dy = e.clientY - s.y;
+                        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) stepImage(dx < 0 ? 1 : -1);
+                      }}
                     >
-                      <img
+                      <Image
                         src={product.images[selectedImage]}
-                        alt={product.name}
-                        className="max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
+                        alt={`${product.name}, photo ${selectedImage + 1} sur ${product.images.length}`}
+                        fill
+                        sizes="92vw"
+                        className="object-contain"
                       />
                     </motion.div>
+
                     <button
-                      onClick={() => setLightbox(false)}
-                      className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
+                      ref={lightboxCloseRef}
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+                      aria-label="Fermer la photo agrandie"
+                      className="fixed top-5 right-5 z-10 text-white/80 hover:text-white transition-colors"
                     >
                       <X className="w-7 h-7" />
                     </button>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); setZoomed((z) => !z); }}
+                      className="fixed top-5 left-5 z-10 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/80 hover:text-white transition-colors"
+                    >
+                      {zoomed ? <ZoomOut className="w-5 h-5" strokeWidth={1.5} /> : <ZoomIn className="w-5 h-5" strokeWidth={1.5} />}
+                      {zoomed ? 'Réduire' : 'Zoomer'}
+                    </button>
+
                     {product.images.length > 1 && (
-                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                        {product.images.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={(e) => { e.stopPropagation(); setSelectedImage(i); }}
-                            className={`w-2 h-2 rounded-full transition-all duration-200 ${i === selectedImage ? 'bg-white scale-125' : 'bg-white/40'}`}
-                          />
-                        ))}
-                      </div>
+                      <>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); stepImage(-1); }}
+                          aria-label="Photo précédente"
+                          className="fixed left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/30 text-white/80 transition-colors hover:text-white md:left-6"
+                        >
+                          <ChevronRight className="w-6 h-6 rotate-180" strokeWidth={1.2} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); stepImage(1); }}
+                          aria-label="Photo suivante"
+                          className="fixed right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/30 text-white/80 transition-colors hover:text-white md:right-6"
+                        >
+                          <ChevronRight className="w-6 h-6" strokeWidth={1.2} />
+                        </button>
+                        <div className="fixed bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
+                          {product.images.map((_, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={(e) => { e.stopPropagation(); goToImage(i); }}
+                              aria-label={`Afficher la photo ${i + 1}`}
+                              aria-current={i === selectedImage ? 'true' : undefined}
+                              className={`h-2.5 w-2.5 rounded-full transition-all duration-200 ${i === selectedImage ? 'scale-125 bg-white' : 'bg-white/40 hover:bg-white/70'}`}
+                            />
+                          ))}
+                        </div>
+                      </>
                     )}
                   </motion.div>
                 )}
