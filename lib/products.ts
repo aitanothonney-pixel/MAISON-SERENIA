@@ -170,7 +170,7 @@ const rawProducts: Product[] = [
     price: 2787,
     description: 'Le Canapé Bubble 3 places en blanc crème immaculé — silhouette sculpturale et enveloppante, tissu bouclé doux au toucher. Une pièce maîtresse qui transforme instantanément votre salon.',
     images: [
-      '/catalog/bubble-blanc-1.webp',
+      '/catalog/bubble-blanc-ivoire-boucle.webp',
       '/catalog/bubble-blanc-2.webp',
       '/catalog/bubble-blanc-3.webp',
       '/catalog/bubble-blanc-4.webp',
