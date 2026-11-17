@@ -6,14 +6,14 @@ import Image from 'next/image';
 import { nice99, type Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
 
-export function CollectionCard({ product }: { product: Product }) {
+// position : 'lcp' = première carte (préchargée), 'eager' = cartes visibles dès l'ouverture, undefined = lazy
+export function CollectionCard({ product, position }: { product: Product; position?: 'lcp' | 'eager' }) {
   const cur = useCurrency();
   const [idx, setIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
   const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
-  const hasMultiple = product.images.length > 1;
 
   const onScroll = () => {
     const el = scrollRef.current;
@@ -38,6 +38,8 @@ export function CollectionCard({ product }: { product: Product }) {
                 src={img}
                 alt={`${product.name} ${i + 1}`}
                 fill
+                preload={position === 'lcp' && i === 0}
+                loading={position === 'eager' && i === 0 ? 'eager' : undefined}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
               />
