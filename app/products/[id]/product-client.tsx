@@ -1154,6 +1154,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     },
   ];
 
+  const isBubbleGallery = product.name.includes('Bubble');
   return (
     <>
     <div className="min-h-screen bg-white">
@@ -1246,7 +1247,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
 
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div
+              {!isBubbleGallery && (
+                <div
                 className="group relative overflow-hidden rounded-xl bg-white aspect-square touch-pan-y"
                 onPointerDown={(e) => { swipeStartRef.current = { x: e.clientX, y: e.clientY }; }}
                 onPointerUp={(e) => {
@@ -1323,6 +1325,45 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   </>
                 )}
               </div>
+              )}
+
+{isBubbleGallery && (
+                <div className="bg-[#F6F2EB] p-2">
+                  <div className="group relative aspect-[4/3] overflow-hidden bg-white">
+                    <Image
+                      src={product.images[selectedImage]}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      preload={selectedImage === 0}
+                      className="object-contain p-2"
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => openLightbox(e.currentTarget)}
+                      aria-label="Agrandir la photo"
+                      className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center bg-white/90 text-black shadow-[0_2px_12px_rgba(0,0,0,0.12)] transition-colors hover:bg-white"
+                    >
+                      <Maximize2 className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                  </div>
+                  {product.images.length > 1 && (
+                    <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                      {product.images.map((img, i) => i === selectedImage ? null : (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={(e) => { goToImage(i); openLightbox(e.currentTarget); }}
+                          aria-label={`Agrandir la photo ${i + 1}`}
+                          className="relative aspect-[4/3] overflow-hidden bg-white"
+                        >
+                          <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-contain p-2" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <AnimatePresence>
                 {lightbox && (
@@ -1418,7 +1459,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 )}
               </AnimatePresence>
 
-              {product.images.length > 1 && (
+              {!isBubbleGallery && product.images.length > 1 && (
                 <div className="flex gap-2 flex-wrap">
                   {product.images.map((img, i) => (
                     <button
