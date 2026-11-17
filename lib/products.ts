@@ -202,9 +202,10 @@ const rawProducts: Product[] = [
     price: 2787,
     description: 'Le Canapé Bubble 3 places en bleu Klein intense — une présence sculpturale et chromatique forte. Texture maille 3D signature, assise généreuse et enveloppante.',
     images: [
-      '/catalog/R1tJYDf.jpg',
-      '/catalog/tMbZ7D3Y.jpg',
-      '/catalog/QjXv6K98.jpg',
+      '/catalog/bubble-bleu-royal-1.webp',
+      '/catalog/bubble-bleu-royal-2.webp',
+      '/catalog/bubble-bleu-royal-3.webp',
+      '/catalog/bubble-bleu-royal-4.webp',
     ],
     dimensions: 'L 225 × P 114 × H 76 cm',
     material: 'Tissu maille 3D, base laquée',

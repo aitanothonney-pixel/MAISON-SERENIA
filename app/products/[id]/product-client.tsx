@@ -1247,7 +1247,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-4">
               <div
-                className="group relative overflow-hidden rounded-xl bg-neutral-50 aspect-square touch-pan-y"
+                className="group relative overflow-hidden rounded-xl bg-white aspect-square touch-pan-y"
                 onPointerDown={(e) => { swipeStartRef.current = { x: e.clientX, y: e.clientY }; }}
                 onPointerUp={(e) => {
                   const s = swipeStartRef.current;
@@ -1429,7 +1429,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         const lbl = product.imageColor?.[i] || product.sizes?.find((s) => s.image === img)?.label;
                         if (lbl) setSelectedSize(lbl);
                       }}
-                      className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-neutral-50 transition-all duration-200 ${
+                      className={`relative w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-white transition-all duration-200 ${
                         selectedImage === i ? 'ring-2 ring-black ring-offset-1' : 'opacity-50 hover:opacity-100'
                       }`}
                     >

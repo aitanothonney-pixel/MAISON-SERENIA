@@ -1266,7 +1266,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
             alt={product.name}
             width={600}
             height={450}
-            style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : [7, 8, 9, 10, 13].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
+            style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : product.id === 13 ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
             className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
           {product.images[1] && (
@@ -1275,7 +1275,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
               alt={product.name}
               width={600}
               height={450}
-              style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : [7, 8, 9, 10, 13].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : undefined}
+              style={isBubble ? { transform: product.id === 12 ? 'scale(1.3)' : product.id === 13 ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : undefined}
               className={`absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${product.category === 'Décorations' || product.category === 'Été' || product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
             />
           )}
