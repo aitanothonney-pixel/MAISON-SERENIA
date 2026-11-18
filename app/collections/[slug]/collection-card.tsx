@@ -39,8 +39,8 @@ export function CollectionCard({ product, position }: { product: Product; positi
                 alt={`${product.name} ${i + 1}`}
                 fill
                 preload={position === 'lcp' && i === 0}
-                fetchPriority={position === 'lcp' && i === 0 ? 'high' : 'auto'}
-                loading={position === 'eager' && i === 0 ? 'eager' : undefined}
+                fetchPriority={position && i === 0 ? 'high' : 'auto'}
+                loading={position && i === 0 ? 'eager' : undefined}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
               />

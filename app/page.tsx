@@ -6,13 +6,8 @@ import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, ChevronRight, Share2, Heart, Globe, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles, Pause, Play } from 'lucide-react';
-import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
-import { TestimonialsColumn, type Testimonial } from '@/components/ui/testimonials-columns-1';
-import { VERIFIED_TESTIMONIALS } from '@/lib/testimonials';
-import { motion as motionLib } from 'motion/react';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
-import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
+import { ShoppingBag, ChevronRight, Heart, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles, Pause, Play } from 'lucide-react';
+import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1381,90 +1376,6 @@ function ProductFilterBar({
   );
 }
 
-// ─── Interior Showcase ────────────────────────────────────────────────────────
-
-function InteriorShowcaseSection({ onCategoryClick }: { onCategoryClick: (cat: string, section: string) => void }) {
-  return (
-    <FadeInSection>
-      <div className="flex flex-col overflow-hidden bg-white">
-        <ContainerScroll
-          titleComponent={
-            <div className="mb-8">
-              <p className="text-xs tracking-[0.3em] uppercase mb-4 text-neutral-500">L&apos;art de vivre</p>
-              <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-                Des intérieurs qui vous <br />
-                <span className="italic">ressemblent</span>
-              </h2>
-              <p className="mt-4 text-neutral-500 max-w-xl mx-auto text-base">
-                Chaque pièce est pensée pour s&apos;intégrer harmonieusement dans votre espace de vie.
-              </p>
-            </div>
-          }
-        >
-          <div className="grid grid-cols-3 grid-rows-2 gap-2 h-full w-full">
-            {/* Salon */}
-            <button onClick={() => onCategoryClick('Salon', 'section-salon')} className="col-span-2 row-span-2 relative overflow-hidden rounded-xl group cursor-pointer text-left">
-              <Image
-                src="/catalog/j9h5SNVC.jpg"
-                alt="Salon MAISON SERENIA"
-                fill
-                sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-all duration-300 group-hover:from-black/70" />
-              <div className="absolute bottom-4 left-4 text-white">
-                <p className="text-xs tracking-widest uppercase opacity-70">Collection</p>
-                <p className="text-lg font-semibold" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Salon</p>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-xs font-bold tracking-widest uppercase px-5 py-2.5 rounded-full translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  Voir la collection →
-                </span>
-              </div>
-            </button>
-
-            {/* Décorations */}
-            <button onClick={() => onCategoryClick('Décorations', 'section-figurines')} className="relative overflow-hidden rounded-xl group cursor-pointer">
-              <Image
-                src="/catalog/hxfV4W3d.jpg"
-                alt="Décorations"
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Décorations</div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-                  Voir →
-                </span>
-              </div>
-            </button>
-
-            {/* Meubles */}
-            <button onClick={() => onCategoryClick('Meubles', 'section-bureau')} className="relative overflow-hidden rounded-xl group cursor-pointer">
-              <Image
-                src="https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=600&q=80"
-                alt="Meubles"
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-300 group-hover:from-black/60" />
-              <div className="absolute bottom-3 left-3 text-white text-sm font-semibold">Meubles</div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <span className="bg-white/20 backdrop-blur-sm border border-white/40 text-white text-[10px] font-bold tracking-widest uppercase px-3 py-2 rounded-full translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-                  Voir →
-                </span>
-              </div>
-            </button>
-          </div>
-        </ContainerScroll>
-      </div>
-    </FadeInSection>
-  );
-}
-
 // ─── Shop by Category (bloc catégories bien visible, style meublier) ──────────
 
 function ShopByCategory() {
@@ -1537,11 +1448,6 @@ function ShopByCategory() {
     </FadeInSection>
   );
 }
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-
-const testimonials: Testimonial[] = VERIFIED_TESTIMONIALS;
-
 
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
 
@@ -1720,50 +1626,6 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   );
 }
 
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 9);
-
-function TestimonialsSection() {
-  if (testimonials.length === 0) return null; // aucun avis réel : section non affichée
-  return (
-    <FadeInSection>
-      <section className="bg-white py-20">
-        <div className="container z-10 mx-auto">
-          <motionLib.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
-          >
-            <div className="flex justify-center">
-              <div className="border border-black text-black py-1 px-4 text-xs tracking-[0.2em] uppercase">
-                Témoignages
-              </div>
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl mt-5 text-center uppercase" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)', letterSpacing: '0.12em', fontWeight: 500 }}>
-              Ce que disent nos clients
-            </h2>
-            <p className="text-center mt-5 text-neutral-500 text-sm">
-              Notre sélection, pensée pour sublimer votre intérieur.
-            </p>
-          </motionLib.div>
-
-          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
-            <TestimonialsColumn testimonials={firstColumn} duration={15} />
-            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-
 // ─── Trust Strip ─────────────────────────────────────────────────────────────
 
 function TrustStrip() {
@@ -1864,258 +1726,6 @@ function NewsletterSection() {
         </FadeInSection>
       </div>
     </section>
-  );
-}
-
-// ─── Cookie Banner ────────────────────────────────────────────────────────────
-
-function CookieBanner() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('cookie-consent');
-    // Lecture du consentement cookies (store client) au montage — motif légitime.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!stored) setVisible(true);
-  }, []);
-
-  const handleChoice = (choice: 'accepted' | 'refused') => {
-    localStorage.setItem('cookie-consent', choice);
-    setVisible(false);
-  };
-
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-0 left-0 right-0 z-50 bg-black shadow-lg border-t border-neutral-800"
-        >
-          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4">
-            <p className="text-sm text-neutral-300 text-center sm:text-left">
-              Nous utilisons des cookies pour améliorer votre expérience.
-            </p>
-            <div className="flex gap-3 shrink-0">
-              <button
-                onClick={() => handleChoice('refused')}
-                className="text-sm px-5 py-2 border border-white text-white rounded hover:bg-white/10 transition-colors"
-              >
-                Refuser
-              </button>
-              <button
-                onClick={() => handleChoice('accepted')}
-                className="text-sm px-5 py-2 bg-white text-black rounded hover:bg-neutral-200 transition-colors"
-              >
-                Tout accepter
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-function Footer({ onSectionNav }: { onSectionNav: (section: string, filter?: string) => void }) {
-  const cur = useCurrency();
-  return (
-    <footer className="bg-white text-neutral-500 border-t border-neutral-200 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
-
-          {/* Col 1 — Brand */}
-          <div className="col-span-2 lg:col-span-1">
-            <div className="mb-4">
-              <Logo color="black" size="md" />
-            </div>
-            <p className="text-sm leading-relaxed mb-1 text-neutral-600">Mobilier & pièces d&apos;exception.</p>
-            <p className="text-sm mb-5 text-neutral-500">Genève, Suisse 🇨🇭</p>
-            <div className="flex items-center gap-4">
-              <a href="https://www.instagram.com/serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-neutral-500 hover:text-black transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-              </a>
-              <a href="https://www.tiktok.com/@serenia_officiel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-neutral-500 hover:text-black transition-colors text-sm font-medium tracking-wider">
-                TikTok
-              </a>
-            </div>
-          </div>
-
-          {/* Col 2 — Nos Collections */}
-          <div>
-            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Nos Collections</h4>
-            <ul className="space-y-2.5 text-sm">
-              {[
-                { label: 'Salon', section: 'section-salon', filter: 'Salon' },
-                { label: 'Meubles', section: 'section-bureau', filter: 'Meubles' },
-                { label: 'Décorations', section: 'section-figurines', filter: 'Décorations' },
-                { label: 'Promotions', section: 'section-salon', filter: 'Bubble' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <button
-                    onClick={() => onSectionNav(item.section, item.filter)}
-                    className="text-neutral-500 hover:text-black transition-colors"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 — Service Client */}
-          <div>
-            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Service Client</h4>
-            <ul className="space-y-2.5 text-sm">
-              {[
-                { label: 'Livraison', href: '/livraison' },
-                { label: 'Retours & échanges', href: '/retours' },
-                { label: 'Questions fréquentes', href: '/faq' },
-                { label: 'Nous contacter', href: '/contact' },
-                { label: 'À propos', href: '/a-propos' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="text-neutral-500 hover:text-black transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4 — Informations */}
-          <div>
-            <h4 className="text-black text-xs font-semibold tracking-[0.2em] uppercase mb-4">Informations</h4>
-            <ul className="space-y-2.5 text-sm">
-              {[
-                { label: 'Mentions légales', href: '/mentions-legales' },
-                { label: 'Conditions générales', href: '/cgv' },
-                { label: 'Confidentialité', href: '/confidentialite' },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link href={item.href} className="text-neutral-500 hover:text-black transition-colors">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-5 flex items-center gap-2 text-xs text-neutral-500">
-              <Truck className="w-4 h-4 text-[#7F6A52]" strokeWidth={1.5} />
-              Livraison offerte dès {formatPrice(40, cur)}
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-neutral-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>
-            © 2026 Maison Serenia · Genève, Suisse
-          </p>
-          <div className="flex items-center gap-2.5 flex-wrap justify-center">
-            {/* Visa */}
-            <div className="h-7 w-11 rounded border border-neutral-200 bg-white flex items-center justify-center">
-              <span className="text-[#1A1F71] text-[13px] font-bold italic tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>VISA</span>
-            </div>
-            {/* Mastercard */}
-            <div className="h-7 w-11 rounded border border-neutral-200 bg-white flex items-center justify-center">
-              <span className="relative inline-block w-6 h-4">
-                <span className="absolute left-0 top-0 w-4 h-4 rounded-full bg-[#EB001B]" />
-                <span className="absolute right-0 top-0 w-4 h-4 rounded-full bg-[#F79E1B] mix-blend-multiply" />
-              </span>
-            </div>
-            {/* PayPal */}
-            <div className="h-7 px-2.5 rounded border border-neutral-200 bg-white flex items-center justify-center">
-              <span className="text-[12px] font-bold italic" style={{ fontFamily: 'Arial, sans-serif' }}>
-                <span className="text-[#003087]">Pay</span><span className="text-[#009CDE]">Pal</span>
-              </span>
-            </div>
-            {/* Apple Pay */}
-            <div className="h-7 px-2.5 rounded bg-black flex items-center justify-center gap-0.5">
-              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="white"><path d="M17 13.5c0-2 1.6-3 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.3 0-2.6.8-3.2 2-1.4 2.4-.4 6 1 8 .7 1 1.4 2 2.4 2 1 0 1.3-.6 2.5-.6s1.5.6 2.5.6 1.7-1 2.4-2c.7-1.1 1-2.2 1-2.3-.1 0-2.3-.9-2.3-3.2Zm-2-6c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.2 1.1-.5.6-.9 1.4-.8 2.3.9.1 1.7-.4 2.2-1Z"/></svg>
-              <span className="text-white text-[12px] font-medium" style={{ fontFamily: 'Arial, sans-serif' }}>Pay</span>
-            </div>
-            {/* Amex */}
-            <div className="h-7 w-11 rounded bg-[#2E77BC] flex items-center justify-center">
-              <span className="text-white text-[10px] font-bold tracking-tight" style={{ fontFamily: 'Arial, sans-serif' }}>AMEX</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-// ─── Décorations Section ────────────────────────────────────────────────────────
-
-function DécorationsSection() {
-  const cur = useCurrency();
-  const { isWished, toggle } = useWishlist();
-  const figurines = products
-    .filter((p) => p.category === 'Décorations')
-    .sort((a, b) => {
-      const rank = (n: string) => {
-        const l = n.toLowerCase();
-        if (l.includes('lampe') || l.includes('lustre') || l.includes('suspendue') || l.includes('luminaire')) return 0;
-        return n.includes('Tableau') ? 1 : n.includes('KAWS') || n.includes('Bearbrick') || n.includes('Figurine') ? 3 : 2;
-      };
-      const ra = rank(a.name), rb = rank(b.name);
-      if (ra !== rb) return ra - rb;
-      return b.id - a.id;
-    });
-
-  return (
-    <FadeInSection>
-      <section id="section-figurines" className="py-16 max-w-7xl mx-auto px-6 lg:px-10 scroll-mt-20">
-        <div className="mb-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-neutral-500">Collection</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            Décorations
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {figurines.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group"
-            >
-              <Link href={`/products/${product.id}`}>
-                <div className="relative aspect-[4/3] overflow-hidden bg-white border border-neutral-100 mb-3 transition-shadow duration-300">
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={`object-contain transition-all duration-700 group-hover:scale-105 ${product.id === 34 ? 'p-1 scale-[1.35]' : 'p-4'}`}
-                  />
-                  <button
-                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  >
-                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                  </button>
-                  <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <span className="block w-full text-center bg-black text-white text-[9px] tracking-widest uppercase py-2.5">
-                      Voir le produit
-                    </span>
-                  </div>
-                </div>
-                <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-                <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-    </FadeInSection>
   );
 }
 
@@ -2243,7 +1853,7 @@ export default function Home() {
   const [sortBy, setSortBy] = useState('recommandes');
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [flashCat, setFlashCat] = useState<string | null>(null);
+  const [flashCat] = useState<string | null>(null);
   const barVisible = useAnnouncementBarVisible();
 
   const handleSectionNav = (section: string, filter?: string) => {
@@ -2652,8 +2262,6 @@ export default function Home() {
 
       <BundlesSection onCartOpen={() => setCartOpen(true)} />
       <NewsletterSection />
-      <Footer onSectionNav={handleSectionNav} />
-      <CookieBanner />
     </div>
   );
 }

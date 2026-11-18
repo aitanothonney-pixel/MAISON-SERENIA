@@ -5,11 +5,9 @@ import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
 import { WelcomePopup } from '@/components/ui/welcome-popup'
 import { MotionProvider } from '@/components/ui/motion-provider'
-import { BrevoTracker } from '@/components/ui/brevo-tracker'
+import { CookieConsent } from '@/components/ui/cookie-consent'
+import { SiteFooter } from '@/components/ui/site-footer'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
-import Script from 'next/script'
-
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -109,22 +107,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <MotionProvider>
         <CurrencyProvider value={currency}>
-          <AnnouncementBar>{children}</AnnouncementBar>
+          <AnnouncementBar>
+            {children}
+            <SiteFooter />
+          </AnnouncementBar>
           <WelcomePopup />
+          <CookieConsent />
         </CurrencyProvider>
         </MotionProvider>
-        <BrevoTracker />
-        {GA_ID && (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-            <Script id="ga4-init" strategy="afterInteractive">
-              {`window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}');`}
-            </Script>
-          </>
-        )}
       </body>
     </html>
   )

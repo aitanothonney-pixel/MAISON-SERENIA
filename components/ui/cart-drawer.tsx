@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -28,6 +29,7 @@ const BUNDLE_PRICE = 2778;
 const GIFT_TABLEAU_PRICE = 67; // tableau 50×70 offert avec un ensemble
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const router = useRouter();
   const { items, addItem, removeItem, updateQty, clearCart } = useCart();
   const cur = useCurrency();
   const isBubble = (id: number) => [2, 6, 7, 8, 9, 10, 12, 13, 22].includes(id);
@@ -195,10 +197,17 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   const goShopping = () => {
     handleClose();
+    // Défile vers la collection Salon une fois la page d'accueil affichée.
+    const scrollToSalon = (tries: number) => {
+      const el = document.getElementById('section-salon');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else if (tries > 0) setTimeout(() => scrollToSalon(tries - 1), 100);
+    };
     if (window.location.pathname === '/') {
-      setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+      setTimeout(() => scrollToSalon(0), 300);
     } else {
-      window.location.assign('/#section-salon');
+      router.push('/');
+      setTimeout(() => scrollToSalon(40), 150);
     }
   };
 
@@ -716,8 +725,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                           <span className="flex items-center gap-2.5 min-w-0">
                             <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
                             <span className="flex flex-col min-w-0">
-                              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                              <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Remise de 10 % immédiate</span>
+                              <span className="text-[11px] text-[#7F6A52] leading-tight">Activée en un clic, sans code</span>
                             </span>
                           </span>
                           <span className="shrink-0 bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
@@ -753,7 +762,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
                     {(bubbleSavings > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 bg-[#7F6A52]/5 border border-[#A68A6D]/40 px-3 py-2.5">
-                        <span className="text-[12px] text-[#7F6A52] font-semibold">🎉 Vous cumulez 2 offres : −30% collection + −10% membre</span>
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">🎉 Vous cumulez 2 remises : −30 % collection + −10 %</span>
                       </div>
                     )}
 
@@ -779,7 +788,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
-                          <span>Code membre −10%</span>
+                          <span>Remise −10 %</span>
                           <span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
@@ -876,8 +885,8 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <span className="flex items-center gap-2.5 min-w-0">
                           <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
                           <span className="flex flex-col min-w-0">
-                            <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-                            <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+                            <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Remise de 10 % immédiate</span>
+                            <span className="text-[11px] text-[#7F6A52] leading-tight">Activée en un clic, sans code</span>
                           </span>
                         </span>
                         <span className="shrink-0 bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">

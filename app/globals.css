@@ -80,6 +80,11 @@ html {
   color: #6b6660;
 }
 
+/* Bandeau cookies ouvert : la barre d'achat mobile des fiches produit s'efface pour ne pas le masquer. */
+html[data-cookie-banner='open'] .pdp-sticky-cta {
+  display: none;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

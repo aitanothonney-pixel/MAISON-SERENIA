@@ -216,8 +216,8 @@ function CheckoutDrawer({
           <span className="flex items-center gap-2.5 min-w-0">
             <Sparkles className="w-4 h-4 text-[#7F6A52] shrink-0" />
             <span className="flex flex-col min-w-0">
-              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Offre exceptionnelle — −10% immédiat</span>
-              <span className="text-[11px] text-[#7F6A52] leading-tight">Votre avantage membre, activé en un clic · aujourd&apos;hui seulement</span>
+              <span className="text-[13px] font-bold text-[#7F6A52] leading-tight">Remise de 10 % immédiate</span>
+              <span className="text-[11px] text-[#7F6A52] leading-tight">Activée en un clic, sans code</span>
             </span>
           </span>
           <span className="shrink-0 rounded-lg bg-[#7F6A52] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-colors group-hover:bg-black">
@@ -252,14 +252,6 @@ function CheckoutDrawer({
     )
   );
 
-  const steps: { key: CheckoutStep; label: string; icon: React.ReactNode }[] = [
-    { key: 'cart', label: 'Panier', icon: <ShoppingBag className="w-3.5 h-3.5" /> },
-    { key: 'delivery', label: 'Livraison', icon: <Truck className="w-3.5 h-3.5" /> },
-    { key: 'payment', label: 'Paiement', icon: <CreditCard className="w-3.5 h-3.5" /> },
-    { key: 'confirmation', label: 'Confirmation', icon: <Check className="w-3.5 h-3.5" /> },
-  ];
-
-  const stepIndex = steps.findIndex((s) => s.key === step);
 
   const handlePay = async () => {
     setPayLoading(true);
@@ -383,7 +375,7 @@ function CheckoutDrawer({
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 mb-4 bg-[#7F6A52]/5 border border-[#A68A6D]/40 rounded-xl px-3 py-2.5">
                         <Gift className="w-4 h-4 text-[#7F6A52] shrink-0" />
-                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 remises : −30 % collection + −10 % 🎉</span>
                       </div>
                     )}
 
@@ -398,7 +390,7 @@ function CheckoutDrawer({
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-[#7F6A52] font-semibold">
-                          <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
+                          <span>Remise −10 %</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-neutral-500">
@@ -630,7 +622,7 @@ function CheckoutDrawer({
                     {(bubbleDiscount > 0 && welcomeDiscount > 0) && (
                       <div className="flex items-center gap-2 bg-[#7F6A52]/5 border border-[#A68A6D]/40 rounded-xl px-3 py-2.5">
                         <Gift className="w-4 h-4 text-[#7F6A52] shrink-0" />
-                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 offres : −30% collection + −10% membre 🎉</span>
+                        <span className="text-[12px] text-[#7F6A52] font-semibold">Vous cumulez 2 remises : −30 % collection + −10 % 🎉</span>
                       </div>
                     )}
 
@@ -648,7 +640,7 @@ function CheckoutDrawer({
                       )}
                       {welcomeDiscount > 0 && (
                         <div className="flex justify-between text-sm text-[#7F6A52] font-semibold">
-                          <span>Code membre −10%</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
+                          <span>Remise −10 %</span><span>−{formatPrice(welcomeDiscount, cur)}</span>
                         </div>
                       )}
                       <div className="flex justify-between text-sm text-neutral-500">
@@ -1159,7 +1151,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     <div className="min-h-screen bg-white">
       <CartToast show={showToast} productName={toastMessage || product.name} />
       {ctaOut && (
-        <div className="pdp fixed inset-x-0 bottom-0 z-[60] md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
+        <div className="pdp-sticky-cta pdp fixed inset-x-0 bottom-0 z-[60] md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="text-[12px] text-neutral-600 truncate">{product.name}</p>
             <p className="text-[15px] font-semibold text-black pdp-display">{formatPrice(unitPrice, cur)}</p>
