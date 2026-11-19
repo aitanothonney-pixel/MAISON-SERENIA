@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { BlackFridayCartouche } from '@/components/ui/black-friday-cartouche';
-import { BADGE_BUBBLE, PlancheCard, prixBubble, zoomDe } from '@/components/ui/planche-card';
+import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
+import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
@@ -17,6 +17,7 @@ import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
+import { heroMarcellus, heroRaleway } from '@/lib/hero-fonts';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -895,88 +896,283 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
 
 
-// ─── Planches Bubble (promotion Black Friday) ────────────────────────────────
+// ─── Full-width Promo Banner ──────────────────────────────────────────────────
 
-// Ordre d'affichage : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
-const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
-
-function BubblePromoPlanches() {
-  const items = products.filter((p) => bubblePromoProducts.includes(p.id))
-    .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
-
+function PromoBanner() {
+  const [lightbox, setLightbox] = useState(false);
   return (
-    <section id="bubble-promo" className="da-page scroll-mt-24">
-      <FadeInSection>
-        <div className="da-titre-section">
-          <span className="da-mono">Planches 01 à 09 · Promotion Black Friday</span>
-          <span className="da-mono">Cotes des pièces en centimètres</span>
-        </div>
-      </FadeInSection>
-      <div className="da-planches">
-        {items.map((product, index) => {
-          const prix = prixBubble(product.price);
-          return (
-            <PlancheCard
-              key={product.id}
-              product={product}
-              index={index}
-              price={prix.price}
-              oldPrice={prix.oldPrice}
-              badge={BADGE_BUBBLE}
-              zoom={zoomDe(product.id)}
-              wishlist
+    <FadeInSection>
+      <section className="w-full overflow-hidden relative">
+        <div className="relative min-h-[560px] md:min-h-[600px] py-14 md:py-16">
+          {/* Clickable background image */}
+          <button
+            onClick={() => setLightbox(true)}
+            className="absolute inset-0 w-full h-full cursor-zoom-in"
+            aria-label="Voir la photo en grand"
+          >
+            <Image
+              src="/catalog/99H4L0sP.jpg"
+              alt="Collection Salon Bubble en promotion"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
             />
-          );
-        })}
-      </div>
-    </section>
+          </button>
+          <div className="absolute inset-0 bg-black/65 pointer-events-none" />
+          <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
+            <p className="inline-block border border-[#A68A6D] text-[#D8C9B5] text-xs md:text-sm font-semibold tracking-[0.35em] uppercase px-5 py-2 mb-6">Black Friday</p>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+              Jusqu&apos;à −30% grâce au <span className="text-[#D8C9B5]">Black Friday</span><br className="hidden md:block" /> sur la collection Bubble
+            </h2>
+            <p className="text-white/70 text-sm mb-8 max-w-md">
+              {BLACK_FRIDAY_PROMO.endsAt
+                ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}, dans la limite des stocks disponibles.</>
+                : <>Remise appliquée automatiquement sur les pièces de la collection Bubble.</>}
+            </p>
+            <PromoCountdown endsAt={BLACK_FRIDAY_PROMO.endsAt} className="flex flex-col items-center" />
+
+            <Link
+              href="/promotions"
+              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#7F6A52] hover:text-white transition-colors"
+            >
+              Voir les produits en promotion
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+            onClick={() => setLightbox(false)}
+          >
+            <motion.img
+              src="/catalog/99H4L0sP.jpg"
+              alt="Collection Salon Bubble en promotion"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="max-w-[95vw] max-h-[95vh] object-contain rounded-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              onClick={() => setLightbox(false)}
+              className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
+              aria-label="Fermer"
+            >
+              <X className="w-7 h-7" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </FadeInSection>
   );
 }
 
-// ─── Bestsellers Section (planches) ──────────────────────────────────────────
+// ─── Bubble Promo Carousel ────────────────────────────────────────────────────
+
+// Ordre d'affichage du carrousel : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
+const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
+
+function BubblePromoCarousel() {
+  const cur = useCurrency();
+  const items = products.filter((p) => bubblePromoProducts.includes(p.id))
+    .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
+  const { isWished, toggle } = useWishlist();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+
+  const updateArrows = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 8);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+  };
+
+  const scroll = (dir: 'left' | 'right') => {
+    scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <section id="bubble-promo" className="py-16 scroll-mt-24">
+        <FadeInSection>
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <motion.button
+                onClick={() => scroll('left')}
+                animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
+                transition={{ duration: 0.25 }}
+                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
+                aria-label="Précédent"
+              >
+                <ChevronRight className="w-4 h-4 rotate-180" />
+              </motion.button>
+              <motion.button
+                onClick={() => scroll('right')}
+                animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
+                transition={{ duration: 0.25 }}
+                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
+                aria-label="Suivant"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+          </div>
+        </FadeInSection>
+        <div
+          ref={scrollRef}
+          onScroll={updateArrows}
+          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"
+        >
+          {items.map((product) => (
+            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72">
+              <Link href={`/products/${product.id}`}>
+              <div className="relative overflow-hidden bg-white mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  width={400}
+                  height={300}
+                  style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
+                  className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+                />
+                {product.images[1] && (
+                  <Image
+                    src={product.images[1]}
+                    alt={product.name}
+                    width={400}
+                    height={300}
+                    style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
+                    className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                  −30%
+                </div>
+                <button
+                  onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+                  aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                >
+                  <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                </button>
+              </div>
+              <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
+              <div className="flex items-center gap-2">
+                <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
+                <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
+              </div>
+            </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+// ─── Bestsellers Section ──────────────────────────────────────────────────────
 
 const bestsellerIds = [100, 135, 140, 103];
 
 function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
+  const cur = useCurrency();
   const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
+  const { isWished, toggle } = useWishlist();
 
   return (
-    <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
-      <FadeInSection>
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="da-mono mb-2">Notre sélection</p>
-            <h2 className="text-2xl md:text-3xl text-black">Coups de cœur</h2>
-            <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
+    <>
+      <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
+        <FadeInSection>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                Coups de cœur
+              </h2>
+              <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
+            </div>
+            <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
+              Tout voir <ChevronRight className="w-3 h-3" />
+            </button>
           </div>
-          <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
-            Tout voir <ChevronRight className="w-3 h-3" />
-          </button>
-        </div>
-      </FadeInSection>
-      <div className="da-planches da-planches--quatre">
-        {bestsellers.map((product, index) => {
-          const bubble = product.name.includes('Bubble');
-          const prix = bubble ? prixBubble(product.price) : { price: product.price, oldPrice: undefined };
-          return (
-            <PlancheCard
+        </FadeInSection>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {bestsellers.map((product) => (
+            <div
               key={product.id}
-              product={product}
-              index={index}
-              price={prix.price}
-              oldPrice={prix.oldPrice}
-              badge={bubble ? BADGE_BUBBLE : 'Coup de cœur'}
-              zoom={zoomDe(product.id)}
-              wishlist
-            />
-          );
-        })}
-      </div>
-    </section>
+              className="group overflow-hidden"
+            >
+              <Link href={`/products/${product.id}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'p-3' : ''}`}>
+                  <Image
+                    src={product.images[0]}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className={`transition-transform duration-600 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
+                  />
+                  {product.images[1] && (
+                    <Image
+                      src={product.images[1]}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
+                    />
+                  )}
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                      Coup de cœur
+                    </div>
+                    {product.name.includes('Bubble') && (
+                      <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                        −30%
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+                    aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                  >
+                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                  </button>
+                </div>
+                <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
+                <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
+                <div className="flex items-center gap-2">
+                  {product.name.includes('Bubble') ? (
+                    <>
+                      <p className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</p>
+                      <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
+                    </>
+                  ) : (
+                    <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
+                  )}
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
-// ─── Product Card (planche) ──────────────────────────────────────────────────
+// ─── Product Card (with optional badge) ──────────────────────────────────────
 
 const newProductIds: number[] = [];
 const saleProductIds: number[] = [];
@@ -989,29 +1185,108 @@ interface ProductPreview {
   price: number;
   images: string[];
   category: string;
-  dimensions?: string;
-  material?: string;
 }
 
-function ProductCard({ product, index }: { product: ProductPreview; index?: number }) {
-  const isBubble = bubbleProductIds.includes(product.id);
+function ProductCard({ product }: { product: ProductPreview }) {
+  const cur = useCurrency();
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
-  const prix = isBubble
-    ? prixBubble(product.price)
-    : { price: product.price, oldPrice: isSale ? Math.round(product.price * 1.25) : undefined };
-  const badge = isBubble ? BADGE_BUBBLE : isNew ? 'Nouveau' : isSale ? '−20 %' : undefined;
+  const isBubble = bubbleProductIds.includes(product.id);
+  const { isWished, toggle } = useWishlist();
 
   return (
-    <PlancheCard
-      product={product}
-      index={index}
-      price={prix.price}
-      oldPrice={prix.oldPrice}
-      badge={badge}
-      zoom={zoomDe(product.id)}
-      wishlist
-    />
+    <div
+      className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
+    >
+      <Link href={`/products/${product.id}`}>
+        <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            width={600}
+            height={450}
+            style={isBubble ? { transform: [10, 12, 13, 22].includes(product.id) ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
+            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+          />
+          {product.images[1] && (
+            <Image
+              src={product.images[1]}
+              alt={product.name}
+              width={600}
+              height={450}
+              style={isBubble ? { transform: [10, 12, 13, 22].includes(product.id) ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : undefined}
+              className={`absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${product.category === 'Décorations' || product.category === 'Été' || product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+            />
+          )}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+
+          {/* Badges */}
+          <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+            {isBubble ? (
+              <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                −30%
+              </span>
+            ) : (
+              <>
+                {isNew && (
+                  <span className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
+                    Nouveau
+                  </span>
+                )}
+                {isSale && (
+                  <span className="bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 border border-neutral-200">
+                    −20%
+                  </span>
+                )}
+              </>
+            )}
+          </div>
+
+          {/* Wishlist */}
+          <button
+            onClick={(e) => { e.preventDefault(); toggle(product.id); }}
+            aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-3 right-3 bg-white/70 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+          >
+            <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+          </button>
+
+          {/* Quick view overlay — thin bottom bar */}
+          <div className="absolute inset-x-0 bottom-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+            <span className="block w-full text-center bg-black text-white text-[9px] tracking-widest uppercase py-2.5">
+              Voir le produit
+            </span>
+          </div>
+        </div>
+        <div className="p-4">
+          <div className="flex items-center justify-between mb-1">
+            <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
+          </div>
+          <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
+          <p className="text-neutral-500 text-[11px] mb-3 line-clamp-1">{product.description}</p>
+          <div className="h-px bg-neutral-100 mb-3" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-black font-bold text-sm price-luxe">
+                {formatPrice(isBubble ? nice99(Math.round(product.price * 0.7)) : product.price, cur)}
+              </span>
+              {isBubble && (
+                <span className="text-neutral-500 line-through text-xs price-luxe">
+                  {formatPrice(product.price, cur)}
+                </span>
+              )}
+              {isSale && !isBubble && (
+                <span className="text-neutral-500 line-through text-xs price-luxe">
+                  {formatPrice(Math.round(product.price * 1.25), cur)}
+                </span>
+              )}
+            </div>
+            <span className="text-[11px] font-semibold tracking-wider uppercase text-neutral-600 group-hover:text-black transition-colors">
+              Voir →
+            </span>
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 }
 
@@ -1515,6 +1790,7 @@ function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () => void 
 // ─── Cart Drawer ──────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const cur = useCurrency();
   const [activeFilter, setActiveFilter] = useState('Salon');
   const [visibleCount, setVisibleCount] = useState(12);
   // Réinitialise l'affichage à 12 produits quand on change d'onglet — motif légitime.
@@ -1688,11 +1964,104 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Cartouche Black Friday : titre, plan d'implantation et boutons (remplace le hero) */}
-      <BlackFridayCartouche marginTop={barVisible ? 190 : 150} />
+      {/* Hero — décalé sous le header fixe pour que l'image soit entièrement visible */}
+      <section
+        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable}`}
+        style={{ marginTop: barVisible ? 190 : 150, minHeight: `calc(100dvh - ${barVisible ? 190 : 150}px)` }}
+      >
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/catalog/accueil-hero-2026.webp"
+            alt="Salon d'exception signé Maison Serenia"
+            fill
+            sizes="100vw"
+            preload
+            fetchPriority="high"
+            className="object-cover object-center max-md:object-[20%_50%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75" />
+        </div>
 
-      {/* Planches Bubble : la promotion Black Friday, en grille, sans défilement */}
-      <BubblePromoPlanches />
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
+          style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}
+        >
+          <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#D8C9B5] mb-6 [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]">
+            Collection 2026 · Mobilier d&apos;exception
+          </p>
+          <h1
+            className="text-[2.8rem] md:text-[5.2rem] font-normal text-white uppercase leading-none"
+            style={{ fontFamily: 'var(--font-hero-titre), Georgia, serif', letterSpacing: '0.1em' }}
+          >
+            Maison Serenia
+          </h1>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 h-px w-28 origin-center"
+            style={{ background: 'linear-gradient(90deg, transparent, #A68A6D, transparent)' }}
+          />
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
+            <Link
+              href="/collections/salon"
+              className="bg-white text-black text-xs font-medium tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#7F6A52] hover:text-white transition-colors duration-300"
+            >
+              Découvrir la collection Salon
+            </Link>
+            <a
+              href="#bubble-promo"
+              className="border border-white/60 text-white text-xs font-medium tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors duration-300"
+            >
+              Voir les promotions
+            </a>
+          </div>
+
+          {/* Micro-réassurance */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]"
+          >
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
+            <span className="hidden sm:block w-px h-3 bg-white/25" />
+            <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Paiement sécurisé</span>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-white/60">Défiler pour découvrir</p>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ChevronRight className="w-4 h-4 text-white/60 rotate-90" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero.
+             L'espace reste, mais au scroll la section « remonte » vers le hero. */}
+      <motion.div
+        initial={{ opacity: 0, marginTop: 64 }}
+        whileInView={{ opacity: 1, marginTop: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <PromoBanner />
+      </motion.div>
+
+      {/* Carrousel Bubble — juste sous la bannière Black Friday */}
+      <BubblePromoCarousel />
 
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur, juste au-dessus de
              « Acheter par catégorie ». Animation : remonte à l'apparition.
@@ -1789,9 +2158,9 @@ export default function Home() {
                     hidden: {},
                     visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
                   }}
-                  className="da-planches da-planches--large"
+                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
                 >
-                  {displayedProducts.map((product, index) => (
+                  {displayedProducts.map((product) => (
                     <motion.div
                       key={product.id}
                       variants={{
@@ -1799,7 +2168,7 @@ export default function Home() {
                         visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
                       }}
                     >
-                      <ProductCard product={product} index={index} />
+                      <ProductCard product={product} />
                     </motion.div>
                   ))}
                 </motion.div>

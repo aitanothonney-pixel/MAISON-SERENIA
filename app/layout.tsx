@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Marcellus, IBM_Plex_Mono, Jost } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Italiana, Cinzel, Jost } from 'next/font/google'
 import { cookies } from 'next/headers'
 import './globals.css'
 import { AnnouncementBar } from '@/components/ui/announcement-bar'
@@ -9,18 +9,29 @@ import { CookieConsent } from '@/components/ui/cookie-consent'
 import { SiteFooter } from '@/components/ui/site-footer'
 import { CurrencyProvider, type Currency } from '@/lib/currency'
 
-// Titres : Marcellus. Texte : Jost. Cotes et libellés : IBM Plex Mono.
-const marcellus = Marcellus({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-marcellus',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
-const plexMono = IBM_Plex_Mono({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-plex-mono',
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+const italiana = Italiana({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-italiana',
+  display: 'swap',
+})
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-cinzel',
   display: 'swap',
 })
 
@@ -56,7 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cookieStore = await cookies();
   const currency: Currency = cookieStore.get('mss-currency')?.value === 'CHF' ? 'CHF' : 'EUR';
   return (
-    <html lang="fr" className={`${marcellus.variable} ${plexMono.variable} ${jost.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${italiana.variable} ${cinzel.variable} ${jost.variable}`}>
       <body>
         <script
           type="application/ld+json"
