@@ -16,7 +16,6 @@ import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
-import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
 
@@ -848,7 +847,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [openDim, setOpenDim] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined);
-  const barVisible = useAnnouncementBarVisible();
   // Barre d'achat fixe (mobile) : visible quand le bouton principal sort de l'écran
   const [ctaOut, setCtaOut] = useState(false);
   const ctaObserver = useRef<IntersectionObserver | null>(null);
@@ -1170,7 +1168,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
       {/* Navbar */}
-      <header className={`fixed left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all duration-300 ${barVisible ? 'top-10' : 'top-0'}`}>
+      <header className="relative z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
           <Logo color="black" size="md" />
           <div className="flex items-center gap-2">
@@ -1200,7 +1198,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
         </div>
       </header>
 
-      <div className={`pdp ${barVisible ? 'pt-[104px]' : 'pt-16'}${ctaOut ? ' pb-24 md:pb-0' : ''}`}>
+      <div className={`pdp${ctaOut ? ' pb-24 md:pb-0' : ''}`}>
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <nav className="flex items-center gap-2 text-xs text-neutral-500">

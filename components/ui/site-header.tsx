@@ -342,9 +342,8 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
 
-export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void; onSectionNav: (section: string, filter?: string) => void }) {
+export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWishlistOpen: () => void; onCartOpen: () => void; onSectionNav: (section: string, filter?: string) => void }) {
   const cur = useCurrency();
-  const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
@@ -352,7 +351,6 @@ export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }:
   const { count: cartCount } = useCart();
   const [mounted, setMounted] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [headerHidden, setHeaderHidden] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [lang, setLang] = useState('FR');
 
@@ -393,19 +391,9 @@ export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }:
   };
 
   useEffect(() => {
-    let lastY = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > (hasBar ? 76 : 40));
-      // Masque le header en défilant vers le bas, le révèle en remontant
-      if (y > lastY && y > 240) setHeaderHidden(true);
-      else if (y < lastY) setHeaderHidden(false);
-      lastY = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
     const t = setTimeout(() => setMounted(true), 800);
-    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
-  }, [hasBar]);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (!searchFocused) return;
@@ -431,10 +419,7 @@ export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }:
 
   return (
     <>
-    <header
-      className={`fixed left-0 right-0 z-50 bg-white transition-[transform,box-shadow] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
-      style={{ transform: headerHidden ? `translateY(-${hasBar ? 192 : 152}px)` : 'translateY(0)' }}
-    >
+    <header className="relative z-40 bg-white shadow-sm">
       {/* Ligne 1 — barre d'arguments et langue */}
       <div className="bg-[#f4f2ee] border-b border-neutral-200">
         <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-9 flex items-center justify-between text-[12px] text-neutral-700" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>

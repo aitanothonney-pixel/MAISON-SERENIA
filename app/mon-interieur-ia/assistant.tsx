@@ -11,7 +11,6 @@ import {
 import { Logo } from '@/components/ui/logo';
 import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
 import { CartDrawer } from '@/components/ui/cart-drawer';
-import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { useRouter } from 'next/navigation';
 import { formatPrice, convertPrice, useCurrency } from '@/lib/currency';
 import { gaEvent } from '@/lib/analytics';
@@ -112,7 +111,6 @@ export default function Assistant() {
   const [chatMsgs, setChatMsgs] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
-  const barVisible = useAnnouncementBarVisible();
   const router = useRouter();
   const [wishOpen, setWishOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -298,16 +296,15 @@ export default function Assistant() {
     true;
 
   return (
-    <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)', paddingTop: barVisible ? 192 : 152 }}>
+    <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
       <SiteHeader
-        hasBar={barVisible}
         onWishlistOpen={() => setWishOpen(true)}
         onCartOpen={() => setCartOpen(true)}
         onSectionNav={(section) => router.push('/#' + section)}
       />
 
       {/* Barre de progression : les étapes commencent ici, comme avant */}
-      <div id="projet" className="scroll-mt-[200px] bg-white border-b border-neutral-100">
+      <div id="projet" className="bg-white border-b border-neutral-100">
         <div className="max-w-3xl mx-auto px-6 py-4">
           <div className="flex items-center justify-end mb-2">
             <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">Étape {stepIdx + 1} / {flow.length}</span>

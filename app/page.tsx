@@ -900,7 +900,7 @@ export default function Home() {
     <div className="bg-white">
       <ScrollProgressBar />
       <BackToTop />
-      <SiteHeader hasBar={barVisible} onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} onSectionNav={handleSectionNav} />
+      <SiteHeader onWishlistOpen={() => setWishlistOpen(true)} onCartOpen={() => setCartOpen(true)} onSectionNav={handleSectionNav} />
       <WishlistDrawer open={wishlistOpen} onClose={() => setWishlistOpen(false)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
@@ -932,10 +932,10 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero — collé sous le header fixe, sans bande blanche : la marge reprend la hauteur de l'en-tête
-          (152 px, plus 40 px avec la barre d'annonce) */}
+      {/* Hero : occupe l'écran sous le bandeau et l'en-tête, qui défilent avec la page
+          (hauteur calculée : 192 px avec la barre d'annonce, 152 px sans) */}
       <section
-        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable} ${barVisible ? 'mt-[192px] min-h-[calc(100dvh_-_192px)]' : 'mt-[152px] min-h-[calc(100dvh_-_152px)]'}`}
+        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable} ${barVisible ? 'min-h-[calc(100dvh_-_192px)]' : 'min-h-[calc(100dvh_-_152px)]'}`}
       >
         {/* Background image */}
         <div className="absolute inset-0">

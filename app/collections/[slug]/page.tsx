@@ -37,7 +37,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
       {/* Barre de navigation entre collections (collante) */}
-      <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-neutral-100">
+      <nav className="relative bg-white/95 backdrop-blur-md border-b border-neutral-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <Link href="/" className="text-[13px] tracking-wide text-neutral-500 hover:text-black transition-colors whitespace-nowrap">
             ← Accueil
