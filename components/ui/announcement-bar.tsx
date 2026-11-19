@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useCurrency, formatPrice } from '@/lib/currency'
 import { Pause, Play } from 'lucide-react'
@@ -66,15 +65,9 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
         >
           <div className="flex min-w-0 items-center gap-2.5">
             <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.4 }}
-                className="min-w-0 max-w-[calc(100vw-7rem)] overflow-hidden text-ellipsis text-[10px] sm:max-w-none sm:text-[11px] tracking-[0.08em] sm:tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
-              >
+            <span
+              className="min-w-0 max-w-[calc(100vw-7rem)] overflow-hidden text-ellipsis text-[10px] sm:max-w-none sm:text-[11px] tracking-[0.08em] sm:tracking-[0.15em] uppercase font-medium text-white/90 select-none whitespace-nowrap"
+            >
                 {current.href ? (
                   <Link href={current.href} className="hover:text-[#A68A6D] transition-colors">
                     {current.text}
@@ -82,8 +75,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
                 ) : (
                   current.text
                 )}
-              </motion.span>
-            </AnimatePresence>
+            </span>
             <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />
           </div>
           <button

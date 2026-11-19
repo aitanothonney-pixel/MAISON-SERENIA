@@ -5,7 +5,7 @@ import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
 import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, ChevronRight, Heart, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
@@ -21,19 +21,9 @@ import { heroMarcellus, heroRaleway } from '@/lib/hero-fonts';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
-function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
-    >
-      {children}
-    </motion.div>
-  );
+// Sans animation : titres et textes s'affichent immédiatement, sans fondu au défilement.
+function FadeInSection({ children }: { children: React.ReactNode }) {
+  return <div>{children}</div>;
 }
 
 // ─── Scroll Progress Bar ──────────────────────────────────────────────────────
@@ -1636,9 +1626,7 @@ function NewsletterSection() {
             Inscrivez-vous et recevez <span className="text-black font-medium">−10% sur votre première commande</span>, ainsi qu&apos;un accès en avant-première à nos nouvelles pièces et offres réservées aux membres.
           </p>
           {submitted ? (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+            <div
               className="max-w-md mx-auto"
             >
               <p className="text-black text-base font-medium mb-4">Bienvenue&nbsp;! 🎉 Votre réduction est activée.</p>
@@ -1647,7 +1635,7 @@ function NewsletterSection() {
                 <span className="text-[11px] uppercase tracking-widest text-neutral-500">−10%</span>
               </div>
               <p className="text-neutral-500 text-[11px] mt-3">Le code s&apos;applique automatiquement dans votre panier.</p>
-            </motion.div>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
               <div className="flex items-stretch border border-neutral-300 bg-white focus-within:border-black transition-colors">
@@ -1984,10 +1972,7 @@ export default function Home() {
         </div>
 
         {/* Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        <div
           className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
           style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}
         >
@@ -2025,17 +2010,14 @@ export default function Home() {
           </div>
 
           {/* Micro-réassurance */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
+          <div
             className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-10 text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]"
           >
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Truck className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Livraison offerte dès {formatPrice(40, cur)}</span>
             <span className="hidden sm:block w-px h-3 bg-white/25" />
             <span className="flex items-center gap-1.5 text-[11px] tracking-wide"><Shield className="w-3.5 h-3.5 text-[#A68A6D]" strokeWidth={1.5} /> Paiement sécurisé</span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}>
@@ -2049,31 +2031,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero.
-             L'espace reste, mais au scroll la section « remonte » vers le hero. */}
-      <motion.div
-        initial={{ opacity: 0, marginTop: 64 }}
-        whileInView={{ opacity: 1, marginTop: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      >
+      {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero. */}
+      <div>
         <PromoBanner />
-      </motion.div>
+      </div>
 
       {/* Carrousel Bubble — juste sous la bannière Black Friday */}
       <BubblePromoCarousel />
 
       {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur, juste au-dessus de
-             « Acheter par catégorie ». Animation : remonte à l'apparition.
+             « Acheter par catégorie ».
              Mise en page validée (proposition 23) : fond beige, fauteuil Bubble rouge détouré.
              Texte à gauche et fauteuil à droite à partir de xl ; empilés en dessous. */}
-      <motion.section
-        className="w-full"
-        initial={{ opacity: 0, marginTop: 64 }}
-        whileInView={{ opacity: 1, marginTop: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <section className="w-full">
           <div className="relative overflow-hidden bg-white text-[#111]">
             <div className="relative w-full max-w-7xl mx-auto px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
               <div className="max-w-[520px]">
@@ -2101,7 +2071,7 @@ export default function Home() {
             </div>
             <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#7F6A52] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
           </div>
-      </motion.section>
+      </section>
 
       {/* Bande de réassurance, juste sous la bannière Mon Intérieur IA */}
       <TrustStrip />
@@ -2148,31 +2118,13 @@ export default function Home() {
                 <ProductFilterBar active={activeFilter} onChange={setActiveFilter} />
               </FadeInSection>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${activeFilter}-${sortBy}`}
-                  initial="hidden"
-                  animate="visible"
-                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                  variants={{
-                    hidden: {},
-                    visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-                  }}
-                  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
-                >
-                  {displayedProducts.map((product) => (
-                    <motion.div
-                      key={product.id}
-                      variants={{
-                        hidden: { opacity: 0, y: 40, scale: 0.92 },
-                        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-                      }}
-                    >
-                      <ProductCard product={product} />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+                {displayedProducts.map((product) => (
+                  <div key={product.id}>
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
 
               {(showViewMore || visibleCount > PAGE_SIZE) && (
                 <div className="flex flex-col items-center gap-3 mt-12">
