@@ -932,10 +932,10 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero — décalé sous le header fixe pour que l'image soit entièrement visible */}
+      {/* Hero — collé sous le header fixe, sans bande blanche : la marge reprend la hauteur réelle de l'en-tête
+          (téléphone 149 / 109 px, ordinateur à partir de xl 148 / 108 px, selon la barre d'annonce) */}
       <section
-        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable}`}
-        style={{ marginTop: barVisible ? 190 : 150, minHeight: `calc(100dvh - ${barVisible ? 190 : 150}px)` }}
+        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable} ${barVisible ? 'mt-[149px] min-h-[calc(100dvh_-_149px)] xl:mt-[148px] xl:min-h-[calc(100dvh_-_148px)]' : 'mt-[109px] min-h-[calc(100dvh_-_109px)] xl:mt-[108px] xl:min-h-[calc(100dvh_-_108px)]'}`}
       >
         {/* Background image */}
         <div className="absolute inset-0">
