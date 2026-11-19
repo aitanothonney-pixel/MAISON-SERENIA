@@ -1041,43 +1041,45 @@ function BubblePromoCarousel() {
   const loopItems = [...items, ...items];
 
   return (
-    <FadeInSection>
+    <>
       <section id="bubble-promo" className="py-16 scroll-mt-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
+        <FadeInSection>
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleCarousel}
+                aria-label={carouselPaused ? 'Reprendre le défilement de la collection' : 'Mettre en pause le défilement de la collection'}
+                aria-pressed={carouselPaused}
+                className="w-9 h-9 flex items-center justify-center border border-neutral-300 hover:border-black text-neutral-700 hover:text-black transition-colors"
+              >
+                {carouselPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+              </button>
+              <motion.button
+                onClick={() => scroll('left')}
+                animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
+                transition={{ duration: 0.25 }}
+                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
+                aria-label="Précédent"
+              >
+                <ChevronRight className="w-4 h-4 rotate-180" />
+              </motion.button>
+              <motion.button
+                onClick={() => scroll('right')}
+                animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
+                transition={{ duration: 0.25 }}
+                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
+                aria-label="Suivant"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={toggleCarousel}
-              aria-label={carouselPaused ? 'Reprendre le défilement de la collection' : 'Mettre en pause le défilement de la collection'}
-              aria-pressed={carouselPaused}
-              className="w-9 h-9 flex items-center justify-center border border-neutral-300 hover:border-black text-neutral-700 hover:text-black transition-colors"
-            >
-              {carouselPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-            </button>
-            <motion.button
-              onClick={() => scroll('left')}
-              animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
-              transition={{ duration: 0.25 }}
-              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-              aria-label="Précédent"
-            >
-              <ChevronRight className="w-4 h-4 rotate-180" />
-            </motion.button>
-            <motion.button
-              onClick={() => scroll('right')}
-              animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
-              transition={{ duration: 0.25 }}
-              className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-              aria-label="Suivant"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
-          </div>
-        </div>
+        </FadeInSection>
         <div
           ref={scrollRef}
           onScroll={updateArrows}
@@ -1129,7 +1131,7 @@ function BubblePromoCarousel() {
           ))}
         </div>
       </section>
-    </FadeInSection>
+    </>
   );
 }
 
@@ -1143,28 +1145,26 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
   const { isWished, toggle } = useWishlist();
 
   return (
-    <FadeInSection>
+    <>
       <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Coups de cœur
-            </h2>
-            <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
+        <FadeInSection>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                Coups de cœur
+              </h2>
+              <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
+            </div>
+            <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
+              Tout voir <ChevronRight className="w-3 h-3" />
+            </button>
           </div>
-          <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
-            Tout voir <ChevronRight className="w-3 h-3" />
-          </button>
-        </div>
+        </FadeInSection>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {bestsellers.map((product, index) => (
-            <motion.div
+          {bestsellers.map((product) => (
+            <div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group overflow-hidden"
             >
               <Link href={`/products/${product.id}`}>
@@ -1216,11 +1216,11 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                   )}
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
-    </FadeInSection>
+    </>
   );
 }
 
@@ -1239,21 +1239,15 @@ interface ProductPreview {
   category: string;
 }
 
-function ProductCard({ product, index }: { product: ProductPreview; index: number }) {
+function ProductCard({ product }: { product: ProductPreview }) {
   const cur = useCurrency();
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
   const isNew = newProductIds.includes(product.id);
   const isSale = saleProductIds.includes(product.id);
   const isBubble = bubbleProductIds.includes(product.id);
   const { isWished, toggle } = useWishlist();
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
+    <div
       className="group relative bg-white overflow-hidden border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500"
     >
       <Link href={`/products/${product.id}`}>
@@ -1344,7 +1338,7 @@ function ProductCard({ product, index }: { product: ProductPreview; index: numbe
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
 
@@ -1607,24 +1601,26 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
 
 function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   return (
-    <FadeInSection>
+    <>
       <section id="section-packs" className="py-20 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="text-center mb-14">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-2">Économisez plus</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Nos ensembles Bubble
-            </h2>
-            <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
-              Le canapé et son fauteuil assortis — avec un tableau offert au choix (taille 50×70 cm).
-            </p>
-          </div>
+          <FadeInSection>
+            <div className="text-center mb-14">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-2">Économisez plus</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                Nos ensembles Bubble
+              </h2>
+              <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
+                Le canapé et son fauteuil assortis — avec un tableau offert au choix (taille 50×70 cm).
+              </p>
+            </div>
+          </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {BUNDLES.map((bundle) => (<BundleCard key={bundle.slug} bundle={bundle} onCartOpen={onCartOpen} />))}
           </div>
         </div>
       </section>
-    </FadeInSection>
+    </>
   );
 }
 
@@ -2215,7 +2211,7 @@ export default function Home() {
                   }}
                   className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
                 >
-                  {displayedProducts.map((product, index) => (
+                  {displayedProducts.map((product) => (
                     <motion.div
                       key={product.id}
                       variants={{
@@ -2223,7 +2219,7 @@ export default function Home() {
                         visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
                       }}
                     >
-                      <ProductCard product={product} index={index} />
+                      <ProductCard product={product} />
                     </motion.div>
                   ))}
                 </motion.div>
