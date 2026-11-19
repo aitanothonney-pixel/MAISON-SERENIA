@@ -1014,31 +1014,31 @@ export default function Home() {
       {/* Bubble : promotion Black Friday, présentée en grille sur fond noir */}
       <BubblePromoSection />
 
-      {/* 2) Mon Intérieur IA — même mise en page que la page « Créez votre projet intérieur » : photo, texte et bouton */}
+      {/* 2) Mon Intérieur IA — sur mobile : texte puis photo pleine largeur ; sur ordinateur : texte à gauche, photo à droite */}
       <section className="relative w-full overflow-hidden bg-[#D4BDAA] text-[#221607]">
         <div className="relative mx-auto max-w-[1672px] flex flex-col lg:block lg:h-[772px]">
+          <div className="relative z-10 px-6 pt-7 pb-3 sm:pt-10 sm:pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:pt-[88px] lg:pb-0">
+            <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B]">Notre service conseil</p>
+            <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60" />
+            <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] text-[#221607]" style={{ fontFamily: 'var(--font-playfair)' }}>
+              Créez votre projet intérieur
+            </h2>
+            <p className="mt-3 sm:mt-7 max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C]">
+              Décrivez votre espace, votre style et votre budget. Nous vous accompagnons dans la sélection de pièces adaptées à votre intérieur.
+            </p>
+            <Link href="/mon-interieur-ia" className="mt-5 sm:mt-10 inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors">
+              Démarrer mon projet <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.4} />
+            </Link>
+          </div>
           <div className="relative w-full aspect-[1032/772] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[61.7%] lg:aspect-auto">
             <Image
               src="/catalog/mon-interieur-ia-banniere.webp"
               alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en bois cannelé"
               fill
               sizes="(min-width: 1024px) 62vw, 100vw"
-              className="object-cover object-[70%_center]"
+              className="object-cover object-[65%_center]"
             />
             <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-[22%] bg-gradient-to-r from-[#D4BDAA] to-transparent" />
-          </div>
-          <div className="relative z-10 px-6 pt-10 pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:pt-[88px] lg:pb-0">
-            <p className="text-[13px] tracking-[0.3em] uppercase text-[#3E2F1B]">Notre service conseil</p>
-            <span aria-hidden="true" className="block mt-7 w-[57px] h-px bg-[#3E2F1B]/60" />
-            <h2 className="mt-8 text-[44px] leading-[1.02] lg:text-[66px] text-[#221607]" style={{ fontFamily: 'var(--font-playfair)' }}>
-              Créez votre projet intérieur
-            </h2>
-            <p className="mt-7 max-w-[470px] text-[16px] lg:text-[19px] leading-[1.6] text-[#1D120C]">
-              Décrivez votre espace, votre style et votre budget. Nous vous accompagnons dans la sélection de pièces adaptées à votre intérieur.
-            </p>
-            <Link href="/mon-interieur-ia" className="mt-10 inline-flex w-full sm:w-[380px] items-center justify-between gap-4 whitespace-nowrap bg-[#6A513A] px-6 sm:px-10 py-5 text-[15px] uppercase tracking-[0.14em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors">
-              Démarrer mon projet <ArrowRight className="w-5 h-5" strokeWidth={1.4} />
-            </Link>
           </div>
         </div>
       </section>
