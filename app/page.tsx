@@ -6,7 +6,7 @@ import { PromoCountdown } from '@/components/ui/promo-countdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, ChevronRight, Heart, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles, Pause, Play } from 'lucide-react';
+import { ShoppingBag, ChevronRight, Heart, Search, X, ArrowLeft, ArrowRight, Clock, TrendingUp, Truck, Shield, ArrowUp, Home as HomeIcon, Gift, Eye, CreditCard, ChevronDown, User, Award, Sparkles } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
@@ -1001,46 +1001,6 @@ function BubblePromoCarousel() {
     scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
   };
 
-  // Défilement automatique doux, en boucle infinie, en pause au survol
-  const pausedRef = useRef(false);
-  // Pause choisie par le visiteur (bouton visible, accessible au clavier)
-  const userPausedRef = useRef(false);
-  const [carouselPaused, setCarouselPaused] = useState(false);
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const reduce = typeof window !== 'undefined'
-      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return; // respecte la préférence « réduire les animations »
-    const SPEED = 50; // px par seconde, identique sur tous les écrans
-    let raf = 0;
-    let last = 0; // horodatage de la frame précédente
-    let pos = el.scrollLeft; // position suivie avec décimales (le navigateur arrondit scrollLeft)
-    let written = pos; // dernière valeur écrite dans scrollLeft
-    const step = (t: number) => {
-      const dt = last ? Math.min(t - last, 100) : 0; // borné (onglet masqué, retour de veille)
-      last = t;
-      // Si l'utilisateur a glissé le carrousel, on repart de sa position réelle
-      if (Math.abs(el.scrollLeft - written) > 2) pos = el.scrollLeft;
-      const half = el.scrollWidth / 2; // la liste est dupliquée une fois
-      if (!pausedRef.current && !userPausedRef.current && half > 0) {
-        pos = (pos + (SPEED * dt) / 1000) % half; // boucle sans couture
-        written = pos;
-        el.scrollLeft = pos;
-      }
-      raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  const pause = () => { pausedRef.current = true; };
-  const resume = () => { pausedRef.current = false; };
-  const toggleCarousel = () => { const next = !userPausedRef.current; userPausedRef.current = next; setCarouselPaused(next); };
-
-  // Liste dupliquée pour permettre la boucle infinie
-  const loopItems = [...items, ...items];
-
   return (
     <>
       <section id="bubble-promo" className="py-16 scroll-mt-24">
@@ -1051,15 +1011,6 @@ function BubblePromoCarousel() {
               <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
             </div>
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={toggleCarousel}
-                aria-label={carouselPaused ? 'Reprendre le défilement de la collection' : 'Mettre en pause le défilement de la collection'}
-                aria-pressed={carouselPaused}
-                className="w-9 h-9 flex items-center justify-center border border-neutral-300 hover:border-black text-neutral-700 hover:text-black transition-colors"
-              >
-                {carouselPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
-              </button>
               <motion.button
                 onClick={() => scroll('left')}
                 animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
@@ -1084,14 +1035,10 @@ function BubblePromoCarousel() {
         <div
           ref={scrollRef}
           onScroll={updateArrows}
-          onMouseEnter={pause}
-          onMouseLeave={resume}
-          onTouchStart={pause}
-          onTouchEnd={resume}
           className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"
         >
-          {loopItems.map((product, i) => (
-            <div key={`${product.id}-${i}`} className="group flex-shrink-0 w-64 md:w-72">
+          {items.map((product) => (
+            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72">
               <Link href={`/products/${product.id}`}>
               <div className="relative overflow-hidden bg-white mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
                 <Image
