@@ -259,6 +259,7 @@ const rawProducts: Product[] = [
       '/catalog/bubble-violet-2.webp',
       '/catalog/bubble-violet-3.webp',
       '/catalog/bubble-violet-4.webp',
+      '/catalog/bubble-violet-5.webp',
     ],
     dimensions: 'L 230 × P 114 × H 76 cm',
     material: 'Tissu maille 3D, base laquée',
