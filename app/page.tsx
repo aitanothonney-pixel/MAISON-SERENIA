@@ -17,6 +17,7 @@ import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
+import { heroMarcellus, heroRaleway } from '@/lib/hero-fonts';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -2018,19 +2019,19 @@ export default function Home() {
 
       {/* Hero — décalé sous le header fixe pour que l'image soit entièrement visible */}
       <section
-        className="relative flex flex-col items-center justify-center overflow-hidden"
+        className={`relative flex flex-col items-center justify-center overflow-hidden ${heroMarcellus.variable} ${heroRaleway.variable}`}
         style={{ marginTop: barVisible ? 190 : 150, minHeight: `calc(100dvh - ${barVisible ? 190 : 150}px)` }}
       >
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/catalog/WW4mTJDL.png"
+            src="/catalog/accueil-hero-2026.webp"
             alt="Salon d'exception signé Maison Serenia"
             fill
             sizes="100vw"
             preload
             fetchPriority="high"
-            className="object-cover object-center"
+            className="object-cover object-center max-md:object-[20%_50%]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/75" />
         </div>
@@ -2041,13 +2042,14 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl"
+          style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}
         >
           <p className="text-[10px] md:text-xs tracking-[0.5em] uppercase text-[#D8C9B5] mb-6 [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]">
             Collection 2026 · Mobilier d&apos;exception
           </p>
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white uppercase leading-[0.95]"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', letterSpacing: '0.12em' }}
+            className="text-[2.8rem] md:text-[5.2rem] font-normal text-white uppercase leading-none"
+            style={{ fontFamily: 'var(--font-hero-titre), Georgia, serif', letterSpacing: '0.1em' }}
           >
             Maison Serenia
           </h1>
@@ -2063,13 +2065,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-10">
             <Link
               href="/collections/salon"
-              className="bg-white text-black text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#7F6A52] hover:text-white transition-colors duration-300"
+              className="bg-white text-black text-xs font-medium tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#7F6A52] hover:text-white transition-colors duration-300"
             >
               Découvrir la collection Salon
             </Link>
             <a
               href="#bubble-promo"
-              className="border border-white/60 text-white text-xs font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors duration-300"
+              className="border border-white/60 text-white text-xs font-medium tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors duration-300"
             >
               Voir les promotions
             </a>
@@ -2089,7 +2091,7 @@ export default function Home() {
         </motion.div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" style={{ fontFamily: 'var(--font-hero-texte), system-ui, sans-serif', fontWeight: 500 }}>
           <p className="text-[10px] tracking-[0.3em] uppercase text-white/60">Défiler pour découvrir</p>
           <motion.div
             animate={{ y: [0, 8, 0] }}
