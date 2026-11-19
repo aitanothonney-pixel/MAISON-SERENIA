@@ -1096,6 +1096,7 @@ function BubblePromoCarousel() {
                   alt={product.name}
                   width={400}
                   height={300}
+                  style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
                   className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
                 />
                 {product.images[1] && (
@@ -1104,6 +1105,7 @@ function BubblePromoCarousel() {
                     alt={product.name}
                     width={400}
                     height={300}
+                    style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
                     className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                   />
                 )}
