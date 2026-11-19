@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState, useRef, useMemo } from 'react';
-import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
-import { PromoCountdown } from '@/components/ui/promo-countdown';
+import { useEffect, useState, useMemo } from 'react';
+import { BLACK_FRIDAY_PROMO } from '@/lib/promotions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -886,190 +885,74 @@ function Navbar({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: 
 
 
 
-// ─── Full-width Promo Banner ──────────────────────────────────────────────────
+// ─── Bubble : promotion Black Friday (section noire, grille de cartes) ───────
 
-function PromoBanner() {
-  const [lightbox, setLightbox] = useState(false);
-  return (
-    <FadeInSection>
-      <section className="w-full overflow-hidden relative">
-        <div className="relative min-h-[560px] md:min-h-[600px] py-14 md:py-16">
-          {/* Clickable background image */}
-          <button
-            onClick={() => setLightbox(true)}
-            className="absolute inset-0 w-full h-full cursor-zoom-in"
-            aria-label="Voir la photo en grand"
-          >
-            <Image
-              src="/catalog/99H4L0sP.jpg"
-              alt="Collection Salon Bubble en promotion"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </button>
-          <div className="absolute inset-0 bg-black/65 pointer-events-none" />
-          <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 pointer-events-none h-full">
-            <p className="inline-block border border-[#A68A6D] text-[#D8C9B5] text-xs md:text-sm font-semibold tracking-[0.35em] uppercase px-5 py-2 mb-6">Black Friday</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4 leading-tight" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Jusqu&apos;à −30% grâce au <span className="text-[#D8C9B5]">Black Friday</span><br className="hidden md:block" /> sur la collection Bubble
-            </h2>
-            <p className="text-white/70 text-sm mb-8 max-w-md">
-              {BLACK_FRIDAY_PROMO.endsAt
-                ? <>Offre valable jusqu&apos;au {formatPromoEnd(BLACK_FRIDAY_PROMO.endsAt)}, dans la limite des stocks disponibles.</>
-                : <>Remise appliquée automatiquement sur les pièces de la collection Bubble.</>}
-            </p>
-            <PromoCountdown endsAt={BLACK_FRIDAY_PROMO.endsAt} className="flex flex-col items-center" />
-
-            <Link
-              href="/promotions"
-              className="pointer-events-auto bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 rounded-none hover:bg-[#7F6A52] hover:text-white transition-colors"
-            >
-              Voir les produits en promotion
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
-            onClick={() => setLightbox(false)}
-          >
-            <motion.img
-              src="/catalog/99H4L0sP.jpg"
-              alt="Collection Salon Bubble en promotion"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-[95vw] max-h-[95vh] object-contain rounded-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button
-              onClick={() => setLightbox(false)}
-              className="absolute top-5 right-5 text-white/70 hover:text-white transition-colors"
-              aria-label="Fermer"
-            >
-              <X className="w-7 h-7" />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </FadeInSection>
-  );
-}
-
-// ─── Bubble Promo Carousel ────────────────────────────────────────────────────
-
-// Ordre d'affichage du carrousel : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
+// Ordre d'affichage : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
 const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
+// Canapés Bubble : agrandis comme dans l'ancien carrousel, avec un cadre réduit pour rester entiers
+const canapesBubble = [10, 12, 13, 22];
 
-function BubblePromoCarousel() {
+function BubblePromoSection() {
   const cur = useCurrency();
+  const { isWished, toggle } = useWishlist();
   const items = products.filter((p) => bubblePromoProducts.includes(p.id))
     .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
-  const { isWished, toggle } = useWishlist();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
-
-  const updateArrows = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 8);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
-  };
-
-  const scroll = (dir: 'left' | 'right') => {
-    scrollRef.current?.scrollBy({ left: dir === 'right' ? 280 : -280, behavior: 'smooth' });
-  };
 
   return (
-    <>
-      <section id="bubble-promo" className="py-16 scroll-mt-24">
-        <FadeInSection>
-          <div className="max-w-7xl mx-auto px-6 lg:px-10 mb-8 flex items-end justify-between">
-            <div>
-              <p className="text-[10px] tracking-[0.3em] uppercase mb-2 text-neutral-500">Offre limitée · −30%</p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>Collection Bubble en promotion <span className="text-[#7F6A52]">Black Friday</span></h2>
-            </div>
-            <div className="flex items-center gap-2">
-              <motion.button
-                onClick={() => scroll('left')}
-                animate={{ opacity: canLeft ? 1 : 0.25, scale: canLeft ? 1 : 0.9 }}
-                transition={{ duration: 0.25 }}
-                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-                aria-label="Précédent"
-              >
-                <ChevronRight className="w-4 h-4 rotate-180" />
-              </motion.button>
-              <motion.button
-                onClick={() => scroll('right')}
-                animate={{ opacity: canRight ? 1 : 0.25, scale: canRight ? 1 : 0.9 }}
-                transition={{ duration: 0.25 }}
-                className="w-9 h-9 border border-neutral-300 bg-white flex items-center justify-center hover:bg-black hover:text-white transition-all duration-200"
-                aria-label="Suivant"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </motion.button>
-            </div>
-          </div>
-        </FadeInSection>
-        <div
-          ref={scrollRef}
-          onScroll={updateArrows}
-          className="flex gap-5 overflow-x-auto px-6 lg:px-10 pb-4 scrollbar-hide"
-        >
-          {items.map((product) => (
-            <div key={product.id} className="group flex-shrink-0 w-64 md:w-72">
-              <Link href={`/products/${product.id}`}>
-              <div className="relative overflow-hidden bg-white mb-3 border border-neutral-100 transition-shadow duration-300 flex items-center justify-center" style={{ height: '200px' }}>
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  width={400}
-                  height={300}
-                  style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
-                  className={`w-full h-full object-contain p-6 transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
-                />
-                {product.images[1] && (
-                  <Image
-                    src={product.images[1]}
-                    alt={product.name}
-                    width={400}
-                    height={300}
-                    style={[10, 12, 13, 22].includes(product.id) ? { transform: 'scale(1.2)' } : undefined}
-                    className="absolute inset-0 w-full h-full object-contain p-6 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                  />
-                )}
-                <div className="absolute top-2 left-2 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                  −30%
-                </div>
-                <button
-                  onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                  aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                >
-                  <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                </button>
-              </div>
-              <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
-              <div className="flex items-center gap-2">
-                <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
-                <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
-              </div>
-            </Link>
-            </div>
-          ))}
+    <section id="bubble-promo" className="scroll-mt-24 bg-[#0b0b0b] text-white py-14 md:py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="text-center mb-10 md:mb-14">
+          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#D8C9B5] mb-4">Collection Bubble</p>
+          <h2 className="text-3xl md:text-5xl leading-tight text-white" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+            Jusqu&apos;à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel} grâce au <span className="text-[#D8C9B5]">Black Friday</span>
+          </h2>
         </div>
-      </section>
-    </>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+          {items.map((product) => {
+            const cadrage = canapesBubble.includes(product.id)
+              ? { transform: 'scale(1.2)', padding: '10%' }
+              : { padding: '6%' };
+            return (
+              <article key={product.id} className="relative bg-white text-black">
+                <Link href={`/products/${product.id}`} className="block">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                      className="object-contain"
+                      style={cadrage}
+                    />
+                    <span className="absolute top-2 left-2 bg-black text-[#D8C9B5] text-[10px] font-bold tracking-widest uppercase px-2 py-1">
+                      {BLACK_FRIDAY_PROMO.bubbleDiscountLabel}
+                    </span>
+                  </div>
+                  <div className="p-3 md:p-4">
+                    <h3 className="text-sm md:text-base leading-snug text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                      {product.name}
+                    </h3>
+                    <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
+                      <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
+                      <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
+                    </div>
+                  </div>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggle(product.id)}
+                  aria-label="Ajouter aux favoris"
+                  aria-pressed={isWished(product.id)}
+                  className="absolute top-2 right-2 z-10 bg-white/85 p-1.5"
+                >
+                  <Heart className={`w-3.5 h-3.5 ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
+                </button>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -2031,46 +1914,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 1) Promotions mises en avant — promo Bubble -30%, juste sous le hero. */}
-      <div>
-        <PromoBanner />
-      </div>
+      {/* Bubble : promotion Black Friday, présentée en grille sur fond noir */}
+      <BubblePromoSection />
 
-      {/* Carrousel Bubble — juste sous la bannière Black Friday */}
-      <BubblePromoCarousel />
-
-      {/* 2) Mon Intérieur IA — bannière CTA éditoriale, pleine largeur, juste au-dessus de
-             « Acheter par catégorie ».
-             Mise en page validée (proposition 23) : fond beige, fauteuil Bubble rouge détouré.
-             Texte à gauche et fauteuil à droite à partir de xl ; empilés en dessous. */}
-      <section className="w-full">
-          <div className="relative overflow-hidden bg-white text-[#111]">
-            <div className="relative w-full max-w-7xl mx-auto px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
-              <div className="max-w-[520px]">
-                <span className="block text-xs uppercase tracking-[0.35em] text-[#7A5A2B] mb-6">
-                  Nouveau · Mon Intérieur IA
-                </span>
-                <h2 className="text-4xl md:text-[44px] font-semibold leading-[1.16] text-[#111] mb-6" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-                  Votre conseiller déco personnel, propulsé par l&apos;IA
-                </h2>
-                <p className="max-w-[460px] text-[15px] leading-[1.7] text-[#333] mb-8" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                  Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
-                </p>
-                <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#111] text-white px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-[#7F6A52] hover:text-white transition-colors">
-                  Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-              <Image
-                src="/catalog/fauteuil-bubble-rouge.png"
-                alt="Fauteuil Bubble rouge"
-                width={900}
-                height={675}
-                sizes="(min-width: 1280px) 400px, 68vw"
-                className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:top-1/2 xl:right-20 xl:-translate-y-1/2 xl:mx-0 xl:mt-0 xl:w-[400px] xl:max-w-none"
-              />
-            </div>
-            <span aria-hidden="true" className="absolute bottom-0 left-6 right-6 h-px bg-[#7F6A52] opacity-60 md:left-16 md:right-16 xl:left-20 xl:right-20" />
+      {/* 2) Mon Intérieur IA — carte bronze avec le fauteuil détouré, au-dessus de « Acheter par catégorie » */}
+      <section className="w-full px-4 md:px-10 py-12 md:py-16">
+        <div className="relative max-w-7xl mx-auto overflow-hidden bg-gradient-to-br from-[#8A6D4B] via-[#7F6A52] to-[#5E4E3C] text-[#FBF7F0] px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
+          <div className="relative max-w-[520px]">
+            <span className="block text-xs uppercase tracking-[0.35em] text-[#F1E4CF] mb-6">
+              Nouveau · Mon Intérieur IA
+            </span>
+            <h2 className="text-4xl md:text-[44px] font-semibold leading-[1.16] text-[#FBF7F0] mb-6" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+              Votre conseiller déco personnel, propulsé par l&apos;IA
+            </h2>
+            <p className="max-w-[460px] text-[15px] leading-[1.7] text-[#F4EBDD] mb-8" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+              Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
+            </p>
+            <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#FBF7F0] text-[#111] px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors">
+              Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
+          <Image
+            src="/catalog/fauteuil-bubble-rouge.png"
+            alt="Fauteuil Bubble rouge"
+            width={900}
+            height={675}
+            sizes="(min-width: 1280px) 420px, 70vw"
+            className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:top-1/2 xl:right-20 xl:-translate-y-1/2 xl:mx-0 xl:mt-0 xl:w-[420px] xl:max-w-none"
+          />
+        </div>
       </section>
 
       {/* Bande de réassurance, juste sous la bannière Mon Intérieur IA */}
