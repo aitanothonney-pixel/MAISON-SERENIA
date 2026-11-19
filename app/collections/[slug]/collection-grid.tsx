@@ -189,10 +189,10 @@ export function CollectionGrid({ items }: { items: Product[] }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8"
+              className="da-planches da-planches--large"
             >
               {displayed.map((product, index) => (
-                <CollectionCard key={product.id} product={product} position={index === 0 ? 'lcp' : index < 4 ? 'eager' : undefined} />
+                <CollectionCard key={product.id} product={product} index={index} position={index === 0 ? 'lcp' : index < 4 ? 'eager' : undefined} />
               ))}
             </motion.div>
           </AnimatePresence>
