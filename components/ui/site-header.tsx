@@ -5,9 +5,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ArrowLeft, ArrowRight, Clock, Heart, ShoppingBag, ChevronRight, Gift, Sparkles, Award, TrendingUp, Home as HomeIcon } from 'lucide-react';
+import { Search, X, ArrowLeft, ArrowRight, Clock, Heart, ShoppingBag, ChevronRight, ChevronDown, Gift, Sparkles, Award, TrendingUp, Home as HomeIcon, Truck, Shield, CreditCard, User } from 'lucide-react';
 import { Logo } from '@/components/ui/logo';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { products, nice99 } from '@/lib/products';
@@ -345,7 +344,6 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
 
 export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }: { hasBar: boolean; onWishlistOpen: () => void; onCartOpen: () => void; onSectionNav: (section: string, filter?: string) => void }) {
   const cur = useCurrency();
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [searchQ, setSearchQ] = useState('');
@@ -355,6 +353,19 @@ export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }:
   const [mounted, setMounted] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [headerHidden, setHeaderHidden] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState('FR');
+
+  useEffect(() => {
+    // Lecture de la langue choisie (store client) au montage — motif légitime.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    try { const l = localStorage.getItem('mss-lang'); if (l) setLang(l); } catch { /* ignore */ }
+  }, []);
+  const chooseLang = (l: string) => {
+    setLang(l);
+    setLangOpen(false);
+    try { localStorage.setItem('mss-lang', l); } catch { /* ignore */ }
+  };
 
 
   useEffect(() => {
@@ -413,76 +424,119 @@ export function SiteHeader({ hasBar, onWishlistOpen, onCartOpen, onSectionNav }:
     { label: 'Décorations', href: '/collections/figurines' },
     { label: 'Luminaires', href: '/collections/figurines?g=Luminaires' },
     { label: 'Tableaux', href: '/collections/figurines?g=Tableaux' },
-    { label: 'Créez votre projet intérieur', href: '/mon-interieur-ia' },
+    { label: 'Bubble', href: '/collections/bubble' },
+    { label: 'Notre Histoire', href: '/a-propos' },
+    { label: 'Mon Intérieur IA', href: '/mon-interieur-ia' },
   ];
 
   return (
     <>
     <header
-      className={`fixed left-0 right-0 z-50 bg-[#F6F3F2] transition-[transform,box-shadow] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : ''}`}
-      style={{ transform: headerHidden ? `translateY(-${hasBar ? 150 : 110}px)` : 'translateY(0)' }}
+      className={`fixed left-0 right-0 z-50 bg-white transition-[transform,box-shadow] duration-300 ${hasBar ? 'top-10' : 'top-0'} ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
+      style={{ transform: headerHidden ? `translateY(-${hasBar ? 192 : 152}px)` : 'translateY(0)' }}
     >
-      {/* Ligne unique : sur ordinateur, logo, navigation et icônes ; sur téléphone, menu, logo et icônes */}
-      <div className="max-w-[1672px] mx-auto px-4 xl:px-8 2xl:px-12 h-16 xl:h-[108px] flex items-center">
-        <button onClick={() => setDrawerOpen(true)} className="xl:hidden flex items-center justify-center text-black mr-4 shrink-0" aria-label="Menu">
-          <span className="flex flex-col gap-[4px]">
-            <span className="block w-5 h-[1.5px] bg-black" />
-            <span className="block w-5 h-[1.5px] bg-black" />
-            <span className="block w-5 h-[1.5px] bg-black" />
+      {/* Ligne 1 — barre d'arguments et langue */}
+      <div className="bg-[#f4f2ee] border-b border-neutral-200">
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-9 flex items-center justify-between text-[12px] text-neutral-700" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
+          <div className="hidden md:flex items-center gap-6 lg:gap-10">
+            <span className="flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte</span>
+            <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Qualité vérifiée</span>
+            <span className="flex items-center gap-2"><CreditCard className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Paiement facile</span>
+          </div>
+          <span className="md:hidden flex items-center gap-2"><Truck className="w-4 h-4 text-[#8A6A35]" strokeWidth={1.5} /> Livraison offerte dès 40 CHF</span>
+          <div className="relative">
+            <button
+              onClick={() => setLangOpen((o) => !o)}
+              className="flex items-center gap-1 hover:text-black transition-colors"
+              aria-label="Langue"
+            >
+              {lang} <ChevronDown className={`w-3.5 h-3.5 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {langOpen && (
+              <>
+                <div className="fixed inset-0 z-[60]" onClick={() => setLangOpen(false)} />
+                <div className="absolute right-0 top-full mt-2 z-[61] bg-white border border-neutral-200 shadow-lg min-w-[140px] py-1">
+                  {[{ c: 'FR', n: 'Français' }, { c: 'EN', n: 'English' }, { c: 'DE', n: 'Deutsch' }].map((o) => (
+                    <button
+                      key={o.c}
+                      onClick={() => chooseLang(o.c)}
+                      className={`w-full text-left px-4 py-2 text-[13px] hover:bg-neutral-50 transition-colors flex items-center justify-between ${o.c === lang ? 'text-black font-semibold' : 'text-neutral-600'}`}
+                    >
+                      {o.n} <span className="text-[11px] text-neutral-500">{o.c}</span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Ligne 2 — logo, recherche et icônes */}
+      <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-[70px] flex items-center gap-4 lg:gap-8">
+        <Logo
+          color="black"
+          size="md"
+          className="shrink-0"
+          onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+        />
+
+        {/* Recherche : barre complète sur ordinateur ; sur téléphone, icône ci-dessous */}
+        <button
+          onClick={() => setSearchFocused(true)}
+          className="hidden md:flex flex-1 max-w-2xl items-stretch h-11 border border-neutral-300 hover:border-neutral-400 transition-colors group"
+          aria-label="Rechercher"
+        >
+          <span className="flex-1 flex items-center px-4 text-left text-sm text-neutral-500" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>Que recherchez-vous ?</span>
+          <span className="w-12 bg-black flex items-center justify-center group-hover:bg-neutral-800 transition-colors">
+            <Search className="w-4 h-4 text-white" />
           </span>
         </button>
-        <div className="xl:hidden shrink-0">
-          <Logo color="black" size="sm" onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} />
-        </div>
-        <div className="hidden xl:block shrink-0">
-          <Logo color="black" size="xl" onClick={(e) => { if (typeof window !== 'undefined' && window.location.pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} />
-        </div>
 
-        <nav className="hidden xl:flex flex-1 items-center justify-end gap-[clamp(20px,3vw,50px)] mr-10" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }} aria-label="Navigation principale">
-          {navLinks.map((l) => {
-            const actif = pathname === l.href;
-            return (
-              <Link
-                key={l.label}
-                href={l.href}
-                aria-current={actif ? 'page' : undefined}
-                className={`whitespace-nowrap text-[clamp(15px,1.15vw,19px)] text-black pb-2 border-b transition-colors ${actif ? 'border-black' : 'border-transparent hover:border-black/40'}`}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-4 sm:gap-6 xl:gap-9 ml-auto shrink-0">
-          <button onClick={() => setSearchFocused(true)} className="flex items-center justify-center text-black hover:opacity-70 transition-opacity" aria-label="Rechercher">
-            <Search className="w-[22px] h-[22px] lg:w-[26px] lg:h-[26px]" strokeWidth={1.4} />
+        <div className="flex items-center gap-3 lg:gap-4 shrink-0 ml-auto">
+          <button onClick={() => setSearchFocused(true)} className="md:hidden flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Rechercher">
+            <Search className="w-[22px] h-[22px]" strokeWidth={1.4} />
           </button>
 
-          <button onClick={onWishlistOpen} className="relative flex items-center justify-center text-black hover:opacity-70 transition-opacity" aria-label="Favoris">
-            <Heart className={`w-[22px] h-[22px] lg:w-[26px] lg:h-[26px] ${mounted && wishCount > 0 ? 'fill-[#A68A6D] text-[#A68A6D]' : ''}`} strokeWidth={1.4} />
+          <Link href="/contact" className="hidden sm:flex flex-col items-center text-neutral-700 hover:text-black transition-colors" aria-label="Contact">
+            <User className="w-[22px] h-[22px]" strokeWidth={1.4} />
+          </Link>
+
+          <button onClick={onWishlistOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Favoris">
+            <Heart className={`w-[22px] h-[22px] ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : ''}`} strokeWidth={1.4} />
             {mounted && wishCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>{wishCount}</span>
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{wishCount}</span>
             )}
           </button>
 
-          <button onClick={onCartOpen} className="relative flex items-center justify-center text-black hover:opacity-70 transition-opacity" aria-label="Panier">
-            <ShoppingBag className="w-[22px] h-[22px] lg:w-[26px] lg:h-[26px]" strokeWidth={1.4} />
+          <button onClick={onCartOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Panier">
+            <ShoppingBag className="w-[22px] h-[22px]" strokeWidth={1.4} />
             {mounted && cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>{cartCount}</span>
+              <span className="absolute -top-2 -right-2 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none" style={{ background: 'linear-gradient(135deg, #C9A96E 0%, #A07840 100%)' }}>{cartCount}</span>
             )}
           </button>
         </div>
       </div>
 
-      {/* Téléphone : liens de navigation en bande défilante sous la ligne principale */}
-      <nav className="xl:hidden border-t border-black/10" aria-label="Navigation">
-        <div className="h-11 px-4 flex items-center gap-6 overflow-x-auto scrollbar-hide" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-          {navLinks.map((l) => (
-            <Link key={l.label} href={l.href} className="whitespace-nowrap shrink-0 text-[15px] text-black">
-              {l.label}
-            </Link>
-          ))}
+      {/* Ligne 3 — menu et catégories */}
+      <nav className="border-t border-neutral-200 bg-white" aria-label="Navigation principale">
+        <div className="max-w-[1440px] mx-auto px-4 lg:px-8 h-11 flex items-center gap-5 overflow-x-auto scrollbar-hide" style={{ fontFamily: 'var(--font-jost, sans-serif)' }}>
+          <button onClick={() => setDrawerOpen(true)} className="flex items-center gap-2 text-[13px] text-black shrink-0 pr-1" aria-label="Menu">
+            <span className="flex flex-col gap-[3px]">
+              <span className="block w-4 h-[1.5px] bg-black" />
+              <span className="block w-4 h-[1.5px] bg-black" />
+              <span className="block w-4 h-[1.5px] bg-black" />
+            </span>
+            <span className="hidden sm:inline uppercase tracking-[0.15em] text-[12px]">Menu</span>
+          </button>
+          <div className="flex flex-1 items-center gap-5 lg:gap-6 md:justify-between overflow-x-auto scrollbar-hide">
+            {navLinks.map((l) => (
+              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap shrink-0 transition-colors">
+                {l.label}
+              </Link>
+            ))}
+            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap shrink-0 font-medium transition-colors">Promotions</Link>
+          </div>
         </div>
       </nav>
     </header>
