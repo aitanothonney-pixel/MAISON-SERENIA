@@ -6,7 +6,7 @@ import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Heart, X, ArrowRight, Clock, Truck, Shield, ArrowUp, Gift, Eye } from 'lucide-react';
+import { ChevronRight, Heart, X, Clock, Truck, Shield, ArrowUp, Gift, Eye } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -1014,32 +1014,18 @@ export default function Home() {
       {/* Bubble : promotion Black Friday, présentée en grille sur fond noir */}
       <BubblePromoSection />
 
-      {/* 2) Mon Intérieur IA — carte bronze avec le fauteuil détouré, au-dessus de « Acheter par catégorie » */}
+      {/* 2) Mon Intérieur IA — visuel « salon bouclé crème », cliquable vers la page du conseiller */}
       <section className="w-full px-4 md:px-10 py-12 md:py-16">
-        <div className="relative max-w-7xl mx-auto overflow-hidden bg-gradient-to-br from-[#8A6D4B] via-[#7F6A52] to-[#5E4E3C] text-[#FBF7F0] px-6 pt-14 pb-12 md:px-16 md:pt-16 xl:h-[600px] xl:px-20 xl:pb-0">
-          <div className="relative max-w-[520px]">
-            <span className="block text-xs uppercase tracking-[0.35em] text-[#F1E4CF] mb-6">
-              Nouveau · Mon Intérieur IA
-            </span>
-            <h2 className="text-4xl md:text-[44px] font-semibold leading-[1.16] text-[#FBF7F0] mb-6" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-              Votre conseiller déco personnel, propulsé par l&apos;IA
-            </h2>
-            <p className="max-w-[460px] text-[15px] leading-[1.7] text-[#F4EBDD] mb-8" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              Décrivez votre espace, votre style et votre budget. Nous composons une sélection de pièces de notre collection, faites pour votre intérieur.
-            </p>
-            <Link href="/mon-interieur-ia" className="group inline-flex items-center gap-3 bg-[#FBF7F0] text-[#111] px-9 py-4 text-sm font-semibold uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors">
-              Imaginer mon intérieur <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+        <Link href="/mon-interieur-ia" aria-label="Découvrir Mon Intérieur IA" className="mx-auto block max-w-7xl">
           <Image
-            src="/catalog/fauteuil-bubble-rouge.png"
-            alt="Fauteuil Bubble rouge"
-            width={900}
-            height={675}
-            sizes="(min-width: 1280px) 420px, 70vw"
-            className="relative mx-auto mt-12 h-auto w-[68vw] max-w-[360px] xl:absolute xl:top-1/2 xl:right-20 xl:-translate-y-1/2 xl:mx-0 xl:mt-0 xl:w-[420px] xl:max-w-none"
+            src="/catalog/mon-interieur-ia-banniere.webp"
+            alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en bois cannelé"
+            width={1918}
+            height={820}
+            sizes="(min-width: 1280px) 1280px, (min-width: 768px) calc(100vw - 80px), calc(100vw - 32px)"
+            className="block h-auto w-full"
           />
-        </div>
+        </Link>
       </section>
 
       {/* Bande de réassurance, juste sous la bannière Mon Intérieur IA */}
