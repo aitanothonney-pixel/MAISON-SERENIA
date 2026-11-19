@@ -61,7 +61,7 @@ export function AnnouncementBar({ children }: { children?: ReactNode }) {
       {visible && (
         <div
           style={{ height: ANNOUNCEMENT_BAR_HEIGHT }}
-          className="fixed top-0 left-0 right-0 z-[75] bg-black text-white flex items-center justify-center px-10 sm:px-12"
+          className="fixed top-0 left-0 right-0 z-[75] bg-[#79604A] text-white flex items-center justify-center px-10 sm:px-12"
         >
           <div className="flex min-w-0 items-center gap-2.5">
             <span className="h-1 w-1 rounded-full bg-[#7F6A52] shrink-0" />

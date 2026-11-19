@@ -9,6 +9,10 @@ import {
   Sparkles, ArrowRight, ArrowLeft, Check, Loader2, Send, Wand2,
 } from 'lucide-react';
 import { Logo } from '@/components/ui/logo';
+import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
+import { CartDrawer } from '@/components/ui/cart-drawer';
+import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
+import { useRouter } from 'next/navigation';
 import { formatPrice, convertPrice, useCurrency } from '@/lib/currency';
 import { gaEvent } from '@/lib/analytics';
 import type { RoomKey } from '@/lib/interieur-matching';
@@ -108,6 +112,10 @@ export default function Assistant() {
   const [chatMsgs, setChatMsgs] = useState<{ role: 'user' | 'assistant'; content: string }[]>([]);
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
+  const barVisible = useAnnouncementBarVisible();
+  const router = useRouter();
+  const [wishOpen, setWishOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   // Le questionnaire s'ouvre directement (plus d'écran d'accueil)
   useEffect(() => { gaEvent('ia_assistant_open'); }, []);
@@ -291,11 +299,47 @@ export default function Assistant() {
 
   return (
     <main className="bg-white min-h-screen" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-      {/* Barre de progression */}
-      <div className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-neutral-100">
+      <SiteHeader
+        hasBar={barVisible}
+        onWishlistOpen={() => setWishOpen(true)}
+        onCartOpen={() => setCartOpen(true)}
+        onSectionNav={(section) => router.push('/#' + section)}
+      />
+
+      {/* Hero « Créez votre projet intérieur » : mise en page de l'exemple */}
+      <section className="relative w-full overflow-hidden bg-[#D4BDAA] text-[#221607]" style={{ marginTop: barVisible ? 150 : 110 }}>
+        <div className="relative mx-auto max-w-[1672px] flex flex-col lg:block lg:h-[772px]">
+          <div className="relative w-full aspect-[1032/772] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[61.7%] lg:aspect-auto">
+            <Image
+              src="/catalog/mon-projet-photo.webp"
+              alt="Salon avec canapé bouclé beige, table basse en bois et vases"
+              fill
+              priority
+              sizes="(min-width: 1024px) 62vw, 100vw"
+              className="object-cover object-center"
+            />
+            <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-[22%] bg-gradient-to-r from-[#D4BDAA] to-transparent" />
+          </div>
+          <div className="relative z-10 px-6 pt-10 pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:pt-[88px] lg:pb-0">
+            <p className="text-[13px] tracking-[0.3em] uppercase text-[#3E2F1B]">Notre service conseil</p>
+            <span aria-hidden="true" className="block mt-7 w-[57px] h-px bg-[#3E2F1B]/60" />
+            <h1 className="mt-8 text-[44px] leading-[1.02] lg:text-[66px] text-[#221607]" style={{ fontFamily: 'var(--font-playfair)' }}>
+              Créez votre projet intérieur
+            </h1>
+            <p className="mt-7 max-w-[470px] text-[16px] lg:text-[19px] leading-[1.6] text-[#1D120C]">
+              Décrivez votre espace, votre style et votre budget. Nous vous accompagnons dans la sélection de pièces adaptées à votre intérieur.
+            </p>
+            <a href="#projet" className="mt-10 inline-flex w-full sm:w-[380px] items-center justify-between gap-4 whitespace-nowrap bg-[#6A513A] px-6 sm:px-10 py-5 text-[15px] uppercase tracking-[0.14em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors">
+              Démarrer mon projet <ArrowRight className="w-5 h-5" strokeWidth={1.4} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Barre de progression : les étapes commencent ici */}
+      <div id="projet" className="scroll-mt-[160px] bg-white border-b border-neutral-100">
         <div className="max-w-3xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-2">
-            <Logo color="black" size="sm" />
+          <div className="flex items-center justify-end mb-2">
             <span className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">Étape {stepIdx + 1} / {flow.length}</span>
           </div>
           <div className="h-1 bg-neutral-100 overflow-hidden rounded-full">
@@ -440,6 +484,8 @@ export default function Assistant() {
           )}
         </div>
       </div>
+      <WishlistDrawer open={wishOpen} onClose={() => setWishOpen(false)} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </main>
   );
 }

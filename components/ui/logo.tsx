@@ -4,16 +4,17 @@ import Link from 'next/link';
 
 interface LogoProps {
   color?: 'black' | 'white';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   href?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   className?: string;
 }
 
 const SIZES = {
-  sm: { box: 'w-7 h-7', mono: 'text-[10px]', word: 'text-[12px]', tracking: '0.32em' },
-  md: { box: 'w-9 h-9', mono: 'text-[11px]', word: 'text-sm lg:text-base', tracking: '0.36em' },
-  lg: { box: 'w-10 h-10', mono: 'text-xs', word: 'text-xl', tracking: '0.4em' },
+  sm: { box: 'w-7 h-7', mono: 'text-[10px]', word: 'text-[12px]', tracking: '0.32em', lead: '' },
+  md: { box: 'w-9 h-9', mono: 'text-[11px]', word: 'text-sm lg:text-base', tracking: '0.36em', lead: '' },
+  lg: { box: 'w-10 h-10', mono: 'text-xs', word: 'text-xl', tracking: '0.4em', lead: '' },
+  xl: { box: 'w-[58px] h-[58px]', mono: 'text-[15px]', word: 'text-[clamp(16px,1.44vw,24px)]', tracking: '0.38em', lead: 'ml-3' },
 } as const;
 
 export function Logo({ color = 'black', size = 'md', href = '/', onClick, className = '' }: LogoProps) {
@@ -39,7 +40,7 @@ export function Logo({ color = 'black', size = 'md', href = '/', onClick, classN
 
       {/* Wordmark */}
       <span
-        className={`whitespace-nowrap transition-colors duration-300 ${s.word} ${isWhite ? 'text-white' : 'text-black'}`}
+        className={`whitespace-nowrap transition-colors duration-300 ${s.word} ${s.lead} ${isWhite ? 'text-white' : 'text-black'}`}
         style={{ fontFamily: 'var(--font-italiana, Georgia, serif)', letterSpacing: s.tracking }}
       >
         MAISON SERENIA
