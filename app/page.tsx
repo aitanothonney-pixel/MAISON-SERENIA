@@ -1014,23 +1014,23 @@ export default function Home() {
       {/* Bubble : promotion Black Friday, présentée en grille sur fond noir */}
       <BubblePromoSection />
 
-      {/* 2) Mon Intérieur IA — sur mobile : texte puis photo pleine largeur ; sur ordinateur : texte à gauche, photo à droite */}
+      {/* 2) Mon Intérieur IA — sur mobile : texte puis photo pleine largeur ; sur ordinateur (thème 2) : photo pleine largeur, texte clair à gauche sur un voile brun */}
       <section className="relative w-full overflow-hidden bg-[#D4BDAA] text-[#221607]">
         <div className="relative mx-auto max-w-[1672px] flex flex-col lg:block lg:h-[772px]">
           <div className="relative z-10 px-6 pt-7 pb-3 sm:pt-10 sm:pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:px-0 lg:pt-[88px] lg:pb-0">
-            <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B]">Notre service conseil</p>
-            <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60" />
-            <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B] lg:text-[#EADBC8]">Notre service conseil</p>
+            <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60 lg:bg-[#EADBC8]/60" />
+            <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair)' }}>
               Créez votre projet intérieur
             </h2>
-            <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C]">
+            <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C] lg:text-[#F1E8DC]">
               Décrivez votre espace, votre style et votre budget. Nous vous accompagnons dans la sélection de pièces adaptées à votre intérieur.
             </p>
-            <Link href="/mon-interieur-ia" className="mt-5 sm:mt-10 lg:mt-[51px] inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors">
+            <Link href="/mon-interieur-ia" className="mt-5 sm:mt-10 lg:mt-[51px] inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors lg:bg-[#F6F3F2] lg:text-[#221607] lg:hover:bg-white">
               Démarrer mon projet <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.4} />
             </Link>
           </div>
-          <div className="relative w-full aspect-[1672/941] lg:absolute lg:inset-y-0 lg:left-0 lg:right-[calc(50%_-_50vw)] lg:w-auto lg:aspect-auto">
+          <div className="relative w-full aspect-[1672/941] lg:absolute lg:inset-y-0 lg:left-[calc(50%_-_50vw)] lg:right-[calc(50%_-_50vw)] lg:w-auto lg:aspect-auto">
             <Image
               src="/catalog/mon-interieur-ia-salon-clair.webp"
               alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en bois cannelé"
@@ -1039,7 +1039,7 @@ export default function Home() {
               className="object-cover object-[50%_100%]"
             />
             <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
-            <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,#D4BDAA_0%,#D4BDAA_30%,rgba(212,189,170,0)_46%)]" />
+            <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,rgba(34,22,7,0.88)_0%,rgba(34,22,7,0.62)_38%,rgba(34,22,7,0)_68%)]" />
           </div>
         </div>
       </section>
