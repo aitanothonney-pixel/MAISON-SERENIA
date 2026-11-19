@@ -1032,12 +1032,13 @@ export default function Home() {
           </div>
           <div className="relative w-full aspect-[1032/772] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[61.7%] lg:aspect-auto">
             <Image
-              src="/catalog/mon-interieur-ia-banniere.webp"
-              alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en bois cannelé"
+              src="/catalog/mon-interieur-ia-photo.webp"
+              alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en marbre"
               fill
               sizes="(min-width: 1024px) 62vw, 100vw"
-              className="object-cover object-[65%_center]"
+              className="object-cover object-center"
             />
+            <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
             <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-[22%] bg-gradient-to-r from-[#D4BDAA] to-transparent" />
           </div>
         </div>
