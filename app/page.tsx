@@ -1053,7 +1053,7 @@ export default function Home() {
           <div className="relative w-full aspect-[1672/941] lg:absolute lg:inset-y-0 lg:left-[calc(50%_-_50vw)] lg:right-[calc(50%_-_50vw)] lg:w-auto lg:aspect-auto">
             <Image
               src="/catalog/mon-interieur-ia-salon-clair.webp"
-              alt="Salon au canapé bouclé crème, fauteuil assorti et table basse en bois cannelé"
+              alt="Salon avec canapé d'angle anthracite, meuble TV noir et tables basses en marbre"
               fill
               sizes="100vw"
               className="object-cover object-[50%_100%]"
