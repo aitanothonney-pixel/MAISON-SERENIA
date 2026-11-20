@@ -113,7 +113,7 @@ function BubblePromoSection() {
           <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C] lg:text-[#F1E8DC]">
             Canapés et fauteuils de la collection Bubble, en promotion pendant le Black Friday.
           </p>
-          <Link href="/collections/bubble" className="mt-5 sm:mt-10 lg:mt-[51px] inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors lg:bg-[#F6F3F2] lg:text-[#221607] lg:hover:bg-white">
+          <Link href="/collections/bubble" className="mt-5 sm:mt-10 lg:mt-[51px] inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors duration-500 ease-out lg:bg-[#F6F3F2] lg:text-[#221607] lg:hover:bg-[#F6F3F2] lg:hover:text-[#A68A6D]">
             Voir la collection <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.4} />
           </Link>
         </div>
