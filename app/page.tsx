@@ -380,8 +380,8 @@ function ShopByCategory() {
       slug: 'meubles',
       label: 'Meubles',
       desc: 'Tables, TV, rangements',
-      img: '/catalog/SDHV1Yz6.png', // Table basse Farmhouse en bois (id 77)
-      position: 'center 100%',
+      img: '/catalog/table-basse-farmhouse-en-bois-1.webp', // Table basse Farmhouse en bois (id 77)
+      position: 'center 55%',
       big: false,
     },
     {
