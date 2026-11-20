@@ -58,10 +58,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 73, color: 'Noir', colorHex: '#1a1a1a' },
   ],
-  'table-ovale-vintage': [
-    { productId: 79, color: 'Brun', colorHex: '#6b4a30' },
-    { productId: 80, color: 'Gris', colorHex: '#9e9e9e' },
-  ],
   'table-gigognes-lot2': [
     { productId: 84, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 85, color: 'Brun', colorHex: '#6b4a30' },
@@ -1107,20 +1103,6 @@ const exactPriceProducts: Product[] = [
     ],
     dimensions: 'L 120 × P 54 × H 44 cm',
     material: 'Bois finition brun vintage, pieds tournés',
-    details: ['Forme ovale profil bas', 'Style Mid-Century vintage', '2 niveaux de rangement', 'Pieds tournés élégants'],
-  },
-  // ── Meubles : Table basse ovale vintage 2 niveaux — Gris ─────────────────────
-  {
-    id: 80,
-    name: 'Table basse ovale vintage 2 niveaux',
-    category: 'Meubles',
-    price: 128,
-    description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois gris raffinée — une pièce de caractère pour le salon.',
-    images: [
-      '/catalog/Kj2CF2k0.png',
-    ],
-    dimensions: 'L 120 × P 54 × H 44 cm',
-    material: 'Bois finition gris, pieds tournés',
     details: ['Forme ovale profil bas', 'Style Mid-Century vintage', '2 niveaux de rangement', 'Pieds tournés élégants'],
   },
   // ── Meubles : Table basse moderne noire 2 étagères ───────────────────────────
