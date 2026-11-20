@@ -516,11 +516,11 @@ export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWis
           </button>
           <div className="flex flex-1 items-center gap-5 lg:gap-6 md:justify-between overflow-x-auto scrollbar-hide">
             {navLinks.map((l) => (
-              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-black whitespace-nowrap shrink-0 transition-colors">
+              <Link key={l.label} href={l.href} className="text-[14px] text-neutral-700 hover:text-[#A68A6D] whitespace-nowrap shrink-0 transition-colors duration-500 ease-out">
                 {l.label}
               </Link>
             ))}
-            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-red-700 whitespace-nowrap shrink-0 font-medium transition-colors">Promotions</Link>
+            <Link href="/promotions" className="text-[14px] text-red-600 hover:text-[#A68A6D] whitespace-nowrap shrink-0 font-medium transition-colors duration-500 ease-out">Promotions</Link>
           </div>
         </div>
       </nav>
