@@ -111,22 +111,31 @@ function BubblePromoSection() {
     .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
 
   return (
-    <section id="bubble-promo" className="scroll-mt-24 bg-[#F6F3F2] text-[#221607]">
-      {/* Bandeau photo avec le titre Black Friday */}
-      <div className="relative h-[460px] md:h-[780px] overflow-hidden">
-        <Image src={BUBBLE_HERO_IMAGE} alt="" fill sizes="100vw" className="object-cover object-[50%_60%]" />
-        <div aria-hidden="true" className="absolute inset-0 md:hidden bg-gradient-to-t from-[rgba(34,22,7,0.85)] via-[rgba(34,22,7,0.35)] to-[rgba(34,22,7,0.1)]" />
-        <div aria-hidden="true" className="absolute inset-0 hidden md:block bg-[linear-gradient(90deg,rgba(34,22,7,0.8)_0%,rgba(34,22,7,0.4)_55%,rgba(34,22,7,0)_82%)]" />
-        <div className="absolute left-6 right-6 bottom-10 md:left-[120px] md:right-auto md:bottom-[120px] md:w-[860px] text-[#FBF7F2]">
-          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#EADBC8] mb-5">Collection Bubble</p>
-          <h2 className="text-[40px] md:text-[92px] leading-[1.02] text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
-            Jusqu&apos;à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel} grâce au <span className="italic text-[#EADBC8]">Black Friday</span>
+    <section id="bubble-promo" className="scroll-mt-24 overflow-hidden bg-[#D4BDAA] text-[#221607]">
+      {/* Bloc photo : même taille et même mise en page que « Mon Intérieur IA » */}
+      <div className="relative mx-auto max-w-[1672px] flex flex-col lg:block lg:h-[772px]">
+        <div className="relative z-10 px-6 pt-7 pb-3 sm:pt-10 sm:pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:px-0 lg:pt-[88px] lg:pb-0">
+          <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B] lg:text-[#EADBC8]">Collection Bubble</p>
+          <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60 lg:bg-[#EADBC8]/60" />
+          <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Les produits Bubble à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel}
           </h2>
+          <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C] lg:text-[#F1E8DC]">
+            Canapés et fauteuils de la collection Bubble, en promotion pendant le Black Friday.
+          </p>
+          <Link href="/collections/bubble" className="mt-5 sm:mt-10 lg:mt-[51px] inline-flex w-auto sm:w-[380px] items-center justify-between gap-3 whitespace-nowrap bg-[#6A513A] px-4 py-2 sm:px-10 sm:py-5 text-[12px] sm:text-[15px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-white hover:bg-[#5A4430] transition-colors lg:bg-[#F6F3F2] lg:text-[#221607] lg:hover:bg-white">
+            Voir la collection <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.4} />
+          </Link>
+        </div>
+        <div className="relative w-full aspect-[1672/941] lg:absolute lg:inset-y-0 lg:left-[calc(50%_-_50vw)] lg:right-[calc(50%_-_50vw)] lg:w-auto lg:aspect-auto">
+          <Image src={BUBBLE_HERO_IMAGE} alt="Salon avec les canapés et fauteuils Bubble" fill sizes="100vw" className="object-cover object-[50%_100%]" />
+          <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
+          <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,rgba(34,22,7,0.88)_0%,rgba(34,22,7,0.62)_38%,rgba(34,22,7,0)_68%)]" />
         </div>
       </div>
 
       {/* Produits : 2 colonnes sur téléphone, 3 sur tablette, 5 sur ordinateur */}
-      <div className="px-6 md:px-[120px] pt-12 md:pt-24 pb-16 md:pb-28">
+      <div className="bg-[#F6F3F2] px-6 md:px-[120px] pt-12 md:pt-24 pb-16 md:pb-28">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-11">
           {items.map((product) => {
             const cadrage = canapesBubble.includes(product.id)
