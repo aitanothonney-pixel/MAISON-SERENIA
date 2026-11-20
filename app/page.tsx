@@ -96,20 +96,10 @@ function BackToTop() {
 
 // ─── Bubble : promotion Black Friday (section noire, grille de cartes) ───────
 
-// Ordre d'affichage : canapé et fauteuil rouges, puis blancs, puis bleus, puis le reste
-const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
-// Canapés Bubble : agrandis comme dans l'ancien carrousel, avec un cadre réduit pour rester entiers
-const canapesBubble = [10, 12, 13, 22];
-
 // Photo d'ambiance du bandeau Bubble. Pour la changer : remplacer public/catalog/bubble-ambiance.webp (même nom).
 const BUBBLE_HERO_IMAGE = '/catalog/bubble-ambiance.webp';
 
 function BubblePromoSection() {
-  const cur = useCurrency();
-  const { isWished, toggle } = useWishlist();
-  const items = products.filter((p) => bubblePromoProducts.includes(p.id))
-    .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
-
   return (
     <section id="bubble-promo" className="scroll-mt-24 overflow-hidden bg-[#D4BDAA] text-[#221607]">
       {/* Bloc photo : même taille et même mise en page que « Mon Intérieur IA » */}
@@ -131,54 +121,6 @@ function BubblePromoSection() {
           <Image src={BUBBLE_HERO_IMAGE} alt="Salon avec les canapés et fauteuils Bubble" fill sizes="100vw" className="object-cover object-[50%_100%]" />
           <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
           <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,rgba(34,22,7,0.88)_0%,rgba(34,22,7,0.62)_38%,rgba(34,22,7,0)_68%)]" />
-        </div>
-      </div>
-
-      {/* Produits : 2 colonnes sur téléphone, 3 sur tablette, 5 sur ordinateur */}
-      <div className="bg-[#F6F3F2] px-6 md:px-[120px] pt-12 md:pt-24 pb-16 md:pb-28">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-11">
-          {items.map((product) => {
-            const cadrage = canapesBubble.includes(product.id)
-              ? { transform: 'scale(1.2)', padding: '10%' }
-              : { padding: '6%' };
-            return (
-              <article key={product.id} className="relative">
-                <Link href={`/products/${product.id}`} className="block">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#EFE9E2]">
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                      className="object-contain mix-blend-multiply"
-                      style={cadrage}
-                    />
-                    <span className="absolute top-2 left-2 bg-[#6A513A] text-white text-[10px] font-bold tracking-widest uppercase px-2 py-1">
-                      {BLACK_FRIDAY_PROMO.bubbleDiscountLabel}
-                    </span>
-                  </div>
-                  <div className="pt-4">
-                    <h3 className="text-sm md:text-[14px] font-medium leading-snug text-[#221607]">
-                      {product.name}
-                    </h3>
-                    <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
-                      <span className="text-[#6A513A] font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
-                      <span className="text-[#8d8377] line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
-                    </div>
-                  </div>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggle(product.id)}
-                  aria-label="Ajouter aux favoris"
-                  aria-pressed={isWished(product.id)}
-                  className="absolute top-2 right-2 z-10 bg-white/85 p-1.5"
-                >
-                  <Heart className={`w-3.5 h-3.5 ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                </button>
-              </article>
-            );
-          })}
         </div>
       </div>
     </section>
