@@ -1034,7 +1034,6 @@ const exactPriceProducts: Product[] = [
     details: ['Lot de 2 tables basses rondes', 'Style nordique épuré', 'Gigognes, gain de place', 'Finition bois noyer'],
   },
   // ── Meubles : Table à manger en bois massif nordique ─────────────────────────
-  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
   {
     id: 132,
     name: 'Table à manger en bois massif nordique',
@@ -1042,10 +1041,14 @@ const exactPriceProducts: Product[] = [
     price: 549,
     description: 'Table à manger en bois massif au style nordique, épurée et chaleureuse. Piètement fuselé et plateau généreux — parfaite pour un repas en famille comme pour un petit appartement. Une pièce intemporelle qui structure la salle à manger.',
     images: [
-      '/catalog/mWcMT0V.png',
-      '/catalog/39kJVNJ2.png',
-      '/catalog/PsWJd40f.png',
-      '/catalog/ZpX2KPDT.png',
+      '/catalog/table-a-manger-en-bois-massif-nordique-1.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-2.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-3.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-4.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-5.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-6.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-7.webp',
+      '/catalog/table-a-manger-en-bois-massif-nordique-8.webp',
     ],
     dimensions: 'L 120 × P 70 × H 75 cm',
     material: 'Bois massif',
