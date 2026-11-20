@@ -101,6 +101,9 @@ const bubblePromoProducts = [22, 8, 10, 2, 13, 6, 12, 9, 7];
 // Canapés Bubble : agrandis comme dans l'ancien carrousel, avec un cadre réduit pour rester entiers
 const canapesBubble = [10, 12, 13, 22];
 
+// Photo d'ambiance du bandeau Bubble. Pour la changer : remplacer public/catalog/bubble-ambiance.webp (même nom).
+const BUBBLE_HERO_IMAGE = '/catalog/bubble-ambiance.webp';
+
 function BubblePromoSection() {
   const cur = useCurrency();
   const { isWished, toggle } = useWishlist();
@@ -108,42 +111,50 @@ function BubblePromoSection() {
     .sort((a, b) => bubblePromoProducts.indexOf(a.id) - bubblePromoProducts.indexOf(b.id));
 
   return (
-    <section id="bubble-promo" className="scroll-mt-24 bg-[#0b0b0b] text-white py-14 md:py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="text-center mb-10 md:mb-14">
-          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#D8C9B5] mb-4">Collection Bubble</p>
-          <h2 className="text-3xl md:text-5xl leading-tight text-white" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
-            Jusqu&apos;à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel} grâce au <span className="text-[#D8C9B5]">Black Friday</span>
+    <section id="bubble-promo" className="scroll-mt-24 bg-[#F6F3F2] text-[#221607]">
+      {/* Bandeau photo avec le titre Black Friday */}
+      <div className="relative h-[460px] md:h-[780px] overflow-hidden">
+        <Image src={BUBBLE_HERO_IMAGE} alt="" fill sizes="100vw" className="object-cover object-[50%_60%]" />
+        <div aria-hidden="true" className="absolute inset-0 md:hidden bg-gradient-to-t from-[rgba(34,22,7,0.85)] via-[rgba(34,22,7,0.35)] to-[rgba(34,22,7,0.1)]" />
+        <div aria-hidden="true" className="absolute inset-0 hidden md:block bg-[linear-gradient(90deg,rgba(34,22,7,0.8)_0%,rgba(34,22,7,0.4)_55%,rgba(34,22,7,0)_82%)]" />
+        <div className="absolute left-6 right-6 bottom-10 md:left-[120px] md:right-auto md:bottom-[120px] md:w-[860px] text-[#FBF7F2]">
+          <p className="text-[10px] md:text-xs tracking-[0.4em] uppercase text-[#EADBC8] mb-5">Collection Bubble</p>
+          <h2 className="text-[40px] md:text-[92px] leading-[1.02] text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+            Jusqu&apos;à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel} grâce au <span className="italic text-[#EADBC8]">Black Friday</span>
           </h2>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+      </div>
+
+      {/* Produits : 2 colonnes sur téléphone, 3 sur tablette, 5 sur ordinateur */}
+      <div className="px-6 md:px-[120px] pt-12 md:pt-24 pb-16 md:pb-28">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-11">
           {items.map((product) => {
             const cadrage = canapesBubble.includes(product.id)
               ? { transform: 'scale(1.2)', padding: '10%' }
               : { padding: '6%' };
             return (
-              <article key={product.id} className="relative bg-white text-black">
+              <article key={product.id} className="relative">
                 <Link href={`/products/${product.id}`} className="block">
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#EFE9E2]">
                     <Image
                       src={product.images[0]}
                       alt={product.name}
                       fill
-                      sizes="(max-width: 1024px) 50vw, 33vw"
-                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-contain mix-blend-multiply"
                       style={cadrage}
                     />
-                    <span className="absolute top-2 left-2 bg-black text-[#D8C9B5] text-[10px] font-bold tracking-widest uppercase px-2 py-1">
+                    <span className="absolute top-2 left-2 bg-[#6A513A] text-white text-[10px] font-bold tracking-widest uppercase px-2 py-1">
                       {BLACK_FRIDAY_PROMO.bubbleDiscountLabel}
                     </span>
                   </div>
-                  <div className="p-3 md:p-4">
-                    <h3 className="text-sm md:text-base leading-snug text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                  <div className="pt-4">
+                    <h3 className="text-sm md:text-[14px] font-medium leading-snug text-[#221607]">
                       {product.name}
                     </h3>
                     <div className="mt-2 flex flex-wrap items-baseline gap-x-2">
-                      <span className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
-                      <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
+                      <span className="text-[#6A513A] font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</span>
+                      <span className="text-[#8d8377] line-through text-xs price-luxe">{formatPrice(product.price, cur)}</span>
                     </div>
                   </div>
                 </Link>
