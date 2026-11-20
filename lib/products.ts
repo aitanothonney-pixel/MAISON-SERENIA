@@ -1100,9 +1100,10 @@ const exactPriceProducts: Product[] = [
     price: 128,
     description: 'Table basse ovale à profil bas, style Mid-Century vintage. Deux niveaux généreux, plateau supérieur galbé et étagère de rangement, portés par des pieds tournés élégants. Finition bois brun chaleureuse — une pièce de caractère pour le salon.',
     images: [
-      '/catalog/gMh9nwq7.png',
-      '/catalog/PBzHLg1.png',
-      '/catalog/fzg8Sgdd.png',
+      '/catalog/table-basse-ovale-vintage-2-niveaux-brun-1.webp',
+      '/catalog/table-basse-ovale-vintage-2-niveaux-brun-2.webp',
+      '/catalog/table-basse-ovale-vintage-2-niveaux-brun-3.webp',
+      '/catalog/table-basse-ovale-vintage-2-niveaux-brun-4.webp',
     ],
     dimensions: 'L 120 × P 54 × H 44 cm',
     material: 'Bois finition brun vintage, pieds tournés',
