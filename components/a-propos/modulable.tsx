@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { APROPOS } from '@/lib/a-propos-contenu';
-import { Rise, Segments } from '../motion-kit';
+import { Rise, Segments } from './motion-kit';
 
 // Décalages de départ (en px et en degrés) : chaque bloc arrive de sa position éparpillée et se range.
 const DECALAGES = [
@@ -26,17 +26,18 @@ const DECALAGES_TITRE = [
   { x: 90, y: -100, r: 5 },
 ];
 
+// Photos studio retenues (fond neutre, produit entier). Chaque tuile garde la proportion exacte de sa photo : rien n'est rogné.
 const TUILES = [
-  { src: '/catalog/canape-d-angle-modulable-en-u-beige-1.webp', legende: 'U beige' },
-  { src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème' },
-  { src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite' },
-  { src: '/catalog/canape-d-angle-modulable-en-u-gris-fonce-4.webp', legende: 'U gris foncé' },
-  { src: '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp', legende: 'L blanc chaud' },
-  { src: '/catalog/j9h5SNVC.jpg', legende: 'Bubble' },
+  { src: '/catalog/canape-d-angle-modulable-en-u-beige-1.webp', legende: 'U beige', w: 1122, h: 1402 },
+  { src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème', w: 1122, h: 1402 },
+  { src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
+  { src: '/catalog/canape-d-angle-modulable-en-u-gris-fonce-1.webp', legende: 'U gris foncé', w: 1536, h: 1024 },
+  { src: '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp', legende: 'L blanc chaud', w: 1122, h: 1402 },
+  { src: '/catalog/bubble-blanc-ivoire-boucle.webp', legende: 'Bubble', w: 1774, h: 887 },
 ];
 
 // Une tuile photo : éparpillée au départ, elle se range dans la grille quand elle entre dans l'écran.
-function Tuile({ src, legende, index }: { src: string; legende: string; index: number }) {
+function Tuile({ src, legende, w, h, index }: { src: string; legende: string; w: number; h: number; index: number }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.98', 'start 0.4'] });
   const d = DECALAGES[index % DECALAGES.length];
@@ -44,8 +45,8 @@ function Tuile({ src, legende, index }: { src: string; legende: string; index: n
   const y = useTransform(scrollYProgress, [0, 1], [d.y, 0]);
   const rotation = useTransform(scrollYProgress, [0, 1], [d.r, 0]);
   return (
-    <motion.figure ref={ref} style={{ x, y, rotate: rotation }} className="relative m-0 aspect-[4/5] overflow-hidden bg-[#F6F2EB] shadow-[0_30px_60px_-35px_rgba(34,22,7,0.45)]">
-      <Image src={src} alt={legende} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover p-2" />
+    <motion.figure ref={ref} style={{ x, y, rotate: rotation }} className="relative m-0 overflow-hidden bg-[#F6F2EB] p-2 shadow-[0_30px_60px_-35px_rgba(34,22,7,0.45)]">
+      <Image src={src} alt={legende} width={w} height={h} sizes="(max-width: 768px) 50vw, 33vw" className="block h-auto w-full" />
       <figcaption className="absolute bottom-3 left-3 bg-white/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] text-[#221607]">{legende}</figcaption>
     </motion.figure>
   );
@@ -64,7 +65,7 @@ export function Modulable() {
         </Link>
         <div className="mx-auto w-full max-w-6xl">
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#7F6A52]">{APROPOS.accroche}</p>
-          <h1 className="mt-8 flex flex-wrap gap-x-3 gap-y-4">
+          <h1 className="pdp-display mt-8 flex flex-wrap gap-x-3 gap-y-4">
             {mots.map((mot, i) => {
               const d = DECALAGES_TITRE[i % DECALAGES_TITRE.length];
               return (
@@ -90,7 +91,7 @@ export function Modulable() {
         </Rise>
         <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-10">
           {TUILES.map((t, i) => (
-            <Tuile key={t.src} src={t.src} legende={t.legende} index={i} />
+            <Tuile key={t.src} src={t.src} legende={t.legende} w={t.w} h={t.h} index={i} />
           ))}
         </div>
       </section>
