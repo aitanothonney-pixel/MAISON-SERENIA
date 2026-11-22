@@ -1350,9 +1350,9 @@ const exactPriceProducts: Product[] = [
     price: 749,
     description: 'Grand canapé sectionnel en forme de U avec double méridienne, en tissu chenille doux et enveloppant. Modulable et combinable selon votre espace, il offre une assise généreuse pour toute la famille. Coloris gris foncé, élégant et intemporel.',
     images: [
+      '/catalog/canape-d-angle-modulable-en-u-gris-fonce-3.webp',
       '/catalog/canape-d-angle-modulable-en-u-gris-fonce-1.webp',
       '/catalog/canape-d-angle-modulable-en-u-gris-fonce-2.webp',
-      '/catalog/canape-d-angle-modulable-en-u-gris-fonce-3.webp',
       '/catalog/canape-d-angle-modulable-en-u-gris-fonce-4.webp',
     ],
     dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
