@@ -1029,7 +1029,6 @@ const exactPriceProducts: Product[] = [
     details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
   },
   // ── Meubles : Lot de 2 tables basses rondes noyer ────────────────────────────
-  // ⚠️ Image temporaire — à remplacer par les vraies photos du client
   {
     id: 133,
     name: 'Lot de 2 tables basses rondes noyer',
@@ -1037,9 +1036,10 @@ const exactPriceProducts: Product[] = [
     price: 199,
     description: 'Lot de 2 tables basses rondes gigognes en bois finition noyer, au style nordique épuré. Plateaux ronds et piètement sculptural — parfaites pour un salon, un balcon ou un petit appartement. Se glissent l\'une sous l\'autre pour gagner de la place.',
     images: [
-      '/catalog/Kzy67HkR.png',
-      '/catalog/Y4VN9RzY.png',
-      '/catalog/qLgFqJS7.png',
+      '/catalog/lot-de-2-tables-basses-rondes-noyer-1.webp',
+      '/catalog/lot-de-2-tables-basses-rondes-noyer-2.webp',
+      '/catalog/lot-de-2-tables-basses-rondes-noyer-3.webp',
+      '/catalog/lot-de-2-tables-basses-rondes-noyer-4.webp',
     ],
     dimensions: 'Lot de 2 · grande Ø 60 cm & petite Ø 40 cm',
     material: 'Bois, finition noyer',
