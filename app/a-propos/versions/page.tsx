@@ -11,6 +11,11 @@ const VERSIONS = [
   { slug: 'b', nom: 'B · Lumière', description: 'Fond beige, grands titres centrés, photo pleine largeur, valeurs en liste numérotée.' },
   { slug: 'c', nom: 'C · Fiche produit', description: 'Mise en page en lignes comme les fiches produit, photo en cadre beige, bouton anthracite.' },
   { slug: 'd', nom: 'D · Manifeste', description: 'Titres très grands, photo pleine largeur avec carte beige, bandeaux dorés.' },
+  { slug: 'e', nom: 'E · Cinéma', description: 'Défilement cinématographique : la photo change à chaque chapitre, la citation s’éclaire mot à mot.' },
+  { slug: 'f', nom: 'F · Matière', description: 'Titres révélés par masque, photos en parallaxe, ligne dorée qui se dessine au défilement.' },
+  { slug: 'g', nom: 'G · Lumière', description: 'La page passe de la nuit au jour en défilant ; le pointeur éclaire le titre et la photo Bubble.' },
+  { slug: 'h', nom: 'H · Modulable', description: 'Des blocs éparpillés s’assemblent en grille au défilement, avec des ressorts.' },
+  { slug: 'i', nom: 'I · Pas à pas', description: 'Une bande horizontale épinglée, pilotée par le défilement vertical. Version verticale si « réduire les mouvements » est activé.' },
 ];
 
 export default function VersionsIndex() {
