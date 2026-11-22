@@ -76,6 +76,6 @@ export const APROPOS = {
 
   ctaTitre: "Composez l'intérieur qui vous ressemble",
   ctaTexte: 'Parcourez notre sélection et laissez entrer la sérénité chez vous.',
-  ctaPrincipal: { texte: 'Découvrir nos pièces', href: '/produits' },
-  ctaSecondaire: { texte: 'Nous écrire', href: '/contact' },
+  ctaPrincipal: { texte: "Retourner à l'accueil", href: '/' },
+  ctaSecondaire: { texte: 'Contactez-nous', href: '/contact' },
 };
