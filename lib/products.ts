@@ -58,6 +58,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 73, color: 'Noir', colorHex: '#1a1a1a' },
   ],
+  'commode-6-tiroirs': [
+    { productId: 76, color: 'Blanc', colorHex: '#ece7de' },
+    { productId: 74, color: 'Noir', colorHex: '#1a1a1a' },
+  ],
   'table-gigognes-lot2': [
     { productId: 84, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 85, color: 'Brun', colorHex: '#6b4a30' },
@@ -513,11 +517,9 @@ const rawProducts: Product[] = [
     price: 170,
     description: 'Commode moderne à 6 tiroirs, unité de rangement idéale pour la chambre ou l\'entrée. Structure noire et façades bois chocolat, en MDF durable. Grande capacité pour vêtements et essentiels, style contemporain.',
     images: [
-      '/catalog/cSH9XcdH.png',
-      '/catalog/kWbJVR5.png',
-      '/catalog/bg1YMfM9.png',
-      '/catalog/Mxf3wGjT.png',
-      '/catalog/DHp15LLC.png',
+      '/catalog/commode-6-tiroirs-bois-noir-1.webp',
+      '/catalog/commode-6-tiroirs-bois-noir-2.webp',
+      '/catalog/commode-6-tiroirs-bois-noir-3.webp',
     ],
     dimensions: 'L 100 × P 36 × H 69 cm',
     material: 'MDF durable, structure noire, façades bois chocolat',
