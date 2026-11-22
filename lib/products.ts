@@ -1382,7 +1382,11 @@ const exactPriceProducts: Product[] = [
     category: 'Salon',
     price: 749,
     description: 'Grand canapé sectionnel en forme de U avec double méridienne, en tissu chenille doux et enveloppant. Modulable et combinable selon votre espace, il offre une assise généreuse pour toute la famille. Coloris beige chaleureux, parfait pour un intérieur cosy.',
-    images: ['/catalog/G4dCvqjH.png'],
+    images: [
+      '/catalog/canape-d-angle-modulable-en-u-beige-1.webp',
+      '/catalog/canape-d-angle-modulable-en-u-beige-2.webp',
+      '/catalog/canape-d-angle-modulable-en-u-beige-3.webp',
+    ],
     dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
     material: 'Tissu chenille, structure bois',
     details: ['Forme en U avec double méridienne', 'Tissu chenille doux et résistant', 'Modulable et combinable', 'Assise généreuse 4-5 places'],
