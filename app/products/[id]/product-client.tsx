@@ -1244,7 +1244,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   preload={selectedImage === 0}
-                  className="object-contain p-2"
+                  className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover p-2'}
                 />
                 <button
                   type="button"
@@ -1265,7 +1265,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       aria-label={`Agrandir la photo ${i + 1}`}
                       className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
                     >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-contain p-2" />
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover p-2'} />
                     </button>
                   ))}
                 </div>
