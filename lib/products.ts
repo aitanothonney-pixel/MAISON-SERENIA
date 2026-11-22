@@ -1421,6 +1421,7 @@ const exactPriceProducts: Product[] = [
       '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp',
       '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-3.webp',
       '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-4.webp',
+      '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-5.webp',
     ],
     dimensions: 'L 363,2 × P 88,9 × H 87,1 cm (canapé en L)',
     material: 'Velours côtelé, assise moelleuse',
