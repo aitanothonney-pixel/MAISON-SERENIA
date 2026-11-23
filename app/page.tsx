@@ -6,7 +6,7 @@ import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Heart, X, ArrowRight, Clock, Truck, Shield, ArrowUp, Gift } from 'lucide-react';
+import { ChevronRight, Heart, X, ArrowRight, Truck, Shield, ArrowUp, Gift } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -728,35 +728,6 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   );
 }
 
-// ─── Trust Strip ─────────────────────────────────────────────────────────────
-
-function TrustStrip() {
-  const cur = useCurrency();
-  const items = [
-    { Icon: Truck, title: 'Livraison Offerte', subtitle: `dès ${formatPrice(40, cur)}` },
-    { Icon: Shield, title: 'Paiement Sécurisé', subtitle: 'Via Stripe' },
-    { Icon: Clock, title: 'Service client', subtitle: 'Réponse sous 48 h ouvrées' },
-  ];
-  return (
-    <FadeInSection>
-      <div className="w-full" style={{ background: '#f9f9f9' }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-neutral-200">
-          {items.map(({ Icon, title, subtitle }) => (
-            <div key={title} className="flex flex-col items-center justify-center gap-3 py-8 px-2 md:px-4 text-center group">
-              <div className="relative w-12 h-12 rounded-full border border-[#A68A6D]/50 flex items-center justify-center transition-colors duration-300 group-hover:border-[#A68A6D]">
-                <div className="absolute inset-1 rounded-full border border-neutral-200" />
-                <Icon size={18} className="text-black relative" strokeWidth={1.2} />
-              </div>
-              <p className="text-xs font-bold tracking-wide text-black uppercase">{title}</p>
-              <p className="text-[10px] text-neutral-500 tracking-wide">{subtitle}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </FadeInSection>
-  );
-}
-
 // ─── Newsletter Section ───────────────────────────────────────────────────────
 
 function NewsletterSection() {
@@ -1117,9 +1088,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Bande de réassurance, juste sous la bannière Mon Intérieur IA */}
-      <TrustStrip />
 
       {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
       <ShopByCategory />
