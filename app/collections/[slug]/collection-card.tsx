@@ -42,24 +42,11 @@ export function CollectionCard({ product, position }: { product: Product; positi
                 fetchPriority={position && i === 0 ? 'high' : 'auto'}
                 loading={position && i === 0 ? 'eager' : undefined}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
+                className={contain ? 'object-contain' : 'object-cover'}
               />
             </div>
           ))}
         </div>
-
-        {/* 2e image affichée en fondu au survol (desktop) */}
-        {product.images[1] && (
-          <div className={`absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${contain ? 'p-4' : ''}`}>
-            <Image
-              src={product.images[1]}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className={`transition-transform duration-500 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
-            />
-          </div>
-        )}
 
         {isBubble && (
           <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 z-10 pointer-events-none">
