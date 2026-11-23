@@ -560,11 +560,44 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="grid gap-14 lg:grid-cols-12 lg:gap-16"
             >
-              {/* Vitrine : canapé et fauteuil à la même échelle (même hauteur) */}
+              {/* Vitrine : canapé et fauteuil à la même échelle, dans un cadre fin (proposition 3) */}
               <div className="lg:col-span-8">
-                <div className="flex h-full flex-col justify-center bg-white p-6 md:p-10">
-                  <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center md:gap-6">
-                    <div className="flex flex-col items-center text-center">
+                {/* Déclenchement sur le conteneur : le cadre et le reflet démarrent masqués, donc invisibles pour l'observateur */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="relative overflow-hidden bg-white px-7 pb-7 pt-12 md:px-[52px] md:pb-[30px] md:pt-[50px]"
+                >
+                  {/* Cadre fin qui se dessine à l'arrivée */}
+                  <motion.span
+                    aria-hidden
+                    variants={{
+                      hidden: { clipPath: 'inset(0% 0% 100% 0%)' },
+                      show: { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: 1.8, ease: CATEGORY_EASE, delay: 0.1 } },
+                    }}
+                    className="pointer-events-none absolute inset-[14px] border border-[#E6DCCD]"
+                  />
+                  {/* Reflet doré qui traverse la vitrine */}
+                  <motion.span
+                    aria-hidden
+                    variants={{
+                      hidden: { x: '-100%' },
+                      show: { x: '100%', transition: { duration: 2.2, ease: CATEGORY_EASE, delay: 0.35 } },
+                    }}
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: 'linear-gradient(100deg, transparent 35%, rgba(166,138,109,0.16) 50%, transparent 65%)' }}
+                  />
+
+                  <div className="relative flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center md:gap-6">
+                    <motion.div
+                      variants={{
+                        hidden: { x: -90, opacity: 0 },
+                        show: { x: 0, opacity: 1, transition: { duration: 1.6, ease: CATEGORY_EASE, delay: 0.15 } },
+                      }}
+                      whileHover={{ y: -6 }}
+                      className="flex flex-col items-center text-center"
+                    >
                       <Link href={`/products/${bundle.canapeId}`} className="group block">
                         <Image
                           src={visual.canape.src}
@@ -577,8 +610,16 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                       <p className={`mt-6 ${BUNDLE_LEGENDE}`}>Canapé 3 places</p>
                       <p className="titre-produit mt-2 text-black">{canape.name}</p>
                       <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(canapePromo, cur)}</p>
-                    </div>
-                    <div className="flex flex-col items-center text-center">
+                    </motion.div>
+
+                    <motion.div
+                      variants={{
+                        hidden: { x: 90, opacity: 0 },
+                        show: { x: 0, opacity: 1, transition: { duration: 1.6, ease: CATEGORY_EASE, delay: 0.3 } },
+                      }}
+                      whileHover={{ y: -6 }}
+                      className="flex flex-col items-center text-center"
+                    >
                       <Link href={`/products/${bundle.fauteuilId}`} className="group block">
                         <Image
                           src={visual.fauteuil.src}
@@ -591,8 +632,45 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                       <p className={`mt-6 ${BUNDLE_LEGENDE}`}>Fauteuil</p>
                       <p className="titre-produit mt-2 text-black">{fauteuil.name}</p>
                       <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(fauteuilPromo, cur)}</p>
-                    </div>
+                    </motion.div>
                   </div>
+                </motion.div>
+
+                {/* Choix du tableau offert */}
+                <div className="mt-7">
+                  <p className={`mb-3 ${BUNDLE_LEGENDE}`}>Votre tableau</p>
+                  <div className={`flex items-center gap-5 transition-opacity duration-300 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
+                    <button
+                      type="button"
+                      onClick={() => setGiftLightbox(true)}
+                      title="Voir le tableau en grand"
+                      aria-label="Voir le tableau en grand"
+                      className="relative h-24 w-[72px] shrink-0 cursor-zoom-in overflow-hidden border border-[#E6DCCD] bg-white"
+                    >
+                      <Image src={gift.images[0]} alt={gift.name} fill sizes="72px" className="object-cover transition-transform duration-500 hover:scale-105" />
+                    </button>
+                    <select
+                      aria-label="Choisir le tableau offert"
+                      value={selectedTableau}
+                      onChange={(e) => setSelectedTableau(Number(e.target.value))}
+                      disabled={!offerOn}
+                      className="flex-1 cursor-pointer border-0 border-b border-[#D8C9B5] bg-transparent py-2.5 text-[15px] text-[#221607] outline-none focus:border-[#221607] disabled:cursor-not-allowed"
+                    >
+                      {tableaux.map((t) => (
+                        <option key={t.id} value={t.id}>{t.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <label className="mt-4 flex cursor-pointer select-none items-center gap-3 text-[13px] text-[#4D4842]">
+                    <input
+                      type="checkbox"
+                      checked={offerOn}
+                      onChange={(e) => setOfferOn(e.target.checked)}
+                      aria-label="Ajouter le tableau offert au panier"
+                      className="h-4 w-4 accent-[#221607]"
+                    />
+                    Ajouter le tableau offert (50×70 cm), gratuit
+                  </label>
                 </div>
               </div>
 
@@ -629,43 +707,6 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                     )}
                   </li>
                 </ul>
-
-                {/* Choix du tableau offert */}
-                <div className="mt-9">
-                  <p className={`mb-3 ${BUNDLE_LEGENDE}`}>Votre tableau</p>
-                  <div className={`flex items-center gap-5 transition-opacity duration-300 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
-                    <button
-                      type="button"
-                      onClick={() => setGiftLightbox(true)}
-                      title="Voir le tableau en grand"
-                      aria-label="Voir le tableau en grand"
-                      className="relative h-24 w-[72px] shrink-0 cursor-zoom-in overflow-hidden border border-[#E6DCCD] bg-white"
-                    >
-                      <Image src={gift.images[0]} alt={gift.name} fill sizes="72px" className="object-cover transition-transform duration-500 hover:scale-105" />
-                    </button>
-                    <select
-                      aria-label="Choisir le tableau offert"
-                      value={selectedTableau}
-                      onChange={(e) => setSelectedTableau(Number(e.target.value))}
-                      disabled={!offerOn}
-                      className="flex-1 cursor-pointer border-0 border-b border-[#D8C9B5] bg-transparent py-2.5 text-[15px] text-[#221607] outline-none focus:border-[#221607] disabled:cursor-not-allowed"
-                    >
-                      {tableaux.map((t) => (
-                        <option key={t.id} value={t.id}>{t.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <label className="mt-4 flex cursor-pointer select-none items-center gap-3 text-[13px] text-[#4D4842]">
-                    <input
-                      type="checkbox"
-                      checked={offerOn}
-                      onChange={(e) => setOfferOn(e.target.checked)}
-                      aria-label="Ajouter le tableau offert au panier"
-                      className="h-4 w-4 accent-[#221607]"
-                    />
-                    Ajouter le tableau offert (50×70 cm), gratuit
-                  </label>
-                </div>
 
                 {/* Prix */}
                 <div className="mt-10 border-t border-[#D8C9B5] pt-8">
