@@ -1409,7 +1409,12 @@ const exactPriceProducts: Product[] = [
     category: 'Salon',
     price: 749,
     description: 'Grand canapé sectionnel en forme de U avec double méridienne, en tissu chenille doux et enveloppant. Modulable et combinable selon votre espace, il offre une assise généreuse pour toute la famille. Coloris brun profond, chaleureux et raffiné.',
-    images: ['/catalog/R4JJLxJs.png'],
+    images: [
+      '/catalog/canape-d-angle-u-brun-1.webp',
+      '/catalog/canape-d-angle-u-brun-2.webp',
+      '/catalog/canape-d-angle-u-brun-3.webp',
+    ],
+    imageFit: 'contain',
     dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
     material: 'Tissu chenille, structure bois',
     details: ['Forme en U avec double méridienne', 'Tissu chenille doux et résistant', 'Modulable et combinable', 'Assise généreuse 4-5 places'],
