@@ -27,17 +27,18 @@ const DECALAGES_TITRE = [
 ];
 
 // Photos studio retenues (fond neutre, produit entier). Chaque tuile garde la proportion exacte de sa photo : rien n'est rogné.
+// Chaque tuile renvoie vers la fiche de son produit.
 const TUILES = [
-  { src: '/catalog/canape-d-angle-modulable-en-u-beige-1.webp', legende: 'U beige', w: 1122, h: 1402 },
-  { src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème', w: 1122, h: 1402 },
-  { src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
-  { src: '/catalog/meuble-tv-bois-150-cm-2.webp', legende: 'Meuble TV bois', w: 1122, h: 1402 },
-  { src: '/catalog/commode-blanche-6-tiroirs-face-portrait.webp', legende: 'Commode blanche', w: 1122, h: 1402 },
-  { src: '/catalog/table-basse-bicolore-a-niveaux-decales-1.webp', legende: 'Table basse bicolore', w: 1122, h: 1402 },
+  { href: '/products/97', src: '/catalog/canape-d-angle-modulable-en-u-beige-1.webp', legende: 'U beige', w: 1122, h: 1402 },
+  { href: '/products/87', src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème', w: 1122, h: 1402 },
+  { href: '/products/100', src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
+  { href: '/products/60', src: '/catalog/meuble-tv-bois-150-cm-2.webp', legende: 'Meuble TV bois', w: 1122, h: 1402 },
+  { href: '/products/76', src: '/catalog/commode-blanche-6-tiroirs-face-portrait.webp', legende: 'Commode blanche', w: 1122, h: 1402 },
+  { href: '/products/83', src: '/catalog/table-basse-bicolore-a-niveaux-decales-1.webp', legende: 'Table basse bicolore', w: 1122, h: 1402 },
 ];
 
 // Une tuile photo : éparpillée au départ, elle se range dans la grille quand elle entre dans l'écran.
-function Tuile({ src, legende, w, h, index }: { src: string; legende: string; w: number; h: number; index: number }) {
+function Tuile({ href, src, legende, w, h, index }: { href: string; src: string; legende: string; w: number; h: number; index: number }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.98', 'start 0.4'] });
   const d = DECALAGES[index % DECALAGES.length];
@@ -45,10 +46,12 @@ function Tuile({ src, legende, w, h, index }: { src: string; legende: string; w:
   const y = useTransform(scrollYProgress, [0, 1], [d.y, 0]);
   const rotation = useTransform(scrollYProgress, [0, 1], [d.r, 0]);
   return (
-    <motion.figure ref={ref} style={{ x, y, rotate: rotation }} className="relative m-0 overflow-hidden bg-[#F6F2EB] p-2 shadow-[0_30px_60px_-35px_rgba(34,22,7,0.45)]">
-      <Image src={src} alt={legende} width={w} height={h} sizes="(max-width: 768px) 50vw, 33vw" className="block h-auto w-full" />
-      <figcaption className="absolute bottom-3 left-3 bg-white/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] text-[#221607]">{legende}</figcaption>
-    </motion.figure>
+    <Link href={href} className="group block">
+      <motion.figure ref={ref} style={{ x, y, rotate: rotation }} className="relative m-0 overflow-hidden bg-[#F6F2EB] p-2 shadow-[0_30px_60px_-35px_rgba(34,22,7,0.45)]">
+        <Image src={src} alt={legende} width={w} height={h} sizes="(max-width: 768px) 50vw, 33vw" className="block h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]" />
+        <figcaption className="absolute bottom-3 left-3 bg-white/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.15em] text-[#221607]">{legende}</figcaption>
+      </motion.figure>
+    </Link>
   );
 }
 
@@ -91,7 +94,7 @@ export function Modulable() {
         </Rise>
         <div className="mt-12 grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-10">
           {TUILES.map((t, i) => (
-            <Tuile key={t.src} src={t.src} legende={t.legende} w={t.w} h={t.h} index={i} />
+            <Tuile key={t.src} href={t.href} src={t.src} legende={t.legende} w={t.w} h={t.h} index={i} />
           ))}
         </div>
       </section>
