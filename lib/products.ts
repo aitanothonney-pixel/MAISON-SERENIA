@@ -1425,7 +1425,12 @@ const exactPriceProducts: Product[] = [
     category: 'Salon',
     price: 749,
     description: 'Grand canapé sectionnel en forme de U avec double méridienne, en tissu chenille doux et enveloppant. Modulable et combinable selon votre espace, il offre une assise généreuse pour toute la famille. Coloris vert sauge, élégant et tendance.',
-    images: ['/catalog/5hR8cmLr.png'],
+    images: [
+      '/catalog/canape-d-angle-u-vert-1.webp',
+      '/catalog/canape-d-angle-u-vert-2.webp',
+      '/catalog/canape-d-angle-u-vert-3.webp',
+    ],
+    imageFit: 'contain',
     dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
     material: 'Tissu chenille, structure bois',
     details: ['Forme en U avec double méridienne', 'Tissu chenille doux et résistant', 'Modulable et combinable', 'Assise généreuse 4-5 places'],
