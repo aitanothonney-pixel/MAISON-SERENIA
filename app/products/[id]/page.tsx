@@ -2,6 +2,7 @@ import { products, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
 import ProductClient from './product-client';
 import { productInter, productInterTight } from '@/lib/product-fonts';
+import { notFound } from 'next/navigation';
 
 const BASE = 'https://maison-serenia.com';
 
@@ -12,7 +13,8 @@ const toAbsolute = (src: string) => (src.startsWith('http') ? src : `${BASE}${sr
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = products.find(p => p.id === Number(id));
-  if (!product) return { title: 'Produit | Maison Serenia' };
+  // Produit retiré ou inconnu : page 404 du site, en noindex (titre « Page introuvable »).
+  if (!product) notFound();
   const desc = product.description.slice(0, 155);
   return {
     title: `${product.name} | Maison Serenia`,
@@ -37,6 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = products.find(p => p.id === Number(id));
+  // Produit retiré du catalogue ou identifiant inconnu : page 404 du site, non indexable.
+  if (!product) notFound();
 
   // Date de validité du prix (1 an), requise par Google pour les offres.
   const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;

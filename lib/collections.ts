@@ -74,7 +74,7 @@ export function getCollectionProducts(slug: string): Product[] {
   // Le Salon : ordre prioritaire, puis les autres canapés, puis les meubles ;
   // les Bubble (canapés et fauteuils) sont placés tout à la fin de leur gamme.
   if (cat === 'Salon') {
-    const PRIORITY = [100, 102, 101, 87, 88, 94, 89];
+    const PRIORITY = [100, 102, 101, 87, 88, 95, 89];
     const rank = (p: Product) => {
       // Bubble en dernier : canapés Bubble après les autres canapés,
       // fauteuils Bubble après les autres fauteuils.

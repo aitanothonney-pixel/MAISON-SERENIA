@@ -1009,7 +1009,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     91: 'Canapé-lit modulaire chenille beige',
     92: 'Canapé-lit modulaire chenille bleu',
     // Canapés sectionnels en U (chenille, double méridienne)
-    94: 'Canapé d\'angle modulable en U gris foncé',
     95: 'Canapé d\'angle modulable en U noir',
     96: 'Canapé d\'angle modulable en U gris clair',
     97: 'Canapé d\'angle modulable en U beige',

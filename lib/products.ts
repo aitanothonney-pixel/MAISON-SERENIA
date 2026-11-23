@@ -76,7 +76,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 92, color: 'Bleu', colorHex: '#2d3a6b' },
   ],
   'canape-sectionnel-u': [
-    { productId: 94, color: 'Gris foncé', colorHex: '#3a3a3a' },
     { productId: 95, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 96, color: 'Gris clair', colorHex: '#b3b3b3' },
     { productId: 97, color: 'Beige', colorHex: '#d8c8a8' },
@@ -1344,23 +1343,7 @@ const exactPriceProducts: Product[] = [
     material: 'Tissu flanelle côtelé, assise à compression d\'air',
     details: ['Design modulable déformable', 'Tissu flanelle côtelé doux', 'Convertible canapé-lit', 'Assise moelleuse enveloppante'],
   },
-  // ── Salon : Canapé d'angle modulable en U (chenille) — 6 coloris ─────────────
-  {
-    id: 94,
-    name: 'Canapé d\'angle modulable en U gris foncé',
-    category: 'Salon',
-    price: 749,
-    description: 'Grand canapé sectionnel en forme de U avec double méridienne, en tissu chenille doux et enveloppant. Modulable et combinable selon votre espace, il offre une assise généreuse pour toute la famille. Coloris gris foncé, élégant et intemporel.',
-    images: [
-      '/catalog/canape-d-angle-u-gris-fonce-1.webp',
-      '/catalog/canape-d-angle-u-gris-fonce-2.webp',
-      '/catalog/canape-d-angle-u-gris-fonce-3.webp',
-    ],
-    imageFit: 'contain',
-    dimensions: 'L 285 × P 185 × H 85 cm (canapé en U)',
-    material: 'Tissu chenille, structure bois',
-    details: ['Forme en U avec double méridienne', 'Tissu chenille doux et résistant', 'Modulable et combinable', 'Assise généreuse 4-5 places'],
-  },
+  // ── Salon : Canapé d'angle modulable en U (chenille) — 5 coloris ─────────────
   {
     id: 95,
     name: 'Canapé d\'angle modulable en U noir',
