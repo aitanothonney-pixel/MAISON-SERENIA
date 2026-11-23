@@ -1128,6 +1128,9 @@ export default function Home() {
       {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
       <ShopByCategory />
 
+      {/* Ensembles Bubble : juste au-dessus des coups de cœur */}
+      <BundlesSection onCartOpen={() => setCartOpen(true)} />
+
       <div className="w-full">
           {/* Bestsellers / Coups de cœur */}
           <BestsellersSection onToutVoir={() => {
@@ -1207,8 +1210,6 @@ export default function Home() {
 
       </div>
 
-
-      <BundlesSection onCartOpen={() => setCartOpen(true)} />
       <NewsletterSection />
     </div>
   );
