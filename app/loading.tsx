@@ -15,7 +15,7 @@ export default function Loading() {
         {/* MS letters */}
         <p
           className="text-black text-3xl font-bold tracking-widest animate-pulse"
-          style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}
+          style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
         >
           MS
         </p>
