@@ -6,7 +6,7 @@ import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Heart, X, ArrowRight, Clock, Truck, Shield, ArrowUp, Gift, Eye } from 'lucide-react';
+import { ChevronRight, Heart, X, ArrowRight, Clock, Truck, Shield, ArrowUp, Gift } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
 import { useWishlist } from '@/lib/useWishlist';
@@ -439,179 +439,266 @@ function ShopByCategory() {
 
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
 
-function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; onCartOpen: () => void }) {
+const BUNDLE_SWATCH: Record<string, string> = { blanc: '#F7F5F0', bleu: '#1F3FBF', rouge: '#A3151D' };
+const BUNDLE_LEGENDE = 'text-[10px] font-medium uppercase tracking-[0.25em] text-[#7F6A52]';
+const GIFT_PRICE = 60;
+const GIFT_SIZE = '50×70 cm';
+
+function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const cur = useCurrency();
   const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
   const tableaux = products.filter((p) => p.name.includes('Tableau'));
+  const [activeSlug, setActiveSlug] = useState<string>(BUNDLES[0].slug);
   const [selectedTableau, setSelectedTableau] = useState<number>(tableaux[0]?.id ?? 103);
   const [offerOn, setOfferOn] = useState(true);
   const [giftLightbox, setGiftLightbox] = useState(false);
+  const [added, setAdded] = useState(false);
 
-  const GIFT_SIZE = '50×70 cm';
-  const GIFT_PRICE = 60;
+  const bundle = BUNDLES.find((b) => b.slug === activeSlug) ?? BUNDLES[0];
   const canape = products.find((p) => p.id === bundle.canapeId)!;
   const fauteuil = products.find((p) => p.id === bundle.fauteuilId)!;
   const gift = products.find((p) => p.id === selectedTableau)!;
   const canapePromo = nice99(Math.round(canape.price * 0.7));
   const fauteuilPromo = nice99(Math.round(fauteuil.price * 0.7));
   const sum = canapePromo + fauteuilPromo + (offerOn ? GIFT_PRICE : 0);
+  const economie = Math.max(0, sum - BUNDLE_PRICE);
 
   const addBundle = (open: boolean) => {
     addItem(bundle.canapeId);
     addItem(bundle.fauteuilId);
     if (offerOn) addItem(selectedTableau, GIFT_SIZE);
     if (open) onCartOpen();
-    else { setAdded(true); setTimeout(() => setAdded(false), 2000); }
+    else {
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+    }
   };
 
   return (
-    <div className="bg-white border border-neutral-200 p-6 lg:p-7 flex flex-col hover:shadow-lg transition-shadow duration-300">
-      <div className="flex-1 flex flex-col">
-        <Link href={`/products/${bundle.canapeId}`} className="flex items-center gap-4 group">
-          <div className="w-28 h-28 bg-white flex items-center justify-center flex-shrink-0">
-            <Image src={canape.images[0]} alt={canape.name} width={140} height={140} className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
+    <>
+      <section id="section-packs" className="scroll-mt-20 bg-[#F6F2EB] py-24 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          {/* En-tête */}
+          <div className="mb-14 text-center">
+            <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-[#7F6A52]">
+              {BUNDLES.length} ensembles au choix
+            </p>
+            <h2 className="pdp-display text-4xl font-semibold tracking-[-0.03em] text-[#221607] md:text-6xl">
+              Nos ensembles Bubble
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-balance text-[17px] leading-relaxed text-[#4D4842]">
+              Le canapé et son fauteuil assortis — avec un tableau offert au choix (taille 50×70 cm).
+            </p>
           </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="titre-produit text-black group-hover:underline">{canape.name}</h3>
-            <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(canapePromo, cur)}</p>
-          </div>
-        </Link>
-        <div className="flex justify-center my-3"><span className="text-neutral-300 text-2xl leading-none">+</span></div>
-        <Link href={`/products/${bundle.fauteuilId}`} className="flex items-center gap-4 group">
-          <div className="w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden">
-            <Image src={fauteuil.images[0]} alt={fauteuil.name} width={140} height={140} className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="titre-produit text-black group-hover:underline">{fauteuil.name}</h3>
-            <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(fauteuilPromo, cur)}</p>
-          </div>
-        </Link>
 
-        {/* Tableau offert — au choix, taille 50x70 uniquement */}
-        <div className="flex justify-center my-3"><span className="text-neutral-300 text-2xl leading-none">+</span></div>
-        <div className={`transition-opacity duration-200 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setGiftLightbox(true)}
-              title="Voir le tableau en grand"
-              className="relative w-28 h-28 bg-white flex items-center justify-center flex-shrink-0 overflow-hidden border border-neutral-100 group/gift cursor-zoom-in"
-            >
-              <Image src={gift.images[0]} alt={gift.name} width={140} height={140} className="object-cover w-full h-full transition-transform duration-300 group-hover/gift:scale-105" />
-              <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">Offert</span>
-              <span className="absolute inset-0 bg-black/0 group-hover/gift:bg-black/25 transition-colors flex items-center justify-center">
-                <span className="opacity-0 group-hover/gift:opacity-100 transition-opacity text-white text-[9px] font-bold tracking-widest uppercase flex items-center gap-1">
-                  <Eye className="w-3 h-3" /> Voir
-                </span>
-              </span>
-            </button>
-
-            {/* Lightbox du tableau offert */}
-            {giftLightbox && (
-              <div
-                onClick={() => setGiftLightbox(false)}
-                className="fixed inset-0 z-[130] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm cursor-zoom-out"
-              >
+          {/* Choix de l'ensemble : les coloris sont visibles d'un coup d'œil */}
+          <div className="mb-12 grid grid-cols-3 gap-3 md:gap-5">
+            {BUNDLES.map((b) => {
+              const on = b.slug === bundle.slug;
+              return (
                 <button
-                  onClick={() => setGiftLightbox(false)}
-                  aria-label="Fermer"
-                  className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-white/80 hover:text-white"
+                  key={b.slug}
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setActiveSlug(b.slug)}
+                  className={`group flex flex-col items-start gap-3 border px-3 py-4 text-left transition-all duration-500 md:flex-row md:items-center md:gap-5 md:px-7 md:py-6 ${
+                    on
+                      ? 'border-[#221607] bg-white shadow-[0_24px_50px_-30px_rgba(34,22,7,0.5)]'
+                      : 'border-[#D8C9B5] hover:border-[#221607]'
+                  }`}
                 >
-                  <X className="w-6 h-6" />
+                  <span
+                    className="h-7 w-7 shrink-0 rounded-full border border-[#D8C9B5] md:h-12 md:w-12"
+                    style={{ background: BUNDLE_SWATCH[b.slug] }}
+                  />
+                  <span className="min-w-0">
+                    <span className="pdp-display block text-[17px] font-semibold tracking-[-0.02em] text-[#221607] md:text-3xl">
+                      {b.color}
+                    </span>
+                    <span className="mt-1 hidden text-[10px] uppercase tracking-[0.18em] text-[#7F6A52] md:block md:text-xs">
+                      Canapé + fauteuil
+                    </span>
+                  </span>
                 </button>
-                <div onClick={(e) => e.stopPropagation()} className="max-w-2xl w-full text-center">
-                  <Image src={gift.images[0]} alt={gift.name} width={900} height={1200} className="w-full h-auto max-h-[80vh] object-contain shadow-2xl" />
-                  <p className="text-white text-sm mt-4 tracking-wide">{gift.name} · 50×70 cm</p>
+              );
+            })}
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={bundle.slug}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="grid gap-14 lg:grid-cols-12 lg:gap-16"
+            >
+              {/* Vitrine : canapé et fauteuil posés sur la même ligne au sol */}
+              <div className="lg:col-span-7">
+                <div className="bg-white p-5 md:p-12">
+                  <div className="flex items-end justify-between gap-6 md:gap-10">
+                    <Link href={`/products/${bundle.canapeId}`} className="group relative block aspect-[4/3] w-[62%]">
+                      <Image
+                        src={canape.images[0]}
+                        alt={canape.name}
+                        fill
+                        sizes="(max-width: 1024px) 60vw, 420px"
+                        className="object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </Link>
+                    <Link href={`/products/${bundle.fauteuilId}`} className="group relative block aspect-square w-[34%]">
+                      <Image
+                        src={fauteuil.images[0]}
+                        alt={fauteuil.name}
+                        fill
+                        sizes="(max-width: 1024px) 34vw, 220px"
+                        className="object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </Link>
+                  </div>
+                  <div className="mt-8 flex justify-between gap-6 border-t border-[#E6DCCD] pt-6 md:gap-10">
+                    <div className="w-[62%]">
+                      <p className={BUNDLE_LEGENDE}>Canapé 3 places</p>
+                      <p className="titre-produit mt-2 text-black">{canape.name}</p>
+                      <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(canapePromo, cur)}</p>
+                    </div>
+                    <div className="w-[34%]">
+                      <p className={BUNDLE_LEGENDE}>Fauteuil</p>
+                      <p className="titre-produit mt-2 text-black">{fauteuil.name}</p>
+                      <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(fauteuilPromo, cur)}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
-            <div className="flex-1 min-w-0">
-              <p className="text-[10px] tracking-[0.2em] uppercase text-[#7F6A52] mb-1">Tableau offert · 50×70 cm</p>
-              <select aria-label="Choisir le tableau offert"
-                value={selectedTableau}
-                onChange={(e) => setSelectedTableau(Number(e.target.value))}
-                disabled={!offerOn}
-                className="w-full text-[13px] border border-neutral-200 px-2 py-1.5 bg-white focus:outline-none focus:border-black disabled:bg-neutral-50"
-              >
-                {tableaux.map((t) => (<option key={t.id} value={t.id}>{t.name}</option>))}
-              </select>
-              <p className="flex items-center gap-2 mt-1.5">
-                <span className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(GIFT_PRICE, cur)}</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Offert</span>
-              </p>
-            </div>
-          </div>
-          <label className="flex items-center gap-2 mt-3 cursor-pointer select-none">
-            <input type="checkbox" aria-label="Ajouter le tableau offert au panier" checked={offerOn} onChange={(e) => setOfferOn(e.target.checked)} className="w-4 h-4 accent-black" />
-            <span className="text-[12px] text-neutral-600">Ajouter le tableau offert (50×70 cm) — gratuit</span>
-          </label>
-        </div>
-      </div>
 
-      <div className="h-px bg-neutral-200 my-6" />
+              {/* Détail et achat */}
+              <div className="lg:col-span-5">
+                <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-[#7F6A52]">
+                  Ensemble Bubble · {bundle.color}
+                </p>
+                <h3 className="pdp-display text-4xl font-semibold leading-[1.04] tracking-[-0.03em] text-[#221607] md:text-5xl">
+                  Canapé et fauteuil assortis
+                </h3>
+                <p className="mt-5 max-w-md text-[16px] leading-relaxed text-[#4D4842]">
+                  Deux pièces sculpturales dans un même coloris, pour un salon complet. Un tableau offert au choix.
+                </p>
 
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500">Prix de l&apos;ensemble</p>
-        <p className="text-neutral-500 line-through text-sm price-luxe">{formatPrice(sum, cur)}</p>
-      </div>
-      <p className="text-4xl font-bold text-black mb-5 leading-none price-luxe">{formatPrice(BUNDLE_PRICE, cur)}</p>
+                <ul className="mt-9 border-t border-[#D8C9B5]">
+                  <li className="flex items-center justify-between gap-4 border-b border-[#D8C9B5] py-4">
+                    <span className="titre-produit text-black">{canape.name}</span>
+                    <span className="price-luxe text-[15px] text-[#221607]">{formatPrice(canapePromo, cur)}</span>
+                  </li>
+                  <li className="flex items-center justify-between gap-4 border-b border-[#D8C9B5] py-4">
+                    <span className="titre-produit text-black">{fauteuil.name}</span>
+                    <span className="price-luxe text-[15px] text-[#221607]">{formatPrice(fauteuilPromo, cur)}</span>
+                  </li>
+                  <li className="flex items-center justify-between gap-4 border-b border-[#D8C9B5] py-4">
+                    <span className="titre-produit text-black">Tableau offert · 50×70 cm</span>
+                    {offerOn ? (
+                      <span className="flex items-center gap-3">
+                        <s className="price-luxe text-sm text-[#8A8178]">{formatPrice(GIFT_PRICE, cur)}</s>
+                        <span className={BUNDLE_LEGENDE}>Offert</span>
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[#8A8178]">Non ajouté</span>
+                    )}
+                  </li>
+                </ul>
 
-      <div className="flex justify-center mb-3">
-        <span className="inline-block bg-neutral-100 text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 text-black font-semibold">
-          Rabais de {formatPrice(Math.max(0, sum - BUNDLE_PRICE), cur)}
-        </span>
-      </div>
+                {/* Choix du tableau offert */}
+                <div className="mt-9">
+                  <p className={`mb-3 ${BUNDLE_LEGENDE}`}>Votre tableau</p>
+                  <div className={`flex items-center gap-5 transition-opacity duration-300 ${offerOn ? 'opacity-100' : 'opacity-40'}`}>
+                    <button
+                      type="button"
+                      onClick={() => setGiftLightbox(true)}
+                      title="Voir le tableau en grand"
+                      aria-label="Voir le tableau en grand"
+                      className="relative h-24 w-[72px] shrink-0 cursor-zoom-in overflow-hidden border border-[#E6DCCD] bg-white"
+                    >
+                      <Image src={gift.images[0]} alt={gift.name} fill sizes="72px" className="object-cover transition-transform duration-500 hover:scale-105" />
+                    </button>
+                    <select
+                      aria-label="Choisir le tableau offert"
+                      value={selectedTableau}
+                      onChange={(e) => setSelectedTableau(Number(e.target.value))}
+                      disabled={!offerOn}
+                      className="flex-1 cursor-pointer border-0 border-b border-[#D8C9B5] bg-transparent py-2.5 text-[15px] text-[#221607] outline-none focus:border-[#221607] disabled:cursor-not-allowed"
+                    >
+                      {tableaux.map((t) => (
+                        <option key={t.id} value={t.id}>{t.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <label className="mt-4 flex cursor-pointer select-none items-center gap-3 text-[13px] text-[#4D4842]">
+                    <input
+                      type="checkbox"
+                      checked={offerOn}
+                      onChange={(e) => setOfferOn(e.target.checked)}
+                      aria-label="Ajouter le tableau offert au panier"
+                      className="h-4 w-4 accent-[#221607]"
+                    />
+                    Ajouter le tableau offert (50×70 cm), gratuit
+                  </label>
+                </div>
 
-      <div className="flex items-center justify-center gap-2 mb-6 text-center min-h-[20px]">
-        {offerOn ? (
-          <>
-            <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)' }}>
-              <Gift className="w-3 h-3 text-white" strokeWidth={2} />
-            </span>
-            <p className="text-[11px] tracking-wide text-neutral-600">
-              <span className="font-semibold text-black">{gift.name}</span> (50×70 cm) offert avec cet ensemble
-            </p>
-          </>
-        ) : (
-          <p className="text-[11px] tracking-wide text-neutral-500">Ensemble sans le tableau offert</p>
-        )}
-      </div>
+                {/* Prix */}
+                <div className="mt-10 border-t border-[#D8C9B5] pt-8">
+                  <p className={BUNDLE_LEGENDE}>Prix de l’ensemble</p>
+                  <p className="price-luxe mt-3 text-5xl leading-none text-[#221607]">{formatPrice(BUNDLE_PRICE, cur)}</p>
+                  <p className="mt-4 text-[13px] text-[#7F6A52]">
+                    Au lieu de <s className="text-[#8A8178]">{formatPrice(sum, cur)}</s> · vous économisez {formatPrice(economie, cur)}
+                  </p>
+                </div>
 
-      <button onClick={() => addBundle(true)} className="w-full bg-black text-white text-xs font-bold tracking-widest uppercase py-4 hover:bg-neutral-800 transition-colors">
-        Acheter cet ensemble
-      </button>
-      <button onClick={() => addBundle(false)} className={`w-full text-xs font-bold tracking-widest uppercase py-3.5 mt-2.5 border transition-colors ${added ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-black text-black hover:bg-black hover:text-white'}`}>
-        {added ? 'Ajouté au panier ✓' : 'Ajouter au panier'}
-      </button>
-      <p className="text-[10px] text-neutral-500 text-center mt-3 tracking-wide">
-        Livraison gratuite à partir de {formatPrice(40, cur)}
-      </p>
-    </div>
-  );
-}
-
-function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
-  return (
-    <>
-      <section id="section-packs" className="py-20 bg-white scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <FadeInSection>
-            <div className="text-center mb-14">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-2">Économisez plus</p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
-                Nos ensembles Bubble
-              </h2>
-              <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
-                Le canapé et son fauteuil assortis — avec un tableau offert au choix (taille 50×70 cm).
-              </p>
-            </div>
-          </FadeInSection>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {BUNDLES.map((bundle) => (<BundleCard key={bundle.slug} bundle={bundle} onCartOpen={onCartOpen} />))}
-          </div>
+                <div className="mt-8 space-y-3">
+                  <button
+                    type="button"
+                    onClick={() => addBundle(true)}
+                    className="w-full bg-[#221607] py-5 text-[13px] font-medium uppercase tracking-[0.12em] text-[#F6F2EB] transition-transform duration-500 hover:-translate-y-0.5"
+                  >
+                    Acheter cet ensemble
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addBundle(false)}
+                    className={`w-full border py-4 text-[13px] font-medium uppercase tracking-[0.12em] transition-colors duration-500 ${
+                      added
+                        ? 'border-[#221607] bg-[#221607] text-[#F6F2EB]'
+                        : 'border-[#221607] text-[#221607] hover:bg-[#221607] hover:text-[#F6F2EB]'
+                    }`}
+                  >
+                    {added ? 'Ajouté au panier ✓' : 'Ajouter au panier'}
+                  </button>
+                </div>
+                <p className="mt-4 text-center text-[11px] tracking-wide text-[#7F6A52]">
+                  Livraison gratuite à partir de {formatPrice(40, cur)}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
+
+      {/* Agrandissement du tableau, hors de l'animation pour rester plein écran */}
+      {giftLightbox && (
+        <div
+          onClick={() => setGiftLightbox(false)}
+          className="fixed inset-0 z-[130] flex cursor-zoom-out items-center justify-center bg-black/80 p-6 backdrop-blur-sm"
+        >
+          <button
+            onClick={() => setGiftLightbox(false)}
+            aria-label="Fermer"
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center text-white/80 hover:text-white"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-2xl text-center">
+            <Image src={gift.images[0]} alt={gift.name} width={900} height={1200} className="mx-auto h-auto max-h-[80vh] w-full object-contain shadow-2xl" />
+            <p className="mt-4 text-sm tracking-wide text-white">{gift.name} · 50×70 cm</p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
