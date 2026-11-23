@@ -449,7 +449,6 @@ function ShopByCategory() {
 
 // ─── Bundles Section (Canapé + Fauteuil) ─────────────────────────────────────
 
-const BUNDLE_SWATCH: Record<string, string> = { blanc: '#F7F5F0', bleu: '#1F3FBF', rouge: '#A3151D' };
 const BUNDLE_LEGENDE = 'text-[10px] font-medium uppercase tracking-[0.25em] text-[#7F6A52]';
 
 // Photos des ensembles rognées au produit : le canapé et le fauteuil sont affichés à la même hauteur (même échelle)
@@ -534,10 +533,6 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
                       : 'border-[#D8C9B5] hover:border-[#221607]'
                   }`}
                 >
-                  <span
-                    className="h-7 w-7 shrink-0 rounded-full border border-[#D8C9B5] md:h-12 md:w-12"
-                    style={{ background: BUNDLE_SWATCH[b.slug] }}
-                  />
                   <span className="min-w-0">
                     <span className="pdp-display block text-[17px] font-semibold tracking-[-0.02em] text-[#221607] md:text-3xl">
                       {b.color}
