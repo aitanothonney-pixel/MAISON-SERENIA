@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Link2, Plus, Gift, Sparkles, FileText, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Heart, ChevronDown, ChevronRight, X, Check, Lock, Truck, CreditCard, Package, Link2, Plus, Gift, Sparkles, FileText, MessageCircle, Maximize2, ZoomIn, ZoomOut } from 'lucide-react';
 import { products, getVariantGroup, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BLACK_FRIDAY_PROMO, formatPromoEnd } from '@/lib/promotions';
 import { categoryToSlug } from '@/lib/collections';
@@ -1600,6 +1600,36 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Contactez-nous — infos supplémentaires, réponses rapides */}
+              <div className="mb-8 border border-neutral-200 bg-neutral-50 p-5 md:p-6">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#A68A6D]/50 text-[#34322F]">
+                    <MessageCircle className="h-4 w-4" strokeWidth={1.4} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="pdp-kicker">Contactez-nous</p>
+                    <p className="pdp-display mt-1.5 text-[17px] font-semibold leading-snug tracking-[-0.01em] text-black">Une question sur ce produit&nbsp;?</p>
+                    <p className="mt-2 text-[13px] leading-[1.6] text-pretty text-[#4d4842]">
+                      Besoin d’informations supplémentaires&nbsp;? Notre équipe vous répond rapidement&nbsp;: 48 heures ouvrées au plus tard, généralement bien plus tôt.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-5 flex flex-col gap-4">
+                  <Link
+                    href="/contact"
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap border border-[#34322F] bg-white px-5 text-[13px] font-semibold text-[#34322F] transition-colors duration-300 hover:bg-[#34322F] hover:text-white sm:w-auto sm:self-start"
+                  >
+                    Écrire à notre équipe <ChevronRight className="h-4 w-4" />
+                  </Link>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-200 pt-4 text-[12px] text-[#4d4842]">
+                    <span className="text-[#6b6660]">Réponses rapides :</span>
+                    <Link href="/livraison" className="underline underline-offset-4 hover:text-black">Livraison</Link>
+                    <Link href="/retours" className="underline underline-offset-4 hover:text-black">Retours</Link>
+                    <Link href="/faq" className="underline underline-offset-4 hover:text-black">FAQ</Link>
+                  </div>
+                </div>
               </div>
 
               {/* Accordions */}
