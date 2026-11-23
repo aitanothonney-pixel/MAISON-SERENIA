@@ -508,6 +508,22 @@ function ShopByCategory() {
 
 const BUNDLE_SWATCH: Record<string, string> = { blanc: '#F7F5F0', bleu: '#1F3FBF', rouge: '#A3151D' };
 const BUNDLE_LEGENDE = 'text-[10px] font-medium uppercase tracking-[0.25em] text-[#7F6A52]';
+
+// Photos des ensembles rognées au produit : le canapé et le fauteuil sont affichés à la même hauteur (même échelle)
+const BUNDLE_VISUALS: Record<string, { canape: { src: string; w: number; h: number }; fauteuil: { src: string; w: number; h: number } }> = {
+  blanc: {
+    canape: { src: '/catalog/bundles/canape-blanc.webp', w: 1456, h: 600 },
+    fauteuil: { src: '/catalog/bundles/fauteuil-blanc.webp', w: 794, h: 600 },
+  },
+  bleu: {
+    canape: { src: '/catalog/bundles/canape-bleu.webp', w: 1372, h: 600 },
+    fauteuil: { src: '/catalog/bundles/fauteuil-bleu.webp', w: 759, h: 600 },
+  },
+  rouge: {
+    canape: { src: '/catalog/bundles/canape-rouge.webp', w: 1453, h: 600 },
+    fauteuil: { src: '/catalog/bundles/fauteuil-rouge.webp', w: 790, h: 600 },
+  },
+};
 const GIFT_PRICE = 60;
 const GIFT_SIZE = '50×70 cm';
 
@@ -522,6 +538,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
   const [added, setAdded] = useState(false);
 
   const bundle = BUNDLES.find((b) => b.slug === activeSlug) ?? BUNDLES[0];
+  const visual = BUNDLE_VISUALS[bundle.slug];
   const canape = products.find((p) => p.id === bundle.canapeId)!;
   const fauteuil = products.find((p) => p.id === bundle.fauteuilId)!;
   const gift = products.find((p) => p.id === selectedTableau)!;
@@ -548,7 +565,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
           {/* En-tête */}
           <div className="mb-14 text-center">
             <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-[#7F6A52]">
-              {BUNDLES.length} ensembles au choix
+              Notre nouvelle offre · {BUNDLES.length} ensembles au choix
             </p>
             <h2 className="pdp-display text-4xl font-semibold tracking-[-0.03em] text-[#221607] md:text-6xl">
               Nos ensembles Bubble
@@ -600,37 +617,35 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               className="grid gap-14 lg:grid-cols-12 lg:gap-16"
             >
-              {/* Vitrine : canapé et fauteuil posés sur la même ligne au sol */}
-              <div className="lg:col-span-7">
-                <div className="bg-white p-5 md:p-12">
-                  <div className="flex items-end justify-between gap-6 md:gap-10">
-                    <Link href={`/products/${bundle.canapeId}`} className="group relative block aspect-[4/3] w-[62%]">
-                      <Image
-                        src={canape.images[0]}
-                        alt={canape.name}
-                        fill
-                        sizes="(max-width: 1024px) 60vw, 420px"
-                        className="object-contain transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    </Link>
-                    <Link href={`/products/${bundle.fauteuilId}`} className="group relative block aspect-square w-[34%]">
-                      <Image
-                        src={fauteuil.images[0]}
-                        alt={fauteuil.name}
-                        fill
-                        sizes="(max-width: 1024px) 34vw, 220px"
-                        className="object-contain transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    </Link>
-                  </div>
-                  <div className="mt-8 flex justify-between gap-6 border-t border-[#E6DCCD] pt-6 md:gap-10">
-                    <div className="w-[62%]">
-                      <p className={BUNDLE_LEGENDE}>Canapé 3 places</p>
+              {/* Vitrine : canapé et fauteuil à la même échelle (même hauteur) */}
+              <div className="lg:col-span-8">
+                <div className="flex h-full flex-col justify-center bg-white p-6 md:p-10">
+                  <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-center md:gap-6">
+                    <div className="flex flex-col items-center text-center">
+                      <Link href={`/products/${bundle.canapeId}`} className="group block">
+                        <Image
+                          src={visual.canape.src}
+                          alt={canape.name}
+                          width={visual.canape.w}
+                          height={visual.canape.h}
+                          className="h-[118px] w-auto transition-transform duration-700 group-hover:scale-[1.03] md:h-[180px]"
+                        />
+                      </Link>
+                      <p className={`mt-6 ${BUNDLE_LEGENDE}`}>Canapé 3 places</p>
                       <p className="titre-produit mt-2 text-black">{canape.name}</p>
                       <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(canapePromo, cur)}</p>
                     </div>
-                    <div className="w-[34%]">
-                      <p className={BUNDLE_LEGENDE}>Fauteuil</p>
+                    <div className="flex flex-col items-center text-center">
+                      <Link href={`/products/${bundle.fauteuilId}`} className="group block">
+                        <Image
+                          src={visual.fauteuil.src}
+                          alt={fauteuil.name}
+                          width={visual.fauteuil.w}
+                          height={visual.fauteuil.h}
+                          className="h-[118px] w-auto transition-transform duration-700 group-hover:scale-[1.03] md:h-[180px]"
+                        />
+                      </Link>
+                      <p className={`mt-6 ${BUNDLE_LEGENDE}`}>Fauteuil</p>
                       <p className="titre-produit mt-2 text-black">{fauteuil.name}</p>
                       <p className="price-luxe mt-1.5 text-[15px] text-[#221607]">{formatPrice(fauteuilPromo, cur)}</p>
                     </div>
@@ -639,7 +654,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
               </div>
 
               {/* Détail et achat */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-4">
                 <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-[#7F6A52]">
                   Ensemble Bubble · {bundle.color}
                 </p>
