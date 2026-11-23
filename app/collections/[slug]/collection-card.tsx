@@ -13,7 +13,7 @@ export function CollectionCard({ product, position }: { product: Product; positi
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
-  const contain = isBubble || product.category === 'Décorations' || product.category === 'Été';
+  const contain = isBubble || product.imageFit === 'contain' || product.category === 'Décorations' || product.category === 'Été';
 
   const onScroll = () => {
     const el = scrollRef.current;
