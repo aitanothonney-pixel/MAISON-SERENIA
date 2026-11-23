@@ -14,6 +14,8 @@ import { useCart } from '@/lib/useCart';
 import { useAnnouncementBarVisible } from '@/components/ui/announcement-bar';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
+import { HeroHotspots } from '@/components/ui/hero-hotspots';
+import { BUBBLE_HERO_HOTSPOTS, CONSEIL_HERO_HOTSPOTS } from '@/lib/hero-hotspots';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { heroMarcellus, heroRaleway } from '@/lib/hero-fonts';
 
@@ -119,6 +121,7 @@ function BubblePromoSection() {
         </div>
         <div className="relative w-full aspect-[1672/941] lg:absolute lg:inset-y-0 lg:left-[calc(50%_-_50vw)] lg:right-[calc(50%_-_50vw)] lg:w-auto lg:aspect-auto">
           <Image src={BUBBLE_HERO_IMAGE} alt="Salon avec les canapés et fauteuils Bubble" fill sizes="100vw" className="object-cover object-[50%_100%]" />
+          <HeroHotspots items={BUBBLE_HERO_HOTSPOTS} />
           <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
           <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,rgba(34,22,7,0.88)_0%,rgba(34,22,7,0.62)_38%,rgba(34,22,7,0)_68%)]" />
         </div>
@@ -127,85 +130,8 @@ function BubblePromoSection() {
   );
 }
 
-// ─── Bestsellers Section ──────────────────────────────────────────────────────
-
+// Ordre de mise en avant des produits : sert au tri « Recommandés » de la grille d'accueil
 const bestsellerIds = [100, 135, 140, 103];
-
-function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
-  const cur = useCurrency();
-  const bestsellers = bestsellerIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
-  const { isWished, toggle } = useWishlist();
-
-  return (
-    <>
-      <section className="py-14 max-w-7xl mx-auto px-6 lg:px-10">
-        <FadeInSection>
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
-                Coups de cœur
-              </h2>
-              <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
-            </div>
-            <button onClick={onToutVoir} className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5">
-              Tout voir <ChevronRight className="w-3 h-3" />
-            </button>
-          </div>
-        </FadeInSection>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {bestsellers.map((product) => (
-            <div
-              key={product.id}
-              className="group overflow-hidden"
-            >
-              <Link href={`/products/${product.id}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden bg-white mb-3 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'p-3' : ''}`}>
-                  <Image
-                    src={product.images[0]}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}
-                  />
-                  {/* Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                      Coup de cœur
-                    </div>
-                    {product.name.includes('Bubble') && (
-                      <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
-                        −30%
-                      </div>
-                    )}
-                  </div>
-                  <button
-                    onClick={(e) => { e.preventDefault(); toggle(product.id); }}
-                    aria-label="Ajouter aux favoris" aria-pressed={isWished(product.id)} className={`absolute top-3 right-3 bg-white/80 backdrop-blur-sm p-1.5 transition-all duration-300 hover:bg-white ${isWished(product.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  >
-                    <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
-                  </button>
-                </div>
-                <h3 className="titre-produit text-black mb-0.5">{product.name}</h3>
-                <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
-                <div className="flex items-center gap-2">
-                  {product.name.includes('Bubble') ? (
-                    <>
-                      <p className="text-black font-bold text-sm price-luxe">{formatPrice(nice99(Math.round(product.price * 0.7)), cur)}</p>
-                      <p className="text-neutral-500 line-through text-xs price-luxe">{formatPrice(product.price, cur)}</p>
-                    </>
-                  ) : (
-                    <p className="text-black font-bold text-sm price-luxe">{formatPrice(product.price, cur)}</p>
-                  )}
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
-  );
-}
 
 // ─── Product Card (with optional badge) ──────────────────────────────────────
 
@@ -1099,6 +1025,7 @@ export default function Home() {
               sizes="100vw"
               className="object-cover object-[50%_100%]"
             />
+            <HeroHotspots items={CONSEIL_HERO_HOTSPOTS} />
             <div aria-hidden="true" className="absolute inset-x-0 top-[-2px] h-[calc(35%+2px)] bg-gradient-to-b from-[#D4BDAA] to-transparent lg:hidden" />
             <div aria-hidden="true" className="absolute inset-y-0 left-0 hidden lg:block w-full bg-[linear-gradient(to_right,rgba(34,22,7,0.88)_0%,rgba(34,22,7,0.62)_38%,rgba(34,22,7,0)_68%)]" />
           </div>
@@ -1108,17 +1035,10 @@ export default function Home() {
       {/* Acheter par catégorie (« Notre univers ») — bien visible, style meublier */}
       <ShopByCategory />
 
-      {/* Ensembles Bubble : juste au-dessus des coups de cœur */}
+      {/* Ensembles Bubble */}
       <BundlesSection onCartOpen={() => setCartOpen(true)} />
 
       <div className="w-full">
-          {/* Bestsellers / Coups de cœur */}
-          <BestsellersSection onToutVoir={() => {
-            setActiveFilter('Bubble');
-            setSortBy('recommandes');
-            setTimeout(() => document.getElementById('section-salon')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
-          }} />
-
           {/* Products Grid with filter */}
           <section id="section-salon" className="py-16 scroll-mt-20">
             <div id="section-bureau" className="scroll-mt-20" />
