@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CheckCircle, ChevronDown, Mail, Package, RotateCcw } from 'lucide-react';
 import { Rise } from '@/components/a-propos/motion-kit';
-import { InfoEntete, InfoSection } from '@/components/ui/info-kit';
+import { InfoCarte, InfoEntete, InfoSection } from '@/components/ui/info-kit';
 
 const ETAPES = [
   {
@@ -55,14 +55,14 @@ export default function RetoursPage() {
 
   return (
     <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
-      <InfoEntete titre="Retours & Remboursements">
+      <InfoEntete kicker="Service client" titre="Retours & Remboursements">
         <div className="inline-flex items-center gap-3 bg-[#221607] px-6 py-4 text-[#F6F2EB]">
           <CheckCircle className="h-5 w-5 shrink-0" strokeWidth={1.4} />
           <p className="text-sm font-medium uppercase tracking-[0.12em]">Satisfait ou remboursé — 30 jours</p>
         </div>
       </InfoEntete>
 
-      <div className="mx-auto max-w-5xl px-6 pb-32">
+      <div className="mx-auto max-w-6xl px-6 pb-32">
         {/* Trois étapes */}
         <InfoSection titre="Comment effectuer un retour ?">
           <div className="grid gap-10 sm:grid-cols-3">
@@ -116,6 +116,7 @@ export default function RetoursPage() {
 
         {/* Formulaire */}
         <InfoSection titre="Initier un retour">
+          <InfoCarte>
           {submitted ? (
             <Rise>
               <div className="bg-white p-10 text-center shadow-[0_24px_60px_-34px_rgba(34,22,7,0.4)]">
@@ -197,6 +198,7 @@ export default function RetoursPage() {
               </Rise>
             </form>
           )}
+          </InfoCarte>
         </InfoSection>
       </div>
     </main>

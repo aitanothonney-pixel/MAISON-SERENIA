@@ -158,11 +158,12 @@ export default function FaqPage() {
     <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <InfoEntete
+        kicker="Aide"
         titre="Questions Fréquentes"
         intro="Retrouvez les réponses aux questions les plus courantes, organisées par thème."
       />
 
-      <div className="mx-auto max-w-5xl space-y-20 px-6 pb-32">
+      <div className="mx-auto max-w-6xl space-y-20 px-6 pb-32">
         {FAQ_DATA.map(group => (
           <Rise key={group.theme}>
             <section>

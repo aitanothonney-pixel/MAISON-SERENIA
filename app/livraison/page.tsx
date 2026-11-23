@@ -39,11 +39,12 @@ export default function LivraisonPage() {
   return (
     <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
       <InfoEntete
+        kicker="Expédition"
         titre="Livraison & Délais"
         intro="Nous expédions chaque commande avec le plus grand soin, pour que vos pièces arrivent en parfait état."
       />
 
-      <div className="mx-auto max-w-5xl px-6 pb-32">
+      <div className="mx-auto max-w-6xl px-6 pb-32">
         <InfoSection titre="Suivi de commande">
           <p>
             Dès l&apos;expédition de votre colis, vous recevrez un e-mail contenant votre numéro de suivi. Vous pouvez à tout moment suivre l&apos;acheminement de votre commande directement sur le site du transporteur.
