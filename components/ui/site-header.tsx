@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, ArrowLeft, ArrowRight, Clock, Heart, ShoppingBag, ChevronRight, ChevronDown, Gift, Sparkles, Award, TrendingUp, Home as HomeIcon, Truck, Shield, CreditCard, User } from 'lucide-react';
 import { Logo } from '@/components/ui/logo';
+import { ConnexionPanel } from '@/components/ui/connexion-panel';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { products, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
@@ -352,6 +353,7 @@ export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWis
   const [mounted, setMounted] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [langOpen, setLangOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const [lang, setLang] = useState('FR');
 
   useEffect(() => {
@@ -483,9 +485,20 @@ export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWis
             <Search className="w-[22px] h-[22px]" strokeWidth={1.4} />
           </button>
 
-          <Link href="/contact" className="hidden sm:flex flex-col items-center text-neutral-700 hover:text-black transition-colors" aria-label="Contact">
-            <User className="w-[22px] h-[22px]" strokeWidth={1.4} />
-          </Link>
+          <div className="relative hidden sm:flex">
+            <button
+              type="button"
+              onClick={() => setLoginOpen((o) => !o)}
+              aria-label="Se connecter"
+              aria-expanded={loginOpen}
+              className="flex flex-col items-center text-neutral-700 hover:text-black transition-colors"
+            >
+              <User className="w-[22px] h-[22px]" strokeWidth={1.4} />
+            </button>
+            <AnimatePresence>
+              {loginOpen && <ConnexionPanel onClose={() => setLoginOpen(false)} />}
+            </AnimatePresence>
+          </div>
 
           <button onClick={onWishlistOpen} className="relative flex items-center justify-center text-neutral-700 hover:text-black transition-colors" aria-label="Favoris">
             <Heart className={`w-[22px] h-[22px] ${mounted && wishCount > 0 ? 'fill-[#C9A96E] text-[#C9A96E]' : ''}`} strokeWidth={1.4} />
