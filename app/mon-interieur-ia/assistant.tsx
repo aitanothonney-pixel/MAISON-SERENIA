@@ -16,6 +16,8 @@ import { formatPrice, convertPrice, useCurrency } from '@/lib/currency';
 import { gaEvent } from '@/lib/analytics';
 import type { RoomKey } from '@/lib/interieur-matching';
 
+const ROOM_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 type Dims = { length?: number; width?: number; height?: number; maxWidth?: number; maxDepth?: number };
 interface Brief {
   room?: RoomKey; intent?: string; decoType?: string; description?: string;
@@ -321,20 +323,80 @@ export default function Assistant() {
 
             {current === 'room' && (
               <>
-                <h1 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Quelle pièce souhaitez-vous aménager ?</h1>
-                <p className="text-neutral-500 mb-8">Sélectionnez un espace pour commencer.</p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {ROOMS.map((r) => {
-                    const Icon = r.icon; const active = brief.room === r.key;
+                {/* Titre révélé dans un masque, filet doré puis sous-titre qui arrivent ensuite */}
+                <div className="-mb-3 overflow-hidden pb-3">
+                  <motion.h1
+                    initial={{ y: '110%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.9, ease: ROOM_EASE }}
+                    className="text-3xl text-black md:text-4xl"
+                    style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}
+                  >
+                    Quelle pièce souhaitez-vous aménager ?
+                  </motion.h1>
+                </div>
+                <motion.span
+                  aria-hidden
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1, delay: 0.25, ease: ROOM_EASE }}
+                  className="mb-4 mt-5 block h-px w-14 origin-left"
+                  style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }}
+                />
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="mb-8 text-neutral-500"
+                >
+                  Sélectionnez un espace pour commencer.
+                </motion.p>
+
+                {/* Les cases apparaissent en cascade */}
+                <motion.div
+                  className="grid grid-cols-2 gap-3 sm:grid-cols-3"
+                  initial="hidden"
+                  animate="show"
+                  variants={{ show: { transition: { staggerChildren: 0.07, delayChildren: 0.35 } } }}
+                >
+                  {ROOMS.map((r, i) => {
+                    const Icon = r.icon;
+                    const active = brief.room === r.key;
                     return (
-                      <button key={r.key} onClick={() => { set({ room: r.key, intent: undefined, decoType: undefined }); gaEvent('ia_select_room', { room: r.key }); }}
-                        className={`flex flex-col items-center gap-3 border p-6 transition-all ${active ? 'border-black bg-neutral-50 shadow-sm' : 'border-neutral-200 hover:border-neutral-400'}`}>
-                        <Icon className={`w-7 h-7 ${active ? 'text-[#7F6A52]' : 'text-neutral-700'}`} strokeWidth={1.4} />
-                        <span className="text-sm font-medium text-black">{r.label}</span>
-                      </button>
+                      <motion.button
+                        key={r.key}
+                        type="button"
+                        aria-pressed={active}
+                        variants={{
+                          hidden: { opacity: 0, y: 18 },
+                          show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: ROOM_EASE } },
+                        }}
+                        onClick={() => { set({ room: r.key, intent: undefined, decoType: undefined }); gaEvent('ia_select_room', { room: r.key }); }}
+                        className={`group relative flex min-h-[8.5rem] flex-col items-center justify-center gap-3 overflow-hidden border p-5 text-center transition-[border-color,box-shadow] duration-500 before:absolute before:inset-0 before:origin-bottom before:bg-[#F6F2EB] before:transition-all before:duration-700 before:content-[''] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A68A6D] sm:p-6 ${
+                          active
+                            ? 'border-[#221607] shadow-[0_24px_40px_-28px_rgba(34,22,7,0.5)] before:scale-y-100'
+                            : 'border-[#D8C9B5] before:scale-y-0 hover:border-[#A68A6D] hover:shadow-[0_24px_40px_-28px_rgba(34,22,7,0.35)] hover:before:scale-y-100'
+                        }`}
+                      >
+                        <span
+                          className="absolute left-3 top-2.5 text-[10px] tracking-[0.2em] text-[#A68A6D] sm:left-4 sm:top-3"
+                          style={{ fontFamily: 'var(--font-cinzel), Georgia, serif' }}
+                        >
+                          N° {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <Icon
+                          className={`relative z-10 h-7 w-7 transition-all duration-500 group-hover:-translate-y-1 ${active ? 'text-[#7F6A52]' : 'text-[#221607] group-hover:text-[#7F6A52]'}`}
+                          strokeWidth={1.3}
+                        />
+                        <span className="relative z-10 text-sm font-medium text-[#221607]">{r.label}</span>
+                        <span
+                          aria-hidden
+                          className={`absolute bottom-0 left-0 h-px w-full origin-left bg-[#A68A6D] transition-all duration-700 ${active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+                        />
+                      </motion.button>
                     );
                   })}
-                </div>
+                </motion.div>
               </>
             )}
 
