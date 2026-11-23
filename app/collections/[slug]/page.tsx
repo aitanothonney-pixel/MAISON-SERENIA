@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { COLLECTIONS, getCollectionMeta, getCollectionProducts } from '@/lib/collections';
 import { CollectionGrid } from './collection-grid';
+import { CollectionIntro } from '@/components/ui/collection-intro';
 
 export function generateStaticParams() {
   return COLLECTIONS.map((c) => ({ slug: c.slug }));
@@ -61,21 +62,17 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-3">{meta.kicker}</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
-            {meta.label}
-          </h1>
-          <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
-          <p className="text-neutral-500 max-w-xl leading-relaxed">{meta.description}</p>
-          <p className="text-xs text-neutral-500 mt-4">{items.length} pièce{items.length > 1 ? 's' : ''}</p>
-        </div>
-      </section>
+      {/* Intro de catégorie : éditoriale et animée (« Vous êtes dans la catégorie ») */}
+      <CollectionIntro
+        eyebrow={slug === 'bubble' ? meta.kicker : 'Vous êtes dans la catégorie'}
+        title={meta.label}
+        tagline={meta.tagline}
+        description={meta.description}
+        count={items.length}
+      />
 
       {/* Grid */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+      <section id="collection-produits" className="max-w-7xl mx-auto px-6 lg:px-10 py-14 scroll-mt-24">
         {items.length === 0 ? (
           <p className="text-neutral-500 text-center py-20">Aucun produit dans cette collection pour le moment.</p>
         ) : (
