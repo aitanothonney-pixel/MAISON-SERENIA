@@ -166,17 +166,8 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     alt={product.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={`transition-transform duration-600 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
+                    className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}
                   />
-                  {product.images[1] && (
-                    <Image
-                      src={product.images[1]}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain' : 'object-cover'}`}
-                    />
-                  )}
                   {/* Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5">
                     <div className="bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">
@@ -250,19 +241,8 @@ function ProductCard({ product }: { product: ProductPreview }) {
             width={600}
             height={450}
             style={isBubble ? { transform: [10, 12, 13, 22].includes(product.id) ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : product.id === 34 ? { transform: 'scale(1.35)', transformOrigin: 'center center' } : undefined}
-            className={`w-full h-full transition-all duration-700 group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''} ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
+            className={`w-full h-full ${product.category === 'Décorations' || product.category === 'Été' ? 'object-contain' : product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
           />
-          {product.images[1] && (
-            <Image
-              src={product.images[1]}
-              alt={product.name}
-              width={600}
-              height={450}
-              style={isBubble ? { transform: [10, 12, 13, 22].includes(product.id) ? 'none' : [7, 8, 9, 10].includes(product.id) ? 'scale(1.2)' : 'scale(1.1)', transformOrigin: 'center center' } : undefined}
-              className={`absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${product.category === 'Décorations' || product.category === 'Été' || product.name.includes('Bubble') ? 'object-contain' : 'object-cover'}`}
-            />
-          )}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
 
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">

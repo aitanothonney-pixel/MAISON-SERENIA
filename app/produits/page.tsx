@@ -62,7 +62,7 @@ export default function ProduitsPage() {
                     alt={product.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={`transition-transform duration-700 group-hover:scale-105 ${contain ? 'object-contain' : 'object-cover'}`}
+                    className={contain ? 'object-contain' : 'object-cover'}
                   />
                   {isBubble && (
                     <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5">

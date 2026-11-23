@@ -75,7 +75,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                 className="flex items-center gap-5 border border-neutral-100 p-4 hover:border-neutral-300 transition-colors group"
               >
                 <div className="relative w-28 h-28 bg-white shrink-0">
-                  <Image src={product.images[0]} alt={product.name} fill className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
+                  <Image src={product.images[0]} alt={product.name} fill className="object-contain p-2" />
                   {offert && (
                     <span className="absolute top-1 left-1 bg-black text-white text-[8px] font-bold tracking-widest uppercase px-1.5 py-0.5">
                       Offerte
