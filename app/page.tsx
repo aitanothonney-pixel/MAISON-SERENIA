@@ -5,7 +5,7 @@ import { BLACK_FRIDAY_PROMO } from '@/lib/promotions';
 import { SiteHeader, WishlistDrawer } from '@/components/ui/site-header';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Heart, X, ArrowRight, Clock, Truck, Shield, ArrowUp, Gift } from 'lucide-react';
 import { products, collapseVariantDuplicates, nice99 } from '@/lib/products';
 import { BUNDLES, BUNDLE_PRICE } from '@/lib/bundles';
@@ -368,39 +368,14 @@ function ProductFilterBar({
 
 const CATEGORY_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// Position de la photo au curseur, bornée à la fenêtre pour rester visible près du bas de l'écran
-function clampFloat(clientX: number, clientY: number) {
-  return {
-    x: Math.min(clientX + 40, window.innerWidth - 396),
-    y: Math.max(16, Math.min(clientY - 150, window.innerHeight - 296)),
-  };
-}
-
 function ShopByCategory() {
   const tiles = [
-    { slug: 'salon', label: 'Salon', desc: 'Canapés & fauteuils', img: '/catalog/cXXBStKz.avif', pos: 'center 85%' },
-    { slug: 'meubles', label: 'Meubles', desc: 'Tables, TV, rangements', img: '/catalog/table-basse-farmhouse-en-bois-1.webp', pos: 'center' },
-    { slug: 'figurines', label: 'Décorations', desc: 'Pièces & objets déco', img: '/catalog/MXbJ1Ss.png', pos: 'center' },
+    { slug: 'salon', label: 'Salon', desc: 'Canapés & fauteuils' },
+    { slug: 'meubles', label: 'Meubles', desc: 'Tables, TV, rangements' },
+    { slug: 'figurines', label: 'Décorations', desc: 'Pièces & objets déco' },
   ];
-  // active : rangée mise en avant (souris ou clavier) ; floatIndex : photo affichée (souris uniquement)
+  // Rangée mise en avant au survol ou au clavier
   const [active, setActive] = useState<number | null>(null);
-  const [floatIndex, setFloatIndex] = useState<number | null>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const floatX = useSpring(mouseX, { stiffness: 140, damping: 24, mass: 0.6 });
-  const floatY = useSpring(mouseY, { stiffness: 140, damping: 24, mass: 0.6 });
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const p = clampFloat(e.clientX, e.clientY);
-      mouseX.set(p.x);
-      mouseY.set(p.y);
-    };
-    window.addEventListener('mousemove', onMove, { passive: true });
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [mouseX, mouseY]);
-
-  const shown = floatIndex !== null ? tiles[floatIndex] : null;
 
   return (
     <section className="bg-[#F6F2EB] px-6 py-28 lg:px-10">
@@ -412,12 +387,7 @@ function ShopByCategory() {
           </h2>
         </header>
 
-        <div
-          onMouseLeave={() => {
-            setActive(null);
-            setFloatIndex(null);
-          }}
-        >
+        <div onMouseLeave={() => setActive(null)}>
           {tiles.map((t, i) => {
             const on = active === i;
             const dim = active !== null && !on;
@@ -433,16 +403,7 @@ function ShopByCategory() {
                 />
                 <Link
                   href={`/collections/${t.slug}`}
-                  onMouseEnter={(e) => {
-                    // La photo apparaît directement à la bonne place, sans glisser depuis le coin de l'écran
-                    const p = clampFloat(e.clientX, e.clientY);
-                    mouseX.set(p.x);
-                    mouseY.set(p.y);
-                    floatX.jump(p.x);
-                    floatY.jump(p.y);
-                    setActive(i);
-                    setFloatIndex(i);
-                  }}
+                  onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onBlur={() => setActive(null)}
                   className="grid grid-cols-[1fr_auto] items-center gap-6 py-10 md:grid-cols-[120px_1fr_auto] md:py-12"
@@ -481,24 +442,6 @@ function ShopByCategory() {
           })}
           <span className="block h-px w-full bg-[#D8C9B5]" />
         </div>
-
-        {/* Photo qui suit le curseur au survol (ordinateur) */}
-        <AnimatePresence>
-          {shown && (
-            <motion.div
-              key={shown.slug}
-              aria-hidden
-              style={{ x: floatX, y: floatY }}
-              initial={{ opacity: 0, clipPath: 'inset(50% 50% 50% 50%)' }}
-              animate={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0%)' }}
-              exit={{ opacity: 0, clipPath: 'inset(50% 50% 50% 50%)' }}
-              transition={{ duration: 0.9, ease: CATEGORY_EASE }}
-              className="pointer-events-none fixed left-0 top-0 z-[60] hidden h-[280px] w-[380px] overflow-hidden md:block"
-            >
-              <Image src={shown.img} alt="" fill sizes="380px" className="object-cover" style={{ objectPosition: shown.pos }} />
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );
