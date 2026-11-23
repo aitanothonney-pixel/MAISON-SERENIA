@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ScrollText } from 'lucide-react';
+import { InfoDerniereMaj, InfoEntete, InfoSection } from '@/components/ui/info-kit';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://maison-serenia.com/cgv' },
@@ -10,144 +10,101 @@ export const metadata: Metadata = {
 
 export default function CGVPage() {
   return (
-    <main className="bg-white min-h-screen">
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-              <ScrollText className="w-5 h-5 text-white" />
-            </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold text-black"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Conditions Générales de Vente
-            </h1>
-          </div>
-          <p className="text-neutral-500 text-lg max-w-xl" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Les présentes conditions régissent les ventes conclues sur le site maison-serenia.com.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
+      <InfoEntete titre="Conditions Générales de Vente" intro="Les présentes conditions régissent les ventes conclues sur le site maison-serenia.com." />
 
-      <div
-        className="max-w-4xl mx-auto px-6 py-16 space-y-12 text-neutral-700 leading-relaxed"
-        style={{ fontFamily: 'var(--font-dm-sans)' }}
-      >
-        <Section title="1. Objet">
+      <div className="mx-auto max-w-5xl px-6 pb-32">
+        <InfoSection titre="1. Objet">
           <p>
             Les présentes Conditions Générales de Vente (CGV) définissent les droits et obligations des parties
             dans le cadre de la vente en ligne des produits proposés par MAISON SERENIA. Toute commande implique
             l&apos;acceptation pleine et entière des présentes CGV.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="2. Produits">
+        <InfoSection titre="2. Produits">
           <p>
             Les produits proposés sont décrits et présentés avec la plus grande exactitude possible. De légères
             variations de teinte ou d&apos;aspect peuvent survenir, notamment selon les réglages de votre écran,
             sans que la responsabilité de MAISON SERENIA puisse être engagée.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="3. Prix">
+        <InfoSection titre="3. Prix">
           <p>
             Les prix sont indiqués en euros (€) ou en francs suisses (CHF), toutes taxes comprises le cas
             échéant. MAISON SERENIA se réserve le droit de modifier ses prix à tout moment ; les produits sont
             facturés sur la base des tarifs en vigueur au moment de la validation de la commande.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="4. Commande">
+        <InfoSection titre="4. Commande">
           <p>
             La commande est validée après confirmation du paiement. Un e-mail de confirmation récapitulant la
             commande vous est adressé. MAISON SERENIA se réserve le droit d&apos;annuler ou de refuser toute
             commande en cas de litige, de non-paiement ou de motif légitime.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="5. Paiement">
+        <InfoSection titre="5. Paiement">
           <p>
             Le paiement s&apos;effectue en ligne de manière sécurisée via notre prestataire <strong>Stripe</strong>.
             Les moyens de paiement acceptés sont indiqués lors de la commande. La commande est traitée après
             confirmation du paiement.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="6. Livraison">
+        <InfoSection titre="6. Livraison">
           <p>
             Les modalités, délais et frais de livraison sont détaillés sur notre page{' '}
-            <Link href="/livraison" className="text-black underline hover:no-underline">
+            <Link href="/livraison">
               Livraison &amp; Délais
             </Link>
             . Les délais sont donnés à titre indicatif ; un retard de livraison ne peut donner lieu à
             l&apos;annulation de la commande ni au versement de dommages et intérêts.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="7. Droit de rétractation et retours">
+        <InfoSection titre="7. Droit de rétractation et retours">
           <p>
             Conformément à la réglementation applicable, vous disposez d&apos;un délai de <strong>30 jours</strong>{' '}
             pour retourner un article. Les modalités sont précisées sur notre page{' '}
-            <Link href="/retours" className="text-black underline hover:no-underline">
+            <Link href="/retours">
               Retours &amp; Remboursements
             </Link>
             . Le produit doit être retourné dans son état et son emballage d&apos;origine.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="8. Garanties">
+        <InfoSection titre="8. Garanties">
           <p>
             Les produits bénéficient des garanties légales de conformité et contre les vices cachés. En cas de
             produit défectueux ou non conforme, contactez notre service client pour obtenir un échange ou un
             remboursement.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="9. Responsabilité">
+        <InfoSection titre="9. Responsabilité">
           <p>
             MAISON SERENIA ne saurait être tenue responsable des dommages résultant d&apos;une mauvaise
             utilisation des produits ou d&apos;un cas de force majeure.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="10. Droit applicable et litiges">
+        <InfoSection titre="10. Droit applicable et litiges">
           <p>
             Les présentes CGV sont soumises au droit applicable au lieu d&apos;établissement de l&apos;éditeur.
             En cas de litige, une solution amiable sera recherchée en priorité avant toute action judiciaire.
             Pour toute réclamation, contactez-nous via notre{' '}
-            <Link href="/contact" className="text-black underline hover:no-underline">
+            <Link href="/contact">
               page contact
             </Link>
             .
           </p>
-        </Section>
+        </InfoSection>
 
-        <p className="text-xs text-neutral-500 pt-8 border-t border-neutral-100">
-          Dernière mise à jour : 7 août 2026
-        </p>
+        <InfoDerniereMaj texte="Dernière mise à jour : 7 août 2026" />
       </div>
     </main>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section>
-      <h2
-        className="text-2xl font-bold text-black mb-4"
-        style={{ fontFamily: 'var(--font-playfair)' }}
-      >
-        {title}
-      </h2>
-      {children}
-    </section>
   );
 }

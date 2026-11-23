@@ -1,8 +1,48 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { RotateCcw, CheckCircle, Package, ArrowRight, Mail } from 'lucide-react';
+import { CheckCircle, ChevronDown, Mail, Package, RotateCcw } from 'lucide-react';
+import { Rise } from '@/components/a-propos/motion-kit';
+import { InfoEntete, InfoSection } from '@/components/ui/info-kit';
+
+const ETAPES = [
+  {
+    step: '01',
+    icon: Mail,
+    title: 'Faites votre demande',
+    desc: 'Remplissez le formulaire ci-dessous ou contactez-nous par e-mail avec votre numéro de commande.',
+  },
+  {
+    step: '02',
+    icon: Package,
+    title: "Renvoyez l'article",
+    desc: "Emballez soigneusement l'article dans son emballage d'origine et déposez-le dans un point de dépôt ou un bureau de poste.",
+  },
+  {
+    step: '03',
+    icon: CheckCircle,
+    title: 'Remboursement sous 5j',
+    desc: 'Dès réception et vérification du colis, nous procédons au remboursement intégral sous 5 jours ouvrés.',
+  },
+];
+
+const ACCEPTES = [
+  "Article non utilisé, dans son état d'origine",
+  "Étiquettes et emballages d'origine conservés",
+  'Retour dans les 30 jours suivant la réception',
+  'Tous les articles de la commande inclus',
+];
+
+const NON_ELIGIBLES = [
+  'Articles personnalisés ou sur-mesure',
+  'Produits ouverts ou utilisés (cosmétique / bougie)',
+  'Linge de maison après lavage',
+  'Articles soldés marqués "Vente définitive"',
+];
+
+const ETIQUETTE = 'mb-2 block text-[11px] font-medium uppercase tracking-[0.2em] text-[#7F6A52]';
+const CHAMP =
+  'w-full border-0 border-b border-[#D8C9B5] bg-transparent px-0 py-3 text-[16px] text-[#221607] placeholder:text-[#A68A6D]/70 outline-none transition-colors duration-500 focus:border-[#221607]';
 
 export default function RetoursPage() {
   const [form, setForm] = useState({ order: '', email: '', reason: '', details: '' });
@@ -14,231 +54,150 @@ export default function RetoursPage() {
   }
 
   return (
-    <main className="bg-white min-h-screen">
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-              <RotateCcw className="w-5 h-5 text-white" />
-            </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold text-black"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Retours & Remboursements
-            </h1>
-          </div>
-
-          {/* Satisfied guarantee badge */}
-          <div className="inline-flex items-center gap-3 bg-black text-white px-6 py-4 mt-2">
-            <CheckCircle className="w-5 h-5 text-white flex-shrink-0" />
-            <p className="font-semibold text-sm uppercase tracking-widest" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              Satisfait ou remboursé — 30 jours
-            </p>
-          </div>
+    <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
+      <InfoEntete titre="Retours & Remboursements">
+        <div className="inline-flex items-center gap-3 bg-[#221607] px-6 py-4 text-[#F6F2EB]">
+          <CheckCircle className="h-5 w-5 shrink-0" strokeWidth={1.4} />
+          <p className="text-sm font-medium uppercase tracking-[0.12em]">Satisfait ou remboursé — 30 jours</p>
         </div>
-      </section>
+      </InfoEntete>
 
-      <div className="max-w-4xl mx-auto px-6 py-16 space-y-20">
-
-        {/* 3-step process */}
-        <section>
-          <h2
-            className="text-3xl font-bold text-black mb-10"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Comment effectuer un retour ?
-          </h2>
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                icon: <Mail className="w-5 h-5" />,
-                title: 'Faites votre demande',
-                desc: 'Remplissez le formulaire ci-dessous ou contactez-nous par e-mail avec votre numéro de commande.',
-              },
-              {
-                step: '02',
-                icon: <Package className="w-5 h-5" />,
-                title: "Renvoyez l'article",
-                desc: "Emballez soigneusement l'article dans son emballage d'origine et déposez-le dans un point de dépôt ou un bureau de poste.",
-              },
-              {
-                step: '03',
-                icon: <CheckCircle className="w-5 h-5" />,
-                title: 'Remboursement sous 5j',
-                desc: 'Dès réception et vérification du colis, nous procédons au remboursement intégral sous 5 jours ouvrés.',
-              },
-            ].map((step, i) => (
-              <div key={i} className="relative" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                <div className="text-7xl font-bold text-neutral-100 absolute -top-4 -left-2 select-none" style={{ fontFamily: 'var(--font-playfair)' }}>
-                  {step.step}
-                </div>
-                <div className="relative z-10 pt-8">
-                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center mb-4">
-                    <span className="text-white">{step.icon}</span>
-                  </div>
-                  <h3 className="font-semibold text-black mb-2">{step.title}</h3>
-                  <p className="text-neutral-500 text-sm leading-relaxed">{step.desc}</p>
-                </div>
-                {i < 2 && (
-                  <ArrowRight className="hidden sm:block absolute top-12 -right-5 w-4 h-4 text-neutral-300" />
-                )}
-              </div>
+      <div className="mx-auto max-w-5xl px-6 pb-32">
+        {/* Trois étapes */}
+        <InfoSection titre="Comment effectuer un retour ?">
+          <div className="grid gap-10 sm:grid-cols-3">
+            {ETAPES.map((etape, i) => (
+              <Rise key={etape.step} delay={i * 0.1}>
+                <p className="pdp-display text-6xl font-semibold leading-none text-[#D8C9B5]">{etape.step}</p>
+                <span className="mt-6 flex h-11 w-11 items-center justify-center rounded-full bg-[#221607] text-[#F6F2EB]">
+                  <etape.icon className="h-4 w-4" strokeWidth={1.4} />
+                </span>
+                <h3 className="pdp-display mt-6 text-lg font-semibold tracking-[-0.01em]">{etape.title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-[#4D4842]">{etape.desc}</p>
+              </Rise>
             ))}
           </div>
-        </section>
+        </InfoSection>
 
         {/* Conditions */}
-        <section className="border-t border-neutral-100 pt-16">
-          <h2
-            className="text-3xl font-bold text-black mb-8"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Conditions de retour
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+        <InfoSection titre="Conditions de retour">
+          <div className="grid gap-10 sm:grid-cols-2">
             <div>
-              <h3 className="font-semibold text-black mb-3 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-700" /> Articles acceptés
+              <h3 className="pdp-display flex items-center gap-3 text-lg font-semibold">
+                <CheckCircle className="h-4 w-4 text-[#7F6A52]" strokeWidth={1.4} /> Articles acceptés
               </h3>
-              <ul className="space-y-2 text-neutral-600 text-sm">
-                {[
-                  "Article non utilisé, dans son état d'origine",
-                  "Étiquettes et emballages d'origine conservés",
-                  'Retour dans les 30 jours suivant la réception',
-                  'Tous les articles de la commande inclus',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="w-1 h-1 bg-neutral-400 rounded-full mt-2 flex-shrink-0" />
+              <ul className="mt-5 space-y-3">
+                {ACCEPTES.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] text-[#4D4842]">
+                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[#7F6A52]" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-black mb-3 flex items-center gap-2">
-                <RotateCcw className="w-4 h-4 text-red-500" /> Articles non éligibles
+              <h3 className="pdp-display flex items-center gap-3 text-lg font-semibold">
+                <RotateCcw className="h-4 w-4 text-[#7F6A52]" strokeWidth={1.4} /> Articles non éligibles
               </h3>
-              <ul className="space-y-2 text-neutral-600 text-sm">
-                {[
-                  'Articles personnalisés ou sur-mesure',
-                  'Produits ouverts ou utilisés (cosmétique / bougie)',
-                  'Linge de maison après lavage',
-                  'Articles soldés marqués "Vente définitive"',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="w-1 h-1 bg-neutral-400 rounded-full mt-2 flex-shrink-0" />
+              <ul className="mt-5 space-y-3">
+                {NON_ELIGIBLES.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] text-[#4D4842]">
+                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[#7F6A52]" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <p className="mt-6 text-xs text-neutral-500" style={{ fontFamily: 'var(--font-dm-sans)' }}>
+          <p className="mt-10 text-sm text-[#7F6A52]">
             Les frais de retour sont à la charge du client sauf en cas d&apos;erreur de notre part ou d&apos;article défectueux.
           </p>
-        </section>
+        </InfoSection>
 
-        {/* Contact form */}
-        <section className="border-t border-neutral-100 pt-16">
-          <h2
-            className="text-3xl font-bold text-black mb-8"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Initier un retour
-          </h2>
-
+        {/* Formulaire */}
+        <InfoSection titre="Initier un retour">
           {submitted ? (
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-10 text-center">
-              <CheckCircle className="w-10 h-10 text-emerald-700 mx-auto mb-4" />
-              <p
-                className="text-lg font-semibold text-black mb-2"
-                style={{ fontFamily: 'var(--font-playfair)' }}
-              >
-                Demande reçue
-              </p>
-              <p className="text-neutral-500 text-sm" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-                Nous vous répondrons dans les 48 heures ouvrées avec les instructions de retour.
-              </p>
-            </div>
+            <Rise>
+              <div className="bg-white p-10 text-center shadow-[0_24px_60px_-34px_rgba(34,22,7,0.4)]">
+                <CheckCircle className="mx-auto mb-6 h-10 w-10 text-[#7F6A52]" strokeWidth={1.2} />
+                <p className="pdp-display text-2xl font-semibold tracking-[-0.02em]">Demande reçue</p>
+                <p className="mt-3 text-[#4D4842]">Nous vous répondrons dans les 48 heures ouvrées avec les instructions de retour.</p>
+              </div>
+            </Rise>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
-                    Numéro de commande *
-                  </label>
+            <form onSubmit={handleSubmit} className="space-y-10">
+              <div className="grid gap-10 sm:grid-cols-2">
+                <Rise y={24}>
+                  <label htmlFor="retour-commande" className={ETIQUETTE}>Numéro de commande *</label>
                   <input
+                    id="retour-commande"
                     required
                     type="text"
                     placeholder="MS-XXXX"
                     value={form.order}
                     onChange={e => setForm(f => ({ ...f, order: e.target.value }))}
-                    className="w-full border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
+                    className={CHAMP}
                   />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
-                    Adresse e-mail *
-                  </label>
+                </Rise>
+                <Rise y={24} delay={0.08}>
+                  <label htmlFor="retour-email" className={ETIQUETTE}>Adresse e-mail *</label>
                   <input
+                    id="retour-email"
                     required
                     type="email"
                     placeholder="vous@exemple.com"
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    className="w-full border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors"
+                    className={CHAMP}
+                  />
+                </Rise>
+              </div>
+              <Rise y={24} delay={0.12}>
+                <label htmlFor="retour-motif" className={ETIQUETTE}>Motif du retour *</label>
+                <div className="relative">
+                  <select
+                    id="retour-motif"
+                    aria-label="Motif du retour"
+                    required
+                    value={form.reason}
+                    onChange={e => setForm(f => ({ ...f, reason: e.target.value }))}
+                    className={`${CHAMP} cursor-pointer appearance-none pr-8`}
+                  >
+                    <option value="">Sélectionnez un motif</option>
+                    <option value="defect">Article défectueux</option>
+                    <option value="wrong">Article incorrect reçu</option>
+                    <option value="change">Changement d&apos;avis</option>
+                    <option value="size">Taille / dimensions non conformes</option>
+                    <option value="other">Autre</option>
+                  </select>
+                  <ChevronDown
+                    className="pointer-events-none absolute right-0 top-1/2 h-4 w-4 -translate-y-1/2 text-[#7F6A52]"
+                    strokeWidth={1.4}
                   />
                 </div>
-              </div>
-              <div>
-                <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
-                  Motif du retour *
-                </label>
-                <select aria-label="Motif du retour"
-                  required
-                  value={form.reason}
-                  onChange={e => setForm(f => ({ ...f, reason: e.target.value }))}
-                  className="w-full border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors bg-white"
-                >
-                  <option value="">Sélectionnez un motif</option>
-                  <option value="defect">Article défectueux</option>
-                  <option value="wrong">Article incorrect reçu</option>
-                  <option value="change">Changement d&apos;avis</option>
-                  <option value="size">Taille / dimensions non conformes</option>
-                  <option value="other">Autre</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs uppercase tracking-widest text-neutral-500 mb-2">
-                  Détails supplémentaires
-                </label>
+              </Rise>
+              <Rise y={24} delay={0.16}>
+                <label htmlFor="retour-details" className={ETIQUETTE}>Détails supplémentaires</label>
                 <textarea
+                  id="retour-details"
                   rows={4}
                   placeholder="Décrivez le problème rencontré…"
                   value={form.details}
                   onChange={e => setForm(f => ({ ...f, details: e.target.value }))}
-                  className="w-full border border-neutral-200 px-4 py-3 text-sm focus:outline-none focus:border-black transition-colors resize-none"
+                  className={`${CHAMP} resize-none`}
                 />
-              </div>
-              <button
-                type="submit"
-                className="bg-black text-white text-xs uppercase tracking-widest px-8 py-4 hover:bg-neutral-800 transition-colors"
-              >
-                Soumettre la demande
-              </button>
+              </Rise>
+              <Rise y={24} delay={0.2}>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center bg-[#221607] px-10 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#F6F2EB] transition-transform duration-500 hover:-translate-y-0.5"
+                >
+                  Soumettre la demande
+                </button>
+              </Rise>
             </form>
           )}
-        </section>
-
+        </InfoSection>
       </div>
     </main>
   );

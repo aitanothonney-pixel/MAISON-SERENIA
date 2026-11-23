@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { EASE, Rise } from '@/components/a-propos/motion-kit';
+import { INFO_KICKER, InfoEntete } from '@/components/ui/info-kit';
 
 type FaqItem = { q: string; a: string };
 type FaqGroup = { theme: string; items: FaqItem[] };
@@ -98,37 +100,33 @@ const FAQ_DATA: FaqGroup[] = [
 
 function FaqAccordion({ item, isOpen, onToggle }: { item: FaqItem; isOpen: boolean; onToggle: () => void }) {
   return (
-    <div className="border-b border-neutral-100 last:border-b-0">
+    <div>
       <button
+        type="button"
         onClick={onToggle}
-        className="w-full flex items-start justify-between gap-4 py-5 text-left hover:text-neutral-600 transition-colors"
-        style={{ fontFamily: 'var(--font-dm-sans)' }}
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between gap-6 py-6 text-left"
       >
-        <span className="font-semibold text-black text-sm leading-relaxed">{item.q}</span>
-        <motion.div
+        <span className="pdp-display text-lg font-semibold tracking-[-0.01em] md:text-xl">{item.q}</span>
+        <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2, ease: 'easeInOut' }}
-          className="flex-shrink-0 mt-0.5"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#D8C9B5] text-[#7F6A52]"
         >
-          <ChevronDown className="w-4 h-4 text-neutral-500" />
-        </motion.div>
+          <ChevronDown className="h-4 w-4" strokeWidth={1.4} />
+        </motion.span>
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            key="content"
+            key="reponse"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="overflow-hidden"
           >
-            <p
-              className="text-neutral-500 text-sm leading-relaxed pb-5"
-              style={{ fontFamily: 'var(--font-dm-sans)' }}
-            >
-              {item.a}
-            </p>
+            <p className="max-w-2xl pb-7 text-[15px] leading-relaxed text-[#4D4842]">{item.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -157,79 +155,51 @@ export default function FaqPage() {
   };
 
   return (
-    <main className="bg-white min-h-screen">
+    <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-          <h1
-            className="text-4xl md:text-5xl font-bold text-black mb-4"
-            style={{ fontFamily: 'var(--font-playfair)' }}
-          >
-            Questions Fréquentes
-          </h1>
-          <p className="text-neutral-500 text-lg" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Retrouvez les réponses aux questions les plus courantes, organisées par thème.
-          </p>
-        </div>
-      </section>
+      <InfoEntete
+        titre="Questions Fréquentes"
+        intro="Retrouvez les réponses aux questions les plus courantes, organisées par thème."
+      />
 
-      <div className="max-w-4xl mx-auto px-6 py-16 space-y-14">
-
+      <div className="mx-auto max-w-5xl space-y-20 px-6 pb-32">
         {FAQ_DATA.map(group => (
-          <section key={group.theme}>
-            <div className="flex items-center gap-4 mb-6">
-              <h2
-                className="text-xs uppercase tracking-[0.3em] font-semibold text-neutral-500"
-                style={{ fontFamily: 'var(--font-dm-sans)' }}
-              >
-                {group.theme}
-              </h2>
-              <div className="flex-1 h-px bg-neutral-100" />
-            </div>
-            <div className="border border-neutral-200 px-6">
-              {group.items.map((item, idx) => (
-                <FaqAccordion
-                  key={idx}
-                  item={item}
-                  isOpen={openMap[group.theme] === idx}
-                  onToggle={() => toggle(group.theme, idx)}
-                />
-              ))}
-            </div>
-          </section>
+          <Rise key={group.theme}>
+            <section>
+              <div className="flex items-center gap-6">
+                <h2 className={INFO_KICKER}>{group.theme}</h2>
+                <div className="h-px flex-1 bg-[#D8C9B5]" />
+              </div>
+              <div className="mt-6 divide-y divide-[#D8C9B5] border-y border-[#D8C9B5]">
+                {group.items.map((item, idx) => (
+                  <FaqAccordion
+                    key={idx}
+                    item={item}
+                    isOpen={openMap[group.theme] === idx}
+                    onToggle={() => toggle(group.theme, idx)}
+                  />
+                ))}
+              </div>
+            </section>
+          </Rise>
         ))}
 
-        {/* Footer CTA */}
-        <section className="border-t border-neutral-100 pt-12">
-          <div className="bg-neutral-950 p-10 text-center">
-            <h3
-              className="text-2xl font-bold text-white mb-3"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
+        <Rise>
+          <section className="bg-[#221607] p-10 text-center text-[#F6F2EB] md:p-16">
+            <h3 className="pdp-display text-3xl font-semibold tracking-[-0.02em]">
               Vous n&apos;avez pas trouvé votre réponse ?
             </h3>
-            <p
-              className="text-neutral-400 text-sm mb-6"
-              style={{ fontFamily: 'var(--font-dm-sans)' }}
-            >
+            <p className="mt-4 text-[#D8C9B5]">
               Notre équipe répond à toutes vos questions dans les 48 heures ouvrées.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-white text-black text-xs uppercase tracking-widest px-8 py-4 hover:bg-neutral-100 transition-colors"
+              className="mt-8 inline-flex items-center justify-center bg-[#F6F2EB] px-8 py-4 text-sm font-medium uppercase tracking-[0.12em] text-[#221607] transition-transform duration-500 hover:-translate-y-0.5"
             >
               Nous contacter
             </Link>
-          </div>
-        </section>
-
+          </section>
+        </Rise>
       </div>
     </main>
   );

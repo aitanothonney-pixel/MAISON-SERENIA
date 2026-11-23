@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FileText } from 'lucide-react';
+import { InfoDerniereMaj, InfoEntete, InfoSection } from '@/components/ui/info-kit';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://maison-serenia.com/mentions-legales' },
@@ -10,38 +10,11 @@ export const metadata: Metadata = {
 
 export default function MentionsLegalesPage() {
   return (
-    <main className="bg-white min-h-screen">
-      {/* Hero */}
-      <section className="border-b border-neutral-100 bg-neutral-50 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-black transition-colors mb-8"
-          >
-            ← Retour à l&apos;accueil
-          </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-              <FileText className="w-5 h-5 text-white" />
-            </div>
-            <h1
-              className="text-4xl md:text-5xl font-bold text-black"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Mentions légales
-            </h1>
-          </div>
-          <p className="text-neutral-500 text-lg max-w-xl" style={{ fontFamily: 'var(--font-dm-sans)' }}>
-            Informations légales relatives à l&apos;éditeur et à l&apos;hébergement du site.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen bg-[#F6F2EB] text-[#221607]">
+      <InfoEntete titre="Mentions légales" intro="Informations légales relatives à l'éditeur et à l'hébergement du site." />
 
-      <div
-        className="max-w-4xl mx-auto px-6 py-16 space-y-12 text-neutral-700 leading-relaxed"
-        style={{ fontFamily: 'var(--font-dm-sans)' }}
-      >
-        <Section title="Éditeur du site">
+      <div className="mx-auto max-w-5xl px-6 pb-32">
+        <InfoSection titre="Éditeur du site">
           <p>Le site <strong>maison-serenia.com</strong> est édité par :</p>
           <ul className="mt-3 space-y-1">
             <li>Responsable de la publication : <strong>Louis Loffet</strong></li>
@@ -50,73 +23,57 @@ export default function MentionsLegalesPage() {
             <li>Numéro d&apos;immatriculation : <strong>—</strong></li>
             <li>E-mail : <strong>maisonserenia@gmail.com</strong></li>
           </ul>
-        </Section>
+        </InfoSection>
 
-        <Section title="Hébergement">
+        <InfoSection titre="Hébergement">
           <p>Le site est hébergé par :</p>
           <ul className="mt-3 space-y-1">
             <li>Vercel Inc.</li>
             <li>340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis</li>
             <li>vercel.com</li>
           </ul>
-        </Section>
+        </InfoSection>
 
-        <Section title="Propriété intellectuelle">
+        <InfoSection titre="Propriété intellectuelle">
           <p>
             L&apos;ensemble des contenus présents sur le site (textes, images, logos, éléments graphiques,
             mise en page) est protégé par le droit de la propriété intellectuelle. Toute reproduction,
             représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="Responsabilité">
+        <InfoSection titre="Responsabilité">
           <p>
             L&apos;éditeur s&apos;efforce d&apos;assurer l&apos;exactitude des informations diffusées sur le site,
             sans toutefois garantir qu&apos;elles soient exemptes d&apos;erreurs. Les informations sont fournies
             à titre indicatif et sont susceptibles d&apos;évoluer. L&apos;éditeur ne saurait être tenu responsable
             de l&apos;utilisation faite de ces informations.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="Données personnelles">
+        <InfoSection titre="Données personnelles">
           <p>
             Le traitement des données personnelles est décrit dans notre{' '}
-            <Link href="/confidentialite" className="text-black underline hover:no-underline">
+            <Link href="/confidentialite">
               Politique de confidentialité
             </Link>
             . Conformément à la réglementation applicable, vous disposez d&apos;un droit d&apos;accès, de
             rectification et de suppression de vos données.
           </p>
-        </Section>
+        </InfoSection>
 
-        <Section title="Contact">
+        <InfoSection titre="Contact">
           <p>
             Pour toute question relative au site, vous pouvez nous écrire via notre{' '}
-            <Link href="/contact" className="text-black underline hover:no-underline">
+            <Link href="/contact">
               page contact
             </Link>
             .
           </p>
-        </Section>
+        </InfoSection>
 
-        <p className="text-xs text-neutral-500 pt-8 border-t border-neutral-100">
-          Dernière mise à jour : 24 juillet 2026
-        </p>
+        <InfoDerniereMaj texte="Dernière mise à jour : 24 juillet 2026" />
       </div>
     </main>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section>
-      <h2
-        className="text-2xl font-bold text-black mb-4"
-        style={{ fontFamily: 'var(--font-playfair)' }}
-      >
-        {title}
-      </h2>
-      {children}
-    </section>
   );
 }
