@@ -32,7 +32,7 @@ const TUILES = [
   { src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème', w: 1122, h: 1402 },
   { src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
   { src: '/catalog/canape-d-angle-modulable-en-u-gris-fonce-1.webp', legende: 'U gris foncé', w: 1536, h: 1024 },
-  { src: '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp', legende: 'L blanc chaud', w: 1122, h: 1402 },
+  { src: '/catalog/commode-blanche-6-tiroirs-face-portrait.webp', legende: 'Commode blanche', w: 1122, h: 1402 },
   { src: '/catalog/table-basse-bicolore-a-niveaux-decales-1.webp', legende: 'Table basse bicolore', w: 1122, h: 1402 },
 ];
 
