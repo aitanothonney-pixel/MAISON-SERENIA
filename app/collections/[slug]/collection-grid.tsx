@@ -59,10 +59,10 @@ export function CollectionGrid({ items }: { items: Product[] }) {
     return [Math.floor(Math.min(...prices)), Math.ceil(Math.max(...prices))];
   }, [items]);
 
-  // Sous-onglet initial : depuis l'URL (?g=Luminaires) si valide, sinon « Tous »
+  // Gamme initiale : depuis l'URL (?g=Luminaires) si valide, sinon la première gamme de la collection
   const searchParams = useSearchParams();
   const initialG = searchParams.get('g');
-  const [active, setActive] = useState<string>(initialG && ranges.includes(initialG) ? initialG : 'Tous');
+  const [active, setActive] = useState<string>(initialG && ranges.includes(initialG) ? initialG : (ranges[0] ?? ''));
   const PAGE_SIZE = 12;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -75,7 +75,7 @@ export function CollectionGrid({ items }: { items: Product[] }) {
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setMinPrice(minBound); setMaxPrice(maxBound); }, [minBound, maxBound]);
 
-  const byRange = active === 'Tous' ? items : items.filter((p) => rangeOf(p.name) === active);
+  const byRange = items.filter((p) => rangeOf(p.name) === active);
   const filtered = useMemo(() => {
     const lo = Math.min(minPrice, maxPrice);
     const hi = Math.max(minPrice, maxPrice);
@@ -106,7 +106,7 @@ export function CollectionGrid({ items }: { items: Product[] }) {
       {/* Sous-filtres par gamme (affichés seulement s'il y a plusieurs gammes) */}
       {ranges.length > 1 && (
         <div className="flex items-center gap-6 border-b border-neutral-100 mb-8 overflow-x-auto scrollbar-hide">
-          {['Tous', ...ranges].map((r) => (
+          {ranges.map((r) => (
             <button
               key={r}
               onClick={() => selectRange(r)}
