@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Copy, Sparkles } from 'lucide-react';
+import { X, Check, Copy, Sparkles } from 'lucide-react';
 import { brevoIdentify } from '@/lib/brevoTracking';
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #7F6A52 0%, #5E4E3C 100%)';
@@ -34,11 +34,14 @@ export function WelcomePopup() {
     setVisible(false);
   };
 
-  // Fenêtre obligatoire : ni Échap ni clic à côté ne la ferment, le site reste bloqué tant que l'offre n'est pas validée
+  // Fermeture possible : Échap, clic sur le fond ou croix
   useEffect(() => {
     if (!visible) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     return () => {
+      document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
   }, [visible]);
@@ -78,16 +81,26 @@ export function WelcomePopup() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          onClick={close}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 20 }}
             transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-md bg-white shadow-2xl overflow-hidden"
           >
             {/* Fine bordure dorée en haut */}
             <div className="h-1 w-full" style={{ background: GOLD_GRADIENT }} />
+
+            <button
+              onClick={close}
+              className="absolute top-3 right-3 z-10 flex h-9 w-9 items-center justify-center text-neutral-500 transition-colors hover:text-black"
+              aria-label="Fermer"
+            >
+              <X className="h-5 w-5" strokeWidth={1.5} />
+            </button>
 
             {!done ? (
               <div className="px-8 py-10 text-center">
