@@ -922,6 +922,20 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     setLightbox(true);
   };
 
+  // Clic sur une vignette : la photo passe en haut. Double clic : l'agrandissement s'ouvre directement.
+  // Le double clic est repéré au délai entre deux clics, car la vignette disparaît au premier clic
+  // (elle passe en haut) : l'événement natif « dblclick » ne se déclencherait pas.
+  const dernierClicVignette = useRef(0);
+  const cliquerVignette = (ni: number, opener: HTMLElement, instant: number) => {
+    if (instant - dernierClicVignette.current < 500) {
+      dernierClicVignette.current = 0;
+      openLightbox(opener);
+      return;
+    }
+    dernierClicVignette.current = instant;
+    goToImage(ni);
+  };
+
   const closeLightbox = useCallback(() => {
     setLightbox(false);
     setZoomed(false);
@@ -1237,7 +1251,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-2.5">
 {/* Grande photo et grille des autres vues (mise en page V2, toutes les fiches) */}
-              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]">
+              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]" onDoubleClick={(e) => openLightbox(e.currentTarget)}>
                 <Image
                   src={product.images[selectedImage]}
                   alt={product.name}
@@ -1261,7 +1275,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     <button
                       key={i}
                       type="button"
-                      onClick={(e) => { goToImage(i); openLightbox(e.currentTarget); }}
+                      onClick={(e) => cliquerVignette(i, e.currentTarget, e.timeStamp)}
                       aria-label={`Agrandir la photo ${i + 1}`}
                       className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
                     >
