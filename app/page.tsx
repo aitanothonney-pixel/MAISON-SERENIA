@@ -107,7 +107,7 @@ function BubblePromoSection() {
         <div className="relative z-10 px-6 pt-7 pb-3 sm:pt-10 sm:pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:px-0 lg:pt-[88px] lg:pb-0">
           <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B] lg:text-[#EADBC8]">Collection Bubble</p>
           <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60 lg:bg-[#EADBC8]/60" />
-          <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
             Les produits Bubble à {BLACK_FRIDAY_PROMO.bubbleDiscountLabel}
           </h2>
           <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C] lg:text-[#F1E8DC]">
@@ -143,7 +143,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-2">Notre sélection</p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                 Coups de cœur
               </h2>
               <span className="block w-10 h-px mt-3" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
@@ -398,7 +398,7 @@ function ShopByCategory() {
       <section className="py-14 md:py-20 max-w-7xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-2">Notre univers</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+          <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
             Acheter par catégorie
           </h2>
           <span className="block w-10 h-px mx-auto mt-4" style={{ background: 'linear-gradient(90deg, transparent, #A68A6D, transparent)' }} />
@@ -421,7 +421,7 @@ function ShopByCategory() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-300 group-hover:from-black/80" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <p className={`font-semibold ${t.big ? 'text-2xl md:text-3xl' : 'text-lg'}`} style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                <p className={`font-semibold ${t.big ? 'text-2xl md:text-3xl' : 'text-lg'}`} style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                   {t.label}
                 </p>
                 <p className="text-white/75 text-xs md:text-sm mt-0.5">{t.desc}</p>
@@ -599,7 +599,7 @@ function BundlesSection({ onCartOpen }: { onCartOpen: () => void }) {
           <FadeInSection>
             <div className="text-center mb-14">
               <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-2">Économisez plus</p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+              <h2 className="text-2xl md:text-3xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                 Nos ensembles Bubble
               </h2>
               <p className="text-neutral-500 text-sm mt-3 max-w-md mx-auto">
@@ -672,7 +672,7 @@ function NewsletterSection() {
           </div>
           <h2
             className="text-3xl md:text-4xl text-black mb-4"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontStyle: 'italic', fontWeight: 400 }}
+            style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)', fontStyle: 'italic', fontWeight: 400 }}
           >
             Restez informé de nos nouveautés
           </h2>
@@ -887,7 +887,7 @@ export default function Home() {
               <p className="text-neutral-300 text-xs tracking-[0.5em] uppercase mb-4">Collection</p>
               <p
                 className="text-black text-6xl md:text-8xl tracking-tight"
-                style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontWeight: 300, fontStyle: 'italic' }}
+                style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)', fontWeight: 300, fontStyle: 'italic' }}
               >{flashCat}</p>
             </motion.div>
           </motion.div>
@@ -982,7 +982,7 @@ export default function Home() {
           <div className="relative z-10 px-6 pt-7 pb-3 sm:pt-10 sm:pb-12 lg:absolute lg:left-[5.1%] lg:top-0 lg:w-[600px] lg:px-0 lg:pt-[88px] lg:pb-0">
             <p className="text-[9px] sm:text-[13px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#3E2F1B] lg:text-[#EADBC8]">Notre service conseil</p>
             <span aria-hidden="true" className="block mt-2 sm:mt-7 w-[57px] h-px bg-[#3E2F1B]/60 lg:bg-[#EADBC8]/60" />
-            <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <h2 className="mt-5 sm:mt-8 text-[34px] sm:text-[44px] lg:text-[66px] leading-[1.2] sm:leading-[1.02] lg:leading-[1.1] text-[#221607] lg:text-[#FBF7F2]" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
               Créez votre projet intérieur
             </h2>
             <p className="mt-3 sm:mt-7 lg:mt-[31px] max-w-[290px] sm:max-w-[470px] text-[13px] leading-[1.3] sm:text-[16px] sm:leading-[1.6] lg:text-[19px] lg:leading-[1.6] text-[#1D120C] lg:text-[#F1E8DC]">
@@ -1029,7 +1029,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                   <div>
                     <p className="text-[10px] tracking-[0.4em] uppercase mb-2 text-[#7F6A52]">Sélection</p>
-                    <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                       Nos Pièces Signatures
                     </h2>
                     <span className="block w-10 h-px mt-3 mb-2" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />

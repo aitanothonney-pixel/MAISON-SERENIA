@@ -85,7 +85,7 @@ function StockPanel() {
       <div className="bg-white border border-neutral-200 rounded-lg p-8 flex items-start gap-3">
         <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
         <div>
-          <h1 className="text-lg mb-1" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Suivi de stock désactivé</h1>
+          <h1 className="text-lg mb-1" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Suivi de stock désactivé</h1>
           <p className="text-sm text-neutral-600">
             La base Supabase n&apos;est pas encore configurée. Une fois activée (Phase 8), le catalogue
             sera amorcé et la gestion du stock apparaîtra ici. Tant que rien n&apos;est activé, la boutique
@@ -100,7 +100,7 @@ function StockPanel() {
     <>
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Stock</h1>
+          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Stock</h1>
           <p className="text-xs text-neutral-500 mt-1">{variants ? `${filtered.length} / ${variants.length} variante(s)` : '…'}</p>
         </div>
         <button onClick={load} className="p-2 border border-neutral-200 bg-white hover:border-black transition-colors" aria-label="Rafraîchir">

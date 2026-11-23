@@ -411,7 +411,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-1">
                   {step === 'cart' ? 'Votre commande' : step === 'delivery' ? 'Étape 1 / 2' : step === 'payment' ? 'Étape 2 / 2' : 'Merci'}
                 </p>
-                <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                   {stepTitle[step]}
                   {step === 'cart' && totalQty > 0 && <span className="text-neutral-500 text-base"> ({totalQty})</span>}
                 </h2>
@@ -471,7 +471,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                         <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F6F2EB 0%, #F6F2EB 100%)' }}>
                           <ShoppingBag className="w-7 h-7 text-[#A68A6D]" strokeWidth={1.4} />
                         </div>
-                        <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                        <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                           Votre panier est vide
                         </p>
                         <p className="text-sm text-neutral-500 max-w-[240px]">Découvrez nos pièces et commencez votre sélection.</p>
@@ -837,7 +837,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                       <Check className="w-10 h-10 text-white" />
                     </motion.div>
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="w-full">
-                      <h3 className="text-xl font-serif font-bold mb-2" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Merci pour votre commande !</h3>
+                      <h3 className="text-xl font-serif font-bold mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Merci pour votre commande !</h3>
                       <p className="text-sm text-neutral-500 mb-6 leading-relaxed">
                         Votre commande a bien été reçue. Vous recevrez un email de confirmation à <strong>{delivery.email || 'votre adresse'}</strong>.
                       </p>

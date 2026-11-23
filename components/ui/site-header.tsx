@@ -191,7 +191,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <HomeIcon className="w-4 h-4 text-black" strokeWidth={1.4} />
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                       Accueil
                     </p>
                     <p className="text-xs text-neutral-500 mt-0.5">Retour à la page principale</p>
@@ -211,7 +211,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <Award className="w-4 h-4 text-black" strokeWidth={1.4} />
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                       Notre Histoire
                     </p>
                     <p className="text-xs text-neutral-500 mt-0.5">L&apos;esprit MAISON SERENIA</p>
@@ -227,7 +227,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     <Sparkles className="w-4 h-4 text-[#A68A6D]" strokeWidth={1.6} />
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                    <p className="font-serif text-base font-semibold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                       Créez votre projet intérieur
                     </p>
                     <p className="text-xs text-neutral-500 mt-0.5">Votre conseiller déco personnalisé</p>
@@ -259,7 +259,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                         ) : null}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-serif text-base font-semibold text-black leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>{c.name}</p>
+                        <p className="font-serif text-base font-semibold text-black leading-tight" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>{c.name}</p>
                         <p className="text-xs text-neutral-500 mt-0.5">{c.desc}</p>
                       </div>
                       <ChevronRight className="w-4 h-4 text-neutral-300 group-hover:text-[#7F6A52] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
@@ -282,7 +282,7 @@ function SideMenuDrawer({ open, onClose, onSectionNav }: { open: boolean; onClos
                     </span>
                     <div>
                       <p className="text-[10px] tracking-[0.3em] uppercase text-[#D8C9B5] mb-1">Offre exclusive</p>
-                      <h3 className="text-xl font-bold leading-tight" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                      <h3 className="text-xl font-bold leading-tight" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                         Packs &amp; Ensembles
                       </h3>
                       <p className="text-sm text-white/70 mt-1.5 leading-relaxed">Jusqu&apos;à {formatPrice(200, cur)} d&apos;économies sur nos ensembles</p>
@@ -750,7 +750,7 @@ export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWis
               if (results.length === 0) {
                 return (
                   <div className="text-center py-16">
-                    <p className="font-serif text-2xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Aucun résultat</p>
+                    <p className="font-serif text-2xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Aucun résultat</p>
                     <p className="text-sm text-neutral-500">Rien ne correspond à « {searchQ} ». Essayez un autre mot-clé.</p>
                   </div>
                 );
@@ -843,7 +843,7 @@ export function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () =
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52] mb-1">Ma sélection</p>
-                  <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+                  <h2 className="font-serif text-xl text-black leading-none" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
                     Favoris {ids.length > 0 && <span className="text-neutral-500 text-base">({ids.length})</span>}
                   </h2>
                 </div>
@@ -860,7 +860,7 @@ export function WishlistDrawer({ open, onClose }: { open: boolean; onClose: () =
                   <div className="relative w-20 h-20 rounded-full flex items-center justify-center mb-1" style={{ background: 'linear-gradient(135deg, #F6F2EB 0%, #F6F2EB 100%)' }}>
                     <Heart className="w-7 h-7 text-[#A68A6D]" strokeWidth={1.4} />
                   </div>
-                  <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Votre liste de favoris est vide</p>
+                  <p className="font-serif text-lg text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Votre liste de favoris est vide</p>
                   <p className="text-sm text-neutral-500 max-w-[240px]">Ajoutez vos coups de cœur en cliquant sur le cœur d&apos;un produit.</p>
                   <button onClick={onClose} className="mt-5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase px-8 py-3.5 hover:bg-neutral-800 transition-colors">
                     Parcourir la boutique

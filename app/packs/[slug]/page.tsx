@@ -50,7 +50,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
             ← Retour aux ensembles
           </Link>
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-3">Offre exclusive · Rabais <Price value={sum - price} /></p>
-          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
             Ensemble Bubble {bundle.color}
           </h1>
           <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
@@ -64,7 +64,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
       <div className="max-w-5xl mx-auto px-6 py-14 grid lg:grid-cols-[1.4fr_1fr] gap-12">
         {/* Éléments du pack */}
         <div>
-          <h2 className="text-xl font-serif font-bold text-black mb-6" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h2 className="text-xl font-serif font-bold text-black mb-6" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
             Les éléments du pack
           </h2>
           <div className="space-y-4">
@@ -84,7 +84,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
-                  <h3 className="font-serif font-bold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  <h3 className="font-serif font-bold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                     {product.name}
                   </h3>
                   <p className="text-sm text-neutral-600 mt-1 line-clamp-2">{product.description}</p>
@@ -108,7 +108,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
         <aside className="lg:sticky lg:top-8 h-fit border border-neutral-200 p-6">
           <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-500 mb-1">Prix du pack</p>
           <div className="flex items-baseline gap-3 mb-1">
-            <span className="text-4xl font-bold text-black leading-none" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <span className="text-4xl font-bold text-black leading-none" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
               <Price value={price} />
             </span>
             <span className="text-sm text-neutral-500 line-through"><Price value={sum} /></span>

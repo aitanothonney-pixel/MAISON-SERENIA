@@ -189,7 +189,7 @@ export default function Assistant() {
           <div className="max-w-5xl mx-auto px-6 py-10">
             <div className="mb-6"><Logo color="black" size="sm" /></div>
             <p className="text-[11px] uppercase tracking-[0.3em] text-[#7F6A52] mb-3 flex items-center gap-2"><Sparkles className="w-4 h-4" /> Votre sélection</p>
-            <h1 className="text-3xl md:text-5xl text-black mb-4" style={{ fontFamily: 'var(--font-italiana, Georgia, serif)' }}>Voici notre sélection pour votre intérieur</h1>
+            <h1 className="text-3xl md:text-5xl text-black mb-4" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Voici notre sélection pour votre intérieur</h1>
             <p className="text-neutral-600 max-w-2xl leading-relaxed">{result.intro}</p>
             {!result.aiEnabled && (
               <p className="mt-3 text-[12px] text-neutral-500">Sélection fondée sur votre brief et notre catalogue réel. Les explications personnalisées et le chat s&apos;activent une fois la clé IA configurée.</p>
@@ -227,7 +227,7 @@ export default function Assistant() {
                   <div className="flex items-start justify-between gap-4 mb-1">
                     <div>
                       <p className="text-[10px] uppercase tracking-widest text-neutral-500">{r.category}</p>
-                      <h3 className="text-xl text-black" style={{ fontFamily: 'var(--font-playfair)' }}>{r.name}</h3>
+                      <h3 className="text-xl text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>{r.name}</h3>
                     </div>
                     <p className="text-lg font-bold text-black shrink-0 price-luxe">{formatPrice(r.priceChf, cur)}</p>
                   </div>
@@ -250,7 +250,7 @@ export default function Assistant() {
 
           {result.complements.length > 0 && (
             <div className="pt-6">
-              <h2 className="text-2xl text-black mb-5" style={{ fontFamily: 'var(--font-playfair)' }}>Pour compléter votre intérieur</h2>
+              <h2 className="text-2xl text-black mb-5" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Pour compléter votre intérieur</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {result.complements.map((c) => (
                   <Link key={c.id} href={`/products/${c.id}`} onClick={() => gaEvent('ia_reco_click', { item_id: String(c.id) })} className="group">
@@ -267,7 +267,7 @@ export default function Assistant() {
 
           {/* Conversation */}
           <div className="border-t border-neutral-100 pt-8">
-            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-playfair)' }}><Wand2 className="w-5 h-5 text-[#7F6A52]" /> Affiner avec l&apos;assistant</h2>
+            <h2 className="text-xl text-black mb-4 flex items-center gap-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}><Wand2 className="w-5 h-5 text-[#7F6A52]" /> Affiner avec l&apos;assistant</h2>
             {chatMsgs.length > 0 && (
               <div className="space-y-3 mb-4">
                 {chatMsgs.map((m, i) => (
@@ -321,7 +321,7 @@ export default function Assistant() {
 
             {current === 'room' && (
               <>
-                <h1 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Quelle pièce souhaitez-vous aménager ?</h1>
+                <h1 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Quelle pièce souhaitez-vous aménager ?</h1>
                 <p className="text-neutral-500 mb-8">Sélectionnez un espace pour commencer.</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {ROOMS.map((r) => {
@@ -340,7 +340,7 @@ export default function Assistant() {
 
             {current === 'sub' && brief.room && (
               <>
-                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Votre besoin précis</h2>
+                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Votre besoin précis</h2>
                 <p className="text-neutral-500 mb-8">Qu&apos;est-ce qui vous amène pour votre {ROOMS.find((r) => r.key === brief.room)?.label.toLowerCase()} ?</p>
                 <div className="space-y-2">
                   {(SUBQ[brief.room] || []).map((o) => {
@@ -360,7 +360,7 @@ export default function Assistant() {
 
             {current === 'space' && (
               <>
-                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Parlez-nous de votre espace</h2>
+                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Parlez-nous de votre espace</h2>
                 <p className="text-neutral-500 mb-6">Plus vous êtes précis, meilleures seront nos recommandations. Tout est facultatif.</p>
                 <textarea value={brief.description || ''} onChange={(e) => set({ description: e.target.value })} rows={5}
                   placeholder="Mon salon fait environ 25 m². J'ai un mur de 3 mètres de largeur. Je souhaite un canapé design, quelques éléments de décoration et une ambiance moderne, chaleureuse et minimaliste."
@@ -384,7 +384,7 @@ export default function Assistant() {
 
             {current === 'style' && (
               <>
-                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Votre style</h2>
+                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Votre style</h2>
                 <p className="text-neutral-500 mb-6">Plusieurs choix possibles.</p>
                 <div className="flex flex-wrap gap-2 mb-10">
                   {STYLES.map((s) => {
@@ -413,7 +413,7 @@ export default function Assistant() {
 
             {current === 'budget' && (
               <>
-                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-playfair)' }}>Votre budget</h2>
+                <h2 className="text-3xl md:text-4xl text-black mb-2" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>Votre budget</h2>
                 <p className="text-neutral-500 mb-8">Pour cet aménagement, en {cur === 'CHF' ? 'francs suisses' : 'euros'}.</p>
                 <div className="grid grid-cols-2 gap-3">
                   {BUDGETS.map((b) => {

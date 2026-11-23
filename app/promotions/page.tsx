@@ -67,7 +67,7 @@ export default function PromotionsPage() {
           </p>
           <h1
             className="mt-[18px] max-w-[760px] text-[22px] md:text-[34px] leading-[1.25] font-semibold"
-            style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+            style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}
           >
             PROFITEZ DÈS MAINTENANT DE NOS OFFRES SUR LE BLACK FRIDAY
           </h1>
@@ -108,7 +108,7 @@ export default function PromotionsPage() {
                   </div>
                 </div>
                 <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
-                <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
+                <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                   {product.name}
                 </h2>
                 <div className="flex items-baseline gap-2 mt-1.5">
@@ -126,7 +126,7 @@ export default function PromotionsPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-12">
             <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-2">Économisez plus</p>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
               Nos ensembles Bubble
             </h2>
             <span className="block w-10 h-px mt-3 mx-auto" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
@@ -151,7 +151,7 @@ export default function PromotionsPage() {
                     ))}
                   </div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}><Price value={price} /></span>
+                    <span className="text-2xl font-bold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}><Price value={price} /></span>
                     <span className="text-sm text-neutral-500 line-through"><Price value={sum} /></span>
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-neutral-600 mb-5">

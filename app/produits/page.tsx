@@ -36,7 +36,7 @@ export default function ProduitsPage() {
             ← Retour à l&apos;accueil
           </Link>
           <p className="text-[10px] tracking-[0.4em] uppercase text-[#7F6A52] mb-3">Catalogue complet</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-playfair)' }}>
+          <h1 className="text-4xl md:text-5xl font-bold text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
             Tous nos produits
           </h1>
           <span className="block w-12 h-px mt-4 mb-5" style={{ background: 'linear-gradient(90deg, #A68A6D, #D8C9B5)' }} />
@@ -74,7 +74,7 @@ export default function ProduitsPage() {
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
                   </div>
-                  <h2 className="font-serif font-semibold text-black text-sm leading-snug group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  <h2 className="font-serif font-semibold text-black text-sm leading-snug group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                     {product.name}
                   </h2>
                   <div className="h-px bg-neutral-100 my-3" />

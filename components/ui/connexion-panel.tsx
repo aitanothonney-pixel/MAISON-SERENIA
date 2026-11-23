@@ -65,7 +65,7 @@ export function ConnexionPanel({ onClose }: { onClose: () => void }) {
         style={{ fontFamily: 'var(--font-jost, sans-serif)' }}
       >
         <p className="text-[10px] uppercase tracking-[0.3em] text-[#7F6A52]">Mon compte</p>
-        <h2 className="mb-4 mt-2 text-2xl leading-none text-black" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>
+        <h2 className="mb-4 mt-2 text-2xl leading-none text-black" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>
           Se connecter
         </h2>
 

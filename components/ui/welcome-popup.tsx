@@ -107,7 +107,7 @@ export function WelcomePopup() {
                   <Sparkles className="w-3 h-3" /> Offre de bienvenue
                 </div>
 
-                <h2 className="text-3xl font-serif text-black leading-tight mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+                <h2 className="text-3xl font-serif text-black leading-tight mb-3" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                   −10% sur votre<br />première commande
                 </h2>
                 <p className="text-sm text-neutral-500 leading-relaxed mb-7 max-w-xs mx-auto">
@@ -155,7 +155,7 @@ export function WelcomePopup() {
                 </motion.div>
 
                 <p className="text-[10px] tracking-[0.35em] uppercase text-[#7F6A52] mb-3">Offre activée</p>
-                <h2 className="text-[26px] leading-tight font-serif text-black mb-3" style={{ fontFamily: 'var(--font-playfair)' }}>
+                <h2 className="text-[26px] leading-tight font-serif text-black mb-3" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                   Bienvenue chez<br />Maison Serenia
                 </h2>
                 <p className="text-sm text-neutral-500 mb-7 max-w-xs mx-auto leading-relaxed">
@@ -171,7 +171,7 @@ export function WelcomePopup() {
                       <span className="text-[10px] tracking-[0.3em] uppercase text-[#7F6A52]">−10 % · Votre code</span>
                       <span className="h-px w-6 bg-[#7F6A52]/50" />
                     </div>
-                    <p className="text-xl font-semibold tracking-[0.22em] text-black mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
+                    <p className="text-xl font-semibold tracking-[0.22em] text-black mb-4" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
                       {WELCOME_CODE}
                     </p>
                     <button

@@ -66,7 +66,7 @@ export default function AdminGate({ active, children }: { active: 'commandes' | 
           <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center mx-auto mb-6">
             <Lock className="w-5 h-5 text-white" />
           </div>
-          <h1 className="text-lg text-center mb-1" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Espace gestion</h1>
+          <h1 className="text-lg text-center mb-1" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Espace gestion</h1>
           <p className="text-xs text-neutral-500 text-center mb-6">Réservé à l&apos;administration.</p>
           <input
             type="password"

@@ -38,7 +38,7 @@
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-dm-sans, Arial, Helvetica, sans-serif);
-  --font-serif: var(--font-playfair, Georgia, serif);
+  --font-serif: var(--font-pdp-inter-tight, system-ui, sans-serif);
 }
 
 body {
@@ -50,7 +50,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-playfair, Georgia, serif);
+  font-family: var(--font-pdp-inter-tight, system-ui, sans-serif);
 }
 
 html {
@@ -71,6 +71,13 @@ html {
 }
 .pdp-display {
   font-family: var(--font-pdp-inter-tight, var(--font-pdp-inter, system-ui)), system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
+
+/* Titres du site : espacement des lettres serré, comme dans la DA. Les classes de taille et de poids gardent la priorité. */
+@layer base {
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
 }
 .pdp-kicker {
   font-size: 11px;

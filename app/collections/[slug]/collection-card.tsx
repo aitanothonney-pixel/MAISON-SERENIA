@@ -72,7 +72,7 @@ export function CollectionCard({ product, position }: { product: Product; positi
         <div className="flex items-center justify-between mb-1">
           <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500">{product.category}</p>
         </div>
-        <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-playfair)' }}>
+        <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
           {product.name}
         </h2>
         <div className="flex items-baseline gap-2 mt-1.5">

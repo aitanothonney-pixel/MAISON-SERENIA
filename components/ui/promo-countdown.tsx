@@ -38,7 +38,7 @@ export function PromoCountdown({ endsAt, className = '' }: { endsAt: string | nu
           >
             <span
               className="text-white text-3xl md:text-5xl font-bold leading-none tabular-nums"
-              style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+              style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}
             >
               {pad(value)}
             </span>

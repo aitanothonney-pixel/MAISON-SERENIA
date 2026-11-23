@@ -27,7 +27,7 @@ export default function NotFound() {
         {/* Large 404 */}
         <span aria-hidden="true"
           style={{
-            fontFamily: 'var(--font-playfair, Georgia, serif)',
+            fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)',
             fontSize: 'clamp(6rem, 20vw, 14rem)',
             fontWeight: 700,
             color: '#8f8f8f',
@@ -52,7 +52,7 @@ export default function NotFound() {
         {/* Title */}
         <h1
           style={{
-            fontFamily: 'var(--font-playfair, Georgia, serif)',
+            fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)',
             fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
             fontWeight: 600,
             color: '#34322F',

@@ -117,7 +117,7 @@ export function MinimalistHeroSection() {
         >
           <h2
             className="text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] font-black leading-[0.88] tracking-tight text-black select-none"
-            style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
+            style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}
           >
             l&apos;art<br />
             <span className="italic">de</span><br />

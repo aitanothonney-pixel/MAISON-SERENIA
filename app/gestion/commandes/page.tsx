@@ -103,7 +103,7 @@ function OrdersPanel() {
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}>Commandes</h1>
+          <h1 className="text-2xl" style={{ fontFamily: 'var(--font-pdp-inter-tight, system-ui, sans-serif)' }}>Commandes</h1>
           <p className="text-xs text-neutral-500 mt-1">
             {orders ? `${orders.length} commande(s)` : '…'}
             {source === 'stripe' && ' · lecture Stripe (statuts non modifiables sans Supabase)'}
