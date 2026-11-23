@@ -107,10 +107,11 @@ export function WelcomePopup() {
                   <Sparkles className="w-3 h-3" /> Offre de bienvenue
                 </div>
 
-                <h2 className="text-3xl font-serif text-black leading-tight mb-3" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
-                  −10% sur votre<br />première commande
+                <h2 className="text-black leading-tight mb-3" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                  <span className="block text-[72px] italic leading-none tracking-[-0.01em] text-[#221607]">−10%</span>
+                  <span className="mt-4 block text-[22px] font-normal leading-[1.3] tracking-normal text-[#221607]">sur votre première commande</span>
                 </h2>
-                <p className="text-sm text-neutral-500 leading-relaxed mb-7 max-w-xs mx-auto">
+                <p className="text-sm leading-[1.75] text-[#5B554E] mb-7 max-w-xs mx-auto">
                   Inscrivez-vous à la newsletter Maison Serenia et recevez immédiatement votre code de réduction de 10%.
                 </p>
 
@@ -131,7 +132,7 @@ export function WelcomePopup() {
                   <button
                     type="submit"
                     disabled={!consent}
-                    className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-transform hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="w-full py-3.5 text-white text-[11px] font-semibold tracking-[0.22em] uppercase transition-transform hover:scale-[1.01] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                     style={{ background: 'linear-gradient(135deg, #34322F 0%, #000 100%)' }}
                   >
                     Je profite des −10%
