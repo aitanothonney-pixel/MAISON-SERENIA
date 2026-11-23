@@ -1646,7 +1646,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                         <Image src={cp.images[0]} alt={cp.name} width={64} height={64} className="w-full h-full object-contain p-1.5" />
                       </Link>
                       <div className="flex-1 min-w-0">
-                        <Link href={`/products/${cp.id}`} className="pdp-display text-[15px] font-semibold text-black hover:underline">{cp.name}</Link>
+                        <Link href={`/products/${cp.id}`} className="titre-produit text-black hover:underline">{cp.name}</Link>
                         <p className="text-xs text-neutral-500 mt-0.5">{cp.category}</p>
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
@@ -1776,7 +1776,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           </button>
                         </div>
                       </Link>
-                      <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
+                      <p className="titre-produit text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <p className="pdp-display text-[15px] font-semibold text-black">{formatPrice(pPromo, cur)}</p>
                         {pIsBubble && <p className="pdp-display text-neutral-500 line-through text-xs">{formatPrice(p.price, cur)}</p>}
@@ -1835,7 +1835,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                           </button>
                         </div>
                       </Link>
-                      <p className="font-semibold text-sm text-black group-hover:underline">{p.name}</p>
+                      <p className="titre-produit text-black group-hover:underline">{p.name}</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <p className="pdp-display text-[15px] font-semibold text-black">{formatPrice(pPromo, cur)}</p>
                         {pIsBubble && <p className="pdp-display text-neutral-500 line-through text-xs">{formatPrice(p.price, cur)}</p>}

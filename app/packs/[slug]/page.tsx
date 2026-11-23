@@ -84,7 +84,7 @@ export default async function PackPage({ params }: { params: Promise<{ slug: str
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
-                  <h3 className="font-serif font-bold text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
+                  <h3 className="titre-produit text-black group-hover:underline">
                     {product.name}
                   </h3>
                   <p className="text-sm text-neutral-600 mt-1 line-clamp-2">{product.description}</p>

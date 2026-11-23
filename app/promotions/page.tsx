@@ -108,7 +108,7 @@ export default function PromotionsPage() {
                   </div>
                 </div>
                 <p className="text-[10px] tracking-[0.25em] uppercase text-neutral-500 mb-1">{product.category}</p>
-                <h2 className="font-serif font-bold text-sm text-black leading-tight group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
+                <h2 className="titre-produit text-black group-hover:underline">
                   {product.name}
                 </h2>
                 <div className="flex items-baseline gap-2 mt-1.5">

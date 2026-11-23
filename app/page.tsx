@@ -195,7 +195,7 @@ function BestsellersSection({ onToutVoir }: { onToutVoir: () => void }) {
                     <Heart className={`w-3.5 h-3.5 transition-all ${isWished(product.id) ? 'fill-red-500 text-red-500' : 'text-black'}`} />
                   </button>
                 </div>
-                <h3 className="font-serif text-sm font-semibold text-black mb-0.5">{product.name}</h3>
+                <h3 className="titre-produit text-black mb-0.5">{product.name}</h3>
                 <p className="text-neutral-500 text-xs mb-1 line-clamp-1">{product.description}</p>
                 <div className="flex items-center gap-2">
                   {product.name.includes('Bubble') ? (
@@ -305,7 +305,7 @@ function ProductCard({ product }: { product: ProductPreview }) {
           <div className="flex items-center justify-between mb-1">
             <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
           </div>
-          <h3 className="font-serif font-semibold text-black text-sm mb-1 leading-snug">{product.name}</h3>
+          <h3 className="titre-produit text-black mb-1">{product.name}</h3>
           <p className="text-neutral-500 text-[11px] mb-3 line-clamp-1">{product.description}</p>
           <div className="h-px bg-neutral-100 mb-3" />
           <div className="flex items-center justify-between">
@@ -473,7 +473,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
             <Image src={canape.images[0]} alt={canape.name} width={140} height={140} className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{canape.name}</h3>
+            <h3 className="titre-produit text-black group-hover:underline">{canape.name}</h3>
             <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(canapePromo, cur)}</p>
           </div>
         </Link>
@@ -483,7 +483,7 @@ function BundleCard({ bundle, onCartOpen }: { bundle: typeof BUNDLES[number]; on
             <Image src={fauteuil.images[0]} alt={fauteuil.name} width={140} height={140} className="object-contain p-2 transition-transform duration-300 group-hover:scale-105" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-serif text-sm font-semibold text-black leading-snug group-hover:underline">{fauteuil.name}</h3>
+            <h3 className="titre-produit text-black group-hover:underline">{fauteuil.name}</h3>
             <p className="text-neutral-500 text-sm mt-1 price-luxe">{formatPrice(fauteuilPromo, cur)}</p>
           </div>
         </Link>

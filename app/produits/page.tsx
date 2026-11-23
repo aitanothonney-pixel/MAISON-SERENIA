@@ -74,7 +74,7 @@ export default function ProduitsPage() {
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-[9px] tracking-[0.2em] uppercase text-neutral-500">{product.category}</p>
                   </div>
-                  <h2 className="font-serif font-semibold text-black text-sm leading-snug group-hover:underline" style={{ fontFamily: 'var(--font-pdp-inter-tight)' }}>
+                  <h2 className="titre-produit text-black group-hover:underline">
                     {product.name}
                   </h2>
                   <div className="h-px bg-neutral-100 my-3" />
