@@ -33,7 +33,7 @@ const TUILES = [
   { src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
   { src: '/catalog/canape-d-angle-modulable-en-u-gris-fonce-1.webp', legende: 'U gris foncé', w: 1536, h: 1024 },
   { src: '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp', legende: 'L blanc chaud', w: 1122, h: 1402 },
-  { src: '/catalog/bubble-blanc-ivoire-boucle.webp', legende: 'Bubble', w: 1774, h: 887 },
+  { src: '/catalog/table-basse-bicolore-a-niveaux-decales-1.webp', legende: 'Table basse bicolore', w: 1122, h: 1402 },
 ];
 
 // Une tuile photo : éparpillée au départ, elle se range dans la grille quand elle entre dans l'écran.
