@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { nice99, type Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
-import { FONDS_PHOTOS } from '@/lib/fonds-photos';
+import { VIGNETTES } from '@/lib/vignettes';
 
 // position : 'lcp' = première carte (préchargée), 'eager' = cartes visibles dès l'ouverture, undefined = lazy
 export function CollectionCard({ product, position }: { product: Product; position?: 'lcp' | 'eager' }) {
@@ -14,9 +14,10 @@ export function CollectionCard({ product, position }: { product: Product; positi
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
-  const contain = isBubble || product.imageFit === 'contain' || product.category === 'Décorations' || product.category === 'Été';
-  // Canapés en paysage : la photo remplit le cadre, le fond est prolongé avec les couleurs de la photo
-  const fond = FONDS_PHOTOS[product.id];
+  // Canapés : vignettes 4:3 déjà recadrées sur le canapé, elles remplissent le cadre sans fond ajouté
+  const vignettes = VIGNETTES[product.id];
+  const images = vignettes ?? product.images;
+  const contain = !vignettes && (isBubble || product.imageFit === 'contain' || product.category === 'Décorations' || product.category === 'Été');
 
   const onScroll = () => {
     const el = scrollRef.current;
@@ -27,7 +28,7 @@ export function CollectionCard({ product, position }: { product: Product; positi
 
   return (
     <Link href={`/products/${product.id}`} className="group block border border-neutral-100 hover:border-neutral-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.09)] transition-all duration-500">
-      <div className="relative aspect-[4/3] overflow-hidden bg-white" style={fond ? { background: `linear-gradient(to bottom, ${fond.haut}, ${fond.bas})` } : undefined}>
+      <div className="relative aspect-[4/3] overflow-hidden bg-white">
         {/* Carrousel défilable horizontalement */}
         <div
           ref={scrollRef}
@@ -35,8 +36,8 @@ export function CollectionCard({ product, position }: { product: Product; positi
           tabIndex={0} role="region" aria-label="Photos du produit" className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: 'none' }}
         >
-          {product.images.map((img, i) => (
-            <div key={i} className={`relative w-full h-full flex-shrink-0 snap-center ${contain && !fond ? 'p-4' : ''}`}>
+          {images.map((img, i) => (
+            <div key={i} className={`relative w-full h-full flex-shrink-0 snap-center ${contain ? 'p-4' : ''}`}>
               <Image
                 src={img}
                 alt={`${product.name} ${i + 1}`}
@@ -46,7 +47,6 @@ export function CollectionCard({ product, position }: { product: Product; positi
                 loading={position && i === 0 ? 'eager' : undefined}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className={contain ? 'object-contain' : 'object-cover'}
-                style={i === 0 && fond?.zoom ? { transform: `scale(${fond.zoom})` } : undefined}
               />
             </div>
           ))}

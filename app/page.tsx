@@ -18,6 +18,7 @@ import { HeroHotspots } from '@/components/ui/hero-hotspots';
 import { BUBBLE_HERO_HOTSPOTS, CONSEIL_HERO_HOTSPOTS } from '@/lib/hero-hotspots';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 import { heroMarcellus, heroRaleway } from '@/lib/hero-fonts';
+import { VIGNETTES } from '@/lib/vignettes';
 
 // ─── FadeIn wrapper ───────────────────────────────────────────────────────────
 
@@ -162,7 +163,7 @@ function ProductCard({ product }: { product: ProductPreview }) {
       <Link href={`/products/${product.id}`}>
         <div className={`relative overflow-hidden bg-white aspect-[4/3] ${product.name.includes('Bubble') || product.category === 'Décorations' || product.category === 'Été' ? 'p-4' : ''}`}>
           <Image
-            src={product.images[0]}
+            src={VIGNETTES[product.id]?.[0] ?? product.images[0]}
             alt={product.name}
             width={600}
             height={450}
