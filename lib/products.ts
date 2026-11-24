@@ -1328,6 +1328,7 @@ const exactPriceProducts: Product[] = [
       '/catalog/canape-lit-modulaire-chenille-beige-4.webp',
       '/catalog/canape-lit-modulaire-chenille-beige-5.webp',
       '/catalog/canape-lit-modulaire-chenille-beige-6.webp',
+      '/catalog/canape-lit-modulaire-chenille-beige-7.webp',
     ],
     imageFit: 'contain',
     dimensions: 'L 200 × P 100 × H 63 cm (canapé) · L 200 × P 200 cm (déplié)',
