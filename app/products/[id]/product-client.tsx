@@ -842,6 +842,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [lightbox, setLightbox] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
+  // Format du cadre photo (produits « contain ») : celui de la photo principale, par identifiant de produit
+  const [ratioPhotos, setRatioPhotos] = useState<Record<number, number>>({});
   const [toastMessage, setToastMessage] = useState('');
   const [addedComplement, setAddedComplement] = useState(false);
   const [openDim, setOpenDim] = useState<number | null>(null);
@@ -1250,13 +1252,20 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-2.5">
 {/* Grande photo et grille des autres vues (mise en page V2, toutes les fiches) */}
-              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]" onDoubleClick={(e) => openLightbox(e.currentTarget)}>
+              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]" style={product.imageFit === 'contain' && ratioPhotos[product.id] ? { aspectRatio: String(ratioPhotos[product.id]) } : undefined} onDoubleClick={(e) => openLightbox(e.currentTarget)}>
                 <Image
                   src={product.images[selectedImage]}
                   alt={product.name}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   preload={selectedImage === 0}
+                  onLoad={(e) => {
+                    // La photo principale fixe le format du cadre : elle remplit le cadre, bordure inchangée
+                    if (selectedImage === 0 && product.imageFit === 'contain' && !ratioPhotos[product.id]) {
+                      const im = e.currentTarget;
+                      if (im.naturalWidth && im.naturalHeight) setRatioPhotos((v) => ({ ...v, [product.id]: im.naturalWidth / im.naturalHeight }));
+                    }
+                  }}
                   className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'}
                 />
                 <button
@@ -1277,6 +1286,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       onClick={(e) => cliquerVignette(i, e.currentTarget, e.timeStamp)}
                       aria-label={`Agrandir la photo ${i + 1}`}
                       className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
+                      style={product.imageFit === 'contain' && ratioPhotos[product.id] ? { aspectRatio: String(ratioPhotos[product.id]) } : undefined}
                     >
                       <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'} />
                     </button>
