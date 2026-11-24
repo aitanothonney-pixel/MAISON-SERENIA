@@ -12,6 +12,7 @@ export const FONDS_PHOTOS: Record<number, { haut: string; bas: string; zoom?: nu
   96: { haut: '#ddc8b7', bas: '#e2cebe' },
   98: { haut: '#d8c5b4', bas: '#e0d2c5' },
   99: { haut: '#e2d4c9', bas: '#e5d7cd' },
+  112: { haut: '#e5d4c6', bas: '#ddcbbd' },
   113: { haut: '#fefefe', bas: '#fefefe', zoom: 1.2 },
   114: { haut: '#dfd6ce', bas: '#ded3cb' },
 };
