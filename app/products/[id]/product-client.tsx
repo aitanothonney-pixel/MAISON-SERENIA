@@ -111,7 +111,7 @@ function CheckoutDrawer({
 }: {
   open: boolean;
   onClose: () => void;
-  product: { id: number; name: string; price: number; images: string[]; category: string };
+  product: { id: number; name: string; price: number; images: string[]; category: string; imageFit?: 'contain' | 'cover' };
   unitPrice?: number;
   size?: string;
 }) {
@@ -354,7 +354,7 @@ function CheckoutDrawer({
                           alt={product.name}
                           width={80}
                           height={80}
-                          className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'}
+                          className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'}
                         />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -695,7 +695,7 @@ function CheckoutDrawer({
                         <div className="flex gap-3 mb-3">
                           <div className="w-12 h-12 rounded-lg bg-white border border-neutral-100 flex items-center justify-center overflow-hidden">
                             <Image src={product.images[0]} alt={product.name} width={48} height={48}
-                              className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
+                              className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain w-full h-full p-1' : 'object-cover w-full h-full'} />
                           </div>
                           <div>
                             <p className="font-semibold text-sm">{product.name}</p>
@@ -1257,7 +1257,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   preload={selectedImage === 0}
-                  className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover p-2'}
+                  className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'}
                 />
                 <button
                   type="button"
@@ -1278,7 +1278,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       aria-label={`Agrandir la photo ${i + 1}`}
                       className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
                     >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={product.name.includes('Bubble') || product.category === 'Décorations' ? 'object-contain p-2' : 'object-cover p-2'} />
+                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'} />
                     </button>
                   ))}
                 </div>
@@ -1791,9 +1791,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'p-4' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' || p.imageFit === 'contain' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
-                            className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain' : 'object-cover'}`} />
+                            className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' || p.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && (
                             <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
                           )}
@@ -1844,10 +1844,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <Link href={`/products/${p.id}`}>
-                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'p-4' : ''}`}>
+                        <div className={`relative aspect-square overflow-hidden rounded-xl bg-white mb-3 border border-neutral-100 ${p.name.includes('Bubble') || p.category === 'Décorations' || p.imageFit === 'contain' ? 'p-4' : ''}`}>
                           <Image src={p.images[0]} alt={p.name} width={400} height={400}
                             style={[7, 9, 12].includes(p.id) ? { transform: 'scale(1.3)', transformOrigin: 'center center' } : undefined}
-                            className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain' : 'object-cover'}`} />
+                            className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' || p.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`} />
                           {pIsBubble && (
                             <span className="absolute top-2 left-2 text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-black">−30%</span>
                           )}
@@ -1915,7 +1915,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                     return (
                       <div key={p.id} className="flex items-center gap-4 p-3 rounded-2xl border border-neutral-100">
                         <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)} className="shrink-0 w-20 h-20 rounded-xl bg-neutral-50 overflow-hidden flex items-center justify-center">
-                          <Image src={p.images[0]} alt={p.name} width={80} height={80} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' ? 'object-contain p-2' : 'object-cover'}`} />
+                          <Image src={p.images[0]} alt={p.name} width={80} height={80} className={`w-full h-full ${p.name.includes('Bubble') || p.category === 'Décorations' || p.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover'}`} />
                         </Link>
                         <div className="flex-1 min-w-0">
                           <Link href={`/products/${p.id}`} onClick={() => setWishlistOpen(false)}>
