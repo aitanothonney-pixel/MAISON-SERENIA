@@ -29,7 +29,6 @@ const DECALAGES_TITRE = [
 // Photos studio retenues (fond neutre, produit entier). Chaque tuile garde la proportion exacte de sa photo : rien n'est rogné.
 // Chaque tuile renvoie vers la fiche de son produit.
 const TUILES = [
-  { href: '/products/97', src: '/catalog/canape-d-angle-modulable-en-u-beige-1.webp', legende: 'U beige', w: 1122, h: 1402 },
   { href: '/products/87', src: '/catalog/canape-d-angle-3-places-creme-2.webp', legende: '3 places crème', w: 1122, h: 1402 },
   { href: '/products/100', src: '/catalog/canape-modulable-en-l-style-nuage-gris-anthracite-2.webp', legende: 'L gris anthracite', w: 1122, h: 1402 },
   { href: '/products/60', src: '/catalog/meuble-tv-bois-150-cm-2.webp', legende: 'Meuble TV bois', w: 1122, h: 1402 },

@@ -824,7 +824,7 @@ export default function Home() {
             );
             // Dans le Salon : ordre prioritaire choisi, puis le reste
             if (activeFilter === 'Salon') {
-              const PRIORITY = [100, 102, 101, 87, 88, 95, 91];
+              const PRIORITY = [100, 102, 101, 87, 91];
               const rank = (p: typeof products[number]) => {
                 const i = PRIORITY.indexOf(p.id);
                 if (i !== -1) return i;                       // 0..5 : ordre prioritaire

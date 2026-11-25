@@ -706,7 +706,7 @@ export function SiteHeader({ onWishlistOpen, onCartOpen, onSectionNav }: { onWis
                 <div>
                   <p className="text-[11px] tracking-[0.25em] uppercase text-neutral-500 mb-4">Nos suggestions</p>
                   {(() => {
-                    const suggestionIds = [112, 77, 105, 100, 110, 113, 83, 109, 95, 78, 107, 87, 79, 108];
+                    const suggestionIds = [112, 77, 105, 100, 110, 83, 109, 78, 107, 87, 79, 108];
                     const all = suggestionIds.map((id) => products.find((p) => p.id === id)).filter(Boolean) as typeof products;
                     return (
                       <>

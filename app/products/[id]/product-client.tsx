@@ -1009,19 +1009,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     90: 'Canapé-lit modulaire chenille noir',
     91: 'Canapé-lit modulaire chenille beige',
     92: 'Canapé-lit modulaire chenille bleu',
-    // Canapés sectionnels en U (chenille, double méridienne)
-    95: 'Canapé d\'angle modulable en U noir',
-    96: 'Canapé d\'angle modulable en U gris clair',
-    97: 'Canapé d\'angle modulable en U beige',
-    98: 'Canapé d\'angle modulable en U brun',
-    99: 'Canapé d\'angle modulable en U vert',
     // Canapés modulables en L et en U « style nuage »
     100: 'Canapé modulable en L style nuage gris anthracite',
     101: 'Canapé modulable en L style nuage gris anthracite',
     102: 'Canapé modulable en L style nuage gris anthracite',
-    113: 'Canapé modulable en U style nuage blanc',
-    114: 'Canapé modulable en U style nuage noir',
-    115: 'Canapé modulable en U style nuage gris',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
