@@ -70,9 +70,9 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 86, color: 'Blanc doré', colorHex: '#d9c9a3' },
   ],
   'canape-lit-modulaire': [
+    { productId: 91, color: 'Beige', colorHex: '#d8c8a8' },
     { productId: 89, color: 'Vert', colorHex: '#4a5d4a' },
     { productId: 90, color: 'Noir', colorHex: '#1a1a1a' },
-    { productId: 91, color: 'Beige', colorHex: '#d8c8a8' },
     { productId: 92, color: 'Bleu', colorHex: '#2d3a6b' },
   ],
   'canape-sectionnel-u': [
@@ -1498,7 +1498,7 @@ const exactPriceProducts: Product[] = [
     id: 102,
     name: 'Canapé modulable en L style nuage blanc chaud',
     category: 'Salon',
-    price: 849,
+    price: 810, // affiché 899,99 CHF après majoration et arrondi (applyUplift / nice99)
     description: 'Grand canapé d\'angle modulable en forme de L (style nuage), revêtu de velours côtelé doux et moelleux. Assise profonde et enveloppante, pouf mobile et coussins inclus. Modulable selon votre espace pour un salon cosy et contemporain. Coloris blanc chaud, lumineux et élégant.',
     images: [
       '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp',
