@@ -15,7 +15,7 @@ export function CollectionCard({ product, position }: { product: Product; positi
   const isBubble = product.name.includes('Bubble');
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
   // Canapés : vignettes 4:3 déjà recadrées sur le canapé, elles remplissent le cadre sans fond ajouté
-  const vignettes = VIGNETTES[product.id];
+  const vignettes = VIGNETTES[product.id]?.filter((v): v is string => v !== null);
   const images = vignettes ?? product.images;
   const contain = !vignettes && (isBubble || product.imageFit === 'contain' || product.category === 'Décorations' || product.category === 'Été');
 

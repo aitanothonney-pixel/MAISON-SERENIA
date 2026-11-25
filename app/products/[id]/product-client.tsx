@@ -15,6 +15,7 @@ import { trackViewItem, trackBeginCheckout } from '@/lib/analytics';
 import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
+import { VIGNETTES } from '@/lib/vignettes';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
@@ -842,8 +843,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const [lightbox, setLightbox] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<typeof products>([]);
-  // Format du cadre photo (produits « contain ») : celui de la photo principale, par identifiant de produit
-  const [ratioPhotos, setRatioPhotos] = useState<Record<number, number>>({});
   const [toastMessage, setToastMessage] = useState('');
   const [addedComplement, setAddedComplement] = useState(false);
   const [openDim, setOpenDim] = useState<number | null>(null);
@@ -1159,6 +1158,12 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     },
   ];
 
+  // Galerie : les canapés à vignettes remplissent un cadre 4:3, comme les cartes ; les autres fiches gardent leur réglage
+  const vignettesProduit = VIGNETTES[product.id];
+  const imageAffichee = (i: number): string => vignettesProduit?.[i] ?? product.images[i];
+  const enContain = !vignettesProduit && (product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain');
+  const classeImage = enContain ? 'object-contain p-2' : 'object-cover p-2';
+
   return (
     <>
     <div className="min-h-screen bg-white">
@@ -1252,21 +1257,14 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
             {/* Image Gallery */}
             <div className="space-y-2.5">
 {/* Grande photo et grille des autres vues (mise en page V2, toutes les fiches) */}
-              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]" style={product.imageFit === 'contain' && ratioPhotos[product.id] ? { aspectRatio: String(ratioPhotos[product.id]) } : undefined} onDoubleClick={(e) => openLightbox(e.currentTarget)}>
+              <div className="group relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]" onDoubleClick={(e) => openLightbox(e.currentTarget)}>
                 <Image
-                  src={product.images[selectedImage]}
+                  src={imageAffichee(selectedImage)}
                   alt={product.name}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   preload={selectedImage === 0}
-                  onLoad={(e) => {
-                    // La photo principale fixe le format du cadre : elle remplit le cadre, bordure inchangée
-                    if (selectedImage === 0 && product.imageFit === 'contain' && !ratioPhotos[product.id]) {
-                      const im = e.currentTarget;
-                      if (im.naturalWidth && im.naturalHeight) setRatioPhotos((v) => ({ ...v, [product.id]: im.naturalWidth / im.naturalHeight }));
-                    }
-                  }}
-                  className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'}
+                  className={classeImage}
                 />
                 <button
                   type="button"
@@ -1279,16 +1277,15 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
               </div>
               {product.images.length > 1 && (
                 <div className={`grid gap-2.5 ${product.images.length > 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                  {product.images.map((img, i) => i === selectedImage ? null : (
+                  {product.images.map((_, i) => i === selectedImage ? null : (
                     <button
                       key={i}
                       type="button"
                       onClick={(e) => cliquerVignette(i, e.currentTarget, e.timeStamp)}
                       aria-label={`Agrandir la photo ${i + 1}`}
                       className="relative aspect-[4/3] overflow-hidden bg-[#F6F2EB]"
-                      style={product.imageFit === 'contain' && ratioPhotos[product.id] ? { aspectRatio: String(ratioPhotos[product.id]) } : undefined}
                     >
-                      <Image src={img} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={product.name.includes('Bubble') || product.category === 'Décorations' || product.imageFit === 'contain' ? 'object-contain p-2' : 'object-cover p-2'} />
+                      <Image src={imageAffichee(i)} alt={`${product.name} vue ${i + 1}`} fill sizes="(max-width: 640px) 50vw, 25vw" className={classeImage} />
                     </button>
                   ))}
                 </div>
