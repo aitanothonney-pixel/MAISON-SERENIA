@@ -107,10 +107,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 123, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 124, color: 'Or', colorHex: '#c9a96e' },
   ],
-  'fauteuil-cuir-nordique': [
-    { productId: 126, color: 'Noir', colorHex: '#1a1a1a' },
-    { productId: 127, color: 'Blanc', colorHex: '#ece7de' },
-  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -1008,39 +1004,6 @@ const exactPriceProducts: Product[] = [
       { label: '4 lumières', price: 319, image: '/catalog/4wCDHY7M.png' },
     ],
   },
-  // ── Meubles : Fauteuil individuel en cuir style nordique (3 couleurs) ────────
-  // ⚠️ Images temporaires — à remplacer par les vraies photos du client
-  {
-    id: 126,
-    name: 'Fauteuil individuel en cuir style nordique noir',
-    category: 'Salon',
-    price: 349,
-    description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris noir intemporel.',
-    images: [
-      '/catalog/HLnN3Ffx.png',
-      '/catalog/TDQNgGHY.png',
-      '/catalog/23KZftFy.png',
-      '/catalog/qYvTrK4y.png',
-    ],
-    dimensions: 'Fauteuil individuel avec accoudoirs',
-    material: 'Cuir, structure métal soudée',
-    details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
-  },
-  {
-    id: 127,
-    name: 'Fauteuil individuel en cuir style nordique blanc',
-    category: 'Salon',
-    price: 349,
-    description: 'Fauteuil individuel en cuir au style nordique, à la fois rétro et raffiné. Assise enveloppante avec dossier et accoudoirs, portée par une structure en métal à la soudure renforcée. Un luxe léger et confortable, idéal pour un coin lecture ou un salon élégant. Coloris blanc lumineux.',
-    images: [
-      '/catalog/jvTFghrm.png',
-      '/catalog/fYQYCs2L.png',
-      '/catalog/qYvTrK4y.png',
-    ],
-    dimensions: 'Fauteuil individuel avec accoudoirs',
-    material: 'Cuir, structure métal soudée',
-    details: ['Cuir style nordique rétro', 'Structure métal soudure renforcée', 'Dossier et accoudoirs confortables', 'Idéal coin lecture ou salon'],
-  },
   // ── Meubles : Lot de 2 tables basses rondes noyer ────────────────────────────
   {
     id: 133,
@@ -1826,22 +1789,6 @@ const exactPriceProducts: Product[] = [
       { label: '150×250 cm', price: 360 },
     ],
   },
-  // ── Salon : Fauteuil Bauhaus cuir noir & acier ──────────────────────────────
-  {
-    id: 135,
-    name: 'Fauteuil Bauhaus en cuir noir & acier',
-    category: 'Salon',
-    price: 549,
-    description: 'Fauteuil d\'inspiration Bauhaus au design épuré et intemporel : assise et dossier en cuir noir capitonné, structure en acier inoxydable. Un fauteuil sculptural et confortable, à la fois rétro et contemporain, parfait pour un salon élégant, un coin lecture ou une salle de réception.',
-    images: [
-      '/catalog/5hxD47TZ.png',
-      '/catalog/DPM5VyVh.png',
-      '/catalog/rRsgdLK0.png',
-    ],
-    dimensions: 'Fauteuil individuel avec accoudoirs',
-    material: 'Cuir noir, structure acier inoxydable',
-    details: ['Design d\'inspiration Bauhaus', 'Cuir noir capitonné', 'Structure en acier inoxydable', 'Assise rembourrée confortable'],
-  },
   // ── Décorations : Support de livres en spirale rotatif (5 coloris) ───────────
   // ⚠️ Images TEMPORAIRES — à remplacer par les vraies photos ibb du client
   {
@@ -1927,34 +1874,6 @@ const exactPriceProducts: Product[] = [
       { label: 'Rouge', price: 69, image: '/catalog/hx20MPsj.png' },
       { label: 'Jaune', price: 69, image: '/catalog/vCdcP52g.png' },
       { label: 'Rose', price: 69, image: '/catalog/8DdBQpQS.png' },
-    ],
-  },
-  // ── Salon : Fauteuil lounge nuage bouclé (coloris + prix à confirmer) ────────
-  // ⚠️ Image TEMPORAIRE + coloris à compléter (prix, noms & photos à envoyer)
-  {
-    id: 140,
-    name: 'Fauteuil lounge nuage bouclé',
-    category: 'Salon',
-    price: 499,
-    description: 'Fauteuil lounge au design sculptural et enveloppant, inspiration nuage. Assise généreuse en tissu bouclé doux au toucher, portée par un piètement métallique fin et élégant. Une pièce contemporaine et cosy, parfaite pour un coin lecture, un salon design ou une chambre. Confort moelleux et présence forte.',
-    images: [
-      '/catalog/hJdHV8RP.png',
-      '/catalog/3mLfrnw3.png',
-      '/catalog/6cVcQP6q.png',
-      '/catalog/qYJdtnTf.png',
-      '/catalog/Rdgcjq0.png',
-      '/catalog/ywtZF7X.png',
-      '/catalog/fz5TZhZJ.png',
-      '/catalog/WvPV4V6V.png',
-    ],
-    dimensions: 'Fauteuil individuel · assise enveloppante',
-    material: 'Tissu bouclé, piètement métal',
-    details: ['Design sculptural inspiration nuage', 'Tissu bouclé doux', 'Piètement métallique fin', 'Idéal coin lecture ou salon design'],
-    sizeLabel: 'Coloris',
-    imageColor: ['Noir', 'Blanc', 'Blanc', 'Noir', 'Noir', 'Noir', '', ''],
-    sizes: [
-      { label: 'Blanc', price: 499, image: '/catalog/3mLfrnw3.png' },
-      { label: 'Noir', price: 499, image: '/catalog/qYJdtnTf.png' },
     ],
   },
 ];

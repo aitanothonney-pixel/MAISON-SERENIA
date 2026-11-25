@@ -132,7 +132,7 @@ function BubblePromoSection() {
 }
 
 // Ordre de mise en avant des produits : sert au tri « Recommandés » de la grille d'accueil
-const bestsellerIds = [100, 135, 140, 103];
+const bestsellerIds = [100, 103];
 
 // ─── Product Card (with optional badge) ──────────────────────────────────────
 
