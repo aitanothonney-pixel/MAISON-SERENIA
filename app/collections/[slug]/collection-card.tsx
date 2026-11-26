@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { nice99, type Product } from '@/lib/products';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { VIGNETTES } from '@/lib/vignettes';
+import { isSoldOut } from '@/lib/soldout';
 
 // position : 'lcp' = première carte (préchargée), 'eager' = cartes visibles dès l'ouverture, undefined = lazy
 export function CollectionCard({ product, position }: { product: Product; position?: 'lcp' | 'eager' }) {
@@ -13,6 +14,7 @@ export function CollectionCard({ product, position }: { product: Product; positi
   const [idx, setIdx] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isBubble = product.name.includes('Bubble');
+  const soldOut = isSoldOut(product.id);
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
   // Canapés : vignettes 4:3 déjà recadrées sur le canapé, elles remplissent le cadre sans fond ajouté
   const vignettes = VIGNETTES[product.id]?.filter((v): v is string => v !== null);
@@ -52,6 +54,11 @@ export function CollectionCard({ product, position }: { product: Product; positi
           ))}
         </div>
 
+        {soldOut && (
+          <div className="absolute top-3 left-3 bg-white text-black text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 z-10 pointer-events-none">
+            Rupture de stock
+          </div>
+        )}
         {isBubble && (
           <div className="absolute top-3 left-3 bg-black text-white text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 z-10 pointer-events-none">
             −30%

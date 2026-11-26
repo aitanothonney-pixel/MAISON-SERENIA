@@ -1,5 +1,6 @@
 import { products, nice99 } from '@/lib/products';
 import { reserveStock, releaseReservation } from '@/lib/inventory';
+import { isSoldOut } from '@/lib/soldout';
 
 // Runtime Node.js, jamais mis en cache
 export const runtime = 'nodejs';
@@ -93,6 +94,25 @@ export async function POST(req: Request) {
     .filter(Boolean) as { product: typeof products[0]; qty: number; unit: number; label: string }[];
 
   if (cart.length === 0) return Response.json({ error: 'Panier vide' }, { status: 400 });
+
+  // Produits en rupture (liste dans lib/soldout.ts) : aucun paiement n'est lancé.
+  const soldOutLines = cart.filter((x) => isSoldOut(x.product.id));
+  if (soldOutLines.length > 0) {
+    return Response.json(
+      {
+        error: 'out_of_stock',
+        unavailable: soldOutLines.map((x) => ({
+          legacy_id: x.product.id,
+          size: null,
+          sku: null,
+          requested: x.qty,
+          available: 0,
+          name: x.product.name,
+        })),
+      },
+      { status: 409 },
+    );
+  }
 
   // Jeton de réservation, transmis à Stripe (metadata) pour la Phase 5 (webhook).
   const reservationToken = `rsv_${globalThis.crypto.randomUUID()}`;

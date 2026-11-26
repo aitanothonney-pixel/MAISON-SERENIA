@@ -16,6 +16,7 @@ import { Logo } from '@/components/ui/logo';
 import { CartDrawer } from '@/components/ui/cart-drawer';
 import { formatPrice, useCurrency } from '@/lib/currency';
 import { VIGNETTES } from '@/lib/vignettes';
+import { isSoldOut } from '@/lib/soldout';
 import { WELCOME_CODE } from '@/components/ui/welcome-popup';
 
 const normalizeCode = (s: string) => s.trim().replace(/\s+/g, ' ').toUpperCase();
@@ -1089,6 +1090,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   };
 
   const promoPrice = isBubble ? nice99(Math.round(product.price * 0.7)) : product.price;
+  // Produit en rupture de stock : non achetable (voir lib/soldout.ts)
+  const soldOut = isSoldOut(product.id);
   // Prix affiché : selon la taille choisie si le produit en propose, sinon prix promo
   const unitPrice = product.sizes
     ? (product.sizes.find((s) => s.label === selectedSize)?.price ?? product.sizes[0].price)
@@ -1098,6 +1101,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   const complementProduct = complementId ? products.find((p) => p.id === complementId) : undefined;
 
   const handleAddToCart = () => {
+    if (soldOut) return;
     addToCart(product.id, product.sizes ? selectedSize : undefined);
     setAdded(true);
     setToastMessage(product.name);
@@ -1174,10 +1178,11 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
           <button
             type="button"
             onClick={handleAddToCart}
-            className="shrink-0 px-5 py-3.5 bg-black text-white text-[11px] font-semibold tracking-[0.2em] uppercase flex items-center gap-2"
+            disabled={soldOut}
+            className={`shrink-0 px-5 py-3.5 text-white text-[11px] font-semibold tracking-[0.2em] uppercase flex items-center gap-2 ${soldOut ? 'bg-neutral-400 cursor-not-allowed' : 'bg-black'}`}
           >
-            {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
-            {added ? 'Ajouté' : 'Ajouter'}
+            {!soldOut && (added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />)}
+            {soldOut ? 'Rupture de stock' : added ? 'Ajouté' : 'Ajouter'}
           </button>
         </div>
       )}
@@ -1539,10 +1544,14 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 <motion.button
                   ref={setCtaNode}
                   onClick={handleAddToCart}
-                  whileTap={{ scale: 0.99 }}
-                  className="relative flex h-[54px] w-full items-center justify-center gap-2.5 overflow-hidden text-[15px] font-semibold text-white transition-colors duration-300"
-                  style={{ background: added ? '#6b6660' : '#34322F' }}
+                  disabled={soldOut}
+                  whileTap={soldOut ? undefined : { scale: 0.99 }}
+                  className={`relative flex h-[54px] w-full items-center justify-center gap-2.5 overflow-hidden text-[15px] font-semibold text-white transition-colors duration-300 ${soldOut ? 'cursor-not-allowed' : ''}`}
+                  style={{ background: soldOut ? '#b5afa6' : added ? '#6b6660' : '#34322F' }}
                 >
+                  {soldOut ? (
+                    <span className="flex items-center gap-2.5">Rupture de stock</span>
+                  ) : (
                   <AnimatePresence mode="wait">
                     {added ? (
                       <motion.span key="added" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-2.5">
@@ -1554,13 +1563,15 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                       </motion.span>
                     )}
                   </AnimatePresence>
+                  )}
                 </motion.button>
 
                 <div className="grid grid-cols-2 gap-2.5">
                   <motion.button
-                    onClick={() => setCheckoutOpen(true)}
-                    whileTap={{ scale: 0.99 }}
-                    className="flex h-[54px] items-center justify-center gap-2 border border-[#34322F] bg-white text-[14px] font-semibold text-[#34322F] transition-colors duration-300 hover:bg-[#34322F] hover:text-white"
+                    onClick={soldOut ? undefined : () => setCheckoutOpen(true)}
+                    disabled={soldOut}
+                    whileTap={soldOut ? undefined : { scale: 0.99 }}
+                    className={`flex h-[54px] items-center justify-center gap-2 border border-[#34322F] bg-white text-[14px] font-semibold text-[#34322F] transition-colors duration-300 ${soldOut ? 'cursor-not-allowed opacity-40' : 'hover:bg-[#34322F] hover:text-white'}`}
                   >
                     <Lock className="w-4 h-4" /> Acheter
                   </motion.button>
@@ -1578,7 +1589,10 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                 </div>
               </div>
 
-              {/* Livraison estimée */}
+              {/* Livraison estimée (remplacée par la mention de rupture) */}
+              {soldOut ? (
+                <p className="mb-8 text-[13px] text-[#4d4842]">Ce canapé est actuellement en rupture de stock : il ne peut pas être commandé pour le moment.</p>
+              ) : (
               <p className="mb-8 flex items-start gap-2 text-[13px] text-[#4d4842]">
                 <Truck className="mt-0.5 h-4 w-4 shrink-0 text-[#7F6A52]" />
                 <span>
@@ -1587,6 +1601,7 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
                   <strong className="whitespace-nowrap font-semibold text-black">{deliveryRange.to}</strong>
                 </span>
               </p>
+              )}
 
               {/* Réassurance — panneau sous les boutons d'achat */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-4 mb-8 border border-neutral-200 p-4">

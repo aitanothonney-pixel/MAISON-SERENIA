@@ -1,4 +1,5 @@
 import { products, getVariantGroup, getVariantGroupKey, nice99, type Product } from '@/lib/products';
+import { isSoldOut } from '@/lib/soldout';
 
 // Flux produits Google Merchant Center (RSS 2.0 + espace de noms g:).
 // URL publique : https://maison-serenia.com/feed.xml
@@ -57,7 +58,7 @@ function item(p: Product): string {
     `<g:link>${esc(link)}</g:link>`,
     `<g:image_link>${esc(toAbs(mainImage))}</g:image_link>`,
     ...extraImages.slice(0, 10).map((img) => `<g:additional_image_link>${esc(toAbs(img))}</g:additional_image_link>`),
-    `<g:availability>in_stock</g:availability>`,
+    `<g:availability>${isSoldOut(p.id) ? 'out_of_stock' : 'in_stock'}</g:availability>`,
     `<g:price>${sellingPrice(p).toFixed(2)} CHF</g:price>`,
     `<g:condition>new</g:condition>`,
     `<g:brand>${esc(BRAND)}</g:brand>`,

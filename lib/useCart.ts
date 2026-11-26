@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { trackAddToCart } from './analytics';
+import { isSoldOut } from './soldout';
 
 const KEY = 'ms_cart';
 const EVENT = 'ms_cart_change';
@@ -46,6 +47,8 @@ export function useCart() {
   }, []);
 
   const addItem = useCallback((id: number, size?: string) => {
+    // Produit en rupture : jamais ajouté au panier (voir lib/soldout.ts).
+    if (isSoldOut(id)) return;
     setItems((prev) => {
       const existing = prev.find((x) => sameLine(x, { id, size }));
       const next = existing

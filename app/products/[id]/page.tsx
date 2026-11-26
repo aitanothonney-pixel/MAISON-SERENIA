@@ -1,5 +1,6 @@
 import { products, nice99 } from '@/lib/products';
 import { categoryToSlug } from '@/lib/collections';
+import { isSoldOut } from '@/lib/soldout';
 import ProductClient from './product-client';
 import { productInter, productInterTight } from '@/lib/product-fonts';
 import { notFound } from 'next/navigation';
@@ -61,7 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           priceCurrency: 'CHF',
           price: (product.name.includes('Bubble') ? nice99(Math.round(product.price * 0.7)) : product.price).toString(),
           priceValidUntil,
-          availability: 'https://schema.org/InStock',
+          availability: isSoldOut(product.id) ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',
           seller: { '@type': 'Organization', name: 'Maison Serenia' },
         },
