@@ -1317,6 +1317,28 @@ const exactPriceProducts: Product[] = [
       'Livré en 2 colis : vérifiez l\'accès, les portes et les escaliers',
     ],
   },
+  {
+    id: 142,
+    name: 'Canapé d\'angle Nuvola ivoire',
+    category: 'Salon',
+    price: 1080, // affiché 1199,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Canapé d\'angle modulable au revêtement en chenille texturée blanc ivoire. Formes arrondies, assises profondes et dossiers matelassés, méridienne aux courbes douces : un confort enveloppant pour un salon cosy et contemporain.',
+    images: [
+      '/catalog/canape-d-angle-nuvola-blanc-ivoire-1.webp',
+      '/catalog/canape-d-angle-nuvola-blanc-ivoire-2.webp',
+      '/catalog/canape-d-angle-nuvola-blanc-ivoire-3.webp',
+      '/catalog/canape-d-angle-nuvola-blanc-ivoire-4.webp',
+      '/catalog/canape-d-angle-nuvola-blanc-ivoire-5.webp',
+    ],
+    dimensions: 'L 279,4 × P 198,1 cm (hauteur d\'assise 43,2 cm)',
+    material: 'Chenille blanc ivoire, garnissage mousse à reprise rapide',
+    details: [
+      'Canapé d\'angle modulable, 3 à 4 personnes',
+      'Assises profondes et dossiers matelassés',
+      'Teinte à lire selon l\'éclairage (plus crème en lumière chaude)',
+      'Livré en 2 colis, pouvant arriver séparément',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,
