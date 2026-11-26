@@ -90,4 +90,11 @@ export const VIGNETTES: Record<number, (string | null)[]> = {
     null,
     '/catalog/cartes/canape-panoramique-en-u-noir-cotele-6.webp',
   ],
+  147: [
+    '/catalog/cartes/fauteuil-lounge-ivoire-boucle-1.webp',
+    '/catalog/cartes/fauteuil-lounge-ivoire-boucle-2.webp',
+    null,
+    null,
+    '/catalog/cartes/fauteuil-lounge-ivoire-boucle-5.webp',
+  ],
 };

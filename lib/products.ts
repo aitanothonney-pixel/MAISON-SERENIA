@@ -1431,6 +1431,28 @@ const exactPriceProducts: Product[] = [
       'Livré en 2 colis',
     ],
   },
+  {
+    id: 147,
+    name: 'Fauteuil lounge ivoire bouclé',
+    category: 'Salon',
+    price: 360, // affiché 399,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Fauteuil lounge en bouclé ivoire, à accoudoirs en bois brun aux courbes marquées. Son assise épaisse, arrondie à l’avant, et son dossier large et rembourré composent un coin lecture ou un espace de détente chaleureux.',
+    images: [
+      '/catalog/fauteuil-lounge-ivoire-boucle-1.webp',
+      '/catalog/fauteuil-lounge-ivoire-boucle-2.webp',
+      '/catalog/fauteuil-lounge-ivoire-boucle-3.webp',
+      '/catalog/fauteuil-lounge-ivoire-boucle-4.webp',
+      '/catalog/fauteuil-lounge-ivoire-boucle-5.webp',
+    ],
+    dimensions: 'L 72 × P 78 × H 77 cm (profondeur d\'assise 54 cm)',
+    material: 'Bouclé ivoire ; accoudoirs et piètement en bois brun',
+    details: [
+      'Fauteuil individuel, une place',
+      'Assise rembourrée, profonde et arrondie à l’avant',
+      'Dossier large, rembourré et légèrement incliné',
+      'Accoudoirs en bois brun aux courbes marquées',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,

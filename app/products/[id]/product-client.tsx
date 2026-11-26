@@ -1026,6 +1026,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     145: 'Canapé d\'angle Sienna marron moka',
     // Canapé panoramique en U (fiche propre)
     146: 'Canapé panoramique en U noir côtelé',
+    // Fauteuil lounge (fiche propre)
+    147: 'Fauteuil lounge ivoire bouclé',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
