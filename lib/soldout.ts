@@ -8,6 +8,6 @@
 // - données structurées et flux Google Merchant : disponibilité « rupture ».
 //
 // Pour remettre un produit en vente, le retirer de cette liste.
-export const SOLD_OUT_IDS: ReadonlySet<number> = new Set([87]);
+export const SOLD_OUT_IDS: ReadonlySet<number> = new Set([87, 61]);
 
 export const isSoldOut = (id: number): boolean => SOLD_OUT_IDS.has(id);

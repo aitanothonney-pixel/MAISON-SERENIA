@@ -437,21 +437,6 @@ const rawProducts: Product[] = [
     details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Blanc'],
   },
   // ── Salon : Table basse Mahjong mobile ───────────────────────────────────────
-  {
-    id: 68,
-    name: 'Table basse mobile noire',
-    category: 'Meubles',
-    price: 49,
-    description: 'Table basse mobile multifonction en noir : support à thé, étagère de rangement et surface de jeu (échecs, cartes, Mahjong). Double plateau et roulettes pour la déplacer facilement dans tout le salon.',
-    images: [
-      '/catalog/Z6xfjVMN.png',
-      '/catalog/ym393YzM.png',
-      '/catalog/XxGH6wkC.png',
-    ],
-    dimensions: 'L 39 × P 39 × H 50 cm',
-    material: 'Métal et plateau laqué noir',
-    details: ['Double plateau de rangement', 'Roulettes pour un déplacement facile', 'Multifonction : thé, jeux, appoint', 'Finition noire élégante'],
-  },
   // ── Décorations : Vase céramique coquille ────────────────────────────────────
   {
     id: 71,
@@ -1900,7 +1885,7 @@ const exactPriceProducts: Product[] = [
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
-const SHOW_LAST_IDS = [65, 66, 67, 68]; // Table d'appoint double couche + Table basse mobile noire
+const SHOW_LAST_IDS = [65, 66, 67]; // Tables d'appoint double couche
 
 // Produits Bubble : prix catalogue fixé à la main (non majoré par bumpPrice).
 // La remise -30% reste appliquée au paiement/affichage.

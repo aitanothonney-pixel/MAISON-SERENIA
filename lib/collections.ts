@@ -95,7 +95,7 @@ export function getCollectionProducts(slug: string): Product[] {
   // Meubles : ordre prioritaire choisi, puis le reste, puis certains forcés en fin
   if (cat === 'Meubles') {
     const PRIORITY = [77, 83, 78, 79, 81, 84, 75, 76];
-    const LAST = [68, 66, 82]; // forcés tout à la fin, dans cet ordre
+    const LAST = [66, 82]; // forcés tout à la fin, dans cet ordre
     const rank = (id: number) => {
       const i = PRIORITY.indexOf(id);
       if (i !== -1) return i;

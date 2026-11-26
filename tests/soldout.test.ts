@@ -7,6 +7,11 @@ describe('produits en rupture de stock', () => {
     expect(isSoldOut(87)).toBe(true);
   });
 
+  it('le meuble TV extensible noir (61) est en rupture et non achetable', () => {
+    expect(SOLD_OUT_IDS.has(61)).toBe(true);
+    expect(isSoldOut(61)).toBe(true);
+  });
+
   it('les produits nouvellement ajoutés restent en vente', () => {
     expect(isSoldOut(141)).toBe(false);
     expect(isSoldOut(142)).toBe(false);

@@ -840,7 +840,7 @@ export default function Home() {
             // Meubles : ordre prioritaire, puis le reste, puis certains forcés en fin
             if (activeFilter === 'Meubles') {
               const PRIORITY = [77, 83, 78, 79, 81, 84, 75, 76];
-              const LAST = [68, 66, 82]; // forcés tout à la fin, dans cet ordre
+              const LAST = [66, 82]; // forcés tout à la fin, dans cet ordre
               const rank = (id: number) => {
                 const i = PRIORITY.indexOf(id);
                 if (i !== -1) return i;

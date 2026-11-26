@@ -995,7 +995,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     65: 'Table d\'appoint double couche',
     66: 'Table d\'appoint double couche',
     67: 'Table d\'appoint double couche',
-    68: 'Table basse mobile noire',
     74: 'Commode 6 tiroirs bois & noir',
     75: 'Commode meuble TV long à tiroirs',
     76: 'Commode blanche 6 tiroirs',
