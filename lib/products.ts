@@ -95,6 +95,10 @@ export const variantGroups: Record<string, ProductVariant[]> = {
     { productId: 123, color: 'Blanc', colorHex: '#ece7de' },
     { productId: 124, color: 'Or', colorHex: '#c9a96e' },
   ],
+  'fauteuil-lounge': [
+    { productId: 148, color: 'Crème et marron', colorHex: '#e8dcc8' },
+    { productId: 149, color: 'Orange', colorHex: '#d4622a' },
+  ],
 };
 
 // Groupes qui gardent chaque couleur comme carte distincte dans les listes,
@@ -1466,6 +1470,25 @@ const exactPriceProducts: Product[] = [
     ],
     dimensions: '78 × 75 × 67 cm (hors tout)',
     material: 'Coussins textile crème ; coque incurvée aspect cuir marron ; piètement noir',
+    details: [
+      'Fauteuil individuel, sans accoudoirs rapportés',
+      'Assise et dossier : deux coussins rembourrés, revêtement textile',
+      'Coque incurvée aspect cuir, pieds noirs inclinés',
+    ],
+  },
+  {
+    id: 149,
+    name: 'Fauteuil lounge orange',
+    category: 'Salon',
+    price: 360, // affiché 399,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Fauteuil lounge orange, aux coussins et à la coque incurvée de même teinte, avec un piètement noir incliné. Son dossier légèrement incliné et son assise épaisse invitent à la détente, pour un salon, un bureau ou un coin lecture.',
+    images: [
+      '/catalog/fauteuil-lounge-orange-1.webp',
+      '/catalog/fauteuil-lounge-orange-2.webp',
+      '/catalog/fauteuil-lounge-orange-3.webp',
+    ],
+    dimensions: '78 × 75 × 67 cm (hors tout)',
+    material: 'Coussins textile orange ; coque incurvée aspect cuir orange ; piètement noir',
     details: [
       'Fauteuil individuel, sans accoudoirs rapportés',
       'Assise et dossier : deux coussins rembourrés, revêtement textile',

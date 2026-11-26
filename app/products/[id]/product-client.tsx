@@ -1030,6 +1030,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     147: 'Fauteuil lounge ivoire bouclé',
     // Fauteuil lounge crème (fiche PDF fournie)
     148: 'Fauteuil lounge crème et marron',
+    // Fauteuil lounge orange (même fiche, coloris orange)
+    149: 'Fauteuil lounge orange',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
