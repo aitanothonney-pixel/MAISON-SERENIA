@@ -936,7 +936,7 @@ const exactPriceProducts: Product[] = [
     id: 133,
     name: 'Lot de 2 tables basses rondes noyer',
     category: 'Meubles',
-    price: 199,
+    price: 180,
     description: 'Lot de 2 tables basses rondes gigognes en bois finition noyer, au style nordique épuré. Plateaux ronds et piètement sculptural — parfaites pour un salon, un balcon ou un petit appartement. Se glissent l\'une sous l\'autre pour gagner de la place.',
     images: [
       '/catalog/lot-de-2-tables-basses-rondes-noyer-1.webp',
@@ -953,7 +953,7 @@ const exactPriceProducts: Product[] = [
     id: 132,
     name: 'Table à manger en bois massif nordique',
     category: 'Meubles',
-    price: 549,
+    price: 540,
     description: 'Table à manger en bois massif au style nordique, épurée et chaleureuse. Piètement fuselé et plateau généreux — parfaite pour un repas en famille comme pour un petit appartement. Une pièce intemporelle qui structure la salle à manger.',
     images: [
       '/catalog/table-a-manger-en-bois-massif-nordique-1.webp',
