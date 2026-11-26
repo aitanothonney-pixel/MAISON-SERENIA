@@ -566,7 +566,7 @@ const exactPriceProducts: Product[] = [
     id: 112,
     name: 'Canapé sectionnel convertible 3 places gris',
     category: 'Salon',
-    price: 749,
+    price: 765,
     description: 'Grand canapé sectionnel convertible 3 places en velours côtelé gris, sans armature apparente. Assise profonde et enveloppante, coussins moelleux inclus. Modulable et personnalisable selon votre espace, il se transforme en couchage d\'appoint — un choix parfait pour un salon cosy et contemporain.',
     images: [
       '/catalog/canape-sectionnel-convertible-gris-1.webp',
@@ -1168,7 +1168,7 @@ const exactPriceProducts: Product[] = [
     id: 89,
     name: 'Canapé-lit modulaire chenille',
     category: 'Salon',
-    price: 750,
+    price: 765,
     description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Vert.',
     images: [
       '/catalog/canape-lit-modulaire-chenille-vert-1.webp',
@@ -1189,7 +1189,7 @@ const exactPriceProducts: Product[] = [
     id: 90,
     name: 'Canapé-lit modulaire chenille',
     category: 'Salon',
-    price: 750,
+    price: 765,
     description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Noir.',
     images: [
       '/catalog/canape-lit-modulaire-chenille-noir-1.webp',
@@ -1210,7 +1210,7 @@ const exactPriceProducts: Product[] = [
     id: 91,
     name: 'Canapé-lit modulaire chenille',
     category: 'Salon',
-    price: 750,
+    price: 765,
     description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Beige.',
     images: [
       '/catalog/canape-lit-modulaire-chenille-beige-1.webp',
@@ -1231,7 +1231,7 @@ const exactPriceProducts: Product[] = [
     id: 92,
     name: 'Canapé-lit modulaire chenille',
     category: 'Salon',
-    price: 750,
+    price: 765,
     description: 'Canapé-lit modulaire convertible en tissu chenille doux, 2 places sectionnel et combinable. Assise profonde et enveloppante, adapté aux animaux domestiques. Livré compressé sous vide, sans assemblage — un couchage d\'appoint aussi confortable qu\'élégant. Coloris Bleu.',
     images: [
       '/catalog/canape-lit-modulaire-chenille-bleu-1.webp',
@@ -1286,7 +1286,7 @@ const exactPriceProducts: Product[] = [
     id: 102,
     name: 'Canapé modulable en L style nuage blanc chaud',
     category: 'Salon',
-    price: 810, // affiché 899,99 CHF après majoration et arrondi (applyUplift / nice99)
+    price: 849, // affiché 949,99 CHF après majoration et arrondi (applyUplift / nice99)
     description: 'Grand canapé d\'angle modulable en forme de L (style nuage), revêtu de velours côtelé doux et moelleux. Assise profonde et enveloppante, pouf mobile et coussins inclus. Modulable selon votre espace pour un salon cosy et contemporain. Coloris blanc chaud, lumineux et élégant.',
     images: [
       '/catalog/canape-modulable-en-l-style-nuage-blanc-chaud-2.webp',
