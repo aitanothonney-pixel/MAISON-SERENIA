@@ -52,4 +52,11 @@ export const VIGNETTES: Record<number, (string | null)[]> = {
     null,
     '/catalog/cartes/canape-d-angle-en-l-vert-olive-5.webp',
   ],
+  142: [
+    '/catalog/cartes/canape-d-angle-nuvola-blanc-ivoire-1.webp',
+    '/catalog/cartes/canape-d-angle-nuvola-blanc-ivoire-2.webp',
+    null,
+    null,
+    '/catalog/cartes/canape-d-angle-nuvola-blanc-ivoire-5.webp',
+  ],
 };

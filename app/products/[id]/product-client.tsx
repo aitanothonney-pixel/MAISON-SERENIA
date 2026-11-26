@@ -1015,6 +1015,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     102: 'Canapé modulable en L style nuage gris anthracite',
     // Canapé d'angle en L (fiche propre)
     141: 'Canapé d\'angle en L vert olive',
+    // Canapé d'angle Nuvola (fiche propre)
+    142: 'Canapé d\'angle Nuvola blanc ivoire',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
