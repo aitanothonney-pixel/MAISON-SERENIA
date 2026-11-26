@@ -1045,7 +1045,7 @@ const exactPriceProducts: Product[] = [
     id: 82,
     name: 'Table d\'appoint 2 niveaux noyer',
     category: 'Meubles',
-    price: 98,
+    price: 90,
     description: 'Table d\'appoint compacte à 2 niveaux, plateau à surface ondulée cannelée finition noyer et structure métal noir. Idéale en bout de canapé, table de chevet ou coin café. Un design chaleureux et pratique qui se glisse partout.',
     images: [
       '/catalog/table-d-appoint-2-niveaux-noyer-1.webp',
