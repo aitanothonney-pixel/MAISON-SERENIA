@@ -74,4 +74,12 @@ export const VIGNETTES: Record<number, (string | null)[]> = {
     null,
     '/catalog/cartes/canape-incurve-olympe-ivoire-6.webp',
   ],
+  145: [
+    '/catalog/cartes/canape-d-angle-sienna-marron-moka-1.webp',
+    '/catalog/cartes/canape-d-angle-sienna-marron-moka-2.webp',
+    null,
+    null,
+    null,
+    '/catalog/cartes/canape-d-angle-sienna-marron-moka-6.webp',
+  ],
 };

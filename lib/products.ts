@@ -1384,6 +1384,29 @@ const exactPriceProducts: Product[] = [
       'Grand format : vérifiez l\'accès, les portes et les escaliers avant la livraison',
     ],
   },
+  {
+    id: 145,
+    name: 'Canapé d\'angle Sienna marron moka',
+    category: 'Salon',
+    price: 1080, // affiché 1199,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Canapé sectionnel d\'angle Sienna au revêtement marron moka chiné. Volumes sculpturaux, angles adoucis et méridienne à droite pour une silhouette asymétrique, contemporaine et organique.',
+    images: [
+      '/catalog/canape-d-angle-sienna-marron-moka-1.webp',
+      '/catalog/canape-d-angle-sienna-marron-moka-2.webp',
+      '/catalog/canape-d-angle-sienna-marron-moka-3.webp',
+      '/catalog/canape-d-angle-sienna-marron-moka-4.webp',
+      '/catalog/canape-d-angle-sienna-marron-moka-5.webp',
+      '/catalog/canape-d-angle-sienna-marron-moka-6.webp',
+    ],
+    dimensions: 'L 360 × P 155 × H 64 cm (hauteur d\'assise 43 cm)',
+    material: 'Tissu texturé marron moka chiné',
+    details: [
+      'Méridienne à droite, vue de face',
+      'Trois grandes zones d\'assise et dossier bas aux lignes arrondies',
+      'Accoudoir intégré, côté droit',
+      'Dimensions indicatives : une variation de 3 à 5 cm est possible',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,

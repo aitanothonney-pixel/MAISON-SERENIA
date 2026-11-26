@@ -1022,6 +1022,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     143: 'Canapé d\'angle Nuvola bouclé avec pouf',
     // Canapé incurvé Olympe (fiche propre)
     144: 'Canapé incurvé Olympe ivoire',
+    // Canapé d'angle Sienna (fiche propre)
+    145: 'Canapé d\'angle Sienna marron moka',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
