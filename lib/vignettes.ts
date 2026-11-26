@@ -97,4 +97,9 @@ export const VIGNETTES: Record<number, (string | null)[]> = {
     null,
     '/catalog/cartes/fauteuil-lounge-ivoire-boucle-5.webp',
   ],
+  148: [
+    '/catalog/cartes/fauteuil-lounge-creme-marron-1.webp',
+    '/catalog/cartes/fauteuil-lounge-creme-marron-2.webp',
+    null,
+  ],
 };

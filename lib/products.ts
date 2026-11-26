@@ -1453,6 +1453,25 @@ const exactPriceProducts: Product[] = [
       'Accoudoirs en bois brun aux courbes marquées',
     ],
   },
+  {
+    id: 148,
+    name: 'Fauteuil lounge crème et marron',
+    category: 'Salon',
+    price: 360, // affiché 399,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Fauteuil lounge à coussins crème, dans une coque incurvée aspect cuir marron et un piètement noir incliné. Son dossier légèrement incliné et son assise épaisse invitent à la détente, pour un salon, un bureau ou un coin lecture.',
+    images: [
+      '/catalog/fauteuil-lounge-creme-marron-1.webp',
+      '/catalog/fauteuil-lounge-creme-marron-2.webp',
+      '/catalog/fauteuil-lounge-creme-marron-3.webp',
+    ],
+    dimensions: '78 × 75 × 67 cm (hors tout)',
+    material: 'Coussins textile crème ; coque incurvée aspect cuir marron ; piètement noir',
+    details: [
+      'Fauteuil individuel, sans accoudoirs rapportés',
+      'Assise et dossier : deux coussins rembourrés, revêtement textile',
+      'Coque incurvée aspect cuir, pieds noirs inclinés',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,

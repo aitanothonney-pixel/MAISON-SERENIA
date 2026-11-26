@@ -1028,6 +1028,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     146: 'Canapé panoramique en U noir côtelé',
     // Fauteuil lounge (fiche propre)
     147: 'Fauteuil lounge ivoire bouclé',
+    // Fauteuil lounge crème (fiche PDF fournie)
+    148: 'Fauteuil lounge crème et marron',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
