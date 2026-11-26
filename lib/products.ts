@@ -1407,6 +1407,30 @@ const exactPriceProducts: Product[] = [
       'Dimensions indicatives : une variation de 3 à 5 cm est possible',
     ],
   },
+  {
+    id: 146,
+    name: 'Canapé panoramique en U noir côtelé',
+    category: 'Salon',
+    price: 810, // affiché 899,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Canapé panoramique en U en velours côtelé noir à larges côtes. Une silhouette basse, des volumes généreux et deux méridiennes composent un espace de détente convivial ; le relief du velours apporte une présence raffinée au salon.',
+    images: [
+      '/catalog/canape-panoramique-en-u-noir-cotele-1.webp',
+      '/catalog/canape-panoramique-en-u-noir-cotele-2.webp',
+      '/catalog/canape-panoramique-en-u-noir-cotele-3.webp',
+      '/catalog/canape-panoramique-en-u-noir-cotele-4.webp',
+      '/catalog/canape-panoramique-en-u-noir-cotele-5.webp',
+      '/catalog/canape-panoramique-en-u-noir-cotele-6.webp',
+    ],
+    dimensions: 'L 332,7 × P 152,9 × H 62 cm (hauteur d\'assise 41,9 cm)',
+    material: 'Velours côtelé noir à larges côtes',
+    details: [
+      'Configuration panoramique en U, modulable',
+      'Deux méridiennes de 89,9 cm de large',
+      'Dossier : 4 grands coussins et 2 coussins latéraux assortis',
+      'Mousse haute résilience et ressorts ensachés',
+      'Livré en 2 colis',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,
