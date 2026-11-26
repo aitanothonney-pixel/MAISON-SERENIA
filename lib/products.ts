@@ -1295,6 +1295,28 @@ const exactPriceProducts: Product[] = [
     material: 'Velours côtelé, assise moelleuse',
     details: ['Forme en L modulable', 'Velours côtelé doux « style nuage »', 'Pouf mobile & coussins inclus', 'Assise profonde et enveloppante'],
   },
+  {
+    id: 141,
+    name: 'Canapé d\'angle en L vert olive',
+    category: 'Salon',
+    price: 900, // affiché 999,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Grand canapé d\'angle en forme de L, habillé d\'un tissu vert olive chaleureux. Sa méridienne prolonge l\'assise pour s\'allonger ou partager un moment de détente. Coussins d\'assise et de dossier rembourrés, accoudoirs enveloppants : un salon confortable et contemporain.',
+    images: [
+      '/catalog/canape-d-angle-en-l-vert-olive-1.webp',
+      '/catalog/canape-d-angle-en-l-vert-olive-2.webp',
+      '/catalog/canape-d-angle-en-l-vert-olive-3.webp',
+      '/catalog/canape-d-angle-en-l-vert-olive-4.webp',
+      '/catalog/canape-d-angle-en-l-vert-olive-5.webp',
+    ],
+    dimensions: 'L 265 × P 99 × H 75 cm (hauteur d\'assise 45 cm)',
+    material: 'Tissu vert olive, garnissage mousse',
+    details: [
+      'Configuration en L avec méridienne',
+      'Coussins d\'assise et de dossier rembourrés (dossier 70 × 50 cm)',
+      'Accoudoirs rembourrés, 34 cm de large',
+      'Livré en 2 colis : vérifiez l\'accès, les portes et les escaliers',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,
