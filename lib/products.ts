@@ -1339,6 +1339,28 @@ const exactPriceProducts: Product[] = [
       'Livré en 2 colis, pouvant arriver séparément',
     ],
   },
+  {
+    id: 143,
+    name: 'Canapé d\'angle Nuvola bouclé avec pouf',
+    category: 'Salon',
+    price: 1080, // affiché 1199,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Canapé d\'angle Nuvola au tissu à aspect bouclé blanc ivoire, avec pouf indépendant. Lignes intemporelles, assises moelleuses et larges coussins de dossier pour un salon accueillant, contemporain ou chaleureux.',
+    images: [
+      '/catalog/canape-d-angle-nuvola-boucle-avec-pouf-1.webp',
+      '/catalog/canape-d-angle-nuvola-boucle-avec-pouf-2.webp',
+      '/catalog/canape-d-angle-nuvola-boucle-avec-pouf-3.webp',
+      '/catalog/canape-d-angle-nuvola-boucle-avec-pouf-4.webp',
+      '/catalog/canape-d-angle-nuvola-boucle-avec-pouf-5.webp',
+    ],
+    dimensions: 'L 260 × P 75 × H 86 cm (environ)',
+    material: 'Tissu à aspect bouclé blanc ivoire',
+    details: [
+      'Canapé 3 places avec pouf indépendant',
+      'Assises moelleuses et larges coussins de dossier',
+      'Pieds noirs discrets',
+      'Livré en 2 colis, susceptibles d\'arriver séparément',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,

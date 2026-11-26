@@ -1017,6 +1017,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     141: 'Canapé d\'angle en L vert olive',
     // Canapé d'angle Nuvola (fiche propre)
     142: 'Canapé d\'angle Nuvola ivoire',
+    // Canapé d'angle Nuvola bouclé avec pouf (fiche propre)
+    143: 'Canapé d\'angle Nuvola bouclé avec pouf',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses
