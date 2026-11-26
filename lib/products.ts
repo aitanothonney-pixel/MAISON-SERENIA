@@ -54,7 +54,6 @@ export const variantGroups: Record<string, ProductVariant[]> = {
   'table-appoint-double': [
     { productId: 66, color: 'Noir', colorHex: '#1a1a1a' },
     { productId: 67, color: 'Blanc', colorHex: '#ece7de' },
-    { productId: 65, color: 'Vert', colorHex: '#8aa876' },
   ],
   'vase-ceramique-duo': [
     { productId: 72, color: 'Blanc', colorHex: '#ece7de' },
@@ -383,19 +382,6 @@ const rawProducts: Product[] = [
     details: ['Compatible TV jusqu\'à 55 pouces', 'Compartiments ouverts', 'Étagère centrale réglable', 'Structure métal industriel'],
   },
   // ── Salon : Table d'appoint double couche — Vert ─────────────────────────────
-  {
-    id: 65,
-    name: 'Table d\'appoint double couche',
-    category: 'Meubles',
-    price: 49,
-    description: 'Petite table d\'appoint double couche au design moderne et compact (40 × 40 cm). Plateau en plastique résistant sur cadre bois pour une stabilité optimale. Parfaite comme table de chevet ou d\'appoint au salon. Coloris Vert.',
-    images: [
-      '/catalog/HLQrYmp5.png',
-    ],
-    dimensions: 'Ø 40 × H 40 cm',
-    material: 'Plateau plastique résistant, cadre bois',
-    details: ['Design double couche (2 plateaux)', 'Compact et léger', 'Cadre bois stable', 'Coloris Vert'],
-  },
   // ── Salon : Table d'appoint double couche — Noir ─────────────────────────────
   {
     id: 66,
@@ -1885,7 +1871,7 @@ const exactPriceProducts: Product[] = [
 ];
 
 // Produits à afficher en dernier dans leur section (Meubles)
-const SHOW_LAST_IDS = [65, 66, 67]; // Tables d'appoint double couche
+const SHOW_LAST_IDS = [66, 67]; // Tables d'appoint double couche
 
 // Produits Bubble : prix catalogue fixé à la main (non majoré par bumpPrice).
 // La remise -30% reste appliquée au paiement/affichage.

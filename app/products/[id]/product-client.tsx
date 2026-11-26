@@ -992,7 +992,6 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     62: 'Table à manger ovale en bois massif',
     63: 'Table à manger ovale en bois massif',
     64: 'Meuble TV industriel brun rustique',
-    65: 'Table d\'appoint double couche',
     66: 'Table d\'appoint double couche',
     67: 'Table d\'appoint double couche',
     74: 'Commode 6 tiroirs bois & noir',
