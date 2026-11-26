@@ -1020,6 +1020,8 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
     142: 'Canapé d\'angle Nuvola ivoire',
     // Canapé d'angle Nuvola bouclé avec pouf (fiche propre)
     143: 'Canapé d\'angle Nuvola bouclé avec pouf',
+    // Canapé incurvé Olympe (fiche propre)
+    144: 'Canapé incurvé Olympe ivoire',
     // Tables à manger
     132: 'Table à manger en bois massif nordique',
     // Tables basses

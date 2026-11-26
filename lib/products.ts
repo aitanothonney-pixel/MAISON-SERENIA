@@ -1361,6 +1361,29 @@ const exactPriceProducts: Product[] = [
       'Livré en 2 colis, susceptibles d\'arriver séparément',
     ],
   },
+  {
+    id: 144,
+    name: 'Canapé incurvé Olympe ivoire',
+    category: 'Salon',
+    price: 1170, // affiché 1299,99 CHF après majoration et arrondi (applyUplift / nice99)
+    description: 'Canapé sectionnel incurvé Olympe au revêtement à l\'aspect bouclé blanc ivoire. Lignes fluides, courbes généreuses et silhouette basse : une pièce maîtresse pour un salon contemporain et organique.',
+    images: [
+      '/catalog/canape-incurve-olympe-ivoire-1.webp',
+      '/catalog/canape-incurve-olympe-ivoire-2.webp',
+      '/catalog/canape-incurve-olympe-ivoire-3.webp',
+      '/catalog/canape-incurve-olympe-ivoire-4.webp',
+      '/catalog/canape-incurve-olympe-ivoire-5.webp',
+      '/catalog/canape-incurve-olympe-ivoire-6.webp',
+    ],
+    dimensions: 'Largeur totale 330 cm',
+    material: 'Tissu à l\'aspect bouclé blanc ivoire',
+    details: [
+      'Canapé sectionnel incurvé, grand format',
+      'Assise large et profonde, dossier arrondi et enveloppant',
+      'Accoudoirs intégrés à la structure',
+      'Grand format : vérifiez l\'accès, les portes et les escaliers avant la livraison',
+    ],
+  },
   // ── Décorations : Tableau abstrait doré & brun (peinture à l'huile) — tailles au choix ─
   {
     id: 103,
