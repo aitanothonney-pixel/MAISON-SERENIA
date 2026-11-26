@@ -1041,7 +1041,9 @@ export default function ProductClient({ params }: { params: Promise<{ id: string
   };
   // Fiches communes à toute une gamme (Bubble)
   const fichePdfNameLc = product.name.toLowerCase();
-  const fichePdfName = FICHE_PDF_NAME_BY_ID[product.id]
+  // Une option (taille) peut avoir son propre descriptif : il remplace celui du produit
+  const ficheDeLOption = product.sizes?.find((s) => s.label === selectedSize)?.fiche;
+  const fichePdfName = ficheDeLOption ?? FICHE_PDF_NAME_BY_ID[product.id]
     ?? (product.name.includes('Bubble') && fichePdfNameLc.includes('fauteuil') ? 'Fauteuil Bubble'
       : product.name.includes('Bubble') && fichePdfNameLc.includes('canapé') ? 'Canapé Bubble'
       : undefined);

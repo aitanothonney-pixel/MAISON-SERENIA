@@ -3,6 +3,8 @@ export interface ProductSize {
   price: number;
   // Optionnel : image à afficher quand cette option est sélectionnée (doit figurer dans images[])
   image?: string;
+  // Optionnel : descriptif PDF propre à cette option (public/docs/MAISON SERENIA DESCRIPTIF - <fiche>.pdf)
+  fiche?: string;
 }
 
 export interface Product {
@@ -893,28 +895,24 @@ const exactPriceProducts: Product[] = [
     id: 129,
     name: 'Lampe suspendue LED bois minimaliste',
     category: 'Décorations',
-    price: 159,
+    price: 252, // affiché 279,99 CHF (1 lumière) après majoration et arrondi (applyUplift / nice99)
     description: 'Lampe suspendue LED au style minimaliste et moderne, en bois, pierre naturelle et métal. Lumière chaude (3000K) tamisée, câble ajustable jusqu\'à 150 cm. Parfaite pour une salle à manger, une chambre ou un chevet. Choisissez le nombre de lumières selon votre espace.',
     images: [
       '/catalog/4wCDHY7M.png',
       '/catalog/TDN75jVV.png',
       '/catalog/2YMsRd3p.png',
-      '/catalog/pT4tsCD.png',
       '/catalog/043wbjX.png',
-      '/catalog/7xDXs6SR.png',
       '/catalog/fzNJVGfp.png',
       '/catalog/DDyr4hW4.png',
-      '/catalog/4gg0Q1ST.png',
-      '/catalog/DHhD5xHF.png',
     ],
     dimensions: 'Abat-jour Ø 17 cm · câble ajustable 150 cm · barre 60 à 100 cm selon le format',
     material: 'Bois, pierre naturelle & métal · LED 7W (3000K)',
     details: ['Style minimaliste & moderne', 'Bois, pierre naturelle et métal', 'Lumière chaude 3000K, câble ajustable', 'Format 1 à 4 lumières au choix'],
     sizes: [
-      { label: '1 lumière', price: 159, image: '/catalog/fzNJVGfp.png' },
-      { label: '2 lumières', price: 219, image: '/catalog/043wbjX.png' },
-      { label: '3 lumières', price: 269, image: '/catalog/TDN75jVV.png' },
-      { label: '4 lumières', price: 319, image: '/catalog/4wCDHY7M.png' },
+      { label: '1 lumière', price: 252, image: '/catalog/fzNJVGfp.png', fiche: 'Lampe suspendue LED bois minimaliste 1 lumière' },
+      { label: '2 lumières', price: 315, image: '/catalog/043wbjX.png', fiche: 'Lampe suspendue LED bois minimaliste 2 lumières' },
+      { label: '3 lumières', price: 360, image: '/catalog/TDN75jVV.png', fiche: 'Lampe suspendue LED bois minimaliste 3 lumières' },
+      { label: '4 lumières', price: 414, image: '/catalog/4wCDHY7M.png', fiche: 'Lampe suspendue LED bois minimaliste 4 lumières' },
     ],
   },
   // ── Meubles : Lot de 2 tables basses rondes noyer ────────────────────────────
